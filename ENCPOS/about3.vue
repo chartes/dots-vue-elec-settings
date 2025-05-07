@@ -1,8 +1,8 @@
 <template>
   <article class="about">
-    <div class="title app-width-padding">About Title 3</div>
+    <div class="title app-width-padding">Consultation des thèses : ThENC@</div>
     <div class="about-content app-width-padding">
-      <h2>Consultation des thèses : ThENC@</h2>
+      <h2></h2>
       <p>
         Propriété de leur auteur jusqu’en 1961, de nombreuses thèses anciennes se retrouvent dans différentes
         institutions patrimoniales que les auteurs ont fréquentées dans le cadre de leur recherche ou plus tard dans

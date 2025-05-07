@@ -2,17 +2,15 @@
   "collectionId": "ENCPOS",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "collectionAltTitle": "Les positions de l'ENC",
+    "collectionAltTitle": "",
     "collectionShortTitle": "Thèses",
-    "collectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget euismod erat. Praesent dictum nulla nibh, non vulputate odio finibus sed. Curabitur vestibulum, ligula eget."
+    "collectionDescription": "",
+    "customCollectionDescription": { "compName": "HomePageContent" }
   },
   "footerSettings": {
-    "footerTitle": "Positions footerTitle",
-    "footerSubtitles": [
-      "Positions subTitle1",
-      "Positions subTitle2"
-    ],
-    "footerDescription": "Le projet d'édition des POSITIONS a été développé par la Mission projets numériques de l'École nationale des chartes – PSL avec le soutien de Biblissima+. Biblissima+ bénéficie d’une aide de l'Etat gérée par l'ANR au titre du Programme d’investissements d’avenir intégré à France 2030, portant la référence ANR-21-ESRE-0005."
+    "footerTitle": "",
+    "footerSubtitles": [],
+    "footerDescription": ""
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,

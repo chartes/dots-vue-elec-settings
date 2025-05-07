@@ -1,8 +1,8 @@
 <template>
   <article class="about">
-    <div class="title app-width-padding">About Title 1</div>
+    <div class="title app-width-padding">Les thèses de l’École des chartes</div>
     <div class="about-content app-width-padding">
-      <h2>Les thèses de l’École des chartes</h2>
+      <h2></h2>
       <p>
         Depuis 1849, les élèves de l’École nationale des chartes soutiennent une thèse d’École qui conditionne
         l’obtention du diplôme d’archiviste paléographe. Cette thèse est l’aboutissement d’un cursus d’enseignements

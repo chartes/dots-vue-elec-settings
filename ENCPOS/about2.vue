@@ -1,8 +1,8 @@
 <template>
   <article class="about">
-    <div class="title app-width-padding">About Title 2</div>
+    <div class="title app-width-padding">Les positions de thèses</div>
     <div class="about-content app-width-padding">
-      <h2>Les positions de thèses</h2>
+      <h2></h2>
       <p>
         Chaque année, dès 1849, un volume des <i>Positions des thèses</i> soutenues est publié : les élèves y énoncent
         les points de doctrine (les <i>positions</i>) à défendre face au jury. Progressivement ces énumérations brèves

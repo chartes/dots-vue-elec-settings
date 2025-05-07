@@ -3,7 +3,7 @@
     <div class="about-content app-width-padding">
       <h2>A custom description for theater</h2>
       <p>
-        This is a custom description the the theater collection.
+        This is a custom description for the theater collection.
       </p>
     </div>
   </article>

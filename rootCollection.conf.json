@@ -1,0 +1,19 @@
+{
+  "collectionId": "rootCollection",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "collectionAltTitle": "Collection racine d'Elec",
+    "collectionShortTitle": "",
+    "collectionDescription": "",
+    "customCollectionDescription": { "compName": "" },
+    "appNavBarLogo": {
+      "imgName": "logo-enc-white.png",
+      "href": "https://www.chartes.psl.eu"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Collection racine d'Elec",
+    "footerSubtitles": [],
+    "footerDescription": "Une implémentation de DoTS pour les ressources électorniques de l'École nationale des chartes."
+  }
+}

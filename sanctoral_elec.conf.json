@@ -1,0 +1,27 @@
+{
+  "collectionId": "sanctoral_elec",
+  "homePageSettings": {
+    "collectionAltTitle": "Le sanctoral du lectionnaire de l'office dominicain (1254-1256)",
+    "collectionShortTitle": "Sanctoral",
+    "collectionDescription": "",
+    "logo": "sanctoral_200.jpg"
+  },
+  "footerSettings": {
+    "footerTitle": "",
+    "footerSubtitles": null,
+    "footerDescription": "Le projet d'édition du Sanctoral du lectionnaire de l'office dominicain (1254-1256) a été développé par la Mission projets numériques de l'École nationale des chartes – PSL."
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 4,
+    "editByLevel": null,
+    "editByCiteType": [
+       "dies"
+    ],
+    "countByCiteType": [
+      "dies"
+    ],
+    "displayTopToc": false
+  },
+  "aboutPageSettings": [
+  ]
+}

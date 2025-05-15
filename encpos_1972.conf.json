@@ -4,7 +4,8 @@
   "homePageSettings": {
     "collectionAltTitle": "Les positions de l'ENC de 1972",
     "collectionShortTitle": "Thèses de 1972",
-    "collectionDescription": ""
+    "collectionDescription": "",
+    "customCollectionDescription": {}
   },
   "footerSettings": {
     "footerTitle": "Positions footerTitle",

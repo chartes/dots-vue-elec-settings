@@ -1,0 +1,30 @@
+{
+  "collectionId": "dubourg",
+  "homePageSettings": {
+    "collectionAltTitle": "Correspondance du chancelier Antoine Du Bourg",
+    "collectionShortTitle": "Correspondance Du Bourg",
+    "collectionDescription": "",
+    "logo": "dubourg_logo.png"
+  },
+  "footerSettings": {
+    "footerTitle": "",
+    "footerSubtitles": null,
+    "footerDescription": "Le projet d'édition de la correspondance d'Antoine Du Bourg a été développé par la Mission projet numérique de l'École nationale des chartes – PSL."
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 2,
+    "editByLevel": null,
+    "editByCiteType": [
+       "introduction",
+       "lettre",
+       "index-person",
+       "index-place"
+    ],
+    "countByCiteType": [
+      "lettre"
+    ],
+    "displayTopToc":false
+  },
+  "aboutPageSettings": [
+  ]
+}

@@ -13,7 +13,6 @@
   },
   "footerSettings": {
     "footerTitle": "Collection racine d'Elec",
-    "footerSubtitles": [],
-    "footerDescription": "Une implémentation de DoTS pour les ressources électorniques de l'École nationale des chartes."
+    "footerSubtitles": ["Une implémentation de DoTS pour les ressources électorniques de l'École nationale des chartes."]
   }
 }

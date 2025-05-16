@@ -2,17 +2,16 @@
   "collectionId": "rootCollection",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "collectionAltTitle": "Collection racine d'Elec",
-    "collectionShortTitle": "",
+    "collectionAltTitle": "Éditions en ligne de l'École des chartes (Élec)",
+    "collectionShortTitle": "Élec",
     "collectionDescription": "",
-    "customCollectionDescription": { "compName": "" },
     "appNavBarLogo": {
       "imgName": "logo-enc-white.png",
       "href": "https://www.chartes.psl.eu"
     }
   },
   "footerSettings": {
-    "footerTitle": "Collection racine d'Elec",
+    "footerTitle": "Éditions en ligne de l'École des chartes (Élec)",
     "footerSubtitles": ["Une implémentation de DoTS pour les ressources électroniques de l'École nationale des chartes."]
   }
 }

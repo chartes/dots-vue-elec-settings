@@ -4,7 +4,26 @@
     "collectionAltTitle": "",
     "collectionShortTitle": "",
     "collectionDescription": "",
-    "customCollectionDescription": { "compName": "" },
+    "customCollectionDescription": null,
     "logo": ""
-  }
+  },
+  "footerSettings": {
+    "footerTitle": "",
+    "footerSubtitles": null,
+    "footerDescription": "Le projet d'édition du formulaire d'Odart Morchesne a été développé par la Mission projets numériques de l'École nationale des chartes – PSL."
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 3,
+    "editByLevel": null,
+    "editByCiteType": [
+       "chapitre",
+      "formulaire"
+    ],
+    "countByCiteType": [
+      "formulaire"
+    ],
+    "displayTopToc": false
+  },
+  "aboutPageSettings": [
+  ]
 }

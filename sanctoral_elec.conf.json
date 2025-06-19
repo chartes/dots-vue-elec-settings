@@ -1,10 +1,19 @@
 {
   "collectionId": "sanctoral_elec",
   "homePageSettings": {
-    "collectionAltTitle": "Le sanctoral du lectionnaire de l'office dominicain (1254-1256)",
-    "collectionShortTitle": "Sanctoral",
-    "collectionDescription": "",
-    "logo": "sanctoral_200.jpg"
+    "appNavBar": {
+      "collectionShortTitle": "Sanctoral"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Le sanctoral du lectionnaire de l'office dominicain (1254-1256)",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": ""
+    },
+    "listSection": {
+      "logo": "sanctoral_200.jpg"
+    }
   },
   "footerSettings": {
     "footerTitle": "",

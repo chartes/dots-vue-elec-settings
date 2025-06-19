@@ -1,10 +1,22 @@
 {
   "collectionId": "cartulaires",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "collectionAltTitle": "Les cartulaires de l'ENC",
-    "collectionShortTitle": "Carts",
-    "collectionDescription": "",
-    "logo": "Logo_cartulaires.png"
+    "appNavBar": {
+      "collectionShortTitle": "Carts"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Les cartulaires de l'ENC",
+      "aboutButtonText": "À propos des cartulaires"
+    },
+    "descriptionSection": {
+      "collectionDescription": ""
+    },
+    "listSection": {
+      "displayAs": "cards",
+      "collectionsPerPage": 10,
+      "logo": "Logo_cartulaires.png"
+    }
   },
   "footerSettings": {
     "footerTitle": "Cartulaires footerTitle",
@@ -27,5 +39,6 @@
     "displayTopToc": false
   },
   "aboutPageSettings": [
-  ]
+  ],
+  "collectionCustomCss": false
 }

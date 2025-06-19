@@ -1,11 +1,20 @@
 {
   "collectionId": "dubourg",
   "homePageSettings": {
-    "collectionAltTitle": "Correspondance du chancelier Antoine Du Bourg",
-    "collectionShortTitle": "Correspondance Du Bourg",
-    "collectionDescription": "",
-    "customCollectionDescription": null,
-    "logo": "dubourg_logo.png"
+    "appNavBar": {
+      "collectionShortTitle": "Correspondance Du Bourg"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Correspondance du chancelier Antoine Du Bourg",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": null
+    },
+    "listSection": {
+      "logo": "dubourg_logo.png"
+    }
   },
   "footerSettings": {
     "footerTitle": "",

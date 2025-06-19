@@ -1,11 +1,22 @@
 {
   "collectionId": "formulaires",
   "homePageSettings": {
-    "collectionAltTitle": "",
-    "collectionShortTitle": "",
-    "collectionDescription": "",
-    "customCollectionDescription": null,
-    "logo": ""
+    "appNavBar": {
+      "collectionShortTitle": ""
+    },
+    "pageHeader": {
+      "collectionAltTitle": "",
+      "aboutButtonText": "À propos du projet"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": null
+    },
+    "listSection": {
+      "displayAs": "list",
+      "logo": "",
+      "browseButtonText": "Parcourir la collection"
+    }
   },
   "footerSettings": {
     "footerTitle": "",
@@ -25,5 +36,6 @@
     "displayTopToc": false
   },
   "aboutPageSettings": [
-  ]
+  ],
+  "collectionCustomCss": "elec"
 }

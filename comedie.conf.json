@@ -1,30 +1,27 @@
 {
-  "collectionId": "theater",
+  "collectionId": "comedie",
   "mediaTypeEndpoint": "tei",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": ""
+      "collectionShortTitle": "Comédies"
     },
     "pageHeader": {
-      "collectionAltTitle": "",
-      "aboutButtonText": "En savoir plus"
+      "collectionAltTitle": ""
     },
     "descriptionSection": {
       "collectionDescription": "",
       "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
-      "displayAs": "cards",
-      "collectionsPerPage": 10,
+      "displayAs": "list",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/6/61/Frontispiece_to_Moli%C3%A8re%27s_Dom_Juan_by_P_Brissart_1682_-_c%C3%A9sar.jpg",
       "browseButtonText": "Parcourir la collection"
     }
   },
-  "footerSettings": {
+"footerSettings": {
     "footerTitle": "Theater footerTitle",
     "footerSubtitles": [
-      "Theater subTitle1",
-      "Theater subTitle2"
+      "Comédies"
     ],
     "footerDescription": ""
   },
@@ -35,5 +32,5 @@
     ],
     "displayTopToc": false
   },
-  "collectionCustomCss": "theater"
+  "collectionCustomCss": false
 }

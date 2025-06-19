@@ -1,20 +1,20 @@
 {
-  "collectionId": "ENCPOS",
-  "mediaTypeEndpoint": "tei",
+  "collectionId": "CLEM",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Thèses"
+      "collectionShortTitle": "Epigramme"
     },
     "pageHeader": {
       "collectionAltTitle": "",
-      "aboutButtonText": "À propos des Thèses"
+      "aboutButtonText": "À propos des Epigrammes"
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "customCollectionDescription": ""
     },
     "listSection": {
-      "displayAs": "cards",
+      "displayAs": "list",
       "collectionsPerPage": 2
     }
   },
@@ -25,15 +25,11 @@
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
-    "editByLevel": null,
-    "editByCiteType": ["part"
+    "editByCiteType": ["Resource"
     ],
     "displayTopToc": true
   },
   "aboutPageSettings": [
-    { "tabName": "Les thèses", "compName": "about1" },
-    { "tabName": "Les positions", "compName": "about2" },
-    { "tabName": "Consultation", "compName": "about3" }
   ],
   "collectionCustomCss": false
 }

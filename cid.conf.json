@@ -1,10 +1,23 @@
 {
   "collectionId": "cid",
+  "mediaTypeEndpoint": "tei",
   "homePageSettings": {
-    "collectionAltTitle": "",
-    "collectionShortTitle": "",
-    "collectionDescription": "",
-    "logo": "Logo_cid.svg"
+    "appNavBar": {
+      "collectionShortTitle": ""
+    },
+    "pageHeader": {
+      "collectionAltTitle": "",
+      "aboutButtonText": "À propos de la CID"
+    },
+    "descriptionSection": {
+      "collectionDescription": ""
+    },
+    "listSection": {
+      "displayAs": "list",
+      "collectionsPerPage": 4,
+      "logo": "Logo_cid.svg",
+      "browseButtonText": "Découvrir la collection"
+    }
   },
   "footerSettings": {
     "footerTitle": "CID footerTitle",
@@ -18,10 +31,11 @@
     "tableOfContentDepth": 5,
     "editByLevel": 0,
     "editByCiteType": [
-      "article"
+      "Resource"
     ],
     "displayTopToc": false
   },
   "aboutPageSettings": [
-  ]
+  ],
+  "collectionCustomCss": false
 }

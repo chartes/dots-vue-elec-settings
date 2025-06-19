@@ -2,10 +2,19 @@
   "collectionId": "ENCPOS_1972",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "collectionAltTitle": "Les positions de l'ENC de 1972",
-    "collectionShortTitle": "Thèses de 1972",
-    "collectionDescription": "",
-    "customCollectionDescription": {}
+    "appNavBar": {
+      "collectionShortTitle": "Thèses de 1972"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Les positions de l'ENC de 1972"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": {}
+    },
+    "listSection": {
+      "displayAs": "list"
+    }
   },
   "footerSettings": {
     "footerTitle": "Positions footerTitle",

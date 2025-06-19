@@ -1,0 +1,82 @@
+[data-theme="red"] {
+  --text-color: #8f0e21;
+  --fill-color: #8f0e21;
+}
+/*nav.level {
+  background-color: var(--fill-color) !important;
+}*/
+.about > h1 {
+  font-style: italic !important;
+}
+button {
+  &.expanded {
+    fill: var(--fill-color)
+  }
+}
+
+
+
+.document-views > * {
+  .row:not(.remove-bottom-padding):not(.bottom-toc) {
+    margin: 20px 100px 20px 100px;
+    padding: 30px;
+    border-radius: 5px;
+    border: 1px solid #d8d0be;
+    box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.3);
+    background: url('../images/piece_fond.jpg') center top #fffbf5;
+    text-align: center;
+    color: #3e3b36;
+    & tei > div > p {
+      text-align: center;
+      font-size: larger;
+      padding-top: 14px;
+      padding-left: 10px;
+      padding-bottom: 10px;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+      margin-top: 1em;
+      font-variant: small-caps;
+      color: #4e4940;
+      text-shadow: 1px 2px 2px #bbb;
+    }
+  }
+  head {
+    font-family: "Linux Libertine", "Times New Roman", Times, "Liberation Serif", FreeSerif, serif;
+    font-variant: small-caps;
+    color: #4e4940;
+    text-shadow: 1px 2px 2px #bbb;
+    background-color: transparent;
+  }
+  stage, sp, s {
+    margin: 16px auto;
+    font-family: "Linux Libertine", "Times New Roman", Times, "Liberation Serif", FreeSerif, serif !important;
+  }
+  stage, sp {
+    font-variant: small-caps;
+    & > p {
+      margin-top: 16px;
+    }
+  }
+  speaker {
+    font-weight: normal;
+  }
+  speaker > hi[rend] {
+    font-style: italic;
+    color: #827E62;
+  }
+  stage {
+    color: #827E62;
+  }
+  s {
+    font-variant: normal;
+    & > hi {
+      background-color: transparent;
+      color: #3e3b36;
+    }
+  }
+
+
+  span.left {
+    font-weight: bold !important;
+  }
+}

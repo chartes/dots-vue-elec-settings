@@ -1,0 +1,36 @@
+{
+  "collectionId": "miroir",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Miroir"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Le Miroir des classiques",
+      "aboutButtonText": "Miroir, mon beau miroir"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": null
+    },
+    "listSection": {
+      "displayAs": "list",
+      "collectionsPerPage": 5
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "",
+    "footerSubtitles": [],
+    "footerDescription": ""
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 5,
+    "editByLevel": 1,
+    "editByCiteType": [
+    ],
+    "displayTopToc": true
+  },
+  "aboutPageSettings": [
+  ],
+  "collectionCustomCss": false
+}

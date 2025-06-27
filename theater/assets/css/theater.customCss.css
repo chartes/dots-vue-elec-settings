@@ -1,4 +1,10 @@
+/* theater */
+/* TODO working in dev but not  in build :
 [data-theme="red"] {
+  --text-color: #8f0e21;
+  --fill-color: #8f0e21;
+}*/
+:root {
   --text-color: #8f0e21;
   --fill-color: #8f0e21;
 }

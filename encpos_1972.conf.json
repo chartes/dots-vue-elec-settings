@@ -27,7 +27,7 @@
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
     "editByLevel": null,
-    "editByCiteType": ["Resource"
+    "editByCiteType": ["chapter"
     ],
     "displayTopToc": true
   },

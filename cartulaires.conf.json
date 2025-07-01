@@ -14,7 +14,7 @@
     },
     "listSection": {
       "displayAs": "cards",
-      "collectionsPerPage": 10,
+      "cardCollectionsPerPage": 10,
       "logo": "Logo_cartulaires.png"
     }
   },

@@ -14,7 +14,7 @@
     },
     "listSection": {
       "displayAs": "list",
-      "collectionsPerPage": 4,
+      "cardCollectionsPerPage": 4,
       "logo": "Logo_cid.svg",
       "browseButtonText": "Découvrir la collection"
     }

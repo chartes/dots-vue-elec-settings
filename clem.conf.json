@@ -15,7 +15,7 @@
     },
     "listSection": {
       "displayAs": "list",
-      "collectionsPerPage": 2
+      "cardCollectionsPerPage": 2
     }
   },
   "footerSettings": {

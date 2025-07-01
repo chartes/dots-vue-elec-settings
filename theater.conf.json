@@ -15,7 +15,7 @@
     },
     "listSection": {
       "displayAs": "cards",
-      "collectionsPerPage": 10,
+      "cardCollectionsPerPage": 10,
       "logo": "https://upload.wikimedia.org/wikipedia/commons/6/61/Frontispiece_to_Moli%C3%A8re%27s_Dom_Juan_by_P_Brissart_1682_-_c%C3%A9sar.jpg",
       "browseButtonText": "Parcourir la collection"
     }

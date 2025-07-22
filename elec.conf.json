@@ -21,13 +21,13 @@
       "collectionDescription": ""
     },
     "listSection": {
-      "displayAs": "",
-      "cardCollectionsPerPage": 5
+      "displayMode": "",
+      "cardCollectionPerPage": 5
     }
   },
   "footerSettings": {
     "footerTitle": "Éditions en ligne de l'École des chartes (Élec)",
-    "footerSubtitles": ["Une implémentation de DoTS pour les ressources électroniques de l'École nationale des chartes."]
+    "footerSubtitles": ""
   },
   "collectionCustomCss": "elec"
 }

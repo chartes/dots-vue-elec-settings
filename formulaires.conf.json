@@ -13,7 +13,7 @@
       "customCollectionDescription": null
     },
     "listSection": {
-      "displayAs": "list",
+      "displayMode": "list",
       "logo": "",
       "browseButtonText": "Parcourir la collection"
     }

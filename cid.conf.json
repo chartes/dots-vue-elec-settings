@@ -13,8 +13,8 @@
       "collectionDescription": ""
     },
     "listSection": {
-      "displayAs": "list",
-      "cardCollectionsPerPage": 4,
+      "displayMode": "list",
+      "cardCollectionPerPage": 4,
       "logo": "Logo_cid.svg",
       "browseButtonText": "Découvrir la collection"
     }

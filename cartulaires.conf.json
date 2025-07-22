@@ -13,8 +13,8 @@
       "collectionDescription": ""
     },
     "listSection": {
-      "displayAs": "cards",
-      "cardCollectionsPerPage": 10,
+      "displayMode": "card",
+      "cardCollectionPerPage": 10,
       "logo": "Logo_cartulaires.png"
     }
   },

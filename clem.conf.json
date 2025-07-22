@@ -14,8 +14,8 @@
       "customCollectionDescription": ""
     },
     "listSection": {
-      "displayAs": "list",
-      "cardCollectionsPerPage": 2
+      "displayMode": "list",
+      "cardCollectionPerPage": 2
     }
   },
   "footerSettings": {

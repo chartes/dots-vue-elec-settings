@@ -1,24 +1,56 @@
-/* moliere */
-/* TODO working in dev but not  in build :
+/*=============================================================
+ PART 1
+ Updating the css color schema for:
+  - the collection moliere
+  - its children (unless otherwise specified)
+ =============================================================*/
+/* Using themes TODO working in dev but not in build :
 [data-theme="red"] {
   --text-color: #4051b5;
   --fill-color: #4051b5;
 }*/
+/* Using css variables */
 :root {
   --text-color: #4051b5;
   --fill-color: #4051b5;
 }
 
+/*=============================================================
+ PART 2
+ Updating the css of specific elements (HTML) for:
+  - the collection moliere
+  - its children (unless otherwise specified)
+ =============================================================*/
+.about > h1 {
+  font-style: italic !important;
+}
+button {
+  &.expanded {
+    fill: var(--fill-color)
+  }
+}
+
+/*=============================================================
+ PART 3
+ Updating the css of the DTS API tei response for:
+  - the collection moliere
+  - its children (unless otherwise specified)
+ =============================================================*/
 .document-views > * {
   .row:not(.remove-bottom-padding):not(.bottom-toc) {
-    margin: 20px 100px 20px 100px;
-    padding: 30px;
-    border-radius: 5px;
-    border: 1px solid #d8d0be;
-    box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.3);
-    background: url('../images/piece_fond.jpg') center top #fffbf5;
-    text-align: center;
-    color: #3e3b36;
+    & tei > div {
+      margin: 20px 100px 20px 100px;
+      padding: 30px 30px 44px;
+      border-radius: 5px;
+      border: 1px solid #d8d0be;
+      box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.3);
+      background: url('../images/piece_fond.jpg') center top #fffbf5;
+      text-align: center;
+      color: #3e3b36;
+      @media screen and (max-width: 500px) {
+        margin: 20px 5px 20px 5px;
+      }
+    }
     & tei > div > p {
       text-align: center;
       font-size: larger;
@@ -33,15 +65,24 @@
       text-shadow: 1px 2px 2px #bbb;
     }
   }
-  head {
+  head, trailer, label {
     font-family: "Linux Libertine", "Times New Roman", Times, "Liberation Serif", FreeSerif, serif;
     font-variant: small-caps;
+    font-weight: bold;
+    font-size: larger;
     color: #4e4940;
     text-shadow: 1px 2px 2px #bbb;
     background-color: transparent;
+    padding-left: 0 !important;
+  }
+  l {
+    white-space: normal;
+    font-variant: normal;
   }
   stage, sp, s {
-    margin: 16px auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-left: 0;
     font-family: "Linux Libertine", "Times New Roman", Times, "Liberation Serif", FreeSerif, serif !important;
   }
   stage, sp {
@@ -62,13 +103,12 @@
   }
   s {
     font-variant: normal;
+    padding-left: 5px;
     & > hi {
       background-color: transparent;
       color: #3e3b36;
     }
   }
-
-
   span.left {
     font-weight: bold !important;
   }

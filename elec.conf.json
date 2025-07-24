@@ -30,5 +30,5 @@
     "footerSubtitles": ""
   },
   "collectionCustomCss": "elec",
-  "excludeCollectionIds": ["papyri"]
+  "excludeCollectionIds": ["corpus"]
 }

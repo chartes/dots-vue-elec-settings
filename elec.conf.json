@@ -29,5 +29,6 @@
     "footerTitle": "Éditions en ligne de l'École des chartes (Élec)",
     "footerSubtitles": ""
   },
-  "collectionCustomCss": "elec"
+  "collectionCustomCss": "elec",
+  "excludeCollectionIds": ["papyri"]
 }

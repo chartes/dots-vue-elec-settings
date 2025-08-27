@@ -15,7 +15,7 @@
     "listSection": {
       "displayMode": "list",
       "cardCollectionPerPage": 4,
-      "logo": "Logo_cid.svg",
+      "logo": "logo_cid.svg",
       "browseButtonText": "Découvrir la collection"
     }
   },

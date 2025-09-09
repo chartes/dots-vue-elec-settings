@@ -1,9 +1,8 @@
 <template>
   <article class="about">
     <div class="about-content app-width-padding">
-      <h1>A custom title </h1>
-      <h2>A custom subtitle </h2>
-      <!--<h2>In the default custom component, you can use either: </h2>
+      <!--<h1>A custom title </h1>
+      <h2>In the default custom component, you can use either: </h2>
       <p>
         <b>a DTS API collection description if available:</b>
       </p>
@@ -58,6 +57,9 @@ export default {
 <style scoped>
 .about {
   font-family: "Barlow", sans-serif;
+}
+.about-content {
+  padding-top: 40px;
 }
 .about h1 {
   padding-top: 20px;

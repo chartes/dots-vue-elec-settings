@@ -1,6 +1,6 @@
 <template>
   <article class="about">
-    <div class="title app-width-padding">CLEM</div>
+    <!--<div class="title app-width-padding">CLEM</div>-->
     <div class="about-content app-width-padding">
       <p>
         Le projet Clem a pour ambition de constituer une base de données répertoriant les inscriptions latines poétiques de l’âge moderne entendu au sens le plus large du terme, depuis le premier humanisme jusqu’à nos jours.

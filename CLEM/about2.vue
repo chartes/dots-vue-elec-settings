@@ -1,22 +1,25 @@
 <template>
   <article class="about">
-    <div class="title app-width-padding">Signes critiques :</div>
+    <!--<div class="title app-width-padding">Signes critiques :</div>-->
     <div class="about-content app-width-padding">
       <p>
-        ( ) : développements d’abréviations
+        <b>Signes critiques :</b>
       </p>
-      <p>
-        [ ] : restitutions de passages manquants
-      </p>
-      <p>
-        < > : correction par addition
-      </p>
-      <p>
-        Italique : correction par modification
-      </p>
-      <p>
-        Nous marquons la quantité des syllabes pour souligner les erreurs de versification.
-      </p>
+      <ul>
+        <li>
+          <code>( )</code> : développements d’abréviations
+        </li>
+        <li>
+          <code>[ ]</code> : restitutions de passages manquants
+        </li>
+        <li>
+          <code>< ></code> : correction par addition
+        </li>
+      </ul>
+        <p>
+          Nous marquons la quantité des syllabes pour souligner les erreurs de versification.
+        </p>
+
     </div>
   </article>
 
@@ -30,4 +33,8 @@ export default {
 }
 </script>
 <style scoped>
+pre {
+  height: fit-content;
+  width: fit-content;
+}
 </style>

@@ -14,14 +14,11 @@
       "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
-      "displayMode": "card",
-      "cardCollectionPerPage": 16,
-      "logo": "",
       "browseButtonText": "Parcourir"
     }
   },
   "footerSettings": {
-    "footerTitle": "",
+    "footerTitle": "CLEM",
     "footerSubtitles": [],
     "footerDescription": ""
   },

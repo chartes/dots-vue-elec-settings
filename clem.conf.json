@@ -3,19 +3,21 @@
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Epigramme"
+      "collectionShortTitle": "CLEM"
     },
     "pageHeader": {
-      "collectionAltTitle": "",
-      "aboutButtonText": "À propos des Epigrammes"
+      "collectionAltTitle": "Carmina latina epigraphica moderna",
+      "aboutButtonText": "À propos de CLEM"
     },
     "descriptionSection": {
-      "collectionDescription": "",
-      "customCollectionDescription": ""
+      "collectionDescription": "CLEM est une base des inscriptions latines poétiques de l'âge moderne, depuis le premier humanisme jusqu'à nos jours.",
+      "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
-      "displayMode": "list",
-      "cardCollectionPerPage": 2
+      "displayMode": "card",
+      "cardCollectionPerPage": 16,
+      "logo": "",
+      "browseButtonText": "Parcourir"
     }
   },
   "footerSettings": {
@@ -30,6 +32,9 @@
     "displayTopToc": true
   },
   "aboutPageSettings": [
+    { "tabName": "À propos", "compName": "about1" },
+    { "tabName": "Conventions éditoriales", "compName": "about2" },
+    null
   ],
   "collectionCustomCss": false
 }

@@ -26,7 +26,7 @@
     "tableOfContentDepth": 5,
     "editByCiteType": ["Resource"
     ],
-    "displayTopToc": true
+    "displayTopToc": falsegi
   },
   "aboutPageSettings": [
     { "tabName": "À propos", "compName": "about1" },

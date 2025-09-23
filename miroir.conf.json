@@ -7,11 +7,11 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Le Miroir des classiques",
-      "aboutButtonText": "Miroir, mon beau miroir"
+      "aboutButtonText": "Le projet"
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": null
+      "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
       "displayMode": "list",
@@ -25,12 +25,18 @@
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
-    "editByLevel": 1,
+    "editByLevel": 0,
     "editByCiteType": [
+      "prologue",
+      "livre",
+      "partie"
     ],
-    "displayTopToc": true
+    "displayTopToc": false
   },
-  "aboutPageSettings": [
+"aboutPageSettings": [
+    { "tabName": "Genèse du projet", "compName": "about1" },
+    { "tabName": "Définition du Corpus", "compName": "about2" },
+    null
   ],
   "collectionCustomCss": false
 }

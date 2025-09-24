@@ -1,7 +1,3 @@
-aside.media.pb-component {
-  margin: 10px; /* Ajoute 10px d'espace autour de chaque vignette */
-}
-
 h3 {
     color: var(--text-color); !important;
 }

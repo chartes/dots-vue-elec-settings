@@ -38,5 +38,5 @@
     { "tabName": "Définition du Corpus", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": ["miroir"]
+  "collectionCustomCss": "miroir"
 }

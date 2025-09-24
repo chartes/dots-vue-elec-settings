@@ -23,7 +23,7 @@
     "footerDescription": ""
   },
   "tableOfContentsSettings": {
-    "tableOfContentDepth": 5,
+    "tableOfContentDepth": 1,
     "editByCiteType": ["Resource"
     ],
     "displayTopToc": false

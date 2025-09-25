@@ -35,6 +35,16 @@ div.msItem p {text-indent:0;margin-top:0.3em;}
 ul.poList > li.bibl {margin-top:1em;}
 footer.note {margin-left:1.5em;padding-left:0.5em;border-left:dotted 1px;}
 
+.lg-n {
+    position: absolute;
+    margin-left: -3em;
+    margin-left: -12rem;
+}
+
+.corr {
+    text-decoration: underline;
+}
+
 /*=============================================================
  PART 3
  Updating the css of the DTS API tei response for:

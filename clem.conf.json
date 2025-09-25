@@ -14,7 +14,8 @@
       "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
-      "browseButtonText": "Parcourir"
+      "browseButtonText": "Parcourir",
+      "displaySort": ["CLEM_0001", "CLEM_0002", "CLEM_0003", "CLEM_0004", "CLEM_0005", "CLEM_0006", "CLEM_0007", "CLEM_0008", "CLEM_0009", "CLEM_0010", "CLEM_0011", "CLEM_0012", "CLEM_0013", "CLEM_0014", "CLEM_0015", "CLEM_0016"]
     }
   },
   "footerSettings": {

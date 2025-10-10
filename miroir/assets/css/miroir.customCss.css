@@ -54,6 +54,14 @@ footer.note {margin-left:1.5em;padding-left:0.5em;border-left:dotted 1px;}
     text-decoration: underline;
 }
 
+.note:target::before {
+  content: "☞";
+  position: absolute;
+  margin: 0 1ex 0 -7.5ex;
+  font-size: 16px;
+    left: 300px;
+}
+
 /*=============================================================
  PART 3
  Updating the css of the DTS API tei response for:

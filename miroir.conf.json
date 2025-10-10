@@ -15,7 +15,8 @@
     },
     "listSection": {
       "displayMode": "list",
-      "cardCollectionPerPage": 5
+      "cardCollectionPerPage": 5,
+      "openState": true
     }
   },
   "footerSettings": {

@@ -30,6 +30,22 @@ button {
   }
 }
 
+.pb-component {
+    display: flex; /* Assure que les images sont en bloc */
+    margin-bottom: 3.5rem; /* Ajoute un espace sous chaque image */
+    width: 100%; /* Rend les images responsives */
+    height: auto
+}
+
+div.l {
+  text-align: left;
+  padding-left: 2rem;
+}
+
+.media + .media {
+    border-top: 0px;
+}
+
 h3 {
     color: var(--text-color) !important;
 }

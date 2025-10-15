@@ -29,7 +29,7 @@
     "editByCiteType": ["Resource"
     ],
     "displayTopToc": false,
-    "displayLeftToc": false
+    "displayLeftToc": true
   },
   "aboutPageSettings": [
     { "tabName": "À propos", "compName": "about1" },

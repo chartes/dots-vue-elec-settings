@@ -1,6 +1,6 @@
 {
   "collectionId": "cid",
-  "mediaTypeEndpoint": "tei",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": ""
@@ -16,7 +16,9 @@
       "displayMode": "list",
       "cardCollectionPerPage": 4,
       "logo": "logo_cid.svg",
-      "browseButtonText": "Découvrir la collection"
+      "displaySort": ["cid1983", "cid1985", "cid1986", "cid1990", "cid1991", "cid1992", "cid1993", "cid1994", "cid1996", "cid1998", "cid1999", "cid2003", "cid2009", "cid2012"],
+      "browseButtonText": "Découvrir la collection",
+      "openState": true
     }
   },
   "footerSettings": {
@@ -31,9 +33,10 @@
     "tableOfContentDepth": 5,
     "editByLevel": 0,
     "editByCiteType": [
-      "Resource"
+      "article"
     ],
-    "displayTopToc": false
+    "displayTopToc": false,
+    "displayLeftToc": true
   },
   "aboutPageSettings": [
   ],

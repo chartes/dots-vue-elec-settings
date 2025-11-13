@@ -1,12 +1,12 @@
 {
-  "collectionId": "miroir",
+  "collectionId": "cjc",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Miroir"
+      "collectionShortTitle": "Corpus Juris Civilis"
     },
     "pageHeader": {
-      "collectionAltTitle": "Le Miroir des classiques",
+      "collectionAltTitle": "Corpus Juris Civilis",
       "aboutButtonText": "Le projet"
     },
     "descriptionSection": {
@@ -28,17 +28,13 @@
     "tableOfContentDepth": 5,
     "editByLevel": 0,
     "editByCiteType": [
-      "prologue",
-      "livre",
-      "partie"
+      "part",
+      "liber"
     ],
     "displayTopToc": false,
     "displayLeftToc": true
   },
-"aboutPageSettings": [
-    { "tabName": "Genèse du projet", "compName": "about1" },
-    { "tabName": "Définition du Corpus", "compName": "about2" },
-    null
+ "aboutPageSettings": [
   ],
   "collectionCustomCss": "miroir"
 }

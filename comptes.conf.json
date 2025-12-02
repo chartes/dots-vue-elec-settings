@@ -1,32 +1,42 @@
 {
   "collectionId": "comptes",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "collectionAltTitle": "Les comptes des consuls de Montferrand",
-    "collectionShortTitle": "Comptes",
-    "collectionDescription": "",
-    "logo": ""
+    "appNavBar": {
+      "collectionShortTitle": "Comptes"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Les comptes des consuls de Montferrand",
+      "aboutButtonText": "Le projet"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "list",
+      "cardCollectionPerPage": 5,
+      "openState": true
+    }
   },
   "footerSettings": {
     "footerTitle": "",
-    "footerSubtitles": null,
+    "footerSubtitles": [],
     "footerDescription": "Le projet d'édition des comptes des consuls de Montferrand (1273–1319) a été développé par la Mission projet numérique de l'École nationale des chartes – PSL."
   },
   "tableOfContentsSettings": {
-    "tableOfContentDepth": 3,
-    "editByLevel": null,
+    "tableOfContentDepth": 5,
+    "editByLevel": 1,
     "editByCiteType": [
        "partie",
        "compte",
        "glossaire",
        "personnes"
     ],
-    "countByCiteType": [
-      "compte",
-      "entry",
-      "item"
-    ],
-    "displayTopToc": false
+    "displayTopToc": false,
+    "displayLeftToc": true
   },
-  "aboutPageSettings": [
-  ]
+ "aboutPageSettings": [
+  ],
+  "collectionCustomCss": ""
 }

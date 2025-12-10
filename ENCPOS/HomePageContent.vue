@@ -62,6 +62,7 @@ export default {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: left;
+  font-family: "Barlow", sans-serif;
   font-size: 25px;
   font-weight: 500;
   line-height: 33px;
@@ -72,6 +73,7 @@ export default {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: left;
+  font-family: "Barlow", sans-serif;
   font-size: 20px;
   font-weight: 500;
   line-height: 33px;

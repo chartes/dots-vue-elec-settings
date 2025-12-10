@@ -1,6 +1,6 @@
 <template>
-  <article class="about">
-    <div class="about-content app-width-padding">
+  <article class="home">
+    <div class="home-content app-width-padding">
      <p>{{dtsCollectionDescription}}</p>
     </div>
   </article>
@@ -38,13 +38,13 @@ export default {
 }
 </script>
 <style scoped>
-.about {
+.home {
   font-family: "Barlow", sans-serif;
 }
-.about-content {
+.home-content {
   padding-top: 40px;
 }
-.about h1 {
+.home h1 {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: left;
@@ -54,7 +54,7 @@ export default {
   text-transform: none;
   color: var(--text-color);
 }
-.about h2 {
+.home h2 {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: left;
@@ -63,7 +63,7 @@ export default {
   line-height: 33px;
   text-transform: none;
 }
-.about p {
+.home p {
   text-align: left;
   text-indent: 0;
 }

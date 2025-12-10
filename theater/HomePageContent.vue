@@ -1,6 +1,6 @@
 <template>
-  <article class="about">
-    <div class="about-content app-width-padding">
+  <article class="home">
+    <div class="home-content app-width-padding">
       <h1>A custom description for theater</h1>
       <h2>In the default custom component, you can use either: </h2>
       <p>
@@ -57,10 +57,10 @@ export default {
 }
 </script>
 <style scoped>
-.about {
+.home {
   font-family: "Barlow", sans-serif;
 }
-.about h1 {
+.home h1 {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: left;
@@ -70,7 +70,7 @@ export default {
   text-transform: none;
   color: var(--text-color);
 }
-.about h2 {
+.home h2 {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: left;
@@ -79,7 +79,7 @@ export default {
   line-height: 33px;
   text-transform: none;
 }
-.about p {
+.home p {
   text-align: left;
   text-indent: 0;
 }

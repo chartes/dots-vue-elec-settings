@@ -28,12 +28,13 @@
     "editByLevel": null,
     "editByCiteType": ["Resource"
     ],
-    "displayTopToc": true
+    "displayTopToc": true,
+    "displayLeftToc": true
   },
   "aboutPageSettings": [
     { "tabName": "Les thèses", "compName": "about1" },
     { "tabName": "Les positions", "compName": "about2" },
     { "tabName": "Consultation", "compName": "about3" }
   ],
-  "collectionCustomCss": false
+  "collectionCustomCss": "elec"
 }

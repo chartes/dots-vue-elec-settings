@@ -33,7 +33,8 @@
     "editByLevel": 2,
     "editByCiteType": [
     ],
-    "displayTopToc": false
+    "displayTopToc": false,
+    "displayLeftToc": true
   },
   "collectionCustomCss": "theater"
 }

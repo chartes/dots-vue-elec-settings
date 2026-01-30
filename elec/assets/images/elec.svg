@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="474" height="275" viewBox="0 0 474 275">
+  <g font-family="Josefin Sans, sans-serif" font-size="200" font-weight="500" fill="#1b2c39">
+    <!-- Chaque lettre dans un tspan pour positionnement précis -->
+    <text x="10" y="200">
+      <tspan id="t1" x="10">E</tspan>
+      <tspan id="t2" x="130">l</tspan>
+      <tspan id="t3" x="180">e</tspan>
+      <tspan id="t4" x="290">c</tspan>
+    </text>
+
+    <!-- Point oscillant centré sur le "e" minuscule, couleur orange #cc3e46 -->
+    <ellipse cx="237" cy="120" rx="17.5" ry="17.5" fill="#cc3e46" stroke="rgb(0,0,0)">
+      <animateTransform
+        attributeName="transform"
+        attributeType="XML"
+        type="translate"
+        values="0,0;0,40;0,0"
+        keyTimes="0;0.5;1"
+        dur="2s"
+        repeatCount="indefinite"
+      />
+    </ellipse>
+  </g>
+</svg>

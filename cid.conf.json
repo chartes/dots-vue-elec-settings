@@ -35,7 +35,7 @@
     "editByCiteType": [
       "article"
     ],
-    "displayTopToc": false,
+    "displayTopToc": true,
     "displayLeftToc": true
   },
   "aboutPageSettings": [

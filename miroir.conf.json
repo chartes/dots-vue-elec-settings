@@ -31,9 +31,7 @@
       "prologue",
       "livre",
       "partie"
-    ],
-    "displayTopToc": false,
-    "displayLeftToc": true
+    ]
   },
 "aboutPageSettings": [
     { "tabName": "Genèse du projet", "compName": "about1" },

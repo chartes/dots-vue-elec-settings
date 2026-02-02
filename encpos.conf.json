@@ -27,9 +27,7 @@
     "tableOfContentDepth": 5,
     "editByLevel": null,
     "editByCiteType": ["Resource"
-    ],
-    "displayTopToc": true,
-    "displayLeftToc": true
+    ]
   },
   "aboutPageSettings": [
     { "tabName": "Les thèses", "compName": "about1" },

@@ -32,9 +32,7 @@
     "tableOfContentDepth": 5,
     "editByLevel": 4,
     "editByCiteType": [
-    ],
-    "displayTopToc": false,
-    "displayLeftToc": true
+    ]
   },
   "collectionCustomCss": "theater"
 }

@@ -1,0 +1,46 @@
+{
+  "collectionId": "edits",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Édits de pacification"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Édits",
+      "aboutButtonText": "À propos des Édits de pacification"
+    },
+    "descriptionSection": {
+      "collectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "card",
+      "cardCollectionPerPage": 10,
+      "openState": true
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Édits footerTitle",
+    "footerSubtitles": [
+      "Édits subTitle1",
+      "Édits subTitle2"
+    ],
+    "footerDescription": "Le projet d'édition des Édits a été développé par la Mission projets numériques de l'École nationale des chartes – PSL avec le soutien de Biblissima+. Biblissima+ bénéficie d’une aide de l'Etat gérée par l'ANR au titre du Programme d’investissements d’avenir intégré à France 2030, portant la référence ANR-21-ESRE-0005."
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 5,
+    "editByLevel": null,
+    "editByCiteType": [
+      "part",
+      "edit",
+      "index"
+    ],
+    "countByCiteType": [
+      "edit"
+    ],
+    "displayTopToc": false,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [
+  ],
+  "collectionCustomCss": false
+}

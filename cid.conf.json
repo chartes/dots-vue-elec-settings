@@ -34,7 +34,8 @@
     "editByLevel": 0,
     "editByCiteType": [
       "article"
-    ]
+    ],
+    "leftTocFragmentIsDocument": true
   },
   "aboutPageSettings": [
     { "tabName": "Le projet", "compName": "about1" },

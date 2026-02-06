@@ -1,29 +1,23 @@
 {
   "collectionId": "cartulaires",
   "mediaTypeEndpoint": "html",
-
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Carts"
+      "collectionShortTitle": "Cartulaires"
     },
-
     "pageHeader": {
-      "collectionAltTitle": "Les cartulaires de l'ENC",
+      "collectionAltTitle": "Cartulaires numérisés d'Île-de-France",
       "aboutButtonText": "À propos"
     },
-
     "descriptionSection": {
-      "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "collectionDescription": ""
     },
-
     "listSection": {
-      "displayMode": "card",
+      "displayMode": "list",
       "cardCollectionPerPage": 10,
       "logo": "logo_cartulaires.png"
     }
   },
-
   "footerSettings": {
     "footerTitle": "Cartulaires d’Île-de-France",
     "footerSubtitles": [
@@ -60,5 +54,5 @@
     }
   ],
 
-  "collectionCustomCss": "cartulaires"
+  "collectionCustomCss": false
 }

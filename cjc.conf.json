@@ -1,5 +1,5 @@
 {
-  "collectionId": "cjc",
+  "collectionId": "CJC",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
@@ -31,30 +31,10 @@
       "partie"
     ]
   },
-<<<<<<< HEAD
-
-    "aboutPageSettings": [
+  "aboutPageSettings": [
     {
-      "tabName": "A. Présentation de l’œuvre",
-      "compName": "about1"
-    },
-    {
-      "tabName": "B. Introduction de l’édition en ligne",
-      "compName": "about2"
-    },
-    {
-      "tabName": "C. Repères bibliographiques",
-      "compName": "about3"
+      "tabName": null
     }
   ],
-
-  "collectionCustomCss": "miroir"
-=======
- "aboutPageSettings": [
-   {"tabName": "Le projet"},
-   null,
-   null
-  ],
   "collectionCustomCss": "cjc"
->>>>>>> d34427a9cbca34da2218daf1f3f2bcf307779fd0
 }

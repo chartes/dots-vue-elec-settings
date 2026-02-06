@@ -1,6 +1,6 @@
 <template>
   <div class="about-content">
-    <h1>Éditions en ligne de l'École des chartes (Élec)</h1>
+    <h1>Cartulaires d'Île-de-France</h1>
 
     <p>
       Dans le cadre des projets de numérisation soutenus par la sous-direction des

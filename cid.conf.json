@@ -10,7 +10,8 @@
       "aboutButtonText": "À propos"
     },
     "descriptionSection": {
-      "collectionDescription": ""
+      "collectionDescription": "",
+      "customCollectionDescription": ""
     },
     "listSection": {
       "displayMode": "list",
@@ -22,10 +23,9 @@
     }
   },
   "footerSettings": {
-    "footerTitle": "CID footerTitle",
+    "footerTitle": "",
     "footerSubtitles": [
-      "CID subTitle1",
-      "CID subTitle2"
+      ""
     ],
     "footerDescription": ""
   },
@@ -37,6 +37,10 @@
     ]
   },
   "aboutPageSettings": [
+    { "tabName": "Le projet", "compName": "about1" },
+    { "tabName": "Liste des réunions publiées", "compName": "about2" },
+    null
   ],
   "collectionCustomCss": false
 }
+

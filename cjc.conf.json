@@ -10,8 +10,7 @@
       "aboutButtonText": "À propos"
     },
     "descriptionSection": {
-      "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "collectionDescription": ""
     },
     "listSection": {
       "displayMode": "list",
@@ -32,6 +31,7 @@
       "partie"
     ]
   },
+<<<<<<< HEAD
 
     "aboutPageSettings": [
     {
@@ -49,4 +49,12 @@
   ],
 
   "collectionCustomCss": "miroir"
+=======
+ "aboutPageSettings": [
+   {"tabName": "Le projet"},
+   null,
+   null
+  ],
+  "collectionCustomCss": "cjc"
+>>>>>>> d34427a9cbca34da2218daf1f3f2bcf307779fd0
 }

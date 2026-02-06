@@ -1,5 +1,5 @@
 {
-  "collectionId": "CJC",
+  "collectionId": "cjc",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
@@ -7,7 +7,7 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Corpus Juris Civilis",
-      "aboutButtonText": "Le projet"
+      "aboutButtonText": "À propos"
     },
     "descriptionSection": {
       "collectionDescription": "",
@@ -32,7 +32,21 @@
       "partie"
     ]
   },
- "aboutPageSettings": [
+
+    "aboutPageSettings": [
+    {
+      "tabName": "A. Présentation de l’œuvre",
+      "compName": "about1"
+    },
+    {
+      "tabName": "B. Introduction de l’édition en ligne",
+      "compName": "about2"
+    },
+    {
+      "tabName": "C. Repères bibliographiques",
+      "compName": "about3"
+    }
   ],
+
   "collectionCustomCss": "miroir"
 }

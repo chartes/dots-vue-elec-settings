@@ -1,5 +1,6 @@
 {
   "collectionId": "dubourg",
+
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "Correspondance Du Bourg"
@@ -16,24 +17,31 @@
       "logo": "logo_dubourg.png"
     }
   },
+
   "footerSettings": {
     "footerTitle": "",
     "footerSubtitles": null,
     "footerDescription": "Le projet d'édition de la correspondance d'Antoine Du Bourg a été développé par la Mission projet numérique de l'École nationale des chartes – PSL."
   },
+
   "tableOfContentsSettings": {
     "tableOfContentDepth": 2,
     "editByLevel": null,
     "editByCiteType": [
-       "introduction",
-       "lettre",
-       "index-person",
-       "index-place"
+      "introduction",
+      "lettre",
+      "index-person",
+      "index-place"
     ],
     "countByCiteType": [
       "lettre"
     ]
   },
+
   "aboutPageSettings": [
+    {
+      "tabName": "Présentation du projet",
+      "compName": "about1"
+    }
   ]
 }

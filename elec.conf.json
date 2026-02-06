@@ -1,33 +1,40 @@
 {
   "collectionId": "elec",
   "mediaTypeEndpoint": "tei",
+
   "homePageSettings": {
     "appNavBar": {
-      "appNavBarLogo": {
-      "imgName": "elec.svg"
-      },
+      "appNavBarLogo": { "imgName": "elec.svg" },
       "collectionShortTitle": "Élec",
       "appNavBarApiLogo": {
         "imgName": "logo_api.svg",
         "href": "https://chartes.github.io/dots_documentation/api/"
       }
     },
+
     "pageHeader": {
       "collectionAltTitle": "Éditions en ligne de l'École des chartes (Élec)",
-      "aboutButtonText": "À propos de Élec"
+      "aboutButtonText": "À propos"
     },
-    "descriptionSection": {
-      "collectionDescription": ""
-    },
+
     "listSection": {
-      "displayMode": "",
       "cardCollectionPerPage": 5
     }
   },
+
   "footerSettings": {
-    "footerTitle": "Éditions en ligne de l'École des chartes (Élec)",
-    "footerSubtitles": ""
+    "footerTitle": "Éditions en ligne de l'École des chartes (Élec)"
   },
+
+  "aboutPageSettings": [
+    {
+      "tabName": "Présentation",
+      "compName": "about1"
+    },
+    null,
+    null
+  ],
+
   "collectionCustomCss": "elec",
   "excludeCollectionIds": ["corpus"]
 }

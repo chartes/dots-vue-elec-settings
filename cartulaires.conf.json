@@ -1,31 +1,38 @@
 {
   "collectionId": "cartulaires",
   "mediaTypeEndpoint": "html",
+
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "Carts"
     },
+
     "pageHeader": {
       "collectionAltTitle": "Les cartulaires de l'ENC",
-      "aboutButtonText": "À propos des cartulaires"
+      "aboutButtonText": "À propos"
     },
+
     "descriptionSection": {
-      "collectionDescription": ""
+      "collectionDescription": "",
+      "customCollectionDescription": { "compName": "HomePageContent" }
     },
+
     "listSection": {
       "displayMode": "card",
       "cardCollectionPerPage": 10,
       "logo": "logo_cartulaires.png"
     }
   },
+
   "footerSettings": {
-    "footerTitle": "Cartulaires footerTitle",
+    "footerTitle": "Cartulaires d’Île-de-France",
     "footerSubtitles": [
-      "Cartulaires subTitle1",
-      "Cartulaires subTitle2"
+      "Corpus numérique de cartulaires médiévaux",
+      "École nationale des chartes – PSL"
     ],
     "footerDescription": "Le projet d'édition des CARTULAIRES a été développé par la Mission projets numériques de l'École nationale des chartes – PSL avec le soutien de Biblissima+. Biblissima+ bénéficie d’une aide de l'Etat gérée par l'ANR au titre du Programme d’investissements d’avenir intégré à France 2030, portant la référence ANR-21-ESRE-0005."
   },
+
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
     "editByLevel": null,
@@ -37,7 +44,21 @@
       "acte"
     ]
   },
+
   "aboutPageSettings": [
+    {
+      "tabName": "Cartulaires d’Île-de-France",
+      "compName": "about1"
+    },
+    {
+      "tabName": "Un corpus géographiquement homogène",
+      "compName": "about2"
+    },
+    {
+      "tabName": "Une lecture critique et croisée",
+      "compName": "about3"
+    }
   ],
-  "collectionCustomCss": false
+
+  "collectionCustomCss": "cartulaires"
 }

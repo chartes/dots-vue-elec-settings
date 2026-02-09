@@ -10,11 +10,13 @@
       "aboutButtonText": "À propos"
     },
     "descriptionSection": {
-      "collectionDescription": ""
+      "collectionDescription": "",
+      "customCollectionDescription": ""
     },
     "listSection": {
       "displayMode": "list",
       "cardCollectionPerPage": 5,
+      "browseButtonText": "Découvrir la collection",
       "openState": true
     }
   },

@@ -7,7 +7,7 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Édits",
-      "aboutButtonText": "À propos des Édits de pacification"
+      "aboutButtonText": "À propos"
     },
     "descriptionSection": {
       "collectionDescription": ""
@@ -15,6 +15,7 @@
     "listSection": {
       "displayMode": "card",
       "cardCollectionPerPage": 10,
+      "browseButtonText": "Découvrir la collection",
       "openState": true
     }
   },

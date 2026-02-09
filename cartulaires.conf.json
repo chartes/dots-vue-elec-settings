@@ -10,12 +10,15 @@
       "aboutButtonText": "À propos"
     },
     "descriptionSection": {
-      "collectionDescription": ""
+      "collectionDescription": "",
+      "customCollectionDescription": ""
     },
     "listSection": {
       "displayMode": "list",
       "cardCollectionPerPage": 10,
-      "logo": "logo_cartulaires.png"
+      "logo": "logo_cartulaires.png",
+      "browseButtonText": "Découvrir la collection",
+      "openState": true
     }
   },
   "footerSettings": {

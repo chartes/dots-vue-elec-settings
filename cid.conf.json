@@ -30,7 +30,7 @@
     "footerDescription": ""
   },
   "tableOfContentsSettings": {
-    "tableOfContentDepth": 5,
+    "tableOfContentDepth": 10,
     "editByLevel": 0,
     "editByCiteType": [
       "article"

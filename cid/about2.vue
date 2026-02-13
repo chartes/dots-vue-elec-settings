@@ -146,7 +146,7 @@
           <td>O. Guyotjeannin, L. Morelle, S. P. Scalfati</td>
           <td>École des chartes</td>
           <td>-</td>
-          <td>-</td>
+          <td><a href="https://catalogue.chartes.psl.eu/cgi-bin/koha/opac-detail.pl?biblionumber=122685" target="_blank">8C617</a></td>
         </tr>
       </tbody></table>
     </div>

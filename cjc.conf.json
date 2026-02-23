@@ -34,9 +34,7 @@
     ]
   },
   "aboutPageSettings": [
-    {
-      "tabName": null
-    }
+    { "tabName": "Le projet", "compName": "about1" }
   ],
   "collectionCustomCss": "cjc"
 }

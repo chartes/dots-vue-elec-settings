@@ -8,11 +8,14 @@
       "collectionAltTitle": "Le sanctoral du lectionnaire de l'office dominicain (1254-1256)",
       "aboutButtonText": "À propos"
     },
-    "descriptionSection": {
-      "collectionDescription": ""
+     "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
     },
     "listSection": {
-      "logo": "sanctoral_200.jpg"
+      "logo": "sanctoral_200.jpg",
+      "browseButtonText": "Découvrir la collection",
+      "openState": true
     }
   },
   "footerSettings": {
@@ -24,7 +27,9 @@
     "tableOfContentDepth": 4,
     "editByLevel": null,
     "editByCiteType": [
-       "dies"
+       "introduction",
+      "section",
+      "dies"
     ],
     "countByCiteType": [
       "dies"

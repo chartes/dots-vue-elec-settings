@@ -3,15 +3,15 @@
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Corpus Juris Civilis"
+      "collectionShortTitle": "Juris"
     },
     "pageHeader": {
       "collectionAltTitle": "Corpus Juris Civilis",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": null
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": ""
+      "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
       "displayMode": "list",

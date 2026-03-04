@@ -17,5 +17,5 @@ jobs:
         with:
           node-version: 24
           cache: "yarn"
-        # XXX: update package localisation when it's migrated
-      - run: npm exec --package "https://github.com/xgaia/dots-vue-config-validator" validate *.conf.json
+      - run: npm exec --package "https://github.com/dots-suite/dots-vue-config-validator" validate -- --generic-config custom.conf.json
+      - run: GLOBIGNORE="custom.*";npm exec --package "https://github.com/xgaia/dots-vue-config-validator" validate -- *.conf.json

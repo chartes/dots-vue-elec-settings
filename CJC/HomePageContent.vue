@@ -1,7 +1,6 @@
 <template>
   <article class="home">
     <div class="home-content app-width-padding">
-      <h1>Le projet</h1>
       <p><i>Corpus juris civilis</i> regroupe des compilations et traductions médiévales françaises en lien avec le droit romain. Cet ensemble d’éditions vise à faciliter l’étude de la réception du droit romain en France à partir du XIII<sup>e</sup> siècle. Il comprend des éditions de textes complets, comme <i>Li livres de jostice et de plet</i>, mais aussi des éditions partielles, notamment une série d’éditions du livre 2 du <i>Code</i> et du <i>Digeste</i> d’après toutes les traductions connues, ce qui permet des comparaisons fructueuses.</p>
       <p>Les notices détaillées des manuscrits utilisés dans ces éditions sont consultables dans la section juridique du <a :href="appRootUrl + 'miroir'">Miroir des classiques</a>. Les traductions du <i>Corpus juris civilis</i> ont été décrites dans Frédéric Duval, avec la collab. d’Hélène Biu, Viola Mariotti et Graziella Pastore <i>Les traductions médiévales des compilations de Justinien</i>, Paris, Académie des inscriptions et belles lettres, 2024, 506 p. (<i>Histoire littéraire de la France</i>, t. 48). Ce projet a bénéficié du financement des Equipex Biblissima et Biblissima+ (ANR-21-ESRE-0005).</p>
       <p class="byline">Frédéric Duval</p>

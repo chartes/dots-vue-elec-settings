@@ -14,9 +14,12 @@
 
     "pageHeader": {
       "collectionAltTitle": "Éditions en ligne de l'École des chartes (Élec)",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": null
     },
-
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": { "compName": "HomePageContent" }
+    },
     "listSection": {
       "cardCollectionPerPage": 5
     }

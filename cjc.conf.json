@@ -33,7 +33,7 @@
     ]
   },
   "aboutPageSettings": [
-    { "tabName": "Présentation", "compName": "about1" }
+    null
   ],
   "collectionCustomCss": "cjc"
 }

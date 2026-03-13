@@ -1,9 +1,9 @@
 {
-  "collectionId": "CJC",
+  "collectionId": "cjc",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Juris"
+      "collectionShortTitle": "CJC"
     },
     "pageHeader": {
       "collectionAltTitle": "Corpus Juris Civilis",
@@ -15,13 +15,14 @@
     },
     "listSection": {
       "displayMode": "list",
+      "logo": "cjc_logo.svg",
       "cardCollectionPerPage": 5,
-      "browseButtonText": "Découvrir la collection",
+      "browseButtonText": "Consulter les documents",
       "openState": true
     }
   },
   "footerSettings": {
-    "footerTitle": "Corpus Juris Civilis - Éditions en ligne de l'École des chartes (Élec)"
+    "footerTitle": "CJC"
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,

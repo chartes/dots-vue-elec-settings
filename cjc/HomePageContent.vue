@@ -91,4 +91,8 @@ export default {
   text-indent: 0;
   font-variant: small-caps;
 }
+
+.home-content {
+  padding-top: 40px;
+}
 </style>

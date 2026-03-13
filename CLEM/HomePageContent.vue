@@ -69,7 +69,7 @@ export default {
   font-family: "Barlow", sans-serif;
 }
 .home-content {
-  padding-top: 40px;
+  padding-top: 40px; /* adjust depending if you also have a title - see below */
 }
 .home h1 {
   padding-top: 20px;

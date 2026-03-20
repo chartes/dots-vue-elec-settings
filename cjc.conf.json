@@ -28,8 +28,8 @@
     "tableOfContentDepth": 5,
     "editByLevel": 0,
     "editByCiteType": [
-      "partie",
-      "part"
+      "part",
+      "partie"
     ]
   },
   "aboutPageSettings": [
@@ -38,47 +38,42 @@
   "collectionCustomCss": "cjc",
   "keepCollectionMetadata": {
     "displayOrder": [
+      "identifier",
+      "type",
       "dc:title",
       "dc:creator",
-      "dc:date",
       "dc:contributor",
-      "description",
-      "dc:source",
-      "dct:isVersionOf",
+      "dc:date",
       "dc:relation",
-      "dct:creator",
-      "dct:contributor",
-      "identifier",
+      "downloadXML",
+      "downloadPDF",
       "dct:publisher",
-      "dct:created",
-      "dcat:accessURL",
-      "download",
-      "funder",
-      "dct:rights"
+      "dct:rights",
+      "dct:isVersionOf",
+      "dct:creator",
+      "url"
     ],
     "fields": {
       "@id": "identifier",
-      "description": "description",
-      "download": "download",
+      "@type": "type",
+      "download": {
+        "XML": "downloadXML",
+        "PDF": "downloadPDF"
+      },
+      "url": "url",
       "dublincore": {
         "title": "dc:title",
         "creator": "dc:creator",
         "contributor": "dc:contributor",
         "date": "dc:date",
-        "relation": "dc:relation",
-        "source": "dc:source"
+        "relation": "dc:relation"
       },
       "extensions": {
-        "dct:created": null,
         "dct:publisher": null,
         "dct:rights": null,
         "dct:isVersionOf": null,
-        "dct:creator": null,
-        "dct:contributor": null,
-        "funder": null,
-        "dcat:accessURL": null
+        "dct:creator": null
       }
     }
- }
+  }
 }
-

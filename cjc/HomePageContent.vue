@@ -22,17 +22,21 @@ export default {
       type: String,
       required: false
     },
-    appRootUrl: {
+    applicationRootUrl: {
       type: String,
       required: true
     }
   },
   setup (props) {
-    const appRootUrl = ref(props.appRootUrl)
+    /* Use appRootUrl to create links within the application with the relevant base url for the current deployment */
+    const appRootUrl = ref(props.applicationRootUrl)
+    /* Use dtsCollDescription to display the DTS API 'description' data */
     const dtsCollDescription = ref(props.dtsCollectionDescription)
+    /* Use customCollDescription to display the homePageSettings.descriptionSection.collectionDescription data of the collection conf.json */
     const customCollDescription = ref(props.customCollectionDescription)
 
     watch(props, async (newProps) => {
+      appRootUrl.value = newProps.applicationRootUrl
       dtsCollDescription.value = newProps.dtsCollectionDescription
       customCollDescription.value = newProps.customCollectionDescription
     }, { deep: true, immediate: true })
@@ -48,6 +52,9 @@ export default {
 <style scoped>
 .home {
   font-family: "Barlow", sans-serif;
+}
+.home-content {
+  padding-top: 40px; /* adjust depending if you also have a title - see below */
 }
 .home h1 {
   padding-top: 20px;

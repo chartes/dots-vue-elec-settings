@@ -28,12 +28,57 @@
     "tableOfContentDepth": 5,
     "editByLevel": 0,
     "editByCiteType": [
-      "part",
-      "partie"
+      "partie",
+      "part"
     ]
   },
   "aboutPageSettings": [
-    { "tabName": "Présentation", "compName": "about1" }
+    null
   ],
-  "collectionCustomCss": "cjc"
+  "collectionCustomCss": "cjc",
+  "keepCollectionMetadata": {
+    "displayOrder": [
+      "dc:title",
+      "dc:creator",
+      "dc:date",
+      "dc:contributor",
+      "description",
+      "dc:source",
+      "dct:isVersionOf",
+      "dc:relation",
+      "dct:creator",
+      "dct:contributor",
+      "identifier",
+      "dct:publisher",
+      "dct:created",
+      "dcat:accessURL",
+      "download",
+      "funder",
+      "dct:rights"
+    ],
+    "fields": {
+      "@id": "identifier",
+      "description": "description",
+      "download": "download",
+      "dublincore": {
+        "title": "dc:title",
+        "creator": "dc:creator",
+        "contributor": "dc:contributor",
+        "date": "dc:date",
+        "relation": "dc:relation",
+        "source": "dc:source"
+      },
+      "extensions": {
+        "dct:created": null,
+        "dct:publisher": null,
+        "dct:rights": null,
+        "dct:isVersionOf": null,
+        "dct:creator": null,
+        "dct:contributor": null,
+        "funder": null,
+        "dcat:accessURL": null
+      }
+    }
+ }
 }
+

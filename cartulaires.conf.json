@@ -15,7 +15,7 @@
     },
     "listSection": {
       "displayMode": "list",
-      "cardCollectionPerPage": 10,
+      "cardCollectionPerPage": 30,
       "logo": "logo_cartulaires.png",
       "browseButtonText": "Découvrir la collection",
       "openState": true

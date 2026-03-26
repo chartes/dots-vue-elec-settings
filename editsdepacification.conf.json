@@ -13,10 +13,9 @@
       "collectionDescription": ""
     },
     "listSection": {
-      "displayMode": "card",
-      "cardCollectionPerPage": 10,
-      "browseButtonText": "Découvrir la collection",
-      "openState": true
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Découvrir la collection"
     }
   },
   "footerSettings": {

@@ -14,6 +14,8 @@
       "customCollectionDescription": null
     },
     "listSection": {
+      "displayMode": "toc",
+      "openState": true,
       "logo": "logo_dubourg.png"
     }
   },

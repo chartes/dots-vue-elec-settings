@@ -14,9 +14,10 @@
       "customCollectionDescription": ""
     },
     "listSection": {
+      "displayMode": "toc",
+      "openState": true,
       "logo": "sanctoral_200.jpg",
-      "browseButtonText": "Découvrir la collection",
-      "openState": true
+      "browseButtonText": "Découvrir la collection"
     }
   },
   "footerSettings": {

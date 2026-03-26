@@ -1,12 +1,12 @@
 {
-  "collectionId": "comptes",
+  "collectionId": "obituaires",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Comptes"
+      "collectionShortTitle": "Obituaires"
     },
     "pageHeader": {
-      "collectionAltTitle": "Les comptes des consuls de Montferrand",
+      "collectionAltTitle": "L'Obituaire du Saint-Mont",
       "aboutButtonText": "À propos"
     },
     "descriptionSection": {
@@ -21,16 +21,15 @@
   "footerSettings": {
     "footerTitle": "",
     "footerSubtitles": [],
-    "footerDescription": "Le projet d'édition des comptes des consuls de Montferrand (1273–1319) a été développé par la Mission projet numérique de l'École nationale des chartes – PSL."
+    "footerDescription": ""
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
     "editByLevel": 1,
     "editByCiteType": [
-       "partie",
-       "compte",
-       "glossaire",
-       "personnes"
+      "partie",
+      "mensis",
+      "Annexes"
     ]
   },
  "aboutPageSettings": [

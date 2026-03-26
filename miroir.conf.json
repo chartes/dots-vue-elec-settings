@@ -14,9 +14,9 @@
       "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
-      "displayMode": "list",
-      "cardCollectionPerPage": 5,
-      "openState": true
+      "displayMode": "mixed",
+      "openState": true,
+      "cardCollectionPerPage": 5
     }
   },
   "footerSettings": {

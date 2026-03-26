@@ -1,21 +1,20 @@
 {
-  "collectionId": "ENCPOS",
+  "collectionId": "ENCPOS_2",
   "mediaTypeEndpoint": "tei",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "Thèses"
     },
     "pageHeader": {
-      "collectionAltTitle": "",
+      "collectionAltTitle": "ENCPOS TESTS",
       "aboutButtonText": "À propos"
     },
     "descriptionSection": {
-      "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "collectionDescription": ""
     },
     "listSection": {
-      "displayMode": "toc",
-      "openState": true
+      "displayMode": "mixed",
+      "cardCollectionPerPage": 3
     }
   },
   "footerSettings": {
@@ -30,9 +29,7 @@
     ]
   },
   "aboutPageSettings": [
-    { "tabName": "Les thèses", "compName": "about1" },
-    { "tabName": "Les positions", "compName": "about2" },
-    { "tabName": "Consultation", "compName": "about3" }
+    null
   ],
   "collectionCustomCss": "elec"
 }

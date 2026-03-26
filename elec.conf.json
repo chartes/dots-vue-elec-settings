@@ -21,6 +21,7 @@
       "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
+      "displayMode": "card",
       "cardCollectionPerPage": 5
     }
   },

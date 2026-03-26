@@ -13,7 +13,8 @@
       "customCollectionDescription": null
     },
     "listSection": {
-      "displayMode": "list",
+      "displayMode": "toc",
+      "openState": true,
       "logo": "",
       "browseButtonText": "Parcourir la collection"
     }

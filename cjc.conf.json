@@ -14,7 +14,7 @@
       "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
-      "displayMode": "list",
+      "displayMode": "mixed",
       "logo": "cjc_logo.svg",
       "cardCollectionPerPage": 5,
       "browseButtonText": "Consulter les documents",

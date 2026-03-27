@@ -40,25 +40,27 @@
     "displayOrder": [
       "dc:title",
       "dc:creator",
+      "dct:creator",
       "dc:date",
       "dc:contributor",
+      "dct:contributor",
       "description",
       "dc:source",
       "dct:isVersionOf",
       "dc:relation",
-      "dct:creator",
-      "dct:contributor",
+      "dc:subject",
       "dct:bibliographicalCitation",
-      "identifier",
-      "dct:publisher",
-      "dct:created",
-      "dcat:accessURL",
+      "dc:identifier",
       "download",
+      "dcat:accessURL",
+      "dct:created",
+      "dct:publisher",
       "funder",
-      "dct:rights"
+      "dct:rights",
+      "type"
     ],
     "fields": {
-      "@id": "identifier",
+      "@id": "dc:identifier",
       "description": "description",
       "download": "download",
       "dublincore": {
@@ -67,7 +69,8 @@
         "contributor": "dc:contributor",
         "date": "dc:date",
         "relation": "dc:relation",
-        "source": "dc:source"
+        "source": "dc:source",
+        "subject": "dc:subject"
       },
       "extensions": {
         "dct:created": null,

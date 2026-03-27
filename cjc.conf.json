@@ -50,7 +50,7 @@
       "dc:relation",
       "dc:subject",
       "dct:bibliographicalCitation",
-      "dc:identifier",
+      "identifier",
       "download",
       "dcat:accessURL",
       "dct:created",
@@ -60,7 +60,7 @@
       "type"
     ],
     "fields": {
-      "@id": "dc:identifier",
+      "@id": "identifier",
       "description": "description",
       "download": "download",
       "dublincore": {

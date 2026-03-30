@@ -2,6 +2,7 @@
   "genericConf": {
     "mediaTypeEndpoint": "html",
     "homePageSettings": {
+      "favicon": "enc.ico",
       "appNavBar": {
         "appNavBarLogo": {
         "imgName": "logo_dots_circle.svg",

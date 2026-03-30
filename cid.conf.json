@@ -18,7 +18,26 @@
       "logo": "logo_cid.svg",
       "displaySort": ["cid1983", "cid1985", "cid1986", "cid1990", "cid1991", "cid1992", "cid1993", "cid1994", "cid1996", "cid1998", "cid1999", "cid2003", "cid2009", "cid2012"],
       "browseButtonText": "Découvrir la collection",
-      "openState": true
+      "openState": true,
+      "columns": [
+        {
+          "key": "title",
+          "label": "Titre",
+          "width": "2fr"
+        },
+        {
+          "key": "dublincore.contributor",
+          "label": "Auteur",
+          "width": "1fr"
+        },
+        {
+          "key": "dublincore.date",
+          "label": "Date",
+          "type": "range",
+          "width": "150px"
+        },
+        null
+      ]
     }
   },
   "footerSettings": {

@@ -42,7 +42,6 @@
   "keepCollectionMetadata": {
     "displayOrder": [
       "identifier",
-      "type",
       "dc:title",
       "dc:creator",
       "dc:contributor",
@@ -53,13 +52,10 @@
       "dct:publisher",
       "dct:rights",
       "dct:isVersionOf",
-      "dct:creator",
-      "member"
+      "dct:creator"
     ],
     "fields": {
       "@id": "identifier",
-      "@type": "type",
-      "member": "member",
       "download": {
         "XML": "downloadXML",
         "PDF": "downloadPDF"

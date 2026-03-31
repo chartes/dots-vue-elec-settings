@@ -3,13 +3,14 @@
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": ""
+      "collectionShortTitle": "Cid"
     },
     "pageHeader": {
-      "collectionAltTitle": "",
+      "collectionAltTitle": "Actes des congrès de la Commission internationale de diplomatique",
       "aboutButtonText": "À propos"
     },
     "descriptionSection": {
+      "collectionDescription": "",
       "customCollectionDescription": ""
     },
     "listSection": {
@@ -31,7 +32,7 @@
           "width": "1fr"
         },
         {
-          "key": "dublincore.date",
+          "key": "extensions.dct:created",
           "label": "Date",
           "type": "range",
           "width": "150px"
@@ -60,6 +61,48 @@
     { "tabName": "Liste des réunions publiées", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": false
+  "collectionCustomCss": false,
+  "keepCollectionMetadata": {
+    "displayOrder": [
+      "dc:title",
+      "dc:creator",
+      "dc:date",
+      "dc:contributor",
+      "dct:contributor",
+      "description",
+      "dct:isVersionOf",
+      "dct:hasPart",
+      "dct:bibliographicalCitation",
+      "identifier",
+      "download",
+      "dcat:accessURL",
+      "dct:created",
+      "dct:publisher",
+      "funder",
+      "dct:rights",
+      "type"
+    ],
+    "fields": {
+      "@id": "identifier",
+      "description": "description",
+      "download": "download",
+      "dublincore": {
+        "title": "dc:title",
+        "creator": "dc:creator",
+        "contributor": "dc:contributor",
+        "date": "dc:date"
+      },
+      "extensions": {
+        "dct:created": null,
+        "dct:publisher": null,
+        "dct:rights": null,
+        "dct:isVersionOf": null,
+        "dct:hasPart": null,
+        "dct:bibliographicalCitation": null,
+        "dct:contributor": null,
+        "funder": null,
+        "dcat:accessURL": null
+      }
+    }
+  }
 }
-

@@ -1,6 +1,6 @@
 {
   "collectionId": "dubourg",
-
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "Correspondance Du Bourg"
@@ -42,8 +42,48 @@
 
   "aboutPageSettings": [
     {
-      "tabName": "Présentation du projet",
+      "tabName": "Présentation",
       "compName": "about1"
     }
-  ]
+  ],
+  "keepCollectionMetadata": {
+    "displayOrder": [
+      "dc:title",
+      "dc:creator",
+      "dct:creator",
+      "dc:date",
+      "dc:contributor",
+      "dct:contributor",
+      "description",
+      "dc:source",
+      "download",
+      "dcat:accessURL",
+      "dct:created",
+      "dct:publisher",
+      "funder",
+      "dct:rights",
+      "identifier"
+    ],
+    "fields": {
+      "@id": "identifier",
+      "description": "description",
+      "download": "download",
+      "dublincore": {
+        "title": "dc:title",
+        "creator": "dc:creator",
+        "contributor": "dc:contributor",
+        "date": "dc:date",
+        "source": "dc:source"
+      },
+      "extensions": {
+        "dct:creator": null,
+        "dct:contributor": null,
+        "dcat:accessURL": null,
+        "dct:created": null,
+        "dct:publisher": null,
+        "funder": null,
+        "dct:rights": null
+      }
+    }
+  }
 }

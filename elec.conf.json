@@ -1,7 +1,5 @@
 {
   "collectionId": "elec",
-  "mediaTypeEndpoint": "tei",
-
   "homePageSettings": {
     "appNavBar": {
       "appNavBarLogo": {

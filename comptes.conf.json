@@ -1,6 +1,5 @@
 {
   "collectionId": "comptes",
-  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "Comptes"

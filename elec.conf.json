@@ -15,7 +15,7 @@
 
     "pageHeader": {
       "collectionAltTitle": "Éditions en ligne de l'École des chartes",
-      "aboutButtonText": null
+      "aboutButtonText": "À propos"
     },
     "descriptionSection": {
       "collectionDescription": "",
@@ -23,7 +23,8 @@
     },
     "listSection": {
       "displayMode": "card",
-      "cardCollectionPerPage": 5
+      "cardCollectionPerPage": 5,
+      "logo": ""
     }
   },
 
@@ -32,10 +33,7 @@
   },
 
   "aboutPageSettings": [
-    {
-      "tabName": "Présentation",
-      "compName": "about1"
-    },
+    null,
     null,
     null
   ],

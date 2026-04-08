@@ -15,7 +15,7 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "logo": "",
+      "logo": "logo_morchesne.png",
       "browseButtonText": "Parcourir la collection"
     }
   },

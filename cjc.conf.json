@@ -6,7 +6,7 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Corpus Juris Civilis",
-      "aboutButtonText": null
+      "aboutButtonText": "À propos"
     },
     "descriptionSection": {
       "collectionDescription": "",
@@ -55,8 +55,7 @@
       "dct:created",
       "dct:publisher",
       "funder",
-      "dct:rights",
-      "type"
+      "dct:rights"
     ],
     "fields": {
       "@id": "identifier",

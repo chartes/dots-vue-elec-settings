@@ -6,7 +6,8 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Cartulaires numérisés d'Île-de-France",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "collectionBannerImg": "banner_cartulaires.png"
     },
     "descriptionSection": {
       "collectionDescription": "",

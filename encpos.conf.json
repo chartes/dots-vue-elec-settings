@@ -34,5 +34,12 @@
     { "tabName": "Les positions", "compName": "about2" },
     { "tabName": "Consultation", "compName": "about3" }
   ],
-  "collectionCustomCss": "elec"
+  "collectionCustomCss": "elec",
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ]
 }

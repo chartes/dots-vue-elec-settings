@@ -15,7 +15,8 @@
     "listSection": {
       "displayMode": "mixed",
       "openState": true,
-      "cardCollectionPerPage": 5
+      "cardCollectionPerPage": 5,
+      "logo": "DotsLogo.vue"
     }
   },
   "footerSettings": {

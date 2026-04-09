@@ -14,7 +14,8 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "browseButtonText": "Découvrir la collection"
+      "browseButtonText": "Découvrir la collection",
+      "logo": "DotsLogo.vue"
     }
   },
   "footerSettings": {

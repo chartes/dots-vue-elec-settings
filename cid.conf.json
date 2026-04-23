@@ -27,7 +27,7 @@
           "width": "2fr"
         },
         {
-          "key": "dublincore.contributor",
+          "key": "dublinCore.contributor",
           "label": "Auteur",
           "width": "1fr"
         },
@@ -86,7 +86,7 @@
       "@id": "identifier",
       "description": "description",
       "download": "download",
-      "dublincore": {
+      "dublinCore": {
         "title": "dc:title",
         "creator": "dc:creator",
         "contributor": "dc:contributor",

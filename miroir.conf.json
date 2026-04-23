@@ -60,7 +60,7 @@
         "XML": "downloadXML",
         "PDF": "downloadPDF"
       },
-      "dublincore": {
+      "dublinCore": {
         "title": "dc:title",
         "creator": "dc:creator",
         "contributor": "dc:contributor",

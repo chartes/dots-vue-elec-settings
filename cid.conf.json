@@ -35,7 +35,7 @@
           "key": "extensions.dct:created",
           "label": "Date",
           "type": "range",
-          "width": "150px"
+          "width": "250px"
         },
         null
       ]

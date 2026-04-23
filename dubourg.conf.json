@@ -67,7 +67,7 @@
       "@id": "identifier",
       "description": "description",
       "download": "download",
-      "dublincore": {
+      "dublinCore": {
         "title": "dc:title",
         "creator": "dc:creator",
         "contributor": "dc:contributor",

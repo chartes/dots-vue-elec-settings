@@ -57,5 +57,44 @@
     }
   ],
 
-  "collectionCustomCss": false
+  "collectionCustomCss": false,
+  "keepCollectionMetadata": {
+    "displayOrder": [
+      "dct:identifier",
+      "dct:title",
+      "dct:creator",
+      "dct:contributor",
+      "dct:created",
+      "dct:language",
+      "dct:coverage",
+      "dct:source",
+      "dct:description",
+      "dct:publisher",
+      "dct:issued",
+      "dct:license",
+      "dct:rights",
+      "dct:bibliographicalCitation",
+      "download"
+    ],
+    "fields": {
+      "@id": "dct:identifier",
+      "description": "dct:description",
+      "download": "download",
+      "dublinCore": {
+        "identifier": "dct:identifier",
+        "title": "dct:title",
+        "creator": "dct:creator",
+        "contributor": "dct:contributor",
+        "created": "dct:created",
+        "language": "dct:language",
+        "coverage": "dct:coverage",
+        "source": "dct:source",
+        "publisher": "dct:publisher",
+        "issued": "dct:issued",
+        "license": "dct:license",
+        "rights": "dct:rights",
+        "bibliographicalCitation": "dct:bibliographicalCitation"
+      }
+    }
+ }
 }

@@ -14,7 +14,8 @@
     },
     "listSection": {
       "displayMode": "toc",
-      "openState": true
+      "openState": true,
+      "logo": "ElecLogoSimple.vue"
     }
   },
   "footerSettings": {

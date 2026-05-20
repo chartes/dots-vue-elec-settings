@@ -26,9 +26,8 @@
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
-    "editByLevel": null,
-    "editByCiteType": ["chapter"
-    ]
+    "editByLevel": 1,
+    "editByCiteType": null
   },
   "aboutPageSettings": [
     { "tabName": "Les thèses", "compName": "about1" },

@@ -61,48 +61,5 @@
     { "tabName": "Liste des réunions publiées", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": false,
-  "keepCollectionMetadata": {
-    "displayOrder": [
-      "dc:title",
-      "dc:creator",
-      "dc:date",
-      "dc:contributor",
-      "dct:contributor",
-      "description",
-      "dct:isVersionOf",
-      "dct:hasPart",
-      "dct:bibliographicalCitation",
-      "identifier",
-      "download",
-      "dcat:accessURL",
-      "dct:created",
-      "dct:publisher",
-      "funder",
-      "dct:rights",
-      "type"
-    ],
-    "fields": {
-      "@id": "identifier",
-      "description": "description",
-      "download": "download",
-      "dublinCore": {
-        "title": "dc:title",
-        "creator": "dc:creator",
-        "contributor": "dc:contributor",
-        "date": "dc:date"
-      },
-      "extensions": {
-        "dct:created": null,
-        "dct:publisher": null,
-        "dct:rights": null,
-        "dct:isVersionOf": null,
-        "dct:hasPart": null,
-        "dct:bibliographicalCitation": null,
-        "dct:contributor": null,
-        "funder": null,
-        "dcat:accessURL": null
-      }
-    }
-  }
+  "collectionCustomCss": false
 }

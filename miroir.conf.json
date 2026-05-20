@@ -33,46 +33,10 @@
       "partie"
     ]
   },
-"aboutPageSettings": [
+  "aboutPageSettings": [
     { "tabName": "Genèse du projet", "compName": "about1" },
     { "tabName": "Définition du Corpus", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": "miroir",
-  "keepCollectionMetadata": {
-    "displayOrder": [
-      "identifier",
-      "dc:title",
-      "dc:creator",
-      "dc:contributor",
-      "dc:date",
-      "dc:relation",
-      "downloadXML",
-      "downloadPDF",
-      "dct:publisher",
-      "dct:rights",
-      "dct:isVersionOf",
-      "dct:creator"
-    ],
-    "fields": {
-      "@id": "identifier",
-      "download": {
-        "XML": "downloadXML",
-        "PDF": "downloadPDF"
-      },
-      "dublinCore": {
-        "title": "dc:title",
-        "creator": "dc:creator",
-        "contributor": "dc:contributor",
-        "date": "dc:date",
-        "relation": "dc:relation"
-      },
-      "extensions": {
-        "dct:publisher": null,
-        "dct:rights": null,
-        "dct:isVersionOf": null,
-        "dct:creator": null
-      }
-    }
-  }
+  "collectionCustomCss": "miroir"
 }

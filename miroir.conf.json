@@ -38,5 +38,9 @@
     { "tabName": "Définition du Corpus", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": "miroir"
+  "collectionCustomCss": "miroir",
+  "topBreadcrumbButtonLabel": [
+    "dublinCore.contributor",
+    "extensions.dots:shortTitle"
+  ]
 }

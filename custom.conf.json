@@ -56,6 +56,10 @@
       "schema": "https://schema.org/",
       "dots":   "https://github.com/chartes/dots/"
     },
+    "topBreadcrumbButtonLabel": [
+      "dublinCore.creator",
+      "extensions.dots:shortTitle"
+    ],
     "metadataDisplayOrder": [
       "dts:title",
       "dts:id",
@@ -77,8 +81,8 @@
       "dct:rights",
       "dct:isVersionOf",
       "schema:isVersionOf",
-      "schema:creator",
-      "schema:contributor",
+      "schema:author",
+      "schema:editor",
       "schema:source",
       "schema:isBasedOn",
       "schema:encoding",
@@ -95,8 +99,8 @@
     "excludeMetadata": {
       "onlyDeclared": false,
       "fields": [
-        "schema:inLanguage",
-        "dts:citationTrees"
+        "dts:*",
+        "schema:inLanguage"
       ]
     }
   }

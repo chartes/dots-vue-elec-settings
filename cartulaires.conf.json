@@ -56,6 +56,57 @@
       "compName": "about3"
     }
   ],
+  "collectionCustomCss": false,
+  "metadataDisplayOrder": [
+    "dct:title",
 
-  "collectionCustomCss": false
+    "schema:author",
+
+    "dct:created",
+
+    "schema:exampleOfWork",
+
+    "dct:language",
+
+    "schema:editor",
+
+    "schema:isBasedOn",
+
+    "schema:publisher",
+
+    "dct:issued",
+
+    "dct:bibliographicCitation",
+
+    "dct:coverage",
+
+    "dct:description",
+
+    "dct:license",
+
+    "dct:rights",
+
+    "schema:funder",
+
+    "dct:identifier",
+    "schema:identifier",
+
+    "schema:encoding",
+
+    "schema:associatedMedia",
+
+    "schema:subjectOf",
+    "schema:about",
+
+    "dcat:accessURL"
+  ],
+  "metadataRename": {
+    "@id": "dts:id",
+    "@type": "dts:type"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": [
+    ]
+  }
 }

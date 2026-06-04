@@ -33,5 +33,43 @@
   },
  "aboutPageSettings": [
   ],
-  "collectionCustomCss": ""
+  "collectionCustomCss": "",
+  "metadataDisplayOrder": [
+    "dct:title",
+
+    "dct:creator",
+
+    "dct:created",
+
+    "dct:language",
+
+    "schema:contributor",
+
+    "schema:isBasedOn",
+
+    "dct:publisher",
+
+    "dct:issued",
+
+    "dct:bibliographicalCitation",
+
+    "dct:coverage",
+
+    "dct:description",
+
+    "dct:license",
+
+    "dct:rights",
+
+    "dct:identifier"
+  ],
+  "metadataRename": {
+    "@id": "dts:id",
+    "@type": "dts:type"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": [
+    ]
+  }
 }

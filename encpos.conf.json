@@ -36,11 +36,49 @@
     { "tabName": "Consultation", "compName": "about3" }
   ],
   "collectionCustomCss": "elec",
-  "customRoutes": [
-    {
-      "name": "Search",
-      "path": "search",
-      "compName": "SearchPage"
-    }
-  ]
+  "metadataDisplayOrder": [
+    "dct:title",
+
+    "schema:creator",
+
+    "dct:created",
+
+    "dct:isVersionOf",
+    "schema:exampleOfWork",
+
+    "dct:language",
+
+    "schema:isBasedOn",
+
+    "schema:publisher",
+
+    "dct:issued",
+
+    "dct:bibliographicCitation",
+
+    "dct:coverage",
+
+    "dct:description",
+
+    "dct:license",
+
+    "dct:rights",
+
+    "dct:identifier",
+
+    "schema:encoding",
+
+    "schema:associatedMedia",
+
+    "dots:resourceIIIFManifest"
+  ],
+  "metadataRename": {
+    "@id": "dts:id",
+    "@type": "dts:type"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": [
+    ]
+  }
 }

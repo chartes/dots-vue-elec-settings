@@ -37,5 +37,39 @@
     { "tabName": "Conventions éditoriales", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": "CLEM"
+  "collectionCustomCss": "CLEM",
+  "metadataDisplayOrder": [
+      "dct:title",
+      "dct:creator",
+      "dct:created",
+      "dct:isVersionOf",
+      "dct:language",
+      "schema:contributor",
+      "dct:source",
+      "dct:publisher",
+      "dct:issued",
+      "dct:bibliographicalCitation",
+      "dct:coverage",
+      "dct:description",
+      "dct:license",
+      "dct:rights",
+      "dct:identifier",
+      "dct:relation",
+      "dots:resourceIIIFManifest"
+    ],
+    "metadataRename": {
+      "@id": "dts:id",
+      "@type": "dts:type"
+    },
+    "excludeMetadata": {
+      "onlyDeclared": false,
+      "fields": [
+        "@id",
+        "@type",
+        "dts:*",
+        "schema:*",
+        "dots:*",
+        "dcat:*"
+      ]
+    }
 }

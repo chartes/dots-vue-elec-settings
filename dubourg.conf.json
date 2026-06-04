@@ -45,44 +45,46 @@
       "compName": "about1"
     }
   ],
-  "keepCollectionMetadata": {
-    "displayOrder": [
-      "dc:title",
-      "dc:creator",
-      "dct:creator",
-      "dc:date",
-      "dc:contributor",
-      "dct:contributor",
-      "description",
-      "dc:source",
-      "download",
-      "dcat:accessURL",
-      "dct:created",
-      "dct:publisher",
-      "funder",
-      "dct:rights",
-      "identifier"
-    ],
-    "fields": {
-      "@id": "identifier",
-      "description": "description",
-      "download": "download",
-      "dublinCore": {
-        "title": "dc:title",
-        "creator": "dc:creator",
-        "contributor": "dc:contributor",
-        "date": "dc:date",
-        "source": "dc:source"
-      },
-      "extensions": {
-        "dct:creator": null,
-        "dct:contributor": null,
-        "dcat:accessURL": null,
-        "dct:created": null,
-        "dct:publisher": null,
-        "funder": null,
-        "dct:rights": null
-      }
-    }
+  "metadataDisplayOrder": [
+    "dct:title",
+
+    "schema:author",
+
+    "dct:created",
+
+    "dct:language",
+
+    "schema:editor",
+
+    "schema:isBasedOn",
+
+    "schema:publisher",
+
+    "dct:issued",
+
+    "dct:bibliographicCitation",
+
+    "dct:coverage",
+
+    "dct:description",
+
+    "schema:license",
+
+    "dct:rights",
+
+    "schema:funder",
+
+    "dct:identifier",
+
+    "schema:encoding"
+  ],
+  "metadataRename": {
+    "@id": "dts:id",
+    "@type": "dts:type"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": [
+    ]
   }
 }

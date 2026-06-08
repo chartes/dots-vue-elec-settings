@@ -80,5 +80,12 @@
     "onlyDeclared": true,
     "fields": [
     ]
-  }
+  },
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ]
 }

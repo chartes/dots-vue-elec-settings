@@ -18,7 +18,26 @@
       "displayMode": "mixed",
       "cardCollectionPerPage": 10,
       "logo": "https://upload.wikimedia.org/wikipedia/commons/6/61/Frontispiece_to_Moli%C3%A8re%27s_Dom_Juan_by_P_Brissart_1682_-_c%C3%A9sar.jpg",
-      "browseButtonText": "Parcourir la collec"
+      "browseButtonText": "Parcourir la collec",
+      "columns": [
+        {
+          "key": "title",
+          "label": "Titre",
+          "width": "2fr"
+        },
+        {
+          "key": "dublinCore.creator",
+          "label": "Auteur",
+          "width": "1fr"
+        },
+        {
+          "key": "dublinCore.date",
+          "label": "Date",
+          "type": "range",
+          "width": "250px"
+        },
+        null
+      ]
     }
   },
   "footerSettings": {
@@ -36,5 +55,12 @@
       "act"
     ]
   },
-  "collectionCustomCss": "theater"
+  "collectionCustomCss": "theater",
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ]
 }

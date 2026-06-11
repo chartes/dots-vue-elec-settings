@@ -39,5 +39,5 @@
   ],
 
   "collectionCustomCss": "elec",
-  "excludeCollectionIds": ["corpus"]
+  "excludeCollectionIds": ["corpus", "bfm"]
 }

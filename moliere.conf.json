@@ -26,8 +26,7 @@
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
     "editByLevel": 2,
-    "editByCiteType": [
-    ]
+    "editByCiteType": null
   },
   "collectionCustomCss": "moliere"
 }

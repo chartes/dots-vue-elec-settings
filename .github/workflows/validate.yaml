@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - dev
+      - jsonld-metadata
   pull_request:
     branches:
       - dev
+      - jsonld-metadata
 
 jobs:
   eslint:
@@ -18,4 +20,4 @@ jobs:
           node-version: 24
           cache: "yarn"
       - run: npm exec --package "https://github.com/dots-suite/dots-vue-config-validator" validate -- --generic-config custom.conf.json
-      - run: GLOBIGNORE="custom.*";npm exec --package "https://github.com/xgaia/dots-vue-config-validator" validate -- *.conf.json
+      - run: GLOBIGNORE="custom.*";npm exec --package "https://github.com/dots-suite/dots-vue-config-validator" validate -- *.conf.json

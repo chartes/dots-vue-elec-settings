@@ -1,0 +1,100 @@
+{
+  "collectionId": "ducange",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Du Cange"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Du Cange",
+      "aboutButtonText": "À propos",
+      "collectionBannerImg": "glossarium_favre_10vol.jpg"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "cardCollectionPerPage": 30,
+      "logo": "C._du_Cange.jpg",
+      "browseButtonText": "Découvrir la collection",
+      "openState": true
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Cartulaires d’Île-de-France",
+    "footerSubtitles": [
+      "Corpus numérique de cartulaires médiévaux",
+      "École nationale des chartes – PSL"
+    ],
+    "footerDescription": "Le projet d'édition des CARTULAIRES a été développé par la Mission projets numériques de l'École nationale des chartes – PSL avec le soutien de Biblissima+. Biblissima+ bénéficie d’une aide de l'Etat gérée par l'ANR au titre du Programme d’investissements d’avenir intégré à France 2030, portant la référence ANR-21-ESRE-0005."
+  },
+
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 5,
+    "editByLevel": null,
+    "editByCiteType": [
+      "entry"
+    ],
+    "countByCiteType": [
+      "entry"
+    ]
+  },
+
+  "aboutPageSettings": [
+
+  ],
+  "collectionCustomCss": "ducange",
+  "metadataDisplayOrder": [
+    "dct:title",
+
+    "schema:author",
+
+    "dct:created",
+
+    "schema:exampleOfWork",
+
+    "dct:language",
+
+    "schema:editor",
+
+    "schema:isBasedOn",
+
+    "schema:publisher",
+
+    "dct:issued",
+
+    "dct:bibliographicCitation",
+
+    "dct:coverage",
+
+    "dct:description",
+
+    "dct:license",
+
+    "dct:rights",
+
+    "schema:funder",
+
+    "dct:identifier",
+    "schema:identifier",
+
+    "schema:encoding",
+
+    "schema:associatedMedia",
+
+    "schema:subjectOf",
+    "schema:about",
+
+    "dcat:accessURL"
+  ],
+  "metadataRename": {
+    "@id": "dts:id",
+    "@type": "dts:type"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": [
+    ]
+  }
+}

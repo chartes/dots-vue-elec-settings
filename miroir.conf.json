@@ -46,7 +46,7 @@
   "metadataDisplayOrder": [
     "dct:title",
 
-    "schema:creator",
+    "schema:author",
 
     "dct:created",
 

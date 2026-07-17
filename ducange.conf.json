@@ -1,5 +1,6 @@
 {
   "collectionId": "ducange",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "Du Cange"

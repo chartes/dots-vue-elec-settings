@@ -39,5 +39,21 @@
   ],
 
   "collectionCustomCss": "elec",
-  "excludeCollectionIds": ["corpus", "bfm"]
+  "excludeCollectionIds": ["corpus", "bfm"],
+  "searchConfig": {
+    "temporalFacets": [
+      {
+        "id": "coverage",
+        "label": "Période couverte",
+        "enabled": true,
+        "order": 1
+      },
+      {
+        "id": "created",
+        "label": "Date de création",
+        "enabled": true,
+        "order": 2
+      }
+    ]
+  }
 }

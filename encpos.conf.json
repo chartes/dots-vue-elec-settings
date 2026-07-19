@@ -16,7 +16,31 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "logo": "ElecLogo.vue"
+      "logo": "ElecLogo.vue",
+      "columns": [
+        {
+          "key": "title",
+          "label": "Titre",
+          "width": "2fr"
+        },
+        {
+          "key": "creator",
+          "label": "Auteur",
+          "width": "1fr"
+        },
+        {
+          "key": "date",
+          "label": "Date",
+          "type": "numeric",
+          "width": "125px"
+        },
+        {
+          "key": "coverage",
+          "label": "Sujet",
+          "type": "range",
+          "width": "125px"
+        }
+      ]
     }
   },
   "footerSettings": {
@@ -87,5 +111,37 @@
       "path": "search",
       "compName": "SearchPage"
     }
-  ]
+  ],
+  "searchConfig": {
+    "temporalFacets": [
+      {
+        "id": "coverage",
+        "label": "Période couverte",
+        "enabled": true,
+        "order": 1
+      },
+      {
+        "id": "created",
+        "label": "Date de création",
+        "enabled": true,
+        "order": 2
+      },
+      {
+        "id": "issued",
+        "enabled": false
+      },
+      {
+        "id": "dateCreated",
+        "enabled": false
+      },
+      {
+        "id": "datePublished",
+        "enabled": false
+      },
+      {
+        "id": "temporalCoverage",
+        "enabled": false
+      }
+    ]
+  }
 }

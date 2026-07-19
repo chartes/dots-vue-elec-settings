@@ -18,7 +18,31 @@
       "cardCollectionPerPage": 30,
       "logo": "logo_cartulaires.png",
       "browseButtonText": "Découvrir la collection",
-      "openState": true
+      "openState": true,
+      "columns": [
+        {
+          "key": "title",
+          "label": "Titre",
+          "width": "2fr"
+        },
+        {
+          "key": "creator",
+          "label": "Auteur",
+          "width": "1fr"
+        },
+        {
+          "key": "date",
+          "label": "Date",
+          "type": "numeric",
+          "width": "125px"
+        },
+        {
+          "key": "coverage",
+          "label": "Sujet",
+          "type": "range",
+          "width": "125px"
+        }
+      ]
     }
   },
   "footerSettings": {
@@ -107,6 +131,55 @@
   "excludeMetadata": {
     "onlyDeclared": true,
     "fields": [
+    ]
+  },
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "searchConfig": {
+    "facets": [
+      {
+        "id": "dct:creator",
+        "label": "Toto",
+        "enabled": true,
+        "order": 1
+      },
+      {
+        "id": "schema:funder",
+        "enabled": false
+      }
+    ],
+    "temporalFacets": [
+      {
+        "id": "coverage",
+        "label": "Période d'étude",
+        "enabled": true,
+        "order": 3
+      },
+      {
+        "id": "created",
+        "label": "Date du doc",
+        "enabled": true,
+        "order": 2
+      },
+      {
+        "id": "issued",
+        "label": "Date de publication",
+        "enabled": true,
+        "order": 4
+      },
+      {
+        "id": "dateCreated",
+        "enabled": false
+      },
+      {
+        "id": "temporalCoverage",
+        "enabled": false
+      }
     ]
   }
 }

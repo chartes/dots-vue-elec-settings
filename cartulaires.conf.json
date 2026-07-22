@@ -144,7 +144,7 @@
     "facets": [
       {
         "id": "dct:creator",
-        "label": "Toto",
+        "label": "Auteur",
         "enabled": true,
         "order": 1
       },

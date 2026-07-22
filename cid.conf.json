@@ -61,5 +61,20 @@
     { "tabName": "Liste des réunions publiées", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": false
+  "collectionCustomCss": false,
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "searchConfig": {
+    "facets": [
+      {
+        "id": "collections",
+        "enabled": false
+      }
+    ]
+  }
 }

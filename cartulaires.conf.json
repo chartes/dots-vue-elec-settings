@@ -144,9 +144,41 @@
     "facets": [
       {
         "id": "dct:creator",
-        "label": "Auteur",
+        "label": "Auteurs",
         "enabled": true,
         "order": 1
+      },
+      {
+        "id": "dct:contributor",
+        "label": "Contributeurs",
+        "enabled": true,
+        "order": 2
+      },
+      {
+        "id": "dct:publisher",
+        "enabled": false
+      },
+      {
+        "id": "dct:language",
+        "label": "Langue des actes",
+        "enabled": true,
+        "order": 6
+      },
+      {
+        "id": "schema:author",
+        "enabled": false
+      },
+      {
+        "id": "schema:editor",
+        "enabled": false
+      },
+      {
+        "id": "schema:publisher",
+        "enabled": false
+      },
+      {
+        "id": "schema:inLanguage",
+        "enabled": false
       },
       {
         "id": "schema:funder",
@@ -158,22 +190,26 @@
         "id": "coverage",
         "label": "Période d'étude",
         "enabled": true,
-        "order": 3
-      },
-      {
-        "id": "created",
-        "label": "Date du doc",
-        "enabled": true,
-        "order": 2
-      },
-      {
-        "id": "issued",
-        "label": "Date de publication",
-        "enabled": true,
         "order": 4
       },
       {
+        "id": "created",
+        "label": "Date des sources",
+        "enabled": true,
+        "order": 3
+      },
+      {
+        "id": "issued",
+        "label": "Date des éditions",
+        "enabled": true,
+        "order": 5
+      },
+      {
         "id": "dateCreated",
+        "enabled": false
+      },
+      {
+        "id": "datePublished",
         "enabled": false
       },
       {

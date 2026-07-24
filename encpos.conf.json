@@ -113,16 +113,61 @@
     }
   ],
   "searchConfig": {
+    "facets": [
+      {
+        "id": "collections",
+        "label": "Volumes annuels",
+        "enabled": true
+      },
+      {
+        "id": "dct:creator",
+        "label": "Auteurs",
+        "enabled": true,
+        "order": 3
+      },
+      {
+        "id": "dct:contributor",
+        "enabled": false
+      },
+      {
+        "id": "dct:publisher",
+        "enabled": false
+      },
+      {
+        "id": "dct:language",
+        "enabled": false
+      },
+      {
+        "id": "schema:author",
+        "enabled": false
+      },
+      {
+        "id": "schema:editor",
+        "enabled": false
+      },
+      {
+        "id": "schema:publisher",
+        "enabled": false
+      },
+      {
+        "id": "schema:inLanguage",
+        "enabled": false
+      },
+      {
+        "id": "schema:funder",
+        "enabled": false
+      }
+    ],
     "temporalFacets": [
       {
-        "id": "coverage",
-        "label": "Période couverte",
+        "id": "created",
+        "label": "Promotion (période)",
         "enabled": true,
         "order": 1
       },
       {
-        "id": "created",
-        "label": "Date de création",
+        "id": "coverage",
+        "label": "Sujet (période)",
         "enabled": true,
         "order": 2
       },

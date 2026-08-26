@@ -45,36 +45,6 @@ footer.note {margin-left:1.5em;padding-left:0.5em;border-left:dotted 1px;}
     font-size: 13px !important;
 }
 
-/* La lettre de l'appel (a, b, c...) est déjà fournie par la XSL.
-   L'apparat critique reste donc une suite éditoriale, sans marqueur
-   numérique automatique ni retour forcé après chaque variante. */
-.critical-apparatus {
-    font-size: 13px !important;
-}
-
-.critical-apparatus .apps-list {
-    display: inline;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    line-height: 1.5;
-}
-
-.critical-apparatus .fn-app {
-    display: inline;
-    margin-right: .5em;
-}
-
-/* html.css positionne les retours de note ordinaires à gauche, en absolu.
-   Dans une ligne d'apparat, le repère doit rester avec sa variante. */
-.critical-apparatus .fn-app > a.noteback {
-    position: static;
-    display: inline;
-    width: auto;
-    margin: 0 .35em 0 0;
-    text-align: inherit;
-}
-
 
 .lg-n {
     position: absolute;

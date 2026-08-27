@@ -22,7 +22,7 @@
       "openState": true,
       "columns": [
         {
-          "key": "title",
+          "key": "dublinCore.title",
           "label": "Titre",
           "width": "2fr"
         },
@@ -32,12 +32,10 @@
           "width": "1fr"
         },
         {
-          "key": "extensions.dct:created",
+          "key": "extensions.temporalCoverage",
           "label": "Date",
-          "type": "range",
           "width": "250px"
-        },
-        null
+        }
       ]
     }
   },

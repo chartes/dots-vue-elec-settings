@@ -21,23 +21,23 @@
       "openState": true,
       "columns": [
         {
-          "key": "title",
+          "key": "dublinCore.title",
           "label": "Titre",
           "width": "2fr"
         },
         {
-          "key": "creator",
+          "key": "dublinCore.creator",
           "label": "Auteur",
           "width": "1fr"
         },
         {
-          "key": "date",
+          "key": "dublinCore.created",
           "label": "Date",
           "type": "numeric",
           "width": "125px"
         },
         {
-          "key": "coverage",
+          "key": "dublinCore.coverage",
           "label": "Sujet",
           "type": "range",
           "width": "125px"

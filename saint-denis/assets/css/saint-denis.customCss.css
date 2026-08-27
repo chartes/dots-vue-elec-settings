@@ -1,0 +1,8 @@
+:root { --fill-color:#315d71; --meta-area-fill-color:#edf3f4; --default-text-color:#20282b; }
+.document-area #article { font-family:Georgia,"Times New Roman",serif; line-height:1.65; max-width:74rem; margin:auto; }
+.document-area #article h1,.document-area #article h2,.document-area #article h3 { color:#315d71; font-family:Arial,Helvetica,sans-serif; }
+.document-area #article .tradition,.document-area #article .comments { border-left:3px solid #82a5ae; background:#f3f8f8; margin:1rem 0; padding:.8rem 1rem; }
+.document-area #article .transcription { border-top:1px solid #b8cccf; margin-top:1.5rem; padding-top:1.5rem; }
+.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
+.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
+.description-section nav a:hover { background:var(--fill-color); color:white; }

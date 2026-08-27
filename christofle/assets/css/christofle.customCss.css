@@ -1,0 +1,46 @@
+/* Pierre Christofle — adaptation du thème historique ÉLEC au gabarit DoTS Vue. */
+:root {
+  --fill-color: #8d2632;
+  --meta-area-fill-color: #f5eeee;
+  --default-text-color: #28211f;
+}
+
+.document-area #article {
+  max-width: 74rem;
+  margin: 0 auto;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.document-area #article h1,
+.document-area #article h2,
+.document-area #article h3 {
+  color: #8d2632;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.25;
+}
+
+.document-area #article h1 { font-size: 2rem; margin: 2rem 0 1.25rem; }
+.document-area #article h2 { font-size: 1.45rem; margin: 2rem 0 1rem; }
+.document-area #article h3 { font-size: 1.2rem; margin: 1.5rem 0 .75rem; }
+.document-area #article p { margin: 0 0 1rem; }
+
+/* Les index et les textes édités utilisent les renvois et la coloration ÉLEC. */
+.document-area #article a { color: #8d2632; }
+.document-area #article a:hover { color: #5a121c; }
+.document-area #article .persName,
+.document-area #article .placeName,
+.document-area #article .orgName { color: #8d2632; }
+.document-area #article .date { white-space: nowrap; }
+.document-area #article .note,
+.document-area #article .footnotes,
+.document-area #article .apparatus,
+.document-area #article .app { font-size: .92em; }
+.document-area #article .fileDesc,
+.document-area #article .teiHeader { background: #f8f4f2; border-left: 4px solid #8d2632; padding: 1.5rem; }
+
+@media (max-width: 768px) {
+  .document-area #article { font-size: 1rem; }
+  .document-area #article h1 { font-size: 1.55rem; }
+}

@@ -1,0 +1,14 @@
+{
+  "collectionId": "saint-denis",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": { "collectionShortTitle": "Chartes de Saint-Denis" },
+    "pageHeader": { "collectionAltTitle": "Chartes médiévales de l’abbaye de Saint-Denis (VIIe-XIIIe siècle)", "aboutButtonText": "Le projet" },
+    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": { "compName": "HomePageContent" } },
+    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Parcourir les chartes" }
+  },
+  "footerSettings": { "footerTitle": "Chartes médiévales de l’abbaye de Saint-Denis", "footerSubtitles": ["VIIe-XIIIe siècle", "École nationale des chartes – PSL"], "footerDescription": "Édition électronique des chartes de l’abbaye de Saint-Denis." },
+  "tableOfContentsSettings": { "tableOfContentDepth": 1, "editByLevel": 1, "editByCiteType": ["acte"], "displayTopToc": true, "displayLeftToc": true },
+  "aboutPageSettings": [{ "tabName": "Le projet", "compName": "about1" }, { "tabName": "Les textes", "compName": "about2" }, { "tabName": "Feuille de route", "compName": "about3" }],
+  "collectionCustomCss": "saint-denis"
+}

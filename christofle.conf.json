@@ -1,0 +1,39 @@
+{
+  "collectionId": "christofle",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Pierre Christofle"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "L’année 1437 dans la pratique de Pierre Christofle, notaire du Châtelet d’Orléans",
+      "aboutButtonText": "Présentation"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": { "compName": "HomePageContent" }
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Consulter l’édition"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "L’année 1437 dans la pratique de Pierre Christofle",
+    "footerSubtitles": [
+      "Édition de Kouky Fianu, Anne Fortier et Florence Clavaud",
+      "École nationale des chartes – PSL"
+    ],
+    "footerDescription": "Édition électronique du registre de Pierre Christofle, notaire du Châtelet d’Orléans."
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 2,
+    "editByLevel": 1,
+    "editByCiteType": ["Note", "Index des lieux et personnes"],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [],
+  "collectionCustomCss": "christofle"
+}

@@ -1,0 +1,9 @@
+:root { --fill-color:#a73136; --meta-area-fill-color:#f8eeee; --default-text-color:#2d2524; }
+.document-area #article { font-family: Georgia, "Times New Roman", serif; line-height:1.65; max-width:74rem; margin:auto; }
+.document-area #article h1,.document-area #article h2,.document-area #article h3 { color:#a73136; font-family:Arial,Helvetica,sans-serif; }
+.document-area #article .summary,.document-area #article .physdesc,.document-area #article .reference { background:#fbf6f5; border-left:4px solid #a73136; margin:1rem 0; padding:.8rem 1rem; }
+.document-area #article .dateline,.document-area #article .signed { text-align:center; }
+.document-area #article .orig { color:#6b625f; } .document-area #article .reg { color:#171313; }
+.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
+.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
+.description-section nav a:hover { background:var(--fill-color); color:white; }

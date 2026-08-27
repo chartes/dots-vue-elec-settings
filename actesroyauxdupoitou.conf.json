@@ -1,0 +1,14 @@
+{
+  "collectionId": "actesroyauxdupoitou",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": { "collectionShortTitle": "Actes royaux du Poitou" },
+    "pageHeader": { "collectionAltTitle": "Actes royaux du Poitou", "aboutButtonText": "Présentation" },
+    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": { "compName": "HomePageContent" } },
+    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Consulter les douze tomes" }
+  },
+  "footerSettings": { "footerTitle": "Actes royaux du Poitou", "footerSubtitles": ["Douze tomes, 1302-1483", "École nationale des chartes – PSL"], "footerDescription": "Édition électronique des actes royaux du Poitou." },
+  "tableOfContentsSettings": { "tableOfContentDepth": 1, "editByLevel": 1, "editByCiteType": ["acte"], "displayTopToc": true, "displayLeftToc": true },
+  "aboutPageSettings": [{ "tabName": "La collection", "compName": "about1" }, { "tabName": "Les tomes", "compName": "about2" }],
+  "collectionCustomCss": "actesroyauxdupoitou"
+}

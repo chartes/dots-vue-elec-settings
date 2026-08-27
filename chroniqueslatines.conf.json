@@ -1,0 +1,14 @@
+{
+  "collectionId": "chroniqueslatines",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": { "collectionShortTitle": "Chroniques latines" },
+    "pageHeader": { "collectionAltTitle": "Les chroniques latines de Saint-Denis", "aboutButtonText": "Présentation" },
+    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": { "compName": "HomePageContent" } },
+    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Lire les chroniques" }
+  },
+  "footerSettings": { "footerTitle": "Les chroniques latines de Saint-Denis", "footerSubtitles": ["Le réservoir de mémoire des historiens français de la fin du Moyen Âge", "École nationale des chartes – PSL"], "footerDescription": "Édition électronique des Chroniques latines de Saint-Denis." },
+  "tableOfContentsSettings": { "tableOfContentDepth": 2, "editByLevel": 2, "editByCiteType": ["livre", "chapitre", "section"], "displayTopToc": true, "displayLeftToc": true },
+  "aboutPageSettings": [{ "tabName": "Introduction", "compName": "about1" }, { "tabName": "Présentation du texte", "compName": "about2" }],
+  "collectionCustomCss": "chroniqueslatines"
+}

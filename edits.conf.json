@@ -1,0 +1,80 @@
+{
+  "collectionId": "edits",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Édits"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Édits de pacification",
+      "aboutButtonText": "À propos",
+      "collectionBannerImg": "banner_edits.png"
+    },
+    "descriptionSection": {
+
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Découvrir la collection",
+      "logo": "edits.png"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "L'édit de Nantes et ses antécédents",
+    "footerSubtitles": [
+      "1562-1598"
+    ],
+    "footerDescription": ""
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 5,
+    "editByLevel": null,
+    "editByCiteType": [
+      "part",
+      "edit",
+      "index"
+    ],
+    "countByCiteType": [
+      "edit"
+    ],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [
+  ],
+  "collectionCustomCss": "edits",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:editor",
+    "dct:created",
+    "dct:source",
+    "dct:language",
+    "dct:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:license",
+    "dct:rights"
+  ],
+   "metadataRename": {
+    "title":  "Titre",
+     "schema:editor": "Édition scientifique",
+     "dct:created": "Dates du document",
+     "dct:source": "Source",
+     "dct:language": "Langue",
+     "dct:publisher": "Publié par",
+     "dct:issued": "Date de publication",
+     "dct:bibliographicCitation": "Comment citer ce document",
+     "dct:license": "Licence",
+     "dct:rights": "Mentions de droits"
+
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": [
+      "dct:coverage",
+      "dct:description",
+      "dct:identifier"
+    ]
+  }
+}

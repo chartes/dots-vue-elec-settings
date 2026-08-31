@@ -1,0 +1,81 @@
+/*=============================================================
+ PART 1
+ Updating the css color schema for:
+  - the collection theater
+  - its children (unless otherwise specified)
+ =============================================================*/
+/* Using themes TODO working in dev but not in build :
+[data-theme="red"] {
+  --text-color: #8f0e21;
+  --fill-color: #8f0e21;
+}*/
+/* Using css variables */
+:root {
+  --text-color: #8f0e21;
+  --fill-color: #8f0e21;
+  --fill-color-light: #8F0E21D8;
+}
+
+/*=============================================================
+ PART 2
+ Updating the css of specific elements (HTML) for:
+  - the collection theater
+  - its children (unless otherwise specified)
+ =============================================================*/
+.about > h1 {
+  font-style: italic !important;
+}
+button {
+  &.expanded {
+    fill: var(--fill-color)
+  }
+}
+
+/*=============================================================
+ PART 3
+ Updating the css of the DTS API tei response for:
+  - the collection theater
+  - its children (unless otherwise specified)
+ =============================================================*/
+@media screen {
+  .body > .div {
+    border-bottom: none; !important;
+    padding-bottom: 3em;
+  }
+}
+fieldset {
+  margin: 2em 0em 1em 0;
+  padding: 0 1ex 1ex 1ex;
+  box-sizing: border-box;
+  max-width: 100%;
+  border: 1px dotted #363;
+  white-space: normal;
+}
+
+.front, .div, .footnotes {
+  font-family: Libre Baskerville,serif !important;
+  font-size: 16px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 28px;
+  color: #5f5f5f;
+}
+
+.front > h1 {
+  color: var(--fill-color) !important;
+}
+
+.witness {
+  font-family: Libre Baskerville,serif !important;
+  -webkit-border-radius: 1ex;
+  margin-left: 1em;
+}
+
+a {
+  color: #315ba7;
+  text-decoration: none;
+}
+
+.apparatus {
+  margin-bottom: 30px !important;
+}

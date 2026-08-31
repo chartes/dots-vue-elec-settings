@@ -79,3 +79,52 @@ a {
 .apparatus {
   margin-bottom: 30px !important;
 }
+
+/* Neutralise le width="50%" figé dans le HTML et laisse la table respirer */
+table.app.table {
+  width: 100% !important;
+  max-width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  margin: 0.75em 0;
+}
+
+table.app.table th,
+table.app.table td {
+  width: auto !important;   /* écrase l'attribut width="50%" */
+  box-sizing: border-box;
+  padding: 0.5em 0.75em;
+  vertical-align: top;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+table.app.table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+table.app.table a.wit {
+  display: inline-block;
+  word-break: break-word;
+}
+
+table.app.table td.rdg {
+  line-height: 1.5;
+}
+
+/* Sur petit écran, si une ligne reste trop dense, on autorise un défilement horizontal plutôt qu'un écrasement */
+@media (max-width: 600px) {
+  table.app.table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table.app.table th,
+  table.app.table td {
+    font-size: 0.9em;
+  }
+}

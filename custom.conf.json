@@ -91,6 +91,9 @@
         "schema:*",
         "dots:*",
         "dcat:*"
+      ],
+      "alwaysExclude": [
+        "dts:citationTrees"
       ]
     }
   }

@@ -33,13 +33,13 @@
         {
           "key": "dublinCore.created",
           "label": "Date",
-          "type": "numeric",
+          "type": "date",
           "width": "125px"
         },
         {
           "key": "dublinCore.coverage",
           "label": "Sujet",
-          "type": "range",
+          "type": "date",
           "width": "125px"
         }
       ]

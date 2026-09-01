@@ -24,20 +24,20 @@
           "width": "2fr"
         },
         {
-          "key": "creator",
+          "key": "dublinCore.creator",
           "label": "Auteur",
           "width": "1fr"
         },
         {
-          "key": "date",
+          "key": "dublinCore.created",
           "label": "Date",
-          "type": "numeric",
+          "type": "date",
           "width": "125px"
         },
         {
-          "key": "coverage",
+          "key": "dublinCore.coverage",
           "label": "Sujet",
-          "type": "range",
+          "type": "date",
           "width": "125px"
         }
       ]

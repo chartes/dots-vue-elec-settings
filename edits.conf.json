@@ -57,7 +57,7 @@
     "dct:rights"
   ],
    "metadataRename": {
-    "title":  "Titre",
+     "dct:title": "Titre",
      "schema:editor": "Édition scientifique",
      "dct:created": "Dates du document",
      "dct:source": "Source",
@@ -67,14 +67,8 @@
      "dct:bibliographicCitation": "Comment citer ce document",
      "dct:license": "Licence",
      "dct:rights": "Mentions de droits"
-
   },
   "excludeMetadata": {
-    "onlyDeclared": true,
-    "fields": [
-      "dct:coverage",
-      "dct:description",
-      "dct:identifier"
-    ]
+    "onlyDeclared": true
   }
 }

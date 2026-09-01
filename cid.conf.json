@@ -34,6 +34,7 @@
         {
           "key": "extensions.temporalCoverage",
           "label": "Date",
+          "type": "date",
           "width": "250px"
         }
       ]

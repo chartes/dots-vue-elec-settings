@@ -29,7 +29,7 @@
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
-    "editByLevel": null,
+    "editByLevel": "",
     "editByCiteType": [
       "part",
       "edit",

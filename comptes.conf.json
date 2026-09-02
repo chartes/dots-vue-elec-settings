@@ -29,11 +29,10 @@
     "editByCiteType": [
        "partie",
        "compte",
-       "glossaire",
-       "personnes"
+       "index"
     ]
   },
  "aboutPageSettings": [
   ],
-  "collectionCustomCss": ""
+  "collectionCustomCss": "comptes"
 }

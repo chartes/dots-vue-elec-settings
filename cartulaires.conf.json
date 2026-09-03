@@ -146,13 +146,13 @@
         "id": "dct:creator",
         "label": "Auteurs",
         "enabled": true,
-        "order": 1
+        "order": 5
       },
       {
         "id": "dct:contributor",
         "label": "Contributeurs",
         "enabled": true,
-        "order": 2
+        "order": 6
       },
       {
         "id": "dct:publisher",
@@ -162,7 +162,7 @@
         "id": "dct:language",
         "label": "Langue des actes",
         "enabled": true,
-        "order": 6
+        "order": 7
       },
       {
         "id": "schema:author",
@@ -190,19 +190,19 @@
         "id": "coverage",
         "label": "Période d'étude",
         "enabled": true,
-        "order": 4
+        "order": 3
       },
       {
         "id": "created",
         "label": "Date des sources",
         "enabled": true,
-        "order": 3
+        "order": 2
       },
       {
         "id": "issued",
         "label": "Date des éditions",
         "enabled": true,
-        "order": 5
+        "order": 4
       },
       {
         "id": "dateCreated",

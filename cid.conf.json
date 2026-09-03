@@ -70,10 +70,96 @@
   ],
   "searchConfig": {
     "facets": [
+
+        {
+        "id" : "dct:contributor",
+        "label" : "Auteur",  
+        "enabled" : true,
+        "order" : 6,
+        "alphabetScroller" : true,
+        "letterHeaders" : true
+        },
+        {
+        "id" : "dct:creator",
+        "label" : "Institution",
+        "enabled" : true,
+        "order" : 4,
+        "alphabetScroller" : true,
+        "letterHeaders" : false
+        },
+        {
+        "id":"dct:language",
+        "label" : "Langage",
+        "enabled" : true,
+        "order" : 6,
+        "alphabetScroller" : true,
+        "letterHeaders" : false
+        },
+
+
       {
         "id": "collections",
         "enabled": false
-      }
+      },
+
+      {
+        "id" : "schema:funder",
+        "label" : "Porteur de projet",
+        "enabled": false
+      },
+      {
+        "id" : "dct:publisher",
+        "enabled" : false
+        },
+        {
+        "id":"schema:publisher",
+        "enabled": false
+        },
+        {
+        "id" : "schema:author",
+        "enabled" : false  
+        },
+        {
+        "id" : "schema:editor",
+        "enabled" : false  
+        },
+        {
+        "id" : "schema:inLanguage",
+        "enabled" : false  
+        }
+    ],
+        "temporalFacets": [
+          {
+            "id": "dateCreated",
+            "label": "Date de création",
+            "enabled": true,
+            "order": 1
+          },
+          {
+            "id": "issued",
+            "label": "Date de publication",
+            "enabled": true,
+            "order": 2
+          },
+          {
+            "id": "coverage",
+            "label": "Période du sujet",
+            "enabled": true,
+            "order": 3
+          },
+
+          {
+        "id" : "created",
+        "enabled" : false
+        },          
+        {
+            "id" : "datePublished",
+            "enabled" : false
+          },
+          {
+            "id" : "temporalCoverage",
+            "enabled" : false
+          }
     ]
   }
 }

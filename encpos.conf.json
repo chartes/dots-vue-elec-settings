@@ -117,13 +117,17 @@
       {
         "id": "collections",
         "label": "Volumes annuels",
-        "enabled": true
+        "enabled": true,
+        "alphabetScroller": true,
+        "letterHeaders": false
       },
       {
         "id": "dct:creator",
         "label": "Auteurs",
         "enabled": true,
-        "order": 3
+        "order": 3,
+        "alphabetScroller": true,
+        "letterHeaders": true
       },
       {
         "id": "dct:contributor",

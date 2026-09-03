@@ -72,7 +72,7 @@
     "facets": [
 
         {
-        "id" : "dct:contributor",
+        "key" : "dublinCore.contributor",
         "label" : "Auteur",  
         "enabled" : true,
         "order" : 6,
@@ -80,7 +80,7 @@
         "letterHeaders" : true
         },
         {
-        "id" : "dct:creator",
+        "key" : "dublinCore.creator",
         "label" : "Institution",
         "enabled" : true,
         "order" : 4,
@@ -88,7 +88,7 @@
         "letterHeaders" : false
         },
         {
-        "id":"dct:language",
+        "key":"dublinCore.language",
         "label" : "Langage",
         "enabled" : true,
         "order" : 6,
@@ -103,61 +103,64 @@
       },
 
       {
-        "id" : "schema:funder",
+        "key" : "extentions.funder",
         "label" : "Porteur de projet",
         "enabled": false
       },
       {
-        "id" : "dct:publisher",
+        "key" : "dublinCore.publisher",
         "enabled" : false
         },
         {
-        "id":"schema:publisher",
+        "key":"extensions.publisher",
         "enabled": false
         },
         {
-        "id" : "schema:author",
+        "key" : "extensions.author",
         "enabled" : false  
         },
         {
-        "id" : "schema:editor",
+        "key" : "extensions.editor",
         "enabled" : false  
         },
         {
-        "id" : "schema:inLanguage",
+        "key" : "extensions.inLanguage",
         "enabled" : false  
+        },
+        {
+        "key" : "extensions.funder",
+        "enabled" : false
         }
     ],
         "temporalFacets": [
           {
-            "id": "dateCreated",
+            "key": "dublinCore.created",
             "label": "Date de création",
             "enabled": true,
-            "order": 1
+            "order": 1  
           },
           {
-            "id": "issued",
-            "label": "Date de publication",
-            "enabled": true,
-            "order": 2
+            "key" : "dublinCore.issued",
+            "label" : "Date de publication",
+            "enabled" : true,
+            "order" : 2
           },
           {
-            "id": "coverage",
-            "label": "Période du sujet",
-            "enabled": true,
-            "order": 3
+            "key" : "dublinCore.coverage",
+            "label" : "Période d'étude",
+            "enabled" : true,
+            "order" : 3
           },
-
           {
-        "id" : "created",
-        "enabled" : false
-        },          
-        {
-            "id" : "datePublished",
+            "key" : "extensions.dateCreated",
             "enabled" : false
           },
           {
-            "id" : "temporalCoverage",
+            "key" : "extensions.datePublished",
+            "enabled" : false
+          },
+          {
+            "key" : "extensions.temporalCoverage",
             "enabled" : false
           }
     ]

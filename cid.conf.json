@@ -71,7 +71,7 @@
   "searchConfig": {
     "facets": [
       {
-        "id": "collections",
+        "key": "collections",
         "enabled": false
       }
     ]

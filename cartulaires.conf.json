@@ -143,77 +143,77 @@
   "searchConfig": {
     "facets": [
       {
-        "id": "dct:creator",
+        "key": "dublinCore.creator",
         "label": "Auteurs",
         "enabled": true,
         "order": 1
       },
       {
-        "id": "dct:contributor",
+        "key": "dublinCore.contributor",
         "label": "Contributeurs",
         "enabled": true,
         "order": 2
       },
       {
-        "id": "dct:publisher",
+        "key": "dublinCore.publisher",
         "enabled": false
       },
       {
-        "id": "dct:language",
+        "key": "dublinCore.language",
         "label": "Langue des actes",
         "enabled": true,
         "order": 6
       },
       {
-        "id": "schema:author",
+        "key": "extensions.author",
         "enabled": false
       },
       {
-        "id": "schema:editor",
+        "key": "extensions.editor",
         "enabled": false
       },
       {
-        "id": "schema:publisher",
+        "key": "extensions.publisher",
         "enabled": false
       },
       {
-        "id": "schema:inLanguage",
+        "key": "extensions.inLanguage",
         "enabled": false
       },
       {
-        "id": "schema:funder",
+        "key": "extensions.funder",
         "enabled": false
       }
     ],
     "temporalFacets": [
       {
-        "id": "coverage",
+        "key": "dublinCore.coverage",
         "label": "Période d'étude",
         "enabled": true,
         "order": 4
       },
       {
-        "id": "created",
+        "key": "dublinCore.created",
         "label": "Date des sources",
         "enabled": true,
         "order": 3
       },
       {
-        "id": "issued",
+        "key": "dublinCore.issued",
         "label": "Date des éditions",
         "enabled": true,
         "order": 5
       },
       {
-        "id": "dateCreated",
+        "key": "extensions.dateCreated",
         "enabled": false
       },
       {
-        "id": "datePublished",
+        "key": "extensions.datePublished",
         "enabled": false
       },
       {
-        "id": "temporalCoverage",
+        "key": "extensions.temporalCoverage",
         "enabled": false
       }
     ]

@@ -1,0 +1,125 @@
+/* Glossaire de Montferrand : restituer la liste compacte de l'Élec historique.
+   La règle générique `.entry > *` est utile aux articles de dictionnaire,
+   mais elle isole ici chaque mot grammatical et chaque forme liée. */
+.dts-content .entry {
+  display: list-item;
+  margin: 0 0 0.2em 1.4em;
+  padding: 0;
+}
+
+.dts-content .entry > * {
+  margin-left: 0;
+}
+
+/* Les définitions, renvois et formes associées font partie de la même ligne. */
+.dts-content .entry > .def,
+.dts-content .entry > .xr {
+  display: inline;
+}
+
+/* --------------------------------------------------------------------------
+   Renvois croisés (liens produits par comptes.xsl)
+   -------------------------------------------------------------------------- */
+
+/* Mots du texte liés à leur entrée de glossaire : quasi tous les mots sont
+   liés, donc pas de décoration permanente (sinon le texte occitan est
+   illisible). Le lien ne se révèle qu'au survol. */
+a.lemma-link,
+a.lemma-link.doc-internal-link {
+  color: #315ba7;   /* bleu ELEC (a.w) : le lecteur voit que le mot renvoie au glossaire */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.lemma-link:hover,
+a.lemma-link.doc-internal-link:hover {
+  text-decoration: underline;
+}
+
+/* Renvois numériques de l'index de noms vers les articles des comptes :
+   ce sont de vrais points d'entrée, on les garde visibles mais sobres. */
+a.renvoi-compte,
+a.renvoi-compte.doc-internal-link {
+  color: #6b0057;
+  text-decoration: none;
+}
+
+a.renvoi-compte:hover,
+a.renvoi-compte.doc-internal-link:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Montferrand : règles de la feuille historique (elec.enc.sorbonne.fr)
+   -------------------------------------------------------------------------- */
+
+.montferrand-historic {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.montferrand-historic .somme {
+  font-weight: bold;
+}
+
+.montferrand-historic a.w {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.montferrand-historic a.item {
+  text-decoration: none;
+  border-bottom: none;
+  font-size: 80%;
+  color: #971615;
+}
+
+.montferrand-historic .compte li {
+  list-style: none;
+}
+
+/* Passages cancellés.
+   La feuille TEI générique de DoTS-vue applique à <del> :
+     color: red;
+     text-decoration: line-through;
+   L'Élec historique conserve le passage visible sans rouge ni barré.
+   On garde donc le <del> dans le XML mais on neutralise uniquement son rendu. */
+.montferrand-historic del {
+  display: inline;
+  color: inherit;
+  background-color: inherit;
+  text-decoration: none;
+}
+
+/* Glossaire — séparation du bloc « Occurrences : ».
+   Le front DoTS strippe le whitespace inter-balises, et les règles ci-dessus
+   rendent .def/.xr inline : sans marge, les occurrences se collent à la forme
+   suivante ou à la définition (abationt|abatieront|démolir). La marge CSS est
+   robuste là où un espace XSL ne survit pas au rendu du front. */
+.dts-content .gloss-occurrences {
+  margin: 0 0.35em;
+}
+
+/* Apparat critique : rendre les lettres-sigles (a, b, c…) distinctes du texte
+   et aérer chaque leçon, sinon le paragraphe continu paraît illisible. */
+.apparatus .apparatus-back {
+  font-weight: bold;
+  color: #6b0057;
+  margin-right: .15em;
+  text-decoration: none;
+}
+
+.apparatus .apparatus-note {
+  margin-right: .6em;
+}
+
+/* Folios [fol. N] INLINE : la règle générique de html.css « .pb { float: right }
+   » rejette le folio dans la marge droite et disloque l'entrée (numéro à gauche,
+   fin de l'entrée à droite). Le template Montferrand veut le folio au fil du
+   texte → on annule le float pour ces folios. */
+.montferrand-historic a.pb.folio,
+.montferrand-historic .folio {
+  float: none;
+  display: block;             /* le [fol. N] sur sa propre ligne */
+  margin: .6em 0 .35em 0;     /* espace sous le folio */
+  color: grey;
+}

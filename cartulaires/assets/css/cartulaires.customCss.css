@@ -1,0 +1,51 @@
+/* Cartulaires : les liens <pb facs> et les témoins @facs sont convertis en
+   composants PageBreak. Comme Du Cange, on garde le marqueur générique de
+   PageBreak.vue — une ICÔNE média cliquable (image en opacity:0 + icône en
+   fond) — et PAS la preview de l'image. Le clic ouvre le folio/manuscrit dans
+   Mirador. (On ne redéfinit donc plus .pb-thumbnail-parent/.pb-thumbnail :
+   les valeurs par défaut du composant suffisent.) */
+
+/* PageBreak est prévu à l'origine comme une petite icône marginale, donc son
+   article est positionné en absolu. Avec une véritable vignette, ce placement
+   peut la mettre sous le lien du folio suivant : le clic part alors vers #pb…
+   au lieu de Mirador. Les Cartulaires la conservent dans le flux du texte. */
+.pb-component {
+  display: inline-block;
+  float: none;
+  margin: 0.5rem 0.75rem 0.5rem 0;
+  vertical-align: middle;
+}
+
+.pb-component .pb {
+  position: static;
+}
+
+.pb-component .pb-label {
+  display: none;
+}
+
+/* Vraies notes éditoriales inline (note sans @n ni @xml:id) : rendues en
+   place dans le texte, police plus petite, sans appel de note ni note de bas
+   de page. On garde la classe .note (héritage 13px de html.css) + le
+   modificateur .note-inline pour l'affichage dans le flux. */
+span.note-inline {
+  font-size: 0.85em;
+}
+
+/* Édition critique façon Énéide : en pied d'acte, deux rubriques
+   distinctes — « Notes » (notes explicatives) et « Apparat critique »
+   (variantes, @n=lettre). Titres de rubrique + apparat en plus petit. */
+.footnotes-rubric-title {
+  font-weight: bold;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.4em 0;
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid #E2DED0;
+}
+.apparatus-rubric {
+  font-size: 0.85em;
+}
+.notes-rubric + .apparatus-rubric {
+  margin-top: 1.5em;
+}

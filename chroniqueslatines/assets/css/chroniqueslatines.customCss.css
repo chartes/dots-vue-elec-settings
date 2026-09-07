@@ -1,9 +1,103 @@
-:root { --fill-color:#63375c; --meta-area-fill-color:#f5eef4; --default-text-color:#292028; }
-.document-area #article { font-family:Georgia,"Times New Roman",serif; line-height:1.7; max-width:74rem; margin:auto; }
-.document-area #article h1,.document-area #article h2,.document-area #article h3 { color:#63375c; font-family:Arial,Helvetica,sans-serif; }
-.document-area #article .argument { background:#faf7fa; border-left:4px solid #8d6686; margin:1rem 0 2rem; padding:1rem 1.25rem; }
-.document-area #article .rubric { color:#9a2333; font-weight:700; } .document-area #article .add { font-size:1.08em; }
-.document-area #article .note,.document-area #article .app { font-size:.92em; }
-.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
-.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
-.description-section nav a:hover { background:var(--fill-color); color:white; }
+/* Chroniques latines de Saint-Denis — CSS custom DoTS Vue.
+
+   Attention au nommage : la clé de chargement est le NOM DU FICHIER
+   (App.vue, getCustomCss). Le dossier ne contenait qu'un
+   christofle.customCss.css copié-collé, donc "chroniqueslatines" n'avait
+   aucune feuille custom. */
+
+/* --------------------------------------------------------------------------
+   Puces rouges de l'ÉLEC historique.
+
+   Sur elec.enc.sorbonne.fr la puce n'est pas une couleur de marqueur mais une
+   IMAGE : enc.css applique `ul { list-style-image: url('img/puce_rouge.png') }`
+   à toutes les listes du site. Ce fichier est un carré de 7 × 6 px, couleur
+   dominante #8d2e34.
+
+   On le reproduit ici avec un SVG en data-URI (mêmes dimensions, même teinte,
+   aucun fichier externe à déployer), limité à la zone de texte pour ne pas
+   repeindre les listes de l'interface (sommaire, navigation).
+   -------------------------------------------------------------------------- */
+#article ul,
+.document-area #article ul {
+  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='6'%3E%3Crect width='7' height='6' fill='%238d2e34'/%3E%3C/svg%3E");
+  padding-top: .3em;
+}
+
+/* Comme sur ELEC, les listes imbriquées reprennent les marqueurs standard. */
+#article ul ul { list-style: circle; }
+#article ul ul ul { list-style: disc; }
+
+/* Page « Références citées » : l'ÉLEC rend `ul.listBibl > li`, le fragment
+   local rend `ul.refs-list > li.refs-entry`. */
+.refs-list {
+  padding-left: 1.4em;
+  margin: 1rem 0;
+}
+.refs-list > .refs-entry {
+  margin: 0 0 .45rem;
+}
+
+/* --------------------------------------------------------------------------
+   Citations : appel dans le texte + liste en pied d'article.
+   La XSL (chroniqueslatines.xsl, mode citation-entry) reproduit le bloc
+   `<div class="cit">` de l'ÉLEC, jusque-là absent en local — les appels
+   `<a class="noteref" href="#citN">` pointaient donc dans le vide.
+   -------------------------------------------------------------------------- */
+.citations-list {
+  margin-top: 1.5rem;
+  font-size: .92em;
+}
+.citations-list .cit {
+  margin: .2rem 0;
+}
+.citations-list .cit > a.note {
+  font-weight: 700;
+  text-decoration: none;
+  margin-right: .35rem;
+}
+
+/* --------------------------------------------------------------------------
+   Page de garde : blocs du teiHeader rétablis par chroniqueslatines.xsl.
+
+   L'ÉLEC en tirait deux pages — /credits (titleStmt + respStmt + revisionDesc)
+   et /licence (publicationStmt + address + availability). Le HTEIML rendait les
+   deux premiers seulement : l'adresse, la licence Creative Commons et
+   l'historique des révisions étaient dans le XML mais jamais affichés. Ils le
+   sont désormais sur la garde, avec les noms de classe de l'ÉLEC.
+   -------------------------------------------------------------------------- */
+#article .titleStmt .title { font-size: 1.15rem; font-weight: 600; }
+#article .principal,
+#article .respStmt { margin: .3rem 0; }
+#article .fileDesc label,
+#article .fileDesc legend {
+  display: block;
+  margin: 1.4rem 0 .4rem;
+  font-weight: 600;
+}
+
+/* Historique des révisions : rendu en table.data par le HTEIML. */
+#article .revisionDesc {
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  width: 100%;
+}
+#article .revisionDesc caption {
+  text-align: left;
+  font-weight: 600;
+  padding-bottom: .4rem;
+}
+#article .revisionDesc td {
+  border-top: 1px solid #e6dddf;
+  padding: .35rem .7rem .35rem 0;
+  vertical-align: top;
+}
+
+#article .address { margin: .8rem 0; font-style: normal; }
+#article .address .addrLine { display: block; }
+
+#article .availability {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e6dddf;
+}
+#article .availability .ident { font-weight: 700; }

@@ -5,6 +5,12 @@
   --default-text-color: #28211f;
 }
 
+/* Christofle affiche ses fac-similés en <img> inline (christofle-facsimile), pas
+   via le panneau Mirador. Ce dernier reste visibility:hidden mais garde sa largeur
+   (~1225px) dans le flex .document-views → débordement horizontal (~2469px) qui
+   décale la page à droite au clic d'un appel de note. On le retire de la mise en page. */
+.document-views .mirador-view { display: none !important; }
+
 .document-area #article {
   max-width: 74rem;
   margin: 0 auto;
@@ -39,6 +45,226 @@
 .document-area #article .app { font-size: .92em; }
 .document-area #article .fileDesc,
 .document-area #article .teiHeader { background: #f8f4f2; border-left: 4px solid #8d2632; padding: 1.5rem; }
+
+/* --- Introduction : sommaire des parties (Le notaire, Son registre…) --- */
+.christofle-intro-index .cl-section-head { color:#8d2632; font-family:Arial,Helvetica,sans-serif; margin:1.5rem 0 1rem; }
+.christofle-intro-index .cl-children { list-style:none; padding:0; margin:0 0 2rem; }
+.christofle-intro-index .cl-children li { border-bottom:1px dotted #e0dcd5; }
+.christofle-intro-index .cl-child-link { display:block; padding:.55rem .3rem; color:#8d2632; text-decoration:none; line-height:1.45; }
+.christofle-intro-index .cl-child-link:hover { background:#f5eeee; }
+
+/* --- Bouton de téléchargement de l'édition (partie « Télécharger ») --- */
+.document-area #article a.christofle-download { display:inline-block; margin:.5rem 0; padding:.5rem 1rem;
+  background:#8d2632; color:#fff; border-radius:4px; text-decoration:none; font-family:Arial,Helvetica,sans-serif; font-size:.95rem; }
+.document-area #article a.christofle-download:hover { background:#5a121c; }
+.document-area #article a.christofle-download::before { content:"\2193  "; }
+
+/* --- Index des types d'actes (fragment citeStructure rendu par la XSL) --- */
+.chr-types .chr-types-intro { color:#5a4a4a; margin:0 0 1.5rem; }
+.chr-types .chr-type { margin:0 0 1.4rem; }
+.chr-types .chr-type-head { font-family:Arial,Helvetica,sans-serif; color:#8d2632; font-size:1.15rem; margin:0 0 .5rem; text-transform:capitalize; }
+.chr-types .chr-type-count { color:#a05a63; font-weight:400; font-size:.9rem; }
+.chr-types .chr-acte-list { list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; gap:.35rem; }
+.chr-types .chr-acte-list a { display:inline-block; min-width:2.2rem; text-align:center; padding:.2rem .5rem; border:1px solid #e0cccc; border-radius:4px; color:#8d2632; text-decoration:none; font-size:.9rem; }
+.chr-types .chr-acte-list a:hover { background:#8d2632; color:#fff; border-color:#8d2632; }
+
+/* --- Édition des minutes (fiches) : styles sortis des attributs inline de la XSL --- */
+.document-area #article .christofle-edition { max-width: 68rem; margin: 0 auto; }
+.christofle-minute { margin: 0 0 3.5rem; padding: 0 0 2.5rem; border-bottom: 1px solid #d7d1ca; }
+.christofle-minute .recordMetadata { margin: 0 0 1.5rem; font-size: 90%; }
+.christofle-minute .recordMetadata h2 { margin: 0 0 .7rem; color: inherit; font-size: inherit; font-weight: bold; text-align: center; line-height: 1.45; }
+.christofle-minute .recordSummary { margin: 0; font-style: italic; }
+.christofle-minute .recordType { font-weight: bold; }
+.christofle-transcription { font-size: 1.05rem; }
+
+/* Folios [77 v°] */
+.christofle-minute .pb { display: inline-block; margin-right: .3em; color: #777; font-size: .92em; white-space: nowrap; }
+
+/* Fac-similés */
+.christofle-facsimile { display: block; max-width: 20rem; margin: 1rem auto; }
+.christofle-facsimile img { display: block; width: 100%; height: auto; }
+.christofle-image { display: block; max-width: 100%; height: auto; margin: 1rem auto; }
+
+/* Liens d'index dans le texte (renvoi pers/lieu -> index) */
+.linkToIndex { color: inherit; border-bottom: 1px dotted var(--fill-color); text-decoration: none; }
+.linkToIndex:hover { color: var(--fill-color); }
+.internalLink { color: var(--fill-color); text-decoration: none; }
+.internalLink:hover { text-decoration: underline; }
+
+/* --- Index des types d'actes : feuille ÉLEC historique (christofle.css) ---
+   La source est une page HTML statique, pas un fragment TEI/XSL. Ces règles
+   reprennent sa présentation : entrées compactes, filet pointillé, vedette
+   en gras et renvois bordeaux. */
+.actTypes {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+.actTypes > section > h1 {
+  color: #8d2632;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  text-align: center;
+}
+.actTypes article {
+  margin: 5px 0;
+  padding: .35rem 0;
+  border-bottom: 1px dotted #e8e8e8;
+  font-size: 14px;
+}
+.actTypes .actType-entry { font-weight: bold; }
+.actTypes .index-refs a.internalLink {
+  color: #8d2632;
+  text-decoration: none;
+}
+.actTypes .index-refs a.internalLink:hover { text-decoration: underline; }
+
+/* La page historique utilisait la typographie compacte du thème diple :
+   14 px Arial, titre discret centré et une entrée par ligne. Les sélecteurs
+   sont volontairement plus précis que les styles généraux de DocumentPage. */
+.document-area #article .actTypes,
+.document-area #article .actTypes * {
+  font-family: Arial, Verdana, sans-serif;
+}
+.document-area #article .actTypes {
+  font-size: 14px;
+  line-height: 133%;
+}
+.document-area #article .actTypes > section > h1 {
+  color: #a73136 !important;
+  font-family: Arial, Verdana, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  text-shadow: 1px 1px #e8e8e8;
+  margin: .2% 2% .2% 0;
+}
+.document-area #article .actTypes article {
+  margin: 5px 0;
+  padding: 0;
+  font-size: 14px;
+}
+.document-area #article .actTypes .index-refs a.internalLink {
+  color: #a73136;
+  text-decoration: none;
+}
+
+/* --- Index historique unifié des lieux et des personnes --- */
+.christofle-index {
+  max-width: 60rem;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.christofle-index h2 {
+  border-bottom: 1px solid #d7d1ca;
+  padding-bottom: .3rem;
+}
+
+.christofle-index-intro { margin: 0 0 1.35rem; }
+.christofle-index-intro p {
+  margin: 0 0 .8rem;
+  color: #28211f;
+  font-style: normal;
+}
+
+.christofle-index .index-entry {
+  border-bottom: 1px dotted #e0dcd5;
+  padding: .48rem 0;
+}
+.christofle-index .index-entry p { margin: 0; }
+
+/* Personnes : casse normale comme dans l'ÉLEC historique. */
+.christofle-index .person-entry .surname,
+.christofle-index .person-entry .forename,
+.christofle-index .person-entry .name-entry,
+.christofle-index .person-entry .forename-entry {
+  font-variant: normal;
+  font-variant-caps: normal;
+  text-transform: none;
+}
+
+/* Lieux : vedette en petites capitales ; type de lieu en romain. */
+.christofle-index .placeName-entry {
+  font-variant: small-caps;
+  font-variant-caps: small-caps;
+}
+.christofle-index .placeName-entry .term {
+  font-variant: normal;
+  font-variant-caps: normal;
+  font-style: normal;
+  text-transform: none;
+}
+
+/* Localisation : département en romain, canton en italique. */
+.christofle-index .location,
+.christofle-index .location * {
+  font-variant: normal;
+  font-variant-caps: normal;
+  font-style: normal;
+}
+.christofle-index .location .canton { font-style: italic; }
+
+/* Sous-entrées de lieux restent sous leur parent. */
+.christofle-index .index-subentries {
+  margin: .25rem 0 0 1.4rem;
+}
+.christofle-index .index-subentries > .index-entry {
+  border-bottom: 0;
+  padding: .2rem 0;
+  font-size: .95em;
+}
+
+.christofle-index .persName-note,
+.christofle-index .index-seealso {
+  font-style: italic;
+  color: #555;
+}
+
+.christofle-index .index-refs { color: inherit; }
+
+.document-area #article .christofle-index a.internalLink,
+.document-area #article .christofle-index a.linkToIndex {
+  color: #8d2632;
+  text-decoration: none;
+  border-bottom: 1px dotted #8d2632;
+}
+.document-area #article .christofle-index a.internalLink:hover,
+.document-area #article .christofle-index a.linkToIndex:hover {
+  color: #5a121c;
+  border-bottom-color: #5a121c;
+}
+
+/* --- Drill mois -> jours : filtre par jour (hack radio :checked, aucun JS) --- */
+.christofle-mois .mois-head { text-transform: capitalize; }
+.christofle-mois .mois-intro { color: #5a4a4a; font-style: italic; margin: 0 0 1rem; }
+/* les radios de filtre sont masquées : on interagit via les <label> de la barre */
+.christofle-mois .jf-radio { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.jours-nav { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: .3rem; padding: .55rem .3rem; margin: 0 0 1.5rem; background: #fbf8f8;
+  border-top: 1px solid #d7d1ca; border-bottom: 1px solid #d7d1ca; }
+.jours-nav .jours-label { font-family: Arial, Helvetica, sans-serif; font-size: .85rem; color: #a05a63; margin-right: .3rem; }
+.jours-nav .jour-link { display: inline-block; min-width: 1.9rem; text-align: center; padding: .15rem .45rem;
+  border: 1px solid #e0cccc; border-radius: 4px; color: #8d2632; cursor: pointer; font-size: .9rem;
+  user-select: none; transition: background .12s; }
+.jours-nav .jour-link:hover { background: #f0e0e0; }
+.jours-nav .jour-all { font-family: Arial, Helvetica, sans-serif; font-size: .82rem; }
+/* FILTRE générique (aucun id par jour) : un jour coché masque les autres groupes.
+   « Tous » est hors de .jours-index -> aucun groupe coché -> tout visible. */
+.jours-index:has(.jour-group .jf-radio:checked) .jour-group:not(:has(.jf-radio:checked)) { display: none; }
+/* groupes de jour */
+.jour-group { margin: 0 0 1.6rem; scroll-margin-top: 4rem; }
+.jour-group .jour-head { font-family: Arial, Helvetica, sans-serif; font-size: .95rem; font-weight: 700;
+  color: #8d2632; border-bottom: 1px solid #e0dcd5; padding-bottom: .2rem; margin: 0 0 .6rem; }
+.jour-note { padding: .2rem 0; border-bottom: 1px dotted #eadfe0; }
+.jour-note .note-link { display: block; color: inherit; text-decoration: none; }
+.jour-note .note-link:hover { background: #faf4f4; }
+.jour-note .note-num { font-weight: 700; color: #8d2632; }
+.jour-note .note-type { font-variant: small-caps; color: #7a4a50; }
+.jour-note .note-summary { color: #33292a; }
 
 @media (max-width: 768px) {
   .document-area #article { font-size: 1rem; }

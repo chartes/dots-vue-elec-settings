@@ -83,12 +83,14 @@
   font-family: inherit;
   font-size: inherit;
   font-weight: 700;
-  text-transform: capitalize;
+  /* pas de text-transform : la XSL ne capitalise que la première lettre,
+     « Contrat d'apprentissage » et non « Contrat D'apprentissage ». */
 }
 .chr-types .chr-type-head::after { content: " : "; font-weight: 400; }
 
-/* Le décompte n'existe pas sur l'ÉLEC ; on le garde, en retrait. */
-.chr-types .chr-type-count { font-weight: 400; color: #8a7b7b; }
+/* Le décompte n'existe pas sur l'ÉLEC : masqué pour coller au site historique.
+   Il reste dans le balisage — retirer ce display:none pour le réafficher. */
+.chr-types .chr-type-count { display: none; }
 
 .chr-types .chr-acte-list { display: inline; list-style: none; padding: 0; margin: 0; }
 .chr-types .chr-acte-list > li { display: inline; }
@@ -313,3 +315,74 @@
   .document-area #article { font-size: 1rem; }
   .document-area #article h1 { font-size: 1.55rem; }
 }
+
+/* --- Navigation par mois et par jour ------------------------------------------
+   Reprise de la barre #specific-menu-minutes de l'ÉLEC (theme/christofle.css) :
+   les douze mois sur une ligne, puis les jours du mois courant, séparés par des
+   barres verticales, centrés, entrées actives en bordeaux gras. Sans JavaScript :
+   la navigation est précalculée dans le TEI et rendue par la XSL.
+   Sert sur chaque note (.christofle-note-nav) et sur la page « Édition des
+   notes » (.christofle-notes-index). */
+#article .christofle-note-nav {
+  border-bottom: 1px solid #E8E8E8;
+  margin: 0 0 1.2rem;
+  padding: 0;
+  text-align: center;
+  font-size: 90%;
+}
+#article .christofle-note-nav .months-list { border-bottom: 1px solid #E8E8E8; }
+#article .christofle-note-nav ul {
+  list-style: none;
+  padding: 2px 0;
+  margin: 0;
+}
+#article .christofle-note-nav li { display: inline-block; }
+#article .christofle-note-nav li:not(:last-child)::after {
+  content: " | ";
+  color: #c9bcbc;
+}
+#article .christofle-note-nav a {
+  color: #28211f;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 0 .28rem;
+}
+#article .christofle-note-nav a:hover,
+#article .christofle-note-nav a:focus,
+#article .christofle-note-nav li.selected a {
+  color: #A73136;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Sommaire « Édition des notes » : mêmes codes, en bloc par mois. */
+#article .christofle-notes-index .notes-intro { color: #5a4a4a; margin: 0 0 1.2rem; }
+#article .christofle-notes-index .months-list { list-style: none; padding: 0; margin: 0; }
+#article .christofle-notes-index .month-item {
+  border-bottom: 1px dotted #E8E8E8;
+  padding: .45rem 0;
+}
+#article .christofle-notes-index .month-link {
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #A73136;
+  text-decoration: none;
+}
+#article .christofle-notes-index .month-count { color: #8a7b7b; }
+#article .christofle-notes-index .days-list {
+  display: inline;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 .5rem;
+}
+#article .christofle-notes-index .days-list li { display: inline; }
+#article .christofle-notes-index .days-list li:not(:last-child)::after {
+  content: " · ";
+  color: #c9bcbc;
+}
+#article .christofle-notes-index .day-link {
+  color: #28211f;
+  text-decoration: none;
+  padding: 0 .15rem;
+}
+#article .christofle-notes-index .day-link:hover { color: #A73136; font-weight: 700; }

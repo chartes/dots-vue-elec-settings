@@ -59,14 +59,53 @@
 .document-area #article a.christofle-download:hover { background:#5a121c; }
 .document-area #article a.christofle-download::before { content:"\2193  "; }
 
-/* --- Index des types d'actes (fragment citeStructure rendu par la XSL) --- */
+/* --- Index des types d'actes, présentation de l'ÉLEC historique ---------------
+   Référence : elec.enc.sorbonne.fr/christofle/index-des-types-d-actes.html, dont
+   theme/christofle.css donne « Accord : 9 (8 janvier) ; 26 (16 janvier) ; … »
+   — une entrée par ligne coulante, vedette en gras, filet pointillé #E8E8E8,
+   renvois bordeaux #A73136 soulignés au survol.
+
+   La XSL émet ici une structure de liste (h3 + ul/li) et non les <span> de
+   l'ÉLEC : on la remet dans le flux plutôt que de toucher au balisage. */
 .chr-types .chr-types-intro { color:#5a4a4a; margin:0 0 1.5rem; }
-.chr-types .chr-type { margin:0 0 1.4rem; }
-.chr-types .chr-type-head { font-family:Arial,Helvetica,sans-serif; color:#8d2632; font-size:1.15rem; margin:0 0 .5rem; text-transform:capitalize; }
-.chr-types .chr-type-count { color:#a05a63; font-weight:400; font-size:.9rem; }
-.chr-types .chr-acte-list { list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; gap:.35rem; }
-.chr-types .chr-acte-list a { display:inline-block; min-width:2.2rem; text-align:center; padding:.2rem .5rem; border:1px solid #e0cccc; border-radius:4px; color:#8d2632; text-decoration:none; font-size:.9rem; }
-.chr-types .chr-acte-list a:hover { background:#8d2632; color:#fff; border-color:#8d2632; }
+
+.chr-types .chr-type {
+  border-bottom: 1px dotted #E8E8E8;
+  margin: 5px 0;
+  padding-bottom: .4rem;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Le titre de rubrique repasse dans le flux, suivi des deux-points de l'ÉLEC. */
+.chr-types .chr-type-head {
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.chr-types .chr-type-head::after { content: " : "; font-weight: 400; }
+
+/* Le décompte n'existe pas sur l'ÉLEC ; on le garde, en retrait. */
+.chr-types .chr-type-count { font-weight: 400; color: #8a7b7b; }
+
+.chr-types .chr-acte-list { display: inline; list-style: none; padding: 0; margin: 0; }
+.chr-types .chr-acte-list > li { display: inline; }
+.chr-types .chr-acte-list > li:not(:last-child)::after { content: " ; "; }
+.chr-types .chr-acte-date { color: #5a4a4a; }
+
+.chr-types .chr-acte-list a.internalLink {
+  color: #A73136;
+  font-weight: 400;
+  text-decoration: none;
+}
+.chr-types .chr-acte-list a.internalLink:hover,
+.chr-types .chr-acte-list a.internalLink:focus {
+  color: #A73136;
+  font-weight: 700;
+  text-decoration: underline;
+}
 
 /* --- Édition des minutes (fiches) : styles sortis des attributs inline de la XSL --- */
 .document-area #article .christofle-edition { max-width: 68rem; margin: 0 auto; }
@@ -91,7 +130,11 @@
 .internalLink { color: var(--fill-color); text-decoration: none; }
 .internalLink:hover { text-decoration: underline; }
 
-/* --- Index des types d'actes : feuille ÉLEC historique (christofle.css) ---
+/* ⚠ DORMANT — la XSL déployée émet « chr-types » (bloc ci-dessus), plus
+   « actTypes ». Ces règles ne s'appliquent donc à rien tant que la feuille
+   christofle.xsl du dépôt reste en place. Conservées si la version qui émettait
+   actTypes/index-refs devait revenir.
+--- Index des types d'actes : feuille ÉLEC historique (christofle.css) ---
    La source est une page HTML statique, pas un fragment TEI/XSL. Ces règles
    reprennent sa présentation : entrées compactes, filet pointillé, vedette
    en gras et renvois bordeaux. */

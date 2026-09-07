@@ -30,7 +30,7 @@
   "tableOfContentsSettings": {
     "tableOfContentDepth": 2,
     "editByLevel": 1,
-    "editByCiteType": ["Note", "Index des lieux et personnes"],
+    "editByCiteType": ["Note", "Index des lieux et personnes", "Index", "Index des types d'actes"],
     "displayTopToc": true,
     "displayLeftToc": true
   },

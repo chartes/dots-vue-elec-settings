@@ -101,3 +101,30 @@
   border-top: 1px solid #e6dddf;
 }
 #article .availability .ident { font-weight: 700; }
+
+/* --------------------------------------------------------------------------
+   Référence d'une citation : hors du fil du texte.
+
+   Le HTEIML place la référence (« I, 1, 1-2 ») juste après l'appel, en clair
+   dans le paragraphe. L'ÉLEC ne le fait pas : diple.css la masque
+   (`.cit_n .bibl { display:none }`) et ne la montre qu'au survol. On la masque
+   donc ici aussi — la référence complète, auteur et titre compris, est de toute
+   façon donnée en pied d'article, et le numéro d'appel y conduit.
+
+   ⚠ Ne pas cibler `.cit_n > .listBibl` : la citation contient un <blockquote>,
+   élément de bloc dans un <span> inline, ce qui casse le span au parsing. La
+   référence se retrouve alors sœur du bloc, hors de tout .cit_n. On la vise
+   donc directement, et on la révèle au survol de son appel (sélecteur de frère
+   adjacent), sans dépendre du onmouseover du HTEIML — lequel vise
+   `this.parentNode`, c'est-à-dire le <sup>, et ne bascule rien.
+   -------------------------------------------------------------------------- */
+#article .listBibl { display: none; }
+#article sup:hover + .listBibl,
+#article sup:focus-within + .listBibl {
+  display: inline;
+  margin-left: .35rem;
+  padding: .05rem .4rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  font-size: .92em;
+}

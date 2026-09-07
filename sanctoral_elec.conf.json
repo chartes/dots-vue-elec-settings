@@ -37,7 +37,7 @@
   },
   "aboutPageSettings": [
   ],
-  "collectionCustomCss": false,
+  "collectionCustomCss": "sanctoral_elec",
   "metadataDisplayOrder": [
     "dct:title",
 

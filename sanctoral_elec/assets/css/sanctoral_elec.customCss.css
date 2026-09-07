@@ -1,0 +1,60 @@
+/* Sanctoral du lectionnaire de l'office dominicain — CSS custom DoTS Vue.
+
+   Attention au nommage : la clé de chargement est le NOM DU FICHIER
+   (App.vue, getCustomCss), qui doit valoir la valeur de "collectionCustomCss"
+   dans sanctoral_elec.conf.json.
+
+   Les valeurs reprennent celles de la publication Diple d'origine
+   (elec.enc.sorbonne.fr/sanctoral, theme/sanctoral.css et
+   diple/theme/neutre/diple_html.css), afin que la lecture retrouve les
+   conventions de l'édition. */
+
+:root { --fill-color:#7c1c3d; --meta-area-fill-color:#f7eef2; --default-text-color:#211a1d; }
+
+.document-area #article { font-family: Georgia, "Times New Roman", serif; line-height:1.6; max-width:74rem; margin:auto; }
+.document-area #article h1, .document-area #article h2, .document-area #article h3 { font-family:Arial, Helvetica, sans-serif; }
+
+/* --------------------------------------------------------------------------
+   Encre rouge. Les « Conventions typographiques » de l'introduction opposent
+   l'encre noire du texte à l'encre rouge des rubriques : c'est le #971716 de
+   Diple. 540 paragraphes du corps sont concernés.
+   -------------------------------------------------------------------------- */
+.document-area #article .rubric { color:#971716; }
+
+/* Les numéros de lectio et de dies sont en petites capitales chez Diple. */
+.document-area #article .num { font-variant:small-caps; line-height:100%; }
+.document-area #article .num sup { font-variant:normal; }
+
+/* --------------------------------------------------------------------------
+   Les deux apparats.
+
+   La feuille sanctoral.xsl rend l'apparat critique (notes sans @n) en ligne
+   continue dans un p.apparatus, et les notes de commentaire (notes à @n) en
+   notes de bas de page. La générique hteiml ne style ni l'un ni l'autre.
+   -------------------------------------------------------------------------- */
+.document-area #article .footnotes { font-size:.92em; margin-top:2rem; padding-top:.6rem; border-top:1px solid #d9ccd2; }
+.document-area #article .footnotes .apparatus { margin:0 0 .6rem; text-indent:0; color:#3a3033; }
+/* chaque entrée d'apparat reste dans le fil, séparée par une espace nette */
+.document-area #article .footnotes .apparatus .note { margin-right:.45rem; }
+.document-area #article .footnotes .apparatus .note a { margin-right:.2rem; }
+.document-area #article aside.note { display:block; margin:.15rem 0; text-indent:0; }
+
+/* Appels et retours : exposant discret, comme les a.refnote de Diple. */
+.document-area #article a.noteref { font-size:.72em; vertical-align:super; line-height:0; text-decoration:none; padding:0 .1em; }
+.document-area #article a.noteref:hover { text-decoration:none; border-bottom:1px solid currentColor; }
+.document-area #article .footnotes a.noteback,
+.document-area #article .footnotes .apparatus .note > a { font-weight:700; text-decoration:none; }
+.document-area #article .footnotes a:hover { border-bottom:1px solid currentColor; }
+
+/* La cible d'un renvoi se signale, sans quoi rien ne distingue la note
+   atteinte de ses voisines dans une liste continue. */
+.document-area #article .note, .document-area #article aside.note { scroll-margin-top:6rem; }
+.document-area #article .note:target, .document-area #article aside.note:target { background:#fdf3d7; outline:2px solid #d2a323; }
+
+/* --------------------------------------------------------------------------
+   Sources et citations : les listBibl closent chaque lectio.
+   -------------------------------------------------------------------------- */
+.document-area #article ul.listBibl { list-style:none; margin:.35rem 0 0; padding-left:1.2rem; font-size:.9em; color:#4a4045; }
+.document-area #article ul.listBibl li.bibl { margin:.1rem 0; }
+.document-area #article .cit q, .document-area #article q { font-style:italic; }
+.document-area #article cite.title { font-style:italic; }

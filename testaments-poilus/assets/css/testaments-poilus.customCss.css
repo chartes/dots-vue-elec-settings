@@ -4,6 +4,30 @@
 .document-area #article .summary,.document-area #article .physdesc,.document-area #article .reference { background:#fbf6f5; border-left:4px solid #a73136; margin:1rem 0; padding:.8rem 1rem; }
 .document-area #article .dateline,.document-area #article .signed { text-align:center; }
 .document-area #article .orig { color:#6b625f; } .document-area #article .reg { color:#171313; }
+.document-area #article .tp-facsimile { display:block; width:min(100%, 44rem); height:auto; margin:1.4rem auto; border:1px solid #d7d1ca; box-shadow:0 .2rem .8rem rgba(45,37,36,.14); }
+.document-area #article .tp-index { max-width:62rem; margin:0 auto; }
+.document-area #article .tp-index .index-entry { border-bottom:1px dotted #e0dcd5; padding:.65rem 0; }
+.document-area #article .tp-index .index-entry h4 { margin:0 0 .3rem; font-size:1.05rem; }
+.document-area #article .tp-index .surname { font-variant:small-caps; font-weight:700; }
+.document-area #article .tp-index .dates, .document-area #article .tp-index .bibl { color:#655b58; }
+.document-area #article .tp-index .bio { margin:.25rem 0; }
 .description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
 .description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
 .description-section nav a:hover { background:var(--fill-color); color:white; }
+.document-area #article .note, .document-area #article .fn-app { scroll-margin-top:6rem; }
+.document-area #article .note:target, .document-area #article .fn-app:target { background:#fff3cc; outline:2px solid #d2a323; }
+
+/* --------------------------------------------------------------------------
+   Index paginés par lettre. Chaque sous-liste listPerson/listPlace devient une
+   page ; sa lettre sert de titre, comme sur les 38 pages-lettres de l'ÉLEC.
+   -------------------------------------------------------------------------- */
+.document-area #article .tp-index-letter { margin:0 0 1.6rem; }
+.document-area #article .tp-index-initial { font-size:1.6rem; color:#a73136; font-weight:700; margin:1.2rem 0 .4rem; border-bottom:1px solid #e0dcd5; }
+.document-area #article .tp-index .addName { font-style:italic; }
+.document-area #article .tp-index .displayedLocation { font-weight:400; color:#655b58; }
+
+/* Fac-similés : la vignette ouvre la pleine résolution, comme l'agrandissement
+   qu'offrait l'ÉLEC. Le lien ne doit pas souligner l'image. */
+.document-area #article a.tp-facsimile-link { display:block; text-decoration:none; border:0; }
+.document-area #article a.tp-facsimile-link:hover .tp-facsimile { box-shadow:0 .2rem 1rem rgba(45,37,36,.3); }
+.document-area #article .tp-page-break { display:block; text-align:center; font-size:.85em; color:#7a6f6c; margin-top:1.2rem; }

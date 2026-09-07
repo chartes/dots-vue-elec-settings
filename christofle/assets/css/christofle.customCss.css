@@ -60,54 +60,78 @@
 .document-area #article a.christofle-download::before { content:"\2193  "; }
 
 /* --- Index des types d'actes, présentation de l'ÉLEC historique ---------------
-   Référence : elec.enc.sorbonne.fr/christofle/index-des-types-d-actes.html, dont
-   theme/christofle.css donne « Accord : 9 (8 janvier) ; 26 (16 janvier) ; … »
-   — une entrée par ligne coulante, vedette en gras, filet pointillé #E8E8E8,
-   renvois bordeaux #A73136 soulignés au survol.
+   Valeurs relevées dans le navigateur sur
+   elec.enc.sorbonne.fr/christofle/index-des-types-d-actes.html (theme/christofle.css) :
 
-   La XSL émet ici une structure de liste (h3 + ul/li) et non les <span> de
-   l'ÉLEC : on la remet dans le flux plutôt que de toucher au balisage. */
-.chr-types .chr-types-intro { color:#5a4a4a; margin:0 0 1.5rem; }
+     bloc      Arial 14 px, interligne 18,62 px, texte justifié
+     entrée    filet pointillé 1 px #E8E8E8, marges de 5 px
+     vedette   Arial 14 px, gras, NOIRE — et non bordeaux
+     renvois   Arial 14 px, maigre, #A73136 ; gras souligné au survol
+     titre     Arial 15,4 px, gras, #A73136
 
-.chr-types .chr-type {
+   La XSL rend une structure de liste (h3 + ul/li) là où l'ÉLEC a des <span> :
+   on la remet dans le flux plutôt que de toucher au balisage. */
+#article .chr-types {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.33;
+  text-align: justify;
+}
+#article .chr-types h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15.4px;
+  font-weight: 700;
+  color: #A73136;
+  line-height: 1.33;
+  margin: 0 0 .8rem;
+}
+#article .chr-types .chr-types-intro { font-size: 14px; color: #5a4a4a; margin: 0 0 1rem; }
+
+#article .chr-types .chr-type {
   border-bottom: 1px dotted #E8E8E8;
   margin: 5px 0;
-  padding-bottom: .4rem;
+  padding: 0;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.33;
 }
 
-/* Le titre de rubrique repasse dans le flux, suivi des deux-points de l'ÉLEC. */
-.chr-types .chr-type-head {
+/* Le titre de rubrique repasse dans le flux, suivi des deux-points de l'ÉLEC.
+   Noir et à la taille du texte : c'est le renvoi qui porte la couleur. */
+#article .chr-types .chr-type-head {
   display: inline;
   font-family: inherit;
   font-size: inherit;
   font-weight: 700;
-  /* pas de text-transform : la XSL ne capitalise que la première lettre,
-     « Contrat d'apprentissage » et non « Contrat D'apprentissage ». */
+  color: #000;
+  line-height: inherit;
+  margin: 0;
 }
-.chr-types .chr-type-head::after { content: " : "; font-weight: 400; }
+#article .chr-types .chr-type-head::after { content: " : "; font-weight: 400; color: #000; }
 
-/* Le décompte n'existe pas sur l'ÉLEC : masqué pour coller au site historique.
-   Il reste dans le balisage — retirer ce display:none pour le réafficher. */
-.chr-types .chr-type-count { display: none; }
+/* Le décompte n'existe pas sur l'ÉLEC : masqué. Il reste dans le balisage —
+   retirer ce display:none le rétablit. */
+#article .chr-types .chr-type-count { display: none; }
 
-.chr-types .chr-acte-list { display: inline; list-style: none; padding: 0; margin: 0; }
-.chr-types .chr-acte-list > li { display: inline; }
-.chr-types .chr-acte-list > li:not(:last-child)::after { content: " ; "; }
-.chr-types .chr-acte-date { color: #5a4a4a; }
+#article .chr-types .chr-acte-list { display: inline; list-style: none; padding: 0; margin: 0; }
+#article .chr-types .chr-acte-list > li { display: inline; }
+#article .chr-types .chr-acte-list > li:not(:last-child)::after { content: " ; "; }
+#article .chr-types .chr-acte-date { font-family: inherit; font-size: inherit; color: #000; }
 
-.chr-types .chr-acte-list a.internalLink {
+#article .chr-types .chr-acte-list a.internalLink {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
   color: #A73136;
   font-weight: 400;
   text-decoration: none;
 }
-.chr-types .chr-acte-list a.internalLink:hover,
-.chr-types .chr-acte-list a.internalLink:focus {
+#article .chr-types .chr-acte-list a.internalLink:hover,
+#article .chr-types .chr-acte-list a.internalLink:focus {
   color: #A73136;
   font-weight: 700;
   text-decoration: underline;
 }
+
 
 /* --- Édition des minutes (fiches) : styles sortis des attributs inline de la XSL --- */
 .document-area #article .christofle-edition { max-width: 68rem; margin: 0 auto; }

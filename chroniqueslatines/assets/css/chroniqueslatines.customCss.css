@@ -128,3 +128,14 @@
   border: 1px solid #ccc;
   font-size: .92em;
 }
+
+/* --------------------------------------------------------------------------
+   Visionneuse Mirador : retirée du flux en mode texte seul.
+
+   Le conteneur est masqué par `visibility: hidden`, qui CONSERVE sa place :
+   609 px de vide au-dessus du texte. Tout saut vers une ancre — le retour
+   depuis une référence, par exemple — atterrissait donc décalé d'autant.
+   `display: none` le sort du flux. La règle est limitée à `.text-mode-only`,
+   donc sans effet sur les corpus qui affichent réellement des images.
+   -------------------------------------------------------------------------- */
+.text-mode-only .mirador-view { display: none; }

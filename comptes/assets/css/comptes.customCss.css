@@ -123,3 +123,19 @@ a.renvoi-compte.doc-internal-link:hover {
   margin: .6em 0 .35em 0;     /* espace sous le folio */
   color: grey;
 }
+
+/* Mots annotés (<rs ref="#fnN">) : sur l'ÉLEC le mot LUI-MÊME est le lien vers
+   sa note, souligné en pointillés gris et coloré en bleu — valeurs relevées sur
+   http://elec.enc.sorbonne.fr/montferrand/C1317-1318 :
+   color rgb(49,91,167) ; border-bottom .67px dotted rgb(153,153,153). */
+#article a.rs,
+.montferrand-historic a.rs {
+  color: #315BA7;
+  text-decoration: none;
+  border-bottom: 1px dotted #999;
+  cursor: pointer;
+}
+#article a.rs:hover,
+.montferrand-historic a.rs:hover {
+  border-bottom-style: solid;
+}

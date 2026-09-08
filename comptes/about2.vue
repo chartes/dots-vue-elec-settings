@@ -1,0 +1,17 @@
+﻿<template>
+  <div class="about-content">
+<h1>Principes d’édition</h1><p>Les différents registres formant cette collection se rapportent à des périodes chronologiques clairement indiquées, à deux exceptions près&nbsp;: le fragment que nous avons tiré du registre CC&nbsp;174 ne comporte aucune indication de date, et le registre CC&nbsp;157 (1285-1286) semble représenter une version primitive des fol.&nbsp;36v-39v du registre CC&nbsp;156. Nous avons donc pris le parti de présenter les comptes dans l’ordre qui suit&nbsp;:</p><ul>
+<li>1273-1275&nbsp;: CC&nbsp;155</li>
+<li>1281 [?]&nbsp;: CC&nbsp;174</li>
+<li>1282-1289&nbsp;: CC&nbsp;156, CC&nbsp;157</li>
+<li>1296-1298&nbsp;: CC&nbsp;158</li>
+<li>1307-1309&nbsp;: CC&nbsp;159 </li>
+<li>1317&nbsp;: CC&nbsp;160</li>
+<li>1318-1319&nbsp;: CC&nbsp;539</li>
+</ul><p>Dans notre édition, nous avons numéroté chaque article, en faisant précéder le numéro de l’article par le numéro du registre.</p><p>Les registres ne font pas de distinctions bien nettes entre les diverses sections des comptes (recettes, dépenses, comptes rendus etc.), ni entre les différents articles. Pour faciliter leur lecture, nous avons numéroté chaque article, en distinguant une ligne pour chacun. Nous avons également ajouté des titres pour les différentes sections, ainsi que la liste des consuls en tête de l’année en question (là où nous disposons des renseignements nécessaires). Ces ajouts figurent entre crochets carrés [&nbsp;]. Les documents comportent de nombreuses cancellations et biffures, les premières indiquant que les comptes en question ont été contrôlés et les dettes réglées, les secondes que le scribe a corrigé une faute. Nous reproduisons dans le corps du texte toutes les sections cancellées, en rejetant en bas de page les erreurs biffées.</p><p>Comme dans le reste de l’Auvergne, le calendrier montferrandais suivait le style de l’Annonciation (<span>calculus florentinus)</span> en faisant commencer l’année le 25 mars. Jusqu’au milieu du XIV<sup>e</sup>&nbsp;siècle, les consuls expriment le jour de la semaine par référence à une fête religieuse, au lieu d’indiquer le mois et le quantième. Pour faciliter la lecture du texte, nous avons inséré la date selon le nouveau style entre crochets carrés.</p><p>Suivant des conventions éditoriales bien établies, nous avons résolu la majorité des abréviations utilisées par les scribes, nous avons imposé une division moderne des mots et nous avons distingué entre les lettres <i>u</i> et <i>v</i>, <i>i</i> et <i>j</i>, qui sont interchangeables dans les manuscrits. Dans le cas de fautes évidentes, nous mettons entre crochets carrés [&nbsp;] les lettres que le scribe a omises, et entre parenthèses (&nbsp;) les lettres qui sont en trop.</p><p>Enfin, il convient de signaler qu’il subsiste dans nos textes de nombreux problèmes de nature surtout paléographique&nbsp;: le travail hâtif de certains scribes et le mauvais état de conservation de nombre de ces registres très anciens font que le texte que nous présentons comporte de nombreuses lacunes qu’il nous a été impossible de restituer.</p><p>Le texte disponible ici reprend exactement les matériaux publiés parallèlement sous le même titre en édition papier (Paris&nbsp;: diffusion Champion/Droz, 2006, XLI-212 pages&nbsp;; <cite>Études et rencontres de l’École des chartes</cite>, 23). Le glossaire, établi sur la même base, offrent les facilités d’accès usuelles en matière informatique.</p>
+  </div>
+</template>
+
+<script setup>
+
+</script>

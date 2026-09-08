@@ -115,76 +115,76 @@
   "searchConfig": {
     "facets": [
       {
-        "id": "collections",
+        "key": "collections",
         "label": "Volumes annuels",
         "enabled": true
       },
       {
-        "id": "dct:creator",
+        "key": "dublinCore.creator",
         "label": "Auteurs",
         "enabled": true,
         "order": 3
       },
       {
-        "id": "dct:contributor",
+        "key": "dublinCore.contributor",
         "enabled": false
       },
       {
-        "id": "dct:publisher",
+        "key": "dublinCore.publisher",
         "enabled": false
       },
       {
-        "id": "dct:language",
+        "key": "dublinCore.language",
         "enabled": false
       },
       {
-        "id": "schema:author",
+        "key": "extensions.author",
         "enabled": false
       },
       {
-        "id": "schema:editor",
+        "key": "extensions.editor",
         "enabled": false
       },
       {
-        "id": "schema:publisher",
+        "key": "extensions.publisher",
         "enabled": false
       },
       {
-        "id": "schema:inLanguage",
+        "key": "extensions.inLanguage",
         "enabled": false
       },
       {
-        "id": "schema:funder",
+        "key": "extensions.funder",
         "enabled": false
       }
     ],
     "temporalFacets": [
       {
-        "id": "created",
+        "key": "dublinCore.created",
         "label": "Promotion (période)",
         "enabled": true,
         "order": 1
       },
       {
-        "id": "coverage",
+        "key": "dublinCore.coverage",
         "label": "Sujet (période)",
         "enabled": true,
         "order": 2
       },
       {
-        "id": "issued",
+        "key": "dublinCore.issued",
         "enabled": false
       },
       {
-        "id": "dateCreated",
+        "key": "extensions.dateCreated",
         "enabled": false
       },
       {
-        "id": "datePublished",
+        "key": "extensions.datePublished",
         "enabled": false
       },
       {
-        "id": "temporalCoverage",
+        "key": "extensions.temporalCoverage",
         "enabled": false
       }
     ]

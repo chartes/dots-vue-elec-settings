@@ -43,13 +43,13 @@
   "searchConfig": {
     "temporalFacets": [
       {
-        "id": "coverage",
+        "key": "dublinCore.coverage",
         "label": "Période couverte",
         "enabled": true,
         "order": 1
       },
       {
-        "id": "created",
+        "key": "dublinCore.created",
         "label": "Date de création",
         "enabled": true,
         "order": 2

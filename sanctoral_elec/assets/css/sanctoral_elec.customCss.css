@@ -67,3 +67,14 @@
 .text-mode #vue-mirador-container { display:none !important; }
 .text-mode .document-views,
 .text-mode.layout-main { min-height:0 !important; }
+
+/* --------------------------------------------------------------------------
+   Sommaire des divisions conteneurs — parties et pars. La liste vient de la
+   source (list[@type='summary']) : DoTS retire les enfants d'une unité servie
+   avec excludeFragments, la feuille ne pourrait pas la dresser elle-même.
+   Puces carrées et interligne serré, comme sur l'ÉLEC.
+   -------------------------------------------------------------------------- */
+.document-area #article ul.sommaire { list-style:square; margin:1rem 0 0 1.5rem; padding:0; }
+.document-area #article ul.sommaire li { margin:.12rem 0; }
+.document-area #article ul.sommaire a { text-decoration:none; border-bottom:1px solid rgba(124,28,61,.35); }
+.document-area #article ul.sommaire a:hover { border-bottom-color:currentColor; }

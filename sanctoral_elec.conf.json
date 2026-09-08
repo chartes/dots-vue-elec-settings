@@ -29,6 +29,7 @@
     "editByLevel": null,
     "editByCiteType": [
       "section",
+      "sous-section",
       "dies"
     ],
     "countByCiteType": [
@@ -37,7 +38,7 @@
   },
   "aboutPageSettings": [
   ],
-  "collectionCustomCss": false,
+  "collectionCustomCss": "sanctoral_elec",
   "metadataDisplayOrder": [
     "dct:title",
 

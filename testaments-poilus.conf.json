@@ -8,7 +8,7 @@
     "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Consulter les testaments" }
   },
   "footerSettings": { "footerTitle": "Testaments de guerre de Poilus parisiens (1914-1918)", "footerSubtitles": ["Édition critique", "École nationale des chartes – PSL"], "footerDescription": "Édition électronique des testaments de guerre de Poilus parisiens." },
-  "tableOfContentsSettings": { "tableOfContentDepth": 1, "editByLevel": 1, "editByCiteType": ["testament"], "displayTopToc": true, "displayLeftToc": true },
+  "tableOfContentsSettings": { "tableOfContentDepth": 3, "editByLevel": 2, "editByCiteType": ["testament", "lettre", "partie", "sous-partie", "section", "Accueil", "Nous contacter", "Crédits", "Mentions légales"], "displayTopToc": true, "displayLeftToc": true },
   "aboutPageSettings": [{ "tabName": "Le projet", "compName": "about1" }, { "tabName": "Introduction", "compName": "about3" }, { "tabName": "Édition et droits", "compName": "about2" }],
   "collectionCustomCss": "testaments-poilus"
 }

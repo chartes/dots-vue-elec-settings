@@ -1,0 +1,80 @@
+/* Sanctoral du lectionnaire de l'office dominicain — CSS custom DoTS Vue.
+
+   Attention au nommage : la clé de chargement est le NOM DU FICHIER
+   (App.vue, getCustomCss), qui doit valoir la valeur de "collectionCustomCss"
+   dans sanctoral_elec.conf.json.
+
+   Les valeurs reprennent celles de la publication Diple d'origine
+   (elec.enc.sorbonne.fr/sanctoral, theme/sanctoral.css et
+   diple/theme/neutre/diple_html.css), afin que la lecture retrouve les
+   conventions de l'édition. */
+
+:root { --fill-color:#7c1c3d; --meta-area-fill-color:#f7eef2; --default-text-color:#211a1d; }
+
+.document-area #article { font-family: Georgia, "Times New Roman", serif; line-height:1.6; max-width:74rem; margin:auto; }
+.document-area #article h1, .document-area #article h2, .document-area #article h3 { font-family:Arial, Helvetica, sans-serif; }
+
+/* --------------------------------------------------------------------------
+   Encre rouge. Les « Conventions typographiques » de l'introduction opposent
+   l'encre noire du texte à l'encre rouge des rubriques : c'est le #971716 de
+   Diple. 540 paragraphes du corps sont concernés.
+   -------------------------------------------------------------------------- */
+.document-area #article .rubric { color:#971716; }
+
+/* Les numéros de lectio et de dies sont en petites capitales chez Diple. */
+.document-area #article .num { font-variant:small-caps; line-height:100%; }
+.document-area #article .num sup { font-variant:normal; }
+
+/* --------------------------------------------------------------------------
+   Les deux apparats.
+
+   Apparat critique (notes sans @n) et notes de commentaire (notes à @n) se
+   suivent dans l'ordre du texte, chacune sur sa ligne, comme dans la
+   publication Diple. La générique hteiml ne les style pas.
+   -------------------------------------------------------------------------- */
+.document-area #article .footnotes { font-size:.92em; margin-top:2rem; padding-top:.6rem; border-top:1px solid #d9ccd2; }
+.document-area #article aside.note { display:block; margin:.2rem 0; text-indent:0; padding-left:1.6rem; text-indent:-1.6rem; }
+
+/* Appels et retours : exposant discret, comme les a.refnote de Diple. */
+.document-area #article a.noteref { font-size:.72em; vertical-align:super; line-height:0; text-decoration:none; padding:0 .1em; }
+.document-area #article a.noteref:hover { text-decoration:none; border-bottom:1px solid currentColor; }
+.document-area #article .footnotes a.noteback { font-weight:700; text-decoration:none; }
+.document-area #article .footnotes a:hover { border-bottom:1px solid currentColor; }
+
+/* La cible d'un renvoi se signale, sans quoi rien ne distingue la note
+   atteinte de ses voisines dans une liste continue. */
+.document-area #article .note, .document-area #article aside.note { scroll-margin-top:6rem; }
+.document-area #article .note:target, .document-area #article aside.note:target { background:#fdf3d7; outline:2px solid #d2a323; }
+
+/* --------------------------------------------------------------------------
+   Sources et citations : les listBibl closent chaque lectio.
+   -------------------------------------------------------------------------- */
+.document-area #article ul.listBibl { list-style:none; margin:.35rem 0 0; padding-left:1.2rem; font-size:.9em; color:#4a4045; }
+.document-area #article ul.listBibl li.bibl { margin:.1rem 0; }
+.document-area #article .cit q, .document-area #article q { font-style:italic; }
+.document-area #article cite.title { font-style:italic; }
+
+/* --------------------------------------------------------------------------
+   Mirador. Le sanctoral n'a pas de fac-similés : la visionneuse n'y sert
+   jamais. En mode texte, l'application la masque en visibility:hidden, ce qui
+   la laisse dans le flux — elle gardait 609 px de haut, et les conteneurs
+   .document-views / .layout-main portent en outre une min-height calculée pour
+   la vue en deux volets. Sur une page dont le contenu fait 157 px, le document
+   en faisait 1215 : d'où le défilement dans le vide.
+   Mesuré : 1215 px -> 763 px.
+   -------------------------------------------------------------------------- */
+.text-mode .mirador-view,
+.text-mode #vue-mirador-container { display:none !important; }
+.text-mode .document-views,
+.text-mode.layout-main { min-height:0 !important; }
+
+/* --------------------------------------------------------------------------
+   Sommaire des divisions conteneurs — parties et pars. La liste vient de la
+   source (list[@type='summary']) : DoTS retire les enfants d'une unité servie
+   avec excludeFragments, la feuille ne pourrait pas la dresser elle-même.
+   Puces carrées et interligne serré, comme sur l'ÉLEC.
+   -------------------------------------------------------------------------- */
+.document-area #article ul.sommaire { list-style:square; margin:1rem 0 0 1.5rem; padding:0; }
+.document-area #article ul.sommaire li { margin:.12rem 0; }
+.document-area #article ul.sommaire a { text-decoration:none; border-bottom:1px solid rgba(124,28,61,.35); }
+.document-area #article ul.sommaire a:hover { border-bottom-color:currentColor; }

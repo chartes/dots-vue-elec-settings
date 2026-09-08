@@ -5,6 +5,12 @@
   --default-text-color: #28211f;
 }
 
+/* Christofle affiche ses fac-similés en <img> inline (christofle-facsimile), pas
+   via le panneau Mirador. Ce dernier reste visibility:hidden mais garde sa largeur
+   (~1225px) dans le flex .document-views → débordement horizontal (~2469px) qui
+   décale la page à droite au clic d'un appel de note. On le retire de la mise en page. */
+.document-views .mirador-view { display: none !important; }
+
 .document-area #article {
   max-width: 74rem;
   margin: 0 auto;
@@ -40,7 +46,367 @@
 .document-area #article .fileDesc,
 .document-area #article .teiHeader { background: #f8f4f2; border-left: 4px solid #8d2632; padding: 1.5rem; }
 
+/* --- Introduction : sommaire des parties (Le notaire, Son registre…) --- */
+.christofle-intro-index .cl-section-head { color:#8d2632; font-family:Arial,Helvetica,sans-serif; margin:1.5rem 0 1rem; }
+.christofle-intro-index .cl-children { list-style:none; padding:0; margin:0 0 2rem; }
+.christofle-intro-index .cl-children li { border-bottom:1px dotted #e0dcd5; }
+.christofle-intro-index .cl-child-link { display:block; padding:.55rem .3rem; color:#8d2632; text-decoration:none; line-height:1.45; }
+.christofle-intro-index .cl-child-link:hover { background:#f5eeee; }
+
+/* --- Bouton de téléchargement de l'édition (partie « Télécharger ») --- */
+.document-area #article a.christofle-download { display:inline-block; margin:.5rem 0; padding:.5rem 1rem;
+  background:#8d2632; color:#fff; border-radius:4px; text-decoration:none; font-family:Arial,Helvetica,sans-serif; font-size:.95rem; }
+.document-area #article a.christofle-download:hover { background:#5a121c; }
+.document-area #article a.christofle-download::before { content:"\2193  "; }
+
+/* --- Index des types d'actes, présentation de l'ÉLEC historique ---------------
+   Valeurs relevées dans le navigateur sur
+   elec.enc.sorbonne.fr/christofle/index-des-types-d-actes.html (theme/christofle.css) :
+
+     bloc      Arial 14 px, interligne 18,62 px, texte justifié
+     entrée    filet pointillé 1 px #E8E8E8, marges de 5 px
+     vedette   Arial 14 px, gras, NOIRE — et non bordeaux
+     renvois   Arial 14 px, maigre, #A73136 ; gras souligné au survol
+     titre     Arial 15,4 px, gras, #A73136
+
+   La XSL rend une structure de liste (h3 + ul/li) là où l'ÉLEC a des <span> :
+   on la remet dans le flux plutôt que de toucher au balisage. */
+#article .chr-types {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.33;
+  text-align: justify;
+}
+#article .chr-types h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15.4px;
+  font-weight: 700;
+  color: #A73136;
+  line-height: 1.33;
+  margin: 0 0 .8rem;
+}
+#article .chr-types .chr-types-intro { font-size: 14px; color: #5a4a4a; margin: 0 0 1rem; }
+
+#article .chr-types .chr-type {
+  border-bottom: 1px dotted #E8E8E8;
+  margin: 5px 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.33;
+}
+
+/* Le titre de rubrique repasse dans le flux, suivi des deux-points de l'ÉLEC.
+   Noir et à la taille du texte : c'est le renvoi qui porte la couleur. */
+#article .chr-types .chr-type-head {
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  color: #000;
+  line-height: inherit;
+  margin: 0;
+}
+#article .chr-types .chr-type-head::after { content: " : "; font-weight: 400; color: #000; }
+
+/* Le décompte n'existe pas sur l'ÉLEC : masqué. Il reste dans le balisage —
+   retirer ce display:none le rétablit. */
+#article .chr-types .chr-type-count { display: none; }
+
+#article .chr-types .chr-acte-list { display: inline; list-style: none; padding: 0; margin: 0; }
+#article .chr-types .chr-acte-list > li { display: inline; }
+#article .chr-types .chr-acte-list > li:not(:last-child)::after { content: " ; "; }
+#article .chr-types .chr-acte-date { font-family: inherit; font-size: inherit; color: #000; }
+
+#article .chr-types .chr-acte-list a.internalLink {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: #A73136;
+  font-weight: 400;
+  text-decoration: none;
+}
+#article .chr-types .chr-acte-list a.internalLink:hover,
+#article .chr-types .chr-acte-list a.internalLink:focus {
+  color: #A73136;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+
+/* --- Édition des minutes (fiches) : styles sortis des attributs inline de la XSL --- */
+.document-area #article .christofle-edition { max-width: 68rem; margin: 0 auto; }
+.christofle-minute { margin: 0 0 3.5rem; padding: 0 0 2.5rem; border-bottom: 1px solid #d7d1ca; }
+.christofle-minute .recordMetadata { margin: 0 0 1.5rem; font-size: 90%; }
+.christofle-minute .recordMetadata h2 { margin: 0 0 .7rem; color: inherit; font-size: inherit; font-weight: bold; text-align: center; line-height: 1.45; }
+.christofle-minute .recordSummary { margin: 0; font-style: italic; }
+.christofle-minute .recordType { font-weight: bold; }
+.christofle-transcription { font-size: 1.05rem; }
+
+/* Folios [77 v°] */
+.christofle-minute .pb { display: inline-block; margin-right: .3em; color: #777; font-size: .92em; white-space: nowrap; }
+
+/* Fac-similés */
+.christofle-facsimile { display: block; max-width: 20rem; margin: 1rem auto; }
+.christofle-facsimile img { display: block; width: 100%; height: auto; }
+.christofle-image { display: block; max-width: 100%; height: auto; margin: 1rem auto; }
+
+/* Liens d'index dans le texte (renvoi pers/lieu -> index) */
+.linkToIndex { color: inherit; border-bottom: 1px dotted var(--fill-color); text-decoration: none; }
+.linkToIndex:hover { color: var(--fill-color); }
+.internalLink { color: var(--fill-color); text-decoration: none; }
+.internalLink:hover { text-decoration: underline; }
+
+/* ⚠ DORMANT — la XSL déployée émet « chr-types » (bloc ci-dessus), plus
+   « actTypes ». Ces règles ne s'appliquent donc à rien tant que la feuille
+   christofle.xsl du dépôt reste en place. Conservées si la version qui émettait
+   actTypes/index-refs devait revenir.
+--- Index des types d'actes : feuille ÉLEC historique (christofle.css) ---
+   La source est une page HTML statique, pas un fragment TEI/XSL. Ces règles
+   reprennent sa présentation : entrées compactes, filet pointillé, vedette
+   en gras et renvois bordeaux. */
+.actTypes {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+.actTypes > section > h1 {
+  color: #8d2632;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  text-align: center;
+}
+.actTypes article {
+  margin: 5px 0;
+  padding: .35rem 0;
+  border-bottom: 1px dotted #e8e8e8;
+  font-size: 14px;
+}
+.actTypes .actType-entry { font-weight: bold; }
+.actTypes .index-refs a.internalLink {
+  color: #8d2632;
+  text-decoration: none;
+}
+.actTypes .index-refs a.internalLink:hover { text-decoration: underline; }
+
+/* La page historique utilisait la typographie compacte du thème diple :
+   14 px Arial, titre discret centré et une entrée par ligne. Les sélecteurs
+   sont volontairement plus précis que les styles généraux de DocumentPage. */
+.document-area #article .actTypes,
+.document-area #article .actTypes * {
+  font-family: Arial, Verdana, sans-serif;
+}
+.document-area #article .actTypes {
+  font-size: 14px;
+  line-height: 133%;
+}
+.document-area #article .actTypes > section > h1 {
+  color: #a73136 !important;
+  font-family: Arial, Verdana, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  text-shadow: 1px 1px #e8e8e8;
+  margin: .2% 2% .2% 0;
+}
+.document-area #article .actTypes article {
+  margin: 5px 0;
+  padding: 0;
+  font-size: 14px;
+}
+.document-area #article .actTypes .index-refs a.internalLink {
+  color: #a73136;
+  text-decoration: none;
+}
+
+/* --- Index historique unifié des lieux et des personnes --- */
+.christofle-index {
+  max-width: 60rem;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.christofle-index h2 {
+  border-bottom: 1px solid #d7d1ca;
+  padding-bottom: .3rem;
+}
+
+.christofle-index-intro { margin: 0 0 1.35rem; }
+.christofle-index-intro p {
+  margin: 0 0 .8rem;
+  color: #28211f;
+  font-style: normal;
+}
+
+.christofle-index .index-entry {
+  border-bottom: 1px dotted #e0dcd5;
+  padding: .48rem 0;
+}
+.christofle-index .index-entry p { margin: 0; }
+
+/* Personnes : casse normale comme dans l'ÉLEC historique. */
+.christofle-index .person-entry .surname,
+.christofle-index .person-entry .forename,
+.christofle-index .person-entry .name-entry,
+.christofle-index .person-entry .forename-entry {
+  font-variant: normal;
+  font-variant-caps: normal;
+  text-transform: none;
+}
+
+/* Lieux : vedette en petites capitales ; type de lieu en romain. */
+.christofle-index .placeName-entry {
+  font-variant: small-caps;
+  font-variant-caps: small-caps;
+}
+.christofle-index .placeName-entry .term {
+  font-variant: normal;
+  font-variant-caps: normal;
+  font-style: normal;
+  text-transform: none;
+}
+
+/* Localisation : département en romain, canton en italique. */
+.christofle-index .location,
+.christofle-index .location * {
+  font-variant: normal;
+  font-variant-caps: normal;
+  font-style: normal;
+}
+.christofle-index .location .canton { font-style: italic; }
+
+/* Sous-entrées de lieux restent sous leur parent. */
+.christofle-index .index-subentries {
+  margin: .25rem 0 0 1.4rem;
+}
+.christofle-index .index-subentries > .index-entry {
+  border-bottom: 0;
+  padding: .2rem 0;
+  font-size: .95em;
+}
+
+.christofle-index .persName-note,
+.christofle-index .index-seealso {
+  font-style: italic;
+  color: #555;
+}
+
+.christofle-index .index-refs { color: inherit; }
+
+.document-area #article .christofle-index a.internalLink,
+.document-area #article .christofle-index a.linkToIndex {
+  color: #8d2632;
+  text-decoration: none;
+  border-bottom: 1px dotted #8d2632;
+}
+.document-area #article .christofle-index a.internalLink:hover,
+.document-area #article .christofle-index a.linkToIndex:hover {
+  color: #5a121c;
+  border-bottom-color: #5a121c;
+}
+
+/* --- Drill mois -> jours : filtre par jour (hack radio :checked, aucun JS) --- */
+.christofle-mois .mois-head { text-transform: capitalize; }
+.christofle-mois .mois-intro { color: #5a4a4a; font-style: italic; margin: 0 0 1rem; }
+/* les radios de filtre sont masquées : on interagit via les <label> de la barre */
+.christofle-mois .jf-radio { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.jours-nav { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: .3rem; padding: .55rem .3rem; margin: 0 0 1.5rem; background: #fbf8f8;
+  border-top: 1px solid #d7d1ca; border-bottom: 1px solid #d7d1ca; }
+.jours-nav .jours-label { font-family: Arial, Helvetica, sans-serif; font-size: .85rem; color: #a05a63; margin-right: .3rem; }
+.jours-nav .jour-link { display: inline-block; min-width: 1.9rem; text-align: center; padding: .15rem .45rem;
+  border: 1px solid #e0cccc; border-radius: 4px; color: #8d2632; cursor: pointer; font-size: .9rem;
+  user-select: none; transition: background .12s; }
+.jours-nav .jour-link:hover { background: #f0e0e0; }
+.jours-nav .jour-all { font-family: Arial, Helvetica, sans-serif; font-size: .82rem; }
+/* FILTRE générique (aucun id par jour) : un jour coché masque les autres groupes.
+   « Tous » est hors de .jours-index -> aucun groupe coché -> tout visible. */
+.jours-index:has(.jour-group .jf-radio:checked) .jour-group:not(:has(.jf-radio:checked)) { display: none; }
+/* groupes de jour */
+.jour-group { margin: 0 0 1.6rem; scroll-margin-top: 4rem; }
+.jour-group .jour-head { font-family: Arial, Helvetica, sans-serif; font-size: .95rem; font-weight: 700;
+  color: #8d2632; border-bottom: 1px solid #e0dcd5; padding-bottom: .2rem; margin: 0 0 .6rem; }
+.jour-note { padding: .2rem 0; border-bottom: 1px dotted #eadfe0; }
+.jour-note .note-link { display: block; color: inherit; text-decoration: none; }
+.jour-note .note-link:hover { background: #faf4f4; }
+.jour-note .note-num { font-weight: 700; color: #8d2632; }
+.jour-note .note-type { font-variant: small-caps; color: #7a4a50; }
+.jour-note .note-summary { color: #33292a; }
+
 @media (max-width: 768px) {
   .document-area #article { font-size: 1rem; }
   .document-area #article h1 { font-size: 1.55rem; }
 }
+
+/* --- Navigation par mois et par jour ------------------------------------------
+   Reprise de la barre #specific-menu-minutes de l'ÉLEC (theme/christofle.css) :
+   les douze mois sur une ligne, puis les jours du mois courant, séparés par des
+   barres verticales, centrés, entrées actives en bordeaux gras. Sans JavaScript :
+   la navigation est précalculée dans le TEI et rendue par la XSL.
+   Sert sur chaque note (.christofle-note-nav) et sur la page « Édition des
+   notes » (.christofle-notes-index). */
+#article .christofle-note-nav {
+  border-bottom: 1px solid #E8E8E8;
+  margin: 0 0 1.2rem;
+  padding: 0;
+  text-align: center;
+  font-size: 90%;
+}
+#article .christofle-note-nav .months-list { border-bottom: 1px solid #E8E8E8; }
+#article .christofle-note-nav ul {
+  list-style: none;
+  padding: 2px 0;
+  margin: 0;
+}
+#article .christofle-note-nav li { display: inline-block; }
+#article .christofle-note-nav li:not(:last-child)::after {
+  content: " | ";
+  color: #c9bcbc;
+}
+#article .christofle-note-nav a {
+  color: #28211f;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 0 .28rem;
+}
+#article .christofle-note-nav a:hover,
+#article .christofle-note-nav a:focus,
+#article .christofle-note-nav li.selected a {
+  color: #A73136;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Sommaire « Édition des notes » : mêmes codes, en bloc par mois. */
+#article .christofle-notes-index .notes-intro { color: #5a4a4a; margin: 0 0 1.2rem; }
+#article .christofle-notes-index .months-list { list-style: none; padding: 0; margin: 0; }
+#article .christofle-notes-index .month-item {
+  border-bottom: 1px dotted #E8E8E8;
+  padding: .45rem 0;
+}
+#article .christofle-notes-index .month-link {
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #A73136;
+  text-decoration: none;
+}
+#article .christofle-notes-index .month-count { color: #8a7b7b; }
+#article .christofle-notes-index .days-list {
+  display: inline;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 .5rem;
+}
+#article .christofle-notes-index .days-list li { display: inline; }
+#article .christofle-notes-index .days-list li:not(:last-child)::after {
+  content: " · ";
+  color: #c9bcbc;
+}
+#article .christofle-notes-index .day-link {
+  color: #28211f;
+  text-decoration: none;
+  padding: 0 .15rem;
+}
+#article .christofle-notes-index .day-link:hover { color: #A73136; font-weight: 700; }

@@ -53,3 +53,17 @@
 .document-area #article ul.listBibl li.bibl { margin:.1rem 0; }
 .document-area #article .cit q, .document-area #article q { font-style:italic; }
 .document-area #article cite.title { font-style:italic; }
+
+/* --------------------------------------------------------------------------
+   Mirador. Le sanctoral n'a pas de fac-similés : la visionneuse n'y sert
+   jamais. En mode texte, l'application la masque en visibility:hidden, ce qui
+   la laisse dans le flux — elle gardait 609 px de haut, et les conteneurs
+   .document-views / .layout-main portent en outre une min-height calculée pour
+   la vue en deux volets. Sur une page dont le contenu fait 157 px, le document
+   en faisait 1215 : d'où le défilement dans le vide.
+   Mesuré : 1215 px -> 763 px.
+   -------------------------------------------------------------------------- */
+.text-mode .mirador-view,
+.text-mode #vue-mirador-container { display:none !important; }
+.text-mode .document-views,
+.text-mode.layout-main { min-height:0 !important; }

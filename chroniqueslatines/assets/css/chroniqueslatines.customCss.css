@@ -139,3 +139,12 @@
    donc sans effet sur les corpus qui affichent réellement des images.
    -------------------------------------------------------------------------- */
 .text-mode-only .mirador-view { display: none; }
+
+/* Liste des citations en pied d'article : une citation peut renvoyer à
+   plusieurs ouvrages — le même passage se lit chez Grégoire de Tours, chez
+   Frédégaire et dans le Liber historiae Francorum. Chaque source sur sa ligne,
+   sans quoi les trois références se suivent et se lisent comme une seule. */
+.citations-list .cit-source {
+  display: block;
+  margin-left: 1.4em;
+}

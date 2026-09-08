@@ -31,3 +31,20 @@
 .document-area #article a.tp-facsimile-link { display:block; text-decoration:none; border:0; }
 .document-area #article a.tp-facsimile-link:hover .tp-facsimile { box-shadow:0 .2rem 1rem rgba(45,37,36,.3); }
 .document-area #article .tp-page-break { display:block; text-align:center; font-size:.85em; color:#7a6f6c; margin-top:1.2rem; }
+
+/* --------------------------------------------------------------------------
+   Mirador. Les fac-similés de ce corpus sont de simples <img> : la visionneuse
+   n'y sert pas. En mode texte l'application la masque en visibility:hidden, ce
+   qui la laisse dans le flux avec sa hauteur, et .document-views porte une
+   min-height calculée pour la vue en deux volets — d'où un long défilement
+   dans le vide sous les pages courtes, l'index par lettre en particulier.
+   -------------------------------------------------------------------------- */
+.text-mode .mirador-view,
+.text-mode #vue-mirador-container { display:none !important; }
+.text-mode .document-views,
+.text-mode.layout-main { min-height:0 !important; }
+
+/* Barre des lettres de l'index, précalculée dans la source. */
+.document-area #article .tp-letter-nav { margin:.4rem 0 1rem; font-size:1.05rem; }
+.document-area #article .tp-letter-link { text-decoration:none; border-bottom:1px solid rgba(167,49,54,.35); padding:0 .15rem; }
+.document-area #article .tp-letter-link:hover { border-bottom-color:currentColor; }

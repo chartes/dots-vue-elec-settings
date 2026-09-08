@@ -1,0 +1,9 @@
+{
+  "collectionId": "bellelay",
+  "homePageSettings": {
+    "appNavBar": { "collectionShortTitle": "Bellelay" },
+    "pageHeader": { "collectionAltTitle": "Le Graduel de Bellelay", "aboutButtonText": "À propos" },
+    "descriptionSection": { "collectionDescription": "Édition électronique du Graduel de Bellelay." }
+  },
+  "collectionCustomCss": "bellelay"
+}

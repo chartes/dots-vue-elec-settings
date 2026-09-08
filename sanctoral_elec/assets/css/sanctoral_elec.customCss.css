@@ -28,22 +28,17 @@
 /* --------------------------------------------------------------------------
    Les deux apparats.
 
-   La feuille sanctoral.xsl rend l'apparat critique (notes sans @n) en ligne
-   continue dans un p.apparatus, et les notes de commentaire (notes à @n) en
-   notes de bas de page. La générique hteiml ne style ni l'un ni l'autre.
+   Apparat critique (notes sans @n) et notes de commentaire (notes à @n) se
+   suivent dans l'ordre du texte, chacune sur sa ligne, comme dans la
+   publication Diple. La générique hteiml ne les style pas.
    -------------------------------------------------------------------------- */
 .document-area #article .footnotes { font-size:.92em; margin-top:2rem; padding-top:.6rem; border-top:1px solid #d9ccd2; }
-.document-area #article .footnotes .apparatus { margin:0 0 .6rem; text-indent:0; color:#3a3033; }
-/* chaque entrée d'apparat reste dans le fil, séparée par une espace nette */
-.document-area #article .footnotes .apparatus .note { margin-right:.45rem; }
-.document-area #article .footnotes .apparatus .note a { margin-right:.2rem; }
-.document-area #article aside.note { display:block; margin:.15rem 0; text-indent:0; }
+.document-area #article aside.note { display:block; margin:.2rem 0; text-indent:0; padding-left:1.6rem; text-indent:-1.6rem; }
 
 /* Appels et retours : exposant discret, comme les a.refnote de Diple. */
 .document-area #article a.noteref { font-size:.72em; vertical-align:super; line-height:0; text-decoration:none; padding:0 .1em; }
 .document-area #article a.noteref:hover { text-decoration:none; border-bottom:1px solid currentColor; }
-.document-area #article .footnotes a.noteback,
-.document-area #article .footnotes .apparatus .note > a { font-weight:700; text-decoration:none; }
+.document-area #article .footnotes a.noteback { font-weight:700; text-decoration:none; }
 .document-area #article .footnotes a:hover { border-bottom:1px solid currentColor; }
 
 /* La cible d'un renvoi se signale, sans quoi rien ne distingue la note

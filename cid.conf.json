@@ -70,10 +70,93 @@
   ],
   "searchConfig": {
     "facets": [
+
+        {
+        "key" : "dublinCore.contributor",
+        "label" : "Auteur",  
+        "enabled" : true,
+        "order" : 6
+        },
+        {
+        "key" : "dublinCore.creator",
+        "label" : "Institution",
+        "enabled" : true,
+        "order" : 4
+        },
+        {
+        "key":"dublinCore.language",
+        "label" : "Langage",
+        "enabled" : true,
+        "order" : 6
+        },
+
+
       {
         "key": "collections",
         "enabled": false
-      }
+      },
+
+      {
+        "key" : "extentions.funder",
+        "label" : "Porteur de projet",
+        "enabled": false
+      },
+      {
+        "key" : "dublinCore.publisher",
+        "enabled" : false
+        },
+        {
+        "key":"extensions.publisher",
+        "enabled": false
+        },
+        {
+        "key" : "extensions.author",
+        "enabled" : false  
+        },
+        {
+        "key" : "extensions.editor",
+        "enabled" : false  
+        },
+        {
+        "key" : "extensions.inLanguage",
+        "enabled" : false  
+        },
+        {
+        "key" : "extensions.funder",
+        "enabled" : false
+        }
+    ],
+        "temporalFacets": [
+          {
+            "key": "dublinCore.created",
+            "label": "Date de création",
+            "enabled": true,
+            "order": 1  
+          },
+          {
+            "key" : "dublinCore.issued",
+            "label" : "Date de publication",
+            "enabled" : true,
+            "order" : 2
+          },
+          {
+            "key" : "dublinCore.coverage",
+            "label" : "Période d'étude",
+            "enabled" : true,
+            "order" : 3
+          },
+          {
+            "key" : "extensions.dateCreated",
+            "enabled" : false
+          },
+          {
+            "key" : "extensions.datePublished",
+            "enabled" : false
+          },
+          {
+            "key" : "extensions.temporalCoverage",
+            "enabled" : false
+          }
     ]
   }
 }

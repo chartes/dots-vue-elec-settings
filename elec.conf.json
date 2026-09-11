@@ -39,7 +39,7 @@
   ],
 
   "collectionCustomCss": "elec",
-  "excludeCollectionIds": ["corpus", "bfm", "ENCPOS", "theater"],
+  "excludeCollectionIds": ["corpus", "bfm"],
   "searchConfig": {
     "temporalFacets": [
       {

@@ -62,43 +62,37 @@
   "collectionCustomCss": "elec",
   "metadataDisplayOrder": [
     "dct:title",
-
-    "schema:creator",
-
+    "schema:author",
     "dct:created",
-
+    "dct:language",
+    "dct:coverage",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "schema:license",
+    "dct:rights",
     "dct:isVersionOf",
     "schema:exampleOfWork",
-
-    "dct:language",
-
-    "schema:isBasedOn",
-
-    "schema:publisher",
-
-    "dct:issued",
-
-    "dct:bibliographicCitation",
-
-    "dct:coverage",
-
     "dct:description",
-
-    "dct:license",
-
-    "dct:rights",
-
     "dct:identifier",
-
     "schema:encoding",
-
     "schema:associatedMedia",
-
     "dots:resourceIIIFManifest"
   ],
   "metadataRename": {
-    "@id": "dts:id",
-    "@type": "dts:type"
+    "dct:title": "Titre",
+    "schema:author": "Auteur",
+    "dct:created": "Date du document",
+    "dct:language": "Langue",
+    "dct:coverage": "Période du sujet",
+    "schema:isBasedOn": "Source",
+    "schema:publisher": "Publié par",
+    "dct:issued": "Date de publication",
+    "schema:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "dct:identifier": "Identifiant",
+    "dots:resourceIIIFManifest": "Manifeste IIIF"
   },
   "excludeMetadata": {
     "onlyDeclared": true,

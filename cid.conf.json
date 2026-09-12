@@ -17,7 +17,22 @@
       "displayMode": "list",
       "cardCollectionPerPage": 30,
       "logo": "logo_cid.svg",
-      "displaySort": ["cid1983", "cid1985", "cid1986", "cid1990", "cid1991", "cid1992", "cid1993", "cid1994", "cid1996", "cid1998", "cid1999", "cid2003", "cid2009", "cid2012"],
+      "displaySort": [
+        "cid1983",
+        "cid1985",
+        "cid1986",
+        "cid1990",
+        "cid1991",
+        "cid1992",
+        "cid1993",
+        "cid1994",
+        "cid1996",
+        "cid1998",
+        "cid1999",
+        "cid2003",
+        "cid2009",
+        "cid2012"
+      ],
       "browseButtonText": "Découvrir la collection",
       "openState": true,
       "columns": [
@@ -56,8 +71,14 @@
     "leftTocFragmentIsDocument": true
   },
   "aboutPageSettings": [
-    { "tabName": "Le projet", "compName": "about1" },
-    { "tabName": "Liste des réunions publiées", "compName": "about2" },
+    {
+      "tabName": "Le projet",
+      "compName": "about1"
+    },
+    {
+      "tabName": "Liste des réunions publiées",
+      "compName": "about2"
+    },
     null
   ],
   "collectionCustomCss": false,
@@ -70,99 +91,84 @@
   ],
   "searchConfig": {
     "facets": [
-
-        {
-        "key" : "dublinCore.contributor",
-        "label" : "Auteur",  
-        "enabled" : true,
-        "order" : 6,
-        "alphabetScroller" : true,
-        "letterHeaders" : true
-        },
-        {
-        "key" : "dublinCore.creator",
-        "label" : "Institution",
-        "enabled" : true,
-        "order" : 4,
-        "alphabetScroller" : true,
-        "letterHeaders" : false
-        },
-        {
-        "key":"dublinCore.language",
-        "label" : "Langage",
-        "enabled" : true,
-        "order" : 6,
-        "alphabetScroller" : true,
-        "letterHeaders" : false
-        },
-
-
+      {
+        "key": "dublinCore.contributor",
+        "label": "Auteur",
+        "enabled": true,
+        "order": 6
+      },
+      {
+        "key": "dublinCore.creator",
+        "label": "Institution",
+        "enabled": true,
+        "order": 4
+      },
+      {
+        "key": "dublinCore.language",
+        "label": "Langage",
+        "enabled": true,
+        "order": 6
+      },
       {
         "key": "collections",
         "enabled": false
       },
-
       {
-        "key" : "extentions.funder",
-        "label" : "Porteur de projet",
+        "key": "dublinCore.publisher",
         "enabled": false
       },
       {
-        "key" : "dublinCore.publisher",
-        "enabled" : false
-        },
-        {
-        "key":"extensions.publisher",
+        "key": "extensions.publisher",
         "enabled": false
-        },
-        {
-        "key" : "extensions.author",
-        "enabled" : false  
-        },
-        {
-        "key" : "extensions.editor",
-        "enabled" : false  
-        },
-        {
-        "key" : "extensions.inLanguage",
-        "enabled" : false  
-        },
-        {
-        "key" : "extensions.funder",
-        "enabled" : false
-        }
+      },
+      {
+        "key": "extensions.author",
+        "enabled": false
+      },
+      {
+        "key": "extensions.editor",
+        "enabled": false
+      },
+      {
+        "key": "extensions.inLanguage",
+        "enabled": false
+      },
+      {
+        "key": "extensions.funder",
+        "enabled": false
+      }
     ],
-        "temporalFacets": [
-          {
-            "key": "dublinCore.created",
-            "label": "Date de création",
-            "enabled": true,
-            "order": 1  
-          },
-          {
-            "key" : "dublinCore.issued",
-            "label" : "Date de publication",
-            "enabled" : true,
-            "order" : 2
-          },
-          {
-            "key" : "dublinCore.coverage",
-            "label" : "Période d'étude",
-            "enabled" : true,
-            "order" : 3
-          },
-          {
-            "key" : "extensions.dateCreated",
-            "enabled" : false
-          },
-          {
-            "key" : "extensions.datePublished",
-            "enabled" : false
-          },
-          {
-            "key" : "extensions.temporalCoverage",
-            "enabled" : false
-          }
+    "temporalFacets": [
+      {
+        "key": "dublinCore.created",
+        "label": "Date de création",
+        "enabled": true,
+        "order": 1
+      },
+      {
+        "key": "dublinCore.issued",
+        "label": "Date de publication",
+        "enabled": true,
+        "order": 2
+      },
+      {
+        "key": "dublinCore.coverage",
+        "label": "Période d'étude",
+        "enabled": true,
+        "order": 3
+      },
+      {
+        "key": "extensions.dateCreated",
+        "enabled": false
+      },
+      {
+        "key": "extensions.datePublished",
+        "enabled": false
+      },
+      {
+        "key": "extensions.temporalCoverage",
+        "enabled": false
+      }
     ]
   }
 }

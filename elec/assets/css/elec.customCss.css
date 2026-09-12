@@ -4,16 +4,10 @@
   - the collection elec
   - its children (unless otherwise specified)
  =============================================================*/
-/* Using themes TODO working in dev but not in build :
-[data-theme="red"] {
-  --text-color: #4051b5;
-  --fill-color: #4051b5;
-}*/
+
 /* Using css variables */
 :root {
-  --text-color: #5f004d;
   --fill-color: #5f004d;
-  --fill-color-light: #5f004d;
   --meta-area-fill-color: #e6e4e5;
 }
 

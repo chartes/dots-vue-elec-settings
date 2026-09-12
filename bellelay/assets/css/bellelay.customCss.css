@@ -3,7 +3,7 @@
    alors que la version qui était ici ne stylait que le conteneur générique du
    visualiseur. On garde par-dessus les deux variables de couleur que l'app lit
    pour son propre habillage. */
-:root { --text-color: #8b3028; --fill-color: #8b3028; }
+:root { --fill-color: #8b3028; }
 
 .bellelay-edition { --ink: #25211d; --paper: #fffdf7; --accent: #8b3028; --rule: #d9cfbb; max-width: 76rem; margin: 0 auto; padding: clamp(1.5rem, 4vw, 4rem); color: var(--ink); background: var(--paper); font: 1.08rem/1.7 Georgia, 'Times New Roman', serif; }
 .bellelay-masthead { margin-bottom: 3.5rem; padding: 2.25rem 0; border-block: 4px solid var(--accent); }

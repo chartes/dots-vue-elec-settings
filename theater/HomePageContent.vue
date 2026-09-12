@@ -82,7 +82,7 @@ export default {
   font-weight: 500;
   line-height: 33px;
   text-transform: none;
-  color: var(--text-color);
+  color: var(--fill-color);
 }
 .home h2 {
   margin: 0 !important;

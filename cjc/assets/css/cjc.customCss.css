@@ -4,16 +4,10 @@
   - the collection miroir
   - its children (unless otherwise specified)
  =============================================================*/
-/* Using themes TODO working in dev but not in build :
-[data-theme="red"] {
-  --text-color: #4051b5;
-  --fill-color: #4051b5;
-}*/
+
 /* Using css variables */
 :root {
-    --text-color: #8f0e21;
     --fill-color: #8f0e21;
-    --fill-color-light: #8F0E21D8;
 }
 
 /*=============================================================

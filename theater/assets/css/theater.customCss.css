@@ -4,16 +4,10 @@
   - the collection theater
   - its children (unless otherwise specified)
  =============================================================*/
-/* Using themes TODO working in dev but not in build :
-[data-theme="red"] {
-  --text-color: #8f0e21;
-  --fill-color: #8f0e21;
-}*/
+
 /* Using css variables */
 :root {
-  --text-color: #8f0e21;
   --fill-color: #8f0e21;
-  --fill-color-light: #8F0E21D8;
 }
 
 /*=============================================================

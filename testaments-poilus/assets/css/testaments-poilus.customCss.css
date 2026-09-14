@@ -1,3 +1,8 @@
+/* 2026-09-12 (D19) : `.dots-target` double `:target`. Raison : `:target` ne s'applique
+   pas quand une URL avec ancre est ouverte à froid (le fragment DTS est monté après que
+   le navigateur a résolu le fragment) ; DoTS-vue pose donc cette classe sur l'élément
+   visé, dans DocumentPage.vue. Les deux sélecteurs coexistent : `:target` continue de
+   servir pour un clic interne et pour l'impression. */
 :root { --fill-color:#a73136; --meta-area-fill-color:#f8eeee; --default-text-color:#2d2524; }
 .document-area #article { font-family: Georgia, "Times New Roman", serif; line-height:1.65; max-width:74rem; margin:auto; }
 .document-area #article h1,.document-area #article h2,.document-area #article h3 { color:#a73136; font-family:Arial,Helvetica,sans-serif; }
@@ -15,7 +20,8 @@
 .description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
 .description-section nav a:hover { background:var(--fill-color); color:white; }
 .document-area #article .note, .document-area #article .fn-app { scroll-margin-top:6rem; }
-.document-area #article .note:target, .document-area #article .fn-app:target { background:#fff3cc; outline:2px solid #d2a323; }
+.document-area #article .note:target, .document-area #article .fn-app:target,
+.document-area #article .note.dots-target, .document-area #article .fn-app.dots-target { background:#fff3cc; outline:2px solid #d2a323; }
 
 /* --------------------------------------------------------------------------
    Index paginés par lettre. Chaque sous-liste listPerson/listPlace devient une
@@ -48,3 +54,553 @@
 .document-area #article .tp-letter-nav { margin:.4rem 0 1rem; font-size:1.05rem; }
 .document-area #article .tp-letter-link { text-decoration:none; border-bottom:1px solid rgba(167,49,54,.35); padding:0 .15rem; }
 .document-area #article .tp-letter-link:hover { border-bottom-color:currentColor; }
+
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ==========================================================================
+   D14e-1 (2026-09-12) — comportements de l'ancien site ÉLEC, en CSS seul
+   (aucun script ne s'exécute dans un fragment DoTS-vue).
+   Relevé de l'ancien site : theme/utils.js + theme/testaments-poilus.css,
+   copiés dans dots-autopilot/logs/d14e1/old/.
+   Sauvegarde du fichier : *.bak_d14e1_20260912
+   ========================================================================== */
+
+/* --- 1. Bascule Transcription / Édition (ancien displaySection) ----------- */
+.document-area #article .tp-mode { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+.document-area #article .tp-mode-label {
+  display: inline-block; margin: 0 .35rem 1rem 0; padding: .3rem .85rem;
+  border: 1px solid #a73136; border-radius: 3px; color: #a73136;
+  font-family: Arial, Helvetica, sans-serif; font-size: .88rem; cursor: pointer;
+}
+.document-area #article .tp-mode:checked + .tp-mode-label { background: #a73136; color: #fff; font-weight: 700; }
+.document-area #article .tp-mode:focus-visible + .tp-mode-label { outline: 2px solid #a73136; outline-offset: 2px; }
+/* état choisi : on masque l'autre version (mêmes sélecteurs que delescluze) */
+.document-area #article .tp-mode-tr:checked ~ .tp-ed,
+.document-area #article .tp-mode-tr:checked ~ * .tp-ed { display: none; }
+.document-area #article .tp-mode-ed:checked ~ .tp-tr,
+.document-area #article .tp-mode-ed:checked ~ * .tp-tr { display: none; }
+
+/* --- 2. Marques éditoriales (présentation de l'ancien site) --------------- */
+.document-area #article .tp-supplied::before { content: "["; }
+.document-area #article .tp-supplied::after { content: "]"; }
+.document-area #article ins.tp-add, .document-area #article .tp-ex { text-decoration: none; }
+/* @place vaut inline, above, marginLeft, below, interline (classes tp-add-<place>).
+   L'ancien site ne prefixait « (En marge : ) » que dans la section des lettres
+   (.letters .margin_left_addition), pas dans les testaments : aucun habillage ici. */
+.document-area #article .tp-add-below, .document-area #article .tp-add-marginLeft { text-decoration: none; }
+.document-area #article .tp-del { text-decoration: line-through; }
+.document-area #article .supUnderlined { vertical-align: super; font-size: .72em; text-decoration: underline; }
+.document-area #article .underlined { text-decoration: underline; }
+.document-area #article .doubleUnderlined { text-decoration: underline double; }
+/* repère de page dans le texte : [Première page], en bloc dans la
+   transcription et en ligne dans l'édition, comme #transcription-text .pb /
+   #edition-text .pb de l'ancien site */
+.document-area #article .tp-pb { color: #6b625f; font-size: .9em; font-style: italic; }
+.document-area #article .tp-pb::before { content: "["; font-style: normal; }
+.document-area #article .tp-pb::after { content: "]"; font-style: normal; }
+.document-area #article .tp-mode-tr:checked ~ * .tp-pb { display: block; margin: 1em 0; }
+
+/* --- 3. Apparat en bulle (ancien displayApparatusNote au survol) ---------- */
+.document-area #article .tp-app-anchor { position: relative; cursor: help; }
+.document-area #article .tp-app-call { color: #97add1; font-weight: normal; text-decoration: none; }
+.document-area #article .tp-app-note {
+  display: none; position: absolute; left: 0; top: 1.5em; z-index: 30;
+  box-sizing: border-box; width: 24rem; max-width: 72vw; padding: 3px 6px;
+  border: 1px solid #4a4a4a; background: #e8e8e8; color: #000;
+  font-size: .78rem; font-style: normal; line-height: normal; text-align: left;
+}
+.document-area #article .tp-app-anchor:hover > .tp-app-note,
+.document-area #article .tp-app-anchor:focus > .tp-app-note,
+.document-area #article .tp-app-anchor:focus-within > .tp-app-note { display: block; }
+
+/* --- 4. Fac-similés : une page à la fois (ancien loadImageSectionBis) ----- */
+/* L'ancien site mettait cette colonne a gauche du texte (#facsimile, float).
+   Dans DoTS-vue le contenu qui suit ne remonte pas a cote du flottant (il est
+   degage), ce qui laissait une colonne vide a droite : bloc compact en tete du
+   testament, comme les vignettes de D5, mais avec le choix de la page. */
+.document-area #article .tp-facs { width: min(100%, 400px); margin: 0 0 1.4rem; }
+.document-area #article .tp-facs-r { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+.document-area #article .tp-facs-nav { margin: 0 0 .4rem; font-size: .8rem; line-height: 1.5; }
+.document-area #article .tp-facs-lab { color: #2d2524; cursor: pointer; }
+.document-area #article .tp-facs-lab:hover { color: #a73136; }
+.document-area #article .tp-facs-sep { color: #777; }
+.document-area #article .tp-facs-fig { display: none; margin: 0; }
+.document-area #article .tp-facs-imgs .tp-facsimile {
+  display: block; width: auto; max-width: min(100%, 400px); height: auto; max-height: 60vh;
+  border: 1px solid #d7d1ca; box-shadow: 0 .2rem .8rem rgba(45, 37, 36, .14);
+}
+.document-area #article .tp-facs figcaption { margin-top: .3rem; font-size: .8rem; font-weight: 700; color: #4a4a4a; }
+/* la page cochée : libellé en vedette et image affichée (10 pages au plus) */
+.document-area #article .tp-facs-r1:checked ~ .tp-facs-nav .tp-facs-l1,
+.document-area #article .tp-facs-r2:checked ~ .tp-facs-nav .tp-facs-l2,
+.document-area #article .tp-facs-r3:checked ~ .tp-facs-nav .tp-facs-l3,
+.document-area #article .tp-facs-r4:checked ~ .tp-facs-nav .tp-facs-l4,
+.document-area #article .tp-facs-r5:checked ~ .tp-facs-nav .tp-facs-l5,
+.document-area #article .tp-facs-r6:checked ~ .tp-facs-nav .tp-facs-l6,
+.document-area #article .tp-facs-r7:checked ~ .tp-facs-nav .tp-facs-l7,
+.document-area #article .tp-facs-r8:checked ~ .tp-facs-nav .tp-facs-l8,
+.document-area #article .tp-facs-r9:checked ~ .tp-facs-nav .tp-facs-l9,
+.document-area #article .tp-facs-r10:checked ~ .tp-facs-nav .tp-facs-l10 { color: #a73136; font-weight: 700; }
+.document-area #article .tp-facs-r1:checked ~ .tp-facs-imgs > .tp-facs-f1,
+.document-area #article .tp-facs-r2:checked ~ .tp-facs-imgs > .tp-facs-f2,
+.document-area #article .tp-facs-r3:checked ~ .tp-facs-imgs > .tp-facs-f3,
+.document-area #article .tp-facs-r4:checked ~ .tp-facs-imgs > .tp-facs-f4,
+.document-area #article .tp-facs-r5:checked ~ .tp-facs-imgs > .tp-facs-f5,
+.document-area #article .tp-facs-r6:checked ~ .tp-facs-imgs > .tp-facs-f6,
+.document-area #article .tp-facs-r7:checked ~ .tp-facs-imgs > .tp-facs-f7,
+.document-area #article .tp-facs-r8:checked ~ .tp-facs-imgs > .tp-facs-f8,
+.document-area #article .tp-facs-r9:checked ~ .tp-facs-imgs > .tp-facs-f9,
+.document-area #article .tp-facs-r10:checked ~ .tp-facs-imgs > .tp-facs-f10 { display: block; }
+.document-area #article .tp-facs-r1:focus-visible ~ .tp-facs-nav .tp-facs-l1,
+.document-area #article .tp-facs-r2:focus-visible ~ .tp-facs-nav .tp-facs-l2,
+.document-area #article .tp-facs-r3:focus-visible ~ .tp-facs-nav .tp-facs-l3 { outline: 2px solid #a73136; outline-offset: 2px; }
+@media (max-width: 768px) {
+  .document-area #article .tp-facs { width: auto; margin: 0 0 1.2rem; }
+}
+
+/* --- 5. Index : sommaire des notices, retour en haut, notice visée -------- */
+.document-area #article .tp-anchor { display: block; height: 0; scroll-margin-top: 90px; }
+.document-area #article .tp-entry-nav ul { margin: .2rem 0 1.2rem; padding: 0; list-style: none; }
+.document-area #article .tp-entry-nav li { display: inline; font-variant: small-caps; }
+.document-area #article .tp-entry-nav li:not(:last-child)::after { content: " · "; color: #777; font-variant: normal; }
+.document-area #article .tp-entry-nav a { color: #a73136; text-decoration: none; }
+.document-area #article .tp-entry-nav a:hover { text-decoration: underline; }
+.document-area #article .tp-backtotop { margin: .6rem 0 1.6rem; font-size: .85rem; }
+.document-area #article .tp-backtotop a { color: #a73136; text-decoration: none; }
+/* ancien .marked (« ☞ » devant la notice atteinte depuis un renvoi), en :target */
+.document-area #article .index-entry { scroll-margin-top: 90px; }
+.document-area #article .index-entry:target,
+.document-area #article .index-entry.dots-target { background: #fff8e7; outline: 2px solid #d2a323; }
+.document-area #article .index-entry:target > h4::before,
+.document-area #article .index-entry.dots-target > h4::before { content: "☞ "; color: #a73136; }
+/* ==== fin D14e-1 ==== */
+
+/* ===== E2 (2026-09-12) : agrandissement des fac-similes dans la page =====
+   Les 312 images pleine taille citees par le TEI ont ete rapatriees en local avant
+   la fermeture de l'ancien site (dots-vue/public/testaments-poilus/images/sources/,
+   1 500 px de large, 2 000 a 17 250 px de haut) et les 21 vignettes qui manquaient
+   ont ete fabriquees a 400 px. testaments-poilus.xsl enveloppe donc chaque
+   fac-simile dans <details class="tp-facs-zoom">.
+   INDISPENSABLE : html.css l. 48-51 pose `details > * { display:none }` (seul
+   `details.minus` y echappe) et videraient ce bloc ; les deux regles ci-dessous le
+   retablissent, comme pour la pièce sommaire de bellelay et sgdp-figure. */
+.document-area #article .tp-facs-zoom > summary { display: list-item; cursor: zoom-in; list-style: none; }
+.document-area #article .tp-facs-zoom > summary::-webkit-details-marker { display: none; }
+/* Restreint a [open] : html.css impose `details > * {display:none}`, mais une regle
+   non restreinte ecrase AUSSI le masquage natif de l'etat ferme — mesure au
+   navigateur le 2026-09-12 : image pleine taille visible (563 x 387 px) alors que le
+   bloc etait ferme. */
+.document-area #article .tp-facs-zoom[open] > img { display: block; }
+.document-area #article .tp-facs-zoom[open] > summary { cursor: zoom-out; }
+
+/* Libelles : un seul des deux est montre, selon l'etat du <details>. */
+.document-area #article .tp-facs-ouvrir,
+.document-area #article .tp-facs-fermer { display: block; margin: .2rem 0 0; font-size: .78rem; color: #a73136; }
+.document-area #article .tp-facs-zoom > summary .tp-facs-fermer { display: none; }
+.document-area #article .tp-facs-zoom[open] > summary .tp-facs-ouvrir { display: none; }
+.document-area #article .tp-facs-zoom[open] > summary .tp-facs-fermer { display: block; }
+.document-area #article .tp-facs-zoom > summary:hover .tp-facs-ouvrir,
+.document-area #article .tp-facs-zoom > summary:hover .tp-facs-fermer { text-decoration: underline; }
+.document-area #article .tp-facs-zoom > summary:focus-visible { outline: 2px solid #a73136; outline-offset: 2px; }
+
+/* Image pleine taille : elle peut faire 17 250 px de haut, donc on la borne en
+   hauteur et on laisse defiler a l'interieur plutot que d'etirer la page. */
+.document-area #article .tp-facs-full {
+  /* Mesure au navigateur le 2026-09-12 : a 100 % de la colonne de fac-similes
+     (400 px), l'image « pleine taille » ne faisait que 357 px de large, a peine
+     plus que la vignette (253 px) — l'agrandissement ne servait a rien. On la
+     laisse donc a sa RESOLUTION REELLE (1 500 px de large) et c'est le cadre qui
+     defile, sur les deux axes : c'est ce que la loupe elevateZoom de l'ancien
+     site donnait a voir, sans script et sans risque de debordement de la page. */
+  width: auto; max-width: none; height: auto; margin: .6rem 0 0;
+  border: 1px solid #d7d1ca; box-shadow: 0 .2rem .8rem rgba(45,37,36,.14);
+}
+.document-area #article .tp-facs-zoom[open] {
+  max-height: 80vh; overflow: auto; overscroll-behavior: contain;
+  background: #fbf6f5; padding: .4rem; border: 1px solid #e6ded9;
+}
+/* ===== fin E2 ===== */
+/* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
+/* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
+   Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
+   au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
+   est conservée : elle est lue dans --text-color, avec un repli sur celle de DoTS. */
+.document-area #article:not(.bottom-toc),
+.document-area main {
+  --d12-accent: var(--text-color, #8f0e21);
+  --d12-encre: var(--document-text-color, #303030);
+  --d12-filet: #dcd8d3;
+  --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
+  --d12-fond-tres-doux: #fafafa;
+  --d12-rayon: var(--button-border-radius, 4px);
+}
+
+/* Texte : mesure de lecture régulière, encre et interligne de l'application.
+   La largeur est bornée parce qu'elle atteignait 1 184 px chez christofle
+   (mesuré le 2026-09-12), soit des lignes de plus de 130 caractères. 72rem est
+   la valeur déjà retenue par les corpus qui s'en étaient souciés (bellelay 72,
+   actesroyauxdupoitou 74) ; un corpus peut la surcharger après ce bloc. */
+.document-area #article:not(.bottom-toc) {
+  max-width: min(100%, 72rem);
+  margin-inline: auto;
+  color: var(--d12-encre);
+  font-size: var(--font-default-size, 16px);
+  /* 1.6 et non le jeton --font-default-line-heigth (1.4) : celui-ci est calibré pour
+     l'interface, et la comparaison avant/après du 2026-09-12 montrait l'interligne
+     tomber de 26,4 px à 22,4 px chez christofle, actesroyauxdupoitou, sanctoral_elec
+     et les testaments — trop serré pour de la prose éditoriale en serif. */
+  line-height: 1.6;
+}
+.document-area #article:not(.bottom-toc) p {
+  margin: 0 0 .9em;
+}
+
+/* Titres : famille secondaire de l'application, graisse tenue, accent sobre.
+   Pas de bandeau plein : un filet gauche, comme les blocs de DoTS. */
+.document-area #article:not(.bottom-toc) h1,
+.document-area #article:not(.bottom-toc) h2,
+.document-area #article:not(.bottom-toc) h3,
+.document-area #article:not(.bottom-toc) h4 {
+  color: #202020;
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .01em;
+}
+.document-area #article:not(.bottom-toc) h1 { font-size: 1.6rem; margin: 0 0 1rem; }
+.document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
+.document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
+.document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
+
+/* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
+.document-area #article:not(.bottom-toc) a {
+  color: var(--d12-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.document-area #article:not(.bottom-toc) a:hover,
+.document-area #article:not(.bottom-toc) a:focus-visible {
+  text-decoration: var(--text-decoration-hover, underline dotted);
+}
+.document-area #article:not(.bottom-toc) a:focus-visible {
+  outline: 2px solid var(--d12-accent);
+  outline-offset: 2px;
+}
+
+/* Tableaux : filets fins, en-tête sur fond doux, pas de quadrillage lourd. */
+.document-area #article:not(.bottom-toc) table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: .95em;
+}
+.document-area #article:not(.bottom-toc) th,
+.document-area #article:not(.bottom-toc) td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid var(--d12-filet);
+  text-align: left;
+  vertical-align: top;
+}
+.document-area #article:not(.bottom-toc) th {
+  background: var(--d12-fond-doux);
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+/* Un tableau large défile dans son cadre, la page ne défile jamais de côté. */
+.document-area #article:not(.bottom-toc) .table-wrap {
+  overflow-x: auto;
+}
+
+/* Citations, blocs éditoriaux, légendes. */
+.document-area #article:not(.bottom-toc) blockquote,
+.document-area #article:not(.bottom-toc) .citation {
+  margin: 1rem 0;
+  padding: .1rem 0 .1rem 1rem;
+  border-left: 3px solid var(--d12-filet);
+  color: #45403c;
+}
+.document-area #article:not(.bottom-toc) figcaption,
+.document-area #article:not(.bottom-toc) .legendeillustration {
+  color: #5a5450;
+  font-size: .85rem;
+  line-height: 1.4;
+}
+.document-area #article:not(.bottom-toc) hr {
+  height: 0;
+  margin: 1.6rem 0;
+  border: 0;
+  border-top: 1px solid var(--d12-filet);
+}
+
+/* Colonne de texte : elle prend la place disponible dans la rangée.
+   Pourquoi : sur une page COQUILLE — une unité non éditoriale, qui ne rend que son titre
+   (le `liber` de cjc, la `rubrique` paratextes de delescluze) — la colonne se rétractait
+   sur la largeur du titre : mesuré le 2026-09-12, 65 px chez cjc (« Livre I » coupé en deux
+   lignes) et 92 px chez delescluze, parent compris, la visionneuse occupant le reste de la
+   rangée. Même procédé que D11 pour le sommaire des enfants (`flex` sur l'enfant du
+   `wrapper`), et sans effet quand la page a du contenu.
+   La chaîne mesurée sur cjc : `#article` (65 px) ← `#main` (65) ← `.row.remove-bottom-padding`
+   (65, en `display:flex`) ← `.wrapper` (1 225 px). C'est donc la RANGÉE qui se rétracte, pas
+   `#article` : une première version de cette règle visait `.wrapper > #article` et ne pouvait
+   pas s'appliquer, `#article` n'étant pas enfant du `wrapper`. La visionneuse, elle, est en
+   `position: absolute` (500 px) et n'entre pas dans le calcul. */
+.document-area .wrapper > .row {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Images : jamais plus larges que la colonne. */
+.document-area #article:not(.bottom-toc) img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Contrôles éditoriaux (onglets, boutons, menus dépliants des corpus) : même
+   grammaire visuelle que les boutons de l'application — coins légers, filet fin,
+   accent réservé à l'état actif. */
+.document-area #article:not(.bottom-toc) button,
+.document-area #article:not(.bottom-toc) input[type="reset"],
+.document-area #article:not(.bottom-toc) input[type="submit"],
+.document-area #article:not(.bottom-toc) summary {
+  font-family: var(--font-primary, "Roboto"), Arial, Helvetica, sans-serif;
+  font-size: .9rem;
+}
+.document-area #article:not(.bottom-toc) input[type="reset"],
+.document-area #article:not(.bottom-toc) input[type="submit"],
+.document-area #article:not(.bottom-toc) button {
+  padding: .35rem .7rem;
+  border: 1px solid var(--d12-filet);
+  border-radius: var(--d12-rayon);
+  background: #fff;
+  color: var(--d12-encre);
+  cursor: pointer;
+}
+.document-area #article:not(.bottom-toc) input[type="reset"]:hover,
+.document-area #article:not(.bottom-toc) input[type="submit"]:hover,
+.document-area #article:not(.bottom-toc) button:hover {
+  border-color: var(--d12-accent);
+  color: var(--d12-accent);
+}
+
+/* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
+.document-area #article:not(.bottom-toc) .footnotes,
+.document-area #article:not(.bottom-toc) .apparatus,
+.document-area #article:not(.bottom-toc) .note {
+  font-size: var(--font-small-size, 14px);
+  line-height: 1.5;
+}
+.document-area #article:not(.bottom-toc) .footnotes {
+  margin-top: 2rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--d12-filet);
+}
+.document-area #article:not(.bottom-toc) a.noteref,
+.document-area #article:not(.bottom-toc) .noteref {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .document-area #article:not(.bottom-toc) h1 { font-size: 1.4rem; }
+  .document-area #article:not(.bottom-toc) h2 { font-size: 1.2rem; }
+  .document-area #article:not(.bottom-toc) table { font-size: .9em; }
+}
+/* ==== D12-SOCLE-FIN ==== */
+
+/* ==========================================================================
+   2026-09-14 (agent_tp) — index : les lettres passent dans le sommaire.
+
+   La barre « A | B | C … » a été retirée de la page (XSL, template
+   tp-letter-nav plus appelé) : les 19 lettres de chaque index sont déjà des
+   unités citables, et le sommaire de gauche les liste.
+
+   MAIS, mesuré : le sommaire sert les deux index à plat, 38 entrées libellées
+   « A B C … W » puis « A B C … Z », sans rien qui les distingue — le titre
+   d'une lettre vient de citeData/@use = normalize-space(head[1]), et <head>
+   ne contient que la lettre. Sans la barre de la page, rien ne disait plus
+   dans quel index on clique. On réintroduit donc les deux intitulés de
+   groupe ici, faute de pouvoir les déclarer dans le refsDecl (écriture en
+   base). Les sélecteurs visent la PREMIÈRE lettre de chaque série par son
+   identifiant (…?refId=testateurs-A / …?refId=lieux-A) : ils restent justes
+   si un niveau « testateur » / « lieu » est ajouté sous les lettres, et, si
+   la lettre A venait à disparaître, ils n'affichent rien plutôt qu'un
+   intitulé faux. À SUPPRIMER le jour où le refsDecl déclare deux unités
+   parentes « Index des testateurs » / « Index des lieux de décès » : les
+   intitulés feraient alors doublon.
+   ========================================================================== */
+.toc-area-aside #toc-tree > li:has(> .container > a.toc-title[data-href$="refId=testateurs-A"])::before,
+.toc-area-aside #toc-tree > li:has(> .container > a.toc-title[data-href$="refId=lieux-A"])::before {
+  /* DoTS-vue pose `float: left` sur les ::before des <li> du sommaire
+     (filets de l'arborescence) : sans `float: none`, l'intitulé se met sur la
+     même ligne que la lettre A. Mesuré au navigateur, pas supposé. */
+  display: block;
+  float: none;
+  clear: both;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 1.1rem 0 .35rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid rgba(167, 49, 54, .3);
+  color: #a73136;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.toc-area-aside #toc-tree > li:has(> .container > a.toc-title[data-href$="refId=testateurs-A"])::before {
+  content: "Index des testateurs";
+  margin-top: .2rem;
+}
+.toc-area-aside #toc-tree > li:has(> .container > a.toc-title[data-href$="refId=lieux-A"])::before {
+  content: "Index des lieux de décès";
+}
+
+/* ==========================================================================
+   agentwill (2026-09-14) — la page d'un testament reprend la disposition de
+   l'ÉLEC (elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-NNN).
+   Sauvegarde du fichier : *.bak_agentwill_20260914
+   ========================================================================== */
+
+/* --- A. Barre année / mois / jour / testament (nav#specific-menu-wills) ----
+   Mêmes codes que la barre de christofle (.christofle-note-nav), qui est
+   l'étalon de l'utilisateur, et que l'ÉLEC : listes en ligne, séparateur « | »,
+   élément courant en rouge et gras. L'élément courant sort en <strong> et non
+   en <a> (un lien vers la route courante vide la page dans DoTS-vue). */
+.document-area #article .tp-will-nav {
+  border-bottom: 1px solid #E8E8E8;
+  margin: 0 0 1.1rem;
+  padding: 0;
+  text-align: center;
+  font-size: 90%;
+}
+.document-area #article .tp-will-nav ul { list-style: none; padding: 2px 0; margin: 0; }
+.document-area #article .tp-will-nav .tp-years-list,
+.document-area #article .tp-will-nav .tp-months-list,
+.document-area #article .tp-will-nav .tp-days-list { border-bottom: 1px solid #E8E8E8; }
+.document-area #article .tp-will-nav li { display: inline-block; }
+.document-area #article .tp-will-nav li:not(:last-child):not(.tp-nav-prev)::after {
+  content: " | "; color: #c9bcbc;
+}
+.document-area #article .tp-will-nav a { color: #28211f; font-weight: 400; text-decoration: none; padding: 0 .28rem; }
+.document-area #article .tp-will-nav a:hover,
+.document-area #article .tp-will-nav a:focus { color: #a73136; font-weight: 700; text-decoration: none; }
+.document-area #article .tp-will-nav .tp-nav-courant { color: #a73136; font-weight: 700; padding: 0 .28rem; }
+.document-area #article .tp-will-nav .tp-nav-sep { color: #9a8f8c; }
+.document-area #article .tp-will-nav .tp-years-list { font-variant: small-caps; letter-spacing: .03em; }
+
+/* --- B. Les fac-similés reviennent EN COLONNE à gauche, comme #facsimile ---
+   Le commentaire du bloc 4 disait la colonne impossible dans DoTS-vue (« le
+   contenu qui suit ne remonte pas à côté du flottant »). Re-mesuré le
+   2026-09-14 : la cause est `html.css` l. 119 `section { clear: both }` (et
+   l. 81/86 pour les titres), pas le flottant. Il suffit de rendre `clear: none`
+   aux seules sections du testament. Géométrie de l'ÉLEC reprise telle quelle :
+   #facsimile { float:left; width:30% } et #text { margin-left:30% }. */
+@media (min-width: 62rem) {
+  .document-area #article article.testament > .tp-facs {
+    float: left; width: 30%; min-width: 15rem; margin: 0 0 1.2rem;
+  }
+  .document-area #article article.testament > header.front,
+  .document-area #article article.testament > section.body,
+  .document-area #article article.testament > section.footnotes {
+    clear: none; margin-left: 32%;
+  }
+  /* les sections filles (summary / physdesc / reference) et le titre héritent
+     eux aussi du `clear: both` de html.css : il les ferait tomber sous l'image */
+  .document-area #article article.testament header.front section,
+  .document-area #article article.testament section.body section,
+  .document-area #article article.testament h2.tp-num { clear: none; }
+  .document-area #article article.testament .tp-facs-imgs .tp-facsimile { max-width: 100%; }
+}
+
+/* --- C. En-tête de notice (header.recordMetadata de l'ÉLEC) ---------------
+   numéro du testament centré au-dessus de la date, puis le filet pointillé qui
+   sépare la notice du texte. */
+.document-area #article h2.tp-num {
+  margin: 0 0 .6rem; padding: 0; font-size: 1.05rem; line-height: 1.5;
+  text-align: center; font-weight: 700; color: #2d2524;
+}
+.document-area #article h2.tp-num .tp-num-n { font-size: 1.35rem; }
+.document-area #article h2.tp-num .tp-docDate { font-weight: 400; font-size: .95rem; }
+.document-area #article article.testament > header.front {
+  /* la feuille de base encadre TOUT <header> d'un cadre pointille arrondi
+     (`header { border: 1px dashed #ccc; border-radius: 1ex; padding: 1ex }`) ;
+     l'ELEC n'en a pas : la notice y est un simple bloc souligne d'un filet. */
+  border: 0; border-bottom: 1px dotted #4a4a4a; border-radius: 0;
+  padding: 0 0 .6rem; font-size: 92%;
+}
+.document-area #article article.testament .summary { font-style: italic; }
+.document-area #article .tp-referenceLabel { font-style: normal; color: #4a4a4a; }
+
+/* --- D. Mentions éditoriales attachées aux <pb> et aux <space> ------------
+   `span.editorialComment` de l'ÉLEC : en italique, en bloc dans la
+   transcription, en ligne dans l'édition. */
+.document-area #article .editorialComment { font-style: italic; color: #6b625f; font-size: .9em; }
+.document-area #article .tp-mode-tr:checked ~ * .tp-pb-comment { display: block; margin: 0 0 1em; }
+.document-area #article .tp-space { display: block; margin: 1em 0; width: auto; }
+.document-area #article .tp-lb-hyph { color: inherit; }
+
+/* --- E. La notice redevient la notice de l'ÉLEC ---------------------------
+   La règle l. 9 encadrait summary / physdesc / reference de trois cartouches
+   roses à filet rouge. L'ÉLEC n'en a aucun : `header.recordMetadata` y est un
+   simple bloc en 90 %, le résumé en italique, l'ensemble souligné d'un filet
+   pointillé (relevé dans theme/testaments-poilus.css l. 107-133). On rend donc
+   les trois blocs au fil du texte, DANS LE TESTAMENT SEULEMENT — les cartouches
+   restent en place partout ailleurs. */
+.document-area #article article.testament > header.front > .summary,
+.document-area #article article.testament > header.front > .physdesc,
+.document-area #article article.testament > header.front > .reference {
+  background: none; border-left: 0; margin: .35rem 0; padding: 0;
+}
+.document-area #article article.testament > header.front p { margin: .3rem 0; text-align: left; }
+.document-area #article article.testament > header.front .summary p { font-style: italic; }
+
+/* --- F. « (En marge de gauche) » ------------------------------------------
+   L'ÉLEC ouvrait le seul `<postscript rend="margin-left">` du corpus (will-126)
+   par cette mention éditoriale. hteiml pose déjà `class="postscript margin-left"` :
+   la mention se rétablit donc en CSS, sans toucher à la transformation. */
+.document-area #article .postscript.margin-left > p:first-child::before {
+  content: "(En marge de gauche)";
+  display: block; font-style: italic; color: #6b625f; font-size: .9em;
+}
+
+/* --- G. Les noms de famille ne sont pas en petites capitales dans l'ÉLEC ---
+   `html.css` l. 267 pose `.surname { font-variant: small-caps }` pour tous les
+   corpus. L'ÉLEC écrit « Albert Alexandre Foudriat », au fil du texte comme dans
+   la notice. On ne neutralise la règle QUE dans un testament : l'index des
+   testateurs, lui, met bien la vedette en petites capitales (ÉLEC et nous). */
+.document-area #article article.testament .surname {
+  /* deux regles s'y mettent : `.surname { font-variant: small-caps }` (html.css
+     l. 267) ET `.surname { text-transform: uppercase }` — d'ou « FOUDRIAT ». */
+  font-variant: normal; text-transform: none;
+}

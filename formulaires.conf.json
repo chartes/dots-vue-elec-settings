@@ -26,16 +26,23 @@
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 3,
-    "editByLevel": null,
+    "editByLevel": 1,
     "editByCiteType": [
-       "partie",
+      "partie",
       "formulaire"
     ],
     "countByCiteType": [
       "formulaire"
     ]
   },
-  "aboutPageSettings": [
+  "aboutPageSettings": [],
+  "collectionCustomCss": "elec",
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
   ],
-  "collectionCustomCss": "elec"
+  "mediaTypeEndpoint": "html"
 }

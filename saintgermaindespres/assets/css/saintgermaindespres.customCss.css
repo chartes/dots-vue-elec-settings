@@ -1,167 +1,205 @@
-/* 2026-09-12 (D19) : `.dots-target` double `:target`. Raison : `:target` ne s'applique
-   pas quand une URL avec ancre est ouverte à froid (le fragment DTS est monté après que
-   le navigateur a résolu le fragment) ; DoTS-vue pose donc cette classe sur l'élément
-   visé, dans DocumentPage.vue. Les deux sélecteurs coexistent : `:target` continue de
-   servir pour un clic interne et pour l'impression. */
-/* Chroniques latines de Saint-Denis — CSS custom DoTS Vue.
+/* ============================================================================
+   Restauration de l'église Saint-Germain-des-Prés — CSS spécifique du corpus,
+   adaptée au gabarit DoTS Vue.
 
-   Attention au nommage : la clé de chargement est le NOM DU FICHIER
-   (App.vue, getCustomCss). Le dossier ne contenait qu'un
-   christofle.customCss.css copié-collé, donc "chroniqueslatines" n'avait
-   aucune feuille custom. */
+   POURQUOI CE FICHIER A ÉTÉ REFAIT (2026-09-09)
+   ---------------------------------------------
+   La version précédente (402 lignes) concaténait quatre feuilles du site ÉLEC :
+   `theme/foundation.min.css` (le framework Foundation complet, normalize.css
+   inclus), `theme/template.css`, `theme/base.css` et `theme/colorbox.css`.
+
+   App.vue injecte cette feuille dans un <style id="customCss"> ajouté en dernier
+   dans <head> : un framework CSS entier s'appliquait donc à TOUTE l'application
+   dots-vue, avec la précédence maximale — reset `*`, `html`, `body`, grille
+   `.row`/`.column`, boutons, formulaires, plus les règles de gabarit d'ÉLEC
+   (`header#header`, `#main-menu`, `#main`, `footer`, `.container`, `.inner`) et
+   des sélecteurs nus `a`, `h1`-`h6`, `ul`, `li`, `ol`, `table`, `img`, `p`,
+   `input`, `select`. `#main` est en outre le conteneur émis par la XSL DoTS :
+   les valeurs de mise en page d'ÉLEC s'y appliquaient directement.
+
+   CE QUI EST CONSERVÉ
+   -------------------
+   La personnalité éditoriale d'ÉLEC (rouge #bc052d, titres Georgia gras, filet
+   sous le h1, puces carrées, numérotation en pastilles rouges, encadrés `.box`,
+   justification), reprise valeur pour valeur de `theme/base.css` et
+   `theme/template.css`, limitée à la zone de texte TEI.
+
+   Les @font-face « CartaNovaTexte » de template.css sont abandonnés : les
+   fichiers de fonte répondent 404 sur ÉLEC (vérifié le 2026-09-09), le site
+   historique retombe donc lui-même sur la pile serif par défaut.
+
+   PORTÉE : `#main #article` est le conteneur émis par la chaîne XSL DoTS.
+   La page contient un SECOND `id="article"` (le sommaire de bas de page de
+   dots-vue) ; seul celui de la zone de texte est fils de `#main`.
+   ============================================================================ */
+
 
 /* --------------------------------------------------------------------------
-   Puces rouges de l'ÉLEC historique.
-
-   Sur elec.enc.sorbonne.fr la puce n'est pas une couleur de marqueur mais une
-   IMAGE : enc.css applique `ul { list-style-image: url('img/puce_rouge.png') }`
-   à toutes les listes du site. Ce fichier est un carré de 7 × 6 px, couleur
-   dominante #8d2e34.
-
-   On le reproduit ici avec un SVG en data-URI (mêmes dimensions, même teinte,
-   aucun fichier externe à déployer), limité à la zone de texte pour ne pas
-   repeindre les listes de l'interface (sommaire, navigation).
+   1. Colonne de texte — theme/template.css : body { #fbf8f4, serif }
    -------------------------------------------------------------------------- */
-#article ul,
-.document-area #article ul {
-  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='6'%3E%3Crect width='7' height='6' fill='%238d2e34'/%3E%3C/svg%3E");
-  padding-top: .3em;
+
+#main #article {
+  font-family: "CartaNovaTexte", Georgia, "Times New Roman", serif;
+  color: #000;
+  line-height: 1.5;
+  max-width: 74rem;
+  margin: 0 auto;
 }
 
-/* Comme sur ELEC, les listes imbriquées reprennent les marqueurs standard. */
-#article ul ul { list-style: circle; }
-#article ul ul ul { list-style: disc; }
+#main #article p { margin: 0 0 1em; text-align: justify; }
+#main #article p.noindent { text-indent: 0; }
 
-/* Page « Références citées » : l'ÉLEC rend `ul.listBibl > li`, le fragment
-   local rend `ul.refs-list > li.refs-entry`. */
-.refs-list {
-  padding-left: 1.4em;
+
+/* --------------------------------------------------------------------------
+   2. Titres — theme/base.css
+   -------------------------------------------------------------------------- */
+
+#main #article h1,
+#main #article h2,
+#main #article h3,
+#main #article h4,
+#main #article h5,
+#main #article h6 { font-family: Georgia, "Times New Roman", serif; font-weight: bold; }
+
+#main #article h1 {
+  font-size: 1.6em;
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+  margin: 0 0 1em;
+}
+#main #article h2 { font-size: 1.3em; margin: 1.6em 0 .8em; }
+#main #article h3 { font-size: 1.15em; margin: 1.4em 0 .6em; }
+#main #article h4 { font-size: 1.05em; margin: 1.2em 0 .6em; }
+
+#main #article h1 a,
+#main #article h2 a,
+#main #article h3 a { color: inherit; }
+
+
+/* --------------------------------------------------------------------------
+   3. Liens du texte — theme/base.css
+   -------------------------------------------------------------------------- */
+
+#main #article a,
+#main #article a:visited { color: #bc052d; text-decoration: none; }
+#main #article a:hover { text-decoration: underline; color: #bc052d; }
+
+
+/* --------------------------------------------------------------------------
+   4. Listes — theme/base.css (puces carrées, numérotation en pastilles rouges)
+   -------------------------------------------------------------------------- */
+
+#main #article ul { margin: 0 0 1em; padding: 0 0 0 1.2em; }
+#main #article ul li { list-style: square; padding: 0 0 0 10px; margin: 0; }
+
+#main #article ol { margin: 0 0 1em; padding: 0; counter-reset: li; }
+#main #article ol > li {
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 8px 8px 8px 28px;
+}
+#main #article ol > li::before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  top: 6px;
+  left: 0;
+  min-width: 1em;
+  min-height: 1em;
+  line-height: 1em;
+  padding: 4px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #bc052d;
+  font-weight: 300;
+  text-align: center;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. Appareil éditorial de la pièce
+   La XSL DoTS sort chaque pièce en `article.text` avec `header.front`
+   (chapeau, date, lieu), puis les divisions `.tradition`, `.transcription`,
+   et les mentions `.listWit`, `.witness`, `.argument`, `.salute`, `.signed`,
+   `.docDate`. Même traitement que la CSS saint-denis, aux couleurs d'ÉLEC.
+   -------------------------------------------------------------------------- */
+
+#main #article .front { margin-bottom: 1.5em; }
+#main #article .docDate,
+#main #article .date { font-variant: small-caps; }
+#main #article .argument { font-size: .95em; }
+
+#main #article .tradition,
+#main #article .listWit {
+  border-left: 3px solid #e6c3c9;
+  background: #fbf8f4;
   margin: 1rem 0;
+  padding: .8rem 1rem;
+  font-size: .95em;
 }
-.refs-list > .refs-entry {
-  margin: 0 0 .45rem;
-}
+#main #article .witness { display: block; }
 
-/* --------------------------------------------------------------------------
-   Citations : appel dans le texte + liste en pied d'article.
-   La XSL (chroniqueslatines.xsl, mode citation-entry) reproduit le bloc
-   `<div class="cit">` de l'ÉLEC, jusque-là absent en local — les appels
-   `<a class="noteref" href="#citN">` pointaient donc dans le vide.
-   -------------------------------------------------------------------------- */
-.citations-list {
+#main #article .transcription {
+  border-top: 1px solid #e6c3c9;
   margin-top: 1.5rem;
-  font-size: .92em;
+  padding-top: 1.5rem;
 }
-.citations-list .cit {
-  margin: .2rem 0;
+
+#main #article .salute,
+#main #article .signed { text-align: right; text-indent: 0; }
+
+/* Encadrés éditoriaux — theme/base.css */
+#main #article .box {
+  border: 1px solid #bc052d;
+  padding: 10px;
+  text-align: justify;
 }
-.citations-list .cit > a.note {
-  font-weight: 700;
-  text-decoration: none;
-  margin-right: .35rem;
+#main #article .box.box-inverse { padding: 0; background: #bc052d; color: #fff; }
+#main #article .box h4.box-title {
+  background: #bc052d;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  margin: 0;
+  font-size: 1.2em;
 }
+
 
 /* --------------------------------------------------------------------------
-   Page de garde : blocs du teiHeader rétablis par chroniqueslatines.xsl.
-
-   L'ÉLEC en tirait deux pages — /credits (titleStmt + respStmt + revisionDesc)
-   et /licence (publicationStmt + address + availability). Le HTEIML rendait les
-   deux premiers seulement : l'adresse, la licence Creative Commons et
-   l'historique des révisions étaient dans le XML mais jamais affichés. Ils le
-   sont désormais sur la garde, avec les noms de classe de l'ÉLEC.
+   6. Images et tableaux — theme/base.css
    -------------------------------------------------------------------------- */
-#article .titleStmt .title { font-size: 1.15rem; font-weight: 600; }
-#article .principal,
-#article .respStmt { margin: .3rem 0; }
-#article .fileDesc label,
-#article .fileDesc legend {
-  display: block;
-  margin: 1.4rem 0 .4rem;
-  font-weight: 600;
-}
 
-/* Historique des révisions : rendu en table.data par le HTEIML. */
-#article .revisionDesc {
-  border-collapse: collapse;
-  margin: 1rem 0 1.5rem;
-  width: 100%;
-}
-#article .revisionDesc caption {
-  text-align: left;
-  font-weight: 600;
-  padding-bottom: .4rem;
-}
-#article .revisionDesc td {
-  border-top: 1px solid #e6dddf;
-  padding: .35rem .7rem .35rem 0;
-  vertical-align: top;
-}
+#main #article img { max-width: 100%; height: auto; }
+#main #article table { font-size: .857em; border-collapse: collapse; }
+#main #article th,
+#main #article td { border: 1px solid #ddd; padding: 2px 6px; vertical-align: top; }
+#main #article sup { top: -.3em; }
 
-#article .address { margin: .8rem 0; font-style: normal; }
-#article .address .addrLine { display: block; }
-
-#article .availability {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e6dddf;
-}
-#article .availability .ident { font-weight: 700; }
 
 /* --------------------------------------------------------------------------
-   Référence d'une citation : hors du fil du texte.
-
-   Le HTEIML place la référence (« I, 1, 1-2 ») juste après l'appel, en clair
-   dans le paragraphe. L'ÉLEC ne le fait pas : diple.css la masque
-   (`.cit_n .bibl { display:none }`) et ne la montre qu'au survol. On la masque
-   donc ici aussi — la référence complète, auteur et titre compris, est de toute
-   façon donnée en pied d'article, et le numéro d'appel y conduit.
-
-   ⚠ Ne pas cibler `.cit_n > .listBibl` : la citation contient un <blockquote>,
-   élément de bloc dans un <span> inline, ce qui casse le span au parsing. La
-   référence se retrouve alors sœur du bloc, hors de tout .cit_n. On la vise
-   donc directement, et on la révèle au survol de son appel (sélecteur de frère
-   adjacent), sans dépendre du onmouseover du HTEIML — lequel vise
-   `this.parentNode`, c'est-à-dire le <sup>, et ne bascule rien.
+   7. Notes de bas de fragment
    -------------------------------------------------------------------------- */
-#article .listBibl { display: none; }
-#article sup:hover + .listBibl,
-#article sup:focus-within + .listBibl {
-  display: inline;
-  margin-left: .35rem;
-  padding: .05rem .4rem;
-  background: #fff;
-  border: 1px solid #ccc;
-  font-size: .92em;
-}
 
-/* --------------------------------------------------------------------------
-   Visionneuse Mirador : retirée du flux en mode texte seul.
+#main #article .noteref,
+#main #article .noteback { color: #bc052d; }
+#main #article .footnotes { font-size: 90%; line-height: 1.25; }
+#main #article .footnotes p { margin: 0; text-indent: 0; }
 
-   Le conteneur est masqué par `visibility: hidden`, qui CONSERVE sa place :
-   609 px de vide au-dessus du texte. Tout saut vers une ancre — le retour
-   depuis une référence, par exemple — atterrissait donc décalé d'autant.
-   `display: none` le sort du flux. La règle est limitée à `.text-mode-only`,
-   donc sans effet sur les corpus qui affichent réellement des images.
-   -------------------------------------------------------------------------- */
-.text-mode-only .mirador-view { display: none; }
-
-/* Liste des citations en pied d'article : une citation peut renvoyer à
-   plusieurs ouvrages — le même passage se lit chez Grégoire de Tours, chez
-   Frédégaire et dans le Liber historiae Francorum. Chaque source sur sa ligne,
-   sans quoi les trois références se suivent et se lisent comme une seule. */
-.citations-list .cit-source {
-  display: block;
-  margin-left: 1.4em;
-}
+#main #article a.bookmark { color: #ccc; text-decoration: none; }
+#main #article a.bookmark:hover { color: #bc052d; }
 
 
 /* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
+   8. Volet Mirador en mode texte (2026-09-11, D7)
+   DocumentPage.vue veut sortir le volet du flux en mode texte
+   (`.text-mode .mirador-view { position: absolute; visibility: hidden }`),
+   mais sa règle `#mirador-view { position: relative }` (sélecteur d'id, plus
+   fort) l'emporte : le volet invisible restait un élément flex de 1225 px à
+   droite du texte (page de 2469 px de large pour 1280) et son marginTop
+   « sticky », recalculé à chaque défilement, produisait le défilement
+   anormal signalé après un clic sur un renvoi. Le corpus n'a aucune image
+   IIIF : le volet est inutile en mode texte.
    -------------------------------------------------------------------------- */
 
 .text-mode #mirador-view {
@@ -184,51 +222,74 @@
 }
 /* ==== fin D11 ==== */
 
-/* ==== D14e-5 (2026-09-12) : comportements de lecture de l'ÉLEC, sans script ====
+/* ==== D14e-6 (2026-09-12) : agrandissement des 64 images dans la page ====
+   Ancien site : les figures etaient de simples <img> en ligne, a leur taille
+   naturelle (600 a 850 px de large) ; jquery.colorbox etait charge par deux
+   pages seulement (l'accueil et inha.php) et lie a la classe « .colorbox »,
+   absente de toutes les pages conservees : aucune visionneuse en surimpression
+   n'a donc jamais fonctionne sur le site historique.
+   Les fragments DoTS-vue sont compiles comme gabarits Vue (aucun <script>) :
+   l'agrandissement se fait sans script par <details>/<summary>, comme pour les
+   fac-similes de christofle.
+   Etat FERME = rendu ELEC a l'identique (image en ligne, taille naturelle).
+   Etat OUVERT = image portee a toute la largeur de la colonne de texte
+   (~1093 px mesures), soit environ 1,3 a 1,8 fois la taille naturelle. */
 
-   1) Apparat critique au survol du lemme.
-      Ancien site : <span class="app"> … <span class="rdgList"> masqué, et les
-      gestionnaires onmouseover/onmouseout/onclick basculaient la classe en
-      « apprdg » — diple_html.css : `.app .rdgList { display:none }`,
-      `.apprdg { background:#DDD }`, `.apprdg .rdgList { display:inline;
-      border-left:2px solid #888; margin-left:1ex; padding-right:1ex }`.
-      Le clic épinglait la leçon (drapeau this.cloc).
-      DoTS-vue ne les exécute pas : chroniqueslatines.xsl produit la structure,
-      la bascule est ici en CSS. :focus-within tient lieu d'épinglage au clavier.
-      Portée limitée à span.app pour ne pas toucher les apparats tabulaires. */
-#article span.app { position: relative; }
-#article span.app .rdgList { display: none; }
-#article span.app:hover,
-#article span.app:focus-within { background: #ddd; }
-#article span.app:hover .rdgList,
-#article span.app:focus-within .rdgList {
-  display: inline;
-  border-left: 2px solid #888;
-  margin-left: 1ex;
-  padding-right: 1ex;
+#main #article .sgdp-figure { display: block; margin: 1rem 0; }
+#main #article .sgdp-figure > summary {
+  display: block;
+  cursor: zoom-in;
+  list-style: none;
 }
-/* Les leçons sont déjà reprises en pied d'article : dans la bulle de survol,
-   pas de retrait ni de puce parasites. */
-#article span.app .rdgList .rdg { font-style: normal; }
+#main #article .sgdp-figure > summary::-webkit-details-marker { display: none; }
+#main #article .sgdp-figure[open] > summary { cursor: zoom-out; }
 
-/* 2) Mise en évidence de la cible d'un renvoi (ancien Diple.js, méthode
-      Diple.hash : la classe « mark » était posée sur l'élément désigné par le
-      fragment d'URL, fond gris — neutre_html.css : `mark { background:#DDD }`,
-      `li.mark, .notes div.mark { background-color:#E6E6E6 }`).
-      DoTS-vue ne rejoue pas ce script ; :target le fait nativement.
-      On ne repeint pas les grands blocs : pour une section, seul l'intitulé
-      est marqué. */
-#article span:target,
-#article .app-entry:target,
-#article .cit:target,
-#article .note:target,
-#article li:target,
-#article .refs-entry:target,
-#article .refs-entry.dots-target { background-color: #e6e6e6; }
-#article section:target > .head,
-#article div.div:target > .head,
-#article div.div.dots-target > .head { background-color: #e6e6e6; }
-/* ==== fin D14e-5 ==== */
+#main #article .sgdp-figure img { display: block; height: auto; }
+#main #article .sgdp-figure-vignette { max-width: 100%; }
+
+#main #article .sgdp-figure-ouvrir,
+#main #article .sgdp-figure-fermer {
+  display: inline-block;
+  margin-top: .3rem;
+  color: #bc052d;
+  font-size: .9em;
+}
+#main #article .sgdp-figure-fermer,
+#main #article .sgdp-figure[open] .sgdp-figure-ouvrir,
+#main #article .sgdp-figure[open] .sgdp-figure-vignette { display: none; }
+#main #article .sgdp-figure[open] .sgdp-figure-fermer { display: inline-block; }
+
+/* Ouvert, l'image deborde dans la marge interne de #article (padding 20px 10% 120px
+   de DoTS-vue) : la colonne de texte ne fait que 875 px pour des images de 600 a
+   850 px de large, un « width: 100% » ne gagnait que 3 %. Les marges negatives de
+   10 % (87 px, soit moins que le padding de 109 px) portent l'image a 1050 px sans
+   creer de debordement horizontal de la page. Gain mesure : 1,24x pour la plus
+   grande image, jusqu'a 1,75x pour les plus petites. */
+#main #article .sgdp-figure > .sgdp-figure-image { display: none; }
+#main #article .sgdp-figure[open] > .sgdp-figure-image {
+  display: block;
+  width: 120%;
+  max-width: 120%;
+  margin: .4rem -10%;
+}
+@media (max-width: 900px) {
+  #main #article .sgdp-figure[open] > .sgdp-figure-image {
+    width: 100%;
+    max-width: 100%;
+    margin: .4rem 0;
+  }
+}
+
+#main #article .sgdp-figure-legende {
+  font-size: .9em;
+  text-align: center;
+  text-indent: 0;
+  margin: .3rem 0 0;
+}
+
+/* Les 48 renvois aux PDF d'attachements restent sur l'ancien site ELEC. */
+#main #article a.sgdp-pdf::after { content: " [PDF]"; font-size: .85em; }
+/* ==== fin D14e-6 ==== */
 /* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
 /* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
    Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)

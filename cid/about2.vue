@@ -142,7 +142,7 @@
         </tr>
         <tr>
           <td>XIII<sup>e</sup> congrès Paris 2012</td>
-          <td><a href="http://elec.enc.sorbonne.fr/cid2012/"><em>Les formulaires</em> 2016</a></td>
+          <td><a href="/cid/document/cid2012"><em>Les formulaires</em> 2016</a></td>
           <td>O. Guyotjeannin, L. Morelle, S. P. Scalfati</td>
           <td>École des chartes</td>
           <td>-</td>

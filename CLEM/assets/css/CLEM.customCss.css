@@ -142,3 +142,33 @@ h3 {
     font-weight: bold !important;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */

@@ -60,7 +60,7 @@
     { "tabName": "Liste des réunions publiées", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": false,
+  "collectionCustomCss": "cid",
   "customRoutes": [
     {
       "name": "Search",

@@ -1,201 +1,220 @@
-/* 2026-09-12 (D19) : `.dots-target` double `:target`. Raison : `:target` ne s'applique
-   pas quand une URL avec ancre est ouverte à froid (le fragment DTS est monté après que
-   le navigateur a résolu le fragment) ; DoTS-vue pose donc cette classe sur l'élément
-   visé, dans DocumentPage.vue. Les deux sélecteurs coexistent : `:target` continue de
-   servir pour un clic interne et pour l'impression. */
-/*=============================================================
- PART 1
- Updating the css color schema for:
-  - the collection theater
-  - its children (unless otherwise specified)
- =============================================================*/
-/* Using themes TODO working in dev but not in build :
-[data-theme="red"] {
-  --text-color: #8f0e21;
-  --fill-color: #8f0e21;
-}*/
-/* Using css variables */
-:root {
-  --text-color: #8f0e21;
-  --fill-color: #8f0e21;
-  --fill-color-light: #8F0E21D8;
-}
+/* ============================================================================
+   Robert d'Arbrissel, entre philologie et histoire — CSS spécifique du corpus.
 
-/*=============================================================
- PART 2
- Updating the css of specific elements (HTML) for:
-  - the collection theater
-  - its children (unless otherwise specified)
- =============================================================*/
-.about > h1 {
-  font-style: italic !important;
-}
-button {
-  &.expanded {
-    fill: var(--fill-color)
-  }
-}
+   POURQUOI CE FICHIER A ÉTÉ REFAIT (2026-09-09)
+   ---------------------------------------------
+   La version précédente (3448 lignes) était la concaténation brute des feuilles
+   du site ÉLEC historique :
+     diple/modules/xrem/xrem.css, diple/theme/neutre/html.css,
+     diple/theme/neutre/diple_html.css, diple/theme/enc/enc.css
+   plus deux pages d'ERREUR HTML récupérées par le crawl à la place de deux CSS
+   qui n'existent pas sur ÉLEC (« ie_only.css » et « theme/arbrissel.css »
+   renvoient 200 avec « Le document … semble introuvable »). Ces 54 fragments
+   de HTML dans un fichier .css cassaient la lecture des règles.
 
-/*=============================================================
- PART 3
- Updating the css of the DTS API tei response for:
-  - the collection theater
-  - its children (unless otherwise specified)
- =============================================================*/
-@media screen {
-  .body > .div {
-    border-bottom: none; !important;
-    padding-bottom: 3em;
-  }
-}
-@media (max-width: 480px) {
-  .fileDesc {
-    padding: 1.25rem 1rem;
-  }
+   Surtout : App.vue injecte cette feuille dans un <style id="customCss"> ajouté
+   EN DERNIER dans <head>, donc appliqué à toute la page, pas seulement au texte
+   TEI. Les règles de gabarit d'ÉLEC repeignaient l'interface DoTS :
+     - `.ariane, #ariane { background:#BC052D; padding:5px 0 5px 285px }`
+       peignait le fil d'Ariane de dots-vue → le grand bandeau rouge sous le titre ;
+     - `#article { margin:3ex 5em 5em 320px }` (enc.css) réservait la colonne de
+       navigation d'ÉLEC → la colonne de texte tombait à 282 px de large ;
+     - le reset ÉLEC (`body`, `a`, `li`, `ul`, `section/nav/article/header/footer`,
+       `.title`, `.tree`) débordait sur la navigation et le sommaire de l'appli.
 
-  .fileDesc .date {
-    display: block;
-    margin-top: 0.75rem;
-    font-size: 1.2rem; /* légèrement réduite par rapport au desktop, mais toujours lisible */
-  }
-}
+   CE QUI EST CONSERVÉ
+   -------------------
+   La personnalité éditoriale d'ÉLEC (couleurs de titres, petites capitales,
+   titres d'œuvres droits, retraits, puce rouge, justification, liens bleus),
+   reprise valeur pour valeur des feuilles ci-dessus, mais limitée à la zone de
+   texte TEI. Tout ce qui relevait du gabarit du site historique (en-tête, menu
+   gauche, fil d'Ariane, pied de page, bordures, barre d'outils) est écarté :
+   dots-vue fournit sa propre interface.
 
-fieldset {
-  margin: 2em 0em 1em 0;
-  padding: 0 1ex 1ex 1ex;
-  box-sizing: border-box;
-  max-width: 100%;
-  border: 1px dotted #363;
-  white-space: normal;
-}
+   PORTÉE DES SÉLECTEURS
+   ---------------------
+   `#main #article` est le conteneur émis par la chaîne XSL DoTS
+   (`<div id="center"><div id="main"><div id="article">`). Attention : la page
+   contient DEUX éléments `id="article"` — celui-ci et le sommaire de bas de page
+   de dots-vue (`.wrapper > #article.row.bottom-toc`) ; seul le premier est fils
+   de `#main`, d'où ce préfixe systématique.
+   ============================================================================ */
 
-.front, .div, .footnotes {
-  font-family: Libre Baskerville,serif !important;
+
+/* --------------------------------------------------------------------------
+   1. Colonne de texte
+   -------------------------------------------------------------------------- */
+
+#main #article {
+  /* enc.css : #article { font-size:16px } ; html.css : body { line-height:133% } */
+  font-family: "CartaNovaTexte", Georgia, "Times New Roman", serif;
   font-size: 16px;
-  text-align: left;
-  font-weight: 400;
-  line-height: 28px;
-  color: #5f5f5f;
-}
-
-/* 2026-09-14 : cette declaration `!important` imposait le rouge #8f0e21 a TOUS les titres
-   et battait la regle harmonisee de la l. 308 (`#202020`), pourtant deja presente.
-   Neutralisee : les titres suivent desormais la meme couleur que les autres collections.
-   La variable --fill-color reste employee ailleurs (filets, accents), elle n'est pas touchee.
-h1, h2, h3 {
-  color: var(--fill-color) !important;
-}
-*/
-
-.witness {
-  font-family: Libre Baskerville,serif !important;
-  -webkit-border-radius: 1ex;
-  margin-left: 1em;
-}
-
-a {
-  color: #315ba7;
-  text-decoration: none;
-}
-
-.apparatus {
-  margin-bottom: 30px !important;
-}
-
-/* Neutralise le width="50%" figé dans le HTML et laisse la table respirer */
-table.app.table {
-  width: 100% !important;
-  max-width: 100%;
-  table-layout: auto;
-  border-collapse: collapse;
-  margin: 0.75em 0;
-}
-
-table.app.table th,
-table.app.table td {
-  width: auto !important;   /* écrase l'attribut width="50%" */
-  box-sizing: border-box;
-  padding: 0.5em 0.75em;
-  vertical-align: top;
-  text-align: left;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-table.app.table th {
-  background: #f5f5f5;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-table.app.table a.wit {
-  display: inline-block;
-  word-break: break-word;
-}
-
-table.app.table td.rdg {
-  line-height: 1.5;
-}
-
-/* Sur petit écran, si une ligne reste trop dense, on autorise un défilement horizontal plutôt qu'un écrasement */
-@media (max-width: 600px) {
-  table.app.table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  table.app.table th,
-  table.app.table td {
-    font-size: 0.9em;
-  }
-}
-
-ul.index li {
-  margin: 2.5ex 0;
-}
-
-.fileDesc {
-  max-width: 42rem;
+  line-height: 1.33;
+  color: #000;
+  max-width: 74rem;
   margin: 0 auto;
-  padding: 2rem 1.25rem;
-  font-family: "Georgia", "Iowan Old Style", serif;
-  text-align: center;
 }
 
-.fileDesc h1 {
-  margin: 0 0 1rem;
-  color: #8f0e21;
-  font-size: clamp(1.4rem, 4vw, 2.1rem);
+/* html.css : p, dd, li { text-align:justify } */
+#main #article p,
+#main #article dd,
+#main #article li { text-align: justify; }
+
+#main #article li { line-height: 1.33; margin: .5ex 0; }
+#main #article li p { margin: 0; text-indent: 0; }
+
+
+/* --------------------------------------------------------------------------
+   2. Titres — enc.css
+   -------------------------------------------------------------------------- */
+
+#main #article h1,
+#main #article .h1 {
+  /* 2026-09-14 : titre ramené au gris sombre commun aux collections (#202020).
+     Ce n'est pas un choix de goût : c'est la valeur MESURÉE sur la majorité des corpus
+     (15 titres sur 5 collections), et la règle harmonisée
+     `.document-area #article:not(.bottom-toc) h1…{color:#202020}` existe déjà dans les 18
+     feuilles — elle était simplement battue ici par ce sélecteur à DEUX identifiants,
+     plus spécifique. L'accent rouge reste où il sert de repère (appels de note,
+     signets), pas sur les titres. Demande de l'utilisateur : « les titres en rouge
+     jsuis pas fan en vrai homogénéise ». */
+  color: #202020;
+  font-size: 26px;
+  font-weight: normal;
+  text-align: left;
   line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-align: center !important;
+  margin: 0 0 1em;
+  padding-top: 1em;
 }
 
-.fileDesc .principal {
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
-  color: #333;
-  margin-bottom: 0.75rem;
-  font-variant: small-caps;
-  letter-spacing: 0.03em; /* les petites capitales rendent souvent mieux légèrement espacées */
+#main #article h2 {
+  /* 2026-09-14 : titre ramené au gris sombre commun aux collections (#202020).
+     Ce n'est pas un choix de goût : c'est la valeur MESURÉE sur la majorité des corpus
+     (15 titres sur 5 collections), et la règle harmonisée
+     `.document-area #article:not(.bottom-toc) h1…{color:#202020}` existe déjà dans les 18
+     feuilles — elle était simplement battue ici par ce sélecteur à DEUX identifiants,
+     plus spécifique. L'accent rouge reste où il sert de repère (appels de note,
+     signets), pas sur les titres. Demande de l'utilisateur : « les titres en rouge
+     jsuis pas fan en vrai homogénéise ». */
+  color: #202020;
+  font-size: 24px;
+  font-weight: normal;
+  border-bottom: none;
+  margin: 1em 0;
+  padding: 1em 0 0;
 }
 
-.fileDesc .principal .label {
-  font-style: italic;
-  color: #666;
-  font-variant: normal; /* on annule les petites capitales pour "sous la direction de" */
+#main #article h3 {
+  color: #585858;
+  font-size: 22px;
+  font-weight: normal;
+  border-bottom: none;
+  margin: 1em 0;
+  padding: 10px 0 0 1em;
 }
 
-.fileDesc .date {
-  display: inline-block;
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-  color: #8f0e21;
-  border-top: 1px solid #e2c5cb;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
+#main #article h4 {
+  color: #585858;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 1em 0;
+  padding: 10px 0 0 3em;
 }
+
+/* html.css : les liens dans un titre héritent de la couleur du titre */
+#main #article h1 a,
+#main #article h2 a,
+#main #article h3 a,
+#main #article h4 a {
+  color: inherit;
+  border-bottom-color: transparent;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Liens du texte — enc.css
+   -------------------------------------------------------------------------- */
+
+#main #article a { color: #315ba7; text-decoration: none; }
+#main #article a:visited { color: #2b1476; }
+#main #article a:hover { border-bottom: 1px solid; }
+
+
+/* --------------------------------------------------------------------------
+   4. Micro-typographie éditoriale — diple_html.css
+   -------------------------------------------------------------------------- */
+
+/* Titres d'œuvres : ÉLEC les compose droits, y compris dans un <cite>. */
+#main #article cite,
+#main #article .title { font-style: normal; }
+#main #article .title i,
+#main #article .title em { font-style: normal; }
+#main #article .title abbr { font-variant: small-caps; }
+#main #article cite.u { text-decoration: underline; font-style: normal; }
+
+/* Petites capitales (noms de personnes, numérotations). */
+#main #article .sc { font-variant: small-caps; }
+#main #article .num { font-family: inherit; line-height: 1; font-variant: small-caps; }
+#main #article .num sup { font-variant: normal; }
+
+/* Alinéas. */
+#main #article p.indent { text-indent: 2em; }
+#main #article p.noindent { text-indent: 0; }
+#main #article p.right { text-align: right; }
+
+/* Citations en retrait. */
+#main #article blockquote {
+  margin: 0 2em 1.5ex 1.5em;
+  padding: .3ex 1ex .3ex .5em;
+  border-left: 2px dotted #ccc;
+  text-align: justify;
+  line-height: 1.15;
+}
+#main #article blockquote p { text-indent: 0; margin: .7ex 0; }
+
+/* html.css : une emphase dans une emphase revient au droit. */
+#main #article i i,
+#main #article i em,
+#main #article em i,
+#main #article em em { font-style: normal; }
+
+
+/* --------------------------------------------------------------------------
+   5. Puce rouge d'ÉLEC
+   enc.css : ul { list-style-image:url('img/puce_rouge.png') } — un carré de
+   7 × 6 px, #8d2e34. Reproduit en SVG inline pour ne rien avoir à déployer.
+   Même solution que la CSS « chroniqueslatines ».
+   -------------------------------------------------------------------------- */
+
+#main #article ul {
+  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='6'%3E%3Crect width='7' height='6' fill='%238d2e34'/%3E%3C/svg%3E");
+  padding-top: .3em;
+}
+#main #article ul ul { list-style: circle; }
+#main #article ul ul ul { list-style: disc; }
+
+
+/* --------------------------------------------------------------------------
+   6. Notes de bas de fragment
+   La XSL DoTS d'Arbrissel sort les notes en fin de fragment (.footnotes) avec
+   des appels .noteref / des retours .noteback ; l'ossature est fournie par la
+   feuille générique hteiml, on n'ajoute ici que la couleur ÉLEC.
+   -------------------------------------------------------------------------- */
+
+#main #article .noteref,
+#main #article .noteback { color: #BC052D; }
+/* « 16. » puis le texte : l'espace final du numéro est perdu à l'affichage. */
+#main #article .noteback { margin-right: .3em; }
+#main #article .footnotes { font-size: 90%; line-height: 1.15; }
+#main #article .footnotes p { margin: 0; text-indent: 0; }
+
+
+/* --------------------------------------------------------------------------
+   7. Ancres de section (« ¶ ») : discrètes, comme sur ÉLEC.
+   -------------------------------------------------------------------------- */
+
+#main #article a.bookmark { color: #ccc; border-bottom: none; }
+#main #article a.bookmark:hover { color: #BC052D; }
 
 
 /* --------------------------------------------------------------------------
@@ -226,53 +245,6 @@ ul.index li {
   .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
 }
 /* ==== fin D11 ==== */
-
-/* ==== D14e-5 (2026-09-12) : comportements de lecture de l'ÉLEC, sans script ====
-
-   1) Apparat critique au survol du lemme (212 pages de l'ancien site portaient
-      les gestionnaires onmouseover="this.className='apprdg'",
-      onmouseout="if(!this.cloc) …", onclick="… this.cloc …").
-      diple_html.css : `.app .rdgList { display:none }`,
-      `.apprdg { background:#DDD }`, `.apprdg .rdgList { display:inline;
-      border-left:2px solid #888; margin-left:1ex; padding-right:1ex }`.
-      edits.xsl produit désormais le <span class="rdgList"> inline ; la bascule
-      est faite ici en CSS. :focus-within tient lieu d'épinglage au clavier.
-      Sélecteur span.app uniquement : les apparats tabulaires (table.app.table,
-      réglés plus haut) ne doivent pas être touchés. */
-span.app { position: relative; }
-span.app .rdgList { display: none; }
-span.app:hover,
-span.app:focus-within { background: #ddd; }
-span.app:hover .rdgList,
-span.app:focus-within .rdgList {
-  display: inline;
-  border-left: 2px solid #888;
-  margin-left: 1ex;
-  padding-right: 1ex;
-}
-/* La note d'apparat en pied reprend la même structure <span class="app"> :
-   elle y est toujours visible, pas de bascule au survol. */
-.footnotes span.app .rdgList,
-p.apparatus span.app .rdgList { display: inline; border-left: none; margin-left: 0; }
-.footnotes span.app:hover,
-p.apparatus span.app:hover { background: transparent; }
-
-/* 2) Mise en évidence de la cible d'un renvoi (ancien Diple.js, Diple.hash :
-      classe « mark » posée sur l'élément désigné par le fragment d'URL, fond
-      gris — neutre_html.css `mark { background:#DDD }`,
-      `li.mark, .notes div.mark { background-color:#E6E6E6 }`). Les renvois de
-      l'édition (« Voir aussi, VIII.31 ») et les index arrivent tous avec un
-      #ancre : sans cela, rien ne signale l'article atteint.
-      Les grands blocs ne sont pas repeints : seul leur intitulé l'est. */
-#article span:target,
-#article .note:target,
-#article .witness:target,
-#article li:target,
-#article li.dots-target { background-color: #e6e6e6; }
-#article div.div:target > .head,
-#article section:target > .head,
-#article section.dots-target > .head { background-color: #e6e6e6; }
-/* ==== fin D14e-5 ==== */
 /* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
 /* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
    Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)

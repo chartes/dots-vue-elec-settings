@@ -1,0 +1,522 @@
+/* ============================================================================
+   Carnets de prison et correspondance d'Henri Delescluze — CSS spécifique,
+   adaptée au gabarit DoTS Vue.
+
+   POURQUOI CE FICHIER A ÉTÉ REFAIT (2026-09-09)
+   ---------------------------------------------
+   La version précédente (1049 lignes) reprenait telles quelles les deux
+   feuilles du site ÉLEC Delescluze (theme/delescluze.css et theme/responsive.css,
+   Florence Clavaud et Natalia Pashkeeva, 2014). Ce thème est écrit pour le
+   gabarit du site historique : la quasi-totalité de ses règles sont clefées sur
+   des conteneurs qui n'existent pas dans le HTML produit par la chaîne XSL DoTS
+   (`#content`, `#edition`, `#transcription`, `#facsimile`, `#main-menu`,
+   `#specific-menu-*`, `#text-menu`, `#years-list`…). Elles étaient donc inertes
+   pour le texte — mais pas pour l'application : App.vue injecte cette feuille
+   dans un <style id="customCss"> ajouté en dernier dans <head>, avec la
+   précédence maximale sur TOUTE la page. Sept sélecteurs repeignaient
+   l'interface dots-vue :
+     body ; header, nav, section, footer, article ; footer ; footer ul li ;
+     #main-menu ul, footer ul, #specific-menu-paratext ul, #text-menu ;
+     #main-menu ul li, footer ul li, #text-menu li ;
+     footer ul li a:link, footer ul li a:visited
+   (le pied de page de l'application était mis en page comme celui d'ÉLEC).
+
+   CE QUI EST CONSERVÉ
+   -------------------
+   La personnalité éditoriale d'ÉLEC Delescluze — rouge #A73136, Arial, titres
+   d'œuvres en italique, renvois d'index soulignés en pointillé, citations,
+   langues étrangères en italique, tableaux de comptes — reprise valeur pour
+   valeur, mais réécrite sur les classes que la XSL DoTS émet réellement
+   (`.title`, `.persName`, `.bibl`, `.noteref`, `.noteback`, `.edition note`,
+   `.head rubrique`, `.head page`, `.p noindent`, `.pb`, `.footnotes`) et
+   limitée à la zone de texte.
+
+   PORTÉE : `#main #article` est le conteneur émis par la chaîne XSL DoTS.
+   La page contient un SECOND `id="article"` (le sommaire de bas de page de
+   dots-vue) ; seul celui de la zone de texte est fils de `#main`.
+   ============================================================================ */
+
+
+/* --------------------------------------------------------------------------
+   1. Colonne de texte — theme/delescluze.css : body { Arial 14px, 133% }
+   -------------------------------------------------------------------------- */
+
+#main #article {
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.33;
+  color: #000;
+  max-width: 74rem;
+  margin: 0 auto;
+}
+
+#main #article p { text-align: justify; }
+#main #article p.noindent { text-indent: 0; }
+
+
+/* --------------------------------------------------------------------------
+   2. Titres — le rouge du site : #A73136
+   -------------------------------------------------------------------------- */
+
+#main #article h1,
+#main #article .head.rubrique {
+  /* 2026-09-14 : titre ramené au gris sombre commun (#202020), valeur mesurée sur la
+     majorité des corpus. Les LIENS et les appels de note gardent le #A73136 de l'ÉLEC :
+     là, le rouge porte une information (c'est cliquable), sur un titre il n'en porte
+     aucune. Demande : « les titres en rouge jsuis pas fan en vrai homogénéise ». */
+  color: #202020;
+  font-size: 150%;
+  font-weight: bold;
+  margin: 0 0 1em;
+  padding-top: .5em;
+}
+
+#main #article h2,
+#main #article .head.page {
+  /* 2026-09-14 : titre ramené au gris sombre commun (#202020), valeur mesurée sur la
+     majorité des corpus. Les LIENS et les appels de note gardent le #A73136 de l'ÉLEC :
+     là, le rouge porte une information (c'est cliquable), sur un titre il n'en porte
+     aucune. Demande : « les titres en rouge jsuis pas fan en vrai homogénéise ». */
+  color: #202020;
+  font-size: 115%;
+  font-weight: normal;
+  margin: 1.5em 0 .8em;
+}
+
+#main #article h3,
+#main #article h4 { font-size: 105%; font-weight: bold; margin: 1.2em 0 .6em; }
+
+#main #article h1 a,
+#main #article h2 a,
+#main #article h3 a,
+#main #article h4 a { color: inherit; }
+
+
+/* --------------------------------------------------------------------------
+   3. Liens du texte
+   ÉLEC : liens internes et renvois d'index en #A73136, liens externes en
+   #4A4A4A, renvois soulignés d'un pointillé.
+   -------------------------------------------------------------------------- */
+
+#main #article a { color: #A73136; text-decoration: none; font-weight: normal; }
+#main #article a:hover { font-weight: bold; }
+#main #article a[href^="http"]:not([href*="localhost"]) { color: #4A4A4A; }
+
+/* .persName-linked / .rs-linked sur ÉLEC ; la XSL DoTS sort .persName. */
+#main #article .persName-linked,
+#main #article .rs-linked,
+#main #article a .persName,
+#main #article .persName a { border-bottom: 1px dotted #A73136; }
+
+
+/* --------------------------------------------------------------------------
+   4. Micro-typographie éditoriale — theme/delescluze.css
+   -------------------------------------------------------------------------- */
+
+/* Titres d'œuvres : italique dans l'édition. */
+#main #article .title { font-style: italic; text-decoration: none; font-weight: inherit; }
+#main #article .title_underline { font-style: italic; text-decoration: underline; }
+#main #article .underline,
+#main #article em.underline { text-decoration: underline; font-weight: inherit; font-style: inherit; }
+
+/* Langues étrangères en italique. */
+#main #article :lang(lat),
+#main #article :lang(eng) { font-style: italic; }
+
+/* Références bibliographiques. */
+#main #article .bibl { display: inline; }
+#main #article .surname,
+#main #article .persName-st { font-variant: small-caps; }
+
+/* Citations. */
+#main #article .cit { display: block; margin: 8px 0; }
+#main #article blockquote { display: block; margin: .8em 0 .8em 1.5em; }
+
+/* Guillemets d'ÉLEC autour des titres de niveau analytique. */
+#main #article .level-a { font-style: normal; }
+#main #article .level-a::before { content: "\00AB\00A0"; }
+#main #article .level-a::after { content: "\00A0\00BB"; }
+
+/* Sauts de page. */
+#main #article .pb { font-style: normal; font-size: inherit; }
+
+/* Listes de l'édition. */
+#main #article .list,
+#main #article .listItem,
+#main #article .list .item { display: block; }
+
+
+/* --------------------------------------------------------------------------
+   5. Tableaux de comptes — theme/delescluze.css (.account)
+   -------------------------------------------------------------------------- */
+
+#main #article table.account { width: 50%; border: 1px solid #000; margin: 8px 0; }
+#main #article .account tr,
+#main #article .account tr td { border: 1px solid #000; }
+#main #article .account td:first-child { width: 50%; }
+
+
+/* --------------------------------------------------------------------------
+   6. Notes de bas de fragment
+   La XSL Delescluze sort les notes en fin de fragment ; ÉLEC les affichait dans
+   une colonne latérale (#edition-notes), impossible ici : on garde l'appel et
+   le retour dans la teinte du site.
+   -------------------------------------------------------------------------- */
+
+#main #article .noteref,
+#main #article .noteback { color: #A73136; }
+#main #article .noteAnchor { color: #97ADD1; font-weight: normal; text-decoration: none; }
+#main #article .footnotes { font-size: 90%; line-height: 1.2; }
+#main #article .footnotes p { margin: 0; text-indent: 0; text-align: justify; }
+
+#main #article a.bookmark { color: #ccc; border-bottom: none; }
+#main #article a.bookmark:hover { color: #A73136; }
+
+
+/* --------------------------------------------------------------------------
+   7. Fac-similés — theme/responsive.css
+   -------------------------------------------------------------------------- */
+
+#main #article img { max-width: 100%; height: auto; }
+
+@media screen and (min-width: 1280px) {
+  #main #article figure img { max-width: 250px; }
+}
+@media screen and (min-width: 1850px) {
+  #main #article figure img { max-width: 350px; }
+}
+#main #article figure figcaption { font-size: 80%; }
+
+
+/* --------------------------------------------------------------------------
+   8. États « Édition » / « Transcription » (autopilote 2026-09-11, B6)
+   Remplace la bascule JavaScript de l'ancien site (displaySection) :
+   deux boutons radio émis par la XSL en tête du contenu de chaque page.
+   Édition : formes régularisées, suppressions masquées.
+   Transcription : formes originales, suppressions barrées.
+   -------------------------------------------------------------------------- */
+
+#main #article .dl-mode { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+#main #article .dl-mode + label {
+  display: inline-block; margin: 0 .4rem .6rem 0; padding: .15rem .7rem;
+  border: 1px solid #A73136; border-radius: 3px; color: #A73136; background: #fff;
+  font: bold .85rem Arial, Helvetica, sans-serif; cursor: pointer;
+}
+#main #article .dl-mode:checked + label { background: #A73136; color: #fff; }
+#main #article .dl-mode:focus-visible + label { outline: 2px solid #A73136; outline-offset: 2px; }
+
+#main #article .dl-mode-ed:checked ~ .orig,
+#main #article .dl-mode-ed:checked ~ * .orig,
+#main #article .dl-mode-ed:checked ~ del,
+#main #article .dl-mode-ed:checked ~ * del { display: none; }
+#main #article .dl-mode-tr:checked ~ .reg,
+#main #article .dl-mode-tr:checked ~ * .reg { display: none; }
+#main #article .dl-mode-tr:checked ~ * del { text-decoration: line-through; }
+
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ==== D14d (2026-09-12, autopilote) : conformité au site ÉLEC historique ==== */
+/* 1. Cote du fac-similé sous l'image : l'ancien site l'affichait en <figcaption>
+      (« Archives nationales, 494AP/1, dossier 4 : carnet 1, page 5 »). */
+#main #article .facsimile-desc {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #555;
+}
+/* 2. Menu « Aller au mois » et intervalle de dates de la page (nav#months-list et
+      nav#pages-list de l'ancien site), émis par delescluze-edition.xsl depuis
+      transform/delescluze/delescluze-mois.xml. */
+#main #article .dl-page-nav { margin: 0.4rem 0 1.2rem; }
+#main #article .dl-page-dates {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+/* DoTS-vue impose `details > * { display: none }` (src/assets/css/html.css) : sans les deux
+   règles qui suivent, le menu est vide (même contournement que Bellelay). */
+#main #article details.dl-mois > summary { display: list-item; cursor: pointer; }
+/* restreint a [open] : sans cela la regle ecrase aussi le masquage natif de l'etat
+   ferme et la liste reste visible (mesure du 2026-09-12 : hauteur 346 px menu ferme) */
+#main #article details.dl-mois[open] > :not(summary) { display: block; }
+#main #article details.dl-mois > summary {
+  font-size: 0.9rem;
+  color: #A73136;
+  list-style: none;
+}
+#main #article details.dl-mois > summary::after { content: " ▾"; }
+#main #article details.dl-mois[open] > summary::after { content: " ▴"; }
+/* le display est porte par l'etat [open] ci-dessous : pose ici, il s'appliquait
+   AUSSI menu ferme et ecrasait le masquage natif du navigateur (mesure du
+   2026-09-12 : liste visible sur 54 px alors que le menu etait ferme) */
+#main #article ul.dl-mois-liste {
+  flex-wrap: wrap;
+  gap: 0.15rem 0.9rem;
+  margin: 0.4rem 0 0;
+  padding: 0.5rem 0.8rem;
+  list-style: none;
+  border: 1px solid #d8d2c8;
+  background: #faf8f5;
+  font-size: 0.9rem;
+}
+#main #article details.dl-mois[open] > ul.dl-mois-liste { display: flex; flex-wrap: wrap; }
+#main #article details.dl-mois:not([open]) > ul.dl-mois-liste { display: none; }
+#main #article ul.dl-mois-liste li { margin: 0; }
+#main #article ul.dl-mois-liste a { text-decoration: none; }
+#main #article ul.dl-mois-liste a:hover { text-decoration: underline; }
+#main #article ul.dl-mois-liste a[aria-current="page"] { font-weight: bold; color: #A73136; }
+/* ==== fin D14d ==== */
+/* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
+/* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
+   Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
+   au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
+   est conservée : elle est lue dans --text-color, avec un repli sur celle de DoTS. */
+.document-area #article:not(.bottom-toc),
+.document-area main {
+  --d12-accent: var(--text-color, #8f0e21);
+  --d12-encre: var(--document-text-color, #303030);
+  --d12-filet: #dcd8d3;
+  --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
+  --d12-fond-tres-doux: #fafafa;
+  --d12-rayon: var(--button-border-radius, 4px);
+}
+
+/* Texte : mesure de lecture régulière, encre et interligne de l'application.
+   La largeur est bornée parce qu'elle atteignait 1 184 px chez christofle
+   (mesuré le 2026-09-12), soit des lignes de plus de 130 caractères. 72rem est
+   la valeur déjà retenue par les corpus qui s'en étaient souciés (bellelay 72,
+   actesroyauxdupoitou 74) ; un corpus peut la surcharger après ce bloc. */
+.document-area #article:not(.bottom-toc) {
+  max-width: min(100%, 72rem);
+  margin-inline: auto;
+  color: var(--d12-encre);
+  font-size: var(--font-default-size, 16px);
+  /* 1.6 et non le jeton --font-default-line-heigth (1.4) : celui-ci est calibré pour
+     l'interface, et la comparaison avant/après du 2026-09-12 montrait l'interligne
+     tomber de 26,4 px à 22,4 px chez christofle, actesroyauxdupoitou, sanctoral_elec
+     et les testaments — trop serré pour de la prose éditoriale en serif. */
+  line-height: 1.6;
+}
+.document-area #article:not(.bottom-toc) p {
+  margin: 0 0 .9em;
+}
+
+/* Titres : famille secondaire de l'application, graisse tenue, accent sobre.
+   Pas de bandeau plein : un filet gauche, comme les blocs de DoTS. */
+.document-area #article:not(.bottom-toc) h1,
+.document-area #article:not(.bottom-toc) h2,
+.document-area #article:not(.bottom-toc) h3,
+.document-area #article:not(.bottom-toc) h4 {
+  color: #202020;
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .01em;
+}
+.document-area #article:not(.bottom-toc) h1 { font-size: 1.6rem; margin: 0 0 1rem; }
+.document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
+.document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
+.document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
+
+/* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
+.document-area #article:not(.bottom-toc) a {
+  color: var(--d12-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.document-area #article:not(.bottom-toc) a:hover,
+.document-area #article:not(.bottom-toc) a:focus-visible {
+  text-decoration: var(--text-decoration-hover, underline dotted);
+}
+.document-area #article:not(.bottom-toc) a:focus-visible {
+  outline: 2px solid var(--d12-accent);
+  outline-offset: 2px;
+}
+
+/* Tableaux : filets fins, en-tête sur fond doux, pas de quadrillage lourd. */
+.document-area #article:not(.bottom-toc) table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: .95em;
+}
+.document-area #article:not(.bottom-toc) th,
+.document-area #article:not(.bottom-toc) td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid var(--d12-filet);
+  text-align: left;
+  vertical-align: top;
+}
+.document-area #article:not(.bottom-toc) th {
+  background: var(--d12-fond-doux);
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+/* Un tableau large défile dans son cadre, la page ne défile jamais de côté. */
+.document-area #article:not(.bottom-toc) .table-wrap {
+  overflow-x: auto;
+}
+
+/* Citations, blocs éditoriaux, légendes. */
+.document-area #article:not(.bottom-toc) blockquote,
+.document-area #article:not(.bottom-toc) .citation {
+  margin: 1rem 0;
+  padding: .1rem 0 .1rem 1rem;
+  border-left: 3px solid var(--d12-filet);
+  color: #45403c;
+}
+.document-area #article:not(.bottom-toc) figcaption,
+.document-area #article:not(.bottom-toc) .legendeillustration {
+  color: #5a5450;
+  font-size: .85rem;
+  line-height: 1.4;
+}
+.document-area #article:not(.bottom-toc) hr {
+  height: 0;
+  margin: 1.6rem 0;
+  border: 0;
+  border-top: 1px solid var(--d12-filet);
+}
+
+/* Colonne de texte : elle prend la place disponible dans la rangée.
+   Pourquoi : sur une page COQUILLE — une unité non éditoriale, qui ne rend que son titre
+   (le `liber` de cjc, la `rubrique` paratextes de delescluze) — la colonne se rétractait
+   sur la largeur du titre : mesuré le 2026-09-12, 65 px chez cjc (« Livre I » coupé en deux
+   lignes) et 92 px chez delescluze, parent compris, la visionneuse occupant le reste de la
+   rangée. Même procédé que D11 pour le sommaire des enfants (`flex` sur l'enfant du
+   `wrapper`), et sans effet quand la page a du contenu.
+   La chaîne mesurée sur cjc : `#article` (65 px) ← `#main` (65) ← `.row.remove-bottom-padding`
+   (65, en `display:flex`) ← `.wrapper` (1 225 px). C'est donc la RANGÉE qui se rétracte, pas
+   `#article` : une première version de cette règle visait `.wrapper > #article` et ne pouvait
+   pas s'appliquer, `#article` n'étant pas enfant du `wrapper`. La visionneuse, elle, est en
+   `position: absolute` (500 px) et n'entre pas dans le calcul. */
+.document-area .wrapper > .row {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Images : jamais plus larges que la colonne. */
+.document-area #article:not(.bottom-toc) img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Contrôles éditoriaux (onglets, boutons, menus dépliants des corpus) : même
+   grammaire visuelle que les boutons de l'application — coins légers, filet fin,
+   accent réservé à l'état actif. */
+.document-area #article:not(.bottom-toc) button,
+.document-area #article:not(.bottom-toc) input[type="reset"],
+.document-area #article:not(.bottom-toc) input[type="submit"],
+.document-area #article:not(.bottom-toc) summary {
+  font-family: var(--font-primary, "Roboto"), Arial, Helvetica, sans-serif;
+  font-size: .9rem;
+}
+.document-area #article:not(.bottom-toc) input[type="reset"],
+.document-area #article:not(.bottom-toc) input[type="submit"],
+.document-area #article:not(.bottom-toc) button {
+  padding: .35rem .7rem;
+  border: 1px solid var(--d12-filet);
+  border-radius: var(--d12-rayon);
+  background: #fff;
+  color: var(--d12-encre);
+  cursor: pointer;
+}
+.document-area #article:not(.bottom-toc) input[type="reset"]:hover,
+.document-area #article:not(.bottom-toc) input[type="submit"]:hover,
+.document-area #article:not(.bottom-toc) button:hover {
+  border-color: var(--d12-accent);
+  color: var(--d12-accent);
+}
+
+/* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
+.document-area #article:not(.bottom-toc) .footnotes,
+.document-area #article:not(.bottom-toc) .apparatus,
+.document-area #article:not(.bottom-toc) .note {
+  font-size: var(--font-small-size, 14px);
+  line-height: 1.5;
+}
+.document-area #article:not(.bottom-toc) .footnotes {
+  margin-top: 2rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--d12-filet);
+}
+.document-area #article:not(.bottom-toc) a.noteref,
+.document-area #article:not(.bottom-toc) .noteref {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .document-area #article:not(.bottom-toc) h1 { font-size: 1.4rem; }
+  .document-area #article:not(.bottom-toc) h2 { font-size: 1.2rem; }
+  .document-area #article:not(.bottom-toc) table { font-size: .9em; }
+}
+/* ==== D12-SOCLE-FIN ==== */
+
+/* ==== 2026-09-12, 19:30 : les 39 lignes du menu déroulant « Aller à la lettre » ont été
+   RETIRÉES d'ici. Ce menu n'existe plus (l'utilisateur a demandé une table des matières à
+   gauche à la place), donc ses règles ne visaient plus aucun élément : elles ne faisaient que
+   masquer, par leur seule présence, l'endroit où se règle vraiment la colonne — voir
+   « table des matières des lettres » ci-dessous. La version d'avant est dans
+   `delescluze.customCss.css.bak_lettresnues_20260912`. ==== */
+
+/* ==== Repère de l'élément courant dans les menus (2026-09-12) ====
+   Trois tentatives ont échoué avant la bonne : `aria-current` sur l'ancre, une classe sur le
+   <li>, puis un second jeton de classe sur l'ancre — DoTS-vue réécrit les ancres internes, perd
+   `aria-current`, retire les classes des <li> et ne garde que le PREMIER jeton de classe des
+   <a>. Les règles qui visaient `a.dl-lettre-courante` / `a.dl-mois-courant` ont donc été
+   retirées le 2026-09-12 à 19:30 : plus aucune ancre ne porte ces classes, l'élément courant est
+   un <strong>, stylé juste en dessous. ==== */
+
+/* La lettre (ou le mois) courante est un <strong>, pas un lien : DoTS-vue normalise la classe
+   des ancres internes, donc aucun attribut ni classe ne survit sur un <a> ; un élément distinct,
+   lui, traverse la réécriture (mesuré le 2026-09-12). */
+#main #article ul.dl-mois-liste strong.dl-mois-courant {
+  color: #A73136;
+  font-weight: bold;
+}
+
+/* ==== 2026-09-12, 20:30 : les 60 lignes de la table des matières des lettres ont été RETIRÉES.
+   « en vrai enlève les lettre a b c d e c'est déjà dans la toc » — vérifié avant de retirer : le
+   sommaire de DoTS-vue liste les 19 unités « Index des personnes : lettre A » … « lettre V ».
+   La XSL n'émet plus aucune liste de lettres ; ces règles ne visaient donc plus rien.
+   Version précédente : delescluze.customCss.css.bak_lettresnues_20260912. ==== */
+
+/* ==== D18 (2026-09-12) : variantes de nom et identifiants d'autorité des notices ==== */
+#main #article .dl-noms-locaux { margin: .2rem 0; font-style: italic; }
+#main #article .dl-autorite { margin: .2rem 0; font-size: 92%; }
+#main #article .dl-autorite-libelle { color: #555; }
+#main #article .dl-autorite-lien { word-break: break-all; }
+/* ==== fin D18 ==== */

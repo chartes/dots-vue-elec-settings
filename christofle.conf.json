@@ -28,9 +28,9 @@
     "footerDescription": "Édition électronique du registre de Pierre Christofle, notaire du Châtelet d’Orléans."
   },
   "tableOfContentsSettings": {
-    "tableOfContentDepth": 2,
+    "tableOfContentDepth": 4,
     "editByLevel": 1,
-    "editByCiteType": ["Section", "Note", "Index des lieux et personnes", "Index des types d'actes"],
+    "editByCiteType": ["Section", "Note", "lettre", "Index des types d'actes"],
     "displayTopToc": true,
     "displayLeftToc": true
   },

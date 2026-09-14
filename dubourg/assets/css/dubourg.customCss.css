@@ -1,29 +1,5 @@
-:root { --fill-color:#74472f; --meta-area-fill-color:#f6f0eb; --default-text-color:#2c2521; }
-.document-area #article { font-family:Georgia,"Times New Roman",serif; line-height:1.65; max-width:74rem; margin:auto; }
-.document-area #article h1,.document-area #article h2,.document-area #article h3 { color:#74472f; font-family:Arial,Helvetica,sans-serif; }
-.document-area #article .transcription { background:#fcfaf7; border:1px solid #ddcfc3; padding:1.5rem; }
-.document-area #article .date,.document-area #article .placeName { color:#74472f; font-weight:600; }
-.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
-.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
-.description-section nav a:hover { background:var(--fill-color); color:white; }
-
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
+/* dubourg — CSS de collection créée le 2026-09-11 (dots-autopilot, tâche D11) pour ne porter que la règle ci-dessous.
+   Avant : aucune CSS de collection (clé collectionCustomCss absente de dubourg.conf.json). */
 
 /* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
 /* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral

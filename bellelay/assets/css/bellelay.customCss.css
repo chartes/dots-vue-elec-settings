@@ -1,14 +1,1606 @@
-/* La feuille du corpus (bellebay/css/bellelay.css) : elle vise les classes que
-   pose bellelay.xsl — .bellelay-edition, .bellelay-masthead, .bellelay-pages —
-   alors que la version qui était ici ne stylait que le conteneur générique du
-   visualiseur. On garde par-dessus les deux variables de couleur que l'app lit
-   pour son propre habillage. */
-:root { --text-color: #8b3028; --fill-color: #8b3028; }
+/* Bellelay — DoTS-vue, structure V8 (bellelay_site_v2) */
+:root { --text-color: #cf0b05; --fill-color: #cf0b05; }
 
-.bellelay-edition { --ink: #25211d; --paper: #fffdf7; --accent: #8b3028; --rule: #d9cfbb; max-width: 76rem; margin: 0 auto; padding: clamp(1.5rem, 4vw, 4rem); color: var(--ink); background: var(--paper); font: 1.08rem/1.7 Georgia, 'Times New Roman', serif; }
-.bellelay-masthead { margin-bottom: 3.5rem; padding: 2.25rem 0; border-block: 4px solid var(--accent); }
-.bellelay-kicker { margin: 0 0 .5rem; color: var(--accent); font: 600 .75rem/1.2 system-ui, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
-.bellelay-edition h1, .bellelay-edition h2, .bellelay-edition h3 { line-height: 1.15; color: var(--accent); }
-.bellelay-pages { margin: 1.5rem 0 3rem; padding: 1rem; border: 1px solid var(--rule); background: #f7f1e6; }.bellelay-pages ol { columns: 3 14rem; margin: 0; padding-left: 1.4rem; font: .82rem/1.45 system-ui, sans-serif; }.bellelay-pages li { break-inside: avoid; margin: .2rem 0; }.bellelay-edition .page { scroll-margin-top: 2rem; padding-top: 2rem; margin-top: 3rem; border-top: 1px solid var(--rule); }
-.bellelay-edition h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 4rem); }.bellelay-edition h2 { margin-top: 3.5rem; font-size: 2rem; }.bellelay-edition h3 { margin-top: 2.5rem; font-size: 1.4rem; }
-.bellelay-edition p, .bellelay-edition li { max-width: 72ch; }.bellelay-edition a { color: var(--accent); text-underline-offset: .18em; }.bellelay-edition figure { margin: 2rem auto; max-width: 60rem; }.bellelay-edition figure img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }.bellelay-edition figcaption, .bellelay-edition .note { font-size: .92rem; color: #5a5147; }.bellelay-edition .table-wrap { overflow-x: auto; margin: 2rem 0; }.bellelay-edition table { width: 100%; border-collapse: collapse; font-size: .9rem; }.bellelay-edition td { padding: .45rem .65rem; border: 1px solid var(--rule); vertical-align: top; }.bellelay-edition tr:first-child { font-weight: bold; background: #f3ecdc; }.bellelay-edition .note { margin: 1rem 0; padding: 1rem; border-left: 3px solid var(--accent); background: #f7f1e6; }
+#center { max-width: 100%; overflow-x: hidden; }
+
+.bellelay-edition { --red: #cf0b05; --ink: #111; --muted: #777; --line: #d8d8d8; width: 100%; margin: 0; padding: 0; color: var(--ink); background: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 17px; line-height: 1.48; }
+.bellelay-edition *, .bellelay-edition *::before, .bellelay-edition *::after { box-sizing: border-box; }
+
+/* ---- carte de la collection (page d'accueil DoTS-vue) ---- */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-list.mixed-mode { max-width: 74rem; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .resources-grid { display: block; }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card { max-width: 42rem; margin: 0 auto; border: 1px solid #d8d8d8; background: #fff; box-shadow: 0 10px 30px rgba(0, 0, 0, .08); }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line { display: block; padding: 1.25rem 1.5rem; color: #cf0b05; font: 700 1.35rem/1.25 Georgia, "Times New Roman", serif; text-align: center; text-decoration: none; }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line::after { content: "Accueil, introduction, étude générale, manuscrit, interventions, index et analyse"; display: block; margin-top: .65rem; color: #333; font: 400 1rem/1.45 Arial, Helvetica, sans-serif; }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus { color: #fff; background: #cf0b05; }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover::after,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus::after { color: #fff; }
+
+/* ---- bandeaux rouges (#titrepage historique) ---- */
+.bellelay-edition main { max-width: 74rem; margin: 0 auto; padding: 0 1.5rem 3rem; }
+.bellelay-edition .rubrique-bar,
+.bellelay-edition .page-bar { width: min(720px, 100%); margin: 1.5rem 0 1.25rem; padding: 4px 12px; color: #fff; background: var(--red); font-weight: 700; line-height: 1.25; }
+.bellelay-edition .page { margin: 0 0 2rem; scroll-margin-top: 90px; }
+.bellelay-edition .page + .page { border-top: 1px solid #ddd; padding-top: 1rem; }
+.bellelay-edition .page-inner { margin: 1.5rem 0 2.5rem; }
+
+.bellelay-edition h1, .bellelay-edition h2, .bellelay-edition h3, .bellelay-edition h4 { font-family: Georgia, "Times New Roman", serif; color: var(--ink); line-height: 1.25; }
+.bellelay-edition h1 { font-size: 28px; } .bellelay-edition h2 { font-size: 24px; } .bellelay-edition h3 { font-size: 21px; }
+.bellelay-edition p { margin: .55em 0 1em; }
+.bellelay-edition .texte { text-align: justify; }
+.bellelay-edition .citation { margin-left: 6%; margin-right: 6%; }
+.bellelay-edition .legendeillustration { text-align: center; font-family: Georgia, serif; }
+.bellelay-edition .puces { margin-left: 2em; }
+.bellelay-edition .author { text-align: right; }
+.bellelay-edition a { color: var(--red); }
+.bellelay-edition ul, .bellelay-edition ol { margin: 14px 0 22px 30px; }
+.bellelay-edition li { margin: 7px 0; }
+
+/* ---- sommaires de rubrique / sous-partie ---- */
+.bellelay-edition .bellelay-sommaire { margin: 1.5rem 0 0; padding: 1rem 0; border-top: 1px solid var(--line); }
+.bellelay-edition .bellelay-sommaire > ol { columns: 2 18rem; margin-left: 1.4rem; }
+.bellelay-edition .bellelay-sommaire li { break-inside: avoid; margin: .25rem 0; line-height: 1.35; }
+.bellelay-edition .bellelay-sommaire ol ol { columns: auto; margin: .3rem 0 .6rem 1.2rem; font-size: .95em; }
+
+/* ---- onglets, listes descriptives, navigation entre feuillets ---- */
+.bellelay-edition .tabs { display: flex; flex-wrap: wrap; margin: 0 0 26px; border-bottom: 1px solid #aaa; }
+.bellelay-edition .tab { padding: 5px 12px; border: 1px solid #aaa; border-bottom: 0; background: #f6f6f6; }
+.bellelay-edition .tab a { text-decoration: none; }
+.bellelay-edition .selected { font-weight: 700; }
+.bellelay-edition .description-list { display: grid; grid-template-columns: minmax(180px, 260px) 1fr; margin: 24px 0; border-top: 1px solid #ddd; }
+.bellelay-edition .description-list dt, .bellelay-edition .description-list dd { margin: 0; padding: 8px 10px; border-bottom: 1px solid #ddd; }
+.bellelay-edition .description-list dt { font-weight: 700; background: #fafafa; }
+.bellelay-edition .document-navigation, .bellelay-edition .feuillet-navigation { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin: 0 0 22px; }
+.bellelay-edition .current-folio { padding: 5px 12px; border: 1px solid #999; }
+.bellelay-edition .nav-link { display: inline-block; padding: 4px 10px; border: 1px solid #aaa; text-decoration: none; }
+.bellelay-edition .nav-link.previous::before { content: "← "; }
+.bellelay-edition .nav-link.next::after { content: " →"; }
+
+/* ---- feuillets du manuscrit ---- */
+.bellelay-edition .type-descriptionfeuillet, .bellelay-edition .type-descriptiondossier,
+.bellelay-edition .type-feuilletdossier, .bellelay-edition .type-interventionsfeuillet { overflow: auto; }
+.bellelay-edition .type-descriptionfeuillet { float: right; max-width: 46%; margin-left: 28px; }
+.bellelay-edition .feuillet { max-width: 70%; margin-left: 0; }
+.bellelay-edition .type-feuilletdossier { clear: both; }
+.bellelay-edition .tei-block::after { content: ""; display: block; clear: both; }
+
+/* ---- figures ---- */
+.bellelay-edition figure { max-width: 100%; margin: 22px auto; text-align: center; }
+.bellelay-edition figure img { max-width: 100%; height: auto; }
+.bellelay-edition .feuillet img { max-height: 850px; object-fit: contain; }
+.bellelay-edition figcaption { margin-top: 6px; color: #444; font: 15px/1.35 Georgia, serif; }
+.bellelay-edition .type-imagefeuillet, .bellelay-edition .imagefeuillet { text-align: center; }
+
+/* ---- image maps : taille naturelle pour que les zones restent justes ---- */
+.bellelay-edition .imagemap-wrap { display: block; max-width: 100%; overflow-x: auto; }
+.bellelay-edition img.has-image-map { max-width: none !important; max-height: none !important; width: auto; height: auto; cursor: crosshair; }
+.bellelay-edition .image-annotations { margin: 12px 0 24px; padding: 8px 12px; border: 1px solid #bbb; background: #fafafa; text-align: left; }
+.bellelay-edition .image-annotations summary { cursor: pointer; font-weight: 700; }
+.bellelay-edition .annotation-list li { scroll-margin-top: 90px; }
+.bellelay-edition .image-note { display: inline; }
+
+/* ---- pages de pièce (2026-09-11, D6) : sommaire de la pièce en menu déroulant
+   dans une colonne de droite (collant au défilement), contenu et image dans la
+   colonne de gauche, dans le flux (aucun flottant). Le sommaire est émis par
+   bellelay.xsl (<details class="piece-sommaire">) à la place des onglets. ---- */
+/* 2026-09-11 (demande de l'utilisateur) : sommaire de la pièce à GAUCHE, comme les tables des matières. */
+.bellelay-edition .type-reconstructed:has(> .piece-sommaire) {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  column-gap: 2rem;
+  align-items: start;
+}
+.bellelay-edition .type-reconstructed:has(> .piece-sommaire) > :not(.piece-sommaire) { grid-column: 2; min-width: 0; }
+.bellelay-edition .type-reconstructed > .piece-sommaire {
+  grid-column: 1;
+  grid-row: 1 / span 40;
+  position: sticky;
+  top: 90px;
+  padding: .5rem .9rem;
+  border: 1px solid #aaa;
+  border-top: 3px solid var(--red);
+  background: #f6f6f6;
+  font-size: .95em;
+}
+.bellelay-edition .piece-sommaire summary { cursor: pointer; font-weight: 700; color: var(--red); }
+.bellelay-edition .piece-sommaire ul { list-style: none; margin: .5rem 0 .2rem; padding: 0; }
+.bellelay-edition .piece-sommaire li { margin: .35rem 0; }
+.bellelay-edition .piece-sommaire li a { text-decoration: none; }
+.bellelay-edition .piece-sommaire li a:hover { text-decoration: underline; }
+.bellelay-edition .piece-sommaire li.selected a { color: var(--ink); font-weight: 700; }
+.bellelay-edition .type-reconstructed .feuillet,
+.bellelay-edition .type-reconstructed figure { float: none; margin-left: 0; margin-right: auto; }
+.bellelay-edition .type-reconstructed .imagemap-wrap { max-width: 100%; overflow-x: auto; }
+/* DoTS-vue injecte une règle globale `details > * { display: none }` (+ `details summary
+   { display: inherit }`) : sans ceci, tout <details> des fragments est vide (sommaire de
+   la pièce, annotations d'images, formulaires). Le navigateur masque toujours le contenu
+   d'un <details> fermé ; `.choice-links` (plus spécifique) garde sa grille. */
+.bellelay-edition details > summary { display: list-item; }
+.bellelay-edition details > :not(summary) { display: block; }
+
+@media (max-width: 850px) {
+  .bellelay-edition .type-reconstructed:has(> .piece-sommaire) { display: block; }
+  .bellelay-edition .type-reconstructed > .piece-sommaire { position: static; margin: 0 0 1.2rem; }
+}
+
+/* ---- anciens formulaires ---- */
+.bellelay-edition .legacy-form { margin: 25px 4%; padding: 14px 18px; border: 1px solid #444; }
+.bellelay-edition .form-choice { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; margin: 7px 0; }
+.bellelay-edition .form-choice summary { padding: 3px 9px; border: 1px solid #aaa; background: #fff; cursor: pointer; }
+.bellelay-edition .choice-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 3px; min-width: min(650px, 80vw); max-height: 340px; overflow: auto; padding: 8px; border: 1px solid #bbb; background: #fff; }
+.bellelay-edition .choice-links a { padding: 3px 5px; }
+.bellelay-edition .legacy-input { display: inline-block; min-width: 150px; min-height: 28px; border: 1px solid #aaa; }
+
+/* ---- tableaux (index du manuscrit, interventions) ---- */
+.bellelay-edition .table-wrap { overflow-x: auto; margin: 20px 0 34px; }
+.bellelay-edition table { width: 100%; border-collapse: collapse; background: #fff; }
+.bellelay-edition caption { margin: 0 0 7px; font-weight: 700; text-align: left; }
+.bellelay-edition th, .bellelay-edition td { padding: 3px 8px; border: 1px solid #333; text-align: center; vertical-align: middle; }
+.bellelay-edition th { font-weight: 700; }
+
+/* ---- notes ---- */
+.bellelay-edition .note, .bellelay-edition .type-notes { font: 16px/1.45 Georgia, serif; }
+.bellelay-edition .unresolved { text-decoration: underline dotted; text-underline-offset: 3px; }
+.bellelay-edition .footnote-call { position: relative; margin-left: 1px; font-size: .75em; line-height: 0; vertical-align: super; text-decoration: none; }
+.bellelay-edition .footnote-call[data-tip]:hover::after,
+.bellelay-edition .footnote-call[data-tip]:focus-visible::after { content: attr(data-tip); position: absolute; top: 1.6em; left: 0; z-index: 50; width: min(28rem, 80vw); padding: .55rem .75rem; border: 1px solid #555; background: #fffbe8; color: #111; box-shadow: 0 4px 18px rgba(0, 0, 0, .22); font: 15px/1.35 Georgia, "Times New Roman", serif; white-space: normal; text-align: left; }
+.bellelay-edition .footnote-back { margin-right: .25em; font-weight: 700; }
+
+/* ---- loupes : exemples affichés / masqués au clic ---- */
+.bellelay-edition .toggle-control { cursor: zoom-in; }
+.bellelay-edition .toggle-control img { border: 0; vertical-align: middle; }
+.bellelay-edition .toggle-cb { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.bellelay-edition .toggle-target { display: none; }
+.bellelay-edition .toggle-cb:checked + .toggle-target { display: inline; }
+.bellelay-edition .toggle-target img { margin: 0 4px; vertical-align: middle; }
+.bellelay-edition .tei-anchor { display: inline; }
+
+/* ---- page d'accueil : logos partenaires ---- */
+.bellelay-edition #legacy-index .type-list-group ul { margin-left: 0; padding: 0; list-style: none; text-align: center; }
+.bellelay-edition #legacy-index .type-list-group li { display: inline-block; margin: 5px 12px; }
+.bellelay-edition #legacy-index .type-list-group img { width: auto; max-height: 95px; }
+
+@media (max-width: 850px) {
+  .bellelay-edition { font-size: 16px; }
+  .bellelay-edition main { padding: 0 .75rem 2rem; }
+  .bellelay-edition .type-descriptionfeuillet { float: none; max-width: none; margin-left: 0; }
+  .bellelay-edition .feuillet { max-width: 100%; }
+  .bellelay-edition .description-list { grid-template-columns: 1fr; }
+  .bellelay-edition .description-list dt { border-bottom: 0; }
+  .bellelay-edition .legacy-form { margin-left: 0; margin-right: 0; }
+  .bellelay-edition .bellelay-sommaire > ol { columns: auto; }
+}
+
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D9 filtres de l'index du manuscrit — généré par dots-autopilot/scripts/bellelay_index_filters_css.py, ne pas modifier à la main ==== */
+/* D10 : panneau de recherche (charte Bellelay : bandeau rouge, Georgia) */
+.bellelay-edition .idx-filters { margin: 1.25rem 0 1rem; padding: 0; border: 1px solid var(--line); background: #fff; }
+.bellelay-edition .idx-filters p { text-indent: 0; }
+.bellelay-edition .idx-filters-intro { margin: 0; padding: 4px 12px; color: #fff; background: var(--red); font-weight: 700; line-height: 1.25; }
+.bellelay-edition .idx-filters-body { padding: .9rem 1rem 1rem; }
+.bellelay-edition .idx-filters-aide { margin: 0 0 .8rem; color: var(--muted); font-size: .88rem; }
+.bellelay-edition .idx-filters-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; align-items: start; }
+.bellelay-edition .idx-filter { min-width: 0; }
+.bellelay-edition .idx-filter > summary { position: relative; display: flex; flex-direction: column; gap: 1px; padding: .4rem 2.2rem .45rem .75rem; border: 1px solid #b9b9b9; border-radius: 3px; background: #fff; cursor: pointer; list-style: none; }
+.bellelay-edition .idx-filter > summary::-webkit-details-marker { display: none; }
+.bellelay-edition .idx-filter > summary::after { content: "\25BE"; position: absolute; top: 50%; right: .8rem; transform: translateY(-50%); color: var(--red); }
+.bellelay-edition .idx-filter[open] > summary::after { content: "\25B4"; }
+.bellelay-edition .idx-filter > summary:hover, .bellelay-edition .idx-filter[open] > summary { border-color: var(--red); }
+.bellelay-edition .idx-filter-nom, .bellelay-edition .idx-lettres-titre { color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.bellelay-edition .idx-valeur { overflow: hidden; color: var(--ink); font: 1rem/1.3 Georgia, "Times New Roman", serif; white-space: nowrap; text-overflow: ellipsis; }
+.bellelay-edition .idx-filter:has(input:checked:not([value="__tous__"])) > summary { border-color: var(--red); box-shadow: inset 4px 0 0 var(--red); }
+.bellelay-edition .idx-filter:has(input:checked:not([value="__tous__"])) .idx-tous { display: none; }
+.bellelay-edition .idx-filter:has(input:checked:not([value="__tous__"])) .idx-valeur { color: var(--red); font-weight: 700; }
+/* Menu ouvert = tiroir pleine largeur sous la rangée des menus (dans le flux : il pousse la suite au lieu de la
+   recouvrir, un <details> ne se fermant pas au clic extérieur) ; largeur = 3 colonnes + 2 gouttières. */
+.bellelay-edition .idx-filter > .idx-options { box-sizing: border-box; width: calc(300% + 1.5rem); max-height: 22rem; margin-top: 6px; overflow: auto; padding: .45rem .6rem; border: 1px solid #bbb; border-top: 3px solid var(--red); background: #fff; columns: 12rem; column-gap: 1rem; }
+.bellelay-edition .idx-filter-fete > .idx-options { margin-left: calc(-100% - .75rem); }
+.bellelay-edition .idx-filter-mode > .idx-options { margin-left: calc(-200% - 1.5rem); columns: 6rem; }
+.bellelay-edition .idx-options label { display: flex; gap: .45rem; align-items: baseline; padding: 3px 6px; border-radius: 2px; cursor: pointer; font: .95rem/1.3 Georgia, "Times New Roman", serif; break-inside: avoid; }
+.bellelay-edition .idx-options label:hover { background: #f6e4e3; }
+.bellelay-edition .idx-options label:has(input:checked) { color: var(--red); font-weight: 700; }
+.bellelay-edition .idx-options input { flex: none; accent-color: var(--red); }
+/* 2026-09-12 : les styles des deux menus d'incipit retirés (barre des lettres initiales, sous-menus
+   de deux lettres, liste des mots) ont été supprimés d'ici — ils ne visaient plus aucun élément.
+   Seul `.idx-lettres-titre` reste utilisé : c'est l'étiquette du champ Incipit ci-dessous. */
+.bellelay-edition .idx-lettres-titre { margin: 0 0 .35rem; }
+.bellelay-edition .idx-options .idx-n { color: var(--muted); font-size: .85em; }
+/* 2026-09-12 : champ « Incipit », comme celui de l'ancien formulaire (<input type="text" size="50">).
+   Le filtrage est immédiat, porté par un gestionnaire en attribut dans bellelay.xsl (mesuré : Vue
+   ignore les <script> d'un fragment mais conserve `oninput`, qui s'exécute). Le gestionnaire pose
+   data-txt="0" sur les lignes écartées ; c'est la règle ci-dessous qui les masque, de sorte que le
+   champ se combine avec les trois menus exactement comme eux (une ligne est masquée dès qu'un
+   critère actif ne la retient pas). */
+.bellelay-edition .idx-incipit { display: flex; flex-wrap: wrap; gap: .45rem .9rem; align-items: baseline; margin-top: .9rem; }
+.bellelay-edition .idx-incipit-champ { flex: 1 1 20rem; min-width: 0; padding: .34rem .6rem; border: 1px solid #b9b9b9; border-radius: 3px; background: #fff; color: var(--ink); font: 1rem/1.3 Georgia, "Times New Roman", serif; }
+.bellelay-edition .idx-incipit-champ::placeholder { color: #999; font-style: italic; }
+.bellelay-edition .idx-incipit-champ:hover { border-color: var(--red); }
+.bellelay-edition .idx-incipit-champ:focus { border-color: var(--red); outline: 2px solid #f6e4e3; outline-offset: 0; }
+.bellelay-edition .idx-incipit-champ:not(:placeholder-shown) { border-color: var(--red); box-shadow: inset 4px 0 0 var(--red); }
+.bellelay-edition .idx-incipit-aide { flex: 1 1 100%; color: var(--muted); font-size: .85rem; }
+#legacy-indexmanuscrit tr.index-entry[data-txt="0"] { display: none; }
+/* 2026-09-12 : cascade entre critères. Le gestionnaire du formulaire pose `data-off` sur les
+   options qu'aucune pièce retenue ne porte ; elles sont retirées du menu. La note n'apparaît
+   que lorsqu'un critère est actif. */
+.bellelay-edition .idx-filters label.idx-opt[data-off] { display: none; }
+.bellelay-edition .idx-cascade-note { display: none; margin: .55rem 0 0; color: var(--muted); font-size: .85rem; }
+.bellelay-edition .idx-filters:has(.idx-filter input:checked:not([value="__tous__"])) .idx-cascade-note { display: block; }
+.bellelay-edition .idx-filters:has(.idx-filter input:checked:not([value="__tous__"])) .idx-cascade-note::before { content: "\21B3"; margin-right: .4rem; color: var(--red); }
+/* D10 : actions, message d'attente, nombre de pièces affichées */
+.bellelay-edition .idx-actions { display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; align-items: center; margin-top: .9rem; padding-top: .75rem; border-top: 1px solid var(--line); }
+.bellelay-edition .idx-voir { display: inline-flex; gap: .4rem; align-items: center; cursor: pointer; }
+.bellelay-edition .idx-voir input { accent-color: var(--red); }
+.bellelay-edition .idx-reset { padding: .3rem .8rem; border: 1px solid var(--red); border-radius: 3px; background: #fff; color: var(--red); font: inherit; cursor: pointer; }
+.bellelay-edition .idx-reset:hover { background: var(--red); color: #fff; }
+.bellelay-edition .idx-search { margin-left: auto; }
+/* 2026-09-12 : le message « aucun incipit » apparaît quand le gestionnaire du champ n'a rien
+   retenu (il pose data-sans-resultat sur le formulaire ; le CSS ne sait pas compter les lignes
+   visibles). Sélecteur de frère : le message suit immédiatement le formulaire. */
+.bellelay-edition .idx-filters[data-sans-resultat="1"] ~ .idx-vide { display: block; }
+.bellelay-edition .idx-vide { display: none; margin: 0 0 1.5rem; padding: .9rem 1rem; border-left: 4px solid var(--red); background: #f7f7f7; color: #444; font: italic 1.02rem/1.45 Georgia, "Times New Roman", serif; text-indent: 0; }
+#legacy-indexmanuscrit { counter-reset: idx-pieces; }
+#legacy-indexmanuscrit tr.index-entry { counter-increment: idx-pieces; }
+.bellelay-edition .idx-compte { position: sticky; bottom: 0; z-index: 5; width: fit-content; margin: -1.4rem 0 1.5rem; padding: .3rem .8rem; background: var(--red); color: #fff; font-weight: 700; text-indent: 0; }
+.bellelay-edition .idx-compte::before { content: counter(idx-pieces) " "; }
+/* Liens « Pièces suivantes » du TEI d'origine : ils visent la page elle-même (la pagination de
+   l'ancien site était côté serveur), donc masqués — la pagination fonctionnelle est ci-dessous. */
+#legacy-indexmanuscrit .type-content > p:has(> a[href$="refId=legacy-indexmanuscrit"]:only-child) { display: none; }
+/* 2026-09-12 : pagination par 50, comme l'ancien site (sa page ouvre sur 50 pièces et propose
+   « Pièces suivantes »). Un bouton radio par page, invisible ; un seul état de pagination
+   affiché, celui de la page cochée. Les règles qui montrent les 50 lignes de la page et l'état
+   correspondant sont générées plus bas, et ne s'appliquent QUE si aucun filtre n'est choisi. */
+.bellelay-edition .idx-page-radio { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.bellelay-edition .idx-pager { display: none; flex-wrap: wrap; gap: .4rem 1.2rem; align-items: baseline; margin: .9rem 0 0; padding-top: .75rem; border-top: 1px solid var(--line); }
+.bellelay-edition .idx-pager-etat { display: none; flex-wrap: wrap; gap: .4rem 1.2rem; align-items: baseline; width: 100%; }
+.bellelay-edition .idx-pager-pos { color: var(--muted); font: .92rem/1.3 Georgia, "Times New Roman", serif; }
+.bellelay-edition .idx-pager-lien { color: var(--red); cursor: pointer; font: 1rem/1.3 Georgia, "Times New Roman", serif; text-decoration: underline; text-underline-offset: 2px; }
+.bellelay-edition .idx-pager-lien:hover { color: #5f1612; }
+.bellelay-edition .idx-pager-suiv { margin-left: auto; }
+.bellelay-edition .idx-page-radio:focus-visible + .idx-pager .idx-pager-lien { outline: 2px solid #1a4f9c; outline-offset: 2px; }
+@media (max-width: 760px) {
+  .bellelay-edition .idx-filters-row { grid-template-columns: 1fr; }
+  .bellelay-edition .idx-filter > .idx-options, .bellelay-edition .idx-filter-fete > .idx-options, .bellelay-edition .idx-filter-mode > .idx-options { width: auto; max-height: 18rem; margin-left: 0; columns: auto; }
+  .bellelay-edition .idx-search { margin-left: 0; }
+}
+.idx-filters:has(input[name="idx-genre"][value="Introït"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Introït"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Introït"]:checked) .idx-filter-genre .idx-valeur::after { content: "Introït"; }
+.idx-filters:has(input[name="idx-genre"][value="Graduel"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Graduel"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Graduel"]:checked) .idx-filter-genre .idx-valeur::after { content: "Graduel"; }
+.idx-filters:has(input[name="idx-genre"][value="Alleluia"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Alleluia"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Alleluia"]:checked) .idx-filter-genre .idx-valeur::after { content: "Alleluia"; }
+.idx-filters:has(input[name="idx-genre"][value="Séquence"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Séquence"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Séquence"]:checked) .idx-filter-genre .idx-valeur::after { content: "Séquence"; }
+.idx-filters:has(input[name="idx-genre"][value="Trait"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Trait"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Trait"]:checked) .idx-filter-genre .idx-valeur::after { content: "Trait"; }
+.idx-filters:has(input[name="idx-genre"][value="Offertoire"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Offertoire"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Offertoire"]:checked) .idx-filter-genre .idx-valeur::after { content: "Offertoire"; }
+.idx-filters:has(input[name="idx-genre"][value="Communion"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Communion"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Communion"]:checked) .idx-filter-genre .idx-valeur::after { content: "Communion"; }
+.idx-filters:has(input[name="idx-genre"][value="Antienne"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Antienne"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Antienne"]:checked) .idx-filter-genre .idx-valeur::after { content: "Antienne"; }
+.idx-filters:has(input[name="idx-genre"][value="Hymne"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Hymne"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Hymne"]:checked) .idx-filter-genre .idx-valeur::after { content: "Hymne"; }
+.idx-filters:has(input[name="idx-genre"][value="Impropère"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Impropère"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Impropère"]:checked) .idx-filter-genre .idx-valeur::after { content: "Impropère"; }
+.idx-filters:has(input[name="idx-genre"][value="Varia"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Varia"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Varia"]:checked) .idx-filter-genre .idx-valeur::after { content: "Varia"; }
+.idx-filters:has(input[name="idx-genre"][value="Kyrie"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Kyrie"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Kyrie"]:checked) .idx-filter-genre .idx-valeur::after { content: "Kyrie"; }
+.idx-filters:has(input[name="idx-genre"][value="Gloria"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Gloria"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Gloria"]:checked) .idx-filter-genre .idx-valeur::after { content: "Gloria"; }
+.idx-filters:has(input[name="idx-genre"][value="Sanctus"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Sanctus"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Sanctus"]:checked) .idx-filter-genre .idx-valeur::after { content: "Sanctus"; }
+.idx-filters:has(input[name="idx-genre"][value="Agnus Dei"]:checked) ~ .table-wrap tr.index-entry:not([data-genre="Agnus Dei"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="Agnus Dei"]:checked) .idx-filter-genre .idx-valeur::after { content: "Agnus Dei"; }
+.idx-filters:has(input[name="idx-fete"][value=""]:checked) ~ .table-wrap tr.index-entry:not([data-fete=""]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value=""]:checked) .idx-filter-fete .idx-valeur::after { content: "(non renseigné)"; }
+.idx-filters:has(input[name="idx-fete"][value="Ad Missam Sab. Sancto"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Ad Missam Sab. Sancto"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Ad Missam Sab. Sancto"]:checked) .idx-filter-fete .idx-valeur::after { content: "Ad Missam Sab. Sancto"; }
+.idx-filters:has(input[name="idx-fete"][value="Ad proc. Adv."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Ad proc. Adv."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Ad proc. Adv."]:checked) .idx-filter-fete .idx-valeur::after { content: "Ad proc. Adv."; }
+.idx-filters:has(input[name="idx-fete"][value="Ad vincula S. Petri"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Ad vincula S. Petri"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Ad vincula S. Petri"]:checked) .idx-filter-fete .idx-valeur::after { content: "Ad vincula S. Petri"; }
+.idx-filters:has(input[name="idx-fete"][value="Ad. pro. Dom. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Ad. pro. Dom. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Ad. pro. Dom. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Ad. pro. Dom. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Annunt. S. Mariae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Annunt. S. Mariae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Annunt. S. Mariae"]:checked) .idx-filter-fete .idx-valeur::after { content: "Annunt. S. Mariae"; }
+.idx-filters:has(input[name="idx-fete"][value="Ascens. Dni"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Ascens. Dni"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Ascens. Dni"]:checked) .idx-filter-fete .idx-valeur::after { content: "Ascens. Dni"; }
+.idx-filters:has(input[name="idx-fete"][value="Aspersione aquae Dom. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Aspersione aquae Dom. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Aspersione aquae Dom. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Aspersione aquae Dom. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Assumpt. S. Mariae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Assumpt. S. Mariae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Assumpt. S. Mariae"]:checked) .idx-filter-fete .idx-valeur::after { content: "Assumpt. S. Mariae"; }
+.idx-filters:has(input[name="idx-fete"][value="Cant. in Sab. Sancto"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Cant. in Sab. Sancto"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Cant. in Sab. Sancto"]:checked) .idx-filter-fete .idx-valeur::after { content: "Cant. in Sab. Sancto"; }
+.idx-filters:has(input[name="idx-fete"][value="Cathedra S. Petri"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Cathedra S. Petri"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Cathedra S. Petri"]:checked) .idx-filter-fete .idx-valeur::after { content: "Cathedra S. Petri"; }
+.idx-filters:has(input[name="idx-fete"][value="Confessor vel Pontifices"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Confessor vel Pontifices"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Confessor vel Pontifices"]:checked) .idx-filter-fete .idx-valeur::after { content: "Confessor vel Pontifices"; }
+.idx-filters:has(input[name="idx-fete"][value="Confessor [ ]"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Confessor [ ]"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Confessor [ ]"]:checked) .idx-filter-fete .idx-valeur::after { content: "Confessor [ ]"; }
+.idx-filters:has(input[name="idx-fete"][value="De Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="De Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="De Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "De Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="De circulo anni"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="De circulo anni"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="De circulo anni"]:checked) .idx-filter-fete .idx-valeur::after { content: "De circulo anni"; }
+.idx-filters:has(input[name="idx-fete"][value="De Trinitate"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="De Trinitate"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="De Trinitate"]:checked) .idx-filter-fete .idx-valeur::after { content: "De Trinitate"; }
+.idx-filters:has(input[name="idx-fete"][value="Decolla. S. Joannis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Decolla. S. Joannis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Decolla. S. Joannis"]:checked) .idx-filter-fete .idx-valeur::after { content: "Decolla. S. Joannis"; }
+.idx-filters:has(input[name="idx-fete"][value="Dedicat. Ecclesiae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dedicat. Ecclesiae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dedicat. Ecclesiae"]:checked) .idx-filter-fete .idx-valeur::after { content: "Dedicat. Ecclesiae"; }
+.idx-filters:has(input[name="idx-fete"][value="Divisione Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Divisione Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Divisione Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "Divisione Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. I Adv."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. I Adv."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. I Adv."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. I Adv."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. I p. Epiph."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. I p. Epiph."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. I p. Epiph."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. I p. Epiph."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. I p. Nat. Dni"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. I p. Nat. Dni"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. I p. Nat. Dni"]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. I p. Nat. Dni"; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. I p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. I p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. I p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. I p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II Adv."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. II Adv."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II Adv."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. II Adv."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II p. Epiph."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. II p. Epiph."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II p. Epiph."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. II p. Epiph."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II p. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. II p. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II p. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. II p. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. II p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. II p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. II Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. II Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. II Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III Adv."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. III Adv."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III Adv."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. III Adv."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III p. Epiph."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. III p. Epiph."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III p. Epiph."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. III p. Epiph."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III p. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. III p. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III p. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. III p. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. III p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. III p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. III Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. III Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. III Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Palmis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. in Palmis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Palmis"]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. in Palmis"; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Quadragesima"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. in Quadragesima"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Quadragesima"]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. in Quadragesima"; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Quinquagesima"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. in Quinquagesima"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Quinquagesima"]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. in Quinquagesima"; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Septuagesima"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. in Septuagesima"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Septuagesima"]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. in Septuagesima"; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Sexagesima"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. in Sexagesima"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. in Sexagesima"]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. in Sexagesima"; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IV Adv."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. IV Adv."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IV Adv."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. IV Adv."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IV p. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. IV p. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IV p. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. IV p. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IV p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. IV p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IV p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. IV p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IV Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. IV Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IV Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. IV Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IX p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. IX p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. IX p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. IX p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. Oct. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. Oct. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. Oct. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. Oct. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. p. Ascens."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. p. Ascens."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. p. Ascens."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. p. Ascens."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. V p. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. V p. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. V p. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. V p. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. V p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. V p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. V p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. V p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. V Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. V Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. V Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. V Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. VI p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. VI p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. VI p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. VI p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. VII p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. VII p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. VII p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. VII p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. VIII p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. VIII p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. VIII p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. VIII p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. X p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. X p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. X p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. X p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XI p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XI p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XI p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XI p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XII p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XII p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XII p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XII p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XIII p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XIII p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XIII p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XIII p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XIV p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XIV p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XIV p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XIV p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XIX p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XIX p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XIX p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XIX p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XV p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XV p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XV p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XV p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XVI p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XVI p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XVI p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XVI p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XVII p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XVII p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XVII p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XVII p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XVIII p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XVIII p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XVIII p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XVIII p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XX p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XX p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XX p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XX p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XXI p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XXI p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XXI p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XXI p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XXII p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XXII p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XXII p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XXII p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XXIII p. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Dom. XXIII p. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Dom. XXIII p. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Dom. XXIII p. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Epiphania"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Epiphania"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Epiphania"]:checked) .idx-filter-fete .idx-valeur::after { content: "Epiphania"; }
+.idx-filters:has(input[name="idx-fete"][value="Exaltat. S. Crucis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Exaltat. S. Crucis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Exaltat. S. Crucis"]:checked) .idx-filter-fete .idx-valeur::after { content: "Exaltat. S. Crucis"; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. I Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Hebd. I Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. I Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Hebd. I Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. II Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Hebd. II Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. II Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Hebd. II Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. III Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Hebd. III Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. III Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Hebd. III Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. IV Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Hebd. IV Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. IV Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Hebd. IV Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. V Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Hebd. V Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Hebd. V Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Hebd. V Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Oct. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Oct. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Oct. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Oct. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Sanc. Hebd."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. II Sanc. Hebd."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. II Sanc. Hebd."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. II Sanc. Hebd."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. I Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Hebd. I Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. I Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Hebd. I Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. II Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Hebd. II Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. II Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Hebd. II Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. III Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Hebd. III Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. III Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Hebd. III Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. IV Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Hebd. IV Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. IV Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Hebd. IV Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. V Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Hebd. V Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Hebd. V Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Hebd. V Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Oct. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Oct. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Oct. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Oct. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Sanc. Hebd."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. III Sanc. Hebd."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. III Sanc. Hebd."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. III Sanc. Hebd."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Cin."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Cin."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Cin."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Cin."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Hebd. II Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Hebd. II Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Hebd. II Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Hebd. II Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Hebd. III Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Hebd. III Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Hebd. III Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Hebd. III Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Hebd. IV Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Hebd. IV Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Hebd. IV Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Hebd. IV Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Hebd. V Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Hebd. V Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Hebd. V Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Hebd. V Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Oct. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Oct. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Oct. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Oct. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Q. T. Adv."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Q. T. Adv."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Q. T. Adv."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Q. T. Adv."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Q. T. Sept."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Q. T. Sept."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Q. T. Sept."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Q. T. Sept."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Q.T. Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Q.T. Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Q.T. Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Q.T. Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Sanc. Hebd."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. IV Sanc. Hebd."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. IV Sanc. Hebd."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. IV Sanc. Hebd."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Cena Domini"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Cena Domini"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Cena Domini"]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Cena Domini"; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. I Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Hebd. I Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. I Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Hebd. I Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. II Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Hebd. II Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. II Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Hebd. II Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. III Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Hebd. III Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. III Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Hebd. III Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. IV Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Hebd. IV Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. IV Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Hebd. IV Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. V Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Hebd. V Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Hebd. V Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Hebd. V Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Oct. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Oct. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Oct. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Oct. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V p. Cin."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V p. Cin."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V p. Cin."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V p. Cin."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. V Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. V Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. V Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Hebd. II Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Hebd. II Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Hebd. II Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Hebd. II Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Hebd. III Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Hebd. III Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Hebd. III Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Hebd. III Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Hebd. IV Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Hebd. IV Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Hebd. IV Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Hebd. IV Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Hebd. V Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Hebd. V Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Hebd. V Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Hebd. V Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI in Parasceve"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI in Parasceve"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI in Parasceve"]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI in Parasceve"; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Oct. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Oct. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Oct. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Oct. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI p. Cin."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI p. Cin."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI p. Cin."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI p. Cin."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Q. T. Adv."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Q. T. Adv."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Q. T. Adv."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Q. T. Adv."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Q. T. Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Q. T. Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Q. T. Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Q. T. Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Q. T. Sept."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Fer. VI Q. T. Sept."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Fer. VI Q. T. Sept."]:checked) .idx-filter-fete .idx-valeur::after { content: "Fer. VI Q. T. Sept."; }
+.idx-filters:has(input[name="idx-fete"][value="Grecum ad crucem adorandam"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Grecum ad crucem adorandam"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Grecum ad crucem adorandam"]:checked) .idx-filter-fete .idx-valeur::after { content: "Grecum ad crucem adorandam"; }
+.idx-filters:has(input[name="idx-fete"][value="In circumc. Dni"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="In circumc. Dni"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="In circumc. Dni"]:checked) .idx-filter-fete .idx-valeur::after { content: "In circumc. Dni"; }
+.idx-filters:has(input[name="idx-fete"][value="Inventio S. Stephani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Inventio S. Stephani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Inventio S. Stephani"]:checked) .idx-filter-fete .idx-valeur::after { content: "Inventio S. Stephani"; }
+.idx-filters:has(input[name="idx-fete"][value="Missa in rogationibus"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Missa in rogationibus"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Missa in rogationibus"]:checked) .idx-filter-fete .idx-valeur::after { content: "Missa in rogationibus"; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Dni I"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Nat. Dni I"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Dni I"]:checked) .idx-filter-fete .idx-valeur::after { content: "Nat. Dni I"; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Dni II"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Nat. Dni II"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Dni II"]:checked) .idx-filter-fete .idx-valeur::after { content: "Nat. Dni II"; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Dni III"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Nat. Dni III"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Dni III"]:checked) .idx-filter-fete .idx-valeur::after { content: "Nat. Dni III"; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Innocentum"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Nat. Innocentum"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Innocentum"]:checked) .idx-filter-fete .idx-valeur::after { content: "Nat. Innocentum"; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Plur. Martyrium"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Nat. Plur. Martyrium"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Nat. Plur. Martyrium"]:checked) .idx-filter-fete .idx-valeur::after { content: "Nat. Plur. Martyrium"; }
+.idx-filters:has(input[name="idx-fete"][value="Oct. s. Laurentii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Oct. s. Laurentii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Oct. s. Laurentii"]:checked) .idx-filter-fete .idx-valeur::after { content: "Oct. s. Laurentii"; }
+.idx-filters:has(input[name="idx-fete"][value="Oct. SS. Apost. Petri et Pauli"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Oct. SS. Apost. Petri et Pauli"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Oct. SS. Apost. Petri et Pauli"]:checked) .idx-filter-fete .idx-valeur::after { content: "Oct. SS. Apost. Petri et Pauli"; }
+.idx-filters:has(input[name="idx-fete"][value="Omnium Sanctorum"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Omnium Sanctorum"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Omnium Sanctorum"]:checked) .idx-filter-fete .idx-valeur::after { content: "Omnium Sanctorum"; }
+.idx-filters:has(input[name="idx-fete"][value="Plur. Virg."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Plur. Virg."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Plur. Virg."]:checked) .idx-filter-fete .idx-valeur::after { content: "Plur. Virg."; }
+.idx-filters:has(input[name="idx-fete"][value="Plures Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Plures Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Plures Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "Plures Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="Pres. Corporis Defuncti"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Pres. Corporis Defuncti"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Pres. Corporis Defuncti"]:checked) .idx-filter-fete .idx-valeur::after { content: "Pres. Corporis Defuncti"; }
+.idx-filters:has(input[name="idx-fete"][value="Pro pace"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Pro pace"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Pro pace"]:checked) .idx-filter-fete .idx-valeur::after { content: "Pro pace"; }
+.idx-filters:has(input[name="idx-fete"][value="Pro peccatis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Pro peccatis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Pro peccatis"]:checked) .idx-filter-fete .idx-valeur::after { content: "Pro peccatis"; }
+.idx-filters:has(input[name="idx-fete"][value="Pro stabilitate loci"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Pro stabilitate loci"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Pro stabilitate loci"]:checked) .idx-filter-fete .idx-valeur::after { content: "Pro stabilitate loci"; }
+.idx-filters:has(input[name="idx-fete"][value="Pro tribulatione"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Pro tribulatione"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Pro tribulatione"]:checked) .idx-filter-fete .idx-valeur::after { content: "Pro tribulatione"; }
+.idx-filters:has(input[name="idx-fete"][value="Purif. S. Mariae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Purif. S. Mariae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Purif. S. Mariae"]:checked) .idx-filter-fete .idx-valeur::after { content: "Purif. S. Mariae"; }
+.idx-filters:has(input[name="idx-fete"][value="Quatuor Coronatorum"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Quatuor Coronatorum"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Quatuor Coronatorum"]:checked) .idx-filter-fete .idx-valeur::after { content: "Quatuor Coronatorum"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Adriani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Adriani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Adriani"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Adriani"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Agapiti"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Agapiti"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Agapiti"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Agapiti"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Agathae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Agathae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Agathae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Agathae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Agnetis I"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Agnetis I"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Agnetis I"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Agnetis I"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Agnetis II"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Agnetis II"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Agnetis II"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Agnetis II"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Alexandri"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Alexandri"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Alexandri"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Alexandri"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Ambrosii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Ambrosii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Ambrosii"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Ambrosii"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Andreae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Andreae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Andreae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Andreae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Apollinaris"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Apollinaris"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Apollinaris"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Apollinaris"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Augustini"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Augustini"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Augustini"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Augustini"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Bartholomae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Bartholomae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Bartholomae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Bartholomae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Benedicti"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Benedicti"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Benedicti"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Benedicti"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Callisti"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Callisti"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Callisti"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Callisti"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Catherinae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Catherinae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Catherinae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Catherinae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Ceciliae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Ceciliae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Ceciliae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Ceciliae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Clementis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Clementis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Clementis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Clementis"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Cruce"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Cruce"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Cruce"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Cruce"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Crucis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Crucis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Crucis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Crucis"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Dionysii et Soc."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Dionysii et Soc."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Dionysii et Soc."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Dionysii et Soc."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Euphemiae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Euphemiae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Euphemiae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Euphemiae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Eusebis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Eusebis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Eusebis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Eusebis"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Felicis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Felicis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Felicis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Felicis"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Galli"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Galli"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Galli"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Galli"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Georgii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Georgii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Georgii"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Georgii"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Gereonis et Soc."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Gereonis et Soc."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Gereonis et Soc."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Gereonis et Soc."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Gorgonii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Gorgonii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Gorgonii"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Gorgonii"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Gregorii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Gregorii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Gregorii"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Gregorii"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Hermetis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Hermetis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Hermetis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Hermetis"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Hippolyti"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Hippolyti"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Hippolyti"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Hippolyti"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Imerii I"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Imerii I"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Imerii I"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Imerii I"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Jacobi Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Jacobi Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Jacobi Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Jacobi Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Jeronimi"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Jeronimi"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Jeronimi"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Jeronimi"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis ante Portam Latinam"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Joannis ante Portam Latinam"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis ante Portam Latinam"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Joannis ante Portam Latinam"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis Baptistae I"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Joannis Baptistae I"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis Baptistae I"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Joannis Baptistae I"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis Baptistae II"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Joannis Baptistae II"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis Baptistae II"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Joannis Baptistae II"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis Ev. I"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Joannis Ev. I"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis Ev. I"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Joannis Ev. I"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis Ev. II"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Joannis Ev. II"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Joannis Ev. II"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Joannis Ev. II"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Laurentii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Laurentii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Laurentii"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Laurentii"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Lucae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Lucae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Lucae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Lucae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Luciae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Luciae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Luciae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Luciae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Marcelli Papae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Marcelli Papae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Marcelli Papae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Marcelli Papae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Marci Ev."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Marci Ev."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Marci Ev."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Marci Ev."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Mariae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Mariae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Mariae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Mariae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Mariae Magdalenae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Mariae Magdalenae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Mariae Magdalenae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Mariae Magdalenae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Mariae Nativ."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Mariae Nativ."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Mariae Nativ."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Mariae Nativ."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Martini"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Martini"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Martini"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Martini"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Martini Mr."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Martini Mr."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Martini Mr."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Martini Mr."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Matthaei"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Matthaei"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Matthaei"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Matthaei"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Matthiae Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Matthiae Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Matthiae Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Matthiae Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Mauritii et Soc."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Mauritii et Soc."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Mauritii et Soc."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Mauritii et Soc."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Michaelis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Michaelis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Michaelis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Michaelis"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Nicolai"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Nicolai"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Nicolai"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Nicolai"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Nicomedis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Nicomedis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Nicomedis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Nicomedis"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Pauli"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Pauli"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Pauli"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Pauli"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Petri Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Petri Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Petri Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Petri Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Potencianae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Potencianae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Potencianae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Potencianae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Praxedis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Praxedis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Praxedis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Praxedis"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Priscae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Priscae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Priscae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Priscae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Sabinae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Sabinae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Sabinae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Sabinae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Silvestri"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Silvestri"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Silvestri"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Silvestri"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Simoni"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Simoni"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Simoni"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Simoni"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Spiritu"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Spiritu"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Spiritu"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Spiritu"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Stephani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Stephani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Stephani"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Stephani"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Stephani Papae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Stephani Papae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Stephani Papae"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Stephani Papae"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Theodori"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Theodori"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Theodori"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Theodori"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Thomae Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Thomae Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Thomae Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Thomae Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Thomae Martyr"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Thomae Martyr"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Thomae Martyr"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Thomae Martyr"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Tiburtii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Tiburtii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Tiburtii"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Tiburtii"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Timotheii Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Timotheii Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Timotheii Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Timotheii Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="S. Urbani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Urbani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Urbani"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Urbani"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Valentini"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Valentini"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Valentini"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Valentini"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Vincentii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Vincentii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Vincentii"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Vincentii"; }
+.idx-filters:has(input[name="idx-fete"][value="S. Vitalis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="S. Vitalis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="S. Vitalis"]:checked) .idx-filter-fete .idx-valeur::after { content: "S. Vitalis"; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Hebd. II Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Hebd. II Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Hebd. II Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Hebd. II Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Hebd. III Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Hebd. III Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Hebd. III Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Hebd. III Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Hebd. IV Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Hebd. IV Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Hebd. IV Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Hebd. IV Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Hebd. V Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Hebd. V Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Hebd. V Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Hebd. V Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Oct. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Oct. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Oct. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Oct. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. p. Cin."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. p. Cin."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. p. Cin."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. p. Cin."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Pasch."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Pasch."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Pasch."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Pasch."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Q. T. Adv."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Q. T. Adv."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Q. T. Adv."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Q. T. Adv."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Q. T. Quad."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Q. T. Quad."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Q. T. Quad."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Q. T. Quad."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Q. T. Sept."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Q. T. Sept."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Q. T. Sept."]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Q. T. Sept."; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Sancto"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Sab. Sancto"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Sab. Sancto"]:checked) .idx-filter-fete .idx-valeur::after { content: "Sab. Sancto"; }
+.idx-filters:has(input[name="idx-fete"][value="Septem Fratrum"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Septem Fratrum"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Septem Fratrum"]:checked) .idx-filter-fete .idx-valeur::after { content: "Septem Fratrum"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Abdon et Senes"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Abdon et Senes"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Abdon et Senes"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Abdon et Senes"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Basildis Cirinii et Naboris"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Basildis Cirinii et Naboris"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Basildis Cirinii et Naboris"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Basildis Cirinii et Naboris"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Cornelii et Cypriani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Cornelii et Cypriani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Cornelii et Cypriani"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Cornelii et Cypriani"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Cosmae et Damiani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Cosmae et Damiani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Cosmae et Damiani"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Cosmae et Damiani"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Cyriaci Largi et Smaragdi"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Cyriaci Largi et Smaragdi"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Cyriaci Largi et Smaragdi"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Cyriaci Largi et Smaragdi"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Fabiani et Sebastiani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Fabiani et Sebastiani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Fabiani et Sebastiani"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Fabiani et Sebastiani"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Felicis et Adaucti"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Felicis et Adaucti"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Felicis et Adaucti"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Felicis et Adaucti"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Gervasii et Protasii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Gervasii et Protasii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Gervasii et Protasii"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Gervasii et Protasii"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Gordianii et Epimachi"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Gordianii et Epimachi"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Gordianii et Epimachi"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Gordianii et Epimachi"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Joannis et Pauli"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Joannis et Pauli"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Joannis et Pauli"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Joannis et Pauli"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Marcelli et Petri"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Marcelli et Petri"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Marcelli et Petri"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Marcelli et Petri"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Marci et Marcelliani Mr."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Marci et Marcelliani Mr."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Marci et Marcelliani Mr."]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Marci et Marcelliani Mr."; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Nerei Achillei et Pancratii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Nerei Achillei et Pancratii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Nerei Achillei et Pancratii"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Nerei Achillei et Pancratii"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Philippi et Jacobi"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Philippi et Jacobi"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Philippi et Jacobi"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Philippi et Jacobi"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Primi et Feliciani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Primi et Feliciani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Primi et Feliciani"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Primi et Feliciani"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Processi et Martiniani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Processi et Martiniani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Processi et Martiniani"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Processi et Martiniani"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Proti et Jacinthi"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Proti et Jacinthi"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Proti et Jacinthi"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Proti et Jacinthi"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Simplicii Faustinii et Beatricis"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Simplicii Faustinii et Beatricis"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Simplicii Faustinii et Beatricis"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Simplicii Faustinii et Beatricis"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Sixti Felicissimi et Agapiti"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Sixti Felicissimi et Agapiti"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Sixti Felicissimi et Agapiti"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Sixti Felicissimi et Agapiti"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Thimotei et Simphoriani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Thimotei et Simphoriani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Thimotei et Simphoriani"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Thimotei et Simphoriani"; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Tiburtii et Valeriani"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="SS. Tiburtii et Valeriani"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="SS. Tiburtii et Valeriani"]:checked) .idx-filter-fete .idx-valeur::after { content: "SS. Tiburtii et Valeriani"; }
+.idx-filters:has(input[name="idx-fete"][value="Transl. S. Martini"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Transl. S. Martini"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Transl. S. Martini"]:checked) .idx-filter-fete .idx-valeur::after { content: "Transl. S. Martini"; }
+.idx-filters:has(input[name="idx-fete"][value="Una Virginae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Una Virginae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Una Virginae"]:checked) .idx-filter-fete .idx-valeur::after { content: "Una Virginae"; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Unius Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "Unius Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Conf. non Pontifices"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Unius Conf. non Pontifices"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Conf. non Pontifices"]:checked) .idx-filter-fete .idx-valeur::after { content: "Unius Conf. non Pontifices"; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Conf. qui fuit Epi."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Unius Conf. qui fuit Epi."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Conf. qui fuit Epi."]:checked) .idx-filter-fete .idx-valeur::after { content: "Unius Conf. qui fuit Epi."; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Confessor"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Unius Confessor"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Confessor"]:checked) .idx-filter-fete .idx-valeur::after { content: "Unius Confessor"; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Martyr"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Unius Martyr"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Unius Martyr"]:checked) .idx-filter-fete .idx-valeur::after { content: "Unius Martyr"; }
+.idx-filters:has(input[name="idx-fete"][value="Uno Martire"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Uno Martire"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Uno Martire"]:checked) .idx-filter-fete .idx-valeur::after { content: "Uno Martire"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Ascens."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Ascens."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Ascens."]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Ascens."; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Assumpt. S. Mariae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Assumpt. S. Mariae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Assumpt. S. Mariae"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Assumpt. S. Mariae"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Epiph."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Epiph."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Epiph."]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Epiph."; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Nat. Dom."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Nat. Dom."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Nat. Dom."]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Nat. Dom."; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Nat. Plur. Martyrium"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Nat. Plur. Martyrium"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Nat. Plur. Martyrium"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Nat. Plur. Martyrium"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Omnium Sanctorum"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Omnium Sanctorum"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Omnium Sanctorum"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Omnium Sanctorum"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Pent."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Pent."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Pent."]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Pent."; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Plures Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Plures Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Plures Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Plures Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Andreae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. S. Andreae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Andreae"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. S. Andreae"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Joannis Baptistae"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. S. Joannis Baptistae"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Joannis Baptistae"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. S. Joannis Baptistae"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Laurentii"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. S. Laurentii"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Laurentii"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. S. Laurentii"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Matthaei"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. S. Matthaei"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Matthaei"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. S. Matthaei"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Simoni"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. S. Simoni"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. S. Simoni"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. S. Simoni"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. SS. Apost. Petri et Pauli"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. SS. Apost. Petri et Pauli"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. SS. Apost. Petri et Pauli"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. SS. Apost. Petri et Pauli"; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Unius Apost."]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Unius Apost."]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Unius Apost."]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Unius Apost."; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Unius Martyr"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="Vig. Unius Martyr"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="Vig. Unius Martyr"]:checked) .idx-filter-fete .idx-valeur::after { content: "Vig. Unius Martyr"; }
+.idx-filters:has(input[name="idx-fete"][value="[eff.]"]:checked) ~ .table-wrap tr.index-entry:not([data-fete="[eff.]"]) { display: none; }
+.idx-filters:has(input[name="idx-fete"][value="[eff.]"]:checked) .idx-filter-fete .idx-valeur::after { content: "[eff.]"; }
+.idx-filters:has(input[name="idx-mode"][value=""]:checked) ~ .table-wrap tr.index-entry:not([data-mode=""]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value=""]:checked) .idx-filter-mode .idx-valeur::after { content: "(non renseigné)"; }
+.idx-filters:has(input[name="idx-mode"][value="+"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="+"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="+"]:checked) .idx-filter-mode .idx-valeur::after { content: "+"; }
+.idx-filters:has(input[name="idx-mode"][value="1"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="1"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="1"]:checked) .idx-filter-mode .idx-valeur::after { content: "1"; }
+.idx-filters:has(input[name="idx-mode"][value="1+a"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="1+a"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="1+a"]:checked) .idx-filter-mode .idx-valeur::after { content: "1+a"; }
+.idx-filters:has(input[name="idx-mode"][value="2"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="2"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="2"]:checked) .idx-filter-mode .idx-valeur::after { content: "2"; }
+.idx-filters:has(input[name="idx-mode"][value="2+a"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="2+a"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="2+a"]:checked) .idx-filter-mode .idx-valeur::after { content: "2+a"; }
+.idx-filters:has(input[name="idx-mode"][value="2+g"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="2+g"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="2+g"]:checked) .idx-filter-mode .idx-valeur::after { content: "2+g"; }
+.idx-filters:has(input[name="idx-mode"][value="3"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="3"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="3"]:checked) .idx-filter-mode .idx-valeur::after { content: "3"; }
+.idx-filters:has(input[name="idx-mode"][value="3+"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="3+"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="3+"]:checked) .idx-filter-mode .idx-valeur::after { content: "3+"; }
+.idx-filters:has(input[name="idx-mode"][value="3+a"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="3+a"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="3+a"]:checked) .idx-filter-mode .idx-valeur::after { content: "3+a"; }
+.idx-filters:has(input[name="idx-mode"][value="4"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="4"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="4"]:checked) .idx-filter-mode .idx-valeur::after { content: "4"; }
+.idx-filters:has(input[name="idx-mode"][value="4+a"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="4+a"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="4+a"]:checked) .idx-filter-mode .idx-valeur::after { content: "4+a"; }
+.idx-filters:has(input[name="idx-mode"][value="4+h"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="4+h"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="4+h"]:checked) .idx-filter-mode .idx-valeur::after { content: "4+h"; }
+.idx-filters:has(input[name="idx-mode"][value="5"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="5"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="5"]:checked) .idx-filter-mode .idx-valeur::after { content: "5"; }
+.idx-filters:has(input[name="idx-mode"][value="5+c"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="5+c"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="5+c"]:checked) .idx-filter-mode .idx-valeur::after { content: "5+c"; }
+.idx-filters:has(input[name="idx-mode"][value="6"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="6"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="6"]:checked) .idx-filter-mode .idx-valeur::after { content: "6"; }
+.idx-filters:has(input[name="idx-mode"][value="6+c"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="6+c"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="6+c"]:checked) .idx-filter-mode .idx-valeur::after { content: "6+c"; }
+.idx-filters:has(input[name="idx-mode"][value="7"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="7"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="7"]:checked) .idx-filter-mode .idx-valeur::after { content: "7"; }
+.idx-filters:has(input[name="idx-mode"][value="7+"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="7+"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="7+"]:checked) .idx-filter-mode .idx-valeur::after { content: "7+"; }
+.idx-filters:has(input[name="idx-mode"][value="7+d"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="7+d"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="7+d"]:checked) .idx-filter-mode .idx-valeur::after { content: "7+d"; }
+.idx-filters:has(input[name="idx-mode"][value="8"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="8"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="8"]:checked) .idx-filter-mode .idx-valeur::after { content: "8"; }
+.idx-filters:has(input[name="idx-mode"][value="8+d"]:checked) ~ .table-wrap tr.index-entry:not([data-mode*="8+d"]) { display: none; }
+.idx-filters:has(input[name="idx-mode"][value="8+d"]:checked) .idx-filter-mode .idx-valeur::after { content: "8+d"; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))) .idx-pager { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="1"]:checked) ~ .table-wrap tr.index-entry:not([data-page="1"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="1"]:checked) .idx-pager-etat-1 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="2"]:checked) ~ .table-wrap tr.index-entry:not([data-page="2"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="2"]:checked) .idx-pager-etat-2 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="3"]:checked) ~ .table-wrap tr.index-entry:not([data-page="3"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="3"]:checked) .idx-pager-etat-3 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="4"]:checked) ~ .table-wrap tr.index-entry:not([data-page="4"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="4"]:checked) .idx-pager-etat-4 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="5"]:checked) ~ .table-wrap tr.index-entry:not([data-page="5"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="5"]:checked) .idx-pager-etat-5 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="6"]:checked) ~ .table-wrap tr.index-entry:not([data-page="6"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="6"]:checked) .idx-pager-etat-6 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="7"]:checked) ~ .table-wrap tr.index-entry:not([data-page="7"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="7"]:checked) .idx-pager-etat-7 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="8"]:checked) ~ .table-wrap tr.index-entry:not([data-page="8"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="8"]:checked) .idx-pager-etat-8 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="9"]:checked) ~ .table-wrap tr.index-entry:not([data-page="9"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="9"]:checked) .idx-pager-etat-9 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="10"]:checked) ~ .table-wrap tr.index-entry:not([data-page="10"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="10"]:checked) .idx-pager-etat-10 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="11"]:checked) ~ .table-wrap tr.index-entry:not([data-page="11"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="11"]:checked) .idx-pager-etat-11 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="12"]:checked) ~ .table-wrap tr.index-entry:not([data-page="12"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="12"]:checked) .idx-pager-etat-12 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="13"]:checked) ~ .table-wrap tr.index-entry:not([data-page="13"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="13"]:checked) .idx-pager-etat-13 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="14"]:checked) ~ .table-wrap tr.index-entry:not([data-page="14"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="14"]:checked) .idx-pager-etat-14 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="15"]:checked) ~ .table-wrap tr.index-entry:not([data-page="15"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="15"]:checked) .idx-pager-etat-15 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="16"]:checked) ~ .table-wrap tr.index-entry:not([data-page="16"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="16"]:checked) .idx-pager-etat-16 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="17"]:checked) ~ .table-wrap tr.index-entry:not([data-page="17"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="17"]:checked) .idx-pager-etat-17 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="18"]:checked) ~ .table-wrap tr.index-entry:not([data-page="18"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="18"]:checked) .idx-pager-etat-18 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="19"]:checked) ~ .table-wrap tr.index-entry:not([data-page="19"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="19"]:checked) .idx-pager-etat-19 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="20"]:checked) ~ .table-wrap tr.index-entry:not([data-page="20"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="20"]:checked) .idx-pager-etat-20 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="21"]:checked) ~ .table-wrap tr.index-entry:not([data-page="21"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="21"]:checked) .idx-pager-etat-21 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="22"]:checked) ~ .table-wrap tr.index-entry:not([data-page="22"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="22"]:checked) .idx-pager-etat-22 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="23"]:checked) ~ .table-wrap tr.index-entry:not([data-page="23"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="23"]:checked) .idx-pager-etat-23 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="24"]:checked) ~ .table-wrap tr.index-entry:not([data-page="24"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="24"]:checked) .idx-pager-etat-24 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="25"]:checked) ~ .table-wrap tr.index-entry:not([data-page="25"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="25"]:checked) .idx-pager-etat-25 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="26"]:checked) ~ .table-wrap tr.index-entry:not([data-page="26"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="26"]:checked) .idx-pager-etat-26 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="27"]:checked) ~ .table-wrap tr.index-entry:not([data-page="27"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="27"]:checked) .idx-pager-etat-27 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="28"]:checked) ~ .table-wrap tr.index-entry:not([data-page="28"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="28"]:checked) .idx-pager-etat-28 { display: flex; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="29"]:checked) ~ .table-wrap tr.index-entry:not([data-page="29"]) { display: none; }
+.idx-filters:has(input[name="idx-genre"][value="__tous__"]:checked):has(input[name="idx-mode"][value="__tous__"]:checked):has(input[name="idx-fete"][value="__tous__"]:checked):not(:has(input[name="idx-voir"]:checked)):not(:has(input[name="idx-incipit"]:not(:placeholder-shown))):has(input[name="idx-page"][value="29"]:checked) .idx-pager-etat-29 { display: flex; }
+/* ==== fin D9 filtres de l'index ==== */
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ==== D14b : menu « Aller au feuillet » des pages de feuillet (remplace le <select> + MM_jumpMenu
+   de l'ancien site, qui listait les 373 feuillets entre les deux flèches). ==== */
+.bellelay-edition .feuillet-navigation { display: flex; flex-wrap: wrap; gap: .6rem 1rem; align-items: center; }
+.bellelay-edition .feuillet-menu { position: relative; order: 2; flex: 1 1 12rem; min-width: 0; }
+.bellelay-edition .feuillet-navigation .nav-link.previous { order: 1; }
+.bellelay-edition .feuillet-navigation .nav-link.next { order: 3; }
+.bellelay-edition .feuillet-navigation .current-folio { order: 4; flex-basis: 100%; color: var(--muted); }
+.bellelay-edition .feuillet-menu > summary { display: list-item; padding: .3rem .8rem; border: 1px solid #b9b9b9; border-radius: 3px; background: #fff; cursor: pointer; list-style: none; text-align: center; }
+.bellelay-edition .feuillet-menu > summary::-webkit-details-marker { display: none; }
+.bellelay-edition .feuillet-menu > summary::after { content: "\25BE"; color: var(--red); }
+.bellelay-edition .feuillet-menu[open] > summary::after { content: "\25B4"; }
+.bellelay-edition .feuillet-menu > summary:hover, .bellelay-edition .feuillet-menu[open] > summary { border-color: var(--red); color: var(--red); }
+.bellelay-edition .feuillet-menu-nom { font: .95rem/1.3 Georgia, "Times New Roman", serif; }
+.bellelay-edition .feuillet-menu-liste { display: flex; flex-wrap: wrap; gap: 4px; max-height: 16rem; margin-top: 6px; overflow: auto; padding: .5rem; border: 1px solid #bbb; border-top: 3px solid var(--red); background: #fff; }
+.bellelay-edition .feuillet-lien { display: inline-block; min-width: 2.2rem; padding: .15rem .4rem; border: 1px solid #d0d0d0; border-radius: 3px; color: var(--ink); font: .92rem/1.3 Georgia, "Times New Roman", serif; text-align: center; text-decoration: none; }
+.bellelay-edition .feuillet-lien:hover { border-color: var(--red); color: var(--red); }
+.bellelay-edition .feuillet-lien[aria-current="page"] { border-color: var(--red); background: var(--red); color: #fff; font-weight: 700; }
+/* ==== fin D14b ==== */
+
+/* ==== D12 (2026-09-12) : sobriete DoTS, sans toucher au bloc de filtres genere ==== */
+:root {
+  --text-color: #8f241d;
+  --fill-color: #8f241d;
+}
+
+.bellelay-edition {
+  --red: #8f241d;
+  --ink: #242424;
+  --muted: #686868;
+  --line: #d7d3cd;
+  --paper: #fbfaf8;
+  --soft: #f4f1ed;
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+.bellelay-edition main {
+  max-width: 72rem;
+  padding-top: .25rem;
+}
+
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card {
+  border-color: var(--line, #d7d3cd);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(36, 36, 36, .08);
+}
+
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line {
+  color: #8f241d;
+}
+
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus {
+  background: #8f241d;
+}
+
+.bellelay-edition .rubrique-bar,
+.bellelay-edition .page-bar {
+  width: 100%;
+  max-width: 48rem;
+  margin: 1.5rem 0 1rem;
+  padding: .55rem 0 .55rem .85rem;
+  border-left: 4px solid var(--red);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.bellelay-edition h1,
+.bellelay-edition h2,
+.bellelay-edition h3,
+.bellelay-edition h4 {
+  color: #202020;
+}
+
+.bellelay-edition a {
+  color: #8f241d;
+  text-underline-offset: 2px;
+}
+
+.bellelay-edition a:hover,
+.bellelay-edition a:focus-visible {
+  color: #5f1612;
+}
+
+.bellelay-edition .tab,
+.bellelay-edition .nav-link,
+.bellelay-edition .current-folio,
+.bellelay-edition .form-choice summary,
+.bellelay-edition .feuillet-menu > summary,
+.bellelay-edition .idx-filter > summary,
+.bellelay-edition .idx-reset {
+  border-color: var(--line);
+  border-radius: 5px;
+  background: #fff;
+}
+
+.bellelay-edition .tab,
+.bellelay-edition .piece-sommaire,
+.bellelay-edition .legacy-form,
+.bellelay-edition .idx-filters,
+.bellelay-edition .image-annotations {
+  border-color: var(--line);
+  background: var(--paper);
+}
+
+.bellelay-edition .piece-sommaire {
+  border-top-color: var(--red);
+}
+
+.bellelay-edition .idx-filters-intro {
+  padding: .55rem .85rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--soft);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.bellelay-edition .idx-filter > .idx-options,
+.bellelay-edition .feuillet-menu-liste {
+  border-color: var(--line);
+  border-top-color: var(--red);
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 10px 26px rgba(36, 36, 36, .08);
+}
+
+.bellelay-edition .idx-options label:hover {
+  background: #f3ece9;
+}
+
+.bellelay-edition .idx-reset:hover,
+.bellelay-edition .feuillet-lien[aria-current="page"],
+.bellelay-edition .idx-lettre input:checked + span,
+.bellelay-edition .idx-debut input:checked + span,
+.bellelay-edition .idx-compte {
+  background: var(--red);
+  color: #fff;
+}
+
+.bellelay-edition table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--line);
+}
+
+.bellelay-edition th,
+.bellelay-edition td {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.bellelay-edition th {
+  background: var(--soft);
+}
+
+.bellelay-edition tr:last-child > td {
+  border-bottom: 0;
+}
+
+.bellelay-edition th:last-child,
+.bellelay-edition td:last-child {
+  border-right: 0;
+}
+
+.bellelay-edition .idx-vide {
+  border-left-color: var(--red);
+  background: var(--paper);
+}
+/* ==== fin D12 ==== */
+/* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
+/* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
+   Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
+   au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
+   est conservée : elle est lue dans --text-color, avec un repli sur celle de DoTS. */
+.document-area #article:not(.bottom-toc),
+.document-area main {
+  --d12-accent: var(--text-color, #8f0e21);
+  --d12-encre: var(--document-text-color, #303030);
+  --d12-filet: #dcd8d3;
+  --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
+  --d12-fond-tres-doux: #fafafa;
+  --d12-rayon: var(--button-border-radius, 4px);
+}
+
+/* Texte : mesure de lecture régulière, encre et interligne de l'application.
+   La largeur est bornée parce qu'elle atteignait 1 184 px chez christofle
+   (mesuré le 2026-09-12), soit des lignes de plus de 130 caractères. 72rem est
+   la valeur déjà retenue par les corpus qui s'en étaient souciés (bellelay 72,
+   actesroyauxdupoitou 74) ; un corpus peut la surcharger après ce bloc. */
+.document-area #article:not(.bottom-toc) {
+  max-width: min(100%, 72rem);
+  margin-inline: auto;
+  color: var(--d12-encre);
+  font-size: var(--font-default-size, 16px);
+  /* 1.6 et non le jeton --font-default-line-heigth (1.4) : celui-ci est calibré pour
+     l'interface, et la comparaison avant/après du 2026-09-12 montrait l'interligne
+     tomber de 26,4 px à 22,4 px chez christofle, actesroyauxdupoitou, sanctoral_elec
+     et les testaments — trop serré pour de la prose éditoriale en serif. */
+  line-height: 1.6;
+}
+.document-area #article:not(.bottom-toc) p {
+  margin: 0 0 .9em;
+}
+
+/* Titres : famille secondaire de l'application, graisse tenue, accent sobre.
+   Pas de bandeau plein : un filet gauche, comme les blocs de DoTS. */
+.document-area #article:not(.bottom-toc) h1,
+.document-area #article:not(.bottom-toc) h2,
+.document-area #article:not(.bottom-toc) h3,
+.document-area #article:not(.bottom-toc) h4 {
+  color: #202020;
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .01em;
+}
+.document-area #article:not(.bottom-toc) h1 { font-size: 1.6rem; margin: 0 0 1rem; }
+.document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
+.document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
+.document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
+
+/* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
+.document-area #article:not(.bottom-toc) a {
+  color: var(--d12-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.document-area #article:not(.bottom-toc) a:hover,
+.document-area #article:not(.bottom-toc) a:focus-visible {
+  text-decoration: var(--text-decoration-hover, underline dotted);
+}
+.document-area #article:not(.bottom-toc) a:focus-visible {
+  outline: 2px solid var(--d12-accent);
+  outline-offset: 2px;
+}
+
+/* Tableaux : filets fins, en-tête sur fond doux, pas de quadrillage lourd. */
+.document-area #article:not(.bottom-toc) table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: .95em;
+}
+.document-area #article:not(.bottom-toc) th,
+.document-area #article:not(.bottom-toc) td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid var(--d12-filet);
+  text-align: left;
+  vertical-align: top;
+}
+.document-area #article:not(.bottom-toc) th {
+  background: var(--d12-fond-doux);
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+/* Un tableau large défile dans son cadre, la page ne défile jamais de côté. */
+.document-area #article:not(.bottom-toc) .table-wrap {
+  overflow-x: auto;
+}
+
+/* Citations, blocs éditoriaux, légendes. */
+.document-area #article:not(.bottom-toc) blockquote,
+.document-area #article:not(.bottom-toc) .citation {
+  margin: 1rem 0;
+  padding: .1rem 0 .1rem 1rem;
+  border-left: 3px solid var(--d12-filet);
+  color: #45403c;
+}
+.document-area #article:not(.bottom-toc) figcaption,
+.document-area #article:not(.bottom-toc) .legendeillustration {
+  color: #5a5450;
+  font-size: .85rem;
+  line-height: 1.4;
+}
+.document-area #article:not(.bottom-toc) hr {
+  height: 0;
+  margin: 1.6rem 0;
+  border: 0;
+  border-top: 1px solid var(--d12-filet);
+}
+
+/* Colonne de texte : elle prend la place disponible dans la rangée.
+   Pourquoi : sur une page COQUILLE — une unité non éditoriale, qui ne rend que son titre
+   (le `liber` de cjc, la `rubrique` paratextes de delescluze) — la colonne se rétractait
+   sur la largeur du titre : mesuré le 2026-09-12, 65 px chez cjc (« Livre I » coupé en deux
+   lignes) et 92 px chez delescluze, parent compris, la visionneuse occupant le reste de la
+   rangée. Même procédé que D11 pour le sommaire des enfants (`flex` sur l'enfant du
+   `wrapper`), et sans effet quand la page a du contenu.
+   La chaîne mesurée sur cjc : `#article` (65 px) ← `#main` (65) ← `.row.remove-bottom-padding`
+   (65, en `display:flex`) ← `.wrapper` (1 225 px). C'est donc la RANGÉE qui se rétracte, pas
+   `#article` : une première version de cette règle visait `.wrapper > #article` et ne pouvait
+   pas s'appliquer, `#article` n'étant pas enfant du `wrapper`. La visionneuse, elle, est en
+   `position: absolute` (500 px) et n'entre pas dans le calcul. */
+.document-area .wrapper > .row {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Images : jamais plus larges que la colonne. */
+.document-area #article:not(.bottom-toc) img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Contrôles éditoriaux (onglets, boutons, menus dépliants des corpus) : même
+   grammaire visuelle que les boutons de l'application — coins légers, filet fin,
+   accent réservé à l'état actif. */
+.document-area #article:not(.bottom-toc) button,
+.document-area #article:not(.bottom-toc) input[type="reset"],
+.document-area #article:not(.bottom-toc) input[type="submit"],
+.document-area #article:not(.bottom-toc) summary {
+  font-family: var(--font-primary, "Roboto"), Arial, Helvetica, sans-serif;
+  font-size: .9rem;
+}
+.document-area #article:not(.bottom-toc) input[type="reset"],
+.document-area #article:not(.bottom-toc) input[type="submit"],
+.document-area #article:not(.bottom-toc) button {
+  padding: .35rem .7rem;
+  border: 1px solid var(--d12-filet);
+  border-radius: var(--d12-rayon);
+  background: #fff;
+  color: var(--d12-encre);
+  cursor: pointer;
+}
+.document-area #article:not(.bottom-toc) input[type="reset"]:hover,
+.document-area #article:not(.bottom-toc) input[type="submit"]:hover,
+.document-area #article:not(.bottom-toc) button:hover {
+  border-color: var(--d12-accent);
+  color: var(--d12-accent);
+}
+
+/* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
+.document-area #article:not(.bottom-toc) .footnotes,
+.document-area #article:not(.bottom-toc) .apparatus,
+.document-area #article:not(.bottom-toc) .note {
+  font-size: var(--font-small-size, 14px);
+  line-height: 1.5;
+}
+.document-area #article:not(.bottom-toc) .footnotes {
+  margin-top: 2rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--d12-filet);
+}
+.document-area #article:not(.bottom-toc) a.noteref,
+.document-area #article:not(.bottom-toc) .noteref {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .document-area #article:not(.bottom-toc) h1 { font-size: 1.4rem; }
+  .document-area #article:not(.bottom-toc) h2 { font-size: 1.2rem; }
+  .document-area #article:not(.bottom-toc) table { font-size: .9em; }
+}
+/* ==== D12-SOCLE-FIN ==== */
+
+/* ==== Menus déroulants : état fermé (2026-09-12) ====
+   Mesuré sur `?refId=legacy-feuillet105` : la liste des 373 feuillets s'affichait **menu
+   fermé** (display:flex, 256 px de haut), sur les 373 pages de feuillet. Cause : la règle
+   `.feuillet-menu-liste { display: flex }` (l. 2839) s'applique dans tous les états et
+   l'emporte sur le masquage natif du navigateur pour un `<details>` fermé — le même piège que
+   pour le zoom des fac-similés des testaments (E2) et pour les menus de Delescluze.
+   Correctif additif et spécifique : on ne touche pas à la règle globale
+   `.bellelay-edition details > :not(summary)` (posée exprès, cf. son commentaire l. 114-120),
+   on masque seulement cette liste quand son menu est fermé. */
+.bellelay-edition .feuillet-menu:not([open]) > .feuillet-menu-liste { display: none; }
+/* ==== fin menus fermés ==== */
+
+/* ==== Onglet « Images associées » restitué (2026-09-12) ====
+   Galerie des vignettes de la mosaïque de l'ancien site, pour les 50 pièces qui en avaient
+   encore une. Hors du bloc engendré : ces règles sont écrites à la main. */
+.bellelay-edition .piece-images { margin: 1.4rem 0; padding-top: .9rem; border-top: 1px solid var(--line); }
+.bellelay-edition .piece-images-titre { margin: 0 0 .7rem; font-size: 1.05rem; }
+.bellelay-edition .piece-images-liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: .9rem; margin: 0; padding: 0; list-style: none; }
+.bellelay-edition .piece-images-liste li { margin: 0; }
+.bellelay-edition .piece-images-liste img { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: #fff; }
+.bellelay-edition .piece-images-legende { display: block; margin-top: .25rem; color: var(--muted); font-size: .85rem; }
+.bellelay-edition .onglet-inactif { color: var(--muted); }
+/* ==== fin images associées ==== */
+
+/* ==== Accueil de collection (2026-09-14) : titre lisible, plus de titre rouge ====
+   Mesuré sur http://localhost:5173/bellelay, viewport 1440x1000, AVANT correction :
+     .collection-metadata-title « Le Graduel de Bellelay » : 622x30 px, color rgb(255,255,255)
+       sur un fond rgb(255,255,255)  ->  contraste 1,00:1 (seuil WCAG : 4,5:1) = invisible ;
+     .collection-description « Migration dotifiée… »       : 622x68 px, même contraste 1,00:1 ;
+     soit 60 916 px² de texte invisible sur une carte de 672x200 px (45 % de sa surface),
+     et la seule ligne lisible de la carte était le nom de l'auteur (« Olivier Cullin »,
+     #8f241d, Georgia 700 21,6 px, centré) — donc l'auteur tenait lieu de titre, en rouge.
+   Cause : les règles amont de dots-vue/src/components/CollectionCardWithToc.vue
+     `.mixed-mode .card-header .collection-metadata .collection-metadata-title { color:#FFF }`
+     `.mixed-mode .collection-description { color:#FFF }`
+   supposent le panneau plein `--fill-color` du mode « mixed » (cf. /theater, /miroir, /cjc,
+   où la carte est un aplat rouge). Ici la ressource unique passe par la branche « resource »
+   du composant, qui n'a pas ce panneau : la carte reste blanche, le texte blanc disparaît.
+   Leur spécificité (4 classes + attribut de scope) l'emporte sur nos sélecteurs `body:has(…)`,
+   d'où les `!important` ci-dessous ; dots-vue/src/ n'est pas modifié.
+   Homogénéisation : aucune autre collection ÉLEC mesurée (/saint-denis, /chroniqueslatines,
+   /edits, /delescluze, /obituaires, /theater) n'affiche de titre en rouge — les intitulés y
+   sont à l'encre quasi noire (ou en blanc sur aplat de couleur) et la couleur de collection
+   est réservée au bandeau, aux icônes et aux liens. On s'aligne dessus. */
+
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line {
+  padding: 1.25rem 1.5rem 1.35rem;
+  color: #242424;
+  font: 400 1rem/1.45 Arial, Helvetica, sans-serif;
+}
+
+/* Le vrai titre de la ressource redevient le titre visible de la carte. */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .collection-metadata-title {
+  color: #202020 !important;
+  font: 700 1.35rem/1.25 Georgia, "Times New Roman", serif !important;
+  margin-bottom: .3rem;
+}
+
+/* Auteur : ligne secondaire discrète, elle ne joue plus le rôle de titre. */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .collection-metadata > .is-flex {
+  color: #686868;
+  font: 400 .95rem/1.4 Georgia, "Times New Roman", serif;
+}
+
+/* dc:description (« Migration dotifiée… ») : phrase technique, elle n'était de toute façon
+   pas lisible (blanc sur blanc) et réservait 68 px de vide. La ligne de sommaire injectée en
+   ::after ci-dessous en tient lieu. */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .collection-description {
+  display: none !important;
+}
+
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line::after {
+  margin-top: .55rem;
+  color: #686868;
+  font: 400 .95rem/1.45 Arial, Helvetica, sans-serif;
+}
+
+/* Survol / focus : teinte douce au lieu de l'inversion en aplat rouge ; l'accent de collection
+   ne sert plus qu'à signaler le lien. */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus {
+  color: #242424;
+  background: #f4f1ed;
+}
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover .collection-metadata-title,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus .collection-metadata-title {
+  color: #8f241d !important;
+}
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover::after,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus::after {
+  color: #686868;
+}
+/* ==== fin accueil de collection 2026-09-14 ==== */
+
+
+/* --------------------------------------------------------------------------
+   2026-09-14 — Page « Sommaire de la pièce » : vues de feuillet et champs de
+   description EN VIS-À-VIS, comme sur le site historique.
+
+   Demande de l'utilisateur, en comparant à
+   http://el.enc.sorbonne.fr/bellelay/document570.php : « faut avoir le même
+   comportement que sur le site historique […] faudrait avoir les images et le
+   texte sur la même ligne — si tu veux, là j'ai les images et ensuite les
+   informations ». Et, sur la galerie : « non il faut pas la retirer ».
+
+   LA MISE EN PAGE DE L'ÉLEC, RELEVÉE ET NON DEVINÉE (rendu réel de
+   document570.php mesuré à 1440 px, et sa feuille css/Bellelay.css) :
+     - `ul.onglets`        pleine largeur en tête       x=10   y=151  w=1420
+     - `p.imagefeuillet`   `float: left`, DEUX VUES CÔTE À CÔTE
+                                                        x=10   y=209  w=251
+                                                        x=261  y=209  w=249
+     - `dl.descripiece`    bloc ordinaire, `margin-left: 256px`, il s'écoule
+                           donc À DROITE des flottants  x=266  y=201  w=1132
+   Les deux vues et la description commencent à la même hauteur (209 / 201) :
+   c'est tout le sujet. Les images sont à leur taille naturelle — les fichiers
+   `*-small350.jpg` font 219x350 et 217x350, plus 1em de marge de chaque côté,
+   d'où les 251 px mesurés ; l'ÉLEC ne les redimensionnait pas.
+   L'onglet « Images associées » (`document570.php?format=mosaique`) était une
+   PAGE SÉPARÉE : mêmes vignettes, `float: left`, refermées par un
+   `<div style="visibility:hidden; clear:both">`. Chez nous la galerie est sur
+   la page même — l'utilisateur veut la garder — on la renvoie donc APRÈS le
+   vis-à-vis, dans l'ordre des onglets, l'ancre #piece-images y conduisant.
+
+   POURQUOI UNE GRILLE ET NON UN FLOTTEMENT — c'est une leçon, pas un détail.
+   `dl.description-list` est en `display: grid`, donc un contexte de formatage
+   indépendant, que le navigateur refuse de loger à côté d'un flottant dès que
+   sa boîte de marge n'y tient pas (mesuré deux fois : description rejetée à
+   y=1800 sous des figures à y=756, inchangé même une fois `float: right`
+   effectivement appliqué — vérifié en style calculé). Les figures et la
+   description étant frères dans le même `.tei-block`, une grille sur ce parent
+   les place explicitement, sans dépendre de la géométrie des flottants.
+
+   CE QUI RESTE À EXPLIQUER, parce que la version précédente s'y est trompée :
+     - La description était épinglée en `grid-row: 2`, mais la GALERIE, rendue
+       avant les figures dans le flux, occupait déjà cette rangée sur les deux
+       colonnes ; les figures étaient repoussées plus bas et la description
+       flottait 720 px au-dessus d'elles (mesuré : figures y=1056, description
+       y=333). D'où `order: 9` sur la galerie, qui la fait placer en DERNIER
+       (le placement automatique d'une grille suit l'ordre modifié par `order`).
+     - La rangée de la description n'est plus écrite en dur : `dense` + une
+       colonne définie la posent dans la PREMIÈRE rangée libre de sa colonne,
+       c'est-à-dire celle de la première figure, quel que soit le nombre de
+       blocs pleine largeur qui précèdent.
+     - Elle couvre `span 40` rangées, sinon deux figures encadreraient un trou
+       dès que la description est plus haute que la première vue. Les rangées
+       excédentaires sont vides, et `row-gap: 0` leur donne une hauteur nulle :
+       l'espacement passe par les marges des figures.
+     - Enfin la grille n'est appliquée qu'aux blocs qui ont EFFECTIVEMENT une
+       figure ET une description (`:has()`). Sans ce garde-fou la règle
+       s'appliquait à tout `.tei-block.type-reconstructed` du corpus et tassait
+       dans 320 px des pages qui n'ont rien d'une pièce : mesuré sur
+       legacy-sommaire390, dont les lignes de sommaire étaient repliées sur
+       ~250 px de large au lieu de la pleine mesure. Corollaire demandé : une
+       pièce sans figure ne laisse pas de colonne vide, elle n'est pas mise en
+       grille du tout.
+   -------------------------------------------------------------------------- */
+
+/* Trois colonnes : deux pour les vues de feuillet (l'ÉLEC en montrait deux de
+   front), la dernière pour la description. Les colonnes d'images sont en
+   `max-content` : quand la pièce n'a qu'une vue, la seconde se réduit à zéro et
+   la description vient au contact, sans colonne vide. */
+.bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(0, max-content) minmax(0, 1fr);
+  grid-auto-flow: row dense;
+  column-gap: 1.5rem;
+  row-gap: 0;
+  align-items: start;
+}
+
+/* Par défaut tout enfant tient la largeur entière : les onglets, les titres, la
+   galerie, et tout bloc que la XSL viendrait à ajouter. Seules les deux
+   exceptions ci-dessous entrent dans le vis-à-vis. */
+.bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) > * {
+  grid-column: 1 / -1;
+}
+
+/* Neutralisation explicite de la mise en page D6 (2026-09-11, l. 88-99), qui fait
+   par ailleurs des onglets une colonne latérale de 15 rem collante : ici ils sont
+   la barre d'onglets de l'ÉLEC, pleine largeur en tête. Sans ce rappel, le
+   `grid-row: 1 / span 40` de D6 restait actif et décalait toutes les rangées — le
+   résultat tombait juste par raccroc (rangées vides de hauteur nulle), ce qui
+   n'est pas une base sur laquelle laisser la page. */
+.bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) > details.piece-sommaire {
+  grid-row: auto;
+  position: static;
+  margin: 0 0 1.25rem;
+}
+
+/* Les vues de feuillet se placent d'elles-mêmes dans les colonnes laissées
+   libres : côte à côte quand il y en a deux, l'une sous l'autre si la
+   description occupe déjà la seconde colonne. */
+.bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) > figure.image {
+  grid-column: auto;
+  margin: 0 0 1.25rem;
+}
+
+/* La description : dernière colonne, à la hauteur de la première vue. */
+.bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) > dl.description-list {
+  grid-column: -2 / -1;
+  grid-row: span 40;
+  margin: 0;
+}
+
+/* La galerie conservée, renvoyée sous le vis-à-vis (ordre des onglets). */
+.bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) > section.piece-images {
+  order: 9;
+  margin-top: 2rem;
+}
+
+/* Les vues restent à leur taille naturelle, comme sur l'ÉLEC (219x350) : la règle
+   de base `.bellelay-edition figure img { max-width: 100% }` (l. 70) suffit, et
+   c'est elle qui vaut désormais — la version précédente imposait `width: 100%` à
+   TOUTE figure du corpus, ce qui étirait la vue à la largeur de son conteneur
+   (mesuré sur legacy-document665, vue de feuillet écrasée de 726 à 320 px alors
+   que l'ÉLEC l'y montre en pleine taille). Rien n'est donc réécrit ici.
+   Seule la légende est mise au net, et seulement dans le vis-à-vis : sa largeur
+   est bornée pour qu'un intitulé long n'élargisse pas la colonne `max-content`. */
+.bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) > figure.image figcaption {
+  font-size: .9em;
+  color: #555;
+  text-align: center;
+  margin-top: .3rem;
+  max-width: 24ch;
+}
+
+@media (max-width: 700px) {
+  /* Sous cette largeur le vis-à-vis ne tient plus : on empile. L'ÉLEC, lui,
+     gardait son `margin-left: 256px` en dur et se chevauchait.
+     On empile en COLONNE FLEXIBLE et non en `block` : `order` n'a pas d'effet sur
+     un bloc ordinaire, et la galerie repassait alors devant les vues de feuillet,
+     au rebours de la page large (mesuré : galerie y=395, figures y=778). Une
+     colonne flexible garde le même ordre à toutes les largeurs. */
+  .bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) {
+    display: flex;
+    flex-direction: column;
+    /* `align-items: start` vaut aussi pour une colonne flexible, où il devient un
+       alignement transversal : la description s'y repliait sur 204 px au lieu de
+       la pleine mesure (mesuré). Empilés, les blocs reprennent toute la largeur. */
+    align-items: stretch;
+  }
+  /* Le thème de DoTS-vue impose `width: 100%` aux images de la zone de document
+     (dots-vue/src/, non modifiable) : empilées, les vues passaient de leur taille
+     propre à 585 px de large et près de 940 px de haut, soit un feuillet de trois
+     écrans. On borne la figure — l'ÉLEC les montrait à 219 px, la colonne large
+     les donne à 245. */
+  .bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) > figure.image {
+    max-width: 280px;
+    margin: 0 auto 1.25rem;
+  }
+  .bellelay-edition .page-inner .tei-block.type-reconstructed:has(> figure.image):has(> dl.description-list) > dl.description-list {
+    margin-top: 1rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2026-09-14 — Sommaires : le commentaire de pièce sous son incipit.
+   Voir la note du modèle `tei:seg[@type='p']` dans bellelay.xsl : le segment
+   redevient un `<p>`, comme sur l'ÉLEC. Ne reste ici que la mise au net de la
+   ligne de sommaire, le `<p>` d'origine héritant des marges de paragraphe du
+   thème, beaucoup trop hautes pour un commentaire d'une ligne.
+   -------------------------------------------------------------------------- */
+.bellelay-edition .page-inner li > p {
+  margin: .15rem 0 .1rem;
+}
+.bellelay-edition .page-inner li > p:not([class]) {
+  color: #555;
+  font-size: .95em;
+}

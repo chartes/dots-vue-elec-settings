@@ -1,0 +1,24 @@
+{
+  "collectionId": "delescluze",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": { "collectionShortTitle": "Delescluze" },
+    "pageHeader": { "collectionAltTitle": "Carnets de prison et correspondance privée d'Henri Delescluze", "aboutButtonText": "À propos" },
+    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": "" },
+    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Parcourir l'édition" }
+  },
+  "footerSettings": {
+    "footerTitle": "Henri Delescluze à Belle-Île",
+    "footerSubtitles": ["Carnets de prison et correspondance privée", "1851-1853"],
+    "footerDescription": "Édition critique des carnets de prison et de la correspondance privée d'Henri Delescluze."
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 4,
+    "editByLevel": 2,
+    "editByCiteType": ["page", "groupe", "personne"],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [],
+  "collectionCustomCss": "delescluze"
+}

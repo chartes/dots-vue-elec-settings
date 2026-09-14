@@ -1,3 +1,8 @@
+/* 2026-09-12 (D19) : `.dots-target` double `:target`. Raison : `:target` ne s'applique
+   pas quand une URL avec ancre est ouverte à froid (le fragment DTS est monté après que
+   le navigateur a résolu le fragment) ; DoTS-vue pose donc cette classe sur l'élément
+   visé, dans DocumentPage.vue. Les deux sélecteurs coexistent : `:target` continue de
+   servir pour un clic interne et pour l'impression. */
 /* Pierre Christofle — adaptation du thème historique ÉLEC au gabarit DoTS Vue. */
 :root {
   --fill-color: #8d2632;
@@ -11,7 +16,29 @@
    décale la page à droite au clic d'un appel de note. On le retire de la mise en page. */
 .document-views .mirador-view { display: none !important; }
 
-.document-area #article {
+/* 2026-09-14 : `:not(.bottom-toc)` sur les règles génériques de la zone de texte.
+   Raison mesurée : DoTS-vue rend le SOMMAIRE DES ENFANTS avec le même identifiant
+   que la zone de texte — `<div id="article" class="row bottom-toc">`, enfant direct
+   de `.wrapper`, alors que le texte est `#main > #article`. Les sélecteurs
+   `.document-area #article …` attrapaient donc les deux. Le socle D12, lui, est
+   scopé `:not(.bottom-toc)` : dans le sommaire il ne s'appliquait pas et c'étaient
+   ces règles-ci qui peignaient les titres de sections.
+   Mesures du 2026-09-14 sur /christofle/document/christofle_1437, 1280×900,
+   `a.toc-title` du sommaire :
+       christofle        rgb(141, 38, 50)  Georgia serif  16.8 px   <- anomalie
+       saint-denis       rgb(48, 48, 48)   Roboto         16 px
+       chroniqueslatines rgb(48, 48, 48)   Roboto         16 px
+       edits             rgb(48, 48, 48)   Roboto         16 px
+   Le bouton « Afficher le sommaire » (button.dots-button.toc-menu-toggle) pose
+   `toc-aside-is-opened`, ce qui masque ce sommaire (bloc D11 plus bas) et affiche
+   à la place le volet de l'application, en Roboto 15 px : d'où l'impression de
+   « changement de style » au clic. Avec `:not(.bottom-toc)` les deux présentations
+   coïncident et le rouge disparaît des titres du sommaire.
+   Même remède que saint-denis (qui préfixe par `#main`), mais en conservant la
+   spécificité du socle D12 : le socle vient après dans le fichier et continue donc
+   de l'emporter sur la zone de texte, qui garde exactement l'aspect mesuré avant
+   cette modification (encre rgb(48,48,48), 16 px, interligne 25,6 px). */
+.document-area #article:not(.bottom-toc) {
   max-width: 74rem;
   margin: 0 auto;
   font-family: Georgia, "Times New Roman", serif;
@@ -19,22 +46,25 @@
   line-height: 1.65;
 }
 
-.document-area #article h1,
-.document-area #article h2,
-.document-area #article h3 {
-  color: #8d2632;
+/* Pas de couleur ici : les titres suivent le socle D12 (#202020), comme chez les
+   autres corpus. La déclaration `color: #8d2632` qui s'y trouvait était déjà sans
+   effet dans la zone de texte (spécificité inférieure au socle) et n'agissait plus
+   que sur le sommaire des enfants. */
+.document-area #article:not(.bottom-toc) h1,
+.document-area #article:not(.bottom-toc) h2,
+.document-area #article:not(.bottom-toc) h3 {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.25;
 }
 
-.document-area #article h1 { font-size: 2rem; margin: 2rem 0 1.25rem; }
-.document-area #article h2 { font-size: 1.45rem; margin: 2rem 0 1rem; }
-.document-area #article h3 { font-size: 1.2rem; margin: 1.5rem 0 .75rem; }
-.document-area #article p { margin: 0 0 1rem; }
+.document-area #article:not(.bottom-toc) h1 { font-size: 2rem; margin: 2rem 0 1.25rem; }
+.document-area #article:not(.bottom-toc) h2 { font-size: 1.45rem; margin: 2rem 0 1rem; }
+.document-area #article:not(.bottom-toc) h3 { font-size: 1.2rem; margin: 1.5rem 0 .75rem; }
+.document-area #article:not(.bottom-toc) p { margin: 0 0 1rem; }
 
 /* Les index et les textes édités utilisent les renvois et la coloration ÉLEC. */
-.document-area #article a { color: #8d2632; }
-.document-area #article a:hover { color: #5a121c; }
+.document-area #article:not(.bottom-toc) a { color: #8d2632; }
+.document-area #article:not(.bottom-toc) a:hover { color: #5a121c; }
 .document-area #article .persName,
 .document-area #article .placeName,
 .document-area #article .orgName { color: #8d2632; }
@@ -47,7 +77,9 @@
 .document-area #article .teiHeader { background: #f8f4f2; border-left: 4px solid #8d2632; padding: 1.5rem; }
 
 /* --- Introduction : sommaire des parties (Le notaire, Son registre…) --- */
-.christofle-intro-index .cl-section-head { color:#8d2632; font-family:Arial,Helvetica,sans-serif; margin:1.5rem 0 1rem; }
+/* 2026-09-14 : plus de couleur sur les intitulés de section — ils suivent le socle
+   D12 (#202020) comme chez les autres corpus. */
+.christofle-intro-index .cl-section-head { font-family:Arial,Helvetica,sans-serif; margin:1.5rem 0 1rem; }
 .christofle-intro-index .cl-children { list-style:none; padding:0; margin:0 0 2rem; }
 .christofle-intro-index .cl-children li { border-bottom:1px dotted #e0dcd5; }
 .christofle-intro-index .cl-child-link { display:block; padding:.55rem .3rem; color:#8d2632; text-decoration:none; line-height:1.45; }
@@ -77,11 +109,14 @@
   line-height: 1.33;
   text-align: justify;
 }
+/* 2026-09-14 : `color: #A73136` retiré. Il était déjà sans effet — mesuré
+   rgb(32, 32, 32) sur ?refId=index-types-actes le 2026-09-14, le socle D12
+   (`.document-area #article:not(.bottom-toc) h1`, spécificité supérieure)
+   l'emportant — et le titre doit rester sobre comme chez les autres corpus. */
 #article .chr-types h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15.4px;
   font-weight: 700;
-  color: #A73136;
   line-height: 1.33;
   margin: 0 0 .8rem;
 }
@@ -145,9 +180,19 @@
 /* Folios [77 v°] */
 .christofle-minute .pb { display: inline-block; margin-right: .3em; color: #777; font-size: .92em; white-space: nowrap; }
 
-/* Fac-similés */
+/* Fac-similés : vignette (summary) qui déplie l'image pleine taille, sans script (B8, 2026-09-11).
+   html.css de DoTS-vue masque tout enfant de <details> (details > * { display: none }) : on les rétablit ici. */
 .christofle-facsimile { display: block; max-width: 20rem; margin: 1rem auto; }
+.christofle-facsimile[open] { max-width: 100%; }
+.christofle-facsimile > summary { display: block; cursor: zoom-in; list-style: none; text-align: center; }
+.christofle-facsimile > summary::-webkit-details-marker { display: none; }
+.christofle-facsimile[open] > summary { cursor: zoom-out; }
 .christofle-facsimile img { display: block; width: 100%; height: auto; }
+.christofle-facsimile-ouvrir, .christofle-facsimile-fermer { display: inline-block; margin-top: .3rem; color: var(--fill-color); font-size: .9rem; }
+.christofle-facsimile-fermer, .christofle-facsimile[open] .christofle-facsimile-ouvrir, .christofle-facsimile[open] .christofle-facsimile-vignette { display: none; }
+.christofle-facsimile[open] .christofle-facsimile-fermer { display: inline-block; }
+.christofle-facsimile > .christofle-facsimile-image { display: none; }
+.christofle-facsimile[open] > .christofle-facsimile-image { display: block; margin-top: .4rem; }
 .christofle-image { display: block; max-width: 100%; height: auto; margin: 1rem auto; }
 
 /* Liens d'index dans le texte (renvoi pers/lieu -> index) */
@@ -172,7 +217,7 @@
   line-height: 1.5;
 }
 .actTypes > section > h1 {
-  color: #8d2632;
+  /* 2026-09-14 : couleur retirée (bloc dormant, cf. avertissement ci-dessus). */
   font-family: Georgia, "Times New Roman", serif;
   font-weight: normal;
   text-align: center;
@@ -202,7 +247,8 @@
   line-height: 133%;
 }
 .document-area #article .actTypes > section > h1 {
-  color: #a73136 !important;
+  /* 2026-09-14 : `color: #a73136 !important` retiré — seul rouge de titre qui aurait
+     pu repasser devant le socle D12 si ce bloc dormant redevenait actif. */
   font-family: Arial, Verdana, sans-serif !important;
   font-size: 15px !important;
   font-weight: bold !important;
@@ -326,8 +372,10 @@
 .jours-index:has(.jour-group .jf-radio:checked) .jour-group:not(:has(.jf-radio:checked)) { display: none; }
 /* groupes de jour */
 .jour-group { margin: 0 0 1.6rem; scroll-margin-top: 4rem; }
+/* 2026-09-14 : `color: #8d2632` retiré (déjà sans effet — mesuré rgb(32, 32, 32)
+   sur ?refId=mois-01, 16 occurrences ; le socle D12 l'emportait). */
 .jour-group .jour-head { font-family: Arial, Helvetica, sans-serif; font-size: .95rem; font-weight: 700;
-  color: #8d2632; border-bottom: 1px solid #e0dcd5; padding-bottom: .2rem; margin: 0 0 .6rem; }
+  border-bottom: 1px solid #e0dcd5; padding-bottom: .2rem; margin: 0 0 .6rem; }
 .jour-note { padding: .2rem 0; border-bottom: 1px dotted #eadfe0; }
 .jour-note .note-link { display: block; color: inherit; text-decoration: none; }
 .jour-note .note-link:hover { background: #faf4f4; }
@@ -336,8 +384,10 @@
 .jour-note .note-summary { color: #33292a; }
 
 @media (max-width: 768px) {
-  .document-area #article { font-size: 1rem; }
-  .document-area #article h1 { font-size: 1.55rem; }
+  /* `:not(.bottom-toc)` pour la même raison qu'en tête de fichier : ne pas
+     redimensionner le sommaire des enfants de DoTS-vue. */
+  .document-area #article:not(.bottom-toc) { font-size: 1rem; }
+  .document-area #article:not(.bottom-toc) h1 { font-size: 1.55rem; }
 }
 
 /* --- Navigation par mois et par jour ------------------------------------------
@@ -410,3 +460,378 @@
   padding: 0 .15rem;
 }
 #article .christofle-notes-index .day-link:hover { color: #A73136; font-weight: 700; }
+
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ==== D14e2 (2026-09-12) : comportements de l'ancien site ÉLEC, sans JavaScript ====
+   Trois interactions de elec.enc.sorbonne.fr/christofle relevées dans theme/utils.js
+   et reproduites ici : la bulle d'apparat (displayApparatusNote / hideApparatusNote,
+   84 pages), l'accès à tous les folios (loadImageSectionBis, 82 pages) et le
+   découpage de l'index par lettre (26 pages lettre-X.html). DoTS-vue compile le
+   fragment comme un gabarit Vue : aucun <script> ni <style> ne s'exécute, tout est
+   donc en CSS (:hover, :focus-visible, radios + :has(), :target). */
+
+/* --- 1. Bulle d'apparat au survol de l'appel de note -------------------------
+   L'ÉLEC affichait la note d'apparat à côté de l'appel, sans quitter la ligne.
+   La XSL recopie le texte de la note dans @data-tip (384 appels sur 384 résolus) ;
+   le lien vers la note en pied reste actif au clic.
+   :focus-visible double le survol pour le clavier. Les propriétés héritées sont
+   remises à plat : l'appel est souvent DANS un <a class="linkToIndex"> (vedette
+   en petites capitales, couleur bordeaux) dont la bulle ne doit rien hériter. */
+#article .christofle-minute .noteref { position: relative; text-decoration: none; }
+#article .christofle-minute .noteref[data-tip]:hover,
+#article .christofle-minute .noteref[data-tip]:focus-visible { outline: none; }
+#article .christofle-minute .noteref[data-tip]:hover::after,
+#article .christofle-minute .noteref[data-tip]:focus-visible::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: 1.5em;
+  left: 0;
+  z-index: 60;
+  box-sizing: border-box;
+  width: min(26rem, 78vw);
+  padding: .5rem .7rem;
+  border: 1px solid #8d2632;
+  background: #fdf6f6;
+  color: #28211f;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .22);
+  font: 400 .88rem/1.45 Georgia, "Times New Roman", serif;
+  font-variant: normal;
+  font-variant-caps: normal;
+  text-align: left;
+  text-transform: none;
+  white-space: normal;
+}
+
+/* --- 2. Fac-similés : légende de l'ÉLEC sous l'image dépliée -----------------
+   html.css de DoTS-vue masque tout enfant de <details> : la légende doit être
+   rétablie explicitement à l'ouverture (comme l'image, plus haut dans ce fichier). */
+.christofle-facsimile > .christofle-facsimile-legende { display: none; }
+.christofle-facsimile[open] > .christofle-facsimile-legende {
+  display: block;
+  margin-top: .3rem;
+  color: #5a4a4a;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .82rem;
+  text-align: center;
+}
+
+/* --- 3. Index des lieux et personnes : filtre par lettre ---------------------
+   Équivalent des 26 pages lettre-X.html : les radios sont masquées, on agit par
+   les <label>. « Toutes » coché par défaut => aucune règle ci-dessous ne
+   s'applique => les 1 420 vedettes restent visibles. */
+#article .chr-lettres {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0 0 1.25rem;
+  padding: .55rem .3rem;
+  background: #fbf8f8;
+  border-top: 1px solid #d7d1ca;
+  border-bottom: 1px solid #d7d1ca;
+}
+#article .chr-lettres .chr-lettres-label {
+  margin-right: .3rem;
+  color: #a05a63;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .85rem;
+}
+#article .chr-lettres .chr-lettre { position: relative; }
+#article .chr-lettres .chr-lettre input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+#article .chr-lettres .chr-lettre label {
+  display: inline-block;
+  min-width: 1.7rem;
+  padding: .15rem .4rem;
+  border: 1px solid #e0cccc;
+  border-radius: 4px;
+  background: #fff;
+  color: #8d2632;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .9rem;
+  text-align: center;
+  user-select: none;
+}
+#article .chr-lettres .chr-lettre label:hover { background: #f0e0e0; }
+#article .chr-lettres .chr-lettre input:checked + label {
+  border-color: #8d2632;
+  background: #8d2632;
+  color: #fff;
+  font-weight: 700;
+}
+#article .chr-lettres .chr-lettre input:focus-visible + label {
+  outline: 2px solid #1a4f9c;
+  outline-offset: 1px;
+}
+
+/* Une règle par lettre. Seules les lettres représentées ont un bouton (21 sur 26
+   dans cette édition) ; les autres règles ne peuvent donc jamais s'activer.
+   La portée est l'enfant DIRECT : une sous-entrée de lieu suit son parent. */
+.christofle-index-unified:has(input[name="chr-lettre"][value="A"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="A"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="B"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="B"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="C"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="C"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="D"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="D"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="E"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="E"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="F"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="F"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="G"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="G"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="H"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="H"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="I"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="I"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="J"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="J"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="K"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="K"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="L"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="L"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="M"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="M"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="N"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="N"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="O"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="O"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="P"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="P"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="Q"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="Q"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="R"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="R"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="S"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="S"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="T"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="T"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="U"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="U"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="V"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="V"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="W"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="W"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="X"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="X"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="Y"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="Y"]) { display: none; }
+.christofle-index-unified:has(input[name="chr-lettre"][value="Z"]:checked) .christofle-index-entries > .index-entry:not([data-lettre="Z"]) { display: none; }
+
+/* --- 4. Vedette visée par un renvoi (ancien window.onload : class="marked") ---
+   Une minute renvoie à l'index par ?refId=…#p-0700 : l'ÉLEC surlignait l'entrée
+   atteinte. :target fait la même chose sans script. Le !important garantit qu'une
+   entrée visée reste visible même si un filtre par lettre est actif. */
+#article .christofle-index .index-entry { scroll-margin-top: 4.5rem; }
+#article .christofle-index-unified .christofle-index-entries > .index-entry:target,
+#article .christofle-index-unified .christofle-index-entries > .index-entry.dots-target { display: block !important; }
+#article .christofle-index .index-entry:target,
+#article .christofle-index .index-entry.dots-target {
+  background: #fdf3d8;
+  box-shadow: inset 4px 0 0 #8d2632;
+}
+/* ==== fin D14e2 ==== */
+/* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
+/* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
+   Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
+   au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
+   est conservée : elle est lue dans --text-color, avec un repli sur celle de DoTS. */
+.document-area #article:not(.bottom-toc),
+.document-area main {
+  --d12-accent: var(--text-color, #8f0e21);
+  --d12-encre: var(--document-text-color, #303030);
+  --d12-filet: #dcd8d3;
+  --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
+  --d12-fond-tres-doux: #fafafa;
+  --d12-rayon: var(--button-border-radius, 4px);
+}
+
+/* Texte : mesure de lecture régulière, encre et interligne de l'application.
+   La largeur est bornée parce qu'elle atteignait 1 184 px chez christofle
+   (mesuré le 2026-09-12), soit des lignes de plus de 130 caractères. 72rem est
+   la valeur déjà retenue par les corpus qui s'en étaient souciés (bellelay 72,
+   actesroyauxdupoitou 74) ; un corpus peut la surcharger après ce bloc. */
+.document-area #article:not(.bottom-toc) {
+  max-width: min(100%, 72rem);
+  margin-inline: auto;
+  color: var(--d12-encre);
+  font-size: var(--font-default-size, 16px);
+  /* 1.6 et non le jeton --font-default-line-heigth (1.4) : celui-ci est calibré pour
+     l'interface, et la comparaison avant/après du 2026-09-12 montrait l'interligne
+     tomber de 26,4 px à 22,4 px chez christofle, actesroyauxdupoitou, sanctoral_elec
+     et les testaments — trop serré pour de la prose éditoriale en serif. */
+  line-height: 1.6;
+}
+.document-area #article:not(.bottom-toc) p {
+  margin: 0 0 .9em;
+}
+
+/* Titres : famille secondaire de l'application, graisse tenue, accent sobre.
+   Pas de bandeau plein : un filet gauche, comme les blocs de DoTS. */
+.document-area #article:not(.bottom-toc) h1,
+.document-area #article:not(.bottom-toc) h2,
+.document-area #article:not(.bottom-toc) h3,
+.document-area #article:not(.bottom-toc) h4 {
+  color: #202020;
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .01em;
+}
+.document-area #article:not(.bottom-toc) h1 { font-size: 1.6rem; margin: 0 0 1rem; }
+.document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
+.document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
+.document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
+
+/* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
+.document-area #article:not(.bottom-toc) a {
+  color: var(--d12-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.document-area #article:not(.bottom-toc) a:hover,
+.document-area #article:not(.bottom-toc) a:focus-visible {
+  text-decoration: var(--text-decoration-hover, underline dotted);
+}
+.document-area #article:not(.bottom-toc) a:focus-visible {
+  outline: 2px solid var(--d12-accent);
+  outline-offset: 2px;
+}
+
+/* Tableaux : filets fins, en-tête sur fond doux, pas de quadrillage lourd. */
+.document-area #article:not(.bottom-toc) table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: .95em;
+}
+.document-area #article:not(.bottom-toc) th,
+.document-area #article:not(.bottom-toc) td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid var(--d12-filet);
+  text-align: left;
+  vertical-align: top;
+}
+.document-area #article:not(.bottom-toc) th {
+  background: var(--d12-fond-doux);
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+/* Un tableau large défile dans son cadre, la page ne défile jamais de côté. */
+.document-area #article:not(.bottom-toc) .table-wrap {
+  overflow-x: auto;
+}
+
+/* Citations, blocs éditoriaux, légendes. */
+.document-area #article:not(.bottom-toc) blockquote,
+.document-area #article:not(.bottom-toc) .citation {
+  margin: 1rem 0;
+  padding: .1rem 0 .1rem 1rem;
+  border-left: 3px solid var(--d12-filet);
+  color: #45403c;
+}
+.document-area #article:not(.bottom-toc) figcaption,
+.document-area #article:not(.bottom-toc) .legendeillustration {
+  color: #5a5450;
+  font-size: .85rem;
+  line-height: 1.4;
+}
+.document-area #article:not(.bottom-toc) hr {
+  height: 0;
+  margin: 1.6rem 0;
+  border: 0;
+  border-top: 1px solid var(--d12-filet);
+}
+
+/* Colonne de texte : elle prend la place disponible dans la rangée.
+   Pourquoi : sur une page COQUILLE — une unité non éditoriale, qui ne rend que son titre
+   (le `liber` de cjc, la `rubrique` paratextes de delescluze) — la colonne se rétractait
+   sur la largeur du titre : mesuré le 2026-09-12, 65 px chez cjc (« Livre I » coupé en deux
+   lignes) et 92 px chez delescluze, parent compris, la visionneuse occupant le reste de la
+   rangée. Même procédé que D11 pour le sommaire des enfants (`flex` sur l'enfant du
+   `wrapper`), et sans effet quand la page a du contenu.
+   La chaîne mesurée sur cjc : `#article` (65 px) ← `#main` (65) ← `.row.remove-bottom-padding`
+   (65, en `display:flex`) ← `.wrapper` (1 225 px). C'est donc la RANGÉE qui se rétracte, pas
+   `#article` : une première version de cette règle visait `.wrapper > #article` et ne pouvait
+   pas s'appliquer, `#article` n'étant pas enfant du `wrapper`. La visionneuse, elle, est en
+   `position: absolute` (500 px) et n'entre pas dans le calcul. */
+.document-area .wrapper > .row {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Images : jamais plus larges que la colonne. */
+.document-area #article:not(.bottom-toc) img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Contrôles éditoriaux (onglets, boutons, menus dépliants des corpus) : même
+   grammaire visuelle que les boutons de l'application — coins légers, filet fin,
+   accent réservé à l'état actif. */
+.document-area #article:not(.bottom-toc) button,
+.document-area #article:not(.bottom-toc) input[type="reset"],
+.document-area #article:not(.bottom-toc) input[type="submit"],
+.document-area #article:not(.bottom-toc) summary {
+  font-family: var(--font-primary, "Roboto"), Arial, Helvetica, sans-serif;
+  font-size: .9rem;
+}
+.document-area #article:not(.bottom-toc) input[type="reset"],
+.document-area #article:not(.bottom-toc) input[type="submit"],
+.document-area #article:not(.bottom-toc) button {
+  padding: .35rem .7rem;
+  border: 1px solid var(--d12-filet);
+  border-radius: var(--d12-rayon);
+  background: #fff;
+  color: var(--d12-encre);
+  cursor: pointer;
+}
+.document-area #article:not(.bottom-toc) input[type="reset"]:hover,
+.document-area #article:not(.bottom-toc) input[type="submit"]:hover,
+.document-area #article:not(.bottom-toc) button:hover {
+  border-color: var(--d12-accent);
+  color: var(--d12-accent);
+}
+
+/* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
+.document-area #article:not(.bottom-toc) .footnotes,
+.document-area #article:not(.bottom-toc) .apparatus,
+.document-area #article:not(.bottom-toc) .note {
+  font-size: var(--font-small-size, 14px);
+  line-height: 1.5;
+}
+.document-area #article:not(.bottom-toc) .footnotes {
+  margin-top: 2rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--d12-filet);
+}
+.document-area #article:not(.bottom-toc) a.noteref,
+.document-area #article:not(.bottom-toc) .noteref {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .document-area #article:not(.bottom-toc) h1 { font-size: 1.4rem; }
+  .document-area #article:not(.bottom-toc) h2 { font-size: 1.2rem; }
+  .document-area #article:not(.bottom-toc) table { font-size: .9em; }
+}
+/* ==== D12-SOCLE-FIN ==== */

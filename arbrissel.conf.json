@@ -1,0 +1,24 @@
+{
+  "collectionId": "arbrissel",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": { "collectionShortTitle": "Arbrissel" },
+    "pageHeader": { "collectionAltTitle": "Arbrissel", "aboutButtonText": "À propos" },
+    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": "" },
+    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Parcourir le texte" }
+  },
+  "footerSettings": {
+    "footerTitle": "Arbrissel",
+    "footerSubtitles": ["École nationale des chartes – PSL"],
+    "footerDescription": ""
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 2,
+    "editByLevel": 2,
+    "editByCiteType": ["section"],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [],
+  "collectionCustomCss": "arbrissel"
+}

@@ -1,0 +1,24 @@
+{
+  "collectionId": "interpares2",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": { "collectionShortTitle": "InterPARES 2" },
+    "pageHeader": { "collectionAltTitle": "InterPARES 2", "aboutButtonText": "À propos" },
+    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": "" },
+    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Parcourir les pages" }
+  },
+  "footerSettings": {
+    "footerTitle": "InterPARES 2",
+    "footerSubtitles": ["Édition électronique de l'École nationale des chartes"],
+    "footerDescription": "Archivistique et diplomatique numériques : traduction française d'une partie des livrables du projet InterPARES 2."
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 4,
+    "editByLevel": 2,
+    "editByCiteType": ["page", "div"],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [],
+  "collectionCustomCss": "interpares2"
+}

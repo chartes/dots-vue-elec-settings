@@ -81,7 +81,7 @@
     },
     null
   ],
-  "collectionCustomCss": false,
+  "collectionCustomCss": "cid",
   "customRoutes": [
     {
       "name": "Search",

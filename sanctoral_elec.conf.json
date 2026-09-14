@@ -8,7 +8,7 @@
       "collectionAltTitle": "Le sanctoral du lectionnaire de l'office dominicain (1254-1256)",
       "aboutButtonText": "À propos"
     },
-     "descriptionSection": {
+    "descriptionSection": {
       "collectionDescription": "",
       "customCollectionDescription": ""
     },
@@ -26,7 +26,7 @@
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 4,
-    "editByLevel": null,
+    "editByLevel": 1,
     "editByCiteType": [
       "section",
       "sous-section",
@@ -36,36 +36,22 @@
       "dies"
     ]
   },
-  "aboutPageSettings": [
-  ],
+  "aboutPageSettings": [],
   "collectionCustomCss": "sanctoral_elec",
   "metadataDisplayOrder": [
     "dct:title",
-
     "dct:creator",
-
     "dct:created",
-
     "dct:language",
-
     "schema:contributor",
-
     "schema:isBasedOn",
-
     "dct:publisher",
-
     "dct:issued",
-
     "dct:bibliographicalCitation",
-
     "dct:coverage",
-
     "dct:description",
-
     "dct:license",
-
     "dct:rights",
-
     "dct:identifier"
   ],
   "metadataRename": {
@@ -74,7 +60,14 @@
   },
   "excludeMetadata": {
     "onlyDeclared": true,
-    "fields": [
-    ]
-  }
+    "fields": []
+  },
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "mediaTypeEndpoint": "html"
 }

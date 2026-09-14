@@ -10,7 +10,9 @@
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "toc",
@@ -30,16 +32,33 @@
     "tableOfContentDepth": 5,
     "editByLevel": 1,
     "editByCiteType": [
-       "partie",
-       "registre",
-       "compte",
-       "index"
+      "partie",
+      "registre",
+      "compte",
+      "index"
     ]
   },
- "aboutPageSettings": [
-    { "tabName": "Les archives de Montferrand", "compName": "about1" },
-    { "tabName": "Principes d'édition", "compName": "about2" },
-    { "tabName": "Bibliographie", "compName": "about3" }
+  "aboutPageSettings": [
+    {
+      "tabName": "Les archives de Montferrand",
+      "compName": "about1"
+    },
+    {
+      "tabName": "Principes d'édition",
+      "compName": "about2"
+    },
+    {
+      "tabName": "Bibliographie",
+      "compName": "about3"
+    }
   ],
-  "collectionCustomCss": "comptes"
+  "collectionCustomCss": "comptes",
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "mediaTypeEndpoint": "html"
 }

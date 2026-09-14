@@ -1,10 +1,15 @@
 <template>
-  <section>
-    <h2>Les choix techniques</h2>
-    <p>La présente édition est entièrement encodée en XML conformément au standard TEI (<i>Text Encoding Initiative</i>). Le site historique était produit à partir des fichiers XML/TEI par une transformation XSLT, mise en forme par CSS et complétée par JavaScript.</p>
-    <p>La migration conserve les TEI et leurs crédits comme sources de référence. DoTS fournit désormais les documents et leurs fragments citables ; Vue assure la lecture, les paratextes, les index et les interactions.</p>
-    <h2>Édition et droits</h2>
-    <p>Les fichiers TEI, les crédits et les notices de droits de l’édition ÉLEC restent la référence pour toute réutilisation. La publication sépare explicitement les données sources, l’interface de consultation et les fac-similés.</p>
-    <p><i>Texte adapté de la page « Le projet » de l’édition historique, Christine Nougaret et Florence Clavaud, février 2017.</i></p>
-  </section>
+  <!-- 2026-09-14 : le texte de ce panneau est SUPPRIMÉ, sur décision de l'utilisateur
+       (« about on supprime le texte »).
+
+       Pourquoi : il s'agissait de résumés RÉÉCRITS des paratextes de l'édition — about3
+       le disait lui-même, « textes adaptés des dix sections de l'introduction historique ».
+       Ce ne sont pas les mots de l'ÉLEC. Depuis le versement du document
+       `testaments-poilus-introduction` le même jour, le texte AUTHENTIQUE est servi par
+       l'application (Accueil, Le projet, Introduction, Nous contacter, Crédits, Mentions
+       légales, dans le sommaire de gauche) : ces résumés en étaient devenus le doublon
+       approximatif, et l'utilisateur a choisi partout la fidélité à la source.
+
+       Le composant est conservé, vide, parce que `testaments-poilus.conf.json` le référence
+       encore dans `aboutPageSettings`. L'ancien contenu est dans le fichier .bak ci-contre. -->
 </template>

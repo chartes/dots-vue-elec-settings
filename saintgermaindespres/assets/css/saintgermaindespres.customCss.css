@@ -1,98 +1,205 @@
-/* 2026-09-12 (D19) : `.dots-target` double `:target`. Raison : `:target` ne s'applique
-   pas quand une URL avec ancre est ouverte à froid (le fragment DTS est monté après que
-   le navigateur a résolu le fragment) ; DoTS-vue pose donc cette classe sur l'élément
-   visé, dans DocumentPage.vue. Les deux sélecteurs coexistent : `:target` continue de
-   servir pour un clic interne et pour l'impression. */
-/* Sanctoral du lectionnaire de l'office dominicain — CSS custom DoTS Vue.
+/* ============================================================================
+   Restauration de l'église Saint-Germain-des-Prés — CSS spécifique du corpus,
+   adaptée au gabarit DoTS Vue.
 
-   Attention au nommage : la clé de chargement est le NOM DU FICHIER
-   (App.vue, getCustomCss), qui doit valoir la valeur de "collectionCustomCss"
-   dans sanctoral_elec.conf.json.
+   POURQUOI CE FICHIER A ÉTÉ REFAIT (2026-09-09)
+   ---------------------------------------------
+   La version précédente (402 lignes) concaténait quatre feuilles du site ÉLEC :
+   `theme/foundation.min.css` (le framework Foundation complet, normalize.css
+   inclus), `theme/template.css`, `theme/base.css` et `theme/colorbox.css`.
 
-   Les valeurs reprennent celles de la publication Diple d'origine
-   (elec.enc.sorbonne.fr/sanctoral, theme/sanctoral.css et
-   diple/theme/neutre/diple_html.css), afin que la lecture retrouve les
-   conventions de l'édition. */
+   App.vue injecte cette feuille dans un <style id="customCss"> ajouté en dernier
+   dans <head> : un framework CSS entier s'appliquait donc à TOUTE l'application
+   dots-vue, avec la précédence maximale — reset `*`, `html`, `body`, grille
+   `.row`/`.column`, boutons, formulaires, plus les règles de gabarit d'ÉLEC
+   (`header#header`, `#main-menu`, `#main`, `footer`, `.container`, `.inner`) et
+   des sélecteurs nus `a`, `h1`-`h6`, `ul`, `li`, `ol`, `table`, `img`, `p`,
+   `input`, `select`. `#main` est en outre le conteneur émis par la XSL DoTS :
+   les valeurs de mise en page d'ÉLEC s'y appliquaient directement.
 
-:root { --fill-color:#7c1c3d; --meta-area-fill-color:#f7eef2; --default-text-color:#211a1d; }
+   CE QUI EST CONSERVÉ
+   -------------------
+   La personnalité éditoriale d'ÉLEC (rouge #bc052d, titres Georgia gras, filet
+   sous le h1, puces carrées, numérotation en pastilles rouges, encadrés `.box`,
+   justification), reprise valeur pour valeur de `theme/base.css` et
+   `theme/template.css`, limitée à la zone de texte TEI.
 
-.document-area #article { font-family: Georgia, "Times New Roman", serif; line-height:1.6; max-width:74rem; margin:auto; }
-.document-area #article h1, .document-area #article h2, .document-area #article h3 { font-family:Arial, Helvetica, sans-serif; }
+   Les @font-face « CartaNovaTexte » de template.css sont abandonnés : les
+   fichiers de fonte répondent 404 sur ÉLEC (vérifié le 2026-09-09), le site
+   historique retombe donc lui-même sur la pile serif par défaut.
+
+   PORTÉE : `#main #article` est le conteneur émis par la chaîne XSL DoTS.
+   La page contient un SECOND `id="article"` (le sommaire de bas de page de
+   dots-vue) ; seul celui de la zone de texte est fils de `#main`.
+   ============================================================================ */
+
 
 /* --------------------------------------------------------------------------
-   Encre rouge. Les « Conventions typographiques » de l'introduction opposent
-   l'encre noire du texte à l'encre rouge des rubriques : c'est le #971716 de
-   Diple. 540 paragraphes du corps sont concernés.
+   1. Colonne de texte — theme/template.css : body { #fbf8f4, serif }
    -------------------------------------------------------------------------- */
-.document-area #article .rubric { color:#971716; }
 
-/* Les numéros de lectio et de dies sont en petites capitales chez Diple. */
-.document-area #article .num { font-variant:small-caps; line-height:100%; }
-.document-area #article .num sup { font-variant:normal; }
+#main #article {
+  font-family: "CartaNovaTexte", Georgia, "Times New Roman", serif;
+  color: #000;
+  line-height: 1.5;
+  max-width: 74rem;
+  margin: 0 auto;
+}
+
+#main #article p { margin: 0 0 1em; text-align: justify; }
+#main #article p.noindent { text-indent: 0; }
+
 
 /* --------------------------------------------------------------------------
-   Les deux apparats.
-
-   Apparat critique (notes sans @n) et notes de commentaire (notes à @n) se
-   suivent dans l'ordre du texte, chacune sur sa ligne, comme dans la
-   publication Diple. La générique hteiml ne les style pas.
+   2. Titres — theme/base.css
    -------------------------------------------------------------------------- */
-.document-area #article .footnotes { font-size:.92em; margin-top:2rem; padding-top:.6rem; border-top:1px solid #d9ccd2; }
-.document-area #article aside.note { display:block; margin:.2rem 0; text-indent:0; padding-left:1.6rem; text-indent:-1.6rem; }
 
-/* Appels et retours : exposant discret, comme les a.refnote de Diple. */
-.document-area #article a.noteref { font-size:.72em; vertical-align:super; line-height:0; text-decoration:none; padding:0 .1em; }
-.document-area #article a.noteref:hover { text-decoration:none; border-bottom:1px solid currentColor; }
-.document-area #article .footnotes a.noteback { font-weight:700; text-decoration:none; }
-.document-area #article .footnotes a:hover { border-bottom:1px solid currentColor; }
+#main #article h1,
+#main #article h2,
+#main #article h3,
+#main #article h4,
+#main #article h5,
+#main #article h6 { font-family: Georgia, "Times New Roman", serif; font-weight: bold; }
 
-/* La cible d'un renvoi se signale, sans quoi rien ne distingue la note
-   atteinte de ses voisines dans une liste continue. */
-.document-area #article .note, .document-area #article aside.note { scroll-margin-top:6rem; }
-.document-area #article .note:target, .document-area #article aside.note:target,
-.document-area #article .note.dots-target, .document-area #article aside.note.dots-target { background:#fdf3d7; outline:2px solid #d2a323; }
+#main #article h1 {
+  font-size: 1.6em;
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+  margin: 0 0 1em;
+}
+#main #article h2 { font-size: 1.3em; margin: 1.6em 0 .8em; }
+#main #article h3 { font-size: 1.15em; margin: 1.4em 0 .6em; }
+#main #article h4 { font-size: 1.05em; margin: 1.2em 0 .6em; }
+
+#main #article h1 a,
+#main #article h2 a,
+#main #article h3 a { color: inherit; }
+
 
 /* --------------------------------------------------------------------------
-   Sources et citations : les listBibl closent chaque lectio.
+   3. Liens du texte — theme/base.css
    -------------------------------------------------------------------------- */
-.document-area #article ul.listBibl { list-style:none; margin:.35rem 0 0; padding-left:1.2rem; font-size:.9em; color:#4a4045; }
-.document-area #article ul.listBibl li.bibl { margin:.1rem 0; }
-.document-area #article .cit q, .document-area #article q { font-style:italic; }
-.document-area #article cite.title { font-style:italic; }
+
+#main #article a,
+#main #article a:visited { color: #bc052d; text-decoration: none; }
+#main #article a:hover { text-decoration: underline; color: #bc052d; }
+
 
 /* --------------------------------------------------------------------------
-   Mirador. Le sanctoral n'a pas de fac-similés : la visionneuse n'y sert
-   jamais. En mode texte, l'application la masque en visibility:hidden, ce qui
-   la laisse dans le flux — elle gardait 609 px de haut, et les conteneurs
-   .document-views / .layout-main portent en outre une min-height calculée pour
-   la vue en deux volets. Sur une page dont le contenu fait 157 px, le document
-   en faisait 1215 : d'où le défilement dans le vide.
-   Mesuré : 1215 px -> 763 px.
+   4. Listes — theme/base.css (puces carrées, numérotation en pastilles rouges)
    -------------------------------------------------------------------------- */
-.text-mode .mirador-view,
-.text-mode #vue-mirador-container { display:none !important; }
-.text-mode .document-views,
-.text-mode.layout-main { min-height:0 !important; }
+
+#main #article ul { margin: 0 0 1em; padding: 0 0 0 1.2em; }
+#main #article ul li { list-style: square; padding: 0 0 0 10px; margin: 0; }
+
+#main #article ol { margin: 0 0 1em; padding: 0; counter-reset: li; }
+#main #article ol > li {
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 8px 8px 8px 28px;
+}
+#main #article ol > li::before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  top: 6px;
+  left: 0;
+  min-width: 1em;
+  min-height: 1em;
+  line-height: 1em;
+  padding: 4px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #bc052d;
+  font-weight: 300;
+  text-align: center;
+}
+
 
 /* --------------------------------------------------------------------------
-   Sommaire des divisions conteneurs — parties et pars. La liste vient de la
-   source (list[@type='summary']) : DoTS retire les enfants d'une unité servie
-   avec excludeFragments, la feuille ne pourrait pas la dresser elle-même.
-   Puces carrées et interligne serré, comme sur l'ÉLEC.
+   5. Appareil éditorial de la pièce
+   La XSL DoTS sort chaque pièce en `article.text` avec `header.front`
+   (chapeau, date, lieu), puis les divisions `.tradition`, `.transcription`,
+   et les mentions `.listWit`, `.witness`, `.argument`, `.salute`, `.signed`,
+   `.docDate`. Même traitement que la CSS saint-denis, aux couleurs d'ÉLEC.
    -------------------------------------------------------------------------- */
-.document-area #article ul.sommaire { list-style:square; margin:1rem 0 0 1.5rem; padding:0; }
-.document-area #article ul.sommaire li { margin:.12rem 0; }
-.document-area #article ul.sommaire a { text-decoration:none; border-bottom:1px solid rgba(124,28,61,.35); }
-.document-area #article ul.sommaire a:hover { border-bottom-color:currentColor; }
+
+#main #article .front { margin-bottom: 1.5em; }
+#main #article .docDate,
+#main #article .date { font-variant: small-caps; }
+#main #article .argument { font-size: .95em; }
+
+#main #article .tradition,
+#main #article .listWit {
+  border-left: 3px solid #e6c3c9;
+  background: #fbf8f4;
+  margin: 1rem 0;
+  padding: .8rem 1rem;
+  font-size: .95em;
+}
+#main #article .witness { display: block; }
+
+#main #article .transcription {
+  border-top: 1px solid #e6c3c9;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+#main #article .salute,
+#main #article .signed { text-align: right; text-indent: 0; }
+
+/* Encadrés éditoriaux — theme/base.css */
+#main #article .box {
+  border: 1px solid #bc052d;
+  padding: 10px;
+  text-align: justify;
+}
+#main #article .box.box-inverse { padding: 0; background: #bc052d; color: #fff; }
+#main #article .box h4.box-title {
+  background: #bc052d;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  margin: 0;
+  font-size: 1.2em;
+}
 
 
 /* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
+   6. Images et tableaux — theme/base.css
+   -------------------------------------------------------------------------- */
+
+#main #article img { max-width: 100%; height: auto; }
+#main #article table { font-size: .857em; border-collapse: collapse; }
+#main #article th,
+#main #article td { border: 1px solid #ddd; padding: 2px 6px; vertical-align: top; }
+#main #article sup { top: -.3em; }
+
+
+/* --------------------------------------------------------------------------
+   7. Notes de bas de fragment
+   -------------------------------------------------------------------------- */
+
+#main #article .noteref,
+#main #article .noteback { color: #bc052d; }
+#main #article .footnotes { font-size: 90%; line-height: 1.25; }
+#main #article .footnotes p { margin: 0; text-indent: 0; }
+
+#main #article a.bookmark { color: #ccc; text-decoration: none; }
+#main #article a.bookmark:hover { color: #bc052d; }
+
+
+/* --------------------------------------------------------------------------
+   8. Volet Mirador en mode texte (2026-09-11, D7)
+   DocumentPage.vue veut sortir le volet du flux en mode texte
+   (`.text-mode .mirador-view { position: absolute; visibility: hidden }`),
+   mais sa règle `#mirador-view { position: relative }` (sélecteur d'id, plus
+   fort) l'emporte : le volet invisible restait un élément flex de 1225 px à
+   droite du texte (page de 2469 px de large pour 1280) et son marginTop
+   « sticky », recalculé à chaque défilement, produisait le défilement
+   anormal signalé après un clic sur un renvoi. Le corpus n'a aucune image
+   IIIF : le volet est inutile en mode texte.
    -------------------------------------------------------------------------- */
 
 .text-mode #mirador-view {
@@ -114,6 +221,75 @@
   .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
 }
 /* ==== fin D11 ==== */
+
+/* ==== D14e-6 (2026-09-12) : agrandissement des 64 images dans la page ====
+   Ancien site : les figures etaient de simples <img> en ligne, a leur taille
+   naturelle (600 a 850 px de large) ; jquery.colorbox etait charge par deux
+   pages seulement (l'accueil et inha.php) et lie a la classe « .colorbox »,
+   absente de toutes les pages conservees : aucune visionneuse en surimpression
+   n'a donc jamais fonctionne sur le site historique.
+   Les fragments DoTS-vue sont compiles comme gabarits Vue (aucun <script>) :
+   l'agrandissement se fait sans script par <details>/<summary>, comme pour les
+   fac-similes de christofle.
+   Etat FERME = rendu ELEC a l'identique (image en ligne, taille naturelle).
+   Etat OUVERT = image portee a toute la largeur de la colonne de texte
+   (~1093 px mesures), soit environ 1,3 a 1,8 fois la taille naturelle. */
+
+#main #article .sgdp-figure { display: block; margin: 1rem 0; }
+#main #article .sgdp-figure > summary {
+  display: block;
+  cursor: zoom-in;
+  list-style: none;
+}
+#main #article .sgdp-figure > summary::-webkit-details-marker { display: none; }
+#main #article .sgdp-figure[open] > summary { cursor: zoom-out; }
+
+#main #article .sgdp-figure img { display: block; height: auto; }
+#main #article .sgdp-figure-vignette { max-width: 100%; }
+
+#main #article .sgdp-figure-ouvrir,
+#main #article .sgdp-figure-fermer {
+  display: inline-block;
+  margin-top: .3rem;
+  color: #bc052d;
+  font-size: .9em;
+}
+#main #article .sgdp-figure-fermer,
+#main #article .sgdp-figure[open] .sgdp-figure-ouvrir,
+#main #article .sgdp-figure[open] .sgdp-figure-vignette { display: none; }
+#main #article .sgdp-figure[open] .sgdp-figure-fermer { display: inline-block; }
+
+/* Ouvert, l'image deborde dans la marge interne de #article (padding 20px 10% 120px
+   de DoTS-vue) : la colonne de texte ne fait que 875 px pour des images de 600 a
+   850 px de large, un « width: 100% » ne gagnait que 3 %. Les marges negatives de
+   10 % (87 px, soit moins que le padding de 109 px) portent l'image a 1050 px sans
+   creer de debordement horizontal de la page. Gain mesure : 1,24x pour la plus
+   grande image, jusqu'a 1,75x pour les plus petites. */
+#main #article .sgdp-figure > .sgdp-figure-image { display: none; }
+#main #article .sgdp-figure[open] > .sgdp-figure-image {
+  display: block;
+  width: 120%;
+  max-width: 120%;
+  margin: .4rem -10%;
+}
+@media (max-width: 900px) {
+  #main #article .sgdp-figure[open] > .sgdp-figure-image {
+    width: 100%;
+    max-width: 100%;
+    margin: .4rem 0;
+  }
+}
+
+#main #article .sgdp-figure-legende {
+  font-size: .9em;
+  text-align: center;
+  text-indent: 0;
+  margin: .3rem 0 0;
+}
+
+/* Les 48 renvois aux PDF d'attachements restent sur l'ancien site ELEC. */
+#main #article a.sgdp-pdf::after { content: " [PDF]"; font-size: .85em; }
+/* ==== fin D14e-6 ==== */
 /* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
 /* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
    Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)

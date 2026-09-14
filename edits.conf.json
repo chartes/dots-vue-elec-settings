@@ -10,7 +10,6 @@
       "collectionBannerImg": "banner_edits.png"
     },
     "descriptionSection": {
-
       "customCollectionDescription": ""
     },
     "listSection": {
@@ -41,8 +40,7 @@
     "displayTopToc": true,
     "displayLeftToc": true
   },
-  "aboutPageSettings": [
-  ],
+  "aboutPageSettings": [],
   "collectionCustomCss": "edits",
   "metadataDisplayOrder": [
     "dct:title",
@@ -56,19 +54,27 @@
     "dct:license",
     "dct:rights"
   ],
-   "metadataRename": {
-     "dct:title": "Titre",
-     "schema:editor": "Édition scientifique",
-     "dct:created": "Dates du document",
-     "dct:source": "Source",
-     "dct:language": "Langue",
-     "dct:publisher": "Publié par",
-     "dct:issued": "Date de publication",
-     "dct:bibliographicCitation": "Comment citer ce document",
-     "dct:license": "Licence",
-     "dct:rights": "Mentions de droits"
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:editor": "Édition scientifique",
+    "dct:created": "Dates du document",
+    "dct:source": "Source",
+    "dct:language": "Langue",
+    "dct:publisher": "Publié par",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Comment citer ce document",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits"
   },
   "excludeMetadata": {
     "onlyDeclared": true
-  }
+  },
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "mediaTypeEndpoint": "html"
 }

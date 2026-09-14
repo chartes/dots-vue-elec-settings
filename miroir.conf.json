@@ -10,7 +10,9 @@
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "mixed",
@@ -34,8 +36,14 @@
     ]
   },
   "aboutPageSettings": [
-    { "tabName": "Genèse du projet", "compName": "about1" },
-    { "tabName": "Définition du Corpus", "compName": "about2" },
+    {
+      "tabName": "Genèse du projet",
+      "compName": "about1"
+    },
+    {
+      "tabName": "Définition du Corpus",
+      "compName": "about2"
+    },
     null
   ],
   "collectionCustomCss": "miroir",
@@ -45,42 +53,24 @@
   ],
   "metadataDisplayOrder": [
     "dct:title",
-
     "schema:author",
-
     "dct:created",
-
     "schema:exampleOfWork",
-
     "dct:language",
-
     "schema:editor",
-
     "schema:isBasedOn",
-
     "schema:publisher",
-
     "dct:issued",
-
     "dct:bibliographicalCitation",
-
     "dct:coverage",
-
     "dct:description",
-
     "dct:license",
-
     "dct:rights",
-
     "schema:funder",
-
     "dct:identifier",
-
     "schema:encoding",
-
     "schema:subjectOf",
     "schema:about",
-
     "dots:shortTitle",
     "dcat:accessURL"
   ],
@@ -90,7 +80,14 @@
   },
   "excludeMetadata": {
     "onlyDeclared": true,
-    "fields": [
-    ]
-  }
+    "fields": []
+  },
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "mediaTypeEndpoint": "html"
 }

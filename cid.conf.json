@@ -71,8 +71,14 @@
     "leftTocFragmentIsDocument": true
   },
   "aboutPageSettings": [
-    { "tabName": "Le projet", "compName": "about1" },
-    { "tabName": "Liste des réunions publiées", "compName": "about2" },
+    {
+      "tabName": "Le projet",
+      "compName": "about1"
+    },
+    {
+      "tabName": "Liste des réunions publiées",
+      "compName": "about2"
+    },
     null
   ],
   "collectionCustomCss": false,

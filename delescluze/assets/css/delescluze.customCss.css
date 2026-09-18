@@ -123,8 +123,30 @@
 #main #article :lang(lat),
 #main #article :lang(eng) { font-style: italic; }
 
-/* Références bibliographiques. */
-#main #article .bibl { display: inline; }
+/* Références bibliographiques.
+   2026-09-14 (agent DEL3) — « pourquoi il manque du css sur cette page »
+   (?refId=sources-et-bibliographie). La classe `bibl` porte DEUX choses
+   différentes dans ce corpus :
+     — l'APPEL en ligne dans une note : <a class="bibl"> (template
+       tei:ref[@type='bibl'] de delescluze-edition.xsl, qui note lui-même
+       s'appuyer sur `#main #article .bibl`) ;
+     — l'ENTRÉE de bibliographie : <li class="bibl"> des 185 <bibl> du
+       <listBibl> de « Sources et bibliographie ».
+   La règle `display: inline` non restreinte s'appliquait aussi aux <li> :
+   les 185 notices sortaient collées en un seul paragraphe courant (mesuré
+   au navigateur : getComputedStyle(li.bibl).display === "inline").
+   Sur ÉLEC (data/legacy/sources-et-bibliographie.html) chaque référence est
+   une entrée de liste distincte. On rend donc l'inline aux seuls éléments
+   en ligne et la liste aux seules entrées, sans toucher au reste. */
+#main #article a.bibl,
+#main #article span.bibl { display: inline; }
+#main #article ul.listBibl { margin: 0; padding: 0; list-style: none; }
+#main #article li.bibl {
+  display: block;
+  margin: 0 0 .55em 0;
+  padding-left: 1.6em;
+  text-indent: -1.6em; /* retrait pendant, usage bibliographique */
+}
 #main #article .surname,
 #main #article .persName-st { font-variant: small-caps; }
 

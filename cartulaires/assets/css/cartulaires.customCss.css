@@ -49,3 +49,221 @@ span.note-inline {
 .notes-rubric + .apparatus-rubric {
   margin-top: 1.5em;
 }
+
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ==========================================================================
+   V5-PRESENTATION (2026-09-18) — demandes d'Olivier Canteaut sur la
+   présentation des actes, des notes et des sommaires.
+   Sauvegarde avant modification : *.bak_v5presentation_20260918.
+
+   Toutes les règles sont préfixées par `[collid="cartulaires"]` : la feuille
+   d'un corpus est injectée GLOBALEMENT dans l'application, et cet attribut
+   (posé par DoTS-vue sur le conteneur de la page « document ») est le seul
+   point d'ancrage qui garantisse qu'on ne déforme pas les 24 autres corpus.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Présentation d'un acte
+   « n° (centré) / date (centrée) / blanc / analyse en italique / blanc /
+     liste des témoins en plus petit / blanc / "D'après a." / blanc / Texte.
+     Les blancs devant être à peu près identiques. »
+   Le n° est produit par cartulaires.xsl (<div class="docNum">, bloc
+   V5-PRESENTATION) ; le reste du cartouche vient de hteiml.
+   -------------------------------------------------------------------------- */
+
+[collid="cartulaires"] #main #article header.front {
+  --acte-blanc: 1.5em;
+}
+
+/* n° de l'acte : 1re ligne, centré */
+[collid="cartulaires"] #main #article header.front > .docNum {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 1.2;
+  margin: 0 0 0.2em;
+}
+
+/* date : centrée juste en dessous, puis un blanc */
+[collid="cartulaires"] #main #article header.front > .docDate {
+  display: block;
+  text-align: center;
+  margin: 0 0 var(--acte-blanc);
+}
+
+/* analyse (argument), ou tête latine des actes qui n'ont pas d'argument
+   (La Roche) : même rang typographique, suivie du même blanc */
+[collid="cartulaires"] #main #article header.front > .argument {
+  margin: 0 0 var(--acte-blanc);
+}
+[collid="cartulaires"] #main #article header.front > .argument > p:last-child {
+  margin-bottom: 0;
+}
+[collid="cartulaires"] #main #article header.front > h1.head,
+[collid="cartulaires"] #main #article header.front > h2.head,
+[collid="cartulaires"] #main #article header.front > h3.head {
+  margin: 0 0 var(--acte-blanc);
+  font-size: 1.05em;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+/* tableau de la tradition : plus petit, et le même blanc avant et après */
+[collid="cartulaires"] #main #article header.front > section.tradition,
+[collid="cartulaires"] #main #article header.front > .div.tradition {
+  margin: 0 0 var(--acte-blanc);
+}
+[collid="cartulaires"] #main #article header.front .listWit {
+  margin: 0;
+}
+[collid="cartulaires"] #main #article header.front li.witness {
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+/* Repère de page de l'édition-témoin ([37]) placé DANS l'analyse : DoTS-vue le
+   pose en `.pb { display:block; width:100%; padding:20px 0 }`, ce qui ouvre un
+   trou de ~53 px au milieu du cartouche et casse l'égalité des blancs demandée.
+   Dans le seul cartouche d'acte des cartulaires, on le remet dans le fil. */
+[collid="cartulaires"] #main #article header.front a.pb,
+[collid="cartulaires"] #main #article header.front a.ed {
+  display: inline;
+  width: auto;
+  padding: 0 0 0 0.35em;
+  float: none;
+}
+
+/* « D'après a. », puis le blanc qui le sépare du texte */
+[collid="cartulaires"] #main #article header.front > .according {
+  margin: 0 0 var(--acte-blanc);
+}
+[collid="cartulaires"] #main #article article.text > section.body {
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. Témoins
+   « les témoins qui sont des éditions (a, b, c…) ont normalement un titre à
+     mettre en italique ». Le <title> TEI sort en <cite class="title"> : on
+     s'assure qu'il reste en italique dans la tradition, quelle que soit la
+     règle générique qui passerait par là.
+   (Le point après le sigle est produit par la XSL, pas ici.)
+   -------------------------------------------------------------------------- */
+[collid="cartulaires"] #main #article li.witness cite.title,
+[collid="cartulaires"] #main #article li.witness .title {
+  font-style: italic;
+}
+[collid="cartulaires"] #main #article li.witness small.n {
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   3. Notes
+   a) « je trouve l'espacement entre les notes un peu grand » : DocumentPage.vue
+      pose `.footnotes aside.note { margin: 0 0 40px }`. On le ramène à 14 px.
+   b) BUG « la mise en forme des notes a l'air d'avoir sauté : je ne vois pas
+      d'italique dans La Roche, alors qu'ils sont dans le fichier XML ».
+      Cause : DocumentPage.vue pose `.footnotes aside.note > i { font-style:
+      inherit }` (et main.css `.aside-noteref-content > i { font-style:
+      inherit }`). Comme aside.note est en romain, tout <i> ENFANT DIRECT d'une
+      note redevient romain. La Roche encode ses italiques en <hi rend="i">
+      → <i> : elles disparaissaient. Saint-Merry, lui, les encode en <title>
+      → <cite class="title"> : elles passaient. D'où l'impression que « ça a
+      sauté » pour un corpus et pas pour l'autre.
+   -------------------------------------------------------------------------- */
+[collid="cartulaires"] #main #article .footnotes aside.note {
+  margin: 0 0 14px;
+}
+/* le repère « p. N » qui sépare deux pages de notes portait 10 px + 22 px de
+   marges : ramené au même ordre de grandeur que l'écart entre deux notes. */
+[collid="cartulaires"] #main #article .footnotes .note-page {
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+[collid="cartulaires"] #main #article .footnotes aside.note > i,
+[collid="cartulaires"] #main #article .footnotes aside.note i,
+[collid="cartulaires"] .aside-noteref-content > i,
+[collid="cartulaires"] .aside-noteref-content i {
+  font-style: italic;
+}
+/* on ne réintroduit pas d'italique là où l'imbrication doit l'annuler */
+[collid="cartulaires"] #main #article .footnotes aside.note i i,
+[collid="cartulaires"] #main #article .footnotes aside.note i em,
+[collid="cartulaires"] #main #article .footnotes aside.note i .title,
+[collid="cartulaires"] .aside-noteref-content i i,
+[collid="cartulaires"] .aside-noteref-content i em {
+  font-style: normal;
+}
+
+/* --------------------------------------------------------------------------
+   4. Sommaires
+   « tout ce qui est dépliable apparaît avec une flèche, le reste avec un rond.
+     […] ne peut-on prévoir un symbole moins différent des flèches que ce rond
+     blanc ? Peut-être en le colorant comme les flèches ? »
+   Le rond vient de html.css : `.tree li::before { content: "○"; color: #999 }`.
+   Les nœuds dépliables portent la classe `more` (leur flèche est une icône SVG
+   en var(--fill-color)) et n'ont pas de ::before. On remplace donc le rond des
+   seules feuilles par une puce pleine, dans la couleur des flèches.
+   -------------------------------------------------------------------------- */
+[collid="cartulaires"] .tree li:not(.more):not(.less)::before {
+  content: "•";
+  color: var(--fill-color, #5f004d);
+  font-weight: 700;
+  font-size: 1.15em;
+  line-height: 1;
+}
+/* --------------------------------------------------------------------------
+   5. Onglet « Notice »
+   « pour l'onglet "Notice", mettrions-nous "Notice bibliographique" pour le
+     distinguer de la Notice introductive ? »
+   Le libellé est ECRIT EN DUR dans DocumentPage.vue (l. 125), qui est hors
+   perimetre. On le remplace ici par CSS, pour les seuls cartulaires : le texte
+   du bouton est masque (font-size: 0) et redonne en ::after. C'est un
+   contournement : la correction propre est un mot a changer dans le composant
+   (ou, mieux, un libelle a sortir dans la conf du corpus).
+   -------------------------------------------------------------------------- */
+[collid="cartulaires"] .breadcrumb-panel .tab-header > button.dots-button:first-child {
+  font-size: 0;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+[collid="cartulaires"] .breadcrumb-panel .tab-header > button.dots-button:first-child::after {
+  content: "Notice bibliographique";
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Roboto, sans-serif;
+}
+
+/* ==== fin V5-PRESENTATION ==== */

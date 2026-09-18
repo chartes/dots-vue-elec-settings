@@ -835,3 +835,41 @@
   .document-area #article:not(.bottom-toc) table { font-size: .9em; }
 }
 /* ==== D12-SOCLE-FIN ==== */
+
+/* ============================================================================
+   D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
+
+   POURQUOI
+   --------
+   Certains libellés de sommaire sont longs parce que le texte de l'éditeur
+   l'est : l'analyse d'un acte, une rubrique médiévale, le résumé d'un
+   testament. Les amputer dans le registre de fragments serait mutiler la
+   donnée. On les tronque donc À L'AFFICHAGE, sur deux lignes.
+
+   Le texte complet reste dans le DOM : il est sélectionnable, trouvable par
+   la recherche du navigateur, et lu en entier par les lecteurs d'écran.
+   Rien n'est perdu, seule la hauteur de la ligne du sommaire est bornée.
+
+   PORTÉE — délibérément étroite
+   -----------------------------
+   `#toc-tree a.toc-title` : l'ancre de titre de l'arbre du sommaire émis par
+   TOC.vue, et rien d'autre. Pas de sélecteur sur `a`, `li`, `.tree` ni
+   `.container`, qui servent ailleurs dans la page.
+
+   `display:-webkit-box` est requis par `-webkit-line-clamp` ; l'ancre est un
+   enfant de `.li.container{display:flex}` et reste donc un élément de flex.
+   Les navigateurs sans line-clamp affichent le titre entier : dégradation
+   sans casse.
+
+   NE PAS élargir ce sélecteur : une règle trop large a déjà cassé un autre
+   corpus sur ce projet.
+   ============================================================================ */
+
+#toc-tree a.toc-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,1872 @@
+/* ============================================================================
+   tokens.css — Procès-verbaux de la Commission des monuments historiques
+   (1848-1950).
+
+   SEULS les jetons tirés de la source sont ici. Chaque valeur porte en
+   commentaire son origine : fichier et ligne dans
+   C:\Users\mpopinea\monumentshistoriques.
+
+   Rien n'a été inventé. Les valeurs que la source ne donne pas sont
+   signalées en fin de fichier, dans un bloc à part, et NE SONT PAS
+   déclarées : c'est aux agents de rendu de les arbitrer sciemment.
+
+   Relevé du 2026-09-15 sur 521 fichiers HTML, screen.css (194 accolades,
+   186 blocs actifs) et tooltipster.css (44 blocs).
+   ========================================================================== */
+
+:root {
+
+  /* ---- couleurs : fond et surfaces ------------------------------------- */
+
+  /* Fond de toute la page et de tous les bandeaux. 30 occurrences dans
+     screen.css, à commencer par `html, body` (L. 40). */
+  --mh-fond: #E6E3D7;
+
+  /* Beige d'interaction : survol du navigateur (L. 496), fond des boutons
+     .but (L. 541), pastilles haut/bas (L. 389), filets hr (L. 1173).
+     9 occurrences. */
+  --mh-fond-survol: #E2DED0;
+
+  /* Fond des barres de formulaire de recherche. screen.css L. 1256. */
+  --mh-fond-formulaire: #D4D0C8;
+
+  /* ---- couleurs : rouges ------------------------------------------------ */
+
+  /* LE rouge de l'édition. Cité seul en tête de screen.css (L. 3, commentaire
+     « #bc052d »). 23 occurrences en vigueur : titres .h1/.h2/.h8/.h12,
+     bandeaux #prevnext*, boutons .but, appels de note a.refnote/a.note,
+     vedettes d'index span.commune / span#archiNominum / span.PAYS /
+     span.turista / span.VILLE. */
+  --mh-rouge: #bc052d;
+
+  /* Rouge sombre secondaire. 3 occurrences : pied de page `basdepage`
+     (L. 289), index courant .h10 (L. 658), ligne commune/dép./région
+     span.infoCom (L. 762). */
+  --mh-rouge-sombre: #760609;
+
+  /* Rouge vif. 4 occurrences : ruban alphabétique .listing (L. 947),
+     étiquettes de département span.departement et span.departement a
+     (L. 928, 935). */
+  --mh-rouge-vif: #CC0000;
+
+  /* Rouge historique du site, remplacé partout par --mh-rouge SAUF dans les
+     infobulles, qui n'ont pas suivi : 8 occurrences en vigueur dans
+     tooltipster.css (bordures de bulle L. 6-10, lien survolé L. 64).
+     Dans screen.css il ne subsiste qu'en commentaire, 23 fois, toujours
+     juste après #bc052d. */
+  --mh-rouge-legacy: #750609;
+
+  /* ---- couleurs : texte ------------------------------------------------- */
+
+  /* Aubergine des enveloppes de notice d'index. 4 occurrences :
+     span.infoNominum (L. 734), span.infoTico (L. 789), span#tico (L. 797),
+     span.listing:hover (L. 966). */
+  --mh-notice: #330033;
+
+  /* Gris des liens, identique au visité. screen.css L. 1070 et L. 1076. */
+  --mh-lien: #4e4d4d;
+
+  /* Filet pointillé sous les liens au repos. screen.css L. 1070. */
+  --mh-lien-filet: #888;
+
+  /* Filet pointillé sous les liens au survol (bleu-vert sombre).
+     screen.css L. 1079. */
+  --mh-lien-filet-survol: #288;
+
+  /* Couleur du texte du lien au survol. screen.css L. 1079. */
+  --mh-lien-survol: #000;
+
+  /* Voile posé sous le lien survolé. screen.css L. 1079. */
+  --mh-lien-voile: rgba(255, 255, 255, 0.3);
+
+  /* Ombre portée du lien survolé (olive à 30 %). screen.css L. 1079,
+     3 déclarations préfixées pour la même valeur. */
+  --mh-lien-ombre: 0 3px 4px rgba(128, 128, 1, 0.3);
+
+  /* Fond de survol des appels et retours de note. screen.css L. 1124. */
+  --mh-note-survol: rgba(215, 215, 215, .9);
+
+  /* ---- couleurs : filets ------------------------------------------------ */
+
+  /* Règle `hr` : filet gravé, clair en haut, sombre en bas.
+     screen.css L. 1173. */
+  --mh-filet-clair: #E2DED0;
+  --mh-filet-sombre: #999;
+
+  /* Filet du navigateur latéral : blanc en haut, beige en bas.
+     screen.css L. 512. */
+  --mh-filet-nav-haut: #FFF;
+  --mh-filet-nav-bas: #E2DED0;
+
+  /* Bordure des boutons .but. screen.css L. 541. */
+  --mh-bordure-bouton: #AAA;
+
+  /* Ombre du texte des liens du navigateur. screen.css L. 488. */
+  --mh-ombre-nav: 1px 2px 1px #CACACA;
+
+  /* Ombre du texte des titres de bloc du navigateur (.h12).
+     screen.css L. 20. */
+  --mh-ombre-titre-nav: 1px 1px rgb(125, 123, 123);
+
+  /* ---- polices ---------------------------------------------------------- */
+
+  /* La source écrit `font-family:Arial` 45 fois, SANS repli. Le repli
+     ajouté ici est le minimum technique ; la source ne le dit pas. */
+  --mh-police: Arial, Helvetica, sans-serif;
+
+  /* Formulaires de recherche. screen.css L. 1288, 1302, 1315. */
+  --mh-police-formulaire: Verdana, Arial, Helvetica, sans-serif;
+
+  /* Dates de séance dans l'index des noms de personne : chasse fixe.
+     Seule occurrence de la feuille. screen.css L. 753 (#dateSessionNominum). */
+  --mh-police-chasse-fixe: "Lucida Console", monospace;
+
+  /* Boutons de repli du navigateur. screen.css L. 541 (.but). */
+  --mh-police-bouton: monospace;
+
+  /* ---- corps de texte --------------------------------------------------- */
+
+  /* Corps courant : `p` L. 986 et `p.standard` L. 1018 (n = 103 221
+     paragraphes dans les 521 fichiers). */
+  --mh-corps: 14px;
+
+  /* Vedettes d'index, titres .h8, span.commune, span#archiNominum,
+     span.PAYS, span.turista. 11 occurrences de 16px. */
+  --mh-corps-vedette: 16px;
+
+  /* Titre d'affaire (.h3, L. 603) et .hIndex. */
+  --mh-corps-affaire: 18px;
+
+  /* Titre de séance (.h2, L. 595). */
+  --mh-corps-seance: 28px;
+
+  /* Titre d'année (.h1, L. 587). */
+  --mh-corps-annee: 38px;
+
+  /* Bandeau de navigation d'index (#prevnext*, L. 186). */
+  --mh-corps-bandeau: 34px;
+
+  /* Navigateur latéral, aperçu, libellés d'index .h9/.h10 (L. 142, 169,
+     650, 658). 9 occurrences de 12px. */
+  --mh-corps-nav: 12px;
+
+  /* Appels de note a.refnote/a.note (L. 1093, 1108), renvois de page
+     span.sautdepage (L. 969), barres de recherche. 10 occurrences de 11px. */
+  --mh-corps-menu: 11px;
+
+  /* Ruban alphabétique des index (.listing, L. 947). */
+  --mh-corps-alphabet: 20px;
+
+  /* Appareil de notes : 105 % du corps hérité — les notes sont PLUS GRANDES
+     que le texte. screen.css L. 1139 (.notes) et L. 1150 (.notes_preview). */
+  --mh-corps-notes: 105%;
+
+  /* Exposant : hi.sup, screen.css L. 1052. */
+  --mh-corps-exposant: 55%;
+
+  /* ---- interlignes ------------------------------------------------------ */
+
+  /* Titres de bloc du navigateur (.h12, L. 20) et notes (div.note, L. 1129). */
+  --mh-interligne-serre: 115%;
+
+  /* Appels de note et exposants (L. 1052, 1093, 1108). */
+  --mh-interligne-note: 1.2em;
+
+  /* Infobulle : tooltipster.css L. 120-121 (14px / 16px). */
+  --mh-interligne-bulle: 16px;
+
+  /* ---- géométrie -------------------------------------------------------- */
+
+  /* Largeur du navigateur latéral (#nav, L. 143) et gouttière gauche de la
+     colonne de texte (body.fixed #article, L. 99 ; #article_Index, L. 114). */
+  --mh-nav-largeur: 340px;
+
+  /* Gouttière gauche de l'appareil de notes (.notes, L. 1139) : 10 px de
+     moins que la colonne de texte. */
+  --mh-notes-gouttiere: 330px;
+
+  /* Rembourrage latéral de la colonne de texte (L. 99). */
+  --mh-colonne-marge: 50px;
+
+  /* Rembourrage des paragraphes : `padding: 0px 80px 0px 40px`
+     (p L. 986, p.standard L. 1018, p.indent L. 1004). */
+  --mh-p-marge-gauche: 40px;
+  --mh-p-marge-droite: 80px;
+
+  /* Alinéa du paragraphe courant (p.standard, L. 1018) et de .h4 (L. 609). */
+  --mh-alinea: 3em;
+
+  /* Largeur maximale des blocs repliés d'index (.divcache L. 674,
+     .divcacheNominum L. 726, .divcacheExtraneum L. 699). */
+  --mh-index-largeur-max: 880px;
+
+  /* Retrait des blocs repliés d'index (L. 674, 726). */
+  --mh-index-retrait: 30px;
+
+  /* Réserve droite de la colonne d'index (body.fixed #article_Index, L. 114)
+     et largeur de l'aperçu (body.fixed #prev, L. 156). */
+  --mh-index-reserve-droite: 42%;
+
+  /* Hauteur de l'en-tête fixe (`intro`, L. 352). */
+  --mh-entete-hauteur: 130px;
+
+  /* Hauteur du pied fixe (`basdepage`, L. 289). */
+  --mh-pied-hauteur: 22px;
+
+  /* Ruban alphabétique (.listing, L. 947). */
+  --mh-alphabet-hauteur: 70px;
+  --mh-alphabet-approche: 5px;
+
+  /* Filet de l'appareil de notes (div.notes hr, L. 1160). */
+  --mh-notes-filet: 3px;
+
+  /* Rayons d'angle : boutons et champs (.but L. 541, .gf_* L. 1288-1315) ;
+     survol des liens (a:hover, L. 1079). */
+  --mh-rayon-bouton: 1ex;
+  --mh-rayon-lien: 0.3ex;
+
+  /* Remontée de l'exposant (.sup, L. 1061) et des appels de note
+     (a.refnote L. 1093 : 1ex ; a.note L. 1108 : 1.3ex). */
+  --mh-exposant-remontee: 1.4ex;
+  --mh-refnote-remontee: 1ex;
+  --mh-note-remontee: 1.3ex;
+
+  /* Seuil de bascule en une colonne. Pas dans la CSS : lib/tree.js,
+     fonction resize(), `if (larg < 1024)`. En dessous, le script posait
+     body.nonav et ramenait .notes à margin-left:30px. */
+  --mh-seuil-colonne: 1024px;
+
+  /* Gouttière de repli, sous le seuil (body.nonav #article L. 469,
+     body.nonav #article_Index L. 472, resize() dans tree.js). */
+  --mh-repli-gouttiere: 30px;
+
+  /* ---- infobulles (tooltipster.css, thème .tooltipster-default) --------- */
+
+  /* Fond de la bulle. tooltipster.css L. 108. */
+  --mh-bulle-fond: #330000;
+
+  /* Texte de la bulle. tooltipster.css L. 109. */
+  --mh-bulle-texte: #fff;
+
+  /* Bordure : haut et gauche en rouge legacy, bas et droite en noir.
+     tooltipster.css L. 103-106. */
+  --mh-bulle-bordure-claire: #750609;
+  --mh-bulle-bordure-sombre: #000;
+
+  /* Rayon de la bulle. tooltipster.css L. 101. */
+  --mh-bulle-rayon: 8px;
+
+  /* Ombre INTÉRIEURE de la bulle. tooltipster.css L. 113. */
+  --mh-bulle-ombre: 3px 3px 10px gray inset;
+
+  /* Largeur maximale de la bulle. tooltipster.css L. 112. */
+  --mh-bulle-largeur-max: 250px;
+
+  /* Corps et rembourrage du contenu. tooltipster.css L. 120 et 122. */
+  --mh-bulle-corps: 14px;
+  --mh-bulle-marge: 6px;
+
+  /* Écart entre le déclencheur et la bulle.
+     jquery.tooltipster.js L. 634 et 656 : `± tooltipHeight ∓ offsetY ± 12`. */
+  --mh-bulle-ecart: 12px;
+
+  /* Taille de la flèche. tooltipster.css L. 168-192 : 8px pour le corps,
+     9px pour la bordure. */
+  --mh-bulle-fleche: 8px;
+
+  /* Fond et texte d'un lien survolé DANS la bulle. tooltipster.css L. 86-87. */
+  --mh-bulle-lien-survol-fond: #4c4c4c;
+  --mh-bulle-lien-survol-texte: #750609;
+
+  /* Durée d'apparition : `speed:350` (défaut de Tooltipster 2.1,
+     jquery.tooltipster.js L. 38), animation `fade` (L. 17). */
+  --mh-bulle-duree: 350ms;
+
+  /* Temporisation au survol : lib/tree.js impose `delay:0` neuf fois sur
+     neuf (L. 7, 14, 21, 28, 33, 39, 44, 49, 54). La bulle paraissait
+     INSTANTANÉMENT. */
+  --mh-bulle-delai: 0ms;
+
+  /* ---- surlignage de recherche ------------------------------------------ */
+
+  /* Deux niveaux voulus par l'éditeur : toutes les occurrences trouvées,
+     puis l'occurrence courante. screen.css L. 1327 et L. 1334.
+     ATTENTION : ces valeurs (cyan, yellow, rouge pur, vert pur) sont des
+     couleurs de mise au point. La version douce dort dans gf_search.css
+     (#ffc0c0 / #c0ffc0), feuille que AUCUNE des 521 pages ne lie. */
+  --mh-recherche-trouve-fond: cyan;
+  --mh-recherche-trouve-texte: #ff0000;
+  --mh-recherche-trouve-bordure: #ff0000;
+  --mh-recherche-courant-fond: yellow;
+  --mh-recherche-courant-bordure: #00ff00;
+}
+
+/* ============================================================================
+   CE QUE LA SOURCE NE DIT PAS — aucun jeton n'est déclaré pour ces valeurs.
+
+   - Interligne du corps de texte : aucune déclaration `line-height` ne porte
+     sur `p` ni sur `p.standard` (n = 103 221). Les paragraphes s'affichaient
+     à l'interligne par défaut du navigateur.
+   - Repli de police : `font-family:Arial` est écrit 45 fois sur 45 sans
+     repli. Le `Helvetica, sans-serif` de --mh-police est un ajout technique.
+   - `a:active` et `a:focus` : aucune des cinq feuilles ne les déclare.
+     Aucun style de focus clavier n'existe dans la source.
+   - Thème sombre : la source ne l'envisage pas.
+   - Espacement vertical entre séances, entre affaires : la source ne le règle
+     que par les `padding` des titres (.h2 : 36px avant, 26px après ;
+     .h3 : 10px avant, 14px après ; .h4 : 10px/10px), jamais par des marges
+     sur les conteneurs.
+   ========================================================================== */
+
+
+/* ============================================================================
+   _edition.css — partielle de l'agent « rendu de l'édition » (d46), 2026-09-15
+   Procès-verbaux de la Commission des monuments historiques (1848-1950)
+
+   À CONCATÉNER À LA FIN de
+   dots-vue-elec-settings/monumentshistoriques/assets/css/monumentshistoriques.customCss.css
+   — après le bloc @media (max-width: 850px) qui termine aujourd'hui le
+   fichier. L'ordre compte : les règles ci-dessous s'appuient sur la cascade
+   (même spécificité, plus tard dans le fichier) pour redresser trois valeurs
+   déjà posées. Le repli en petite largeur est redonné à la fin de cette
+   partielle, pour ne pas être écrasé par ce qui le précède.
+
+   Cette partielle NE TOUCHE PAS : .mh-carte et .mh-carte-notice (agent
+   « cartes »), rien de .mh-index-* (agent « index »), ni les styles de
+   tableau, ni .mh-anchor:target, ni .mh-monument (habillage de lien).
+
+   PARTI PRIS, rappelé ici parce qu'il commande tout le reste : on NE
+   reproduit PAS l'Arial 14 px ni la palette #E6E3D7 / #bc052d de l'ancien
+   site. La police (Georgia 17 px/1,55), la couleur de texte (#1d1a17) et le
+   filet (#8d2632) déjà déployés sont conservés : c'est ce qui fait la
+   cohérence avec les 25 autres corpus de DoTS-vue. On corrige en revanche
+   les trois renversements de hiérarchie que le contrat de style a mesurés.
+   ========================================================================= */
+
+
+/* ============================================================================
+   1. LES TROIS REDRESSEMENTS DE HIÉRARCHIE
+   ========================================================================= */
+
+/* --- 1.1  Alinéa du paragraphe courant ------------------------------------
+   screen.css L. 1018 : p.standard { text-indent: 3em }, porté par 103 221
+   paragraphes des 521 fichiers ÉLEC — le style le plus répandu du corpus
+   (51 610 paragraphes réels, les 102 Annees/NNNN_.html étant des duplicata
+   d'aperçu ; la TEI servie par BaseX en compte 54 354). La feuille déployée
+   ne l'a pas : les procès-verbaux perdaient leur découpage visuel.
+
+   Le modèle générique tei2html pose class="p noindent" sur le premier
+   paragraphe qui suit un titre : 18 637 cas sur 54 354. La source, elle,
+   indentait ces paragraphes comme les autres. On suit la source — mais le
+   point est signalé comme arbitrable dans RAPPORT.md. */
+.mh-edition p { text-indent: 3em; }
+.mh-edition p.noindent { text-indent: 3em; }
+
+/* Ce que la source exclut explicitement de l'alinéa. */
+.mh-edition .mh-note p,
+.mh-edition .mh-notes p { text-indent: 0; }   /* screen.css L. 1135 */
+.mh-edition .mh-titlepage,
+.mh-edition .mh-anomalie,
+.mh-edition .mh-anomalie p { text-indent: 0; }
+.mh-edition td p, .mh-edition th p { text-indent: 0; }
+
+/* --- 1.2  « Présents : MM. … » (le .h4 de la source) -----------------------
+   screen.css L. 609 : .h4 { font-size:14px; font-weight:bold;
+   text-align:justify; text-indent:3em; padding:10px 80px 10px 40px },
+   porté par 5 009 div (2 502 p[@rend='liminaire'] dans la TEI).
+   La feuille déployée en faisait l'inverse : filet gris à gauche, couleur
+   affaiblie (#443c34), corps réduit (.95em), ni gras ni alinéa — un rendu
+   discret là où la source demandait un rendu appuyé. On redresse, dans
+   l'habillage DoTS (pas de retour à Arial ni au rouge #bc052d). */
+.mh-edition .mh-liminaire {
+  margin: .6rem 0;
+  padding-left: 0;
+  border-left: 0;
+  color: inherit;
+  font-size: 1em;
+  font-weight: 700;
+  text-align: justify;
+  text-indent: 3em;
+}
+
+/* --- 1.3  Les notes ne sont plus plus petites que le corps -----------------
+   screen.css L. 1139 : .notes { font-size: 105% } — et L. 1150 pour
+   .notes_preview. Les notes de l'éditeur étaient DÉLIBÉRÉMENT plus grandes
+   que le corps du texte. La feuille déployée les met à .9em : c'est un
+   renversement, pas un décalage. On rétablit la valeur mesurée. */
+.mh-edition .mh-notes { font-size: 1.05em; }
+
+
+/* ============================================================================
+   2. LES INFOBULLES EN HTML RÉEL
+   ---------------------------------------------------------------------------
+   Remplace le motif @data-tip + content:attr(data-tip), qui ne rendait que du
+   texte. mh-edition.xsl émet désormais, à l'intérieur du déclencheur :
+
+     <span class="mh-pers mh-tip">Labrouste
+       <span class="mh-bulle" role="tooltip">
+         <span class="mh-bulle-texte">Labrouste (Henri), 1801-1875…</span>
+         <span class="mh-bulle-donnee">Autor : AW00462</span>
+         <span class="mh-bulle-liens">
+           <a class="mh-bulle-lien mh-lien-enc" href="…">→ voir ENC</a>
+           <span class="mh-bulle-mention mh-lien-map">→ voir MAP</span>
+         </span>
+       </span>
+     </span>
+
+   Rendu sur les 102 années : 84 248 bulles, 20 585 liens ENC cliquables,
+   17 077 mentions « → voir MAP » (base Autor hors service : mention, pas
+   lien), 0 attribut data-tip restant, 0 élément vide.
+
+   Apparence : celle déjà déployée (fond clair #fffbe8, filet #8d2632,
+   Georgia .86rem). Le contrat décrit une bulle sombre #330000 / blanc /
+   rayon 8 px / 250 px (tooltipster.css) : non repris, conformément au parti
+   pris rappelé en tête. Sont repris de la source : le délai nul (delay:0,
+   neuf initialisations sur neuf), le décalage de 12 px sous le déclencheur,
+   les liens en bloc et centrés, le filet au-dessus du bloc de liens.
+   ========================================================================= */
+
+/* --- contrat de déclencheur, partagé avec l'agent « index » ---------------
+   L'agent « index » émet lui aussi des <span class="mh-bulle"> mais NE LES
+   DÉFINIT PAS : la bulle est à moi. Son motif : déclencheur en
+   position:relative portant tabindex="0", bulle en enfant direct, montrée au
+   :hover et au :focus du parent. Le mien y ajoute :focus-within (pour que le
+   lien ENC reste atteignable une fois la bulle ouverte) et la classe .mh-tip.
+   Les deux sont pris en charge ci-dessous, dans des blocs SÉPARÉS : la règle
+   :has() est isolée parce qu'un navigateur qui ne la connaît pas jette la
+   liste de sélecteurs entière. Aucune des deux ne dépend de l'autre. */
+.mh-edition .mh-tip { position: relative; }
+.mh-edition [tabindex] { position: relative; }
+
+/* Le déclencheur ne doit pas changer de mode de rendu : il reste en ligne,
+   donc il se coupe normalement en fin de ligne et ne casse pas la
+   justification. La bulle, elle, est hors flux. */
+.mh-edition .mh-bulle {
+  position: absolute;
+  top: 1.45em;
+  /* CENTRÉE SOUS LE DÉCLENCHEUR, comme le faisait Tooltipster (la flèche était
+     au milieu, tooltipster.css bloc 13). Ce n'est pas seulement de la
+     fidélité : mesuré sur le banc (1848, 421 bulles, fenêtre de 1 265 px),
+     l'ancrage à gauche que pratiquait la feuille déployée en faisait déborder
+     63 (15 %), jusqu'à 232 px hors écran ; centrée et plafonnée à 24 rem,
+     aucune ne déborde — 0 sur 421. */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: block;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(24rem, calc(100vw - 1.5rem));
+  padding: .55rem .75rem;
+  border: 1px solid #8d2632;
+  background: #fffbe8;
+  color: #28211f;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .22);
+  /* remise à plat : la bulle peut naître dans un titre gras, un lien, un
+     paragraphe justifié à alinéa */
+  font: 400 .86rem/1.45 Georgia, "Times New Roman", serif;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  text-align: left;
+  text-indent: 0;
+  text-transform: none;
+  white-space: normal;
+  /* invisible par défaut — mais NI display:none NI visibility:hidden, qui
+     retireraient les liens de l'ordre de tabulation et rendraient
+     :focus-within inatteignable au clavier. */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .1s linear;
+  /* la bulle ne doit pas polluer le copier-coller d'un paragraphe */
+  -webkit-user-select: none;
+  user-select: none;
+  /* AU REPOS, ELLE NE DOIT RIEN PESER.
+     Mesuré sur le banc (1848, colonne de 820 px dans une fenêtre de 1 440) :
+     sans ces quatre lignes, les 421 bulles de la page, bien qu'à opacity:0,
+     élargissent la largeur de défilement du document — 196 éléments
+     débordants et une barre horizontale permanente. Largeur nulle +
+     overflow:hidden les neutralise sans les retirer de l'ordre de
+     tabulation (contrairement à display:none et à visibility:hidden). */
+  width: 0;
+  height: 0;
+  padding: 0;
+  border-width: 0;
+  overflow: hidden;
+}
+
+/* Pont invisible entre le déclencheur et la bulle : sans lui, le curseur
+   traverse un vide de 1,45 em et la bulle se referme avant qu'on ait pu
+   cliquer le lien ENC. C'est l'équivalent de l'interactiveTolerance:100 de
+   Tooltipster (lib/tree.js, l. 16, 23 et 36). */
+.mh-edition .mh-bulle::before {
+  content: "";
+  position: absolute;
+  top: -1.5em;
+  left: 0;
+  right: 0;
+  height: 1.5em;
+}
+
+.mh-edition .mh-tip:hover > .mh-bulle,
+.mh-edition .mh-tip:focus > .mh-bulle,
+.mh-edition .mh-tip:focus-within > .mh-bulle,
+.mh-edition [tabindex]:hover > .mh-bulle,
+.mh-edition [tabindex]:focus > .mh-bulle,
+.mh-edition [tabindex]:focus-within > .mh-bulle {
+  width: max-content;
+  height: auto;
+  padding: .55rem .75rem;
+  border-width: 1px;
+  overflow: visible;
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Filet de sécurité, en bloc séparé : tout porteur d'une bulle, quelle que
+   soit la façon dont il est marqué. Ignoré en silence par un navigateur sans
+   :has() (Chrome < 105, Firefox < 121, Safari < 15.4), sans emporter les
+   règles ci-dessus. */
+.mh-edition *:has(> .mh-bulle) { position: relative; }
+.mh-edition *:hover > .mh-bulle,
+.mh-edition *:focus > .mh-bulle,
+.mh-edition *:focus-within > .mh-bulle {
+  width: max-content;
+  height: auto;
+  padding: .55rem .75rem;
+  border-width: 1px;
+  overflow: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Une bulle logée dans un <a> (monument, appel de note) ne contient jamais
+   de lien — mesuré : 0 <a> dans les 20 018 title= de a.lien_ext_merimee.
+   On la rend transparente au clic pour qu'elle ne serve pas de grande
+   surface cliquable du lien qui l'englobe. */
+.mh-edition a > .mh-bulle,
+.mh-edition a > .mh-bulle::before { pointer-events: none; }
+
+/* Les trois registres de la bulle : notice, donnée, liens.
+   Les display:block remplacent les 30 668 <br /> de la source, la bordure
+   supérieure remplace ses 29 001 <hr /> — sans mettre de contenu de flux
+   dans du contenu de phrasé, et sans émettre d'élément vide. */
+.mh-edition .mh-bulle-texte { display: block; }
+.mh-edition .mh-bulle-donnee {
+  display: block;
+  margin-top: .3rem;
+  color: #6b5f55;
+  font-size: .93em;
+}
+.mh-edition .mh-bulle-liens {
+  display: block;
+  margin-top: .4rem;
+  padding-top: .35rem;
+  border-top: 1px solid #d8cec4;
+  text-align: center;
+}
+.mh-edition .mh-bulle-lien,
+.mh-edition .mh-bulle-mention {
+  display: block;
+  font-size: .93em;
+  letter-spacing: .01em;
+}
+.mh-edition .mh-bulle-lien {
+  color: #8d2632;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #c9a0a5;
+  text-underline-offset: 2px;
+}
+.mh-edition .mh-bulle-lien:hover,
+.mh-edition .mh-bulle-lien:focus-visible {
+  background: #f6e7e7;
+  text-decoration-color: #8d2632;
+}
+/* Mention sans lien : la base Autor de la Médiathèque ne répond plus
+   (err=1201, vérifié le 2026-09-15). On la donne pour ce qu'elle est. */
+.mh-edition .mh-bulle-mention {
+  color: #8a7c6d;
+  font-style: italic;
+}
+
+/* Signalement du déclencheur. La source n'en donnait aucun sur les 58 136
+   span#multiarchi : le lecteur ne pouvait deviner qu'un mot portait une
+   notice. C'est une correction de défaut, pas une infidélité. */
+.mh-edition .mh-pers.mh-tip {
+  text-decoration: underline dotted #9a8e80;
+  text-underline-offset: 3px;
+  cursor: help;
+}
+.mh-edition .mh-pb.mh-tip,
+.mh-edition .mh-monument-nr.mh-tip { cursor: help; }
+
+/* Accès clavier : la source n'avait aucun style de focus (0 :focus dans les
+   cinq feuilles). On en crée un.
+   mh-edition.xsl pose tabindex="0" sur les déclencheurs qui sont des <span>
+   (les <a> le sont déjà) : sans cela, une bulle sans lien à l'intérieur ne
+   peut jamais s'ouvrir au clavier, puisque :focus-within n'a rien à quoi
+   s'accrocher. Coût mesuré : voir RAPPORT.md. */
+.mh-edition .mh-tip:focus-visible,
+.mh-edition [tabindex]:focus-visible {
+  outline: 2px solid #8d2632;
+  outline-offset: 2px;
+}
+
+/* Garde-fou : si l'ancien motif @data-tip survivait quelque part sur un
+   élément qui porte déjà la nouvelle bulle, on n'afficherait pas les deux.
+   La règle ne mord que sur .mh-tip, classe posée par mh-edition.xsl seule :
+   si le module XSL n'est pas versé, l'ancien rendu continue de fonctionner. */
+.mh-edition .mh-tip[data-tip]:hover::after,
+.mh-edition .mh-tip[data-tip]:focus-visible::after { content: none; display: none; }
+
+
+/* ============================================================================
+   3. APPAREIL DE NOTES
+   ========================================================================= */
+
+/* Appel de note hors fragment : mh-edition.xsl n'émet plus de lien mort
+   quand la note n'est pas dans l'arbre (194 cas sur 196, editByLevel=2).
+   Le numéro reste visible et la bulle porte le texte intégral. */
+.mh-edition .mh-noteref { text-decoration: none; }
+.mh-edition .mh-noteref sup { font-size: .75em; }
+.mh-edition .mh-noteref-horsfragment {
+  color: #8d2632;
+  cursor: help;
+  border-bottom: 1px dotted #c9a0a5;
+}
+.mh-edition .mh-noteref:hover sup,
+.mh-edition .mh-noteref:focus-visible sup { background: rgba(215, 215, 215, .9); }
+
+.mh-edition .mh-note { margin: .35rem 0; }
+.mh-edition .mh-note-retour { font-weight: 700; text-decoration: none; }
+
+/* Le doublon d'appareil : le modèle générique tei2html rappelle TOUTES les
+   notes dans une <section class="footnotes"> à la fin de l'article
+   (tei2html.xsl l. 213-221, appelé depuis le modèle tei:text). Mesuré sur
+   les 102 années rendues en entier : 43 sections, 190 identifiants DOM en
+   double et 233 href internes morts (190 « #nX_ » + 43 « #pb…/… »),
+   la totalité à l'intérieur de cette section, zéro ailleurs.
+   Le chemin réellement emprunté par DoTS-vue (/document?resource=…&ref=…)
+   n'a pas de tei:text et n'en produit donc pas ; la règle ci-dessous ne sert
+   que pour un appel sans ref. Le correctif de fond est décrit dans
+   RAPPORT.md (il touche au corps de la XSL, on ne l'applique pas ici). */
+.mh-edition section.footnotes { display: none; }
+
+
+/* ============================================================================
+   4. IMPRESSION
+   ---------------------------------------------------------------------------
+   screen.css était liée SANS attribut media sur 519 pages sur 519 : elle
+   s'appliquait aussi à l'impression, avec ses position:fixed et son
+   margin-left:340px. Il ne s'agit donc pas de reproduire l'impression de
+   l'ancien site, qui était mauvaise, mais de ne pas répéter la faute.
+   ========================================================================= */
+@media print {
+  .mh-edition .mh-bulle { display: none !important; }
+  .mh-edition .mh-tip {
+    text-decoration: none;
+    border-bottom: 0;
+  }
+  .mh-edition .mh-anchor { background: none !important; }
+  .mh-edition .mh-notes { font-size: 1em; }
+}
+
+
+/* ============================================================================
+   5. PETITES LARGEURS
+   ---------------------------------------------------------------------------
+   Redonné ici parce que cette partielle est concaténée APRÈS le bloc
+   @media (max-width: 850px) de la feuille déployée : sans cela, les règles
+   du §1 et du §2 l'écraseraient à toute largeur.
+   Le seuil de la source est 1024 px (lib/tree.js, resize(), l. 108-118) ;
+   la feuille déployée a choisi 850 px. On garde 850 px pour ne pas changer
+   un comportement déjà en service, et on ajoute le repli de la bulle.
+   ========================================================================= */
+@media (max-width: 850px) {
+  /* En colonne étroite, aucune largeur de bulle centrée ne tient : mesuré sur
+     le banc (1950, 866 bulles, fenêtre de 685 px), un plafond de 20 rem en
+     faisait déborder 297, jusqu'à 117 px. On change donc de dispositif :
+     la bulle devient un bandeau fixe en bas de fenêtre, sur toute la largeur.
+     Elle ne peut plus déborder, et elle reste lisible sans zoom. */
+  .mh-edition .mh-bulle {
+    position: fixed;
+    top: auto;
+    bottom: .5rem;
+    left: .5rem;
+    right: .5rem;
+    transform: none;
+    max-width: none;
+  }
+  .mh-edition .mh-bulle::before { content: none; }
+  .mh-edition .mh-tip:hover > .mh-bulle,
+  .mh-edition .mh-tip:focus > .mh-bulle,
+  .mh-edition .mh-tip:focus-within > .mh-bulle,
+  .mh-edition [tabindex]:hover > .mh-bulle,
+  .mh-edition [tabindex]:focus > .mh-bulle,
+  .mh-edition [tabindex]:focus-within > .mh-bulle { width: auto; }
+  /* l'alinéa de 3 em est trop creux sur colonne étroite */
+  .mh-edition p,
+  .mh-edition p.noindent,
+  .mh-edition .mh-liminaire { text-indent: 1.6em; }
+  .mh-edition .mh-note p,
+  .mh-edition .mh-notes p { text-indent: 0; }
+}
+
+
+/* ============================================================================
+   _cartes.css — partielle a concatener a
+   dots-vue-elec-settings/monumentshistoriques/assets/css/monumentshistoriques.customCss.css
+   (je n'ecris pas dans la feuille principale : d'autres agents y travaillent).
+
+   Elle habille CE QUE LE MODULE logs/d46_cartes/mh-cartes.xsl EMET, et rien
+   d'autre : les deux plans cliquables (96 departements, 22 regions), le
+   tableau-gazetier devenu cliquable, et les 96 vignettes de departement.
+
+   CE QUI VIENT DE LA SOURCE (releve : logs/d46_style/CONTRAT_STYLE.md,
+   sections 1 et 6.3 ; valeurs verifiees dans
+   C:\Users\mpopinea\monumentshistoriques\styles\screen.css) :
+
+     bloc 18  (L. 211)  .conteneur { display:block; position:relative;
+                         text-align:center }         -> .mh-plans, centrage
+     bloc 30  (L. 338)  #article_visio_carte { padding:50px; text-align:center }
+                                                     -> .mh-plan, rembourrage
+     bloc 80  (L. 629)  .h7 { Arial 12px gras italique ; justifie ;
+                         margin-left:30px ; text-indent:-6px }
+                                                     -> .mh-plan figcaption
+     bloc 118 (L. 928)  span.departement { font-size:16px ; color:#CC0000 ;
+                         padding:0 15px }            -> .mh-gaz-lien, .mh-vignette
+     bloc 119 (L. 935)  span.departement a { color:#CC0000 }   -> idem
+     bloc 160 (L. 1187) img.carte_france { max-width:100% ; height:auto ;
+                         box-sizing:border-box }
+                         -> DEJA en place sous .mh-carte (cartes historiques).
+                            NON reprise pour les plans cliquables : voir ci-dessous.
+     fond de page        #E6E3D7 (30 occurrences, a commencer par html,body L.40)
+     rouge de l'edition  #bc052d (23 occurrences)
+     filets              #E2DED0
+
+   CE QUE LA SOURCE NE DIT PAS, et que j'arbitre en le disant :
+     - la grille des 96 vignettes (l'ancien site n'en montrait qu'une a la
+       fois, au survol, par script) ;
+     - le style de focus clavier : la source n'en declare aucun (CONTRAT §7),
+       or sans script la carte cliquable EST la navigation ; j'en pose un.
+
+   LA REGLE QUI NE SE NEGOCIE PAS
+   ==============================
+   Les coordonnees des 118 <area> sont absolues, exprimees dans les 508x518
+   pixels natifs de carte-france-departements.png. Toute mise a l'echelle de
+   l'image decale les zones sans deplacer les coordonnees : les clics tombent
+   a cote. Or main.css L. 69 pose `img { height:auto; max-width:100% }` pour
+   toute l'application. Le plan doit donc echapper a cette regle et rester a
+   sa taille native ; c'est le CONTENEUR qui defile quand la colonne est trop
+   etroite. C'est pour cette raison, et pour elle seule, que la regle
+   `img.carte_france { max-width:100% }` de la source n'est PAS reprise ici :
+   sur l'ancien site, les pages qui portaient la carte cliquable
+   (index_merimee_departement_alpha / _num / _region) servaient justement
+   l'image SANS la classe `carte_france`, donc a sa taille native. Seule
+   index_cartes.html la posait, dans un cadre large de 60 % de l'ecran.
+   ========================================================================== */
+
+/* ---- bloc d'ensemble ----------------------------------------------------- */
+
+.mh-edition .mh-carte-index { margin: 0 0 2.5rem; }
+
+/* Rappel de la convention d'edition III : c'est la raison d'etre de la page. */
+.mh-edition .mh-carte-avis {
+  margin: .8rem 0 1.4rem;
+  padding: .6rem .8rem;
+  border-left: 4px solid #bc052d;
+  background: #E6E3D7;
+  font-size: .95em;
+  text-align: left;
+}
+
+/* ---- les deux plans cliquables ------------------------------------------ */
+
+/* screen.css bloc 18 : `.conteneur { text-align:center }`. */
+.mh-edition .mh-plans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  text-align: center;
+}
+
+/* screen.css bloc 30 : `#article_visio_carte { padding:50px }`. */
+.mh-edition .mh-plan {
+  flex: 0 1 auto;
+  max-width: 100%;
+  margin: 1rem 0;
+  padding: 50px;
+  border: 1px solid #E2DED0;
+  background: #fff;
+  text-align: center;
+  /* La colonne de lecture peut etre plus etroite que 508 px : on fait defiler
+     le cadre plutot que de reduire l'image (cf. « la regle qui ne se negocie
+     pas », en tete de fichier). */
+  overflow-x: auto;
+}
+
+/* Taille native imposee, contre `img { max-width:100% }` de main.css L. 69.
+   508 x 518 = dimensions reelles du PNG (verifiees dans l'en-tete IHDR). */
+.mh-edition .mh-plan-img {
+  display: block;
+  width: 508px;
+  height: 518px;
+  max-width: none;
+  margin: 0 auto;
+  border: 0;
+}
+
+/* screen.css bloc 80 (.h7) : Arial 12 px gras italique, retrait pendant. */
+.mh-edition .mh-plan figcaption {
+  max-width: 508px;
+  margin: .6rem auto 0;
+  padding: 0 0 0 30px;
+  text-indent: -6px;
+  font: italic 700 12px/1.35 Arial, Helvetica, sans-serif;
+  text-align: justify;
+  background: none;
+}
+
+/* La source ne declare aucun style de focus (CONTRAT §7). Sans script, ces
+   118 zones SONT la navigation : au clavier, elles doivent se voir. */
+.mh-edition .mh-zone:focus {
+  outline: 3px solid #bc052d;
+  outline-offset: 2px;
+}
+
+/* ---- tableau-gazetier : le nom du departement redevient un point d'entree - */
+
+/* screen.css blocs 118-119 : span.departement et son lien, 16 px #CC0000. */
+.mh-edition .mh-gaz-lien {
+  color: #CC0000;
+  text-decoration: none;
+  border-bottom: 1px dotted #CC0000;
+}
+.mh-edition .mh-gaz-lien:hover,
+.mh-edition .mh-gaz-lien:focus-visible {
+  color: #bc052d;
+  border-bottom-style: solid;
+}
+.mh-edition .mh-gaz-dep { white-space: nowrap; }
+
+/* ---- les 96 vignettes de departement ------------------------------------- */
+
+/* L'ancien site les montrait UNE A LA FOIS, au survol d'une zone, par un
+   script (overImage/outImage, index_cartes.html L. 20-40) : DoTS-vue
+   n'execute aucun script. Regroupees dans un <details> ferme, elles ne
+   coutent rien tant qu'on ne les demande pas — les <img loading="lazy">
+   d'un <details> ferme ne sont pas chargees.
+   html.css L. 48-57 (correctif D19) restreint `details > * { display:none }`
+   aux classes .source et .minus : aucun contournement n'est necessaire ici. */
+.mh-edition .mh-vignettes-bloc { margin: 1.5rem 0; }
+.mh-edition .mh-vignettes-bloc > summary {
+  cursor: pointer;
+  padding: .35rem .6rem;
+  border: 1px solid #E2DED0;
+  border-radius: 4px;
+  background: #E6E3D7;
+  font: 700 .95rem/1.35 Georgia, "Times New Roman", serif;
+}
+.mh-edition .mh-vignettes-avis {
+  margin: .6rem 0;
+  font-size: .9em;
+  font-style: italic;
+}
+.mh-edition .mh-vignettes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.mh-edition .mh-vignette {
+  margin: 0;
+  padding: 6px;
+  border: 1px solid #E2DED0;
+  background: #fff;
+  text-align: center;
+}
+.mh-edition .mh-vignette img {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0 auto;
+}
+/* screen.css bloc 118 : l'etiquette de departement, 16 px #CC0000. */
+.mh-edition .mh-vignette figcaption {
+  padding: .35rem 15px 0;
+  font: 16px/1.3 Arial, Helvetica, sans-serif;
+  color: #CC0000;
+  text-align: center;
+  background: none;
+}
+
+/* ---- ecrans etroits ------------------------------------------------------ */
+
+@media (max-width: 850px) {
+  /* Le rembourrage de 50 px de la source suppose une colonne large ; il
+     mangerait la moitie d'un telephone. L'image, elle, ne bouge pas. */
+  .mh-edition .mh-plan { padding: 12px; }
+  .mh-edition .mh-plans { gap: .8rem; }
+  .mh-edition .mh-vignettes { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+
+/* ---- impression ---------------------------------------------------------- */
+
+@media print {
+  /* Une carte cliquable imprimee n'est plus qu'une carte : on garde l'image,
+     on retire le cadre, et le <details> des vignettes reste ferme. */
+  .mh-edition .mh-plan { padding: 0; border: 0; overflow: visible; }
+  .mh-edition .mh-vignettes-bloc { display: none; }
+}
+
+
+/* ============================================================================
+   _index.css — partielle de mise en page des 8 ressources d'index des
+   Proces-verbaux de la Commission des monuments historiques.
+
+   A CONCATENER dans monumentshistoriques.customCss.css. Elle ne redefinit
+   AUCUNE regle existante de cette feuille : tous les selecteurs sont prefixes
+   .mh-index-*, sauf .mh-index qui est la racine posee par mh-index.xsl a
+   l'interieur de l'<article class="mh-edition">.
+
+   CE QU'ELLE NE FAIT PAS, DELIBEREMENT :
+   - elle ne definit pas .mh-bulle : la bulle est au module de l'edition. Les
+     declencheurs d'index (.mh-index-idno) s'y conforment — un <span
+     class="mh-bulle"> imbrique, affiche au survol et au focus. Seul le
+     position:relative du declencheur est pose ici, parce qu'il appartient au
+     declencheur et non a la bulle.
+   - elle ne touche ni a .mh-monument, ni a .mh-monument-nr, ni a .mh-pers, ni
+     a .mh-carte : deja habilles par la feuille de l'edition et par celle des
+     cartes. Les liens d'objet Palissy reutilisent .mh-monument tel quel.
+
+   HABILLAGE. Decision de l'utilisateur : habillage DoTS (Georgia 17 px/1.55,
+   texte #1d1a17, filet #8d2632), et non l'Arial 14 px sur #E6E3D7 de l'ancien
+   site. Ce qui est repris de la source, ce sont la STRUCTURE et les
+   PROPORTIONS relevees dans screen.css :
+     - vedette (span.commune, span#archiNominum, L. 771 et 742) : 16 px sur un
+       corps de 14, soit 1,14 fois le corps  -> 1.08em ici (Georgia porte plus
+       que l'Arial a taille egale).
+     - nom d'edifice (span#tico, L. 797) : meme corps que le texte, retrait
+       20 px.
+     - qualifiants departement / region (L. 779, 784) : 14 px poids NORMAL.
+     - ligne « - n occurrences » (span.occurences, L. 806) : gras, retrait
+       40 px -> le retrait est ici porte par la mise en liste.
+     - bloc replie (.divcache, L. 674) : retrait 30 px, max-width 880px.
+     - ruban alphabetique (.listing, L. 947) : hauteur 70 px, letter-spacing
+       5 px, survol aubergine #330033.
+     - colonne d'index (#article_Index, L. 114) : gouttiere 340 px, reserve
+       droite 42 % -> ces deux valeurs appartenaient au cadre a trois colonnes
+       de l'ancien site, remplace par le chrome de DoTS-vue. On en garde le
+       SENS : une mesure de lecture bornee (max-width) et non la gouttiere.
+   ========================================================================== */
+
+/* ---- racine -------------------------------------------------------------- */
+.mh-edition .mh-index { max-width: 62rem; }
+
+/* Bandeau de titre de l'index. Source : #prevnext{PV,DEPART,...} L. 186,
+   34 px gras 600 #bc052d. Transpose dans la palette DoTS. */
+.mh-edition .mh-index-titre {
+  margin: 0 0 1rem;
+  padding-bottom: .3rem;
+  border-bottom: 2px solid #8d2632;
+  font: 700 1.9rem/1.25 Georgia, "Times New Roman", serif;
+}
+
+/* ---- unites citables (region, departement, lettre, pays, section, index) -- */
+.mh-edition .mh-index-unite { margin: 0 0 2rem; scroll-margin-top: 1rem; }
+.mh-edition .mh-index-unite--departement { margin: 0 0 1.4rem; }
+
+.mh-edition .mh-index-tete {
+  margin: 1.6rem 0 .6rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid #c9bfb6;
+  font: 700 1.35rem/1.3 Georgia, "Times New Roman", serif;
+  color: #5c3a1e;
+}
+/* Une lettre seule n'a pas besoin d'un filet pleine largeur. */
+.mh-edition .mh-index-tete--lettre {
+  border-bottom: none;
+  font-size: 1.7rem;
+  letter-spacing: .05em;
+}
+.mh-edition .mh-index-tete--departement {
+  margin: 1rem 0 .4rem;
+  border-bottom: none;
+  font-size: 1.05rem;
+}
+
+/* ---- liste des entrees --------------------------------------------------- */
+/* Mise en colonnes : la source n'en avait pas — l'ancien site tenait ses index
+   dans une colonne unique bornee a droite par une reserve de 42 %. On garde
+   une seule colonne et on borne la mesure de lecture ; c'est la meme intention
+   dans le cadre de DoTS-vue. */
+.mh-edition .mh-index-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mh-edition .mh-index-entree {
+  margin: 0 0 .55rem;
+  padding: 0 0 .55rem;
+  border-bottom: 1px solid #efe9e2;
+  scroll-margin-top: 1rem;
+}
+.mh-edition .mh-index-entree:last-child { border-bottom: none; }
+.mh-edition .mh-index-entree:target { background: #fdf3c8; }
+
+/* Vedette : commune, pays, personne. 16/14 de la source -> 1.08em. */
+.mh-edition .mh-index-vedette {
+  display: block;
+  color: #8d2632;
+  font-size: 1.08em;
+  font-weight: 700;
+}
+/* Le qualifiant « (25 - Doubs ; Franche-Comte) » suit la commune a l'interieur
+   de la meme vedette : la source le voulait en poids NORMAL et en noir
+   (span.depart L. 779, span.region L. 784). La XSL marque ces vedettes d'un
+   modificateur --qualifiee, plutot que d'employer :has() : le rendu ne depend
+   ainsi d'aucune fonctionnalite recente du navigateur. */
+.mh-edition .mh-index-vedette--qualifiee {
+  color: #443c34;
+  font-size: 1em;
+  font-weight: 400;
+}
+.mh-edition .mh-index-commune {
+  color: #8d2632;
+  font-size: 1.08em;
+  font-weight: 700;
+}
+
+/* Nom d'edifice ou d'objet : retrait 20 px de la source. */
+.mh-edition .mh-index-entree > .mh-monument,
+.mh-edition .mh-index-entree > .mh-monument-nr,
+.mh-edition .mh-index-entree > .mh-index-lien {
+  display: inline-block;
+  margin-left: 1.2rem;
+}
+
+/* Reference Merimee / Palissy : la donnee est visible, la date de protection
+   est dans la bulle — comme la source, qui reunissait les deux dans la meme
+   infobulle du nom d'edifice. */
+.mh-edition .mh-index-idno {
+  position: relative;
+  margin-left: .5rem;
+  color: #7a6f63;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: .78em;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.mh-edition .mh-index-idno[tabindex] {
+  border-bottom: 1px dotted #9a8e80;
+  cursor: help;
+}
+.mh-edition .mh-index-idno[tabindex]:focus-visible {
+  outline: 2px solid #8d2632;
+  outline-offset: 2px;
+}
+
+/* Notice biographique (2 450). La source la montrait EN CLAIR, en aubergine
+   #330033 (span.infoNominum, L. 734) : jeton --mh-notice du contrat. */
+.mh-edition .mh-index-notice {
+  display: block;
+  margin: .1rem 0 .1rem 1.2rem;
+  color: #330033;
+  font-size: .9em;
+}
+
+/* Compteur d'occurrences de mh-index-communes (7 590). */
+.mh-edition .mh-index-compte {
+  margin-left: .5rem;
+  color: #7a6f63;
+  font-size: .82em;
+}
+
+/* Note d'index d'un type non prevu : visible plutot que perdue. */
+.mh-edition .mh-index-note {
+  display: block;
+  margin: .1rem 0 .1rem 1.2rem;
+  color: #443c34;
+  font-size: .9em;
+}
+
+/* ---- repli des occurrences ---------------------------------------------- */
+/* Remplace showDiv()/toggleDiv() (31 585 appels) par <details> natif.
+   .divcache de la source : retrait 30 px, max-width 880 px, gras. */
+.mh-edition .mh-index-renvois {
+  margin: .15rem 0 0 1.2rem;
+  max-width: 55rem; /* 880 px a 16 px de corps */
+}
+.mh-edition .mh-index-occurrences {
+  display: list-item;
+  list-style: disclosure-closed;
+  margin-left: .9rem;
+  color: #1d1a17;
+  font-size: .88em;
+  font-weight: 700;
+  cursor: pointer;
+}
+.mh-edition .mh-index-renvois[open] > .mh-index-occurrences {
+  list-style: disclosure-open;
+  margin-bottom: .2rem;
+}
+.mh-edition .mh-index-occurrences:focus-visible {
+  outline: 2px solid #8d2632;
+  outline-offset: 2px;
+}
+.mh-edition .mh-index-renvois-liste {
+  margin: 0 0 .3rem 1.9rem;
+  padding: 0;
+  list-style: none;
+  font-size: .9em;
+}
+.mh-edition .mh-index-renvoi { margin: 0 0 .1rem; }
+
+/* ---- renvois vers le texte ---------------------------------------------- */
+/* 133 383 renvois. Dans la source ce n'etaient pas des liens mais des
+   <span OnClick=...> ; ce sont maintenant de vrais <a>, habilles comme les
+   liens de l'edition (#4e4d4d gras, filet pointille) mais dans la palette
+   DoTS deja deployee. */
+.mh-edition .mh-index-lien {
+  color: #4e4d4d;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #bdb2a6;
+  text-underline-offset: 2px;
+}
+.mh-edition .mh-index-lien:hover,
+.mh-edition .mh-index-lien:focus-visible { text-decoration-color: #8d2632; color: #8d2632; }
+/* Les 22 renvois dont la source ne donne pas la date : le numero d'ordre de
+   l'ELEC tient lieu de libelle, et il est signale comme tel. */
+.mh-edition .mh-index-lien--sans-libelle {
+  color: #8a7c6d;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Affaire citee a cote du renvoi (32 491) : la source la cachait dans
+   l'infobulle ; ici c'est du texte reel, lisible et imprimable. */
+.mh-edition .mh-index-affaire {
+  color: #443c34;
+  font-style: italic;
+}
+.mh-edition .mh-index-affaire::before { content: " — "; font-style: normal; }
+
+/* Stations examinees en seance (43 listes, libelle de la source non redecoupe). */
+.mh-edition .mh-index-stations {
+  display: block;
+  margin: .1rem 0 0 1.2rem;
+  color: #443c34;
+  font-size: .92em;
+}
+.mh-edition .mh-index-desc { color: #443c34; }
+
+/* ---- fragment DTS (une unite ouverte seule) ------------------------------ */
+/* Le fragment n'a pas ses unites soeurs : pas de ruban, et le titre de l'unite
+   prend le role de titre de page. */
+.mh-edition .mh-index--fragment > .mh-index-unite > .mh-index-tete {
+  margin-top: 0;
+  border-bottom: 2px solid #8d2632;
+  font-size: 1.6rem;
+}
+
+/* ---- ecrans etroits ------------------------------------------------------ */
+@media (max-width: 850px) {
+  .mh-edition .mh-index-titre { font-size: 1.5rem; }
+  .mh-edition .mh-index-tete { font-size: 1.2rem; }
+  .mh-edition .mh-index-tete--lettre { font-size: 1.45rem; }
+  
+  .mh-edition .mh-index-entree > .mh-monument,
+  .mh-edition .mh-index-entree > .mh-monument-nr,
+  .mh-edition .mh-index-entree > .mh-index-lien { margin-left: .6rem; }
+  .mh-edition .mh-index-renvois { margin-left: .6rem; }
+  .mh-edition .mh-index-renvois-liste { margin-left: 1.2rem; }
+}
+
+/* ---- impression ---------------------------------------------------------- */
+@media print {
+  /* Un index imprime dont les occurrences sont repliees est inutilisable.
+     Deplier un <details> ferme sans script n'a pas de solution universelle :
+     ::details-content est la seule voie standardisee et elle est recente. La
+     regle est donc un MEILLEUR EFFORT, signale comme tel dans RAPPORT.md ; le
+     lecteur qui imprime peut aussi deplier a la main avant d'imprimer. */
+  .mh-edition .mh-index-renvois::details-content {
+    content-visibility: visible;
+    block-size: auto;
+  }
+  
+  .mh-edition .mh-index-entree { break-inside: avoid; }
+}
+
+
+.mh-nav { margin: 0 0 1.5rem; border-block: 1px solid #d7cec3; padding: .65rem 0; font-family: Georgia, "Times New Roman", serif; }
+.mh-nav-index > summary { color: #8d2632; cursor: pointer; font-weight: 700; }
+.mh-nav-index > ul { columns: 2 18rem; margin: .65rem 0 0; padding-left: 1.4rem; }
+.mh-nav-index li { break-inside: avoid; margin: .2rem 0; }
+.mh-nav a { color: #8d2632; text-decoration-thickness: .06em; text-underline-offset: .15em; }
+.mh-nav-prevnext { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; margin-top: .75rem; }
+.mh-nav-prevnext > :last-child { text-align: right; }
+.mh-nav-prevnext strong, .mh-nav-presentation { text-align: center; }
+@media (max-width: 700px) { .mh-nav-index > ul { columns: 1; } .mh-nav-prevnext { gap: .4rem; font-size: .9em; } }
+
+
+/* ============================================================================
+   _toc-gauche.css — une seule table des matieres, a GAUCHE          (d61)
+   ---------------------------------------------------------------------------
+   Ce corpus n'avait jamais recu le bloc D11 du 2026-09-11, alors qu'une
+   douzaine d'autres l'ont (CLEM, actesroyauxdupoitou, arbrissel, bellelay,
+   cartulaires, christofle, chroniqueslatines, cid, cjc, comptes...). Meme cas
+   que la classe .dots-target la veille : un mecanisme existant auquel cette
+   feuille-ci n'etait pas branchee. Verifie : aucune sauvegarde de cette CSS,
+   du 15 au 17 septembre, ne porte « bottom-toc » — ce n'est donc pas une
+   regression des reconcatenations du 16 et du 17.
+
+   Defaut mesure le 2026-09-17 sur une fenetre de 1500 px :
+       /monumentshistoriques/document/1848            sommaire a x=1058
+       /monumentshistoriques/document/mh-presentation sommaire a x= 951
+   soit a DROITE du texte. Sur la racine, les decennies et les seances, il n'y
+   a pas de .bottom-toc du tout : le defaut ne se voit que sur les noeuds au
+   dessus du niveau editorial, ce qui est exactement ce que decrit D11.
+
+   Le bloc ci-dessous est repris VERBATIM de scripts/d11_apply_css.py, sa
+   source d'origine, pour qu'il reste identique a celui des douze autres.
+   ========================================================================= */
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+
+/* ============================================================================
+   IMPRESSION — ECARTS DE PARITE                              (chantier d53)
+   PARTIELLE A : a deployer. Ne contient aucun ajout editorial.
+   ---------------------------------------------------------------------------
+   CE QUE styles/impression.css FAISAIT REELLEMENT (mesure, non suppose) :
+
+     @page{size:landscape}   -> agissait.
+     #banner{display:none}   -> INERTE : 0 page sur 521 ne porte id="banner".
+     #nav{display:none}      -> agissait sur 408 pages sur 521.
+     #banner_copy{...}       -> INERTE : 0 page sur 521 ne porte
+                                id="banner_copy". 365 pages portent un element
+                                nu <banner_copy>, que screen.css l. 249 masque
+                                par un selecteur d'ELEMENT (banner_copy, sans
+                                diese) et sans media query — screen.css etant
+                                liee sans attribut media sur 519 pages, le
+                                masquage valait aussi a l'impression.
+                                Mesure Chromium sur Annees/1848.html : display
+                                "none" en ecran ET en impression, boite 0 x 0.
+                                Mesure d'ensemble : l'impression de
+                                Annees/1848.html fait 36 pages et porte la
+                                mention de droits sur 0 page sur 36.
+       => LE BANDEAU DE DROITS DE L'ANCIEN SITE NE S'EST JAMAIS IMPRIME.
+          Le retablir serait un AJOUT, pas une restitution : il fait donc
+          l'objet d'une partielle separee (_impression-appareil.css), que la
+          session peut ne pas deployer.
+
+   Cette partielle-ci ne traite que les ecarts reels.
+   ========================================================================= */
+
+@media print {
+
+  /* --- A.1  Le chrome de l'application ne s'imprime pas -------------------
+     C'est l'equivalent DoTS de #nav — la seule regle de l'ancienne feuille
+     qui agissait. Mesure sur une seance : 70 + 88 + 80 + 60 = 298 px de
+     bandeaux d'interface en tete de feuille (barre Elec, fil d'Ariane,
+     rangee de navigation, barre d'outils), dont .controls qui ne contient
+     aucun texte (0 signe) et n'imprimait que du blanc. .mh-nav est la
+     navigation propre au corpus (« Les index », precedent / suivant) : des
+     liens, inertes sur papier.
+     ATTENTION : la rangee .navigation-row portait le titre de l'edition, et
+     c'etait la seule identification de la feuille — mais sur la premiere
+     page seulement (mesure : 2 pages sur 4 pour une seance, 1 sur 24 pour un
+     index). La partielle B le rend en titre courant sur toutes les pages. Si
+     B n'est pas deployee, le document imprime n'est plus identifie que par
+     le colophon du pied de page, en derniere feuille. */
+  .layout-navbar,
+  .navigation-row-top-container,
+  .navigation-row,
+  .controls,
+  .scroll-top-wrapper,
+  .mh-edition .mh-nav {
+    display: none !important;
+  }
+
+  /* --- A.2  Longueur de ligne --------------------------------------------
+     .mh-edition n'a AUCUN max-width : en impression la longueur de ligne est
+     donc dictee par le papier. Mesure de la mediane des signes par ligne
+     (texte des bulles exclu ; seances s1848-001 et s1900-001) :
+         paysage Letter 1056 px : 106 a 118 signes
+         paysage A4     1122 px : 114 a 136 signes
+         portrait A4     794 px :  92 a  96 signes
+         avec max-width 170 mm  :  72 a  81 signes   <- retenu
+     L'optimum typographique est de 60 a 80 signes.
+
+     C'est ce plafond, et non l'orientation, qui rend le texte lisible : on
+     ne reprend donc PAS le size:landscape de l'ancienne feuille. Ce paysage
+     compensait une mise en page fixe de 1280 px (nav 340 + article 940) que
+     screen.css imposait aussi a l'impression — mesure : #article gardait son
+     margin-left:340px sur la feuille, d'ou une large gouttiere blanche.
+     C'etait un contournement, pas un choix typographique. L'edition DoTS est
+     fluide : on laisse le format au dialogue d'impression (A4 en France).
+
+     Le plafond ne vise QUE la prose des seances. L'index et les cartes sont
+     des listes et un tableau : la longueur de ligne n'y est pas le facteur
+     limitant, et les brider coutait 2 feuilles sur le seul index des noms en
+     A (28 pages bridees contre 26 en pleine justification). D'ou le :has(). */
+  .mh-edition:has(.mh-seance, .mh-affaire) {
+    max-width: 170mm;
+    margin-inline: auto;
+  }
+
+  /* --- A.3  Coupures de page ---------------------------------------------
+     Titre orphelin en bas de feuille et ligne seule : evites.
+     On NE met PAS break-inside:avoid sur .mh-affaire — mesure : une affaire
+     monte a 589 px (s1848-001) et 353 px (s1900-001), soit jusqu'a 70 % de
+     la hauteur utile d'une page ; l'interdire produirait des demi-feuilles
+     blanches. */
+  .mh-edition h1, .mh-edition h2, .mh-edition h3, .mh-edition h4,
+  .mh-edition .mh-h-seance, .mh-edition .mh-h-affaire {
+    break-after: avoid-page;
+    break-inside: avoid;
+  }
+  .mh-edition p { orphans: 3; widows: 3; }
+  .mh-edition .mh-liminaire { break-inside: avoid; }
+
+  /* Tableaux : le gazetier des departements a 96 <tr> et NI <thead> NI <th>
+     (verifie sur le fragment mh-cartes / departements) — on ne peut donc pas
+     faire repeter une ligne d'en-tete sans toucher a la XSL. On se borne a
+     ne pas couper une ligne en deux ; la regle thead servira les tableaux
+     qui en auront un. */
+  .mh-edition table { break-inside: auto; }
+  .mh-edition tr    { break-inside: avoid; }
+  .mh-edition thead { display: table-header-group; }
+
+  /* Images et plans : jamais coupes, jamais debordants. */
+  .mh-edition img,
+  .mh-edition figure,
+  .mh-edition .mh-plan { break-inside: avoid; max-width: 100%; }
+
+  /* --- CE QUI N'EST PAS FAIT ICI, ET POURQUOI ----------------------------
+     * URL des liens a l'impression. Mesure : le texte imprime d'une seance
+       ne porte AUCUN identifiant Merimee ni aucune URL (0 occurrence de
+       PA\d{8}, 0 de http) — la reference est dans la bulle, masquee a
+       l'impression par la partielle de l'edition. Un a::after{content:
+       attr(href)} corrigerait cela pour les 4 liens monument d'une seance
+       (212 signes), mais l'index Merimee en porte 7 590 : 402 270 signes
+       d'URL ajoutes, environ cent feuilles. Et l'identifiant nu n'est pas
+       atteignable en CSS (il est le dernier segment du href). Le faire
+       proprement demande a la XSL d'emettre un attribut data- porteur du
+       seul identifiant. Laisse a l'arbitrage de l'utilisateur.
+     * Remonter le colophon du pied de page en tete. Mesure : la grille
+       .layout-grid-container place ses enfants par grid-template-areas avec
+       une piste d'en-tete fixe de 70 px ; order:-1 est sans effet (mesure :
+       le pied reste a 2768 px du haut), et grid-area:header ecrase le pied a
+       70 px en le faisant chevaucher le texte. Le corriger demanderait de
+       toucher dots-vue/src, hors perimetre. */
+}
+
+
+/* ============================================================================
+   IMPRESSION — APPAREIL DE PAGE                              (chantier d53)
+   PARTIELLE B : PROPOSITION, PAS UNE RESTITUTION DE PARITE.
+   La session peut ne pas la deployer. Elle est independante de la
+   partielle A (_impression.css) et se concatene apres elle.
+   ---------------------------------------------------------------------------
+   POURQUOI CE N'EST PAS UNE RESTITUTION.
+
+   Le bandeau de droits de l'ancien site (#banner_copy, fond
+   images/banner_copy.png) NE S'EST JAMAIS IMPRIME : le selecteur est un id
+   qu'aucune des 521 pages ne porte, et l'element nu <banner_copy> des 365
+   pages qui en ont un est masque par screen.css sans media query. Mesure de
+   bout en bout : l'impression de Annees/1848.html fait 36 pages et porte la
+   mention de droits sur 0 page sur 36, et « reproduction interdite » sur 0.
+   Ajouter le bandeau, c'est donc donner au lecteur quelque chose qu'il n'a
+   jamais eu. C'est defendable, mais c'est un choix editorial.
+
+   CE QUI PLAIDE POUR.
+
+   1. L'ancien site imprimait DEJA un appareil courant, par un autre chemin :
+      screen.css l. 306-307, basdepage:before{content:"Proces-verbaux de la
+      Commission des Monuments historiques, edition Jean-Daniel Pariset ;
+      MAP-ENC"} en position:fixed. Mesure : present sur 36 pages sur 36 de
+      l'impression de Annees/1848.html. « MAP-ENC » y designe la Mediatheque
+      de l'architecture et du patrimoine et l'Ecole nationale des chartes,
+      c'est-a-dire les ayants droit. Un titre courant portant les droits est
+      donc PLUS proche de ce que l'ancien site faisait vraiment que de ne
+      rien mettre.
+   2. Le pied de page DoTS porte bien la mention de droits a l'impression,
+      mais sur la DERNIERE feuille seulement. Mesure AVANT sur les quatre
+      pages temoins : 1 page sur 4 (seance), 1 sur 4 (affaire), 1 sur 24
+      (index des noms en A), 1 sur 7 (cartes). Qui imprime « pages 1 a 3 »
+      d'un index de 24 pages n'obtient aucune mention.
+   3. Numeros de page : absents partout avant (0 page sur 24 pour l'index).
+
+   CE QUI PLAIDE CONTRE.
+
+   1. C'est un ajout, et l'utilisateur ne l'a pas demande.
+   2. Cout papier mesure : +2 feuilles sur l'index des noms en A (26 pages
+      avec B, 24 sans), du fait des marges de 20 mm menagees en haut et en
+      bas. Aucun cout sur la seance (4 pages) ni sur les cartes (7).
+   3. Les margin boxes @page ne sont pas universelles : Chromium les rend
+      (mesure : 12 pages sur 12 d'un temoin), Firefox ne les rend pas — la
+      feuille y sera simplement sans appareil, sans degat.
+   4. Les deux chaines sont figees dans la CSS : si la conf change, elles
+      derivent.
+
+   POURQUOI DU TEXTE ET PAS L'IMAGE banner_copy.png.
+
+   L'image (1180 x 50, 20 073 octets) ne porte qu'un texte : « ©Ecole
+   nationale des chartes - Toute reproduction interdite ». Trois raisons de
+   ne pas la reprendre :
+     a. Ce n'est PAS la mention de droits de cette edition : elle omet le
+        Ministere de la Culture et la Mediatheque de l'architecture et du
+        patrimoine, qui figurent dans le teiHeader et dans la conf. La
+        reprendre appauvrirait la mention.
+     b. Un fond d'image n'est pas imprime par defaut par les navigateurs
+        (case « Graphismes d'arriere-plan » decochee) : le bandeau serait a
+        nouveau invisible, comme il l'a toujours ete.
+     c. Texte raster de 50 px : non selectionnable, non extractible du PDF,
+        invisible aux lecteurs d'ecran, et flou une fois etire.
+   L'image n'est donc PAS reprise et n'a pas a etre copiee dans
+   dots-vue/public/images/monumentshistoriques/.
+
+   POURQUOI DES MARGIN BOXES ET PAS UN position:fixed.
+
+   Comparatif mesure sur un document temoin de 12 pages — pixels de texte du
+   temoin recouverts sur une page courante :
+      margin box @page           12/12 pages   0,00 %   <- retenu
+      position:fixed; top:0      12/12 pages   2,91 %   (une ligne effacee
+                                                         sur chaque page)
+      position:fixed; bottom:0   12/12 pages   0,32 %
+      position:fixed; top:-12mm  11/12 pages   le bandeau tombe en bas de
+                                               page (offset resolu contre
+                                               l'ICB, pas contre le bloc de
+                                               page)
+   Un bandeau fixe efface du texte : inacceptable pour une edition savante.
+
+   CHAINES REPRISES VERBATIM de monumentshistoriques.conf.json
+   (footerSettings.footerTitle et footerSettings.footerDescription). La
+   mention est mot pour mot celle qu'affiche le pied de page.
+   AUCUNE LICENCE N'EST MENTIONNEE : la source n'en porte pas, ne pas en
+   ajouter.
+   >>> Si footerTitle ou footerDescription change dans la conf,
+   >>> changer aussi les deux chaines ci-dessous. <<<
+
+   NOTE POUR L'UTILISATEUR : le teiHeader
+   (publicationStmt/availability/p) finit par « Licence non precisee par la
+   source. » tandis que la conf finit par « La source ne precise aucune
+   licence. » Meme sens, formulation differente. C'est la formulation de la
+   CONF qui est reprise ici, pour que la feuille imprimee soit d'accord avec
+   son propre pied de page. A harmoniser si vous le souhaitez.
+   ========================================================================= */
+
+@media print {
+  @page {
+    /* 20 mm en haut et en bas menagent la place de l'appareil. Sans cette
+       partielle, ne rien declarer : le dialogue d'impression applique ses
+       marges par defaut (10,16 mm sous Chrome). */
+    margin: 20mm 14mm 20mm;
+
+    @top-left {
+      content: "Procès-verbaux de la Commission des monuments historiques";
+      font: italic 7.5pt Georgia, "Times New Roman", serif;
+      color: #6b6257;
+      vertical-align: top;
+    }
+    @top-right {
+      content: "p. " counter(page);
+      font: 7.5pt Georgia, "Times New Roman", serif;
+      color: #6b6257;
+      vertical-align: top;
+    }
+    @bottom-center {
+      content: "Droits : Ministère de la Culture et de la Communication / Médiathèque de l'architecture et du patrimoine ; École nationale des chartes. La source ne précise aucune licence.";
+      font: italic 6.8pt/1.25 Georgia, "Times New Roman", serif;
+      color: #8d2632;
+      vertical-align: bottom;
+    }
+  }
+}
+
+
+/* ============================================================================
+   _signature-ancrage.css — Procès-verbaux de la Commission des monuments
+   historiques (1848-1950).  Livraison D57.
+
+   PARTIEL NOUVEAU. Il n'en modifie aucun autre : il n'ajoute que des
+   sélecteurs inédits (.mh-signature*, .dots-target, .mh-courriel) et ne
+   redéclare aucune propriété déjà posée par tokens.css, _edition.css,
+   _cartes.css, _index.css, _navigation.css ou _impression.css.
+   À concaténer APRÈS eux.
+
+   Il couvre deux choses :
+
+   1. La signature du coproducteur (Médiathèque de l'architecture et du
+      patrimoine) et le contact de l'éditeur scientifique, émis en fin de
+      fragment par le modèle nommé « mh-signature » (mh-navigation.xsl).
+
+   2. Le signalement du point de chute d'un renvoi d'index, par la classe
+      « dots-target ».
+
+   --- pourquoi .dots-target et pas :target ---------------------------------
+   Mesuré le 2026-09-17 sur l'application en service (localhost:5173) :
+
+   . un renvoi d'index vaut /monumentshistoriques/document/1848
+     ?refId=af1848-0035#a231 ;
+   . editByLevel vaut 2 (monumentshistoriques.conf.json) : l'affaire est au
+     niveau 3, donc SOUS le niveau d'édition. DocumentPage.vue (env. L. 2292-
+     2313) remplace alors l'URL par window.location.replace() vers
+     ?refId=s1848-004#af1848-0035 : le refId remonte à la séance, l'affaire
+     descend dans le hash, et le #a231 d'origine est perdu ;
+   . cette navigation recharge l'application : quand le navigateur résout le
+     fragment #af1848-0035, le fragment DTS n'est pas encore monté, l'élément
+     n'existe pas, et :target reste vide DÉFINITIVEMENT
+     (document.querySelectorAll(':target').length === 0 relevé jusqu'à 8 s
+     après l'arrivée, à froid comme après un clic réel dans l'index) ;
+   . mais Document.vue (scrollTo, L. 743-744) pose alors la classe
+     « dots-target » sur l'élément désigné par le hash. Relevé :
+     section#af1848-0035.mh-affaire dots-target
+
+   Cette classe est le mécanisme prévu par l'application depuis D19 pour
+   exactement ce cas ; six feuilles de corpus la lisent déjà à côté de
+   :target. La feuille des monuments historiques était la seule à ne lire que
+   :target — d'où les 56 419 renvois d'index qui arrivaient sans rien dire.
+
+   Contrôle de sonde : sur une vraie navigation de fragment provoquée dans la
+   page (location.hash = '#a231' une fois le fragment monté), :target s'arme
+   bien (1 élément) et l'ancre passe à rgb(253, 243, 200). La sonde sait donc
+   voir un :target quand il y en a un ; son zéro sur les renvois d'index est
+   un vrai zéro, pas un défaut de délai.
+
+   Portée : « dots-target » est une classe de l'application, commune aux 27
+   corpus. Toutes les règles ci-dessous sont donc préfixées par .mh-edition.
+   ========================================================================== */
+
+.mh-edition {
+  /* Ambre de désignation. Même valeur que les deux règles :target déjà en
+     vigueur (.mh-anchor:target, .mh-index-entree:target), reprise ici en
+     variable locale pour qu'un seul endroit la porte désormais. */
+  --mh-chute-fond: #fdf3c8;
+  --mh-chute-fond-vif: #f7e392;
+  --mh-chute-filet: #bc052d;   /* = --mh-rouge (tokens.css) */
+}
+
+/* ---- 1. point de chute : l'unité d'édition ------------------------------- */
+
+/* 56 419 renvois tombent sur une affaire (niveau 3), 16 928 sur une séance
+   (niveau 2), 18 sur une année (niveau 1) : 73 365 en tout, relevés sur les
+   huit ressources d'index. Les trois niveaux reçoivent la classe.
+   L'affaire et la sous-affaire, courtes, prennent le lavis ambre ; la séance
+   et l'année, qui peuvent faire plusieurs écrans, ne prennent que le filet —
+   un aplat de cette taille ne désignerait plus rien. */
+.mh-edition .mh-affaire.dots-target,
+.mh-edition .mh-sous-affaire.dots-target,
+.mh-edition .mh-affaire:target,
+.mh-edition .mh-sous-affaire:target {
+  background: var(--mh-chute-fond);
+  border-left: 3px solid var(--mh-chute-filet);
+  padding: .35rem .6rem .35rem .8rem;
+  margin-left: -.8rem;
+  border-radius: 0 2px 2px 0;
+}
+
+.mh-edition .mh-seance.dots-target,
+.mh-edition .mh-annee.dots-target,
+.mh-edition .mh-seance:target,
+.mh-edition .mh-annee:target {
+  border-left: 3px solid var(--mh-chute-filet);
+  padding-left: .8rem;
+  margin-left: -.8rem;
+}
+
+/* Repère au fil du titre : l'oeil entre par le titre, pas par le fond. */
+.mh-edition .mh-affaire.dots-target > .mh-h-affaire::before,
+.mh-edition .mh-sous-affaire.dots-target > .mh-h-sous-affaire::before,
+.mh-edition .mh-seance.dots-target > .mh-h-seance::before,
+.mh-edition .mh-annee.dots-target > .mh-h-annee::before {
+  content: "\25B8\00A0";        /* triangle pointant a droite + insecable */
+  color: var(--mh-chute-filet);
+}
+
+/* L'arrivée se fait par rechargement : l'élément est neuf, l'animation joue
+   une fois et une seule. Elle ne fait que renforcer l'ambre une seconde, puis
+   le laisse à sa valeur de repos — le repère reste ensuite en place, comme le
+   faisait :target sur l'ancien site. */
+@keyframes mh-chute {
+  0%   { background-color: var(--mh-chute-fond-vif); }
+  100% { background-color: var(--mh-chute-fond); }
+}
+.mh-edition .mh-affaire.dots-target,
+.mh-edition .mh-sous-affaire.dots-target {
+  animation: mh-chute 1.4s ease-out 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mh-edition .mh-affaire.dots-target,
+  .mh-edition .mh-sous-affaire.dots-target { animation: none; }
+}
+
+/* Dégagement sous la barre de navigation de l'application (décalage de -90 px
+   dans Document.vue) : sans lui le titre de l'unité visée arrive sous la
+   barre quand le lecteur remonte d'un cran. */
+.mh-edition .mh-affaire,
+.mh-edition .mh-sous-affaire,
+.mh-edition .mh-seance,
+.mh-edition .mh-annee { scroll-margin-top: 6rem; }
+
+/* ---- 2. point de chute : l'ancre et l'entrée d'index --------------------- */
+
+/* Jumelles des deux règles :target déjà en vigueur. Elles servent quand le
+   hash désigne bien une ancre : renvoi interne de note, lien recopié à la
+   main, retour arrière. */
+.mh-edition .mh-anchor.dots-target,
+.mh-edition .mh-anchor.dots-target + * { background: var(--mh-chute-fond); }
+
+/* ---- 3. point de chute : l'entrée d'index -------------------------------- */
+
+/* Les **7 590** renvois d'un index vers un autre (mh-index-communes ->
+   mh-index-merimee) visent une ENTRÉE, `#mer-eNNNNN`. Avec la correction de
+   `mh-index.xsl` (D57), le `refId` du renvoi est déjà au niveau d'édition —
+   la région — et le hash survit : l'application pose alors `.dots-target` sur
+   l'entrée elle-même. Mesuré : `li#mer-e03194.mh-index-entree dots-target`.
+   Même traitement que l'affaire, puisque c'est la même promesse : « voici
+   l'objet que vous avez demandé ». */
+.mh-edition .mh-index-entree.dots-target,
+.mh-edition .mh-index-entree:target {
+  background: var(--mh-chute-fond);
+  border-left: 3px solid var(--mh-chute-filet);
+  padding-left: .7rem;
+  margin-left: -.7rem;
+  border-radius: 0 2px 2px 0;
+}
+.mh-edition .mh-index-entree.dots-target > .mh-index-vedette::before,
+.mh-edition .mh-index-entree:target > .mh-index-vedette::before {
+  content: "\25B8\00A0";
+  color: var(--mh-chute-filet);
+}
+.mh-edition .mh-index-entree.dots-target { animation: mh-chute 1.4s ease-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  .mh-edition .mh-index-entree.dots-target { animation: none; }
+}
+
+/* L'unité départementale reste marquée dans le cas qui la vise VRAIMENT : les
+   **118 zones cliquables** des cartes (`<area href="…?refId=mer-dep-59">`,
+   sans hash), qui demandent le département et non une entrée. L'application y
+   remonte à la région et met le département dans le hash ; `.dots-target`
+   tombe donc sur `section#mer-dep-59`, et on marque sa tête — pas ses
+   centaines d'entrées. */
+.mh-edition .mh-index-unite.dots-target > .mh-index-tete {
+  background: var(--mh-chute-fond);
+  box-shadow: -.45rem 0 0 var(--mh-chute-fond), .45rem 0 0 var(--mh-chute-fond);
+}
+.mh-edition .mh-index-unite.dots-target > .mh-index-tete::before {
+  content: "\25B8\00A0";
+  color: var(--mh-chute-filet);
+}
+
+/* Les 16 928 renvois de niveau 2 et les 18 de niveau 1 gardent leur hash
+   d'origine (#aNNNN) : l'application ne réécrit rien, et c'est donc l'ANCRE
+   qui reçoit la classe. Or une ancre ne contient qu'un U+200C : la designer
+   seule ne montre presque rien. On remonte donc à l'affaire qui la contient,
+   pour que les 73 365 renvois aboutissent au même signal.
+
+   RÈGLE À PART, ET C'EST VOULU : si le navigateur ignore :has(), une liste de
+   sélecteurs entière serait invalidée. Isolée, elle est simplement ignorée et
+   tout le reste de la feuille tient. Mesuré actif sur le Chromium en service
+   le 2026-09-17 (Chrome 105+, Firefox 121+, Safari 15.4+). */
+.mh-edition .mh-affaire:has(.mh-anchor.dots-target),
+.mh-edition .mh-sous-affaire:has(.mh-anchor.dots-target) {
+  background: var(--mh-chute-fond);
+  border-left: 3px solid var(--mh-chute-filet);
+  padding: .35rem .6rem .35rem .8rem;
+  margin-left: -.8rem;
+  border-radius: 0 2px 2px 0;
+}
+.mh-edition .mh-affaire:has(.mh-anchor.dots-target) > .mh-h-affaire::before,
+.mh-edition .mh-sous-affaire:has(.mh-anchor.dots-target) > .mh-h-sous-affaire::before {
+  content: "\25B8\00A0";
+  color: var(--mh-chute-filet);
+}
+
+/* Et quand l'ancre n'est dans aucune affaire — c'est le cas relevé pour les
+   renvois de niveau 2, qui visent le TITRE de la séance : « 1er juin 1872 »
+   porte <span class="mh-anchor" id="a17944"> en tête de son <h2> — on désigne
+   le bloc qui la contient. Sans cela le seul signal serait l'ancre elle-même,
+   qui ne contient qu'un U+200C, et son frère suivant, ici le <sup>er</sup> de
+   « 1er » : rien de lisible.
+   Règle à part, elle aussi, pour la même raison qu'au-dessus (:has()). */
+.mh-edition h1:has(> .mh-anchor.dots-target),
+.mh-edition h2:has(> .mh-anchor.dots-target),
+.mh-edition h3:has(> .mh-anchor.dots-target),
+.mh-edition h4:has(> .mh-anchor.dots-target),
+.mh-edition p:has(> .mh-anchor.dots-target),
+.mh-edition li:has(> .mh-anchor.dots-target) {
+  background: var(--mh-chute-fond);
+  box-shadow: -.45rem 0 0 var(--mh-chute-fond), .45rem 0 0 var(--mh-chute-fond);
+}
+.mh-edition h1:has(> .mh-anchor.dots-target)::before,
+.mh-edition h2:has(> .mh-anchor.dots-target)::before,
+.mh-edition h3:has(> .mh-anchor.dots-target)::before,
+.mh-edition h4:has(> .mh-anchor.dots-target)::before {
+  content: "\25B8\00A0";
+  color: var(--mh-chute-filet);
+}
+
+/* ---- 4. signature du coproducteur --------------------------------------- */
+
+/* Émise en fin de chaque fragment par « mh-signature » (mh-navigation.xsl).
+   L'ancien site portait ce bloc en bandeau fixe sur 408 de ses 521 pages ;
+   ici il est au pied du texte, hors du chemin de lecture. */
+.mh-edition .mh-signature {
+  margin: 3rem 0 0;
+  padding: 1.1rem 0 .2rem;
+  border-top: 1px solid #c9bfb6;
+  font: .82rem/1.5 Arial, Helvetica, sans-serif;
+  color: #4a443d;
+  text-align: center;
+}
+.mh-edition .mh-signature-intitule {
+  margin: 0 0 .7rem;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #7a736a;
+  text-align: center;
+}
+.mh-edition .mh-signature-logos {
+  margin: 0 0 .9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  text-align: center;
+}
+.mh-edition .mh-signature-lien {
+  display: inline-block;
+  border-bottom: 0;
+  text-decoration: none;
+}
+.mh-edition .mh-signature-logo {
+  display: block;
+  height: 56px;
+  width: auto;
+  max-width: 100%;
+  opacity: .88;
+  transition: opacity .15s ease-in-out;
+}
+.mh-edition .mh-signature-lien:hover .mh-signature-logo,
+.mh-edition .mh-signature-lien:focus-visible .mh-signature-logo { opacity: 1; }
+
+.mh-edition .mh-signature-droits,
+.mh-edition .mh-signature-contact {
+  margin: .25rem 0;
+  text-align: center;
+}
+.mh-edition .mh-signature-droits { color: #6b645b; }
+.mh-edition .mh-signature a:not(.mh-signature-lien) {
+  color: #8d2632;
+  text-decoration: none;
+  border-bottom: 1px dotted #b9a9a9;
+}
+.mh-edition .mh-signature a:not(.mh-signature-lien):hover,
+.mh-edition .mh-signature a:not(.mh-signature-lien):focus-visible {
+  color: var(--mh-chute-filet);
+  border-bottom-color: var(--mh-chute-filet);
+}
+
+/* Le courriel de l'éditeur scientifique est rétabli dans le corps de la
+   Présentation (« contact : pvmh@orange.fr »), où la source le donnait en
+   gras et en lien (index.html L. 840). */
+.mh-edition .mh-courriel {
+  font-weight: 700;
+  color: #8d2632;
+  text-decoration: none;
+  border-bottom: 1px dotted #b9a9a9;
+}
+.mh-edition .mh-courriel:hover,
+.mh-edition .mh-courriel:focus-visible {
+  color: var(--mh-chute-filet);
+  border-bottom-color: var(--mh-chute-filet);
+}
+
+/* ---- 5. petites largeurs ------------------------------------------------- */
+@media (max-width: 560px) {
+  .mh-edition .mh-signature-logos { gap: 1rem; }
+  .mh-edition .mh-signature-logo { height: 44px; }
+}
+
+/* ---- 6. impression ------------------------------------------------------- */
+/* Le repère de chute n'a pas de sens sur le papier : la page imprimée ne vient
+   d'aucun renvoi. La signature, elle, est un ours : elle reste, sans fond. */
+@media print {
+  .mh-edition .mh-affaire.dots-target,
+  .mh-edition .mh-sous-affaire.dots-target,
+  .mh-edition .mh-seance.dots-target,
+  .mh-edition .mh-annee.dots-target,
+  .mh-edition .mh-anchor.dots-target,
+  .mh-edition .mh-anchor.dots-target + *,
+  .mh-edition .mh-index-entree.dots-target {
+    background: none !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    animation: none !important;
+  }
+  .mh-edition .mh-affaire:has(.mh-anchor.dots-target),
+  .mh-edition .mh-sous-affaire:has(.mh-anchor.dots-target) {
+    background: none !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+  .mh-edition .mh-affaire:has(.mh-anchor.dots-target) > .mh-h-affaire::before,
+  .mh-edition .mh-sous-affaire:has(.mh-anchor.dots-target) > .mh-h-sous-affaire::before { content: none; }
+  .mh-edition h1:has(> .mh-anchor.dots-target),
+  .mh-edition h2:has(> .mh-anchor.dots-target),
+  .mh-edition h3:has(> .mh-anchor.dots-target),
+  .mh-edition h4:has(> .mh-anchor.dots-target),
+  .mh-edition p:has(> .mh-anchor.dots-target),
+  .mh-edition li:has(> .mh-anchor.dots-target) { background: none !important; box-shadow: none !important; }
+  .mh-edition h1:has(> .mh-anchor.dots-target)::before,
+  .mh-edition h2:has(> .mh-anchor.dots-target)::before,
+  .mh-edition h3:has(> .mh-anchor.dots-target)::before,
+  .mh-edition h4:has(> .mh-anchor.dots-target)::before { content: none; }
+  .mh-edition .mh-index-unite.dots-target > .mh-index-tete { background: none !important; box-shadow: none !important; }
+  .mh-edition .mh-index-unite.dots-target > .mh-index-tete::before { content: none; }
+  .mh-edition .mh-index-entree.dots-target,
+  .mh-edition .mh-index-entree:target {
+    background: none !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    animation: none !important;
+  }
+  .mh-edition .mh-index-entree.dots-target > .mh-index-vedette::before,
+  .mh-edition .mh-index-entree:target > .mh-index-vedette::before { content: none; }
+  .mh-edition .mh-affaire.dots-target > .mh-h-affaire::before,
+  .mh-edition .mh-sous-affaire.dots-target > .mh-h-sous-affaire::before,
+  .mh-edition .mh-seance.dots-target > .mh-h-seance::before,
+  .mh-edition .mh-annee.dots-target > .mh-h-annee::before { content: none; }
+
+  .mh-edition .mh-signature {
+    margin-top: 1.4rem;
+    padding-top: .6rem;
+    font-size: 8pt;
+    break-inside: avoid;
+  }
+  .mh-edition .mh-signature-logo { height: 32px; opacity: 1; }
+  .mh-edition .mh-signature a { color: inherit; border-bottom: 0; }
+}

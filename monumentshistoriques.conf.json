@@ -1,0 +1,209 @@
+{
+  "collectionId": "monumentshistoriques",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Monuments historiques"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Procès-verbaux de la Commission des monuments historiques (1848-1950)",
+      "aboutButtonText": "Présentation"
+    },
+    "descriptionSection": {
+      "collectionDescription": "Édition électronique des procès-verbaux de la Commission des monuments historiques, conservés à la Médiathèque de l'architecture et du patrimoine (série 0080/15). 102 années réparties en 11 décennies, 1 094 séances, 19 376 affaires, et une partie « Index » de 9 ressources."
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Consulter l'édition",
+      "displaySort": [
+        "mh-presentation",
+        "mh-pv",
+        "mh-1848-1857",
+        "mh-1858-1867",
+        "mh-1868-1877",
+        "mh-1878-1887",
+        "mh-1888-1897",
+        "mh-1898-1907",
+        "mh-1908-1917",
+        "mh-1918-1927",
+        "mh-1928-1937",
+        "mh-1938-1948",
+        "mh-1949-1950",
+        "mh-index",
+        "mh-index-communes",
+        "mh-index-merimee",
+        "mh-index-merimee-nr",
+        "mh-index-palissy",
+        "mh-index-toursit",
+        "mh-index-extraneum",
+        "mh-index-nominum",
+        "mh-index-rapporteurs",
+        "mh-cartes"
+      ]
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Procès-verbaux de la Commission des monuments historiques",
+    "footerSubtitles": [
+      "Édition coproduite par",
+      "Médiathèque de l'architecture et du patrimoine — ministère de la Culture",
+      "École nationale des chartes",
+      "Édition scientifique : Jean-Daniel Pariset, conservateur général du patrimoine — contact : pvmh@orange.fr"
+    ],
+    "footerDescription": "Droits : ministère de la Culture et de la Communication / Médiathèque de l'architecture et du patrimoine, qui conserve les originaux (série 0080/15) ; École nationale des chartes. La source ne précise aucune licence."
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 4,
+    "editByLevel": 2,
+    "editByCiteType": [
+      "seance",
+      "section",
+      "sous-section",
+      "carte",
+      "region",
+      "departement",
+      "lettre",
+      "pays",
+      "index"
+    ],
+    "displayTopToc": true,
+    "displayLeftToc": true,
+    "leftTocFragmentIsDocument": false
+  },
+  "aboutPageSettings": [],
+  "collectionCustomCss": "monumentshistoriques",
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "searchConfig": {
+    "facets": [
+      {
+        "id": "collections",
+        "key": "collections",
+        "label": "Décennies et index",
+        "enabled": true,
+        "order": 1
+      },
+      {
+        "id": "dublinCore.contributor",
+        "key": "dublinCore.contributor",
+        "enabled": false
+      },
+      {
+        "id": "dublinCore.publisher",
+        "key": "dublinCore.publisher",
+        "enabled": false
+      },
+      {
+        "id": "dublinCore.creator",
+        "key": "dublinCore.creator",
+        "enabled": false
+      },
+      {
+        "id": "dublinCore.language",
+        "key": "dublinCore.language",
+        "enabled": false
+      },
+      {
+        "id": "dublinCore.rights",
+        "key": "dublinCore.rights",
+        "enabled": false
+      },
+      {
+        "id": "dublinCore.source",
+        "key": "dublinCore.source",
+        "enabled": false
+      },
+      {
+        "id": "extensions.author",
+        "key": "extensions.author",
+        "enabled": false
+      },
+      {
+        "id": "extensions.editor",
+        "key": "extensions.editor",
+        "enabled": false
+      },
+      {
+        "id": "extensions.publisher",
+        "key": "extensions.publisher",
+        "enabled": false
+      },
+      {
+        "id": "extensions.inLanguage",
+        "key": "extensions.inLanguage",
+        "enabled": false
+      },
+      {
+        "id": "extensions.funder",
+        "key": "extensions.funder",
+        "enabled": false
+      }
+    ],
+    "temporalFacets": [
+      {
+        "id": "dublinCore.created",
+        "key": "dublinCore.created",
+        "enabled": false
+      },
+      {
+        "id": "dublinCore.coverage",
+        "key": "dublinCore.coverage",
+        "enabled": false
+      },
+      {
+        "id": "dublinCore.issued",
+        "key": "dublinCore.issued",
+        "enabled": false
+      },
+      {
+        "id": "extensions.dateCreated",
+        "key": "extensions.dateCreated",
+        "enabled": false
+      },
+      {
+        "id": "extensions.datePublished",
+        "key": "extensions.datePublished",
+        "enabled": false
+      },
+      {
+        "id": "extensions.temporalCoverage",
+        "key": "extensions.temporalCoverage",
+        "enabled": false
+      }
+    ]
+  },
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
+}

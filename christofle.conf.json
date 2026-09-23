@@ -11,7 +11,9 @@
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "toc",
@@ -30,10 +32,43 @@
   "tableOfContentsSettings": {
     "tableOfContentDepth": 4,
     "editByLevel": 1,
-    "editByCiteType": ["Section", "Note", "lettre", "Index des types d'actes"],
+    "editByCiteType": [
+      "Section",
+      "Note",
+      "lettre",
+      "Index des types d'actes"
+    ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
   "aboutPageSettings": [],
-  "collectionCustomCss": "christofle"
+  "collectionCustomCss": "christofle",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

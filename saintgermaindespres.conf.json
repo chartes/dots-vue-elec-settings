@@ -2,23 +2,69 @@
   "collectionId": "saintgermaindespres",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "appNavBar": { "collectionShortTitle": "Saint-Germain-des-Prés" },
-    "pageHeader": { "collectionAltTitle": "Saint-Germain-des-Prés : une église médiévale au filtre du XIXe siècle", "aboutButtonText": "À propos" },
-    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": "" },
-    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Parcourir les dossiers" }
+    "appNavBar": {
+      "collectionShortTitle": "Saint-Germain-des-Prés"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Saint-Germain-des-Prés : une église médiévale au filtre du XIXe siècle",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Parcourir les dossiers"
+    }
   },
   "footerSettings": {
     "footerTitle": "Saint-Germain-des-Prés",
-    "footerSubtitles": ["Une église médiévale au filtre du XIXe siècle", "École nationale des chartes – PSL"],
+    "footerSubtitles": [
+      "Une église médiévale au filtre du XIXe siècle",
+      "École nationale des chartes – PSL"
+    ],
     "footerDescription": "Édition des principales sources écrites et iconographiques concernant la restauration de l'église parisienne de Saint-Germain-des-Prés au XIXe siècle."
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 4,
     "editByLevel": 1,
-    "editByCiteType": ["piece", "section"],
+    "editByCiteType": [
+      "piece",
+      "section"
+    ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
   "aboutPageSettings": [],
-  "collectionCustomCss": "saintgermaindespres"
+  "collectionCustomCss": "saintgermaindespres",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

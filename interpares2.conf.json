@@ -2,23 +2,68 @@
   "collectionId": "interpares2",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "appNavBar": { "collectionShortTitle": "InterPARES 2" },
-    "pageHeader": { "collectionAltTitle": "InterPARES 2", "aboutButtonText": "À propos" },
-    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": "" },
-    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Parcourir les pages" }
+    "appNavBar": {
+      "collectionShortTitle": "InterPARES 2"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "InterPARES 2",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Parcourir les pages"
+    }
   },
   "footerSettings": {
     "footerTitle": "InterPARES 2",
-    "footerSubtitles": ["Édition électronique de l'École nationale des chartes"],
+    "footerSubtitles": [
+      "Édition électronique de l'École nationale des chartes"
+    ],
     "footerDescription": "Archivistique et diplomatique numériques : traduction française d'une partie des livrables du projet InterPARES 2."
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 4,
     "editByLevel": 2,
-    "editByCiteType": ["page", "div"],
+    "editByCiteType": [
+      "page",
+      "div"
+    ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
   "aboutPageSettings": [],
-  "collectionCustomCss": "interpares2"
+  "collectionCustomCss": "interpares2",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

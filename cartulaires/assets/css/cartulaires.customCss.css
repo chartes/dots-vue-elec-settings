@@ -101,7 +101,11 @@ span.note-inline {
    -------------------------------------------------------------------------- */
 
 [collid="cartulaires"] #main #article header.front {
-  --acte-blanc: 1.5em;
+  /* 2026-09-21 : en `em`, le blanc se mesurait sur la police de chaque bloc et
+     valait 25,2 px apres la tete latine de La Roche (1,05 em) contre 24 px
+     ailleurs. « Les blancs devant etre a peu pres identiques » : en `rem`, ils
+     le sont exactement. */
+  --acte-blanc: 1.5rem;
 }
 
 /* n° de l'acte : 1re ligne, centré */
@@ -248,22 +252,254 @@ span.note-inline {
    5. Onglet « Notice »
    « pour l'onglet "Notice", mettrions-nous "Notice bibliographique" pour le
      distinguer de la Notice introductive ? »
-   Le libellé est ECRIT EN DUR dans DocumentPage.vue (l. 125), qui est hors
-   perimetre. On le remplace ici par CSS, pour les seuls cartulaires : le texte
-   du bouton est masque (font-size: 0) et redonne en ::after. C'est un
-   contournement : la correction propre est un mot a changer dans le composant
-   (ou, mieux, un libelle a sortir dans la conf du corpus).
+   2026-09-21 : plus rien ici. Le libellé était masqué (font-size: 0) et redonné
+   en ::after — le bouton gardait « Notice » pour un lecteur d'écran. Il est
+   désormais lu dans la configuration du corpus
+   (documentPageSettings.metadataTabLabel), DocumentPage.vue l'affichant tel
+   quel ; « Notice » reste la valeur par défaut des autres corpus.
    -------------------------------------------------------------------------- */
-[collid="cartulaires"] .breadcrumb-panel .tab-header > button.dots-button:first-child {
-  font-size: 0;
-  padding-left: 18px;
-  padding-right: 18px;
-}
-[collid="cartulaires"] .breadcrumb-panel .tab-header > button.dots-button:first-child::after {
-  content: "Notice bibliographique";
-  font-size: 14px;
-  font-weight: 700;
-  font-family: Roboto, sans-serif;
-}
 
 /* ==== fin V5-PRESENTATION ==== */
+
+/* ==== W1-TABLEAU-DEBUT (2026-09-21) : liste des actes en tableau triable ==================
+   Demande d'Olivier Canteaut : « peut-on essayer de faire 2 colonnes, une avec le n°, l'autre
+   avec la date ? On pourrait même imaginer de trier, ce qui serait super ! »
+
+   Le HTML est engendré par cartulaires.xsl (bloc W1-TABLEAU) sur chaque <group> d'actes.
+   Le tri se fait SANS <script>, sur le modèle de l'index du manuscrit de Bellelay :
+     - quatre boutons radio cachés, chacun enfermé dans son <label> (cliquer le label coche
+       la radio — DoTS-vue laisse passer <input> et <label> dans le gabarit Vue) ;
+     - chaque ligne porte deux rangs précalculés par la XSL, en propriétés personnalisées
+       (ord-n = rang par numéro, ord-d = rang chronologique) ;
+     - le <tbody> est une boîte flex en colonne : `order` suffit alors à réordonner, et
+       `calc(0 - var(…))` à inverser. QUATRE règles, quel que soit le nombre d'actes.
+   Mesuré le 2026-09-21 sur ce poste (Chrome 153) : `:has()`, `order: var()` et
+   `order: calc(0 - var())` fonctionnent tous les trois.
+
+   Le tableau est haut de 28 rem au plus et défile à l'intérieur : la plus grosse partie du
+   corpus en compte 1 149 (Hôtel-Dieu de Paris).
+
+   TOUS les sélecteurs ci-dessous sont préfixés par [collid="cartulaires"] : cette feuille est
+   injectée globalement dans l'application, un sélecteur nu casserait les 26 autres corpus.
+   -------------------------------------------------------------------------------------- */
+
+[collid="cartulaires"] .cartu-actes {
+  box-sizing: border-box;
+  max-width: 46rem;
+  margin: 1.5rem 0 2rem;
+  padding: 0.85rem 1rem 1rem;
+  border: 1px solid #d5cbd2;
+  background: #fbf9fa;
+}
+
+[collid="cartulaires"] .cartu-actes-titre {
+  margin: 0 0 0.15rem;
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+[collid="cartulaires"] .cartu-actes-nb {
+  color: #6d6570;
+  font-weight: 400;
+}
+
+/* Le tableau est mis à plat : c'est le <tbody> en flex-column qui rend `order` utilisable
+   (une ligne de tableau n'est pas un élément flex). Les deux colonnes sont donc tenues par
+   des largeurs explicites et non par l'algorithme de table. */
+[collid="cartulaires"] .cartu-actes-table {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+}
+
+[collid="cartulaires"] .cartu-actes-table thead {
+  display: block;
+}
+
+[collid="cartulaires"] .cartu-actes-table tbody {
+  display: flex;
+  flex-direction: column;
+  max-height: 28rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+[collid="cartulaires"] .cartu-actes-entete,
+[collid="cartulaires"] .cartu-acte {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+[collid="cartulaires"] .cartu-actes-entete {
+  border-bottom: 2px solid var(--fill-color, #5f004d);
+  padding: 0.25rem 0.5rem 0.3rem;
+}
+
+[collid="cartulaires"] .cartu-actes-entete .cartu-c-num,
+[collid="cartulaires"] .cartu-actes-entete .cartu-c-date {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  border: 0;
+  background: none;
+  color: var(--fill-color, #5f004d);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+[collid="cartulaires"] .cartu-c-num {
+  flex: 0 0 7.5rem;
+  min-width: 0;
+}
+
+[collid="cartulaires"] .cartu-c-date {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+[collid="cartulaires"] .cartu-acte {
+  padding: 0.18rem 0.5rem;
+  border-bottom: 1px solid #ece6ea;
+}
+
+[collid="cartulaires"] .cartu-acte:hover {
+  background: #f2e9ef;
+}
+
+[collid="cartulaires"] .cartu-acte .cartu-c-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+[collid="cartulaires"] .cartu-acte .cartu-c-date {
+  color: #3f3a41;
+}
+
+[collid="cartulaires"] .cartu-acte-lien {
+  color: inherit;
+  text-decoration: none;
+}
+
+[collid="cartulaires"] .cartu-acte-lien:hover,
+[collid="cartulaires"] .cartu-acte-lien:focus-visible {
+  color: var(--fill-color, #5f004d);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* --- les commandes de tri ------------------------------------------------------------- */
+/* Les radios sont l'état du tri : cachées à l'œil, pas au clavier (même recette que
+   .idx-page-radio de Bellelay). */
+[collid="cartulaires"] .cartu-tri-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+[collid="cartulaires"] .cartu-tri {
+  display: inline-flex;
+  gap: 0.1rem;
+}
+
+[collid="cartulaires"] .cartu-tri-b {
+  display: inline-block;
+  padding: 0 0.12rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+[collid="cartulaires"] .cartu-fleche {
+  color: #b3a7ae;
+  font-size: 0.72rem;
+}
+
+[collid="cartulaires"] .cartu-tri-b:hover .cartu-fleche {
+  color: #8a5f7e;
+}
+
+[collid="cartulaires"] .cartu-tri-b:has(.cartu-tri-radio:checked) .cartu-fleche {
+  color: var(--fill-color, #5f004d);
+}
+
+[collid="cartulaires"] .cartu-tri-radio:focus-visible + .cartu-fleche {
+  outline: 2px solid #1a4f9c;
+  outline-offset: 2px;
+}
+
+/* --- le tri lui-même : quatre règles ---------------------------------------------------- */
+[collid="cartulaires"] .cartu-actes:has(.cartu-tri-radio[value="num-asc"]:checked) .cartu-acte {
+  order: var(--ord-n);
+}
+
+[collid="cartulaires"] .cartu-actes:has(.cartu-tri-radio[value="num-desc"]:checked) .cartu-acte {
+  order: calc(0 - var(--ord-n));
+}
+
+[collid="cartulaires"] .cartu-actes:has(.cartu-tri-radio[value="date-asc"]:checked) .cartu-acte {
+  order: var(--ord-d);
+}
+
+[collid="cartulaires"] .cartu-actes:has(.cartu-tri-radio[value="date-desc"]:checked) .cartu-acte {
+  order: calc(0 - var(--ord-d));
+}
+
+@media (max-width: 640px) {
+  [collid="cartulaires"] .cartu-actes {
+    max-width: none;
+    padding: 0.6rem 0.5rem 0.7rem;
+  }
+
+  [collid="cartulaires"] .cartu-c-num {
+    flex: 0 0 5.5rem;
+  }
+}
+
+/* ==== W1-TABLEAU-FIN ==== */
+
+/* ==== W2-PAGE-DU-GROUPE (2026-09-21) ==================================================
+   OU LE TABLEAU APPARAIT : sur la page du GROUPE d'actes — « Cartulaire de Saint-Merry de
+   Paris », « Recueil des chartes »... —, le niveau qui reunit tous les actes.
+
+   Comment on l'y a amene, sans toucher au moindre composant Vue :
+   1. DoTS-vue demande une page avec excludeFragments=true tant que le citeType du niveau n'est
+      pas declare dans tableOfContentsSettings.editByCiteType (DocumentPage.vue :
+      editorialLevelIndicator = editByCiteType.includes(citeType) ? 'toEdit' : 'renderToc' ;
+      Document.vue : 'renderToc' => excludeFragments=true). Le resolveur retire alors TOUS les
+      actes avant d'appeler la feuille : mesure du 2026-09-21, le fragment leger de
+      SMPA-EG_group fait 1 791 octets et ne contient ni acte, ni date, ni identifiant — rien a
+      lister. D'ou l'ajout de « part » (et « par », coquille de « part » sur
+      NDPA-EG-02_group-1) a editByCiteType dans cartulaires.conf.json.
+   2. La page est alors servie entiere — et pesait 52,1 Mo pour Saint-Martin de Pontoise : elle
+      ne s'affichait plus. C'est cartulaires.xsl qui engendrait ces octets ; son « Accroche 3 »
+      (modele tei:group[parent::*[local-name()='wrapper']], priorite 20) ne rend donc, sur
+      cette page-la, que le titre et le tableau. Resultat mesure : 66 Ko au lieu de 52,1 Mo,
+      124 Ko pour la plus lourde des 15 pages de groupe servies aujourd'hui.
+
+   Les liens des lignes mènent a la page de chaque acte (et non a une ancre « #id », qui ne
+   menerait nulle part puisque les actes ne sont plus sur la page) : la feuille les fabrique
+   avec le parametre XSL « resource », que routes.xqm l. 273 lui passe deja.
+   -------------------------------------------------------------------------------------- */
+
+/* Sur la page du groupe, le tableau n'est plus un encart au fil du texte mais le contenu
+   meme de la page : un peu plus large, et il n'a pas a defiler dans une boite de 28 rem
+   puisque rien ne le suit. */
+[collid="cartulaires"] #main #article .cartu-groupe-seul .cartu-actes {
+  max-width: 52rem;
+  margin: 1.25rem 0 2.5rem;
+}
+
+[collid="cartulaires"] #main #article .cartu-groupe-seul .cartu-actes-table tbody {
+  max-height: none;
+  overflow-y: visible;
+}
+
+/* ==== W2-PAGE-DU-GROUPE-FIN ==== */

@@ -19,17 +19,6 @@
       "displaySort": [
         "mh-presentation",
         "mh-pv",
-        "mh-1848-1857",
-        "mh-1858-1867",
-        "mh-1868-1877",
-        "mh-1878-1887",
-        "mh-1888-1897",
-        "mh-1898-1907",
-        "mh-1908-1917",
-        "mh-1918-1927",
-        "mh-1928-1937",
-        "mh-1938-1948",
-        "mh-1949-1950",
         "mh-index",
         "mh-index-communes",
         "mh-index-merimee",
@@ -85,7 +74,7 @@
       {
         "id": "collections",
         "key": "collections",
-        "label": "Décennies et index",
+        "label": "Texte et index",
         "enabled": true,
         "order": 1
       },

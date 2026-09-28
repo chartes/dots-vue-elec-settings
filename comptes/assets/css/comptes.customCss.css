@@ -1,144 +1,24 @@
-/* Glossaire de Montferrand : restituer la liste compacte de l'Élec historique.
-   La règle générique `.entry > *` est utile aux articles de dictionnaire,
-   mais elle isole ici chaque mot grammatical et chaque forme liée. */
-.dts-content .entry {
-  display: list-item;
-  margin: 0 0 0.2em 1.4em;
-  padding: 0;
-}
+/* 2026-09-28 : les règles de glossaire, de renvois et de la « feuille historique »
+   qui étaient ici ne visaient pas que Montferrand (.dts-content .entry touchait
+   Du Cange, a.lemma-link et #article a.rs tous les corpus, .apparatus était mort).
+   Elles sont remplacées par le bloc « Montferrand, style 2026-09-28 » en fin de
+   fichier, entièrement préfixé par #main #article .montferrand-historic.
+   Sauvegarde de l'ancienne version : comptes.customCss.css.bak_style_20260928. */
 
-.dts-content .entry > * {
-  margin-left: 0;
-}
-
-/* Les définitions, renvois et formes associées font partie de la même ligne. */
-.dts-content .entry > .def,
-.dts-content .entry > .xr {
-  display: inline;
-}
-
-/* --------------------------------------------------------------------------
-   Renvois croisés (liens produits par comptes.xsl)
-   -------------------------------------------------------------------------- */
-
-/* Mots du texte liés à leur entrée de glossaire : quasi tous les mots sont
-   liés, donc pas de décoration permanente (sinon le texte occitan est
-   illisible). Le lien ne se révèle qu'au survol. */
-a.lemma-link,
-a.lemma-link.doc-internal-link {
-  color: #315ba7;   /* bleu ELEC (a.w) : le lecteur voit que le mot renvoie au glossaire */
-  text-decoration: none;
-  cursor: pointer;
-}
-
-a.lemma-link:hover,
-a.lemma-link.doc-internal-link:hover {
-  text-decoration: underline;
-}
-
-/* Renvois numériques de l'index de noms vers les articles des comptes :
-   ce sont de vrais points d'entrée, on les garde visibles mais sobres. */
-a.renvoi-compte,
-a.renvoi-compte.doc-internal-link {
-  color: #6b0057;
-  text-decoration: none;
-}
-a.renvoi-compte:hover,
-a.renvoi-compte.doc-internal-link:hover {
-  text-decoration: underline;
-}
-
-/* --------------------------------------------------------------------------
-   Montferrand : règles de la feuille historique (elec.enc.sorbonne.fr)
-   -------------------------------------------------------------------------- */
-
-.montferrand-historic {
-  font-family: "Times New Roman", Times, serif;
-}
-
-.montferrand-historic .somme {
-  font-weight: bold;
-}
-
-.montferrand-historic a.w {
-  text-decoration: none;
-  border-bottom: none;
-}
-
-.montferrand-historic a.item {
-  text-decoration: none;
-  border-bottom: none;
-  font-size: 80%;
-  color: #971615;
-}
-
-.montferrand-historic .compte li {
-  list-style: none;
-}
-
-/* Passages cancellés.
-   La feuille TEI générique de DoTS-vue applique à <del> :
-     color: red;
-     text-decoration: line-through;
-   L'Élec historique conserve le passage visible sans rouge ni barré.
-   On garde donc le <del> dans le XML mais on neutralise uniquement son rendu. */
-.montferrand-historic del {
+/* Repris de l'ancien bloc, désormais cantonnés au corpus. */
+#main #article .montferrand-historic del {
   display: inline;
   color: inherit;
   background-color: inherit;
   text-decoration: none;
 }
-
-/* Glossaire — séparation du bloc « Occurrences : ».
-   Le front DoTS strippe le whitespace inter-balises, et les règles ci-dessus
-   rendent .def/.xr inline : sans marge, les occurrences se collent à la forme
-   suivante ou à la définition (abationt|abatieront|démolir). La marge CSS est
-   robuste là où un espace XSL ne survit pas au rendu du front. */
-.dts-content .gloss-occurrences {
-  margin: 0 0.35em;
-}
-
-/* Apparat critique : rendre les lettres-sigles (a, b, c…) distinctes du texte
-   et aérer chaque leçon, sinon le paragraphe continu paraît illisible. */
-.apparatus .apparatus-back {
-  font-weight: bold;
+#main #article .montferrand-historic a.renvoi-compte {
   color: #6b0057;
-  margin-right: .15em;
   text-decoration: none;
 }
-
-.apparatus .apparatus-note {
-  margin-right: .6em;
+#main #article .montferrand-historic a.renvoi-compte:hover {
+  text-decoration: underline;
 }
-
-/* Folios [fol. N] INLINE : la règle générique de html.css « .pb { float: right }
-   » rejette le folio dans la marge droite et disloque l'entrée (numéro à gauche,
-   fin de l'entrée à droite). Le template Montferrand veut le folio au fil du
-   texte → on annule le float pour ces folios. */
-.montferrand-historic a.pb.folio,
-.montferrand-historic .folio {
-  float: none;
-  display: block;             /* le [fol. N] sur sa propre ligne */
-  margin: .6em 0 .35em 0;     /* espace sous le folio */
-  color: grey;
-}
-
-/* Mots annotés (<rs ref="#fnN">) : sur l'ÉLEC le mot LUI-MÊME est le lien vers
-   sa note, souligné en pointillés gris et coloré en bleu — valeurs relevées sur
-   http://elec.enc.sorbonne.fr/montferrand/C1317-1318 :
-   color rgb(49,91,167) ; border-bottom .67px dotted rgb(153,153,153). */
-#article a.rs,
-.montferrand-historic a.rs {
-  color: #315BA7;
-  text-decoration: none;
-  border-bottom: 1px dotted #999;
-  cursor: pointer;
-}
-#article a.rs:hover,
-.montferrand-historic a.rs:hover {
-  border-bottom-style: solid;
-}
-
 
 /* --------------------------------------------------------------------------
    Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
@@ -356,3 +236,669 @@ a.renvoi-compte.doc-internal-link:hover {
   .document-area #article:not(.bottom-toc) table { font-size: .9em; }
 }
 /* ==== D12-SOCLE-FIN ==== */
+
+/* ==========================================================================
+   Montferrand, style 2026-09-28 (glossaire et registres)
+   ========================================================================== */
+/* ==========================================================================
+   Montferrand (comptes) : glossaire et registres — proposition 2026-09-28
+   Toutes les règles passent par #main #article .montferrand-historic :
+   la customCss est injectée globalement, et .montferrand-historic n'est émise
+   que par comptes.xsl. La spécificité (2 id) passe devant le socle D12
+   (.document-area #article:not(.bottom-toc) a = 1 id).
+   ========================================================================== */
+
+#main #article .montferrand-historic {
+  --mf-gris: #77706a;         /* numéros, folios, dates éditoriales */
+  --mf-filet: #dcd8d3;
+  --mf-accent: var(--fill-color, #8f0e21);
+  --mf-gouttiere: 3.4rem;     /* colonne des numéros d'articles */
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* --------------------------------------------------------------------------
+   1. Mots liés au glossaire (a.w.lemma-link) : ~3 400 liens par registre.
+      La couleur ne distingue plus rien quand un mot sur deux est lié : encre
+      normale, le lien se révèle au survol (et au clavier).
+   -------------------------------------------------------------------------- */
+#main #article .montferrand-historic a.w {
+  color: inherit;
+  text-decoration: none;
+  border: 0;
+}
+#main #article .montferrand-historic a.w:hover,
+#main #article .montferrand-historic a.w:focus-visible {
+  color: var(--mf-accent);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+/* Passage annoté (rs) : pointillé gris sous le passage ; ce n'est plus un lien
+   (ses mots restent liés au glossaire), l'appel de note qui le suit (a.rs-appel,
+   voir le bloc « cible surlignée » en fin de fichier) mène à la page Notes. */
+#main #article .montferrand-historic span.rs {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted #999;
+}
+
+/* --------------------------------------------------------------------------
+   2. Appels de note et d'apparat : pas de pastille noire (main.css
+      « a.noteref sup »), un simple exposant d'accent. Lettre d'apparat en
+      italique pour la distinguer du chiffre de note savante.
+   -------------------------------------------------------------------------- */
+#main #article .montferrand-historic a.noteref sup {
+  display: inline;
+  transform: none;
+  margin: 0 0 0 .08em;
+  padding: 0;
+  background: none;
+  color: var(--mf-accent);
+  font: 600 .72em/0 var(--font-primary, "Roboto"), Arial, sans-serif;
+  vertical-align: super;
+}
+#main #article .montferrand-historic a.apparatus-call sup { font-style: italic; }
+#main #article .montferrand-historic a.noteref:hover sup { background: none; text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
+   3. Registres : articles numérotés en gouttière (numéro aligné à droite,
+      texte en retrait suspendu) — la colonne de chiffres se lit d'un coup
+      d'œil comme dans l'édition imprimée.
+   -------------------------------------------------------------------------- */
+#main #article .montferrand-historic .compte ul {
+  margin: .4rem 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+#main #article .montferrand-historic .compte li {
+  margin: 0 0 .35em;
+  padding-left: var(--mf-gouttiere);
+  line-height: 1.5;
+  list-style: none;
+}
+#main #article .montferrand-historic a.item {
+  display: inline-block;
+  width: calc(var(--mf-gouttiere) - .6rem);
+  margin-left: calc(-1 * var(--mf-gouttiere));
+  margin-right: .6rem;
+  text-align: right;
+  color: var(--mf-gris);
+  font: .72rem/1 var(--font-primary, "Roboto"), Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+#main #article .montferrand-historic a.item:hover { color: var(--mf-accent); }
+
+/* Ligne des consuls (<ins>) : pas de soulignement d'insertion. */
+#main #article .montferrand-historic ins { text-decoration: none; font-style: italic; }
+
+/* Sommes (item ana="somme") : ligne de total, filet au-dessus. */
+#main #article .montferrand-historic li.somme {
+  margin-top: .5em;
+  padding-top: .3em;
+  border-top: 1px solid var(--mf-filet);
+  font-weight: 700;
+}
+/* ... mais la remarque éditoriale qui suit la somme n'est pas en gras. */
+#main #article .montferrand-historic li.somme .damage { font-weight: 400; }
+
+/* Remarques et lacunes éditoriales, dates normalisées par l'éditeur :
+   en retrait de couleur, pour ne pas se confondre avec le texte occitan. */
+#main #article .montferrand-historic .damage,
+#main #article .montferrand-historic .gap { color: var(--mf-gris); }
+#main #article .montferrand-historic .date { color: var(--mf-gris); font-size: .92em; }
+
+/* Folios : comme sur l'ÉLEC historique, « [fol. N] » reste au fil de la ligne,
+   juste après le numéro de l'article, dans la police et la couleur du texte
+   (ex. « 1.45. [fol. 84] CLXX £ XIIII s. VIII d »). */
+#main #article .montferrand-historic a.pb.folio,
+#main #article .montferrand-historic .compte li > a.pb.folio:first-child {
+  float: none;
+  display: inline;
+  margin: 0 .25em 0 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: normal;
+  text-decoration: none;
+  background: none;
+  border: 0;
+}
+#main #article .montferrand-historic .compte li > a.pb.folio:first-child::after { content: none; }
+
+/* Apparat au bas du registre : le <hr> 15 % double le filet du socle D12. */
+#main #article .montferrand-historic .footnotes > hr { display: none; }
+
+/* Ancre atteinte depuis un lien : surlignage passager, voir le bloc
+   « cible surlignée » en fin de fichier. */
+#main #article .montferrand-historic li:target,
+#main #article .montferrand-historic li.dots-target {
+  scroll-margin-top: 140px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Glossaire : une entrée = un paragraphe à retrait suspendu (le mot-vedette
+      dépasse), sans puce ; lettrines de section ; compteur d'occurrences en
+      petite étiquette à la fin de la ligne ; occurrences en bloc filé.
+   -------------------------------------------------------------------------- */
+#main #article .montferrand-historic .caption {
+  margin: 1.8rem 0 .6rem;
+  padding-bottom: .15rem;
+  border-bottom: 1px solid var(--mf-filet);
+  color: var(--mf-accent);
+  font: 600 1.15rem/1.2 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+}
+#main #article .montferrand-historic .entry {
+  display: block;
+  margin: 0 0 .3em;
+  padding-left: 1.4em;
+  text-indent: -1.4em;
+  line-height: 1.45;
+}
+#main #article .montferrand-historic .entry > * { margin-left: 0; text-indent: 0; }
+#main #article .montferrand-historic .entry .def,
+#main #article .montferrand-historic .entry .xr,
+#main #article .montferrand-historic .entry .re { display: inline; }
+/* Plusieurs sens : « réparer, remettre en état ; modifier, renouveler ». */
+#main #article .montferrand-historic .entry > .def + .def::before { content: " ; "; }
+#main #article .montferrand-historic .gramGrp { color: #5c5650; }
+
+/* Repli des occurrences : le <summary> recevait display: contents (html.css
+   « details summary { display: inherit } ») et perdait tout signe cliquable. */
+#main #article .montferrand-historic details.gloss-occurrences {
+  display: inline;
+  margin: 0 0 0 .4em;
+}
+#main #article .montferrand-historic summary.gloss-occurrences-toggle {
+  display: inline-block;
+  padding: 0 .45em;
+  border: 1px solid var(--mf-filet);
+  border-radius: 999px;
+  color: var(--mf-gris);
+  font: .72rem/1.5 var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-indent: 0;
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+#main #article .montferrand-historic summary.gloss-occurrences-toggle::-webkit-details-marker { display: none; }
+#main #article .montferrand-historic summary.gloss-occurrences-toggle:hover,
+#main #article .montferrand-historic details[open] > summary.gloss-occurrences-toggle {
+  border-color: var(--mf-accent);
+  color: var(--mf-accent);
+}
+#main #article .montferrand-historic .gloss-occurrence {
+  display: block;
+  margin: 0 0 .15em .1em;
+  padding-left: 3.6em;            /* filet + colonne des numéros */
+  border-left: 2px solid var(--mf-filet);
+  text-indent: -2.9em;            /* 1re ligne : le numéro dépasse dans la colonne */
+  font-size: .92em;
+  line-height: 1.4;
+}
+#main #article .montferrand-historic details[open] > .gloss-occurrence:first-of-type { margin-top: .35em; }
+#main #article .montferrand-historic details[open] > .gloss-occurrence:last-child { margin-bottom: .6em; }
+#main #article .montferrand-historic .gloss-occurrence-num {
+  display: inline-block;
+  width: 2.9em;                   /* = |text-indent| de .gloss-occurrence */
+  text-indent: 0;                 /* sinon hérite du retrait négatif */
+  color: var(--mf-gris);
+  font: .75rem var(--font-primary, "Roboto"), Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+/* La forme dans son contexte : en gras, encre, soulignée au survol. */
+#main #article .montferrand-historic a.oVar {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  border: 0;
+}
+#main #article .montferrand-historic a.oVar:hover { color: var(--mf-accent); text-decoration: underline; }
+
+/* ==========================================================================
+   Liens comme sur l'ÉLEC historique (2026-09-28) : bleu #315BA7, pas de
+   soulignement, pointillé gris dessous, trait plein au survol. Sans ce repère
+   le lecteur ne voit pas que les mots renvoient au glossaire ou à une note.
+   Placé en fin de fichier pour l'emporter sur le bloc « style 2026-09-28 ».
+   ========================================================================== */
+#main #article .montferrand-historic a.w,
+#main #article .montferrand-historic a.lemma-link,
+#main #article .montferrand-historic a.oVar,
+#main #article .montferrand-historic a.renvoi-compte,
+#main #article .montferrand-historic .entry a,
+#main #article .montferrand-historic .notes-page a {
+  color: #315BA7;
+  text-decoration: none;
+  border-bottom: 1px dotted #999;
+  cursor: pointer;
+}
+#main #article .montferrand-historic a.w:hover,
+#main #article .montferrand-historic a.lemma-link:hover,
+#main #article .montferrand-historic a.oVar:hover,
+#main #article .montferrand-historic a.renvoi-compte:hover,
+#main #article .montferrand-historic .entry a:hover,
+#main #article .montferrand-historic .notes-page a:hover {
+  color: #315BA7;
+  border-bottom-style: solid;
+}
+/* Appels d'apparat et de note : petite lettre bleue, comme a.refnote de l'ÉLEC. */
+#main #article .montferrand-historic a.noteref,
+#main #article .montferrand-historic a.noteref sup,
+#main #article .montferrand-historic a.apparatus-call sup {
+  color: #315BA7;
+}
+
+/* Numéros d'articles en rouge, comme sur l'ÉLEC historique (a.item : #971615). */
+#main #article .montferrand-historic a.item,
+#main #article .montferrand-historic a.item.account-item-number {
+  color: #971615;
+  border-bottom: 0;
+  text-decoration: none;
+}
+#main #article .montferrand-historic a.item:hover {
+  color: #971615;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   TABLEAUX TRIABLES — glossaire et index des noms (2026-09-28)
+   Une page par index ; chaque index est un <table class="mf-tableau"> produit
+   par comptes.xsl. Chaque en-tête est un bouton : un clic trie la colonne
+   (ordre croissant), un second clic inverse ; l'état est porté par
+   aria-sort de l'en-tête, que ces règles lisent pour afficher ▲ / ▼.
+   Le tri DÉPLACE les lignes (script dans l'attribut onclick) : c'est un vrai
+   tableau, colonnes calées sur le contenu, et le zébrage (:nth-child) suit
+   l'ordre affiché.
+   ========================================================================== */
+
+/* Le socle (tei.css) met tout tableau en display:block + overflow-x:scroll :
+   la table devient son propre conteneur de défilement et un en-tête collant
+   n'y colle plus. On rend à ces deux tableaux leur modèle de table. */
+#main #article .montferrand-historic .mf-tableau-cadre {
+  margin: 1.2rem 0 2rem;
+}
+#main #article .montferrand-historic table.mf-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;      /* un th collant garde ses filets */
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+#main #article .montferrand-historic .mf-tableau-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: var(--mf-gris);
+  font: .8rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-align: left;
+}
+
+/* En-têtes : collants sous la barre de navigation (80 px), filet d'accent. */
+#main #article .montferrand-historic .mf-tableau thead th {
+  position: sticky;
+  top: 80px;
+  z-index: 2;
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--mf-accent);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+/* Une entrée désignée (arrivée par un lien, choix dans la recherche) est placée
+   à 90 px du haut par Document.vue : un en-tête collant la couvrirait. Il cesse
+   donc de coller tant qu'une ligne porte dots-target ; un tri la libère. */
+#main #article .montferrand-historic .mf-tableau:has(tr.dots-target) thead th {
+  position: static;
+}
+#main #article .montferrand-historic .mf-tableau button.mf-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#main #article .montferrand-historic .mf-tableau button.mf-tri::after {
+  content: "\2195";               /* ↕ : colonne triable, non triée */
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+#main #article .montferrand-historic .mf-tableau th[aria-sort="ascending"] button.mf-tri::after {
+  content: "\25B2";               /* ▲ */
+  color: var(--mf-accent);
+  font-size: .75em;
+}
+#main #article .montferrand-historic .mf-tableau th[aria-sort="descending"] button.mf-tri::after {
+  content: "\25BC";               /* ▼ */
+  color: var(--mf-accent);
+  font-size: .75em;
+}
+#main #article .montferrand-historic .mf-tableau button.mf-tri:hover,
+#main #article .montferrand-historic .mf-tableau th[aria-sort="ascending"] button.mf-tri,
+#main #article .montferrand-historic .mf-tableau th[aria-sort="descending"] button.mf-tri {
+  color: var(--mf-accent);
+}
+#main #article .montferrand-historic .mf-tableau button.mf-tri:hover { background: #ece7e2; }
+#main #article .montferrand-historic .mf-tableau button.mf-tri:focus-visible {
+  outline: 2px solid #315BA7;
+  outline-offset: -2px;
+}
+
+/* Cellules : filet fin, zébrage léger, survol. */
+#main #article .montferrand-historic .mf-tableau td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+#main #article .montferrand-historic .mf-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+#main #article .montferrand-historic .mf-tableau tbody tr:hover > td { background: #f3efe9; }
+#main #article .montferrand-historic .mf-tableau tbody tr:target > td:first-child,
+#main #article .montferrand-historic .mf-tableau tbody tr.dots-target > td:first-child {
+  box-shadow: inset 3px 0 0 var(--mf-accent);
+}
+#main #article .montferrand-historic .mf-tableau .mf-vide { color: #c4bdb6; }
+
+/* Largeurs : la colonne des occurrences accueille, déplié, le texte des articles. */
+#main #article .montferrand-historic .mf-glossaire .mf-c-lemme { width: 24%; }
+#main #article .montferrand-historic .mf-glossaire .mf-c-cat   { width: 13%; }
+#main #article .montferrand-historic .mf-glossaire .mf-c-def   { width: 25%; }
+#main #article .montferrand-historic .mf-glossaire .mf-c-occ   { width: 38%; }
+#main #article .montferrand-historic .mf-glossaire td.mf-c-cat { color: #5c5650; font-style: italic; }
+#main #article .montferrand-historic .mf-noms .mf-c-nom    { width: 22%; }
+#main #article .montferrand-historic .mf-noms .mf-c-glose  { width: 26%; }
+#main #article .montferrand-historic .mf-noms .mf-c-occ    { width: 40%; }
+#main #article .montferrand-historic .mf-noms .mf-c-renvoi { width: 12%; }
+
+/* Glossaire, colonne « Lemme et formes » : le lemme en gras, puis une sous-entrée
+   (forme fléchie et sa catégorie) par ligne, en retrait. */
+#main #article .montferrand-historic .mf-glossaire .mf-c-lemme > b { font-size: 1.02em; }
+#main #article .montferrand-historic .mf-glossaire .re {
+  display: block;
+  margin: .1em 0 0 .9em;
+  font-size: .9em;
+  line-height: 1.35;
+}
+#main #article .montferrand-historic .mf-glossaire .re b { font-weight: 600; }
+#main #article .montferrand-historic .mf-glossaire .re .gramGrp { color: #77706a; }
+#main #article .montferrand-historic .mf-glossaire .re .def { display: inline; }
+#main #article .montferrand-historic .mf-glossaire .mf-c-def .def,
+#main #article .montferrand-historic .mf-glossaire .mf-c-def .xr { display: inline; }
+#main #article .montferrand-historic .mf-glossaire .mf-c-def .def + .def::before,
+#main #article .montferrand-historic .mf-glossaire .mf-c-def .def + .xr::before { content: " ; "; }
+/* Repli des occurrences : l'étiquette ouvre la cellule. */
+#main #article .montferrand-historic .mf-glossaire .mf-c-occ details.gloss-occurrences {
+  display: block;
+  margin: 0;
+}
+#main #article .montferrand-historic .mf-glossaire .mf-c-occ details[open] > .gloss-occurrence:first-of-type { margin-top: .4em; }
+
+/* Index des noms : nombre d'occurrences en petite étiquette devant la liste. */
+#main #article .montferrand-historic .mf-noms .mf-nb {
+  display: inline-block;
+  min-width: 1.6em;
+  margin-right: .2em;
+  padding: 0 .35em;
+  border: 1px solid var(--mf-filet);
+  border-radius: 999px;
+  color: var(--mf-gris);
+  font: .72rem/1.5 var(--font-primary, "Roboto"), Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+/* Liens des tableaux : style ÉLEC (bleu #315BA7, pointillé, trait plein au survol). */
+#main #article .montferrand-historic .mf-tableau td a {
+  color: #315BA7;
+  text-decoration: none;
+  border-bottom: 1px dotted #999;
+}
+#main #article .montferrand-historic .mf-tableau td a:hover {
+  color: #315BA7;
+  border-bottom-style: solid;
+}
+#main #article .montferrand-historic .mf-tableau td a.oVar { border-bottom: 0; color: inherit; }
+#main #article .montferrand-historic .mf-tableau td a.oVar:hover { color: #315BA7; }
+
+/* Recherche en tête de page. */
+#main #article .montferrand-historic .mf-recherche {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .6rem;
+  margin: 0 0 1rem;
+}
+#main #article .montferrand-historic .mf-recherche label {
+  color: var(--mf-gris);
+  font: .85rem var(--font-primary, "Roboto"), Arial, sans-serif;
+}
+#main #article .montferrand-historic .mf-recherche input[type="search"] {
+  width: min(24rem, 100%);
+  padding: .35rem .6rem;
+  border: 1px solid var(--mf-filet);
+  border-radius: 4px;
+  font: .95rem var(--font-primary, "Roboto"), Arial, sans-serif;
+}
+#main #article .montferrand-historic .mf-recherche input[type="search"]:focus {
+  border-color: #315BA7;
+  outline: 2px solid rgba(49, 91, 167, .25);
+}
+
+/* Écran étroit : le tableau défile de côté dans son cadre (l'en-tête ne colle plus). */
+@media (max-width: 760px) {
+  #main #article .montferrand-historic .mf-tableau-cadre { overflow-x: auto; }
+  #main #article .montferrand-historic table.mf-tableau { min-width: 44rem; }
+  #main #article .montferrand-historic .mf-tableau thead th { position: static; }
+}
+/* ==== TABLEAUX TRIABLES-FIN ==== */
+
+/* ==========================================================================
+   CARTES DE DÉFINITION — mots liés au glossaire (2026-09-28)
+   Successeur du title="définition." de l'ÉLEC : chaque a.lemma-link contient
+   un span.mf-carte (lemme en gras, catégorie en petit, définition) produit
+   par comptes.xsl, caché (display:none : aucun coût de mise en page pour les
+   ~3 800 mots d'un registre) et révélé au survol ou au focus clavier, après
+   un léger délai.
+   Placement par ancrage CSS : la carte se pose au-dessus du mot, centrée sur
+   lui, et se retourne sous le mot quand la place manque en haut (barre de
+   navigation de 80 px comprise) ; position fixed = elle se cale sur la
+   fenêtre, sans déborder sur les bords. Elle ne capte pas la souris
+   (pointer-events:none) : le clic va au lien, le survol au mot voisin.
+   Navigateur sans ancrage CSS : carte centrée au-dessus du mot.
+   ========================================================================== */
+#main #article .montferrand-historic .mf-carte { display: none; }
+
+#main #article .montferrand-historic a.lemma-link { anchor-scope: --mf-mot; }
+#main #article .montferrand-historic a.lemma-link:hover,
+#main #article .montferrand-historic a.lemma-link:focus-visible { anchor-name: --mf-mot; }
+
+#main #article .montferrand-historic a.lemma-link:hover > .mf-carte,
+#main #article .montferrand-historic a.lemma-link:focus-visible > .mf-carte {
+  display: block;
+  position: fixed;
+  position-anchor: --mf-mot;
+  position-area: top span-all;
+  justify-self: anchor-center;
+  align-self: end;
+  position-try-fallbacks: --mf-carte-dessous;
+  top: calc(80px + 6px);
+  bottom: 0;
+  margin: 0 8px 11px;
+  container-type: anchored;
+  z-index: 60;
+  box-sizing: border-box;
+  width: max-content;
+  min-width: 9rem;
+  max-width: min(22rem, calc(100vw - 16px));
+  padding: .5rem .75rem .6rem;
+  border: 1px solid #e2dbd3;
+  border-radius: 8px;
+  background: #fffdfa;
+  box-shadow: 0 8px 22px rgba(45, 32, 20, .16), 0 1px 3px rgba(45, 32, 20, .10);
+  color: #303030;
+  font: 400 .95rem/1.38 "Times New Roman", Times, serif;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  white-space: normal;
+  pointer-events: none;
+  animation: mf-carte-apparait .16s ease-out .28s both;
+}
+@position-try --mf-carte-dessous {
+  position-area: bottom span-all;
+  align-self: start;
+  top: 0;
+  bottom: 8px;
+  margin: 11px 8px 0;
+}
+@keyframes mf-carte-apparait {
+  from { opacity: 0; translate: 0 3px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+/* Petite flèche vers le mot : sous la carte, ou au-dessus quand elle est retournée. */
+#main #article .montferrand-historic .mf-carte::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border: solid #e2dbd3;
+  border-width: 0 1px 1px 0;
+  background: #fffdfa;
+  transform: rotate(45deg);
+}
+@container anchored(fallback: --mf-carte-dessous) {
+  #main #article .montferrand-historic .mf-carte::before {
+    top: -6px;
+    bottom: auto;
+    border-width: 1px 0 0 1px;
+  }
+}
+#main #article .montferrand-historic .mf-carte > b {
+  display: block;
+  color: #1f1f1f;
+  font-weight: 700;
+  font-size: 1.02em;
+}
+#main #article .montferrand-historic .mf-carte > small {
+  display: block;
+  margin: .05rem 0 .25rem;
+  color: var(--mf-gris, #77706a);
+  font: italic .74rem/1.3 var(--font-primary, "Roboto"), Arial, sans-serif;
+  letter-spacing: .01em;
+}
+#main #article .montferrand-historic .mf-carte > span { display: block; }
+#main #article .montferrand-historic .mf-carte > b + span { margin-top: .2rem; }
+
+@supports not (anchor-name: --mf-mot) {
+  #main #article .montferrand-historic a.lemma-link { position: relative; }
+  #main #article .montferrand-historic a.lemma-link:hover > .mf-carte,
+  #main #article .montferrand-historic a.lemma-link:focus-visible > .mf-carte {
+    position: absolute;
+    top: auto;
+    bottom: calc(100% + 9px);
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #main #article .montferrand-historic a.lemma-link:hover > .mf-carte,
+  #main #article .montferrand-historic a.lemma-link:focus-visible > .mf-carte {
+    animation-duration: .01s;
+  }
+}
+/* ==== CARTES DE DÉFINITION-FIN ==== */
+
+/* ==== CIBLE SURLIGNÉE-DÉBUT (2026-09-28) ====
+   Arrivée par un lien (…?refId=CC155#CC5.64, glossaire#gloss_…, noms#…,
+   notes#fnN) : Document.vue pose .dots-target sur l'élément visé (:target
+   ne joue pas quand le fragment est monté après la résolution de l'ancre ;
+   il sert encore pour un clic interne). Même principe que les sept autres
+   corpus (christofle, chroniqueslatines, edits, miroir, monuments
+   historiques, sanctoral, testaments) : fond jaune pâle, ici passager
+   (≈ 2 s) pour ne pas laisser une ligne marquée pendant toute la lecture.
+   Cibles : articles des registres (li id="CC…"), entrées et sous-entrées
+   du glossaire (tr, span.re), lignes de l'index des noms (tr), notes de la
+   page Notes (p.note-entry). Dans les tableaux, on colore les cellules :
+   le zébrage des td masquerait le fond de la ligne. */
+@keyframes mf-cible {
+  0%, 35% { background-color: #fbeeb8; }
+  100%    { background-color: transparent; }
+}
+@keyframes mf-cible-cellule {
+  0%, 35% { background-color: #fbeeb8; }
+}
+#main #article .montferrand-historic li[id^="CC"]:target,
+#main #article .montferrand-historic li[id^="CC"].dots-target,
+#main #article .montferrand-historic span.re:target,
+#main #article .montferrand-historic span.re.dots-target,
+#main #article .montferrand-historic p.note-entry:target,
+#main #article .montferrand-historic p.note-entry.dots-target {
+  animation: mf-cible 2.2s ease-out 1;
+}
+#main #article .montferrand-historic .mf-tableau tbody tr:target > td,
+#main #article .montferrand-historic .mf-tableau tbody tr.dots-target > td {
+  animation: mf-cible-cellule 2.2s ease-out 1;
+}
+#main #article .montferrand-historic p.note-entry:target,
+#main #article .montferrand-historic p.note-entry.dots-target,
+#main #article .montferrand-historic span.re:target,
+#main #article .montferrand-historic span.re.dots-target {
+  scroll-margin-top: 140px;
+}
+/* Mouvement réduit : pas d'animation, un fond fixe à la place. */
+@media (prefers-reduced-motion: reduce) {
+  #main #article .montferrand-historic li[id^="CC"]:target,
+  #main #article .montferrand-historic li[id^="CC"].dots-target,
+  #main #article .montferrand-historic span.re:target,
+  #main #article .montferrand-historic span.re.dots-target,
+  #main #article .montferrand-historic p.note-entry:target,
+  #main #article .montferrand-historic p.note-entry.dots-target,
+  #main #article .montferrand-historic .mf-tableau tbody tr:target > td,
+  #main #article .montferrand-historic .mf-tableau tbody tr.dots-target > td {
+    animation: none;
+    background-color: #fbf3d5;
+  }
+}
+
+/* Appel de la note savante, après le passage annoté (span.rs) : petit
+   exposant bleu, comme les appels de l'ÉLEC (a.refnote). */
+#main #article .montferrand-historic a.rs-appel {
+  margin-left: 1px;
+  padding: 0 1px;
+  border: 0;
+  color: #315BA7;
+  font-size: .72em;
+  line-height: 0;
+  vertical-align: super;
+  text-decoration: none;
+  background: none;
+}
+#main #article .montferrand-historic a.rs-appel:hover,
+#main #article .montferrand-historic a.rs-appel:focus-visible {
+  text-decoration: underline;
+}
+/* ==== CIBLE SURLIGNÉE-FIN ==== */

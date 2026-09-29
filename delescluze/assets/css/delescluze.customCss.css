@@ -569,3 +569,19 @@
   display: inline-block; text-decoration: none;
   color: #4A4A4A; font-style: italic; font-size: 80%;
 }
+
+/* Notes d'apparat de la transcription (2026-09-29) : comme l'ÉLEC, appel « [a] » bleu et note
+   au survol, dans l'état « Transcription » seulement. */
+#main #article .app { display: none; }
+#main #article .dl-mode-tr:checked ~ * .app { display: inline; position: relative; }
+#main #article .app .noteAnchor { color: #97ADD1; font-weight: normal; cursor: help; }
+#main #article .app .apparatusNote {
+  display: none; position: absolute; z-index: 5; left: 0; top: 1.4em; width: 18em;
+  padding: .3em .5em; background: #fff; border: 1px solid #ccc;
+  font-size: 80%; font-style: normal; color: #4A4A4A; text-decoration: none; text-align: left;
+}
+#main #article .app:hover .apparatusNote,
+#main #article .app:focus .apparatusNote { display: block; }
+
+/* Page sans image numérique (lettre14-page01) : mention de l'ÉLEC. */
+#main #article .facsimile-absent { font-style: italic; }

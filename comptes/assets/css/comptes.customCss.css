@@ -902,3 +902,71 @@
   text-decoration: underline;
 }
 /* ==== CIBLE SURLIGNÉE-FIN ==== */
+
+/* Filtres par colonne des tableaux (glossaire, index des noms), 2026-09-29.
+   Le socle met les tableaux en flex : sans !important, l'attribut hidden
+   posé par le filtre ne masquerait pas la ligne. */
+#main #article .montferrand-historic .mf-tableau tr[hidden] {
+  display: none !important;
+}
+#main #article .montferrand-historic .mf-barre-filtres {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+#main #article .montferrand-historic .mf-compteur {
+  font-variant-numeric: tabular-nums;
+}
+#main #article .montferrand-historic .mf-effacer {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: #315BA7;
+  font-size: .8rem;
+  cursor: pointer;
+}
+#main #article .montferrand-historic .mf-effacer:hover {
+  border-color: #315BA7;
+}
+#main #article .montferrand-historic .mf-effacer[hidden] {
+  display: none;
+}
+#main #article .montferrand-historic tr.mf-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+#main #article .montferrand-historic tr.mf-filtres input,
+#main #article .montferrand-historic tr.mf-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+#main #article .montferrand-historic tr.mf-filtres input:focus,
+#main #article .montferrand-historic tr.mf-filtres select:focus {
+  outline: 2px solid #315BA7;
+  outline-offset: -1px;
+}
+#main #article .montferrand-historic .mf-intervalle {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+#main #article .montferrand-historic .mf-intervalle input {
+  width: 4.5em;
+  flex: 1 1 0;
+}
+#main #article .montferrand-historic .mf-tiret {
+  color: #888;
+}

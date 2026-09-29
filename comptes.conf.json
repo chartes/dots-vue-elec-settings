@@ -2,15 +2,18 @@
   "collectionId": "comptes",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Comptes"
+      "collectionShortTitle": "Montferrand"
     },
     "pageHeader": {
-      "collectionAltTitle": "Les comptes des consuls de Montferrand",
-      "aboutButtonText": "À propos"
+      "collectionAltTitle": "Les comptes des consuls de Montferrand (1273–1319)",
+      "aboutButtonText": "À propos",
+      "collectionBannerImg": "couv_montferrand.jpg"
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "toc",
@@ -30,16 +33,45 @@
     "tableOfContentDepth": 5,
     "editByLevel": 1,
     "editByCiteType": [
-       "partie",
-       "registre",
-       "compte",
-       "index"
+      "partie",
+      "compte",
+      "index"
     ]
   },
- "aboutPageSettings": [
-    { "tabName": "Les archives de Montferrand", "compName": "about1" },
-    { "tabName": "Principes d'édition", "compName": "about2" },
-    { "tabName": "Bibliographie", "compName": "about3" }
+  "aboutPageSettings": [
+    {
+      "tabName": "Les archives de Montferrand",
+      "compName": "about1"
+    }
   ],
-  "collectionCustomCss": "comptes"
+  "collectionCustomCss": "comptes",
+  "mediaTypeEndpoint": "html",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

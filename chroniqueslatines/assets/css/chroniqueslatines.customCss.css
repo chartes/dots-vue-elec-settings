@@ -55,7 +55,7 @@
 .citations-list .cit {
   margin: .2rem 0;
 }
-.citations-list .cit > a.note {
+.citations-list .cit > a.cit-num {
   font-weight: 700;
   text-decoration: none;
   margin-right: .35rem;
@@ -122,8 +122,29 @@
    donc directement, et on la révèle au survol de son appel (sélecteur de frère
    adjacent), sans dépendre du onmouseover du HTEIML — lequel vise
    `this.parentNode`, c'est-à-dire le <sup>, et ne bascule rien.
+   On ne masque que le <span> des citations : la page Bibliographie rend
+   aussi un `div.listBibl`, qui doit rester visible.
    -------------------------------------------------------------------------- */
-#article .listBibl { display: none; }
+#article span.listBibl { display: none; }
+
+/* Guillemets, comme l'ÉLEC : « » pour le discours direct (<q> du TEI) — tei.css
+   de l'application impose des guillemets droits à tous les corpus. Les passages
+   cités (<quote>, rendus en q.quote ou blockquote.quote) reçoivent leurs “ ” ou
+   ‘ ’ de la XSL, dans le texte : pas de guillemet CSS en plus. Les topos sont
+   en italique. */
+#article q { quotes: "«\00a0" "\00a0»" "“" "”"; }
+#article q.quote::before,
+#article q.quote::after { content: none; }
+#article .quote.topos { font-style: italic; }
+/* Citation dans une citation (44 cas) : en ligne dans la première, comme sur
+   l'ÉLEC (« ‘‘Iterato … legatis’1, nichil ei … thesauris’ »), et non en second
+   bloc — le guillemet de la citation englobante restait seul sur sa ligne. */
+#article blockquote.quote blockquote.quote {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 #article sup:hover + .listBibl,
 #article sup:focus-within + .listBibl {
   display: inline;
@@ -216,13 +237,23 @@
       fragment d'URL, fond gris — neutre_html.css : `mark { background:#DDD }`,
       `li.mark, .notes div.mark { background-color:#E6E6E6 }`).
       DoTS-vue ne rejoue pas ce script ; :target le fait nativement.
+      Chaque sélecteur est doublé par .dots-target, classe que DoTS-vue pose
+      sur l'élément visé quand l'URL à ancre est ouverte à froid (:target
+      ne s'applique pas alors, le fragment étant monté après coup).
       On ne repeint pas les grands blocs : pour une section, seul l'intitulé
       est marqué. */
 #article span:target,
+#article span.dots-target,
 #article .app-entry:target,
+#article .app-entry.dots-target,
 #article .cit:target,
+#article .cit.dots-target,
 #article .note:target,
+#article .note.dots-target,
+#article .cit-num:target,
+#article .cit-num.dots-target,
 #article li:target,
+#article li.dots-target,
 #article .refs-entry:target,
 #article .refs-entry.dots-target { background-color: #e6e6e6; }
 #article section:target > .head,

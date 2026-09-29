@@ -115,7 +115,10 @@
 
 /* Titres d'œuvres : italique dans l'édition. */
 #main #article .title { font-style: italic; text-decoration: none; font-weight: inherit; }
-#main #article .title_underline { font-style: italic; text-decoration: underline; }
+/* Titres soulignés (span.title_underline, <title rend="underline">) : italique dans l'édition,
+   soulignés et droits dans la transcription, comme theme/delescluze.css (2026-09-29). */
+#main #article .title_underline { font-style: italic; text-decoration: none; }
+#main #article .dl-mode-tr:checked ~ * .title_underline { font-style: normal; text-decoration: underline; }
 #main #article .underline,
 #main #article em.underline { text-decoration: underline; font-weight: inherit; font-style: inherit; }
 
@@ -542,3 +545,27 @@
 #main #article .dl-autorite-libelle { color: #555; }
 #main #article .dl-autorite-lien { word-break: break-all; }
 /* ==== fin D18 ==== */
+
+/* --------------------------------------------------------------------------
+   Restitutions du 2026-09-29 (vers, textes insérés, post-scriptum, adresses,
+   lacunes illisibles) — règles reprises de theme/delescluze.css de l'ÉLEC.
+   -------------------------------------------------------------------------- */
+
+/* Vers : <l> rendu en div.l (groupe hors paragraphe) ou span.l (groupe cité dans un paragraphe). */
+#main #article .lg { margin: .6em 0 .6em 1.5em; }
+#main #article span.lg,
+#main #article span.l { display: block; }
+
+/* Textes insérés dans les carnets (div.floatingText) : titre en gras, en retrait. */
+#main #article .floatingTextTitle { margin-left: 15%; font-weight: bold; }
+#main #article .floatingText .signed { display: block; text-align: right; }
+
+/* Lettres : post-scriptum et adresse, avec leur libellé en italique. */
+#main #article .postscriptLabel { font-style: italic; }
+#main #article .addressLabel { font-style: italic; display: block; }
+
+/* Lacune illisible dans une rature : commentaire éditorial, non barré. */
+#main #article .gapInDel {
+  display: inline-block; text-decoration: none;
+  color: #4A4A4A; font-style: italic; font-size: 80%;
+}

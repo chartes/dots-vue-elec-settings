@@ -18,9 +18,12 @@
     }
   },
   "footerSettings": {
-    "footerTitle": "",
-    "footerSubtitles": [],
-    "footerDescription": ""
+    "footerTitle": "L'Obituaire du Saint-Mont (1406)",
+    "footerSubtitles": [
+      "Édition de Marie-José Gasse-Grandjean",
+      "École nationale des chartes – PSL"
+    ],
+    "footerDescription": "Metz, Bibliothèque-médiathèque, ms 1156. Licence CC BY-NC-SA 4.0."
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
@@ -42,7 +45,7 @@
     "schema:isBasedOn",
     "dct:publisher",
     "dct:issued",
-    "dct:bibliographicalCitation",
+    "dct:bibliographicCitation",
     "dct:coverage",
     "dct:description",
     "dct:license",

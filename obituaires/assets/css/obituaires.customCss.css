@@ -439,3 +439,20 @@
 .document-area .obit-facs-img { display: block; max-width: min(100%, 44rem); max-height: 80vh; width: auto; height: auto; margin: .5rem 0; border: 1px solid #d8d2c8; background: #fff; object-fit: contain; }
 .document-area .obit-pb { color: #666; font-size: .85em; }
 /* ==== fin fac-similés ==== */
+
+/* ==== Conventions des Principes d'édition (2026-09-29) ====
+   Jamais rendues : le thème ÉLEC (montferrand.css) répondait en faux-200, et DoTS n'avait
+   aucune règle. Sources, dans le TEI :
+   - « indiqué en couleur verte les notices ajoutées à l'époque moderne » (Principes
+     d'édition) : hi[@rend=vert] → span.vert (40) ;
+   - « Un astérisque signale les mots définis dans le glossaire » (id.) : gloss → dfn.gloss
+     (497) ; la définition (gloss/@n) est en title, posée par obituaires.xsl ;
+   - calendrier : « en jaune = les fêtes lorraines et vosgiennes, en bleu les fêtes
+     identifiant le Saint-Mont » : hi[@rend=vosges] → span.vosges (16), hi[@rend=mont] →
+     span.mont (4). Les teintes exactes de l'ÉLEC sont perdues : surlignage clair. */
+#main #article .vert { color: #1b7a36; }
+#main #article dfn.gloss::after { content: "*"; }
+#main #article dfn.gloss[title] { cursor: help; }
+#main #article .vosges { background-color: #fbeea0; }
+#main #article .mont { background-color: #cfe3f7; }
+/* ==== fin conventions ==== */

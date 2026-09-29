@@ -677,30 +677,6 @@
 #main #article .montferrand-historic .mf-tableau td a.oVar { border-bottom: 0; color: inherit; }
 #main #article .montferrand-historic .mf-tableau td a.oVar:hover { color: #315BA7; }
 
-/* Recherche en tête de page. */
-#main #article .montferrand-historic .mf-recherche {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: .4rem .6rem;
-  margin: 0 0 1rem;
-}
-#main #article .montferrand-historic .mf-recherche label {
-  color: var(--mf-gris);
-  font: .85rem var(--font-primary, "Roboto"), Arial, sans-serif;
-}
-#main #article .montferrand-historic .mf-recherche input[type="search"] {
-  width: min(24rem, 100%);
-  padding: .35rem .6rem;
-  border: 1px solid var(--mf-filet);
-  border-radius: 4px;
-  font: .95rem var(--font-primary, "Roboto"), Arial, sans-serif;
-}
-#main #article .montferrand-historic .mf-recherche input[type="search"]:focus {
-  border-color: #315BA7;
-  outline: 2px solid rgba(49, 91, 167, .25);
-}
-
 /* Écran étroit : le tableau défile de côté dans son cadre (l'en-tête ne colle plus). */
 @media (max-width: 760px) {
   #main #article .montferrand-historic .mf-tableau-cadre { overflow-x: auto; }

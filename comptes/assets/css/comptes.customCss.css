@@ -836,7 +836,7 @@
    il sert encore pour un clic interne). Même principe que les sept autres
    corpus (christofle, chroniqueslatines, edits, miroir, monuments
    historiques, sanctoral, testaments) : fond jaune pâle, ici passager pour
-   ne pas laisser une ligne marquée pendant toute la lecture : 5 s dont 3 s
+   ne pas laisser une ligne marquée pendant toute la lecture : 3 s dont 1,8 s
    pleines (2026-09-30 ; à 2,2 s, il était presque éteint à la fin d'un
    défilement animé et l'on ne voyait pas où l'on arrivait).
    Cibles : articles des registres (li id="CC…"), entrées et sous-entrées
@@ -856,11 +856,11 @@
 #main #article .montferrand-historic span.re.dots-target,
 #main #article .montferrand-historic p.note-entry:target,
 #main #article .montferrand-historic p.note-entry.dots-target {
-  animation: mf-cible 5s ease-out 1;
+  animation: mf-cible 3s ease-out 1;
 }
 #main #article .montferrand-historic .mf-tableau tbody tr:target > td,
 #main #article .montferrand-historic .mf-tableau tbody tr.dots-target > td {
-  animation: mf-cible-cellule 5s ease-out 1;
+  animation: mf-cible-cellule 3s ease-out 1;
 }
 /* Cible juste sous la barre de navigation collante (80 px) : 90 px, la valeur
    que Document.vue (yOffset = -90) et le routeur (82 + 10) appliquent déjà

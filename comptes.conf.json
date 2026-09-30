@@ -65,7 +65,7 @@
     "dct:bibliographicCitation",
     "dct:license",
     "dct:rights",
-    "schema:encoding"gi
+    "schema:encoding"
   ],
   "metadataRename": {
     "dct:title": "Titre",

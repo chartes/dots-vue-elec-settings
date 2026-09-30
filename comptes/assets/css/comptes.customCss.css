@@ -48,6 +48,14 @@
   .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
 }
 /* ==== fin D11 ==== */
+/* Montferrand (2026-09-30) : la page d'un registre (CC156…) n'affiche que son
+   titre ; la table de ses comptes (.bottom-toc) EST son contenu. On la garde
+   donc aussi quand le sommaire latéral est ouvert, sinon la page paraît vide.
+   Limité à cette édition par #montferrand-comptes : les CSS des corpus sont
+   injectées pour tout le site. Sur les autres pages de Montferrand, dots-vue ne
+   produit pas de .bottom-toc (parties, comptes et index sont des types édités). */
+#montferrand-comptes .document-area.toc-aside-is-opened .wrapper > .bottom-toc,
+#montferrand-comptes .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: block; }
 /* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
 /* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
    Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)

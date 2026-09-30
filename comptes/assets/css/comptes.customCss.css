@@ -273,13 +273,24 @@
   text-underline-offset: 3px;
 }
 
-/* Passage annoté (rs) : pointillé gris sous le passage ; ce n'est plus un lien
-   (ses mots restent liés au glossaire), l'appel de note qui le suit (a.rs-appel,
-   voir le bloc « cible surlignée » en fin de fichier) mène à la page Notes. */
-#main #article .montferrand-historic span.rs {
-  color: inherit;
+/* Passage annoté (rs) : le passage entier est le lien vers sa note (page
+   Notes) ; seul élément souligné du texte. Il peut être coupé en segments
+   a.rs successifs par un appel d'apparat. Ses mots du glossaire y sont des
+   span.lemma-link (pas de lien dans le lien) : ils héritent du bleu et du
+   soulignement, et gardent leur carte de définition.
+   Valeurs de l'ÉLEC historique (elec.enc.sorbonne.fr/montferrand, enc.css,
+   html.css et diple_html.css) : bleu #315ba7, pointillé gris 1px #999 dessous ;
+   au survol, fond #FFFFDD et trait plein. */
+#main #article .montferrand-historic a.rs {
+  color: #315BA7;
   text-decoration: none;
   border-bottom: 1px dotted #999;
+  cursor: pointer;
+}
+#main #article .montferrand-historic a.rs:hover,
+#main #article .montferrand-historic a.rs:focus-visible {
+  background-color: #FFFFDD;
+  border-bottom-style: solid;
 }
 
 /* --------------------------------------------------------------------------
@@ -373,7 +384,7 @@
    « cible surlignée » en fin de fichier. */
 #main #article .montferrand-historic li:target,
 #main #article .montferrand-historic li.dots-target {
-  scroll-margin-top: 140px;
+  scroll-margin-top: 90px;   /* voir le bloc « cible surlignée » */
 }
 
 /* --------------------------------------------------------------------------
@@ -456,9 +467,11 @@
 #main #article .montferrand-historic a.oVar:hover { color: var(--mf-accent); text-decoration: underline; }
 
 /* ==========================================================================
-   Liens comme sur l'ÉLEC historique (2026-09-28) : bleu #315BA7, pas de
-   soulignement, pointillé gris dessous, trait plein au survol. Sans ce repère
-   le lecteur ne voit pas que les mots renvoient au glossaire ou à une note.
+   Liens comme sur l'ÉLEC historique (2026-09-28) : bleu #315BA7.
+   2026-09-30 (réunion) : « pas la peine de souligner les trucs qui ne sont
+   pas des notes » : plus de pointillé sous les mots du glossaire, les renvois,
+   les formes et les liens de la page Notes ; le soulignement est réservé au
+   passage annoté (a.rs, plus haut). Le trait apparaît au survol seulement.
    Placé en fin de fichier pour l'emporter sur le bloc « style 2026-09-28 ».
    ========================================================================== */
 #main #article .montferrand-historic a.w,
@@ -469,7 +482,7 @@
 #main #article .montferrand-historic .notes-page a {
   color: #315BA7;
   text-decoration: none;
-  border-bottom: 1px dotted #999;
+  border-bottom: 0;
   cursor: pointer;
 }
 #main #article .montferrand-historic a.w:hover,
@@ -479,7 +492,8 @@
 #main #article .montferrand-historic .entry a:hover,
 #main #article .montferrand-historic .notes-page a:hover {
   color: #315BA7;
-  border-bottom-style: solid;
+  text-decoration: underline solid 1px;
+  text-underline-offset: 3px;
 }
 /* Appels d'apparat et de note : petite lettre bleue, comme a.refnote de l'ÉLEC. */
 #main #article .montferrand-historic a.noteref,
@@ -664,15 +678,17 @@
   text-align: center;
 }
 
-/* Liens des tableaux : style ÉLEC (bleu #315BA7, pointillé, trait plein au survol). */
+/* Liens des tableaux : bleu #315BA7, souligné au survol seulement (le
+   soulignement permanent est réservé aux passages annotés). */
 #main #article .montferrand-historic .mf-tableau td a {
   color: #315BA7;
   text-decoration: none;
-  border-bottom: 1px dotted #999;
+  border-bottom: 0;
 }
 #main #article .montferrand-historic .mf-tableau td a:hover {
   color: #315BA7;
-  border-bottom-style: solid;
+  text-decoration: underline solid 1px;
+  text-underline-offset: 3px;
 }
 #main #article .montferrand-historic .mf-tableau td a.oVar { border-bottom: 0; color: inherit; }
 #main #article .montferrand-historic .mf-tableau td a.oVar:hover { color: #315BA7; }
@@ -693,27 +709,26 @@
    ~3 800 mots d'un registre) et révélé au survol ou au focus clavier, après
    un léger délai.
    Placement par ancrage CSS : la carte se pose au-dessus du mot, centrée sur
-   lui, et se retourne sous le mot quand la place manque en haut (barre de
-   navigation de 80 px comprise) ; position fixed = elle se cale sur la
-   fenêtre, sans déborder sur les bords. Elle ne capte pas la souris
+   lui, et y reste toujours, même quand la place manque en haut (2026-09-30 :
+   jamais sous le mot) ; position fixed = elle se cale sur la fenêtre, sans
+   déborder sur les bords. Elle ne capte pas la souris
    (pointer-events:none) : le clic va au lien, le survol au mot voisin.
    Navigateur sans ancrage CSS : carte centrée au-dessus du mot.
    ========================================================================== */
-#main #article .montferrand-historic .mf-carte { display: none; }
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .mf-carte { display: none; }
 
-#main #article .montferrand-historic a.lemma-link { anchor-scope: --mf-mot; }
-#main #article .montferrand-historic a.lemma-link:hover,
-#main #article .montferrand-historic a.lemma-link:focus-visible { anchor-name: --mf-mot; }
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link { anchor-scope: --mf-mot; }
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:hover,
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:focus-visible { anchor-name: --mf-mot; }
 
-#main #article .montferrand-historic a.lemma-link:hover > .mf-carte,
-#main #article .montferrand-historic a.lemma-link:focus-visible > .mf-carte {
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:hover > .mf-carte,
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:focus-visible > .mf-carte {
   display: block;
   position: fixed;
   position-anchor: --mf-mot;
   position-area: top span-all;
   justify-self: anchor-center;
   align-self: end;
-  position-try-fallbacks: --mf-carte-dessous;
   top: calc(80px + 6px);
   bottom: 0;
   margin: 0 8px 11px;
@@ -740,58 +755,45 @@
   pointer-events: none;
   animation: mf-carte-apparait .16s ease-out .28s both;
 }
-@position-try --mf-carte-dessous {
-  position-area: bottom span-all;
-  align-self: start;
-  top: 0;
-  bottom: 8px;
-  margin: 11px 8px 0;
-}
 @keyframes mf-carte-apparait {
   from { opacity: 0; translate: 0 3px; }
   to   { opacity: 1; translate: 0 0; }
 }
-/* Petite flèche vers le mot : sous la carte, ou au-dessus quand elle est retournée. */
-#main #article .montferrand-historic .mf-carte::before {
+/* Petite flèche en haut de la carte, pointe vers le haut (2026-09-30, choix
+   de Maxime). */
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .mf-carte::before {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -6px;
+  top: -6px;
   width: 10px;
   height: 10px;
   margin-left: -5px;
   border: solid #e2dbd3;
-  border-width: 0 1px 1px 0;
+  border-width: 1px 0 0 1px;
   background: #fffdfa;
   transform: rotate(45deg);
 }
-@container anchored(fallback: --mf-carte-dessous) {
-  #main #article .montferrand-historic .mf-carte::before {
-    top: -6px;
-    bottom: auto;
-    border-width: 1px 0 0 1px;
-  }
-}
-#main #article .montferrand-historic .mf-carte > b {
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .mf-carte > b {
   display: block;
   color: #1f1f1f;
   font-weight: 700;
   font-size: 1.02em;
 }
-#main #article .montferrand-historic .mf-carte > small {
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .mf-carte > small {
   display: block;
   margin: .05rem 0 .25rem;
   color: var(--mf-gris, #77706a);
   font: italic .74rem/1.3 var(--font-primary, "Roboto"), Arial, sans-serif;
   letter-spacing: .01em;
 }
-#main #article .montferrand-historic .mf-carte > span { display: block; }
-#main #article .montferrand-historic .mf-carte > b + span { margin-top: .2rem; }
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .mf-carte > span { display: block; }
+#main #article :is(.montferrand-historic, .aside-noteref-parent) .mf-carte > b + span { margin-top: .2rem; }
 
 @supports not (anchor-name: --mf-mot) {
-  #main #article .montferrand-historic a.lemma-link { position: relative; }
-  #main #article .montferrand-historic a.lemma-link:hover > .mf-carte,
-  #main #article .montferrand-historic a.lemma-link:focus-visible > .mf-carte {
+  #main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link { position: relative; }
+  #main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:hover > .mf-carte,
+  #main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:focus-visible > .mf-carte {
     position: absolute;
     top: auto;
     bottom: calc(100% + 9px);
@@ -801,10 +803,27 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  #main #article .montferrand-historic a.lemma-link:hover > .mf-carte,
-  #main #article .montferrand-historic a.lemma-link:focus-visible > .mf-carte {
+  #main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:hover > .mf-carte,
+  #main #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:focus-visible > .mf-carte {
     animation-duration: .01s;
   }
+}
+/* Panneau des notes (bouton « t¹ ») : dots-vue y recopie les notes d'apparat
+   dans aside.aside-noteref-parent, À CÔTÉ de .montferrand-historic et non
+   dedans. Les règles des cartes ci-dessus visent donc les deux blocs (:is) ;
+   sans cela la carte s'affichait en ligne dans la note (« vivinom
+   masculinvin. »). Les mots du glossaire y sont rendus comme dans les notes
+   de l'ÉLEC : bleus, sans soulignement, définition au survol. */
+#main #article .aside-noteref-parent a.w,
+#main #article .aside-noteref-parent a.lemma-link {
+  color: #315BA7;
+  text-decoration: none;
+  border-bottom: 0;
+}
+#main #article .aside-noteref-parent a.w:hover,
+#main #article .aside-noteref-parent a.lemma-link:hover {
+  text-decoration: underline solid 1px;
+  text-underline-offset: 3px;
 }
 /* ==== CARTES DE DÉFINITION-FIN ==== */
 
@@ -839,11 +858,18 @@
 #main #article .montferrand-historic .mf-tableau tbody tr.dots-target > td {
   animation: mf-cible-cellule 2.2s ease-out 1;
 }
-#main #article .montferrand-historic p.note-entry:target,
-#main #article .montferrand-historic p.note-entry.dots-target,
-#main #article .montferrand-historic span.re:target,
-#main #article .montferrand-historic span.re.dots-target {
-  scroll-margin-top: 140px;
+/* Cible juste sous la barre de navigation collante (80 px) : 90 px, la valeur
+   que Document.vue (yOffset = -90) et le routeur (82 + 10) appliquent déjà
+   quand ils font défiler eux-mêmes. scroll-margin-top ne sert que lorsque
+   c'est le NAVIGATEUR qui fait défiler (retour arrière, rechargement,
+   scrollIntoView, focus) ; les 140 px d'avant y posaient la cible 60 px sous
+   la barre au lieu de 10. Même marge pour toutes les cibles, y compris les
+   lignes des tableaux, qui n'en avaient pas. */
+#main #article .montferrand-historic li[id^="CC"],
+#main #article .montferrand-historic p.note-entry,
+#main #article .montferrand-historic span.re,
+#main #article .montferrand-historic .mf-tableau tbody tr[id] {
+  scroll-margin-top: 90px;
 }
 /* Mouvement réduit : pas d'animation, un fond fixe à la place. */
 @media (prefers-reduced-motion: reduce) {
@@ -858,24 +884,6 @@
     animation: none;
     background-color: #fbf3d5;
   }
-}
-
-/* Appel de la note savante, après le passage annoté (span.rs) : petit
-   exposant bleu, comme les appels de l'ÉLEC (a.refnote). */
-#main #article .montferrand-historic a.rs-appel {
-  margin-left: 1px;
-  padding: 0 1px;
-  border: 0;
-  color: #315BA7;
-  font-size: .72em;
-  line-height: 0;
-  vertical-align: super;
-  text-decoration: none;
-  background: none;
-}
-#main #article .montferrand-historic a.rs-appel:hover,
-#main #article .montferrand-historic a.rs-appel:focus-visible {
-  text-decoration: underline;
 }
 /* ==== CIBLE SURLIGNÉE-FIN ==== */
 
@@ -896,7 +904,8 @@
 #main #article .montferrand-historic .mf-compteur {
   font-variant-numeric: tabular-nums;
 }
-#main #article .montferrand-historic .mf-effacer {
+#main #article .montferrand-historic .mf-effacer,
+#main #article .montferrand-historic .mf-csv {
   padding: .1rem .6rem;
   border: 1px solid #c9c2bc;
   border-radius: 3px;
@@ -905,8 +914,13 @@
   font-size: .8rem;
   cursor: pointer;
 }
-#main #article .montferrand-historic .mf-effacer:hover {
+#main #article .montferrand-historic .mf-effacer:hover,
+#main #article .montferrand-historic .mf-csv:hover {
   border-color: #315BA7;
+}
+/* Export CSV (2026-09-30) : poussé à droite de la barre. */
+#main #article .montferrand-historic .mf-csv {
+  margin-left: auto;
 }
 #main #article .montferrand-historic .mf-effacer[hidden] {
   display: none;

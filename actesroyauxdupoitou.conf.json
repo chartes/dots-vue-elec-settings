@@ -30,24 +30,17 @@
     "footerDescription": "Édition électronique des actes royaux du Poitou."
   },
   "tableOfContentsSettings": {
-    "tableOfContentDepth": 1,
+    "tableOfContentDepth": 2,
     "editByLevel": 1,
     "editByCiteType": [
+      "partie",
+      "introduction",
       "acte"
     ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
-  "aboutPageSettings": [
-    {
-      "tabName": "La collection",
-      "compName": "about1"
-    },
-    {
-      "tabName": "Les tomes",
-      "compName": "about2"
-    }
-  ],
+  "aboutPageSettings": [],
   "collectionCustomCss": "actesroyauxdupoitou",
   "metadataDisplayOrder": [
     "dct:title",

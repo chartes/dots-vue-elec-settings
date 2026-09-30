@@ -565,8 +565,10 @@
 }
 /* Une entrée désignée (arrivée par un lien, choix dans la recherche) est placée
    à 90 px du haut par Document.vue : un en-tête collant la couvrirait. Il cesse
-   donc de coller tant qu'une ligne porte dots-target ; un tri la libère. */
-#main #article .montferrand-historic .mf-tableau:has(tr.dots-target) thead th {
+   donc de coller tant qu'un élément du tableau porte dots-target : ligne,
+   sous-entrée (span.re) ou forme, que la classe vienne de dots-vue (URL avec
+   ancre) ou d'un renvoi « voir » du glossaire (a.mf-voir) ; un tri la libère. */
+#main #article .montferrand-historic .mf-tableau:has(.dots-target) thead th {
   position: static;
 }
 #main #article .montferrand-historic .mf-tableau button.mf-tri {

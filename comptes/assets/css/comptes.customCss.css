@@ -800,3 +800,29 @@
   .document-views .text-view #article .montferrand-historic .mf-biblio-barre { flex-direction: column; align-items: stretch; }
   .document-views .text-view #article .montferrand-historic .mf-biblio-filtre { width: 100%; }
 }
+
+/* ==========================================================================
+   11. BANDEAU DE L'ACCUEIL (2026-10-02)
+   Image : Armorial de Revel, BnF fr. 22297, f. 31 (Gallica btv1b8470455b,
+   vue 41), « La ville et chastiau de Montferrand », recadrée sur la ville,
+   jusqu'à la rivière (2400 × 915 px). RETOUCHE : les deux carrés de
+   couleur des coins supérieurs et les restes du titre au-dessus des flèches
+   sont recouverts de la teinte du parchemin (bandeau seulement).
+   dots-vue l'affiche en cover dans un bandeau de 300 px, centré : la ville
+   était coupée. Ici le bandeau suit la proportion de l'image entre 300 px
+   (place du titre sur mobile) et 520 px ; s'il faut couper, on garde le haut
+   (flèches) : la position remplace le centrage posé en style en ligne par
+   dots-vue, d'où le !important.
+   ========================================================================== */
+.collection-list.has-banner > .tiles > .tile.page-header {
+  /* pas d'aspect-ratio : avec une hauteur minimale, il élargissait le bandeau sur mobile */
+  height: clamp(300px, calc(100vw * 915 / 2400), 520px);
+  background-position: 50% 0 !important;
+}
+.collection-list.has-banner > .tiles > .tile.page-header > .wrapper.collection-header {
+  align-self: stretch;            /* le conteneur du voile était centré, à sa hauteur propre */
+}
+.collection-list.has-banner > .tiles > .tile.page-header > .wrapper.collection-header > .tile.article {
+  height: auto;                   /* élément flex étiré : prend la hauteur du bandeau */
+  min-height: 300px;
+}

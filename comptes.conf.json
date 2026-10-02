@@ -2,7 +2,7 @@
   "collectionId": "comptes",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Comptes"
+      "collectionShortTitle": "Les comptes de Montferrand"
     },
     "pageHeader": {
       "collectionAltTitle": "Les comptes des consuls de Montferrand",
@@ -18,7 +18,7 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "logo": "ElecLogoSimple.vue"
+      "logo": "couv_montferrand.jpg"
     }
   },
   "footerSettings": {
@@ -55,28 +55,32 @@
   "mediaTypeEndpoint": "html",
   "metadataDisplayOrder": [
     "dct:title",
-    "schema:author",
+    "schema:editor",
     "dct:created",
+    "schema:isBasedOn",
     "schema:exampleOfWork",
     "dct:language",
-    "schema:editor",
-    "schema:isBasedOn",
     "schema:publisher",
     "dct:issued",
     "dct:bibliographicCitation",
-    "dct:coverage",
-    "dct:description",
     "dct:license",
     "dct:rights",
-    "schema:funder",
-    "dct:identifier",
-    "schema:identifier",
-    "schema:encoding",
-    "schema:associatedMedia",
-    "schema:subjectOf",
-    "schema:about",
-    "dcat:accessURL"
+    "schema:encoding"
   ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:editor": "Édition scientifique",
+    "dct:created": "Date du document",
+    "schema:isBasedOn": "Source",
+    "dct:language": "Langue",
+    "schema:publisher": "Publié par",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Comment citer ce document",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:exampleOfWork": "Notice",
+    "schema:encoding": "Exports"
+  },
   "excludeMetadata": {
     "onlyDeclared": true,
     "fields": []

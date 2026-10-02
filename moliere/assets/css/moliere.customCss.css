@@ -4,14 +4,9 @@
   - the collection moliere
   - its children (unless otherwise specified)
  =============================================================*/
-/* Using themes TODO working in dev but not in build :
-[data-theme="red"] {
-  --text-color: #4051b5;
-  --fill-color: #4051b5;
-}*/
+
 /* Using css variables */
 :root {
-  --text-color: #4051b5;
   --fill-color: #4051b5;
 }
 

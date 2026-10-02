@@ -294,14 +294,13 @@
 /* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
    Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
    au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
-   est conservée : elle est lue dans --text-color, avec un repli sur celle de DoTS. */
+   est conservée : elle est lue dans --fill-color, avec un repli sur celle de DoTS. */
 .document-area #article:not(.bottom-toc),
 .document-area main {
-  --d12-accent: var(--text-color, #8f0e21);
+  --d12-accent: var(--fill-color, #8f0e21);
   --d12-encre: var(--document-text-color, #303030);
   --d12-filet: #dcd8d3;
   --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
-  --d12-fond-tres-doux: #fafafa;
   --d12-rayon: var(--button-border-radius, 4px);
 }
 

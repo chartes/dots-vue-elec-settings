@@ -55,6 +55,7 @@
    -------------------------------------------------------------------------- */
 .document-views .text-view #article .montferrand-historic a.rs {
   color: #315BA7;
+  text-decoration: none;
   border-bottom: 1px dotted #999;
 }
 .document-views .text-view #article .montferrand-historic a.rs:hover,
@@ -115,6 +116,7 @@
   border-bottom: 0;               /* sinon pointillé gris hérité des règles génériques (mesuré le 2026-10-01) */
   font: .72rem/1 var(--font-primary, "Roboto"), Arial, sans-serif;
   font-variant-numeric: tabular-nums;
+  text-decoration: none;
 }
 .document-views .text-view #article .montferrand-historic a.item:hover { text-decoration: underline; }
 
@@ -165,6 +167,7 @@
 .document-views .text-view #article .montferrand-historic a.renvoi-compte,
 .document-views .text-view #article .montferrand-historic .notes-page a {
   color: #315BA7;
+  text-decoration: none;          /* le dots-vue local souligne les liens, le dev non */
   border-bottom: 0;
 }
 .document-views .text-view #article .montferrand-historic a.w:hover,
@@ -473,7 +476,7 @@
    6. CARTES DE DÉFINITION — mots liés au glossaire (2026-09-28)
    Chaque a.lemma-link contient un span.mf-carte (lemme, catégorie,
    définition) produit par comptes.xsl, caché et révélé au survol ou au focus
-   clavier. Placement par ancrage CSS : au-dessus du mot, jamais dessous ;
+   clavier. Placement par ancrage CSS : sous le mot, petite flèche en haut vers le mot (2026-10-02) ;
    position fixed, sans déborder de la fenêtre ; pointer-events:none.
    Le panneau des notes (bouton « t¹ ») recopie les notes d'apparat dans
    aside.aside-noteref-parent, À CÔTÉ de .montferrand-historic : les règles
@@ -490,12 +493,11 @@
   display: block;
   position: fixed;
   position-anchor: --mf-mot;
-  position-area: top span-all;
+  position-area: bottom span-all;
+  /* Pas la place sous le mot (bas de la fenêtre, défilement) : la carte passe au-dessus. */
+  position-try-fallbacks: flip-block;
   justify-self: anchor-center;
-  align-self: end;
-  top: calc(var(--mf-entete-collant, 80px) + 6px);
-  bottom: 0;
-  margin: 0 8px 11px;
+  margin: 11px 8px;
   container-type: anchored;
   z-index: 60;
   box-sizing: border-box;
@@ -537,6 +539,14 @@
   background: #fffdfa;
   transform: rotate(45deg);
 }
+/* Carte retournée au-dessus du mot : la flèche passe en bas et pointe vers le bas. */
+@container anchored(fallback: flip-block) {
+  .document-views .text-view #article :is(.montferrand-historic, .aside-noteref-parent) .mf-carte::before {
+    top: auto;
+    bottom: -6px;
+    border-width: 0 1px 1px 0;
+  }
+}
 .document-views .text-view #article :is(.montferrand-historic, .aside-noteref-parent) .mf-carte > b {
   display: block;
   color: #1f1f1f;
@@ -558,8 +568,8 @@
   .document-views .text-view #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:hover > .mf-carte,
   .document-views .text-view #article :is(.montferrand-historic, .aside-noteref-parent) .lemma-link:focus-visible > .mf-carte {
     position: absolute;
-    top: auto;
-    bottom: calc(100% + 9px);
+    top: calc(100% + 9px);
+    bottom: auto;
     left: 50%;
     margin: 0;
     transform: translateX(-50%);
@@ -675,4 +685,118 @@
   border-top: 1px solid #e2c5cb;
   padding-top: 0.5rem;
   margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   9. Page d'un registre (CC155…) : la XSL donne la table de ses comptes
+      (années, articles, folios) ; elle remplace le sommaire des enfants de
+      dots-vue, qui ne donnait que les titres (2026-10-02).
+   ========================================================================== */
+.document-area:has(.montferrand-historic .mf-registre) .bottom-toc { display: none; }
+/* La page n'a que son titre et cette table : sans cela, la rangée de texte de
+   dots-vue (.wrapper en flex) se rétracte sur la largeur du titre. */
+.document-area:has(.montferrand-historic .mf-registre) .wrapper > .row { flex: 1 1 auto; min-width: 0; }
+.document-views .text-view #article .montferrand-historic .mf-registre { margin: 1.5rem 0 2.5rem; }
+.document-views .text-view #article .montferrand-historic .mf-registre-resume {
+  margin: 0 0 1rem;
+  color: var(--mf-gris);
+  font: .85rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.document-views .text-view #article .montferrand-historic .mf-registre-comptes {
+  display: grid;
+  gap: .6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: mf-compte;
+}
+.document-views .text-view #article .montferrand-historic .mf-registre-compte { margin: 0; padding: 0; counter-increment: mf-compte; }
+.document-views .text-view #article .montferrand-historic a.mf-registre-lien {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  align-items: baseline;
+  column-gap: .8rem;
+  padding: .85rem 1.1rem;
+  border: 1px solid #e6e0d9;
+  border-left: 3px solid var(--mf-accent);
+  border-radius: 4px;
+  background: #fffdfa;
+  color: inherit;
+  text-decoration: none;
+  transition: background .15s, box-shadow .15s;
+}
+.document-views .text-view #article .montferrand-historic a.mf-registre-lien::before {
+  content: counter(mf-compte);
+  grid-row: span 2;
+  color: var(--mf-accent);
+  font: 600 1.4rem/1 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  text-align: right;
+}
+.document-views .text-view #article .montferrand-historic a.mf-registre-lien:hover,
+.document-views .text-view #article .montferrand-historic a.mf-registre-lien:focus-visible {
+  background: #f7f2ec;
+  box-shadow: 0 2px 8px rgba(45, 32, 20, .08);
+}
+.document-views .text-view #article .montferrand-historic .mf-rc-titre { color: #315BA7; font-size: 1.08rem; font-weight: 600; }
+.document-views .text-view #article .montferrand-historic a.mf-registre-lien:hover .mf-rc-titre { text-decoration: underline solid 1px; text-underline-offset: 3px; }
+.document-views .text-view #article .montferrand-historic .mf-rc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem .9rem;
+  margin-top: .3rem;
+  color: var(--mf-gris);
+  font: .82rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   10. Bibliographie : une référence par ligne, sigle en gras en tête, filtre (2026-10-02).
+   ========================================================================== */
+.document-views .text-view #article .montferrand-historic .mf-biblio { margin: 1rem 0 2.5rem; }
+.document-views .text-view #article .montferrand-historic .mf-biblio-barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 .8rem;
+  padding-bottom: .6rem;
+  border-bottom: 2px solid var(--mf-accent);
+  color: var(--mf-gris);
+  font: .82rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.document-views .text-view #article .montferrand-historic .mf-biblio-filtre {
+  width: min(20rem, 60%);
+  padding: .3rem .55rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: .85rem var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.document-views .text-view #article .montferrand-historic .mf-biblio-filtre:focus { outline: 2px solid #315BA7; outline-offset: -1px; }
+.document-views .text-view #article .montferrand-historic .mf-biblio-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Retrait suspendu, comme une bibliographie imprimée : la 2e ligne d'une référence
+   s'aligne en retrait sous la première. */
+.document-views .text-view #article .montferrand-historic .mf-bib {
+  margin: 0;
+  padding: .45rem .4rem .45rem 2rem;
+  text-indent: -1.6rem;
+  border-bottom: 1px solid #ece7e2;
+  line-height: 1.5;
+  text-align: left;
+}
+.document-views .text-view #article .montferrand-historic .mf-bib[hidden] { display: none; }
+.document-views .text-view #article .montferrand-historic .mf-bib-sigle { color: #1f1f1f; font-weight: 700; }
+@media (max-width: 700px) {
+  .document-views .text-view #article .montferrand-historic .mf-biblio-barre { flex-direction: column; align-items: stretch; }
+  .document-views .text-view #article .montferrand-historic .mf-biblio-filtre { width: 100%; }
 }

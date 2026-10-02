@@ -210,11 +210,14 @@
   text-align: left;
 }
 
-/* En-têtes : collants sous la barre de navigation, filet d'accent. */
-.document-views .text-view #article .montferrand-historic .mf-tableau thead th {
+/* En-têtes : tout le thead (titres de colonnes ET ligne des filtres) colle
+   sous la barre de navigation, pour pouvoir filtrer sans remonter (2026-10-02). */
+.document-views .text-view #article .montferrand-historic .mf-tableau thead {
   position: sticky;
   top: var(--mf-entete-collant);
   z-index: 2;
+}
+.document-views .text-view #article .montferrand-historic .mf-tableau thead th {
   padding: 0;
   border: 0;
   border-bottom: 2px solid var(--mf-accent);
@@ -225,7 +228,7 @@
    à 90 px du haut par Document.vue : un en-tête collant la couvrirait. Il cesse
    donc de coller tant qu'un élément du tableau porte dots-target ; un tri la
    libère. */
-.document-views .text-view #article .montferrand-historic .mf-tableau:has(.dots-target) thead th {
+.document-views .text-view #article .montferrand-historic .mf-tableau:has(.dots-target) thead {
   position: static;
 }
 .document-views .text-view #article .montferrand-historic .mf-tableau button.mf-tri {
@@ -389,7 +392,7 @@
 @media (max-width: 760px) {
   .document-views .text-view #article .montferrand-historic .mf-tableau-cadre { overflow-x: auto; }
   .document-views .text-view #article .montferrand-historic table.mf-tableau { min-width: 44rem; }
-  .document-views .text-view #article .montferrand-historic .mf-tableau thead th { position: static; }
+  .document-views .text-view #article .montferrand-historic .mf-tableau thead { position: static; }
 }
 
 /* Filtres par colonne (2026-09-29). dots-vue met les tableaux en flex : sans

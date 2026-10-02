@@ -262,3 +262,27 @@
   overflow: hidden;
   overflow-wrap: anywhere;
 }
+
+/* Notes en pied des actes et des introductions (2026-10-02) : ces styles étaient
+   écrits en dur dans actesroyauxdupoitou.xsl (attributs style). Mêmes valeurs ici,
+   pour pouvoir les régler depuis la CSS. */
+/* a.notebottom : le panneau de notes de dots-vue recopie chaque note (et recopiait
+   l'attribut style avec elle). */
+.document-area #main #article a.noteref,
+.document-area #main #article a.noteback,
+.document-area #main #article a.notebottom {
+  text-decoration: none;
+  color: #a73136;
+  font-weight: bold;
+}
+.document-area #main #article section.footnotes {
+  margin: 1.2rem 0 0;
+  padding-top: .7rem;
+  border-top: 1px solid #d7d1ca;
+  font-size: .9rem;
+  color: #333;
+}
+.document-area #main #article section.footnotes aside.note {
+  margin: .35rem 0;
+  line-height: 1.45;
+}

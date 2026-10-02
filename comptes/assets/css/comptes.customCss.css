@@ -227,8 +227,9 @@
 /* Une entrée désignée (arrivée par un lien, choix dans la recherche) est placée
    à 90 px du haut par Document.vue : un en-tête collant la couvrirait. Il cesse
    donc de coller tant qu'un élément du tableau porte dots-target ; un tri la
-   libère. */
-.document-views .text-view #article .montferrand-historic .mf-tableau:has(.dots-target) thead {
+   libère. Sauf après un renvoi « voir » (.mf-par-voir posé par le script, qui
+   fait lui-même défiler la ligne sous l'en-tête) : la barre des filtres reste. */
+.document-views .text-view #article .montferrand-historic .mf-tableau:has(.dots-target):not(.mf-par-voir) thead {
   position: static;
 }
 .document-views .text-view #article .montferrand-historic .mf-tableau button.mf-tri {

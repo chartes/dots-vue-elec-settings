@@ -517,6 +517,12 @@
 .document-area #article:not(.bottom-toc) .isd-notice h3:not(.isd-notice-head) {
   margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555;
 }
+/* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
+   l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :
+   <p class="isd-rubrique">. Même aspect que la règle précédente, sans retrait d'alinéa. */
+.document-area #article:not(.bottom-toc) .isd-notice p.isd-rubrique {
+  margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555; text-indent: 0;
+}
 
 /* ============================================================================
    D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
@@ -554,4 +560,179 @@
   line-clamp: 2;
   overflow: hidden;
   overflow-wrap: anywhere;
+}
+
+/* ============================================================================
+   D43 (2026-09-24) — Index des auteurs d'actes (Cartulaire blanc, Inventaire).
+
+   Rendus par saint-denis.xsl au bas des deux pages « Parcourir », depuis le
+   compagnon saint-denis-index-auteurs.xml. Aucun composant Vue : la rubrique
+   est du HTML produit par la feuille, le pliage est celui de <details>.
+
+   PORTÉE — toutes les règles sont préfixées par `#main #article`, la zone de
+   texte TEI. La customCss est injectée globalement : sans ce préfixe, des
+   sélecteurs aussi communs que `details` ou `summary` fuiraient sur les
+   autres corpus de l'application.
+   ============================================================================ */
+
+#main #article .sd-index-auteurs {
+  margin-top: 2.5rem;
+  padding-top: 1.4rem;
+  border-top: 2px solid var(--sd-legacy-red);
+  /* Le lien historique de la page mène ici : ne pas se caler sous l'en-tête fixe. */
+  scroll-margin-top: 5rem;
+}
+
+#main #article .sd-index-auteurs-titre {
+  margin: 0 0 .3rem;
+  font-size: 1.15rem;
+}
+
+#main #article .sd-index-auteurs-chapeau {
+  margin: 0 0 1rem;
+  color: var(--sd-legacy-dark);
+  font-size: .9rem;
+}
+
+/* Barre des initiales. Même vocabulaire de pastilles que la navigation de
+   description, pour que la page reste d'une seule pièce. */
+#main #article .sd-index-lettres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-bottom: 1.2rem;
+}
+
+#main #article .sd-index-lettre-lien {
+  min-width: 1.9rem;
+  padding: .2rem .45rem;
+  border: 1px solid var(--sd-legacy-border);
+  border-radius: 3px;
+  color: var(--fill-color);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+#main #article .sd-index-lettre-lien:hover,
+#main #article .sd-index-lettre-lien:focus {
+  background: var(--fill-color);
+  border-color: var(--fill-color);
+  color: #fff;
+}
+
+#main #article .sd-index-groupe {
+  /* L'ancre d'une initiale ne doit pas se caler sous l'en-tête fixe. */
+  scroll-margin-top: 5rem;
+  margin-bottom: 1.4rem;
+}
+
+#main #article .sd-index-initiale {
+  margin: 0 0 .35rem;
+  padding-bottom: .15rem;
+  border-bottom: 1px solid var(--sd-legacy-border);
+  color: var(--sd-legacy-red);
+  font-size: 1rem;
+  letter-spacing: .06em;
+}
+
+#main #article ul.sd-index-termes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#main #article li.sd-index-terme {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px dotted #ddd;
+}
+
+#main #article .sd-index-sommaire {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  padding: .25rem .2rem;
+  cursor: pointer;
+  list-style-position: outside;
+}
+
+#main #article .sd-index-sommaire:hover {
+  background: #f3f8f8;
+}
+
+/* `display:flex` sur un summary supprime le triangle de pliage du navigateur :
+   on le redessine, sans quoi rien n'indique que le terme s'ouvre. */
+#main #article .sd-index-sommaire::-webkit-details-marker { display: none; }
+#main #article .sd-index-sommaire::marker { content: ""; }
+
+#main #article .sd-index-sommaire::before {
+  content: "\25B8";
+  flex: 0 0 .9rem;
+  color: var(--sd-legacy-red);
+  font-size: .8rem;
+}
+
+#main #article .sd-index-details[open] > .sd-index-sommaire::before {
+  content: "\25BE";
+}
+
+#main #article .sd-index-libelle {
+  flex: 1 1 auto;
+}
+
+/* Le compte d'occurrences, à droite, aligné d'un terme à l'autre. */
+#main #article .sd-index-nb {
+  flex: 0 0 auto;
+  min-width: 2.6rem;
+  padding: 0 .4rem;
+  border-radius: 999px;
+  background: var(--sd-legacy-gray);
+  color: var(--sd-legacy-dark);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .75rem;
+  text-align: center;
+}
+
+#main #article .sd-index-details[open] > .sd-index-sommaire {
+  font-weight: 700;
+}
+
+#main #article .sd-index-renvois {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin: .1rem 0 .6rem;
+  padding: .5rem .2rem .5rem 1.2rem;
+  border-left: 3px solid var(--sd-legacy-gray);
+  /* « auteurs laïques » aligne 647 renvois : on borne la hauteur du bloc
+     déplié plutôt que de pousser la page sur plusieurs écrans. */
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+#main #article a.sd-index-renvoi {
+  padding: .1rem .4rem;
+  border: 1px solid var(--sd-legacy-border);
+  border-radius: 3px;
+  background: #fff;
+  color: var(--fill-color);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .78rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#main #article a.sd-index-renvoi:hover,
+#main #article a.sd-index-renvoi:focus {
+  background: var(--fill-color);
+  border-color: var(--fill-color);
+  color: #fff;
+}
+
+/* Le lien Pleade historique, devenu ancre vers la rubrique de la même page. */
+#main #article a.sd-index-ancre {
+  text-decoration-style: dotted;
 }

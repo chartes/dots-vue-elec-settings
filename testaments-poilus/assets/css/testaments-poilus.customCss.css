@@ -16,9 +16,6 @@
 .document-area #article .tp-index .surname { font-variant:small-caps; font-weight:700; }
 .document-area #article .tp-index .dates, .document-area #article .tp-index .bibl { color:#655b58; }
 .document-area #article .tp-index .bio { margin:.25rem 0; }
-.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
-.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
-.description-section nav a:hover { background:var(--fill-color); color:white; }
 .document-area #article .note, .document-area #article .fn-app { scroll-margin-top:6rem; }
 .document-area #article .note:target, .document-area #article .fn-app:target,
 .document-area #article .note.dots-target, .document-area #article .fn-app.dots-target { background:#fff3cc; outline:2px solid #d2a323; }
@@ -38,40 +35,11 @@
 .document-area #article a.tp-facsimile-link:hover .tp-facsimile { box-shadow:0 .2rem 1rem rgba(45,37,36,.3); }
 .document-area #article .tp-page-break { display:block; text-align:center; font-size:.85em; color:#7a6f6c; margin-top:1.2rem; }
 
-/* --------------------------------------------------------------------------
-   Mirador. Les fac-similés de ce corpus sont de simples <img> : la visionneuse
-   n'y sert pas. En mode texte l'application la masque en visibility:hidden, ce
-   qui la laisse dans le flux avec sa hauteur, et .document-views porte une
-   min-height calculée pour la vue en deux volets — d'où un long défilement
-   dans le vide sous les pages courtes, l'index par lettre en particulier.
-   -------------------------------------------------------------------------- */
-.text-mode .mirador-view,
-.text-mode #vue-mirador-container { display:none !important; }
-.text-mode .document-views,
-.text-mode.layout-main { min-height:0 !important; }
-
 /* Barre des lettres de l'index, précalculée dans la source. */
 .document-area #article .tp-letter-nav { margin:.4rem 0 1rem; font-size:1.05rem; }
 .document-area #article .tp-letter-link { text-decoration:none; border-bottom:1px solid rgba(167,49,54,.35); padding:0 .15rem; }
 .document-area #article .tp-letter-link:hover { border-bottom-color:currentColor; }
 
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
 
 /* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
 /* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral

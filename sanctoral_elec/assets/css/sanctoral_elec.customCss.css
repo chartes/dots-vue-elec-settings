@@ -61,20 +61,6 @@
 .document-area #article cite.title { font-style:italic; }
 
 /* --------------------------------------------------------------------------
-   Mirador. Le sanctoral n'a pas de fac-similés : la visionneuse n'y sert
-   jamais. En mode texte, l'application la masque en visibility:hidden, ce qui
-   la laisse dans le flux — elle gardait 609 px de haut, et les conteneurs
-   .document-views / .layout-main portent en outre une min-height calculée pour
-   la vue en deux volets. Sur une page dont le contenu fait 157 px, le document
-   en faisait 1215 : d'où le défilement dans le vide.
-   Mesuré : 1215 px -> 763 px.
-   -------------------------------------------------------------------------- */
-.text-mode .mirador-view,
-.text-mode #vue-mirador-container { display:none !important; }
-.text-mode .document-views,
-.text-mode.layout-main { min-height:0 !important; }
-
-/* --------------------------------------------------------------------------
    Sommaire des divisions conteneurs — parties et pars. La liste vient de la
    source (list[@type='summary']) : DoTS retire les enfants d'une unité servie
    avec excludeFragments, la feuille ne pourrait pas la dresser elle-même.
@@ -85,23 +71,6 @@
 .document-area #article ul.sommaire a { text-decoration:none; border-bottom:1px solid rgba(124,28,61,.35); }
 .document-area #article ul.sommaire a:hover { border-bottom-color:currentColor; }
 
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
 
 /* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
 /* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral

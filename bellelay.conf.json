@@ -2,8 +2,13 @@
   "collectionId": "bellelay",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "appNavBar": { "collectionShortTitle": "Bellelay" },
-    "pageHeader": { "collectionAltTitle": "Le Graduel de Bellelay", "aboutButtonText": "À propos" },
+    "appNavBar": {
+      "collectionShortTitle": "Bellelay"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Le Graduel de Bellelay",
+      "aboutButtonText": "À propos"
+    },
     "descriptionSection": {
       "collectionDescription": "Le graduel de Bellelay est l'un des premiers livres liturgiques notés de l'ordre des Prémontrés. Cette édition donne accès à la présentation, à l'introduction, à l'étude générale, au manuscrit feuilletable, à la liste des interventions, à l'index et aux analyses.",
       "customCollectionDescription": ""
@@ -28,5 +33,39 @@
     "leftTocFragmentIsDocument": false
   },
   "collectionCustomCss": "bellelay",
-  "customRoutes": [{ "name": "Search", "path": "search", "compName": "SearchPage" }]
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

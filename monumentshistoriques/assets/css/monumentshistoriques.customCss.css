@@ -1870,3 +1870,150 @@
   .mh-edition .mh-signature-logo { height: 32px; opacity: 1; }
   .mh-edition .mh-signature a { color: inherit; border-bottom: 0; }
 }
+
+
+/* ============================================================================
+   LES GRANDES ZONES BLANCHES EN BAS DE PAGE                        (2026-09-21)
+   ---------------------------------------------------------------------------
+   Deux blancs differents, deux causes mesurees au navigateur sur
+   /monumentshistoriques/document/mh-pv?refId=dec-1848-1857, fenetre 1500x900 :
+
+   A. LE BLANC ENTRE LE TEXTE ET LE PIED APPLICATIF (293 px mesures).
+      DoTS-vue reserve un plancher de hauteur a la zone de document,
+      independamment de ce qu'elle contient :
+         .document-views { min-height: 70vh }   DocumentPage.vue L. 3569
+         .layout-main    { min-height: calc(100vh - 250px) }  main.css L. 459
+      Sur une page courte (une garde de decennie fait 337 px de contenu) le
+      plancher vaut 630 px : le pied est repousse de 293 px et l'ecart est du
+      blanc. Sur une page longue (l'annee 1849 fait 91 107 px) ces deux regles
+      n'ont aucun effet : les neutraliser ne change rien au texte.
+      On les remplace par le comportement attendu, qui est celui de la grille :
+      .layout-grid-container porte deja `grid-template-rows: 70px 1fr auto`
+      (main.css L. 465-472) ; il lui manquait seulement une hauteur de
+      reference. `min-height: 100vh` la lui donne, la rangee `1fr` absorbe le
+      mou et le pied se pose au bas de la fenetre, sans blanc.
+      Mesure apres correctif sur la meme page : hauteur du document 900 px
+      pour une fenetre de 900 px (0 defilement), pied de 600 a 900.
+
+   B. LE BLANC SOUS LE PIED APPLICATIF (183 px mesures).
+      La visionneuse IIIF reste montee dans le DOM meme quand le corpus n'a
+      aucune image : DocumentPage.vue la garde en `visibility: hidden` et non
+      en `display: none`, pour ne pas detruire le noeud d'OpenSeadragon
+      pendant une transition (commentaire L. 3634-3636). Mesure :
+         #mirador-view        720 px, position: absolute, visibility: hidden
+         #vue-mirador-container 820 px
+      Etant en position absolue elle ne repousse pas le pied, mais elle
+      allonge la hauteur DEFILABLE de 183 px au-dela de lui : la page defile
+      donc sous son propre pied, sur du blanc.
+      Ce corpus est en texte seul. `text-mode-only` est pose par
+      use-layout.js L. 34-40 exactement quand `imageIsAvailable` est faux,
+      c'est-a-dire quand la visionneuse n'a aucun manifeste et donc aucun
+      noeud OpenSeadragon a proteger : sous cette classe, et sous elle seule,
+      on peut la sortir du flux sans risque.
+
+   Aucun composant Vue n'est touche ; ces regles ne valent que pendant que la
+   feuille du corpus est injectee (App.vue L. 249-271 la retire en sortant).
+   PORTEE. La customCss d'un corpus est injectee GLOBALEMENT dans dots-vue
+   (App.vue l. 249-257 : une seule balise <style id="customCss"> en fin de
+   <head>). Des selecteurs nus sur .layout-grid-container, .layout-main,
+   .document-views ou .mirador-view vaudraient donc pour toute l'application.
+   Le point d'ancrage du corpus dans le DOM servi est l'attribut `collid`, pose
+   sur .layout-main (verifie le 2026-09-21 sur la page d'accueil du corpus ET
+   sur une page de document : `collid="monumentshistoriques"`). La grille etant
+   l'ANCETRE de .layout-main, elle se scope par :has().
+   ========================================================================= */
+
+.layout-grid-container:has(> .layout-main[collid="monumentshistoriques"]) { min-height: 100vh; }
+.layout-main[collid="monumentshistoriques"] { min-height: 0; }
+.layout-main[collid="monumentshistoriques"] .document-views { min-height: 0; }
+.layout-main.text-mode-only[collid="monumentshistoriques"] .mirador-view { display: none; }
+
+
+/* ============================================================================
+   LA PAGE DE GARDE D'UNE DECENNIE                                 (2026-09-21)
+   ---------------------------------------------------------------------------
+   `.mh-decennie-garde` est emise par monumentshistoriques.xsl et n'avait
+   jamais recu une seule declaration : ses liens sortaient dans le bleu souligne
+   du navigateur, au milieu d'une edition qui est en Georgia et en #8d2632. On
+   l'aligne sur .mh-nav, qui est la navigation voisine.
+   (La garde du CORPUS, elle, a ete retiree de la page le 2026-09-21 : son titre
+   doublait celui du teiHeader et ses onze liens doublaient le sommaire de
+   gauche. Ses selecteurs sont donc partis avec elle.)
+   ========================================================================= */
+
+.mh-edition .mh-decennie-garde ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .35rem 1.6rem;
+  margin: 1.2rem auto 0;
+  padding: 0;
+  max-width: 44rem;
+  list-style: none;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.mh-edition .mh-decennie-garde li { margin: 0; }
+.mh-edition .mh-decennie-garde a {
+  color: #8d2632;
+  text-decoration-thickness: .06em;
+  text-underline-offset: .15em;
+}
+
+
+
+/* ============================================================================
+   LE LOGO DE LA MEDIATHEQUE, DANS LE PIED DE PAGE                (2026-09-21)
+   ---------------------------------------------------------------------------
+   L'ours « Edition coproduite par » a quitte le corps de la page. Son TEXTE est
+   passe dans monumentshistoriques.conf.json (footerSubtitles et
+   footerDescription), ou AppFooter.vue le lit : il parait donc desormais une
+   fois par page, dans le pied, et non plus une fois par fragment.
+
+   Restaient les deux logos. AppFooter.vue n'expose aucune liste de logos ; il
+   en code deux en dur (AppFooter.vue l. 27-49) :
+     . celui de l'Ecole nationale des chartes, TOUJOURS affiche et deja lie a
+       chartes.psl.eu — il est donc deja au pied de chaque page ;
+     . celui de Biblissima, sous le drapeau displayBiblissimaLogo (1 corpus
+       sur 31 s'en sert : cartulaires).
+   Il n'existe pas de troisieme emplacement, et aucune des 31 configurations du
+   parc ne fournit d'image au pied : c'est bien une limite du composant, pas de
+   la configuration (cles rencontrees dans les 31 fichiers : footerTitle 29,
+   footerSubtitles 27, footerDescription 27, displayBiblissimaLogo 1).
+
+   Le logo de la Mediatheque est donc repose ici, en image PUREMENT DECORATIVE,
+   ce qui est licite parce que son intitule est juste au dessus, en toutes
+   lettres, dans footerSubtitles : « Mediatheque de l'architecture et du
+   patrimoine — ministere de la Culture ». Aucune information n'est portee par
+   la seule image.
+   Le fichier est celui que l'ours utilisait (logo-map.png, 153 x 87, RGBA a
+   fond transparent) ; le pied etant sombre, il est pose sur une plaque blanche,
+   faute de quoi son texte noir serait illisible.
+
+   CE QU'IL FAUDRAIT POUR FAIRE MIEUX, et que je ne fais pas (interdiction de
+   toucher aux composants) : ouvrir dans AppFooter.vue une cle
+   `footerLogos: [{ src, alt, href }]` a cote de displayBiblissimaLogo, et la
+   boucler dans .logo-institutions. Le logo retrouverait alors son texte de
+   remplacement et son lien vers mediatheque-patrimoine.culture.gouv.fr.
+
+   PORTEE : meme ancrage que le bloc precedent — `collid` est sur .layout-main,
+   le pied en est un FRERE dans .layout-grid-container, d'ou le :has() sur le
+   conteneur de grille.
+   ========================================================================= */
+
+.layout-grid-container:has(> .layout-main[collid="monumentshistoriques"]) .layout-footer .logo-institutions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+.layout-grid-container:has(> .layout-main[collid="monumentshistoriques"]) .layout-footer .logo-institutions::before {
+  content: "";
+  flex: 0 0 auto;
+  order: -1;
+  width: 132px;
+  height: 75px;
+  border-radius: 2px;
+  background: #fff url("/images/monumentshistoriques/logo-map.png") center / contain no-repeat;
+  box-shadow: 0 0 0 6px #fff;
+  margin-right: .5rem;
+}

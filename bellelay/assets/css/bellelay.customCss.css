@@ -1604,3 +1604,42 @@ body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-he
   color: #555;
   font-size: .95em;
 }
+
+/* ==== 2026-09-29 : passe de présentation ==== */
+
+/* Feuillet : l'image à gauche, le sélecteur de feuillet puis « Les pièces du feuillet » à
+   droite, comme sur l'ÉLEC. Le flottant à droite ne prenait pas : l'encadré suit la figure
+   dans le HTML, il se posait donc sous l'image et la moitié droite de l'écran restait vide. */
+.bellelay-edition .type-reconstructed:has(> figure.feuillet + .type-descriptionfeuillet) {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(15rem, 2fr);
+  grid-template-rows: auto auto 1fr;
+  column-gap: 2rem;
+  align-items: start;
+}
+.bellelay-edition .type-reconstructed:has(> figure.feuillet + .type-descriptionfeuillet) > figure.feuillet {
+  grid-column: 1; grid-row: 1 / span 3; max-width: none; margin: 0;
+}
+.bellelay-edition .type-reconstructed:has(> figure.feuillet + .type-descriptionfeuillet) > .feuillet-navigation {
+  grid-column: 2; grid-row: 1; margin: 0 0 1rem;
+}
+.bellelay-edition .type-reconstructed:has(> figure.feuillet + .type-descriptionfeuillet) > .type-descriptionfeuillet {
+  grid-column: 2; grid-row: 2; float: none; max-width: none; margin: 0;
+}
+.bellelay-edition .type-reconstructed:has(> figure.feuillet + .type-descriptionfeuillet) > hr { display: none; }
+@media (max-width: 850px) {
+  .bellelay-edition .type-reconstructed:has(> figure.feuillet + .type-descriptionfeuillet) { display: block; }
+}
+
+/* Notes de l'étude, regroupées en un paragraphe par la feuille (numéro en gras, puis la note). */
+.bellelay-edition p.footnote {
+  margin: .35rem 0;
+  text-indent: 0;
+  font-size: .92em;
+  line-height: 1.45;
+}
+.bellelay-edition p.footnote .footnote-num { color: var(--red); margin-right: .15em; }
+
+/* Index : le compteur de pièces flotte à droite, sur la colonne « Commentaire », le plus
+   souvent vide, et ne masque plus l'incipit ni la fête de la ligne qui passe dessous. */
+.bellelay-edition .idx-compte { margin-left: auto; margin-right: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, .2); }

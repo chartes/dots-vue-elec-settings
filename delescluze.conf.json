@@ -2,23 +2,70 @@
   "collectionId": "delescluze",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "appNavBar": { "collectionShortTitle": "Delescluze" },
-    "pageHeader": { "collectionAltTitle": "Carnets de prison et correspondance privée d'Henri Delescluze", "aboutButtonText": "À propos" },
-    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": "" },
-    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Parcourir l'édition" }
+    "appNavBar": {
+      "collectionShortTitle": "Delescluze"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Carnets de prison et correspondance privée d'Henri Delescluze",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Parcourir l'édition"
+    }
   },
   "footerSettings": {
     "footerTitle": "Henri Delescluze à Belle-Île",
-    "footerSubtitles": ["Carnets de prison et correspondance privée", "1851-1853"],
+    "footerSubtitles": [
+      "Carnets de prison et correspondance privée",
+      "1851-1853"
+    ],
     "footerDescription": "Édition critique des carnets de prison et de la correspondance privée d'Henri Delescluze."
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 4,
     "editByLevel": 2,
-    "editByCiteType": ["page", "groupe", "personne"],
+    "editByCiteType": [
+      "page",
+      "groupe",
+      "personne"
+    ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
   "aboutPageSettings": [],
-  "collectionCustomCss": "delescluze"
+  "collectionCustomCss": "delescluze",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

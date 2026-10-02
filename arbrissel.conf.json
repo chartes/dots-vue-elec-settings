@@ -2,23 +2,67 @@
   "collectionId": "arbrissel",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "appNavBar": { "collectionShortTitle": "Arbrissel" },
-    "pageHeader": { "collectionAltTitle": "Arbrissel", "aboutButtonText": "À propos" },
-    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": "" },
-    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Parcourir le texte" }
+    "appNavBar": {
+      "collectionShortTitle": "Arbrissel"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Arbrissel",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Parcourir le texte"
+    }
   },
   "footerSettings": {
     "footerTitle": "Arbrissel",
-    "footerSubtitles": ["École nationale des chartes – PSL"],
+    "footerSubtitles": [
+      "École nationale des chartes – PSL"
+    ],
     "footerDescription": ""
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 2,
     "editByLevel": 2,
-    "editByCiteType": ["section"],
+    "editByCiteType": [
+      "section"
+    ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
   "aboutPageSettings": [],
-  "collectionCustomCss": "arbrissel"
+  "collectionCustomCss": "arbrissel",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

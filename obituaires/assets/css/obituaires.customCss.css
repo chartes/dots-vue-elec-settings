@@ -455,3 +455,19 @@
 #main #article .vosges { background-color: #fbeea0; }
 #main #article .mont { background-color: #cfe3f7; }
 /* ==== fin conventions ==== */
+
+/* 2026-10-04 — Élément visé par une ancre (note en pied, retour vers l'appel, division),
+   aux couleurs du corpus. `.dots-target` double `:target` : dots-vue pose cette classe sur
+   l'élément visé quand une URL à ancre est ouverte à froid. Une division ne reçoit qu'un
+   filet, pas de fond. */
+.document-area #article:not(.bottom-toc) aside.note:target,
+.document-area #article:not(.bottom-toc) aside.note.dots-target,
+.document-area #article:not(.bottom-toc) a.noteref:target,
+.document-area #article:not(.bottom-toc) a.noteref.dots-target {
+  background: #fbf0f2;
+  box-shadow: inset 3px 0 0 #BC052D;
+}
+.document-area #article:not(.bottom-toc) section.div:target,
+.document-area #article:not(.bottom-toc) section.div.dots-target {
+  box-shadow: inset 3px 0 0 #BC052D;
+}

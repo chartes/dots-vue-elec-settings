@@ -476,3 +476,15 @@
   overflow: hidden;
   overflow-wrap: anywhere;
 }
+
+/* 2026-10-04 — Élément visé par une ancre (note en pied, retour vers l'appel), surligné.
+   `.dots-target` double `:target` : dots-vue pose cette classe sur l'élément visé quand une
+   URL à ancre est ouverte à froid (le fragment est monté après que le navigateur a résolu
+   l'ancre), comme dans les autres corpus. Couleurs : celles du socle D12 de ce fichier. */
+.document-area #main #article .footnote.note:target,
+.document-area #main #article .footnote.note.dots-target,
+.document-area #main #article a.noteref:target,
+.document-area #main #article a.noteref.dots-target {
+  background: var(--meta-area-fill-color, #f5f5f5);
+  box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21);
+}

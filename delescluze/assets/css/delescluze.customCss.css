@@ -584,3 +584,30 @@
 
 /* Page sans image numérique (lettre14-page01) : mention de l'ÉLEC. */
 #main #article .facsimile-absent { font-style: italic; }
+
+/* 2026-10-04 — Élément visé par une ancre, surligné aux couleurs du corpus. `.dots-target`
+   double `:target` : dots-vue pose cette classe sur l'élément visé quand une URL à ancre est
+   ouverte à froid (le fragment est monté après que le navigateur a résolu l'ancre). Les
+   grands blocs ne sont pas repeints : un filet ou leur seul titre. */
+.document-area #main #article aside.edition:target,
+.document-area #main #article aside.edition.dots-target,
+.document-area #main #article a.noteref:target,
+.document-area #main #article a.noteref.dots-target,
+.document-area #main #article a.pb:target,
+.document-area #main #article a.pb.dots-target {
+  background: #faf8f5;
+  box-shadow: inset 3px 0 0 #A73136;
+}
+.document-area #main #article div.facsimile:target,
+.document-area #main #article div.facsimile.dots-target {
+  box-shadow: inset 3px 0 0 #A73136;
+}
+.document-area #main #article section.div:target > h1,
+.document-area #main #article section.div.dots-target > h1,
+.document-area #main #article section.div:target > h2,
+.document-area #main #article section.div.dots-target > h2,
+.document-area #main #article section.div:target > h3,
+.document-area #main #article section.div.dots-target > h3 {
+  background: #faf8f5;
+  box-shadow: inset 3px 0 0 #A73136;
+}

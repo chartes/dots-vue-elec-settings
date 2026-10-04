@@ -1641,3 +1641,16 @@ body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-he
 /* Index : le compteur de pièces flotte à droite, sur la colonne « Commentaire », le plus
    souvent vide, et ne masque plus l'incipit ni la fête de la ligne qui passe dessous. */
 .bellelay-edition .idx-compte { margin-left: auto; margin-right: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, .2); }
+
+/* 2026-10-04 — Élément visé par une ancre (bloc d'images d'une pièce, entrée de liste),
+   aux couleurs du corpus. `.dots-target` double `:target` : dots-vue pose cette classe sur
+   l'élément visé quand une URL à ancre est ouverte à froid. */
+.document-area #article li:target,
+.document-area #article li.dots-target {
+  background: #fdf1f0;
+  box-shadow: inset 3px 0 0 #cf0b05;
+}
+.document-area #article section.piece-images:target,
+.document-area #article section.piece-images.dots-target {
+  box-shadow: inset 3px 0 0 #cf0b05;
+}

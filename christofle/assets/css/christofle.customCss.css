@@ -696,6 +696,9 @@
 .document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
 .document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
 .document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
+/* 2026-10-04 : dans l'index des types d'actes, les titres de type passent de h3 à h2
+   (la page sautait de h1 à h3) ; ils gardent exactement l'aspect de l'ancien h3. */
+.document-area #article:not(.bottom-toc) h2.chr-type-head { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
 
 /* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
 .document-area #article:not(.bottom-toc) a {

@@ -735,3 +735,25 @@
 #main #article a.sd-index-ancre {
   text-decoration-style: dotted;
 }
+
+/* 2026-10-04 — Élément visé par une ancre, surligné aux couleurs du corpus. `.dots-target`
+   double `:target` : dots-vue pose cette classe sur l'élément visé quand une URL à ancre est
+   ouverte à froid (le fragment est monté après que le navigateur a résolu l'ancre). Les
+   grands blocs ne sont pas repeints : un filet ou leur seul titre. */
+.document-area #main #article aside.note:target,
+.document-area #main #article aside.note.dots-target,
+.document-area #main #article span.note:target,
+.document-area #main #article span.note.dots-target,
+.document-area #main #article a.noteref:target,
+.document-area #main #article a.noteref.dots-target,
+.document-area #main #article span.witness:target,
+.document-area #main #article span.witness.dots-target {
+  background: #edf3f4;
+  box-shadow: inset 3px 0 0 #315d71;
+}
+.document-area #main #article div.sd-index-groupe:target,
+.document-area #main #article div.sd-index-groupe.dots-target,
+.document-area #main #article section.sd-index-auteurs:target,
+.document-area #main #article section.sd-index-auteurs.dots-target {
+  box-shadow: inset 3px 0 0 #315d71;
+}

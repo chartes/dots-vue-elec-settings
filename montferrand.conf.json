@@ -47,6 +47,9 @@
     }
   ],
   "collectionCustomCss": "montferrand",
+  "topBreadcrumbButtonLabel": [
+    "extensions.dots:shortTitle"
+  ],
   "metadataDisplayOrder": [
     "dct:title",
     "schema:editor",

@@ -7,6 +7,7 @@
     "pageHeader": {
       "collectionAltTitle": "Les comptes des consuls de Montferrand",
       "aboutButtonText": "À propos",
+      "aboutOpenState": true,
       "collectionBannerImg": "couv_montferrand2.jpg"
     },
     "descriptionSection": {

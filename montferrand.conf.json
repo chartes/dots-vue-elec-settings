@@ -12,7 +12,7 @@
       "collectionBannerImg": "couv_montferrand2.jpg"
     },
     "descriptionSection": {
-
+      "collectionDescription": "",
       "customCollectionDescription": {
         "compName": "HomePageContent"
       }

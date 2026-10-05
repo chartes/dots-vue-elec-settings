@@ -10,10 +10,7 @@
       "aboutButtonText": "Présentation"
     },
     "descriptionSection": {
-      "collectionDescription": "",
-      "customCollectionDescription": {
-        "compName": "HomePageContent"
-      }
+      "collectionDescription": ""
     },
     "listSection": {
       "displayMode": "toc",

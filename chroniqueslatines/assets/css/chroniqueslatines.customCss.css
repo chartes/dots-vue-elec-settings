@@ -136,6 +136,10 @@
 #article q.quote::before,
 #article q.quote::after { content: none; }
 #article .quote.topos { font-style: italic; }
+/* 2026-10-05 : citation dans la phrase (q.quote, posé par la XSL) en italique, comme
+   sur l'ÉLEC (Diple, html.css : q { font-style: italic } q q { font-style: normal }). */
+#article q.quote { font-style: italic; }
+#article q.quote q.quote { font-style: normal; }
 /* Citation dans une citation (44 cas) : en ligne dans la première, comme sur
    l'ÉLEC (« ‘‘Iterato … legatis’1, nichil ei … thesauris’ »), et non en second
    bloc — le guillemet de la citation englobante restait seul sur sa ligne. */
@@ -454,3 +458,10 @@
    s'affichaient jusqu'ici comme du texte. La classe « rubrique » n'avait pas de règle sur
    l'ÉLEC : elle reste en texte courant. */
 .document-area #main #article .rubric { color: #971716; }
+/* 2026-10-05 : lettrines (span.ornament, 235 dans le texte), comme sur l'ÉLEC (Diple,
+   diple_html.css : .ornament { color: #971716; font-size: 200% }). */
+.document-area #main #article .ornament {
+  color: #971716;
+  font-size: 200%;
+  line-height: 1;
+}

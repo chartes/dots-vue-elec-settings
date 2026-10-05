@@ -1,16 +1,18 @@
 {
-  "collectionId": "comptes",
+  "collectionId": "montferrand",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Les comptes de Montferrand"
+      "collectionShortTitle": "Montferrand"
     },
     "pageHeader": {
       "collectionAltTitle": "Les comptes des consuls de Montferrand",
       "aboutButtonText": "À propos",
+      "aboutOpenState": true,
       "collectionBannerImg": "couv_montferrand2.jpg"
     },
     "descriptionSection": {
-      "collectionDescription": "",
+
       "customCollectionDescription": {
         "compName": "HomePageContent"
       }
@@ -24,12 +26,12 @@
   "footerSettings": {
     "footerTitle": "Les comptes des consuls de Montferrand (1273–1319)",
     "footerSubtitles": [
-      "Édition de R. Anthony Lodge",
-      "École nationale des chartes – PSL"
+      "Édition de R. Anthony Lodge"
     ],
-    "footerDescription": "Édition des comptes des consuls de Montferrand (1273–1319) par R. Anthony Lodge. Édition électronique développée par la Mission projets numériques de l'École nationale des chartes – PSL."
+    "footerDescription": null
   },
   "tableOfContentsSettings": {
+    "displayTopToc": false,
     "tableOfContentDepth": 5,
     "editByLevel": 1,
     "editByCiteType": [
@@ -44,15 +46,7 @@
       "compName": "about1"
     }
   ],
-  "collectionCustomCss": "comptes",
-  "customRoutes": [
-    {
-      "name": "Search",
-      "path": "search",
-      "compName": "SearchPage"
-    }
-  ],
-  "mediaTypeEndpoint": "html",
+  "collectionCustomCss": "montferrand",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:editor",
@@ -69,13 +63,13 @@
   ],
   "metadataRename": {
     "dct:title": "Titre",
-    "schema:editor": "Édition scientifique",
+    "schema:editor": "Éditeur scientifique",
     "dct:created": "Date du document",
     "schema:isBasedOn": "Source",
     "dct:language": "Langue",
-    "schema:publisher": "Publié par",
+    "schema:publisher": "Éditeur",
     "dct:issued": "Date de publication",
-    "dct:bibliographicCitation": "Comment citer ce document",
+    "dct:bibliographicCitation": "Citer",
     "dct:license": "Licence",
     "dct:rights": "Mentions de droits",
     "schema:exampleOfWork": "Notice",

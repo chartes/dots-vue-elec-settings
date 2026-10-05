@@ -27,7 +27,10 @@
       "Édition de R. Anthony Lodge",
       "École nationale des chartes – PSL"
     ],
-    "footerDescription": "Édition des comptes des consuls de Montferrand (1273–1319) par R. Anthony Lodge. Édition électronique développée par la Mission projets numériques de l'École nationale des chartes – PSL."
+    "footerDescription": "Édition des comptes des consuls de Montferrand (1273–1319) par R. Anthony Lodge. Édition électronique développée par la Mission projets numériques de l'École nationale des chartes – PSL.",
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,

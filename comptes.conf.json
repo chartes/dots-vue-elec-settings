@@ -2,20 +2,23 @@
   "collectionId": "comptes",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Comptes"
+      "collectionShortTitle": "Les comptes de Montferrand"
     },
     "pageHeader": {
       "collectionAltTitle": "Les comptes des consuls de Montferrand",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "collectionBannerImg": "couv_montferrand2.jpg"
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "logo": "ElecLogoSimple.vue"
+      "logo": "couv_montferrand.jpg"
     }
   },
   "footerSettings": {
@@ -24,22 +27,65 @@
       "Édition de R. Anthony Lodge",
       "École nationale des chartes – PSL"
     ],
-    "footerDescription": "Édition des comptes des consuls de Montferrand (1273–1319) par R. Anthony Lodge. Édition électronique développée par la Mission projets numériques de l'École nationale des chartes – PSL."
+    "footerDescription": "Édition des comptes des consuls de Montferrand (1273–1319) par R. Anthony Lodge. Édition électronique développée par la Mission projets numériques de l'École nationale des chartes – PSL.",
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,
     "editByLevel": 1,
     "editByCiteType": [
-       "partie",
-       "registre",
-       "compte",
-       "index"
+      "partie",
+      "compte",
+      "index"
     ]
   },
- "aboutPageSettings": [
-    { "tabName": "Les archives de Montferrand", "compName": "about1" },
-    { "tabName": "Principes d'édition", "compName": "about2" },
-    { "tabName": "Bibliographie", "compName": "about3" }
+  "aboutPageSettings": [
+    {
+      "tabName": "Les archives de Montferrand",
+      "compName": "about1"
+    }
   ],
-  "collectionCustomCss": "comptes"
+  "collectionCustomCss": "comptes",
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "mediaTypeEndpoint": "html",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:editor",
+    "dct:created",
+    "schema:isBasedOn",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:license",
+    "dct:rights",
+    "schema:encoding"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:editor": "Édition scientifique",
+    "dct:created": "Date du document",
+    "schema:isBasedOn": "Source",
+    "dct:language": "Langue",
+    "schema:publisher": "Publié par",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Comment citer ce document",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:exampleOfWork": "Notice",
+    "schema:encoding": "Exports"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

@@ -17,6 +17,7 @@
       "pageHeader": {
         "collectionAltTitle": "Titre",
         "aboutButtonText": "À propos",
+        "aboutOpenState": false,
         "collectionBannerImg": "banner_default.png"
       },
       "descriptionSection": {

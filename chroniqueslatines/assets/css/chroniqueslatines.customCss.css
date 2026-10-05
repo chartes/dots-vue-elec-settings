@@ -132,7 +132,12 @@
    cités (<quote>, rendus en q.quote ou blockquote.quote) reçoivent leurs “ ” ou
    ‘ ’ de la XSL, dans le texte : pas de guillemet CSS en plus. Les topos sont
    en italique. */
-#article q { quotes: "«\00a0" "\00a0»" "“" "”"; }
+/* 2026-10-05 (feuille v2, repartie de la surcharge historique de l'ÉLEC) : la XSL écrit
+   les guillemets dans le texte (« » pour <q>, “ ” et ‘ ’ pour les citations), comme
+   l'ÉLEC : plus de guillemets CSS. Et comme l'ÉLEC (Diple, html.css), tout <q> est
+   en italique, un <q> dans un <q> en romain. */
+#article q { quotes: none; font-style: italic; }
+#article q q { font-style: normal; }
 #article q.quote::before,
 #article q.quote::after { content: none; }
 #article .quote.topos { font-style: italic; }
@@ -150,6 +155,7 @@
   border: 0;
 }
 #article sup:hover + .listBibl,
+#article a.refnote:hover + .listBibl,
 #article sup:focus-within + .listBibl {
   display: inline;
   margin-left: .35rem;

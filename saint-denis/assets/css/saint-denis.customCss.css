@@ -757,3 +757,18 @@
 .document-area #main #article section.sd-index-auteurs.dots-target {
   box-shadow: inset 3px 0 0 #315d71;
 }
+
+/* 2026-10-05 — Mises en forme du TEI sans règle jusqu'ici (audit du 05/10), reprises de la
+   feuille de l'ancien site (Pleade, theme/css/module-eadeac.css) :
+   - hi[@rend="cite"] → span.cite : <cite> sur l'ancien site, sans règle, donc italique ;
+   - p[@rend="smaller"] → p.smaller : « .smaller { font-size: 90% } » ;
+   - list[@rend="encadré"] → ul.encadré : bloc encadré (90 %, filet noir, marges 2em) ;
+   - emph[@rend="sup"] → em.sup : <sup> droit sur l'ancien site (« sup { vertical-align: top;
+     font-size: 80% } ») ; hteiml le sortait en exposant italique. */
+.document-area #article:not(.bottom-toc) span.cite { font-style: italic; }
+.document-area #article:not(.bottom-toc) p.smaller { font-size: 90%; }
+.document-area #article:not(.bottom-toc) ul.encadré {
+  font-size: 90%; border: 1px solid black; margin-left: 2em; margin-right: 2em;
+  padding: .5em; list-style-position: inside; line-height: 130%;
+}
+.document-area #article:not(.bottom-toc) em.sup { font-style: normal; vertical-align: top; font-size: 80%; }

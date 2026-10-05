@@ -875,3 +875,7 @@
   overflow: hidden;
   overflow-wrap: anywhere;
 }
+
+/* 2026-10-05 : hi[@rend="super"] (6 cas, ex. « 1er janvier » de l’accueil) sort en span.super,
+   que rien ne mettait en exposant : même rendu qu’un <sup>. */
+.document-area #main #article .super { vertical-align: super; font-size: smaller; }

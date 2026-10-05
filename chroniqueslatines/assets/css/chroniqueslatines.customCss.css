@@ -448,3 +448,9 @@
   .document-area #article:not(.bottom-toc) table { font-size: .9em; }
 }
 /* ==== D12-SOCLE-FIN ==== */
+
+/* 2026-10-05 : rubriques (p.rubric, 21 dans le texte), dans le rouge de l'ÉLEC : la feuille
+   Diple de l'ÉLEC (theme/diple_html.css) donnait .rubric { color: #971716 } ; elles
+   s'affichaient jusqu'ici comme du texte. La classe « rubrique » n'avait pas de règle sur
+   l'ÉLEC : elle reste en texte courant. */
+.document-area #main #article .rubric { color: #971716; }

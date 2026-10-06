@@ -5,9 +5,10 @@
    chroniqueslatines.customCss.css. La feuille est injectée dans toute
    l'application : chaque règle est limitée à la zone de texte (#article).
 
-   Rendu : chroniqueslatines.xsl (dépôt chartes/chroniqueslatines) repart de la
-   surcharge historique de l'ÉLEC (Diple) et la complète ; les guillemets sont
-   écrits dans le texte par la XSL. Les valeurs « comme sur l'ÉLEC » viennent
+   Rendu : chroniqueslatines.xsl (v3, 2026-10-06) repart de la surcharge
+   historique de l'ÉLEC (Diple) et la branche sur le HTEIML : appels
+   a.noteref > sup, pied section.footnotes (apparat puis citations), comme les
+   autres projets ; les guillemets sont écrits dans le texte par la XSL. Les valeurs « comme sur l'ÉLEC » viennent
    des feuilles Diple (theme/neutre/diple_html.css, html.css).
 
    Cible d'un renvoi : `.dots-target` double `:target` partout. `:target` ne
@@ -17,16 +18,14 @@
 
    Sommaire du fichier
      1. Listes
-     2. Texte : discours direct et citations, rubriques (voir 9), lettrines (voir 9)
-     3. Citations : référence masquée, notes en pied
-     4. Apparat critique : en pied seulement
-     5. Cible d'un renvoi
-     6. Page de garde (teiHeader)
-     7. Blocs générés : Mirador (D7), sommaire à gauche (D11)
-     8. Socle commun aux corpus (D12, généré)
-     9. Rubriques et lettrines (après le socle)
-    10. Page « Références citées »
-    11. Page « Bibliographie »
+     2. Texte : discours direct et citations, rubriques (voir 8), lettrines (voir 8)
+     3. Notes en pied (citations)
+     4. Cible d'un renvoi
+     5. Page de garde (teiHeader)
+     6. Blocs générés : Mirador (D7), sommaire à gauche (D11)
+     7. Socle commun aux corpus (D12, généré)
+     8. Rubriques et lettrines (après le socle)
+     9. Pages « Références citées » et « Bibliographie »
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -53,16 +52,11 @@
 #article q q { font-style: normal; }
 
 /* --------------------------------------------------------------------------
-   3. Citations.
-   Référence d'une citation : hors du fil du texte (diple.css : `.cit_n .bibl
-   { display: none }`). Le HTEIML l'écrit en clair juste après l'appel
-   (span.listBibl) ; on la masque. Pas d'infobulle au survol (décision du
-   2026-10-06) : la référence complète est donnée en pied d'article, et l'appel
-   y conduit. Seul le <span> est visé : la page Bibliographie rend un
-   div.listBibl, qui doit rester visible.
+   3. Notes en pied.
+   La référence d'une citation n'est plus écrite dans le texte : l'appel
+   (a.noteref > sup) mène à sa note en pied (div.note.cit), que DoTS-vue
+   reprend aussi dans la marge. Pas d'infobulle (décision du 2026-10-06).
    -------------------------------------------------------------------------- */
-#article span.listBibl { display: none; }
-
 /* Pied de page (section.footnotes du HTEIML : p.apparatus puis une div.note par
    citation) : mis en forme par le socle commun (D12), comme les autres projets.
    Seuls ajouts : une citation par ligne, numéro en gras. */
@@ -70,22 +64,13 @@
 #article .footnotes div.note > a.noteback { font-weight: 700; text-decoration: none; margin-right: .35rem; }
 
 /* --------------------------------------------------------------------------
-   4. Apparat critique : leçons en pied de page seulement.
-   Sur l'ÉLEC, les leçons s'affichaient aussi au survol du lemme (span.rdgList).
-   Décision du 2026-10-06 : pas de bulle au survol, comme pour les citations ;
-   l'apparat est donné en pied de page (p.apparatus), où mène la lettre d'appel.
-   La XSL produit encore le span.rdgList : il reste masqué.
-   -------------------------------------------------------------------------- */
-#article span.app .rdgList { display: none; }
-
-/* --------------------------------------------------------------------------
-   5. Cible d'un renvoi (D14e-5, 2026-09-12).
+   4. Cible d'un renvoi (D14e-5, 2026-09-12).
    L'ÉLEC (Diple.js, Diple.hash) posait la classe « mark » sur l'élément visé,
    fond gris (neutre_html.css : `mark { background:#DDD }`, `li.mark,
    .notes div.mark { background-color:#E6E6E6 }`). Éléments visés dans cette
-   édition : entrée d'apparat en pied (span.note, #appn-…), appel
-   d'apparat (#appc-…), note de citation en pied (div.note, #citN). Pour une
-   section, seul l'intitulé est marqué. (Page Références : voir 10.)
+   édition : entrée d'apparat en pied (span.note, #appa), appel (#appa_,
+   #cit1_), note de citation en pied (div.note, #cit1). Pour une section, seul
+   l'intitulé est marqué.
    -------------------------------------------------------------------------- */
 #article span:target,
 #article span.dots-target,
@@ -94,7 +79,7 @@
 #article section:target > .head { background-color: #e6e6e6; }
 
 /* --------------------------------------------------------------------------
-   6. Page de garde : blocs du teiHeader rétablis par la XSL (modèle
+   5. Page de garde : blocs du teiHeader rétablis par la XSL (modèle
    tei:fileDesc). L'ÉLEC en tirait deux pages (/credits, /licence) ; le HTEIML
    ne rendait ni l'adresse, ni la licence, ni l'historique des révisions.
    -------------------------------------------------------------------------- */
@@ -134,7 +119,7 @@
 #article .availability .ident { font-weight: 700; }
 
 /* --------------------------------------------------------------------------
-   7. Blocs générés (repris tels quels).
+   6. Blocs générés (repris tels quels).
    -------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------
    Visionneuse Mirador : retirée du flux en mode texte seul.
@@ -366,7 +351,7 @@
 /* ==== D12-SOCLE-FIN ==== */
 
 /* --------------------------------------------------------------------------
-   9. Rubriques et lettrines.
+   8. Rubriques et lettrines.
    Rubriques (p.rubric, 21) : passages écrits à l'encre rouge dans le manuscrit,
    dans le rouge de l'ÉLEC (diple_html.css : .rubric { color: #971716 }). La
    classe « rubrique » n'avait pas de règle sur l'ÉLEC : texte courant.
@@ -388,97 +373,11 @@
 #article .head > ins:first-child { text-decoration: none; }
 
 /* ==========================================================================
-   Page « Références citées » (2026-10-05) : une ligne repliable par œuvre
-   (<details>), groupée sous les intertitres du TEI ; dépliée, l'édition utilisée
-   puis les passages par chapitre.
-   ========================================================================== */
-#main #article .chroniques-refs .cl-groupe-titre {
-  margin: 1.6rem 0 .4rem;
-  padding-bottom: .2rem;
-  border-bottom: 1px solid #e3ddd6;
-  color: var(--fill-color, #5f004d);
-  font-size: 1.05rem;
-  font-variant: small-caps;
-  letter-spacing: .04em;
-}
-#main #article .chroniques-refs .cl-groupe-nb { color: #8a837c; font-variant: normal; font-size: .85em; letter-spacing: 0; }
-#main #article .chroniques-refs details.cl-oeuvre { border-bottom: 1px solid #f0ece8; scroll-margin-top: 90px; }
-#main #article .chroniques-refs details.cl-oeuvre > summary {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  padding: .3rem .2rem .3rem 1.2rem;
-  list-style: none;
-  cursor: pointer;
-  position: relative;
-}
-#main #article .chroniques-refs details.cl-oeuvre > summary::-webkit-details-marker { display: none; }
-#main #article .chroniques-refs details.cl-oeuvre > summary::before {
-  content: "\25CB";              /* ○ replié */
-  position: absolute;
-  left: .15rem;
-  color: var(--fill-color, #5f004d);
-  font-size: 1.05em;
-  line-height: 1.25;
-}
-#main #article .chroniques-refs details.cl-oeuvre[open] > summary::before,
-#main #article .chroniques-refs details.cl-oeuvre.dots-target > summary::before { content: "\25CF"; } /* ● ouvert */
-#main #article .chroniques-refs details.cl-oeuvre > summary:hover { background: #f7f4f1; }
-#main #article .chroniques-refs .cl-oeuvre-titre { flex: 1 1 auto; }
-#main #article .chroniques-refs .cl-oeuvre-nb {
-  flex: 0 0 auto;
-  color: #8a837c;
-  font-size: .85rem;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-/* Ligne visée par un renvoi de note : affichée ouverte et surlignée. */
-#main #article .chroniques-refs details.cl-oeuvre.dots-target::details-content { content-visibility: visible; display: block; }
-#main #article .chroniques-refs details.cl-oeuvre.dots-target > summary { background: #fbf3d5; }
-#main #article .chroniques-refs .cl-oeuvre-corps { padding: .2rem .2rem .7rem 1.2rem; font-size: .93rem; }
-#main #article .chroniques-refs .cl-edition { margin: .1rem 0 .5rem; color: #555; font-size: .88rem; text-indent: 0; text-align: left; }
-#main #article .chroniques-refs .cl-etiquette { color: #8a837c; }
-#main #article .chroniques-refs dl.cl-chapitres {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  column-gap: 1rem;
-  row-gap: .15rem;
-  margin: 0;
-}
-#main #article .chroniques-refs dl.cl-chapitres > dt { margin: 0; font-weight: normal; white-space: nowrap; }
-#main #article .chroniques-refs dl.cl-chapitres > dd { margin: 0; }
-#main #article .chroniques-refs .cl-sep,
-#main #article .chroniques-refs .cl-fois,
-#main #article .chroniques-refs .cl-vide { color: #8a837c; }
-/* Groupes repliables (<details class="cl-groupe" open>), même rond que les œuvres. */
-#main #article .chroniques-refs details.cl-groupe > summary { display: block; list-style: none; cursor: pointer; }
-#main #article .chroniques-refs details.cl-groupe > summary::-webkit-details-marker { display: none; }
-#main #article .chroniques-refs details.cl-groupe > summary .cl-groupe-titre::before {
-  content: "\25CB";              /* ○ replié */
-  display: inline-block;
-  width: 1.2rem;
-  font-variant: normal;
-  font-size: .9em;
-}
-#main #article .chroniques-refs details.cl-groupe[open] > summary .cl-groupe-titre::before,
-#main #article .chroniques-refs details.cl-groupe:has(.dots-target) > summary .cl-groupe-titre::before { content: "\25CF"; } /* ● ouvert */
-#main #article .chroniques-refs details.cl-groupe > summary:hover .cl-groupe-titre { color: color-mix(in srgb, var(--fill-color, #5f004d) 75%, black); }
-/* Une œuvre visée par un renvoi de note reste visible dans un groupe replié. */
-#main #article .chroniques-refs details.cl-groupe:has(.dots-target)::details-content { content-visibility: visible; display: block; }
-
-/* Ligne d'un chapitre visée par une note (#œuvre--chapitre, 2026-10-05) : la notice
-   s'affiche ouverte, la ligne est surlignée, sous la barre de navigation. */
-#main #article .chroniques-refs details.cl-oeuvre:has(.dots-target)::details-content { content-visibility: visible; display: block; }
-#main #article .chroniques-refs details.cl-oeuvre:has(.dots-target) > summary::before { content: "\25CF"; }
-#main #article .chroniques-refs dl.cl-chapitres > dt { scroll-margin-top: 90px; }
-#main #article .chroniques-refs dl.cl-chapitres > dt.dots-target,
-#main #article .chroniques-refs dl.cl-chapitres > dt.dots-target + dd { background: #fbf3d5; }
-/* ==========================================================================
-   Page « Bibliographie » (2026-10-05) : rendue par le HTEIML (div.listBibl,
-   ul.listBibl > li.bibl). Elle sortait en 14 px, interligne serré, justifiée,
-   sous-titres en h1 de la taille du titre : on lui rend la typographie des
-   autres textes. Ne vise ni les bulles des citations (span.listBibl) ni la
-   page Références (.chroniques-refs).
+   9. Pages « Références citées » et « Bibliographie » (2026-10-05) : rendues
+   en ul.listBibl > li.bibl (la XSL donne la classe « bibl » aux notices des
+   Références, qui prennent ainsi la même présentation). Elles sortaient en
+   14 px, interligne serré, justifiées, sous-titres en h1 de la taille du titre :
+   on leur rend la typographie des autres textes.
    ========================================================================== */
 #main #article div.listBibl > h1.head {
   margin: 1.8rem 0 .7rem;

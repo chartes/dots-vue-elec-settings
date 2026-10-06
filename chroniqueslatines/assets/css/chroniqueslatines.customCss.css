@@ -25,7 +25,8 @@
      6. Blocs générés : Mirador (D7), sommaire à gauche (D11)
      7. Socle commun aux corpus (D12, généré)
      8. Rubriques et lettrines (après le socle)
-     9. Pages « Références citées » et « Bibliographie »
+     9. Page « Références citées »
+    10. Page « Bibliographie »
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -373,11 +374,96 @@
 #article .head > ins:first-child { text-decoration: none; }
 
 /* ==========================================================================
-   9. Pages « Références citées » et « Bibliographie » (2026-10-05) : rendues
-   en ul.listBibl > li.bibl (la XSL donne la classe « bibl » aux notices des
-   Références, qui prennent ainsi la même présentation). Elles sortaient en
-   14 px, interligne serré, justifiées, sous-titres en h1 de la taille du titre :
-   on leur rend la typographie des autres textes.
+   9. Page « Références citées » (2026-10-05) : une ligne repliable par œuvre
+   (<details>), groupée sous les intertitres du TEI ; dépliée, l'édition utilisée
+   puis les passages par chapitre.
+   ========================================================================== */
+#main #article .chroniques-refs .cl-groupe-titre {
+  margin: 1.6rem 0 .4rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid #e3ddd6;
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+}
+#main #article .chroniques-refs .cl-groupe-nb { color: #8a837c; font-variant: normal; font-size: .85em; letter-spacing: 0; }
+#main #article .chroniques-refs details.cl-oeuvre { border-bottom: 1px solid #f0ece8; scroll-margin-top: 90px; }
+#main #article .chroniques-refs details.cl-oeuvre > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .3rem .2rem .3rem 1.2rem;
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+}
+#main #article .chroniques-refs details.cl-oeuvre > summary::-webkit-details-marker { display: none; }
+#main #article .chroniques-refs details.cl-oeuvre > summary::before {
+  content: "\25CB";              /* ○ replié */
+  position: absolute;
+  left: .15rem;
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05em;
+  line-height: 1.25;
+}
+#main #article .chroniques-refs details.cl-oeuvre[open] > summary::before,
+#main #article .chroniques-refs details.cl-oeuvre.dots-target > summary::before { content: "\25CF"; } /* ● ouvert */
+#main #article .chroniques-refs details.cl-oeuvre > summary:hover { background: #f7f4f1; }
+#main #article .chroniques-refs .cl-oeuvre-titre { flex: 1 1 auto; }
+#main #article .chroniques-refs .cl-oeuvre-nb {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* Ligne visée par un renvoi de note : affichée ouverte et surlignée. */
+#main #article .chroniques-refs details.cl-oeuvre.dots-target::details-content { content-visibility: visible; display: block; }
+#main #article .chroniques-refs details.cl-oeuvre.dots-target > summary { background: #fbf3d5; }
+#main #article .chroniques-refs .cl-oeuvre-corps { padding: .2rem .2rem .7rem 1.2rem; font-size: .93rem; }
+#main #article .chroniques-refs .cl-edition { margin: .1rem 0 .5rem; color: #555; font-size: .88rem; text-indent: 0; text-align: left; }
+#main #article .chroniques-refs .cl-etiquette { color: #8a837c; }
+#main #article .chroniques-refs dl.cl-chapitres {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1rem;
+  row-gap: .15rem;
+  margin: 0;
+}
+#main #article .chroniques-refs dl.cl-chapitres > dt { margin: 0; font-weight: normal; white-space: nowrap; }
+#main #article .chroniques-refs dl.cl-chapitres > dd { margin: 0; }
+#main #article .chroniques-refs .cl-sep,
+#main #article .chroniques-refs .cl-fois,
+#main #article .chroniques-refs .cl-vide { color: #8a837c; }
+/* Groupes repliables (<details class="cl-groupe" open>), même rond que les œuvres. */
+#main #article .chroniques-refs details.cl-groupe > summary { display: block; list-style: none; cursor: pointer; }
+#main #article .chroniques-refs details.cl-groupe > summary::-webkit-details-marker { display: none; }
+#main #article .chroniques-refs details.cl-groupe > summary .cl-groupe-titre::before {
+  content: "\25CB";              /* ○ replié */
+  display: inline-block;
+  width: 1.2rem;
+  font-variant: normal;
+  font-size: .9em;
+}
+#main #article .chroniques-refs details.cl-groupe[open] > summary .cl-groupe-titre::before,
+#main #article .chroniques-refs details.cl-groupe:has(.dots-target) > summary .cl-groupe-titre::before { content: "\25CF"; } /* ● ouvert */
+#main #article .chroniques-refs details.cl-groupe > summary:hover .cl-groupe-titre { color: color-mix(in srgb, var(--fill-color, #5f004d) 75%, black); }
+/* Une œuvre visée par un renvoi de note reste visible dans un groupe replié. */
+#main #article .chroniques-refs details.cl-groupe:has(.dots-target)::details-content { content-visibility: visible; display: block; }
+
+/* Ligne d'un chapitre visée par une note (#œuvre--chapitre, 2026-10-05) : la notice
+   s'affiche ouverte, la ligne est surlignée, sous la barre de navigation. */
+#main #article .chroniques-refs details.cl-oeuvre:has(.dots-target)::details-content { content-visibility: visible; display: block; }
+#main #article .chroniques-refs details.cl-oeuvre:has(.dots-target) > summary::before { content: "\25CF"; }
+#main #article .chroniques-refs dl.cl-chapitres > dt { scroll-margin-top: 90px; }
+#main #article .chroniques-refs dl.cl-chapitres > dt.dots-target,
+#main #article .chroniques-refs dl.cl-chapitres > dt.dots-target + dd { background: #fbf3d5; }
+/* ==========================================================================
+   10. Page « Bibliographie » (2026-10-05) : rendue par le HTEIML (div.listBibl,
+   ul.listBibl > li.bibl). Elle sortait en 14 px, interligne serré, justifiée,
+   sous-titres en h1 de la taille du titre : on lui rend la typographie des
+   autres textes. Ne vise pas la page Références (.chroniques-refs, voir 9).
    ========================================================================== */
 #main #article div.listBibl > h1.head {
   margin: 1.8rem 0 .7rem;

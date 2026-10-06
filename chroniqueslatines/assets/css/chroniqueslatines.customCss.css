@@ -18,8 +18,8 @@
    Sommaire du fichier
      1. Listes
      2. Texte : discours direct et citations, rubriques (voir 9), lettrines (voir 9)
-     3. Citations : référence au survol de l'appel, liste en pied
-     4. Apparat critique au survol du lemme
+     3. Citations : référence masquée, notes en pied
+     4. Apparat critique : en pied seulement
      5. Cible d'un renvoi
      6. Page de garde (teiHeader)
      7. Blocs générés : Mirador (D7), sommaire à gauche (D11)
@@ -63,60 +63,34 @@
    -------------------------------------------------------------------------- */
 #article span.listBibl { display: none; }
 
-/* Liste des citations en pied d'article (mode citation-entry de la XSL), sur
-   le modèle de l'ÉLEC (<div class="cit"><a class="note" id="cit1">1</a>…). */
-.citations-list {
-  margin-top: 1.5rem;
-  font-size: .92em;
-}
-.citations-list .cit {
-  margin: .2rem 0;
-}
-.citations-list .cit > a.cit-num {
-  font-weight: 700;
-  text-decoration: none;
-  margin-right: .35rem;
-}
+/* Pied de page (section.footnotes du HTEIML : p.apparatus puis une div.note par
+   citation) : mis en forme par le socle commun (D12), comme les autres projets.
+   Seuls ajouts : une citation par ligne, numéro en gras. */
+#article .footnotes div.note { margin: .2rem 0; }
+#article .footnotes div.note > a.noteback { font-weight: 700; text-decoration: none; margin-right: .35rem; }
 
 /* --------------------------------------------------------------------------
-   4. Apparat critique au survol du lemme (D14e-5, 2026-09-12).
-   Sur l'ÉLEC, <span class="app"> contenait un <span class="rdgList"> masqué,
-   que des gestionnaires onmouseover/onclick révélaient (diple_html.css :
-   `.app .rdgList { display:none }`, `.apprdg { background:#DDD }`,
-   `.apprdg .rdgList { display:inline; border-left:2px solid #888;
-   margin-left:1ex; padding-right:1ex }`). DoTS-vue n'exécute pas ces scripts :
-   la XSL produit la structure, la bascule est faite ici en CSS ; :focus-within
-   tient lieu d'épinglage au clavier. Limité à span.app (pas les apparats
-   tabulaires). Les leçons sont aussi reprises en pied d'article.
+   4. Apparat critique : leçons en pied de page seulement.
+   Sur l'ÉLEC, les leçons s'affichaient aussi au survol du lemme (span.rdgList).
+   Décision du 2026-10-06 : pas de bulle au survol, comme pour les citations ;
+   l'apparat est donné en pied de page (p.apparatus), où mène la lettre d'appel.
+   La XSL produit encore le span.rdgList : il reste masqué.
    -------------------------------------------------------------------------- */
-#article span.app { position: relative; }
 #article span.app .rdgList { display: none; }
-#article span.app:hover,
-#article span.app:focus-within { background: #ddd; }
-#article span.app:hover .rdgList,
-#article span.app:focus-within .rdgList {
-  display: inline;
-  border-left: 2px solid #888;
-  margin-left: 1ex;
-  padding-right: 1ex;
-}
-#article span.app .rdgList .rdg { font-style: normal; }
 
 /* --------------------------------------------------------------------------
    5. Cible d'un renvoi (D14e-5, 2026-09-12).
    L'ÉLEC (Diple.js, Diple.hash) posait la classe « mark » sur l'élément visé,
    fond gris (neutre_html.css : `mark { background:#DDD }`, `li.mark,
    .notes div.mark { background-color:#E6E6E6 }`). Éléments visés dans cette
-   édition : entrée d'apparat en pied (span.app-entry, #appn-…), appel
-   d'apparat (#appc-…), numéro de citation en pied (a.cit-num, #citN). Pour une
+   édition : entrée d'apparat en pied (span.note, #appn-…), appel
+   d'apparat (#appc-…), note de citation en pied (div.note, #citN). Pour une
    section, seul l'intitulé est marqué. (Page Références : voir 10.)
    -------------------------------------------------------------------------- */
 #article span:target,
 #article span.dots-target,
-#article .app-entry:target,
-#article .app-entry.dots-target,
-#article .cit-num:target,
-#article .cit-num.dots-target { background-color: #e6e6e6; }
+#article .footnotes .note:target,
+#article .footnotes .note.dots-target { background-color: #e6e6e6; }
 #article section:target > .head { background-color: #e6e6e6; }
 
 /* --------------------------------------------------------------------------
@@ -396,15 +370,17 @@
    Rubriques (p.rubric, 21) : passages écrits à l'encre rouge dans le manuscrit,
    dans le rouge de l'ÉLEC (diple_html.css : .rubric { color: #971716 }). La
    classe « rubrique » n'avait pas de règle sur l'ÉLEC : texte courant.
-   Lettrines (span.ornament, 235) : taille de l'ÉLEC (diple_html.css :
-   .ornament { font-size: 200% }), dans la couleur du projet.
+   Lettrines (span.ornament, 235) : police, taille et interligne de l'ÉLEC
+   (diple_html.css : .ornament { font-family: "Garamond", "Palatino Linotype",
+   serif; font-size: 200% }), dans la couleur du projet.
    -------------------------------------------------------------------------- */
 .document-area #main #article .rubric { color: #971716; }
 .document-area #main #article .ornament {
   color: var(--fill-color, #5f004d);
+  font-family: "Garamond", "Palatino Linotype", "Book Antiqua", Palatino, serif;  /* comme l'ÉLEC */
   font-size: 200%;
   font-style: normal;          /* droite, même au début d'une citation (en italique) */
-  line-height: 1;
+  line-height: .66;            /* comme l'ÉLEC : la lettrine ne hausse pas la première ligne */
 }
 /* Numéro de chapitre ajouté par l'éditeur (« [10] », <add> rendu en <ins> par le
    HTEIML) : pas souligné, comme sur l'ÉLEC. */

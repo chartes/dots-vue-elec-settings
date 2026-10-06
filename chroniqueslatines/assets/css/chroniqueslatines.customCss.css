@@ -54,42 +54,14 @@
 
 /* --------------------------------------------------------------------------
    3. Citations.
-   Référence d'une citation : hors du fil du texte, comme sur l'ÉLEC
-   (diple.css : `.cit_n .bibl { display: none }`). Le HTEIML écrit la référence
-   en clair juste après l'appel (span.listBibl) ; on la masque et on la montre
-   au survol de l'appel (frère adjacent) : <sup> pour une citation dans la
-   phrase, a.refnote pour une citation à plusieurs paragraphes. La référence
-   complète est aussi donnée en pied d'article. Seul le <span> est visé : la
-   page Bibliographie rend un div.listBibl, qui doit rester visible.
+   Référence d'une citation : hors du fil du texte (diple.css : `.cit_n .bibl
+   { display: none }`). Le HTEIML l'écrit en clair juste après l'appel
+   (span.listBibl) ; on la masque. Pas d'infobulle au survol (décision du
+   2026-10-06) : la référence complète est donnée en pied d'article, et l'appel
+   y conduit. Seul le <span> est visé : la page Bibliographie rend un
+   div.listBibl, qui doit rester visible.
    -------------------------------------------------------------------------- */
 #article span.listBibl { display: none; }
-/* 2026-10-06 : la fenêtre flotte au-dessus du texte, comme sur l'ÉLEC (diple_html.css :
-   `.cit_n_bibl .listBibl { position:absolute; margin-top:1.3em; margin-left:-15em;
-   background:#FFFFFF }`). Insérée dans la ligne, elle repoussait le texte, passait sous
-   le pointeur et se refermait aussitôt (clignotement). Elle reste ouverte tant que le
-   pointeur est sur l'appel ou sur elle, pour pouvoir cliquer le lien qu'elle contient. */
-#article sup:hover + span.listBibl,
-#article a.refnote:hover + span.listBibl,
-#article sup:focus-within + span.listBibl,
-#article span.listBibl:hover,
-#article span.listBibl:focus-within {
-  display: inline;
-  position: absolute;
-  z-index: 20;
-  width: max-content;
-  max-width: min(26rem, 80vw);
-  margin: 1.3em 0 0 -12em;
-  padding: .35rem .6rem;
-  background: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
-  font-size: .92em;
-  font-style: normal;
-  line-height: 1.45;
-  text-align: left;
-  text-indent: 0;
-  white-space: normal;
-}
 
 /* Liste des citations en pied d'article (mode citation-entry de la XSL), sur
    le modèle de l'ÉLEC (<div class="cit"><a class="note" id="cit1">1</a>…). */
@@ -431,8 +403,13 @@
 .document-area #main #article .ornament {
   color: var(--fill-color, #5f004d);
   font-size: 200%;
+  font-style: normal;          /* droite, même au début d'une citation (en italique) */
   line-height: 1;
 }
+/* Numéro de chapitre ajouté par l'éditeur (« [10] », <add> rendu en <ins> par le
+   HTEIML) : pas souligné, comme sur l'ÉLEC. */
+#article p > ins:first-child,
+#article .head > ins:first-child { text-decoration: none; }
 
 /* ==========================================================================
    Page « Références citées » (2026-10-05) : une ligne repliable par œuvre

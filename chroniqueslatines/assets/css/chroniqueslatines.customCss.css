@@ -1,26 +1,39 @@
-/* 2026-09-12 (D19) : `.dots-target` double `:target`. Raison : `:target` ne s'applique
-   pas quand une URL avec ancre est ouverte à froid (le fragment DTS est monté après que
-   le navigateur a résolu le fragment) ; DoTS-vue pose donc cette classe sur l'élément
-   visé, dans DocumentPage.vue. Les deux sélecteurs coexistent : `:target` continue de
-   servir pour un clic interne et pour l'impression. */
-/* Chroniques latines de Saint-Denis — CSS custom DoTS Vue.
+/* ==========================================================================
+   Chroniques latines de Saint-Denis — CSS du corpus pour DoTS-vue.
 
-   Attention au nommage : la clé de chargement est le NOM DU FICHIER
-   (App.vue, getCustomCss). Le dossier ne contenait qu'un
-   christofle.customCss.css copié-collé, donc "chroniqueslatines" n'avait
-   aucune feuille custom. */
+   Chargement : la clé est le NOM DU FICHIER (App.vue, getCustomCss), d'où
+   chroniqueslatines.customCss.css. La feuille est injectée dans toute
+   l'application : chaque règle est limitée à la zone de texte (#article).
+
+   Rendu : chroniqueslatines.xsl (dépôt chartes/chroniqueslatines) repart de la
+   surcharge historique de l'ÉLEC (Diple) et la complète ; les guillemets sont
+   écrits dans le texte par la XSL. Les valeurs « comme sur l'ÉLEC » viennent
+   des feuilles Diple (theme/neutre/diple_html.css, html.css).
+
+   Cible d'un renvoi : `.dots-target` double `:target` partout. `:target` ne
+   s'applique pas quand une URL à ancre est ouverte à froid (le fragment DTS est
+   monté après que le navigateur a résolu l'ancre) ; DoTS-vue pose alors cette
+   classe sur l'élément visé.
+
+   Sommaire du fichier
+     1. Listes
+     2. Texte : discours direct et citations, rubriques (voir 9), lettrines (voir 9)
+     3. Citations : référence au survol de l'appel, liste en pied
+     4. Apparat critique au survol du lemme
+     5. Cible d'un renvoi
+     6. Page de garde (teiHeader)
+     7. Blocs générés : Mirador (D7), sommaire à gauche (D11)
+     8. Socle commun aux corpus (D12, généré)
+     9. Rubriques et lettrines (après le socle)
+    10. Page « Références citées »
+    11. Page « Bibliographie »
+   ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Puces rouges de l'ÉLEC historique.
-
-   Sur elec.enc.sorbonne.fr la puce n'est pas une couleur de marqueur mais une
-   IMAGE : enc.css applique `ul { list-style-image: url('img/puce_rouge.png') }`
-   à toutes les listes du site. Ce fichier est un carré de 7 × 6 px, couleur
-   dominante #8d2e34.
-
-   On le reproduit ici avec un SVG en data-URI (mêmes dimensions, même teinte,
-   aucun fichier externe à déployer), limité à la zone de texte pour ne pas
-   repeindre les listes de l'interface (sommaire, navigation).
+   1. Listes : puce rouge de l'ÉLEC.
+   Sur l'ÉLEC, la puce est une IMAGE (enc.css : `ul { list-style-image:
+   url('img/puce_rouge.png') }`), un carré de 7 × 6 px, teinte #8d2e34. Elle est
+   reproduite en SVG (data-URI : rien à déployer), dans la zone de texte seulement.
    -------------------------------------------------------------------------- */
 #article ul,
 .document-area #article ul {
@@ -28,26 +41,58 @@
   padding-top: .3em;
 }
 
-/* Comme sur ELEC, les listes imbriquées reprennent les marqueurs standard. */
-#article ul ul { list-style: circle; }
-#article ul ul ul { list-style: disc; }
-
-/* Page « Références citées » : l'ÉLEC rend `ul.listBibl > li`, le fragment
-   local rend `ul.refs-list > li.refs-entry`. */
-.refs-list {
-  padding-left: 1.4em;
-  margin: 1rem 0;
-}
-.refs-list > .refs-entry {
-  margin: 0 0 .45rem;
-}
+/* --------------------------------------------------------------------------
+   2. Discours direct et citations.
+   La XSL écrit les guillemets dans le texte, comme l'ÉLEC : « » pour <q>, “ ” et
+   ‘ ’ pour les citations (identique / approchant). Aucun guillemet CSS en plus :
+   tei.css de DoTS-vue en imposerait de droits à tous les corpus. Comme sur
+   l'ÉLEC (html.css : q { font-style: italic } q q { font-style: normal }), tout
+   <q> est en italique, un <q> dans un <q> en romain. Les topos sont des <em>.
+   -------------------------------------------------------------------------- */
+#article q { quotes: none; font-style: italic; }
+#article q q { font-style: normal; }
 
 /* --------------------------------------------------------------------------
-   Citations : appel dans le texte + liste en pied d'article.
-   La XSL (chroniqueslatines.xsl, mode citation-entry) reproduit le bloc
-   `<div class="cit">` de l'ÉLEC, jusque-là absent en local — les appels
-   `<a class="noteref" href="#citN">` pointaient donc dans le vide.
+   3. Citations.
+   Référence d'une citation : hors du fil du texte, comme sur l'ÉLEC
+   (diple.css : `.cit_n .bibl { display: none }`). Le HTEIML écrit la référence
+   en clair juste après l'appel (span.listBibl) ; on la masque et on la montre
+   au survol de l'appel (frère adjacent) : <sup> pour une citation dans la
+   phrase, a.refnote pour une citation à plusieurs paragraphes. La référence
+   complète est aussi donnée en pied d'article. Seul le <span> est visé : la
+   page Bibliographie rend un div.listBibl, qui doit rester visible.
    -------------------------------------------------------------------------- */
+#article span.listBibl { display: none; }
+/* 2026-10-06 : la fenêtre flotte au-dessus du texte, comme sur l'ÉLEC (diple_html.css :
+   `.cit_n_bibl .listBibl { position:absolute; margin-top:1.3em; margin-left:-15em;
+   background:#FFFFFF }`). Insérée dans la ligne, elle repoussait le texte, passait sous
+   le pointeur et se refermait aussitôt (clignotement). Elle reste ouverte tant que le
+   pointeur est sur l'appel ou sur elle, pour pouvoir cliquer le lien qu'elle contient. */
+#article sup:hover + span.listBibl,
+#article a.refnote:hover + span.listBibl,
+#article sup:focus-within + span.listBibl,
+#article span.listBibl:hover,
+#article span.listBibl:focus-within {
+  display: inline;
+  position: absolute;
+  z-index: 20;
+  width: max-content;
+  max-width: min(26rem, 80vw);
+  margin: 1.3em 0 0 -12em;
+  padding: .35rem .6rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+  font-size: .92em;
+  font-style: normal;
+  line-height: 1.45;
+  text-align: left;
+  text-indent: 0;
+  white-space: normal;
+}
+
+/* Liste des citations en pied d'article (mode citation-entry de la XSL), sur
+   le modèle de l'ÉLEC (<div class="cit"><a class="note" id="cit1">1</a>…). */
 .citations-list {
   margin-top: 1.5rem;
   font-size: .92em;
@@ -62,19 +107,54 @@
 }
 
 /* --------------------------------------------------------------------------
-   Page de garde : blocs du teiHeader rétablis par chroniqueslatines.xsl.
-
-   L'ÉLEC en tirait deux pages — /credits (titleStmt + respStmt + revisionDesc)
-   et /licence (publicationStmt + address + availability). Le HTEIML rendait les
-   deux premiers seulement : l'adresse, la licence Creative Commons et
-   l'historique des révisions étaient dans le XML mais jamais affichés. Ils le
-   sont désormais sur la garde, avec les noms de classe de l'ÉLEC.
+   4. Apparat critique au survol du lemme (D14e-5, 2026-09-12).
+   Sur l'ÉLEC, <span class="app"> contenait un <span class="rdgList"> masqué,
+   que des gestionnaires onmouseover/onclick révélaient (diple_html.css :
+   `.app .rdgList { display:none }`, `.apprdg { background:#DDD }`,
+   `.apprdg .rdgList { display:inline; border-left:2px solid #888;
+   margin-left:1ex; padding-right:1ex }`). DoTS-vue n'exécute pas ces scripts :
+   la XSL produit la structure, la bascule est faite ici en CSS ; :focus-within
+   tient lieu d'épinglage au clavier. Limité à span.app (pas les apparats
+   tabulaires). Les leçons sont aussi reprises en pied d'article.
    -------------------------------------------------------------------------- */
-#article .titleStmt .title { font-size: 1.15rem; font-weight: 600; }
+#article span.app { position: relative; }
+#article span.app .rdgList { display: none; }
+#article span.app:hover,
+#article span.app:focus-within { background: #ddd; }
+#article span.app:hover .rdgList,
+#article span.app:focus-within .rdgList {
+  display: inline;
+  border-left: 2px solid #888;
+  margin-left: 1ex;
+  padding-right: 1ex;
+}
+#article span.app .rdgList .rdg { font-style: normal; }
+
+/* --------------------------------------------------------------------------
+   5. Cible d'un renvoi (D14e-5, 2026-09-12).
+   L'ÉLEC (Diple.js, Diple.hash) posait la classe « mark » sur l'élément visé,
+   fond gris (neutre_html.css : `mark { background:#DDD }`, `li.mark,
+   .notes div.mark { background-color:#E6E6E6 }`). Éléments visés dans cette
+   édition : entrée d'apparat en pied (span.app-entry, #appn-…), appel
+   d'apparat (#appc-…), numéro de citation en pied (a.cit-num, #citN). Pour une
+   section, seul l'intitulé est marqué. (Page Références : voir 10.)
+   -------------------------------------------------------------------------- */
+#article span:target,
+#article span.dots-target,
+#article .app-entry:target,
+#article .app-entry.dots-target,
+#article .cit-num:target,
+#article .cit-num.dots-target { background-color: #e6e6e6; }
+#article section:target > .head { background-color: #e6e6e6; }
+
+/* --------------------------------------------------------------------------
+   6. Page de garde : blocs du teiHeader rétablis par la XSL (modèle
+   tei:fileDesc). L'ÉLEC en tirait deux pages (/credits, /licence) ; le HTEIML
+   ne rendait ni l'adresse, ni la licence, ni l'historique des révisions.
+   -------------------------------------------------------------------------- */
 #article .principal,
 #article .respStmt { margin: .3rem 0; }
-#article .fileDesc label,
-#article .fileDesc legend {
+#article .fileDesc label {
   display: block;
   margin: 1.4rem 0 .4rem;
   font-weight: 600;
@@ -108,63 +188,8 @@
 #article .availability .ident { font-weight: 700; }
 
 /* --------------------------------------------------------------------------
-   Référence d'une citation : hors du fil du texte.
-
-   Le HTEIML place la référence (« I, 1, 1-2 ») juste après l'appel, en clair
-   dans le paragraphe. L'ÉLEC ne le fait pas : diple.css la masque
-   (`.cit_n .bibl { display:none }`) et ne la montre qu'au survol. On la masque
-   donc ici aussi — la référence complète, auteur et titre compris, est de toute
-   façon donnée en pied d'article, et le numéro d'appel y conduit.
-
-   ⚠ Ne pas cibler `.cit_n > .listBibl` : la citation contient un <blockquote>,
-   élément de bloc dans un <span> inline, ce qui casse le span au parsing. La
-   référence se retrouve alors sœur du bloc, hors de tout .cit_n. On la vise
-   donc directement, et on la révèle au survol de son appel (sélecteur de frère
-   adjacent), sans dépendre du onmouseover du HTEIML — lequel vise
-   `this.parentNode`, c'est-à-dire le <sup>, et ne bascule rien.
-   On ne masque que le <span> des citations : la page Bibliographie rend
-   aussi un `div.listBibl`, qui doit rester visible.
+   7. Blocs générés (repris tels quels).
    -------------------------------------------------------------------------- */
-#article span.listBibl { display: none; }
-
-/* Guillemets, comme l'ÉLEC : « » pour le discours direct (<q> du TEI) — tei.css
-   de l'application impose des guillemets droits à tous les corpus. Les passages
-   cités (<quote>, rendus en q.quote ou blockquote.quote) reçoivent leurs “ ” ou
-   ‘ ’ de la XSL, dans le texte : pas de guillemet CSS en plus. Les topos sont
-   en italique. */
-/* 2026-10-05 (feuille v2, repartie de la surcharge historique de l'ÉLEC) : la XSL écrit
-   les guillemets dans le texte (« » pour <q>, “ ” et ‘ ’ pour les citations), comme
-   l'ÉLEC : plus de guillemets CSS. Et comme l'ÉLEC (Diple, html.css), tout <q> est
-   en italique, un <q> dans un <q> en romain. */
-#article q { quotes: none; font-style: italic; }
-#article q q { font-style: normal; }
-#article q.quote::before,
-#article q.quote::after { content: none; }
-#article .quote.topos { font-style: italic; }
-/* 2026-10-05 : citation dans la phrase (q.quote, posé par la XSL) en italique, comme
-   sur l'ÉLEC (Diple, html.css : q { font-style: italic } q q { font-style: normal }). */
-#article q.quote { font-style: italic; }
-#article q.quote q.quote { font-style: normal; }
-/* Citation dans une citation (44 cas) : en ligne dans la première, comme sur
-   l'ÉLEC (« ‘‘Iterato … legatis’1, nichil ei … thesauris’ »), et non en second
-   bloc — le guillemet de la citation englobante restait seul sur sa ligne. */
-#article blockquote.quote blockquote.quote {
-  display: inline;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-#article sup:hover + .listBibl,
-#article a.refnote:hover + .listBibl,
-#article sup:focus-within + .listBibl {
-  display: inline;
-  margin-left: .35rem;
-  padding: .05rem .4rem;
-  background: #fff;
-  border: 1px solid #ccc;
-  font-size: .92em;
-}
-
 /* --------------------------------------------------------------------------
    Visionneuse Mirador : retirée du flux en mode texte seul.
 
@@ -175,16 +200,6 @@
    donc sans effet sur les corpus qui affichent réellement des images.
    -------------------------------------------------------------------------- */
 .text-mode-only .mirador-view { display: none; }
-
-/* Liste des citations en pied d'article : une citation peut renvoyer à
-   plusieurs ouvrages — le même passage se lit chez Grégoire de Tours, chez
-   Frédégaire et dans le Liber historiae Francorum. Chaque source sur sa ligne,
-   sans quoi les trois références se suivent et se lisent comme une seule. */
-.citations-list .cit-source {
-  display: block;
-  margin-left: 1.4em;
-}
-
 
 /* --------------------------------------------------------------------------
    Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
@@ -215,61 +230,6 @@
 }
 /* ==== fin D11 ==== */
 
-/* ==== D14e-5 (2026-09-12) : comportements de lecture de l'ÉLEC, sans script ====
-
-   1) Apparat critique au survol du lemme.
-      Ancien site : <span class="app"> … <span class="rdgList"> masqué, et les
-      gestionnaires onmouseover/onmouseout/onclick basculaient la classe en
-      « apprdg » — diple_html.css : `.app .rdgList { display:none }`,
-      `.apprdg { background:#DDD }`, `.apprdg .rdgList { display:inline;
-      border-left:2px solid #888; margin-left:1ex; padding-right:1ex }`.
-      Le clic épinglait la leçon (drapeau this.cloc).
-      DoTS-vue ne les exécute pas : chroniqueslatines.xsl produit la structure,
-      la bascule est ici en CSS. :focus-within tient lieu d'épinglage au clavier.
-      Portée limitée à span.app pour ne pas toucher les apparats tabulaires. */
-#article span.app { position: relative; }
-#article span.app .rdgList { display: none; }
-#article span.app:hover,
-#article span.app:focus-within { background: #ddd; }
-#article span.app:hover .rdgList,
-#article span.app:focus-within .rdgList {
-  display: inline;
-  border-left: 2px solid #888;
-  margin-left: 1ex;
-  padding-right: 1ex;
-}
-/* Les leçons sont déjà reprises en pied d'article : dans la bulle de survol,
-   pas de retrait ni de puce parasites. */
-#article span.app .rdgList .rdg { font-style: normal; }
-
-/* 2) Mise en évidence de la cible d'un renvoi (ancien Diple.js, méthode
-      Diple.hash : la classe « mark » était posée sur l'élément désigné par le
-      fragment d'URL, fond gris — neutre_html.css : `mark { background:#DDD }`,
-      `li.mark, .notes div.mark { background-color:#E6E6E6 }`).
-      DoTS-vue ne rejoue pas ce script ; :target le fait nativement.
-      Chaque sélecteur est doublé par .dots-target, classe que DoTS-vue pose
-      sur l'élément visé quand l'URL à ancre est ouverte à froid (:target
-      ne s'applique pas alors, le fragment étant monté après coup).
-      On ne repeint pas les grands blocs : pour une section, seul l'intitulé
-      est marqué. */
-#article span:target,
-#article span.dots-target,
-#article .app-entry:target,
-#article .app-entry.dots-target,
-#article .cit:target,
-#article .cit.dots-target,
-#article .note:target,
-#article .note.dots-target,
-#article .cit-num:target,
-#article .cit-num.dots-target,
-#article li:target,
-#article li.dots-target,
-#article .refs-entry:target,
-#article .refs-entry.dots-target { background-color: #e6e6e6; }
-#article section:target > .head,
-#article div.div:target > .head,
-#article div.div.dots-target > .head { background-color: #e6e6e6; }
-/* ==== fin D14e-5 ==== */
 /* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
 /* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
    Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
@@ -459,15 +419,141 @@
 }
 /* ==== D12-SOCLE-FIN ==== */
 
-/* 2026-10-05 : rubriques (p.rubric, 21 dans le texte), dans le rouge de l'ÉLEC : la feuille
-   Diple de l'ÉLEC (theme/diple_html.css) donnait .rubric { color: #971716 } ; elles
-   s'affichaient jusqu'ici comme du texte. La classe « rubrique » n'avait pas de règle sur
-   l'ÉLEC : elle reste en texte courant. */
+/* --------------------------------------------------------------------------
+   9. Rubriques et lettrines.
+   Rubriques (p.rubric, 21) : passages écrits à l'encre rouge dans le manuscrit,
+   dans le rouge de l'ÉLEC (diple_html.css : .rubric { color: #971716 }). La
+   classe « rubrique » n'avait pas de règle sur l'ÉLEC : texte courant.
+   Lettrines (span.ornament, 235) : taille de l'ÉLEC (diple_html.css :
+   .ornament { font-size: 200% }), dans la couleur du projet.
+   -------------------------------------------------------------------------- */
 .document-area #main #article .rubric { color: #971716; }
-/* 2026-10-05 : lettrines (span.ornament, 235 dans le texte), comme sur l'ÉLEC (Diple,
-   diple_html.css : .ornament { color: #971716; font-size: 200% }). */
 .document-area #main #article .ornament {
-  color: #971716;
+  color: var(--fill-color, #5f004d);
   font-size: 200%;
   line-height: 1;
 }
+
+/* ==========================================================================
+   Page « Références citées » (2026-10-05) : une ligne repliable par œuvre
+   (<details>), groupée sous les intertitres du TEI ; dépliée, l'édition utilisée
+   puis les passages par chapitre.
+   ========================================================================== */
+#main #article .chroniques-refs .cl-groupe-titre {
+  margin: 1.6rem 0 .4rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid #e3ddd6;
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+}
+#main #article .chroniques-refs .cl-groupe-nb { color: #8a837c; font-variant: normal; font-size: .85em; letter-spacing: 0; }
+#main #article .chroniques-refs details.cl-oeuvre { border-bottom: 1px solid #f0ece8; scroll-margin-top: 90px; }
+#main #article .chroniques-refs details.cl-oeuvre > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .3rem .2rem .3rem 1.2rem;
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+}
+#main #article .chroniques-refs details.cl-oeuvre > summary::-webkit-details-marker { display: none; }
+#main #article .chroniques-refs details.cl-oeuvre > summary::before {
+  content: "\25CB";              /* ○ replié */
+  position: absolute;
+  left: .15rem;
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05em;
+  line-height: 1.25;
+}
+#main #article .chroniques-refs details.cl-oeuvre[open] > summary::before,
+#main #article .chroniques-refs details.cl-oeuvre.dots-target > summary::before { content: "\25CF"; } /* ● ouvert */
+#main #article .chroniques-refs details.cl-oeuvre > summary:hover { background: #f7f4f1; }
+#main #article .chroniques-refs .cl-oeuvre-titre { flex: 1 1 auto; }
+#main #article .chroniques-refs .cl-oeuvre-nb {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* Ligne visée par un renvoi de note : affichée ouverte et surlignée. */
+#main #article .chroniques-refs details.cl-oeuvre.dots-target::details-content { content-visibility: visible; display: block; }
+#main #article .chroniques-refs details.cl-oeuvre.dots-target > summary { background: #fbf3d5; }
+#main #article .chroniques-refs .cl-oeuvre-corps { padding: .2rem .2rem .7rem 1.2rem; font-size: .93rem; }
+#main #article .chroniques-refs .cl-edition { margin: .1rem 0 .5rem; color: #555; font-size: .88rem; text-indent: 0; text-align: left; }
+#main #article .chroniques-refs .cl-etiquette { color: #8a837c; }
+#main #article .chroniques-refs dl.cl-chapitres {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1rem;
+  row-gap: .15rem;
+  margin: 0;
+}
+#main #article .chroniques-refs dl.cl-chapitres > dt { margin: 0; font-weight: normal; white-space: nowrap; }
+#main #article .chroniques-refs dl.cl-chapitres > dd { margin: 0; }
+#main #article .chroniques-refs .cl-sep,
+#main #article .chroniques-refs .cl-fois,
+#main #article .chroniques-refs .cl-vide { color: #8a837c; }
+/* Groupes repliables (<details class="cl-groupe" open>), même rond que les œuvres. */
+#main #article .chroniques-refs details.cl-groupe > summary { display: block; list-style: none; cursor: pointer; }
+#main #article .chroniques-refs details.cl-groupe > summary::-webkit-details-marker { display: none; }
+#main #article .chroniques-refs details.cl-groupe > summary .cl-groupe-titre::before {
+  content: "\25CB";              /* ○ replié */
+  display: inline-block;
+  width: 1.2rem;
+  font-variant: normal;
+  font-size: .9em;
+}
+#main #article .chroniques-refs details.cl-groupe[open] > summary .cl-groupe-titre::before,
+#main #article .chroniques-refs details.cl-groupe:has(.dots-target) > summary .cl-groupe-titre::before { content: "\25CF"; } /* ● ouvert */
+#main #article .chroniques-refs details.cl-groupe > summary:hover .cl-groupe-titre { color: color-mix(in srgb, var(--fill-color, #5f004d) 75%, black); }
+/* Une œuvre visée par un renvoi de note reste visible dans un groupe replié. */
+#main #article .chroniques-refs details.cl-groupe:has(.dots-target)::details-content { content-visibility: visible; display: block; }
+
+/* Ligne d'un chapitre visée par une note (#œuvre--chapitre, 2026-10-05) : la notice
+   s'affiche ouverte, la ligne est surlignée, sous la barre de navigation. */
+#main #article .chroniques-refs details.cl-oeuvre:has(.dots-target)::details-content { content-visibility: visible; display: block; }
+#main #article .chroniques-refs details.cl-oeuvre:has(.dots-target) > summary::before { content: "\25CF"; }
+#main #article .chroniques-refs dl.cl-chapitres > dt { scroll-margin-top: 90px; }
+#main #article .chroniques-refs dl.cl-chapitres > dt.dots-target,
+#main #article .chroniques-refs dl.cl-chapitres > dt.dots-target + dd { background: #fbf3d5; }
+/* ==========================================================================
+   Page « Bibliographie » (2026-10-05) : rendue par le HTEIML (div.listBibl,
+   ul.listBibl > li.bibl). Elle sortait en 14 px, interligne serré, justifiée,
+   sous-titres en h1 de la taille du titre : on lui rend la typographie des
+   autres textes. Ne vise ni les bulles des citations (span.listBibl) ni la
+   page Références (.chroniques-refs).
+   ========================================================================== */
+#main #article div.listBibl > h1.head {
+  margin: 1.8rem 0 .7rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid #e3ddd6;
+  color: var(--fill-color, #5f004d);
+  font-size: 1.02rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  line-height: 1.4;
+}
+/* Auteurs en petites capitales ; titres d'articles en romain (guillemets posés par la XSL). */
+#main #article ul.listBibl > li.bibl .author { font-variant: small-caps; letter-spacing: .02em; }
+#main #article ul.listBibl > li.bibl .titre-article { font-style: normal; }
+#main #article ul.listBibl {
+  margin: 0 0 1.2rem;
+  padding-left: 0;
+  list-style: none;
+}
+#main #article ul.listBibl > li.bibl {
+  margin: 0 0 .55rem;
+  padding-left: 1.6em;           /* retrait suspendu : la 1re ligne dépasse */
+  text-indent: -1.6em;
+  list-style: none;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+}
+#main #article ul.listBibl > li.bibl::before,
+#main #article ul.listBibl > li.bibl::marker { content: none; }

@@ -28,7 +28,10 @@
     "footerSubtitles": [
       "Édition de R. Anthony Lodge"
     ],
-    "footerDescription": null
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "displayTopToc": false,

@@ -27,7 +27,8 @@
       "listSection": {
         "displayMode": "toc",
         "cardCollectionPerPage": 3,
-        "browseButtonText": "Browse the collection"
+        "browseButtonText": "Browse the collection",
+        "singleResourceButtonText": "Accéder au document"
       }
     },
     "footerSettings": {

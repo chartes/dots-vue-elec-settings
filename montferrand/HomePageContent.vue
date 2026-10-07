@@ -5,7 +5,7 @@
       remarquable de documents relatifs à la ville de Montferrand. Parmi eux, les
       livres de comptes des consuls, rédigés en bas-auvergnat (langue d’oc), offrent
       un témoignage exceptionnel sur la vie urbaine, l’administration et la langue
-      en Auvergne aux XIII<sup>e</sup> et XIV<sup>e</sup> siècles.
+      en Auvergne aux XIII<sup>e</sup> et XIV<sup>e</sup> siècles.
     </p>
     <p>
       Faisant suite au plus ancien registre consulaire en langue d’oc (coté CC 154,

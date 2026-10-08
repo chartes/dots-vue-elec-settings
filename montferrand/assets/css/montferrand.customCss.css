@@ -802,4 +802,6 @@
   .document-views .text-view #article .montferrand-historic .mf-biblio-filtre { width: 100%; }
 }
 
-
+section.div h1.head {
+  margin-top: 2rem;
+}

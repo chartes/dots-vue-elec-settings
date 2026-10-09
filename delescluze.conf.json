@@ -32,13 +32,21 @@
     "editByLevel": 2,
     "editByCiteType": [
       "page",
-      "groupe",
-      "personne"
+      "groupe"
     ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
-  "aboutPageSettings": [],
+  "aboutPageSettings": [
+    {
+      "tabName": "Crédits",
+      "compName": "about1"
+    },
+    {
+      "tabName": "Mentions légales",
+      "compName": "about2"
+    }
+  ],
   "collectionCustomCss": "delescluze",
   "metadataDisplayOrder": [
     "dct:title",

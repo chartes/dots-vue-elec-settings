@@ -51,15 +51,13 @@
 }
 
 #main #article p { text-align: justify; }
-#main #article p.noindent { text-indent: 0; }
 
 
 /* --------------------------------------------------------------------------
    2. Titres — le rouge du site : #A73136
    -------------------------------------------------------------------------- */
 
-#main #article h1,
-#main #article .head.rubrique {
+#main #article h1 {
   /* 2026-09-14 : titre ramené au gris sombre commun (#202020), valeur mesurée sur la
      majorité des corpus. Les LIENS et les appels de note gardent le #A73136 de l'ÉLEC :
      là, le rouge porte une information (c'est cliquable), sur un titre il n'en porte
@@ -83,13 +81,7 @@
   margin: 1.5em 0 .8em;
 }
 
-#main #article h3,
-#main #article h4 { font-size: 105%; font-weight: bold; margin: 1.2em 0 .6em; }
-
-#main #article h1 a,
-#main #article h2 a,
-#main #article h3 a,
-#main #article h4 a { color: inherit; }
+#main #article h3 { font-size: 105%; font-weight: bold; margin: 1.2em 0 .6em; }
 
 
 /* --------------------------------------------------------------------------
@@ -102,12 +94,6 @@
 #main #article a:hover { font-weight: bold; }
 #main #article a[href^="http"]:not([href*="localhost"]) { color: #4A4A4A; }
 
-/* .persName-linked / .rs-linked sur ÉLEC ; la XSL DoTS sort .persName. */
-#main #article .persName-linked,
-#main #article .rs-linked,
-#main #article a .persName,
-#main #article .persName a { border-bottom: 1px dotted #A73136; }
-
 
 /* --------------------------------------------------------------------------
    4. Micro-typographie éditoriale — theme/delescluze.css
@@ -119,66 +105,14 @@
    soulignés et droits dans la transcription, comme theme/delescluze.css (2026-09-29). */
 #main #article .title_underline { font-style: italic; text-decoration: none; }
 #main #article .dl-mode-tr:checked ~ * .title_underline { font-style: normal; text-decoration: underline; }
-#main #article .underline,
-#main #article em.underline { text-decoration: underline; font-weight: inherit; font-style: inherit; }
 
-/* Langues étrangères en italique. */
-#main #article :lang(lat),
-#main #article :lang(eng) { font-style: italic; }
-
-/* Références bibliographiques.
-   2026-09-14 (agent DEL3) — « pourquoi il manque du css sur cette page »
-   (?refId=sources-et-bibliographie). La classe `bibl` porte DEUX choses
-   différentes dans ce corpus :
-     — l'APPEL en ligne dans une note : <a class="bibl"> (template
-       tei:ref[@type='bibl'] de delescluze-edition.xsl, qui note lui-même
-       s'appuyer sur `#main #article .bibl`) ;
-     — l'ENTRÉE de bibliographie : <li class="bibl"> des 185 <bibl> du
-       <listBibl> de « Sources et bibliographie ».
-   La règle `display: inline` non restreinte s'appliquait aussi aux <li> :
-   les 185 notices sortaient collées en un seul paragraphe courant (mesuré
-   au navigateur : getComputedStyle(li.bibl).display === "inline").
-   Sur ÉLEC (data/legacy/sources-et-bibliographie.html) chaque référence est
-   une entrée de liste distincte. On rend donc l'inline aux seuls éléments
-   en ligne et la liste aux seules entrées, sans toucher au reste. */
-#main #article a.bibl,
-#main #article span.bibl { display: inline; }
-#main #article ul.listBibl { margin: 0; padding: 0; list-style: none; }
-#main #article li.bibl {
-  display: block;
-  margin: 0 0 .55em 0;
-  padding-left: 1.6em;
-  text-indent: -1.6em; /* retrait pendant, usage bibliographique */
-}
-#main #article .surname,
-#main #article .persName-st { font-variant: small-caps; }
-
-/* Citations. */
-#main #article .cit { display: block; margin: 8px 0; }
-#main #article blockquote { display: block; margin: .8em 0 .8em 1.5em; }
-
-/* Guillemets d'ÉLEC autour des titres de niveau analytique. */
-#main #article .level-a { font-style: normal; }
-#main #article .level-a::before { content: "\00AB\00A0"; }
-#main #article .level-a::after { content: "\00A0\00BB"; }
+/* Références bibliographiques : appel en ligne <a class="bibl"> dans les notes
+   (template tei:ref[@type='bibl'] de delescluze-edition.xsl). Les entrées de
+   « Sources et bibliographie » sont rendues par le bloc BIBLIO commun (p.biblio-notice). */
+#main #article a.bibl { display: inline; }
 
 /* Sauts de page. */
 #main #article .pb { font-style: normal; font-size: inherit; }
-
-/* Listes de l'édition. */
-#main #article .list,
-#main #article .listItem,
-#main #article .list .item { display: block; }
-
-
-/* --------------------------------------------------------------------------
-   5. Tableaux de comptes — theme/delescluze.css (.account)
-   -------------------------------------------------------------------------- */
-
-#main #article table.account { width: 50%; border: 1px solid #000; margin: 8px 0; }
-#main #article .account tr,
-#main #article .account tr td { border: 1px solid #000; }
-#main #article .account td:first-child { width: 50%; }
 
 
 /* --------------------------------------------------------------------------
@@ -190,9 +124,7 @@
 
 #main #article .noteref,
 #main #article .noteback { color: #A73136; }
-#main #article .noteAnchor { color: #97ADD1; font-weight: normal; text-decoration: none; }
 #main #article .footnotes { font-size: 90%; line-height: 1.2; }
-#main #article .footnotes p { margin: 0; text-indent: 0; text-align: justify; }
 
 #main #article a.bookmark { color: #ccc; border-bottom: none; }
 #main #article a.bookmark:hover { color: #A73136; }
@@ -201,8 +133,6 @@
 /* --------------------------------------------------------------------------
    7. Fac-similés — theme/responsive.css
    -------------------------------------------------------------------------- */
-
-#main #article img { max-width: 100%; height: auto; }
 
 @media screen and (min-width: 1280px) {
   #main #article figure img { max-width: 250px; }
@@ -316,7 +246,6 @@
 #main #article details.dl-mois[open] > ul.dl-mois-liste { display: flex; flex-wrap: wrap; }
 #main #article details.dl-mois:not([open]) > ul.dl-mois-liste { display: none; }
 #main #article ul.dl-mois-liste li { margin: 0; }
-#main #article ul.dl-mois-liste a { text-decoration: none; }
 #main #article ul.dl-mois-liste a:hover { text-decoration: underline; }
 #main #article ul.dl-mois-liste a[aria-current="page"] { font-weight: bold; color: #A73136; }
 /* ==== fin D14d ==== */
@@ -538,13 +467,6 @@
    La XSL n'émet plus aucune liste de lettres ; ces règles ne visaient donc plus rien.
    Version précédente : delescluze.customCss.css.bak_lettresnues_20260912. ==== */
 
-/* ==== D18 (2026-09-12) : variantes de nom et identifiants d'autorité des notices ==== */
-#main #article .dl-noms-locaux { margin: .2rem 0; font-style: italic; }
-#main #article .dl-autorite { margin: .2rem 0; font-size: 92%; }
-#main #article .dl-autorite-libelle { color: #555; }
-#main #article .dl-autorite-lien { word-break: break-all; }
-/* ==== fin D18 ==== */
-
 /* --------------------------------------------------------------------------
    Restitutions du 2026-09-29 (vers, textes insérés, post-scriptum, adresses,
    lacunes illisibles) — règles reprises de theme/delescluze.css de l'ÉLEC.
@@ -557,7 +479,6 @@
 
 /* Textes insérés dans les carnets (div.floatingText) : titre en gras, en retrait. */
 #main #article .floatingTextTitle { margin-left: 15%; font-weight: bold; }
-#main #article .floatingText .signed { display: block; text-align: right; }
 
 /* Lettres : post-scriptum et adresse, avec leur libellé en italique. */
 #main #article .postscriptLabel { font-style: italic; }
@@ -611,3 +532,247 @@
   background: #faf8f5;
   box-shadow: inset 3px 0 0 #A73136;
 }
+
+/* ==========================================================================
+   Index des personnes en fiches repliables (2026-10-07), sur le modèle de la page
+   « Références citées » des Chroniques latines (cl-oeuvre) : lettres repliables
+   (« A (7) »), puis une ligne repliable par personne ; dépliée, la fiche.
+   Couleurs sobres, propres à l'index : les liens du corpus (rouge #A73136, gras au
+   survol) y deviennent gris foncé soulignés en pointillé.
+   ========================================================================== */
+#main #article .dl-index {
+  --dl-encre: #3d3833;
+  --dl-gris: #8a837c;
+  --dl-filet: #e6dfd7;
+  --dl-fond: #faf8f5;
+}
+/* lettres */
+#main #article .dl-index details.dl-lettre > summary { display: block; list-style: none; cursor: pointer; }
+#main #article .dl-index details.dl-lettre > summary::-webkit-details-marker { display: none; }
+#main #article .dl-index .dl-lettre-titre {
+  margin: 1.1rem 0 .3rem;
+  padding-bottom: .25rem;
+  border-bottom: 1px solid var(--dl-filet);
+  color: var(--dl-encre);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+#main #article .dl-index .dl-lettre-titre::before {
+  content: "";                  /* triangle ▸ dessiné : la police n'a pas le glyphe */
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin: 0 .55rem .1em .1rem;
+  border-left: 6px solid var(--dl-gris);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  vertical-align: middle;
+  transition: transform .15s;
+}
+#main #article .dl-index details.dl-lettre[open] > summary .dl-lettre-titre::before,
+#main #article .dl-index details.dl-lettre:has(.dots-target) > summary .dl-lettre-titre::before { transform: rotate(90deg); }
+#main #article .dl-index details.dl-lettre > summary:hover .dl-lettre-titre { color: #000; }
+#main #article .dl-index .dl-lettre-nb { color: var(--dl-gris); font-weight: normal; font-size: .82em; letter-spacing: 0; }
+#main #article .dl-index details.dl-lettre:has(.dots-target)::details-content { content-visibility: visible; display: block; }
+
+/* une personne */
+#main #article .dl-index details.dl-fiche { border-bottom: 1px solid #f1ece6; scroll-margin-top: 90px; }
+#main #article .dl-index details.dl-fiche > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .35rem .4rem .35rem 1.3rem;
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  border-radius: 3px;
+}
+#main #article .dl-index details.dl-fiche > summary::-webkit-details-marker { display: none; }
+#main #article .dl-index details.dl-fiche > summary::before {
+  content: "";
+  position: absolute;
+  left: .4rem;
+  top: .78rem;
+  width: 0;
+  height: 0;
+  border-left: 5px solid #b3aaa1;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transition: transform .15s;
+}
+#main #article .dl-index details.dl-fiche[open] > summary::before,
+#main #article .dl-index details.dl-fiche.dots-target > summary::before { transform: rotate(90deg); border-left-color: var(--dl-encre); }
+#main #article .dl-index details.dl-fiche > summary:hover { background: #f6f2ee; }
+#main #article .dl-index details.dl-fiche[open] > summary { background: var(--dl-fond); }
+#main #article .dl-index .dl-fiche-nom { flex: 1 1 auto; color: var(--dl-encre); }
+#main #article .dl-index details.dl-fiche[open] .dl-fiche-vedette { font-weight: 600; }
+#main #article .dl-index .dl-fiche-dates { color: var(--dl-gris); }
+#main #article .dl-index .dl-fiche-fonction { margin-left: .6em; color: var(--dl-gris); font-style: italic; font-size: .9em; }
+#main #article .dl-index .dl-fiche-nb {
+  flex: 0 0 auto;
+  color: var(--dl-gris);
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#main #article .dl-index details.dl-fiche.dots-target::details-content { content-visibility: visible; display: block; }
+#main #article .dl-index details.dl-fiche.dots-target > summary { background: #fbf3d5; }
+
+/* la fiche dépliée : un encart doux, filet à gauche */
+#main #article .dl-index .dl-fiche-corps {
+  margin: 0 0 .7rem 1.3rem;
+  padding: .55rem .9rem .6rem;
+  border-left: 3px solid var(--dl-filet);
+  background: var(--dl-fond);
+  border-radius: 0 3px 3px 0;
+  color: var(--dl-encre);
+  font-size: .93rem;
+  line-height: 1.5;
+}
+#main #article .dl-index .dl-fiche-corps p { margin: 0 0 .5rem; text-indent: 0; text-align: left; }
+#main #article .dl-index .dl-fiche-bio { font-size: .97rem; }
+#main #article .dl-index .dl-etiquette {
+  color: var(--dl-gris);
+  font-size: .78rem;
+  font-variant: small-caps;
+  letter-spacing: .05em;
+}
+#main #article .dl-index dl.dl-fiche-mentions {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1rem;
+  row-gap: .25rem;
+  margin: .2rem 0 .55rem;
+  padding-top: .45rem;
+  border-top: 1px solid var(--dl-filet);
+}
+#main #article .dl-index dl.dl-fiche-mentions > dt {
+  margin: 0;
+  color: var(--dl-gris);
+  font-weight: normal;
+  font-size: .8rem;
+  font-variant: small-caps;
+  letter-spacing: .05em;
+  white-space: nowrap;
+  line-height: 1.85;
+}
+#main #article .dl-index .dl-fiche-corps a {
+  color: var(--dl-encre);
+  font-weight: normal;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+#main #article .dl-index .dl-fiche-corps a:hover {
+  font-weight: normal;
+  color: #000;
+  text-decoration: underline solid #6f6a65;
+}
+#main #article .dl-index .dl-sep { color: #b3aaa1; }
+#main #article .dl-index .dl-passage,
+#main #article .dl-index .dl-passage a { color: var(--dl-gris); font-style: italic; }
+#main #article .dl-index .dl-fiche-autorites { margin-bottom: 0; font-size: .85rem; }
+/* lettre visée par un lien (?refId=index-personnes#index-personnes-B) : ouverte */
+#main #article .dl-index details.dl-lettre.dots-target::details-content { content-visibility: visible; display: block; }
+#main #article .dl-index details.dl-lettre.dots-target > summary .dl-lettre-titre::before { transform: rotate(90deg); }
+#main #article .dl-index details.dl-lettre { scroll-margin-top: 90px; }
+
+/* ==========================================================================
+   Bibliographie (modele commun commun/bibliographie.xsl, 2026-10-08) : meme bloc
+   dans les corpus qui l'utilisent, seul le prefixe de sélecteur change.
+   Base : CSS de la (8) (intertitres en petites capitales, notices en retrait
+   suspendu, auteur en petites capitales) ; cote en gras ; titre d'article entre guillemets.
+   ========================================================================== */
+
+#main #article section.biblio { --biblio-filet: #e3ddd6; color: var(--document-text-color, #303030); }
+#main #article section.biblio h1.biblio-titre { margin: 0 0 1.2rem; font-size: 1.6rem; color: var(--fill-color, #5f004d); }
+#main #article section.biblio h2.biblio-rubrique {
+  margin: 1.8rem 0 .7rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid var(--biblio-filet);
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  line-height: 1.4;
+}
+#main #article section.biblio h3.biblio-sous-titre {
+  margin: 1.2rem 0 .3rem;
+  color: #8a837c;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+#main #article section.biblio h4.biblio-depot { margin: .9rem 0 .25rem; font-size: .98rem; font-style: italic; font-weight: normal; }
+#main #article section.biblio p.biblio-notice {
+  margin: 0 0 .55rem;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+  line-height: 1.6;
+  text-align: left;
+}
+#main #article section.biblio .biblio-fonds p.biblio-notice { margin-bottom: .2rem; }
+#main #article section.biblio p.biblio-notice .author { font-variant: small-caps; letter-spacing: .02em; }
+#main #article section.biblio p.biblio-notice .biblio-cote { font-weight: 600; font-variant-numeric: tabular-nums; }
+#main #article section.biblio p.biblio-notice .note { color: #555; font-size: .92em; }
+#main #article section.biblio section.biblio a { color: inherit; text-decoration: underline dotted #b9afa5; text-underline-offset: .18em; }
+#main #article section.biblio section.biblio a:hover { color: #000; text-decoration-style: solid; }
+
+/* === SECTION GARDE DEBUT (page de garde commune, 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
+/* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev
+   (comptes.customCss.css § 8, mesures du 2026-10-08) ; seule la couleur suit le corpus (--fill-color).
+   La table des matières est le sommaire de DoTS-vue (.bottom-toc), placé SOUS le titre, pleine largeur,
+   au même retrait que le texte (padding par défaut de DoTS-vue : 20px 10% 120px), sur la seule page
+   de garde (wrapper qui contient .titlestmt). */
+.document-area #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+.document-area #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color, #8f0e21) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+.document-area #article .titlestmt .editors { text-align: center; text-indent: 0; }
+.document-area #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
+.document-area #article .titlestmt .editor {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #333;
+  margin-bottom: 0.75rem;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+.document-area #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color, #8f0e21);
+  border-top: 1px solid #e2c5cb;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+.document-area .wrapper:has(.titlestmt) { display: block !important; }
+.document-area .wrapper:has(.titlestmt) > .bottom-toc,
+.document-area .wrapper:has(.titlestmt) > #article.bottom-toc,
+.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > .bottom-toc,
+.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > #article.bottom-toc {
+  display: block !important;
+  order: 0;
+  flex: none;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 20px 10% 120px;
+}
+.document-area .wrapper:has(.titlestmt) > .bottom-toc ul { margin: 15px 0; font-size: 15px; line-height: 20px; }
+.document-area .wrapper:has(.titlestmt) > .bottom-toc li a,
+.document-area .wrapper:has(.titlestmt) > .bottom-toc li .toc-title { padding-top: 4px; padding-bottom: 4px; font-size: 15px; }
+/* === SECTION GARDE FIN === */

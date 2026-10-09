@@ -2,13 +2,81 @@
   "collectionId": "chroniqueslatines",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "appNavBar": { "collectionShortTitle": "Chroniques latines" },
-    "pageHeader": { "collectionAltTitle": "Les chroniques latines de Saint-Denis", "aboutButtonText": "Présentation" },
-    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": { "compName": "HomePageContent" } },
-    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Lire les chroniques" }
+    "appNavBar": {
+      "collectionShortTitle": "Chroniques latines"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Les chroniques latines de Saint-Denis",
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": {
+      "compName": "HomePageContent"
+      }
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Lire les chroniques",
+      "singleResourceButtonText": "Accéder au document"
+    }
   },
-  "footerSettings": { "footerTitle": "Les chroniques latines de Saint-Denis", "footerSubtitles": ["Le réservoir de mémoire des historiens français de la fin du Moyen Âge", "École nationale des chartes – PSL"], "footerDescription": "Édition électronique des Chroniques latines de Saint-Denis." },
-  "tableOfContentsSettings": { "tableOfContentDepth": 2, "editByLevel": 2, "editByCiteType": ["chapitre"], "displayTopToc": true, "displayLeftToc": true },
-  "aboutPageSettings": [{ "tabName": "Introduction", "compName": "about1" }, { "tabName": "Présentation du texte", "compName": "about2" }],
-  "collectionCustomCss": "chroniqueslatines"
+  "footerSettings": {
+    "footerTitle": "Les chroniques latines de Saint-Denis",
+    "footerSubtitles": [
+      "Édition de Pascale Bourgain"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 2,
+    "editByLevel": 2,
+    "editByCiteType": [
+      "section",
+      "chapitre"
+    ],
+    "displayTopToc": false,
+    "displayLeftToc": true
+  },
+  "collectionCustomCss": "chroniqueslatines",
+  "topBreadcrumbButtonLabel": [
+    "extensions.dots:shortTitle"
+  ],
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:editor",
+    "dct:created",
+    "schema:isBasedOn",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:license",
+    "dct:rights",
+    "schema:encoding"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:editor": "Éditeur scientifique",
+    "dct:created": "Date du document",
+    "schema:isBasedOn": "Source",
+    "dct:language": "Langue",
+    "schema:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:exampleOfWork": "Notice",
+    "schema:encoding": "Exports"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

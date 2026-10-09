@@ -21,6 +21,14 @@
       "logo": "img-19.jpg"
     }
   },
+  "footerSettings": {
+    "footerTitle": "Le Graduel de Bellelay",
+    "footerSubtitles": [
+      "Édition d'Olivier Cullin",
+      "École nationale des chartes – PSL"
+    ],
+    "footerDescription": "Édition électronique du Graduel de Bellelay."
+  },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 3,
     "editByLevel": 2,

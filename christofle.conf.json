@@ -36,12 +36,22 @@
       "Section",
       "Note",
       "lettre",
+      "indexLieuxPersonnes",
       "indexTypesActes"
     ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
-  "aboutPageSettings": [],
+  "aboutPageSettings": [
+    {
+      "tabName": "Crédits",
+      "compName": "about1"
+    },
+    {
+      "tabName": "Mentions légales",
+      "compName": "about2"
+    }
+  ],
   "collectionCustomCss": "christofle",
   "metadataDisplayOrder": [
     "dct:title",

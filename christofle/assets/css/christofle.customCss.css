@@ -46,44 +46,12 @@
   line-height: 1.65;
 }
 
-/* Pas de couleur ici : les titres suivent le socle D12 (#202020), comme chez les
-   autres corpus. La déclaration `color: #8d2632` qui s'y trouvait était déjà sans
-   effet dans la zone de texte (spécificité inférieure au socle) et n'agissait plus
-   que sur le sommaire des enfants. */
-.document-area #article:not(.bottom-toc) h1,
-.document-area #article:not(.bottom-toc) h2,
-.document-area #article:not(.bottom-toc) h3 {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.25;
-}
-
-.document-area #article:not(.bottom-toc) h1 { font-size: 2rem; margin: 2rem 0 1.25rem; }
-.document-area #article:not(.bottom-toc) h2 { font-size: 1.45rem; margin: 2rem 0 1rem; }
-.document-area #article:not(.bottom-toc) h3 { font-size: 1.2rem; margin: 1.5rem 0 .75rem; }
-.document-area #article:not(.bottom-toc) p { margin: 0 0 1rem; }
-
 /* Les index et les textes édités utilisent les renvois et la coloration ÉLEC. */
-.document-area #article:not(.bottom-toc) a { color: #8d2632; }
 .document-area #article:not(.bottom-toc) a:hover { color: #5a121c; }
 .document-area #article .persName,
 .document-area #article .placeName,
 .document-area #article .orgName { color: #8d2632; }
 .document-area #article .date { white-space: nowrap; }
-.document-area #article .note,
-.document-area #article .footnotes,
-.document-area #article .apparatus,
-.document-area #article .app { font-size: .92em; }
-.document-area #article .fileDesc,
-.document-area #article .teiHeader { background: #f8f4f2; border-left: 4px solid #8d2632; padding: 1.5rem; }
-
-/* --- Introduction : sommaire des parties (Le notaire, Son registre…) --- */
-/* 2026-09-14 : plus de couleur sur les intitulés de section — ils suivent le socle
-   D12 (#202020) comme chez les autres corpus. */
-.christofle-intro-index .cl-section-head { font-family:Arial,Helvetica,sans-serif; margin:1.5rem 0 1rem; }
-.christofle-intro-index .cl-children { list-style:none; padding:0; margin:0 0 2rem; }
-.christofle-intro-index .cl-children li { border-bottom:1px dotted #e0dcd5; }
-.christofle-intro-index .cl-child-link { display:block; padding:.55rem .3rem; color:#8d2632; text-decoration:none; line-height:1.45; }
-.christofle-intro-index .cl-child-link:hover { background:#f5eeee; }
 
 /* --- Bouton de téléchargement de l'édition (partie « Télécharger ») --- */
 .document-area #article a.christofle-download { display:inline-block; margin:.5rem 0; padding:.5rem 1rem;
@@ -109,70 +77,59 @@
   line-height: 1.33;
   text-align: justify;
 }
-/* 2026-09-14 : `color: #A73136` retiré. Il était déjà sans effet — mesuré
-   rgb(32, 32, 32) sur ?refId=index-types-actes le 2026-09-14, le socle D12
-   (`.document-area #article:not(.bottom-toc) h1`, spécificité supérieure)
-   l'emportant — et le titre doit rester sobre comme chez les autres corpus. */
-#article .chr-types h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15.4px;
-  font-weight: 700;
-  line-height: 1.33;
-  margin: 0 0 .8rem;
-}
 #article .chr-types .chr-types-intro { font-size: 14px; color: #5a4a4a; margin: 0 0 1rem; }
 
-#article .chr-types .chr-type {
-  border-bottom: 1px dotted #E8E8E8;
-  margin: 5px 0;
-  padding: 0;
-  font-size: 14px;
-  line-height: 1.33;
+/* 2026-10-06 : une ligne repliable par type (<details>), comme la page Références
+   des Chroniques latines ; dépliée, les actes groupés par mois. html.css de DoTS-vue
+   masque tout enfant de <details> (details > * { display: none }) : on les rétablit. */
+#article .chr-types details.chr-type { border-bottom: 1px solid #f0ece8; margin: 0; }
+#article .chr-types details.chr-type > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .3rem .2rem .3rem 1.3rem;
+  list-style: none;
+  cursor: pointer;
+  position: relative;
 }
-
-/* Le titre de rubrique repasse dans le flux, suivi des deux-points de l'ÉLEC.
-   Noir et à la taille du texte : c'est le renvoi qui porte la couleur. */
-#article .chr-types .chr-type-head {
-  display: inline;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 700;
-  color: #000;
-  line-height: inherit;
+#article .chr-types details.chr-type > summary::-webkit-details-marker { display: none; }
+#article .chr-types details.chr-type > summary::before {
+  content: "\25CB";              /* ○ replié */
+  position: absolute;
+  left: .15rem;
+  color: var(--fill-color, #A73136);
+  font-size: 1.05em;
+  line-height: 1.25;
+}
+#article .chr-types details.chr-type[open] > summary::before { content: "\25CF"; }  /* ● ouvert */
+#article .chr-types details.chr-type > summary:hover { background: #f7f4f1; }
+#article .chr-types .chr-type-head { flex: 1 1 auto; font-weight: 700; }
+#article .chr-types .chr-type-nb {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#article .chr-types details.chr-type > dl.chr-mois {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1rem;
+  row-gap: .15rem;
   margin: 0;
+  padding: .2rem .2rem .7rem 1.3rem;
 }
-#article .chr-types .chr-type-head::after { content: " : "; font-weight: 400; color: #000; }
-
-/* Le décompte n'existe pas sur l'ÉLEC : masqué. Il reste dans le balisage —
-   retirer ce display:none le rétablit. */
-#article .chr-types .chr-type-count { display: none; }
-
-#article .chr-types .chr-acte-list { display: inline; list-style: none; padding: 0; margin: 0; }
-#article .chr-types .chr-acte-list > li { display: inline; }
-#article .chr-types .chr-acte-list > li:not(:last-child)::after { content: " ; "; }
-#article .chr-types .chr-acte-date { font-family: inherit; font-size: inherit; color: #000; }
-
-#article .chr-types .chr-acte-list a.internalLink {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: #A73136;
-  font-weight: 400;
-  text-decoration: none;
-}
-#article .chr-types .chr-acte-list a.internalLink:hover,
-#article .chr-types .chr-acte-list a.internalLink:focus {
-  color: #A73136;
-  font-weight: 700;
-  text-decoration: underline;
-}
+#article .chr-types dl.chr-mois > dt { margin: 0; font-weight: normal; color: #5a4a4a; }
+#article .chr-types .chr-sep,
+#article .chr-types .chr-acte-date { color: #8a837c; }
+#article .chr-types dl.chr-mois a.internalLink { color: #A73136; text-decoration: none; }
+#article .chr-types dl.chr-mois a.internalLink:hover,
+#article .chr-types dl.chr-mois a.internalLink:focus { text-decoration: underline; }
 
 
 /* --- Édition des minutes (fiches) : styles sortis des attributs inline de la XSL --- */
-.document-area #article .christofle-edition { max-width: 68rem; margin: 0 auto; }
 .christofle-minute { margin: 0 0 3.5rem; padding: 0 0 2.5rem; border-bottom: 1px solid #d7d1ca; }
 .christofle-minute .recordMetadata { margin: 0 0 1.5rem; font-size: 90%; }
-.christofle-minute .recordMetadata h2 { margin: 0 0 .7rem; color: inherit; font-size: inherit; font-weight: bold; text-align: center; line-height: 1.45; }
 .christofle-minute .recordSummary { margin: 0; font-style: italic; }
 .christofle-minute .recordType { font-weight: bold; }
 .christofle-transcription { font-size: 1.05rem; }
@@ -201,82 +158,12 @@
 .internalLink { color: var(--fill-color); text-decoration: none; }
 .internalLink:hover { text-decoration: underline; }
 
-/* ⚠ DORMANT — la XSL déployée émet « chr-types » (bloc ci-dessus), plus
-   « actTypes ». Ces règles ne s'appliquent donc à rien tant que la feuille
-   christofle.xsl du dépôt reste en place. Conservées si la version qui émettait
-   actTypes/index-refs devait revenir.
---- Index des types d'actes : feuille ÉLEC historique (christofle.css) ---
-   La source est une page HTML statique, pas un fragment TEI/XSL. Ces règles
-   reprennent sa présentation : entrées compactes, filet pointillé, vedette
-   en gras et renvois bordeaux. */
-.actTypes {
-  max-width: 74rem;
-  margin: 0 auto;
-  padding: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.5;
-}
-.actTypes > section > h1 {
-  /* 2026-09-14 : couleur retirée (bloc dormant, cf. avertissement ci-dessus). */
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: normal;
-  text-align: center;
-}
-.actTypes article {
-  margin: 5px 0;
-  padding: .35rem 0;
-  border-bottom: 1px dotted #e8e8e8;
-  font-size: 14px;
-}
-.actTypes .actType-entry { font-weight: bold; }
-.actTypes .index-refs a.internalLink {
-  color: #8d2632;
-  text-decoration: none;
-}
-.actTypes .index-refs a.internalLink:hover { text-decoration: underline; }
-
-/* La page historique utilisait la typographie compacte du thème diple :
-   14 px Arial, titre discret centré et une entrée par ligne. Les sélecteurs
-   sont volontairement plus précis que les styles généraux de DocumentPage. */
-.document-area #article .actTypes,
-.document-area #article .actTypes * {
-  font-family: Arial, Verdana, sans-serif;
-}
-.document-area #article .actTypes {
-  font-size: 14px;
-  line-height: 133%;
-}
-.document-area #article .actTypes > section > h1 {
-  /* 2026-09-14 : `color: #a73136 !important` retiré — seul rouge de titre qui aurait
-     pu repasser devant le socle D12 si ce bloc dormant redevenait actif. */
-  font-family: Arial, Verdana, sans-serif !important;
-  font-size: 15px !important;
-  font-weight: bold !important;
-  text-align: center !important;
-  text-shadow: 1px 1px #e8e8e8;
-  margin: .2% 2% .2% 0;
-}
-.document-area #article .actTypes article {
-  margin: 5px 0;
-  padding: 0;
-  font-size: 14px;
-}
-.document-area #article .actTypes .index-refs a.internalLink {
-  color: #a73136;
-  text-decoration: none;
-}
-
 /* --- Index historique unifié des lieux et des personnes --- */
 .christofle-index {
   max-width: 60rem;
   margin: 0 auto;
   line-height: 1.5;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.christofle-index h2 {
-  border-bottom: 1px solid #d7d1ca;
-  padding-bottom: .3rem;
 }
 
 .christofle-index-intro { margin: 0 0 1.35rem; }
@@ -286,17 +173,10 @@
   font-style: normal;
 }
 
-.christofle-index .index-entry {
-  border-bottom: 1px dotted #e0dcd5;
-  padding: .48rem 0;
-}
-.christofle-index .index-entry p { margin: 0; }
 
 /* Personnes : casse normale comme dans l'ÉLEC historique. */
-.christofle-index .person-entry .surname,
-.christofle-index .person-entry .forename,
-.christofle-index .person-entry .name-entry,
-.christofle-index .person-entry .forename-entry {
+.christofle-index .chr-personne .surname,
+.christofle-index .chr-personne .forename {
   font-variant: normal;
   font-variant-caps: normal;
   text-transform: none;
@@ -315,31 +195,13 @@
 }
 
 /* Localisation : département en romain, canton en italique. */
-.christofle-index .location,
-.christofle-index .location * {
-  font-variant: normal;
-  font-variant-caps: normal;
-  font-style: normal;
-}
 .christofle-index .location .canton { font-style: italic; }
-
-/* Sous-entrées de lieux restent sous leur parent. */
-.christofle-index .index-subentries {
-  margin: .25rem 0 0 1.4rem;
-}
-.christofle-index .index-subentries > .index-entry {
-  border-bottom: 0;
-  padding: .2rem 0;
-  font-size: .95em;
-}
 
 .christofle-index .persName-note,
 .christofle-index .index-seealso {
   font-style: italic;
   color: #555;
 }
-
-.christofle-index .index-refs { color: inherit; }
 
 .document-area #article .christofle-index a.internalLink,
 .document-area #article .christofle-index a.linkToIndex {
@@ -353,8 +215,210 @@
   border-bottom-color: #5a121c;
 }
 
+/* --- Index des lieux et des personnes en tableau (2026-10-06) ---
+   Page parent de l'index (christofle-index-unified) : un tableau Nom / Type /
+   Minutes, avec tri, filtres par colonne, compteur, « Effacer » et export CSV
+   (module de Montferrand, préfixé chr-). Les pages par lettre gardent leurs fiches.
+   dots-vue (tei.css) met tout tableau en display:block + overflow-x:scroll : un
+   en-tête collant n'y colle plus. On rend au tableau son modèle de table. */
+.document-views .text-view #article .christofle-index-unified {
+  --chr-accent: var(--fill-color, #8d2632);
+  max-width: 64rem;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau-cadre {
+  margin: 1.2rem 0 2rem;
+}
+.document-views .text-view #article .christofle-index-unified table.chr-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;      /* un th collant garde ses filets */
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: #777;
+  font-size: .8rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* En-têtes : titres de colonnes ET ligne des filtres collent en haut, pour
+   filtrer sans remonter. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--chr-accent);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+/* Une ligne désignée par un lien est placée en haut par Document.vue : l'en-tête
+   collant la couvrirait. Il cesse de coller tant qu'une ligne porte dots-target. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau:has(.dots-target) thead {
+  position: static;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 Arial, Helvetica, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri::after {
+  content: "\2195";               /* ↕ : colonne triable, non triée */
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau th[aria-sort="ascending"] button.chr-tri::after {
+  content: "\25B2";               /* ▲ */
+  color: var(--chr-accent);
+  font-size: .75em;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau th[aria-sort="descending"] button.chr-tri::after {
+  content: "\25BC";               /* ▼ */
+  color: var(--chr-accent);
+  font-size: .75em;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri:hover,
+.document-views .text-view #article .christofle-index-unified .chr-tableau th[aria-sort="ascending"] button.chr-tri,
+.document-views .text-view #article .christofle-index-unified .chr-tableau th[aria-sort="descending"] button.chr-tri {
+  color: var(--chr-accent);
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri:hover { background: #ece7e2; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri:focus-visible {
+  outline: 2px solid var(--chr-accent);
+  outline-offset: -2px;
+}
+
+/* Cellules : filet fin, zébrage léger, survol. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau td {
+  padding: .35rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau tbody tr:hover > td { background: #f3efe9; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau tbody tr:target > td:first-child,
+.document-views .text-view #article .christofle-index-unified .chr-tableau tbody tr.dots-target > td:first-child {
+  box-shadow: inset 3px 0 0 var(--chr-accent);
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-vide { color: #c4bdb6; }
+
+/* Largeurs : Type étroit, Minutes à droite en chiffres alignés. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-c-type {
+  width: 8.5rem;
+  white-space: nowrap;
+  color: #555;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-c-minutes {
+  width: 30%;
+  font-variant-numeric: tabular-nums;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-sep { color: #b0a8a1; }
+
+/* Nom : sous-entrée « Lieu › sous-entrée », le lieu parent en gris. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-parent,
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-chevron {
+  color: #8a837c;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-location {
+  color: #6b645e;
+  font-size: .9em;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-location::before { content: "["; margin: 0 .15em 0 .3em; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-location::after { content: "]"; margin-left: .15em; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau .index-seealso { font-size: .9em; }
+
+/* Écran étroit : le tableau défile de côté dans son cadre (l'en-tête ne colle plus). */
+@media (max-width: 760px) {
+  .document-views .text-view #article .christofle-index-unified .chr-tableau-cadre { overflow-x: auto; }
+  .document-views .text-view #article .christofle-index-unified table.chr-tableau { min-width: 36rem; }
+  .document-views .text-view #article .christofle-index-unified .chr-tableau thead { position: static; }
+}
+
+/* Filtres par colonne. dots-vue met les tableaux en flex : sans !important,
+   l'attribut hidden posé par le filtre ne masquerait pas la ligne. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau tr[hidden] {
+  display: none !important;
+}
+.document-views .text-view #article .christofle-index-unified .chr-barre-filtres {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+.document-views .text-view #article .christofle-index-unified .chr-compteur {
+  font-variant-numeric: tabular-nums;
+}
+.document-views .text-view #article .christofle-index-unified .chr-effacer,
+.document-views .text-view #article .christofle-index-unified .chr-csv {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: var(--chr-accent);
+  font-size: .8rem;
+  cursor: pointer;
+}
+.document-views .text-view #article .christofle-index-unified .chr-effacer:hover,
+.document-views .text-view #article .christofle-index-unified .chr-csv:hover {
+  border-color: var(--chr-accent);
+}
+.document-views .text-view #article .christofle-index-unified .chr-csv { margin-left: auto; }
+.document-views .text-view #article .christofle-index-unified .chr-effacer[hidden] { display: none; }
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres input,
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres input:focus,
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres select:focus {
+  outline: 2px solid var(--chr-accent);
+  outline-offset: -1px;
+}
+
 /* --- Drill mois -> jours : filtre par jour (hack radio :checked, aucun JS) --- */
-.christofle-mois .mois-head { text-transform: capitalize; }
 .christofle-mois .mois-intro { color: #5a4a4a; font-style: italic; margin: 0 0 1rem; }
 /* les radios de filtre sont masquées : on interagit via les <label> de la barre */
 .christofle-mois .jf-radio { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
@@ -383,20 +447,12 @@
 .jour-note .note-type { font-variant: small-caps; color: #7a4a50; }
 .jour-note .note-summary { color: #33292a; }
 
-@media (max-width: 768px) {
-  /* `:not(.bottom-toc)` pour la même raison qu'en tête de fichier : ne pas
-     redimensionner le sommaire des enfants de DoTS-vue. */
-  .document-area #article:not(.bottom-toc) { font-size: 1rem; }
-  .document-area #article:not(.bottom-toc) h1 { font-size: 1.55rem; }
-}
-
 /* --- Navigation par mois et par jour ------------------------------------------
    Reprise de la barre #specific-menu-minutes de l'ÉLEC (theme/christofle.css) :
    les douze mois sur une ligne, puis les jours du mois courant, séparés par des
    barres verticales, centrés, entrées actives en bordeaux gras. Sans JavaScript :
    la navigation est précalculée dans le TEI et rendue par la XSL.
-   Sert sur chaque note (.christofle-note-nav) et sur la page « Édition des
-   notes » (.christofle-notes-index). */
+   Sert sur chaque note (.christofle-note-nav). */
 #article .christofle-note-nav {
   border-bottom: 1px solid #E8E8E8;
   margin: 0 0 1.2rem;
@@ -429,37 +485,8 @@
   text-decoration: none;
 }
 
-/* Sommaire « Édition des notes » : mêmes codes, en bloc par mois. */
+/* Sommaire « Édition des notes » : chapeau. */
 #article .christofle-notes-index .notes-intro { color: #5a4a4a; margin: 0 0 1.2rem; }
-#article .christofle-notes-index .months-list { list-style: none; padding: 0; margin: 0; }
-#article .christofle-notes-index .month-item {
-  border-bottom: 1px dotted #E8E8E8;
-  padding: .45rem 0;
-}
-#article .christofle-notes-index .month-link {
-  font-weight: 700;
-  text-transform: capitalize;
-  color: #A73136;
-  text-decoration: none;
-}
-#article .christofle-notes-index .month-count { color: #8a7b7b; }
-#article .christofle-notes-index .days-list {
-  display: inline;
-  list-style: none;
-  padding: 0;
-  margin: 0 0 0 .5rem;
-}
-#article .christofle-notes-index .days-list li { display: inline; }
-#article .christofle-notes-index .days-list li:not(:last-child)::after {
-  content: " · ";
-  color: #c9bcbc;
-}
-#article .christofle-notes-index .day-link {
-  color: #28211f;
-  text-decoration: none;
-  padding: 0 .15rem;
-}
-#article .christofle-notes-index .day-link:hover { color: #A73136; font-weight: 700; }
 
 
 /* --------------------------------------------------------------------------
@@ -637,7 +664,6 @@
    Une minute renvoie à l'index par ?refId=…#p-0700 : l'ÉLEC surlignait l'entrée
    atteinte. :target fait la même chose sans script. Le !important garantit qu'une
    entrée visée reste visible même si un filtre par lettre est actif. */
-#article .christofle-index .index-entry { scroll-margin-top: 4.5rem; }
 #article .christofle-index-unified .christofle-index-entries > .index-entry:target,
 #article .christofle-index-unified .christofle-index-entries > .index-entry.dots-target { display: block !important; }
 #article .christofle-index .index-entry:target,
@@ -879,3 +905,70 @@
 /* 2026-10-05 : hi[@rend="super"] (6 cas, ex. « 1er janvier » de l’accueil) sort en span.super,
    que rien ne mettait en exposant : même rendu qu’un <sup>. */
 .document-area #main #article .super { vertical-align: super; font-size: smaller; }
+
+/* === SECTION MINUTES DEBUT === */
+/* Filtre Minute de l'index (c2, 2026-10-08) : aide sous la légende du tableau. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau-legende .chr-aide-minutes {
+  display: block;
+  margin-top: .3rem;
+  color: #6b625b;
+}
+/* === SECTION MINUTES FIN === */
+
+/* === SECTION GARDE DEBUT (page de garde commune, 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
+/* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev
+   (comptes.customCss.css § 8, mesures du 2026-10-08) ; seule la couleur suit le corpus (--fill-color).
+   La table des matières est le sommaire de DoTS-vue (.bottom-toc), placé SOUS le titre, pleine largeur,
+   au même retrait que le texte (padding par défaut de DoTS-vue : 20px 10% 120px), sur la seule page
+   de garde (wrapper qui contient .titlestmt). */
+.document-area #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+.document-area #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color, #8f0e21) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+.document-area #article .titlestmt .editors { text-align: center; text-indent: 0; }
+.document-area #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
+.document-area #article .titlestmt .editor {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #333;
+  margin-bottom: 0.75rem;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+.document-area #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color, #8f0e21);
+  border-top: 1px solid #e2c5cb;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+.document-area .wrapper:has(.titlestmt) { display: block !important; }
+.document-area .wrapper:has(.titlestmt) > .bottom-toc,
+.document-area .wrapper:has(.titlestmt) > #article.bottom-toc,
+.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > .bottom-toc,
+.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > #article.bottom-toc {
+  display: block !important;
+  order: 0;
+  flex: none;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 20px 10% 120px;
+}
+.document-area .wrapper:has(.titlestmt) > .bottom-toc ul { margin: 15px 0; font-size: 15px; line-height: 20px; }
+.document-area .wrapper:has(.titlestmt) > .bottom-toc li a,
+.document-area .wrapper:has(.titlestmt) > .bottom-toc li .toc-title { padding-top: 4px; padding-bottom: 4px; font-size: 15px; }
+/* === SECTION GARDE FIN === */

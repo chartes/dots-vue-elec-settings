@@ -58,12 +58,14 @@
     "tableOfContentDepth": 5,
     "editByLevel": null,
     "editByCiteType": [
-      "partie",
-      "acte"
+      "partie",
+      "acte",
+      "index-complet"
     ],
-    "countByCiteType": [
-      "acte"
-    ]
+    "countByCiteType": []
+  },
+  "documentPageSettings": {
+    "metadataTabLabel": "Notice bibliographique"
   },
   "aboutPageSettings": [
     {
@@ -125,13 +127,13 @@
         "key": "dublinCore.creator",
         "label": "Auteurs",
         "enabled": true,
-        "order": 5
+        "order": 1
       },
       {
         "key": "dublinCore.contributor",
         "label": "Contributeurs",
         "enabled": true,
-        "order": 6
+        "order": 2
       },
       {
         "key": "dublinCore.publisher",
@@ -141,7 +143,7 @@
         "key": "dublinCore.language",
         "label": "Langue des actes",
         "enabled": true,
-        "order": 7
+        "order": 6
       },
       {
         "key": "extensions.author",
@@ -169,19 +171,19 @@
         "key": "dublinCore.coverage",
         "label": "Période d'étude",
         "enabled": true,
-        "order": 3
+        "order": 4
       },
       {
         "key": "dublinCore.created",
         "label": "Date des sources",
         "enabled": true,
-        "order": 2
+        "order": 3
       },
       {
         "key": "dublinCore.issued",
         "label": "Date des éditions",
         "enabled": true,
-        "order": 4
+        "order": 5
       },
       {
         "key": "extensions.dateCreated",

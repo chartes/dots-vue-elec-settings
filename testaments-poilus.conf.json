@@ -48,15 +48,11 @@
   },
   "aboutPageSettings": [
     {
-      "tabName": "Le projet",
+      "tabName": "Crédits",
       "compName": "about1"
     },
     {
-      "tabName": "Introduction",
-      "compName": "about3"
-    },
-    {
-      "tabName": "Édition et droits",
+      "tabName": "Mentions légales",
       "compName": "about2"
     }
   ],

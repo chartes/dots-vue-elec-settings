@@ -39,7 +39,6 @@
 }
 
 #main #article p,
-#main #article dd,
 #main #article li { text-align: justify; }
 
 #main #article li { line-height: 1.33; margin: .5ex 0; }
@@ -50,8 +49,7 @@
    2. Titres — enc.css
    -------------------------------------------------------------------------- */
 
-#main #article h1,
-#main #article .h1 {
+#main #article h1 {
   /* 2026-09-14 : titre ramené au gris sombre commun aux collections (#202020).
      Ce n'est pas un choix de goût : c'est la valeur MESURÉE sur la majorité des corpus
      (15 titres sur 5 collections), et la règle harmonisée
@@ -103,11 +101,6 @@
   padding: 10px 0 0 3em;
 }
 
-#main #article h1 a,
-#main #article h2 a,
-#main #article h3 a,
-#main #article h4 a { color: inherit; border-bottom-color: transparent; }
-
 
 /* --------------------------------------------------------------------------
    3. Liens du texte — enc.css
@@ -122,20 +115,7 @@
    4. Micro-typographie éditoriale — diple_html.css / html.css
    -------------------------------------------------------------------------- */
 
-#main #article cite,
-#main #article .title { font-style: normal; }
-#main #article .title i,
-#main #article .title em { font-style: normal; }
-#main #article .title abbr { font-variant: small-caps; }
-
-#main #article .sc { font-variant: small-caps; }
-#main #article dfn { font-style: normal; }
-#main #article .num { font-family: inherit; line-height: 1; font-variant: small-caps; }
-#main #article .num sup { font-variant: normal; }
-
-#main #article p.indent { text-indent: 2em; }
-#main #article p.noindent { text-indent: 0; }
-#main #article p.right { text-align: right; }
+#main #article cite { font-style: normal; }
 
 /* Signatures et mentions d'auteur en fin de contribution. */
 #main #article .byline {
@@ -144,7 +124,6 @@
   text-indent: 0;
   font-variant: small-caps;
 }
-#main #article .docAuthor { text-align: right; text-indent: 0; }
 /* theme/interpares2.css */
 #main #article .docDate { margin-left: 94%; text-indent: 0; }
 #main #article .avert {
@@ -163,11 +142,6 @@
   line-height: 1.15;
 }
 #main #article blockquote p { text-indent: 0; margin: .7ex 0; }
-
-#main #article i i,
-#main #article i em,
-#main #article em i,
-#main #article em em { font-style: normal; }
 
 
 /* --------------------------------------------------------------------------
@@ -216,7 +190,6 @@
 #main #article .noteref,
 #main #article .noteback { color: #BC052D; }
 #main #article .footnotes { font-size: 90%; line-height: 1.15; }
-#main #article .footnotes p { margin: 0; text-indent: 0; }
 
 #main #article a.bookmark { color: #ccc; border-bottom: none; }
 #main #article a.bookmark:hover { color: #BC052D; }
@@ -488,3 +461,201 @@
   background: var(--meta-area-fill-color, #f5f5f5);
   box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21);
 }
+
+/* ==== Glossaire en tableau (2026-10-07) ====
+   Comme le glossaire de Montferrand : tri par colonne, un filtre par colonne dans l'en-tête
+   (suggestions pour le terme, liste pour la nature), compteur, « Effacer », export CSV
+   (module de comptes.xsl via bellelay.xsl, préfixé ip- dans interpares2.xsl). */
+#main #article .ip-tableau-cadre {
+  --ip-accent: var(--fill-color, #5f004d);
+  --ip-entete-collant: 80px;   /* hauteur de la barre de navigation collante (comme Montferrand) */
+}
+#main #article .ip-tableau-cadre {
+  margin: 1.2rem 0 2rem;
+}
+#main #article table.ip-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;      /* un th collant garde ses filets */
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+/* En-têtes : titres de colonnes ET ligne des filtres collent en haut, pour
+   filtrer sans remonter. */
+#main #article .ip-tableau thead {
+  position: sticky;
+  top: var(--ip-entete-collant);
+  z-index: 2;
+}
+#main #article .ip-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--ip-accent);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+/* Une ligne désignée par un lien est placée en haut par Document.vue : l'en-tête
+   collant la couvrirait. Il cesse de coller tant qu'une ligne porte dots-target. */
+/* (règle de Bellelay retirée : l’en-tête reste collant même quand une ligne est visée) */
+#main #article .ip-tableau button.ip-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#main #article .ip-tableau button.ip-tri::after {
+  content: "\2195";               /* ↕ : colonne triable, non triée */
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+#main #article .ip-tableau th[aria-sort="ascending"] button.ip-tri::after {
+  content: "\25B2";               /* ▲ */
+  color: var(--ip-accent);
+  font-size: .75em;
+}
+#main #article .ip-tableau th[aria-sort="descending"] button.ip-tri::after {
+  content: "\25BC";               /* ▼ */
+  color: var(--ip-accent);
+  font-size: .75em;
+}
+#main #article .ip-tableau button.ip-tri:hover,
+#main #article .ip-tableau th[aria-sort="ascending"] button.ip-tri,
+#main #article .ip-tableau th[aria-sort="descending"] button.ip-tri {
+  color: var(--ip-accent);
+}
+#main #article .ip-tableau button.ip-tri:hover { background: #ece7e2; }
+#main #article .ip-tableau button.ip-tri:focus-visible {
+  outline: 2px solid var(--ip-accent);
+  outline-offset: -2px;
+}
+
+/* Cellules : filet fin, zébrage léger, survol. */
+#main #article .ip-tableau td {
+  padding: .35rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+#main #article .ip-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+#main #article .ip-tableau tbody tr:hover > td { background: #f3efe9; }
+#main #article .ip-tableau tbody tr:target > td:first-child,
+#main #article .ip-tableau tbody tr.dots-target > td:first-child {
+  box-shadow: inset 3px 0 0 var(--ip-accent);
+}
+#main #article .ip-tableau .ip-vide { color: #c4bdb6; }
+
+/* Écran étroit : le tableau défile de côté dans son cadre (l'en-tête ne colle plus). */
+@media (max-width: 760px) {
+  #main #article .ip-tableau-cadre { overflow-x: auto; }
+  #main #article table.ip-tableau { min-width: 48rem; }
+  #main #article .ip-tableau thead { position: static; }
+}
+
+/* Filtres par colonne. dots-vue met les tableaux en flex : sans !important,
+   l'attribut hidden posé par le filtre ne masquerait pas la ligne. */
+#main #article .ip-tableau tr[hidden] {
+  display: none !important;
+}
+#main #article .ip-barre-filtres {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+#main #article .ip-compteur {
+  font-variant-numeric: tabular-nums;
+}
+#main #article .ip-effacer,
+#main #article .ip-csv {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: var(--ip-accent);
+  font-size: .8rem;
+  cursor: pointer;
+}
+#main #article .ip-effacer:hover,
+#main #article .ip-csv:hover {
+  border-color: var(--ip-accent);
+}
+#main #article .ip-csv { margin-left: auto; }
+#main #article .ip-effacer[hidden] { display: none; }
+#main #article tr.ip-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+#main #article tr.ip-filtres input,
+#main #article tr.ip-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+#main #article tr.ip-filtres input:focus,
+#main #article tr.ip-filtres select:focus {
+  outline: 2px solid var(--ip-accent);
+  outline-offset: -1px;
+}
+
+/* Colonnes du glossaire : terme en gras, anglais en italique gris, nature étroite. */
+#main #article .ip-tableau td.ip-c-terme { width: 22%; font-weight: 600; }
+#main #article .ip-tableau td.ip-c-anglais { width: 20%; color: #666; }
+#main #article .ip-tableau td.ip-c-nature { width: 7rem; color: #777; font-size: .88em; white-space: nowrap; }
+#main #article .ip-tableau td.ip-c-def { font-size: .95em; }
+#main #article .ip-tableau td.ip-c-def a.ip-renvoi { text-decoration: underline dotted; text-underline-offset: .15em; }
+/* en-tête non triable « Définition » : même allure que les autres */
+#main #article .ip-tableau thead th.ip-c-def {
+  padding: .5rem .6rem .45rem;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+}
+/* La barre (compteur, Effacer, CSV) colle elle aussi, au-dessus de l'en-tête des colonnes. */
+#main #article .ip-tableau-cadre { --ip-barre: 2.3rem; }
+#main #article .ip-barre-filtres {
+  position: sticky;
+  top: var(--ip-entete-collant);
+  z-index: 3;
+  height: var(--ip-barre);
+  margin: 0;
+  background: #fff;
+}
+#main #article .ip-tableau thead { top: calc(var(--ip-entete-collant) + var(--ip-barre)); }
+/* ligne visée (lien depuis ailleurs, ou renvoi « Voir ») : sous la barre et l'en-tête */
+#main #article .ip-tableau tbody tr { scroll-margin-top: calc(var(--ip-entete-collant) + var(--ip-barre) + 5.5rem); }
+#main #article .ip-tableau tbody tr.ip-vise > td { background: #fbf3d5; }
+#main #article .ip-tableau tbody tr.ip-vise > td:first-child { box-shadow: inset 3px 0 0 var(--ip-accent); }
+/* ==== fin glossaire en tableau ==== */

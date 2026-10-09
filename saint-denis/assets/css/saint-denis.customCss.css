@@ -31,19 +31,12 @@
 }
 
 /* Pages éditoriales récupérées */
-#main #article .sd-rubrique,
 #main #article .sd-part,
 #main #article .sd-subpart,
 #main #article .sd-static-page {
   max-width:76rem;
   margin-left:auto;
   margin-right:auto;
-}
-
-#main #article .sd-rubrique-title {
-  border-bottom:4px solid var(--sd-legacy-red);
-  padding-bottom:.35rem;
-  color:var(--sd-legacy-red);
 }
 
 #main #article .sd-part-title {
@@ -106,11 +99,6 @@
   background:#fafafa;
 }
 
-#main #article .sd-static-page img {
-  max-width:100%;
-  height:auto;
-}
-
 #main #article .sd-static-page .date {
   font-size:.9em;
   color:#666;
@@ -136,99 +124,16 @@
   font-weight:700;
 }
 
-#main #article .sd-search-form {
-  display:block;
-}
-
-#main #article .sd-search-form > label {
-  display:block;
-  margin-bottom:.35rem;
-  font-weight:700;
-  color:var(--sd-legacy-dark);
-}
-
-#main #article .sd-search-row {
-  display:grid;
-  grid-template-columns:minmax(14rem,1fr) minmax(12rem,18rem) auto;
-  gap:.55rem;
-}
-
-#main #article .sd-search-row input,
-#main #article .sd-search-row select,
-#main #article .sd-search-row button {
-  min-height:2.6rem;
-  box-sizing:border-box;
-  border:1px solid #a8a8a8;
-  padding:.45rem .65rem;
-  font:inherit;
-}
-
-#main #article .sd-search-row input:focus,
-#main #article .sd-search-row select:focus {
-  outline:2px solid rgba(167,49,54,.25);
-  border-color:var(--sd-legacy-red);
-}
-
-#main #article .sd-search-row button {
-  border-color:var(--sd-legacy-red);
-  background:var(--sd-legacy-red);
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-}
-
-#main #article .sd-search-row button:hover {
-  filter:brightness(.9);
-}
-
-#main #article .sd-search-help,
-#main #article .sd-search-status {
+#main #article .sd-search-help {
   margin:.75rem 0 0;
   font-size:.9rem;
   color:#666;
 }
 
-#main #article .sd-search-status {
-  font-weight:700;
-  color:var(--sd-legacy-dark);
-}
-
-#main #article .sd-search-result {
-  margin-top:.9rem;
-  padding:.8rem .9rem;
-  border-left:3px solid var(--sd-legacy-red);
-  background:#f7f7f7;
-}
-
-#main #article .sd-search-result h3 {
-  margin:0 0 .45rem;
-  padding:0;
-  border:0;
-  font-size:1rem;
-}
-
-#main #article .sd-search-result p {
-  margin:.25rem 0 0;
-}
-
-#main #article .sd-search-result mark {
-  background:#fff1a8;
-  padding:0 .08em;
-}
-
-@media (max-width:760px) {
-  #main #article .sd-search-row {
-    grid-template-columns:1fr;
-  }
-}
-
 /* autopilote 2026-09-11 : images servies depuis /images/saint-denis/ */
 .sd-graphic { max-width: 100%; height: auto; display: block; margin: .5em 0; }
-.sd-illustration-img { display: block; max-width: 100%; height: auto; margin: .5em 0 1em; border: 1px solid #ddd; }
-.sd-illustration-absente { color: inherit; }
 
 /* B1f (autopilote 2026-09-11) : en-tête des actes — titre, auteur, puis « date. — lieu » */
-#main #article header.front .sd-docAuthor { margin:.2rem 0 0; color:#666; font-size:.92em; }
 #main #article header.front .sd-docDate { margin:.2rem 0 1rem; }
 
 /* B1g (autopilote 2026-09-11) : tradition — un paragraphe par liste, libellé en gras (ancien site) */
@@ -262,7 +167,7 @@
 .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
 @media (max-width: 768px) {
   .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+  .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
 }
 /* ==== fin D11 ==== */
 /* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
@@ -432,7 +337,6 @@
 
 /* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
 .document-area #article:not(.bottom-toc) .footnotes,
-.document-area #article:not(.bottom-toc) .apparatus,
 .document-area #article:not(.bottom-toc) .note {
   font-size: var(--font-small-size, 14px);
   line-height: 1.5;
@@ -442,7 +346,6 @@
   padding-top: .8rem;
   border-top: 1px solid var(--d12-filet);
 }
-.document-area #article:not(.bottom-toc) a.noteref,
 .document-area #article:not(.bottom-toc) .noteref {
   text-decoration: none;
 }
@@ -497,28 +400,17 @@
 
 /* ==== D21 (2026-09-12) : Inventaire général des chartes ==== */
 .document-area .isd-section { margin: 1.4rem 0; }
-.document-area .isd-section-head { margin: 0 0 .5rem; }
 .document-area .isd-section-info { margin: .2rem 0; color: #555; }
 .document-area .isd-libelle { font-weight: 700; }
 .document-area .isd-notice { margin: 1.1rem 0; padding: .8rem 1rem; border-left: 3px solid #d8d2c8; background: #fcfbfa; }
-.document-area .isd-notice-head { margin: 0 0 .5rem; font-size: 1.02rem; }
 .document-area .isd-champs { display: grid; grid-template-columns: minmax(9rem, auto) 1fr; gap: .15rem .9rem; margin: .4rem 0; }
 .document-area .isd-champs dt { color: #555; font-size: .9rem; }
-.document-area .isd-champs dd { margin: 0; }
 /* ==== fin Inventaire ==== */
-/* L'intitulé « Édition du regeste » est un head de section dans le TEI : la chaîne le rend en
-   titre de niveau élevé, plus gros que le titre de la notice qui le contient. On le ramène au
-   rang d'un sous-titre. */
-/* Sélecteur avec l'id : le socle sobre de D12 fixe la taille des titres par `#article h1`,
-   qui l'emporte sur deux classes (mesuré : la règle sans id restait sans effet). */
-.document-area #article:not(.bottom-toc) .isd-notice h1,
-.document-area #article:not(.bottom-toc) .isd-notice h2,
-.document-area #article:not(.bottom-toc) .isd-notice h3:not(.isd-notice-head) {
-  margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555;
-}
 /* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
    l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :
-   <p class="isd-rubrique">. Même aspect que la règle précédente, sans retrait d'alinéa. */
+   <p class="isd-rubrique">. Taille, graisse et couleur de l'ancienne règle des titres h1-h3 de notice (retirée le
+   2026-10-09 : plus aucun titre dans les notices), sans retrait d'alinéa. Sélecteur avec l'id :
+   le socle D12 fixe la taille des titres par `#article h1`, qui l'emporte sur deux classes. */
 .document-area #article:not(.bottom-toc) .isd-notice p.isd-rubrique {
   margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555; text-indent: 0;
 }

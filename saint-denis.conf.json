@@ -52,6 +52,10 @@
     {
       "tabName": "Feuille de route",
       "compName": "about3"
+    },
+    {
+      "tabName": "Crédits",
+      "compName": "about4"
     }
   ],
   "collectionCustomCss": "saint-denis",

@@ -68,11 +68,45 @@
   text-indent: 0;
 }
 
-/* hteiml met tout <front> sur fond gris (en-tête des lettres, introduction générale) :
-   on le retire, l'en-tête reste dans le fil du texte. */
+/* hteiml met tout <front> sur fond gris (en-tête des lettres) : fond blanc, le reste de
+   sa mise en page (marges, retrait) est gardé. */
 #main #article section.front {
-  background-color: transparent;
-  padding-left: 0;
+  background-color: #fff;
+}
+
+/* Analyse de la lettre : la feuille historique écrit ses articles en <i> à la suite ; sur
+   l'ÉLEC, une espace venait de l'indentation du HTML, que indent="no" supprime. */
+#main #article section.front p > i + i::before {
+  content: " ";
+}
+
+/* Titre d'une page de partie (« Enquête sur la Great Bible ») : dots-vue affiche ces pages
+   comme un sommaire, sous .dots-ui, dont la remise à zéro (:where(.dots-ui) h1) ramène les
+   titres au corps du texte. On leur rend la taille des titres de hteiml. */
+#main #article h1.head {
+  font-size: 160%;
+  font-weight: 900;
+}
+
+/* Notes : plus près du texte, séparées par un court filet comme sur l'ÉLEC
+   (hteiml : 43 px de marge et 16 px de retrait au-dessus, sans filet). */
+#main #article section.footnotes {
+  margin-top: 1.5em;
+  padding-top: 0;
+}
+#main #article section.footnotes::before {
+  content: "";
+  display: block;
+  width: 15%;
+  margin-bottom: 1em;
+  border-top: 1px solid #999;
+}
+
+/* Index : à l'arrivée par un renvoi du texte, le nom de la fiche visée est surligné en jaune,
+   comme dans Montferrand (.dots-target : posée par dots-vue sur une URL à ancre ouverte à froid). */
+#main #article li:target > .index-name,
+#main #article li.dots-target > .index-name {
+  background-color: #fbeeb8;
 }
 
 /* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est

@@ -39,10 +39,8 @@
     "tableOfContentDepth": 2,
     "editByLevel": null,
     "editByCiteType": [
-      "introduction",
       "lettre",
-      "index-person",
-      "index-place"
+      "index"
     ],
     "countByCiteType": [
       "lettre"

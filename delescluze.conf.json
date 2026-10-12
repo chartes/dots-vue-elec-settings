@@ -16,16 +16,20 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "browseButtonText": "Parcourir l'édition"
+      "browseButtonText": "Parcourir l'édition",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
-    "footerTitle": "Henri Delescluze à Belle-Île",
+    "footerTitle": "Édition critique des carnets de prison et de la correspondance privée d’Henri Delescluze à Belle-Île (1851-1853)",
     "footerSubtitles": [
-      "Carnets de prison et correspondance privée",
-      "1851-1853"
+      "Édition de Christine Nougaret",
+      "Édition électronique de Natalia Pashkeeva, sous la direction et avec l’aide de Florence Clavaud"
     ],
-    "footerDescription": "Édition critique des carnets de prison et de la correspondance privée d'Henri Delescluze."
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 4,

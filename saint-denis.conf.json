@@ -18,16 +18,20 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "browseButtonText": "Parcourir les chartes"
+      "browseButtonText": "Parcourir les chartes",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
-    "footerTitle": "Chartes médiévales de l’abbaye de Saint-Denis",
+    "footerTitle": "Chartes médiévales de l’abbaye de Saint-Denis (VIIe-XIIIe siècle)",
     "footerSubtitles": [
-      "VIIe-XIIIe siècle",
-      "École nationale des chartes – PSL"
+      "Édition de Olivier Guyotjeannin",
+      "Édition électronique de Florence Clavaud"
     ],
-    "footerDescription": "Édition électronique des chartes de l’abbaye de Saint-Denis."
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 2,

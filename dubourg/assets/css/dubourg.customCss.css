@@ -78,6 +78,8 @@
    sa mise en page (marges, retrait) est gardé. */
 #main #article section.front {
   background-color: #fff;
+  border: 1px dotted rgba(95, 0, 77, 0.3); /* #5f004d à 30 % */
+  padding: 0.5em 0.75em;
 }
 
 /* Analyse de la lettre : la feuille historique écrit ses articles en <i> à la suite ; sur

@@ -87,6 +87,18 @@
   font-size: 160%;
   font-weight: 900;
 }
+/* Ces mêmes pages (parties, présentation de l'index) perdent aussi toutes leurs marges :
+   on rend un espace autour des titres et entre les paragraphes. Les lettres, qui ne sont
+   pas sous .dots-ui, ne sont pas touchées. */
+.dots-ui #main #article h1.head {
+  margin: 1.5em 0 0.75em;
+}
+.dots-ui #main #article h1.head:first-child {
+  margin-top: 0.5em;
+}
+.dots-ui #main #article p {
+  margin: 0 0 0.6em;
+}
 
 /* Notes : plus près du texte, séparées par un court filet comme sur l'ÉLEC
    (hteiml : 43 px de marge et 16 px de retrait au-dessus, sans filet). */

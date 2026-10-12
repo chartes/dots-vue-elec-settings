@@ -3,7 +3,13 @@
    Reprise de la feuille du thème historique de l'ÉLEC
    (http://elec.enc.sorbonne.fr/dubourg/theme/dubourg.css), adaptée au HTML que produit
    transform/dubourg/dubourg.xsl dans dots-vue. dots-vue injecte cette feuille dans toute
-   l'application : chaque règle est limitée au texte du document (#main #article). */
+   l'application : chaque règle est limitée au texte du document (#main #article).
+
+   Le renderer déclaré dans elec.conf.json charge d'abord la CSS de hteiml (html.css) dans
+   la couche documentBase : les règles ci-dessous l'emportent sur elle. hteiml met un
+   alinéa à tout paragraphe (p:not(.list)) et supprime leurs marges (p { margin: 0 }) ;
+   on retire l'alinéa là où le texte est centré ou au fer à droite, et on rend aux
+   paragraphes de la lettre l'espacement de l'ÉLEC. */
 
 /* Texte de l'édition justifié (ÉLEC : article.front, article.group). */
 #main #article {
@@ -30,26 +36,44 @@
 /* Date et lieu de la lettre, centrés (« 1536, 4 août. — Vienne »). */
 #main #article p.date {
   text-align: center;
+  text-indent: 0;
   margin-bottom: 2em;
 }
 
-/* Paragraphes de la transcription en alinéa. */
+/* Paragraphes de la transcription en alinéa, espacés comme sur l'ÉLEC. */
 #main #article p.transcription {
   text-indent: 35px;
+  margin: 1em 0;
 }
 
 /* Signature au fer à droite, en petites capitales (ÉLEC : name.signed). */
 #main #article p.signed {
   text-align: right;
+  text-indent: 0;
+  margin: 1em 0;
 }
 #main #article span.signed {
   font-variant: small-caps;
+  margin: 0;
 }
 
 /* Vedettes des index en petites capitales : la feuille historique le faisait par un
    style en ligne sur <name>. */
 #main #article span.index-name {
   font-variant: small-caps;
+}
+/* Notices des index alignées sous la vedette, sans l'alinéa de hteiml (comme sur l'ÉLEC). */
+#main #article #index-person li p,
+#main #article #index-place li p {
+  text-indent: 0;
+}
+
+/* hteiml met tout <front> sur fond gris. On garde ce cadre pour l'en-tête d'une lettre
+   (titre, date, analyse, cote : l'ÉLEC l'encadrait aussi), mais pas pour l'introduction
+   générale, qui est elle-même un <front> sans lettre autour. */
+#main #article section.front:not(article.text > section.front) {
+  background-color: transparent;
+  padding-left: 0;
 }
 
 /* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est
@@ -73,6 +97,7 @@
 }
 #main #article .titlestmt .editors {
   text-align: center;
+  text-indent: 0;
 }
 #main #article .titlestmt .editors-label {
   font-style: italic;

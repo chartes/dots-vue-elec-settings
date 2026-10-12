@@ -68,10 +68,9 @@
   text-indent: 0;
 }
 
-/* hteiml met tout <front> sur fond gris. On garde ce cadre pour l'en-tête d'une lettre
-   (titre, date, analyse, cote : l'ÉLEC l'encadrait aussi), mais pas pour l'introduction
-   générale, qui est elle-même un <front> sans lettre autour. */
-#main #article section.front:not(article.text > section.front) {
+/* hteiml met tout <front> sur fond gris (en-tête des lettres, introduction générale) :
+   on le retire, l'en-tête reste dans le fil du texte. */
+#main #article section.front {
   background-color: transparent;
   padding-left: 0;
 }

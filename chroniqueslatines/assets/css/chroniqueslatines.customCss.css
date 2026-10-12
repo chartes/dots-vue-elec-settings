@@ -74,11 +74,17 @@
     font-variant: small-caps;
   }
   .rubric { color: #8e3a7e; } /* prune clair, distinct des titres (contraste ~7:1) */
+
   .ornament {
     color: var(--accent);
-    font-family: "Garamond", "Palatino Linotype", serif;
     font-size: 200%;
+    line-height: 1.4;
   }
+
+  p:not(.noindent) {
+    text-indent: 0;
+  }
+
   .cb {
     color: grey;
     float: none !important;
@@ -244,3 +250,4 @@
     aside.note a.noteback { font-size: 14px; }
   }
 }
+

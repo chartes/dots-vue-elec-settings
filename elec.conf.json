@@ -41,6 +41,12 @@
   "collectionCustomCss": "elec",
   "excludeCollectionIds": ["corpus", "bfm"],
   "searchConfig": {
+    "facets": [
+      {
+        "key": "resources",
+        "enabled": false
+      }
+    ],
     "temporalFacets": [
       {
         "key": "dublinCore.coverage",

@@ -802,6 +802,17 @@
   .document-views .text-view #article .montferrand-historic .mf-biblio-filtre { width: 100%; }
 }
 
-section.div h1.head {
-  margin-top: 2rem;
+/* ==========================================================================
+   En-tête de registre sur fond blanc (2026-10-12) : la CSS de hteiml, chargée par le
+   renderer d'elec.conf.json, met tout <front> sur fond gris. Fond blanc, le reste de sa
+   mise en page (marges, retrait) est gardé, comme pour Du Bourg.
+   ========================================================================== */
+.document-views .text-view #article .montferrand-historic section.front {
+  background-color: #fff;
+}
+
+.document-views .front h1 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
 }

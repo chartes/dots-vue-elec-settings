@@ -1,90 +1,93 @@
 {
   "collectionId": "dubourg",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "Correspondance Du Bourg"
     },
     "pageHeader": {
       "collectionAltTitle": "Correspondance du chancelier Antoine Du Bourg",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": null
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "logo": "logo_dubourg.png"
+      "logo": "logo_dubourg.png",
+      "browseButtonText": "Lire la correspondance",
+      "singleResourceButtonText": "Accéder au document"
     }
   },
-
   "footerSettings": {
-    "footerTitle": "",
-    "footerSubtitles": null,
-    "footerDescription": "Le projet d'édition de la correspondance d'Antoine Du Bourg a été développé par la Mission projet numérique de l'École nationale des chartes – PSL."
+    "footerTitle": "Correspondance du chancelier Antoine Du Bourg (1535-1538)",
+    "footerSubtitles": [
+      "Édition d'Olivier Poncet",
+      "Édition électronique de Camille Desenclos"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
-
   "tableOfContentsSettings": {
     "tableOfContentDepth": 2,
     "editByLevel": null,
     "editByCiteType": [
-      "introduction",
       "lettre",
-      "index-person",
-      "index-place"
+      "index"
     ],
     "countByCiteType": [
       "lettre"
-    ]
+    ],
+    "displayTopToc": false,
+    "displayLeftToc": true
   },
-
   "aboutPageSettings": [
     {
       "tabName": "Présentation",
       "compName": "about1"
     }
   ],
+  "collectionCustomCss": "dubourg",
+  "topBreadcrumbButtonLabel": [
+    "extensions.dots:shortTitle"
+  ],
   "metadataDisplayOrder": [
     "dct:title",
-
-    "schema:author",
-
-    "dct:created",
-
-    "dct:language",
-
     "schema:editor",
-
+    "dct:created",
     "schema:isBasedOn",
-
+    "schema:exampleOfWork",
+    "dct:language",
     "schema:publisher",
-
     "dct:issued",
-
     "dct:bibliographicCitation",
-
-    "dct:coverage",
-
-    "dct:description",
-
-    "schema:license",
-
+    "dct:license",
     "dct:rights",
-
-    "schema:funder",
-
-    "dct:identifier",
-
     "schema:encoding"
   ],
   "metadataRename": {
-    "@id": "dts:id",
-    "@type": "dts:type"
+    "dct:title": "Titre",
+    "schema:editor": "Éditeur scientifique",
+    "dct:created": "Date du document",
+    "schema:isBasedOn": "Source",
+    "dct:language": "Langue",
+    "schema:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:exampleOfWork": "Notice",
+    "schema:encoding": "Exports"
   },
   "excludeMetadata": {
     "onlyDeclared": true,
-    "fields": [
-    ]
+    "fields": []
   }
 }

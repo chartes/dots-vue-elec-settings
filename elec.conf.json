@@ -1,5 +1,31 @@
 {
   "collectionId": "elec",
+  "renderer": {
+    "css": [
+      "https://dots.chartes.psl.eu/assets/html.css"
+    ],
+    "documentContainer": "#center",
+    "pageSelectors": [
+      "html",
+      "body",
+      ":root"
+    ],
+    "facsimiles": [
+      {
+        "selector": "a.pb[href*='iiif']",
+        "image": {
+          "attribute": "href"
+        }
+      },
+      {
+        "selector": ".lg figure",
+        "image": {
+          "selector": "a img",
+          "attribute": "src"
+        }
+      }
+    ]
+  },
   "homePageSettings": {
     "appNavBar": {
       "appNavBarLogo": {

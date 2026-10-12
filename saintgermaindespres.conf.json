@@ -16,16 +16,20 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "browseButtonText": "Parcourir les dossiers"
+      "browseButtonText": "Parcourir les dossiers",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
-    "footerTitle": "Saint-Germain-des-Prés",
+    "footerTitle": "Travaux de restauration de l'église Saint-Germain-des-Prés",
     "footerSubtitles": [
-      "Une église médiévale au filtre du XIXe siècle",
-      "École nationale des chartes – PSL"
+      "Édition de Philippe Plagnieux et Élisabeth Parinet",
+      "Édition électronique de Mathilde Henriquet"
     ],
-    "footerDescription": "Édition des principales sources écrites et iconographiques concernant la restauration de l'église parisienne de Saint-Germain-des-Prés au XIXe siècle."
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 4,

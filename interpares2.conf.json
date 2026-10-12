@@ -16,15 +16,20 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "browseButtonText": "Parcourir les pages"
+      "browseButtonText": "Parcourir les pages",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
     "footerTitle": "InterPARES 2",
     "footerSubtitles": [
-      "Édition électronique de l'École nationale des chartes"
+      "Édition de Christine Nougaret et Françoise Banat-Berger",
+      "Édition électronique de Mathilde Henriquet"
     ],
-    "footerDescription": "Archivistique et diplomatique numériques : traduction française d'une partie des livrables du projet InterPARES 2."
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 4,

@@ -18,16 +18,19 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "browseButtonText": "Consulter les douze tomes"
+      "browseButtonText": "Consulter les douze tomes",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
-    "footerTitle": "Actes royaux du Poitou",
+    "footerTitle": "Actes royaux du Poitou (1302-1483)",
     "footerSubtitles": [
-      "Douze tomes, 1302-1483",
-      "École nationale des chartes – PSL"
+      "Édition de Paul Guérin"
     ],
-    "footerDescription": "Édition électronique des actes royaux du Poitou."
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 2,

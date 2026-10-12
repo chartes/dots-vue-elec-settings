@@ -18,16 +18,20 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "browseButtonText": "Consulter les testaments"
+      "browseButtonText": "Consulter les testaments",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
     "footerTitle": "Testaments de guerre de Poilus parisiens (1914-1918)",
     "footerSubtitles": [
-      "Édition critique",
-      "École nationale des chartes – PSL"
+      "Édition de Christine Nougaret",
+      "Édition électronique de Florence Clavaud"
     ],
-    "footerDescription": "Édition électronique des testaments de guerre de Poilus parisiens."
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,

@@ -16,15 +16,20 @@
       "displayMode": "toc",
       "openState": true,
       "browseButtonText": "Découvrir la collection",
-      "logo": "edits.png"
+      "logo": "edits.png",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
-    "footerTitle": "L'édit de Nantes et ses antécédents",
+    "footerTitle": "L'édit de Nantes et ses antécédents (1562-1598)",
     "footerSubtitles": [
-      "1562-1598"
+      "Édition de Bernard Barbiche",
+      "Édition électronique de Vincent Jolivet"
     ],
-    "footerDescription": ""
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,

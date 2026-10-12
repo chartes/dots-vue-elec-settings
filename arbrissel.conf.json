@@ -16,15 +16,19 @@
     "listSection": {
       "displayMode": "toc",
       "openState": true,
-      "browseButtonText": "Parcourir le texte"
+      "browseButtonText": "Parcourir le texte",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
-    "footerTitle": "Arbrissel",
+    "footerTitle": "Robert d'Arbrissel, entre philologie et histoire",
     "footerSubtitles": [
-      "École nationale des chartes – PSL"
+      "Actes réunis par Pascale Bourgain et Dominique Poirel"
     ],
-    "footerDescription": ""
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 2,

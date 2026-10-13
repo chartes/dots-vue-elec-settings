@@ -159,7 +159,8 @@ function voir (lien, event) {
   const h = barre ? barre.offsetHeight : 0
   const th = cadre.querySelector('thead')
   const hh = th ? th.offsetHeight : 0
-  window.scrollTo({ top: cible.getBoundingClientRect().top + window.scrollY - 80 - h - hh - 8, behavior: 'smooth' })
+  // Défilement immédiat : sur une page aussi longue, le défilement animé peut s'arrêter avant la ligne
+  window.scrollTo({ top: cible.getBoundingClientRect().top + window.scrollY - 80 - h - hh - 8, behavior: 'instant' })
 }
 
 // Appeler fn sur chaque élément qui correspond à selecteur dès qu'il entre dans la page

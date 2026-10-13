@@ -376,3 +376,134 @@
   #article .feuilletdossier, #article .contenu { margin-left: 0; margin-right: 0; }
   #article .titrepage { padding-left: 1em; min-width: 0; }
 }
+
+/* ==========================================================================
+   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
+   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
+   ========================================================================== */
+
+:root { --fill-color: #8f241d; }
+
+#center { max-width: 100%; overflow-x: hidden; }
+
+/* ---- carte de la collection (page d'accueil DoTS-vue) ; couleurs et police plus bas
+   (« Accueil de collection, 2026-09-14 ») ---- */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-list.mixed-mode { max-width: 74rem; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .resources-grid { display: block; }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card { max-width: 42rem; margin: 0 auto; border: 1px solid var(--line, #d7d3cd); border-radius: 6px; background: #fff; box-shadow: 0 8px 24px rgba(36, 36, 36, .08); }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line { display: block; text-align: center; text-decoration: none; }
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line::after { content: "Accueil, introduction, étude générale, manuscrit, interventions, index et analyse"; display: block; }
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ==== Accueil de collection (2026-09-14) : titre lisible, plus de titre rouge ====
+   Mesuré sur http://localhost:5173/bellelay, viewport 1440x1000, AVANT correction :
+     .collection-metadata-title « Le Graduel de Bellelay » : 622x30 px, color rgb(255,255,255)
+       sur un fond rgb(255,255,255)  ->  contraste 1,00:1 (seuil WCAG : 4,5:1) = invisible ;
+     .collection-description « Migration dotifiée… »       : 622x68 px, même contraste 1,00:1 ;
+     soit 60 916 px² de texte invisible sur une carte de 672x200 px (45 % de sa surface),
+     et la seule ligne lisible de la carte était le nom de l'auteur (« Olivier Cullin »,
+     #8f241d, Georgia 700 21,6 px, centré) — donc l'auteur tenait lieu de titre, en rouge.
+   Cause : les règles amont de dots-vue/src/components/CollectionCardWithToc.vue
+     `.mixed-mode .card-header .collection-metadata .collection-metadata-title { color:#FFF }`
+     `.mixed-mode .collection-description { color:#FFF }`
+   supposent le panneau plein `--fill-color` du mode « mixed » (cf. /theater, /miroir, /cjc,
+   où la carte est un aplat rouge). Ici la ressource unique passe par la branche « resource »
+   du composant, qui n'a pas ce panneau : la carte reste blanche, le texte blanc disparaît.
+   Leur spécificité (4 classes + attribut de scope) l'emporte sur nos sélecteurs `body:has(…)`,
+   d'où les `!important` ci-dessous ; dots-vue/src/ n'est pas modifié.
+   Homogénéisation : aucune autre collection ÉLEC mesurée (/saint-denis, /chroniqueslatines,
+   /edits, /delescluze, /obituaires, /theater) n'affiche de titre en rouge — les intitulés y
+   sont à l'encre quasi noire (ou en blanc sur aplat de couleur) et la couleur de collection
+   est réservée au bandeau, aux icônes et aux liens. On s'aligne dessus. */
+
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line {
+  padding: 1.25rem 1.5rem 1.35rem;
+  color: #242424;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+/* Le vrai titre de la ressource redevient le titre visible de la carte. */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .collection-metadata-title {
+  color: #202020 !important;
+  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.35rem !important;
+  line-height: 1.25 !important;
+  margin-bottom: .3rem;
+}
+
+/* Auteur : ligne secondaire discrète, elle ne joue plus le rôle de titre. */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .collection-metadata > .is-flex {
+  color: #686868;
+  font-size: .95rem;
+  line-height: 1.4;
+}
+
+/* dc:description (« Migration dotifiée… ») : phrase technique, elle n'était de toute façon
+   pas lisible (blanc sur blanc) et réservait 68 px de vide. La ligne de sommaire injectée en
+   ::after ci-dessous en tient lieu. */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .collection-description {
+  display: none !important;
+}
+
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line::after {
+  margin-top: .55rem;
+  color: #686868;
+  font-size: .95rem;
+  line-height: 1.45;
+}
+
+/* Survol / focus : teinte douce au lieu de l'inversion en aplat rouge ; l'accent de collection
+   ne sert plus qu'à signaler le lien. */
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus {
+  color: #242424;
+  background: #f4f1ed;
+}
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover .collection-metadata-title,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus .collection-metadata-title {
+  color: #8f241d !important;
+}
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:hover::after,
+body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line:focus::after {
+  color: #686868;
+}
+/* ==== fin accueil de collection 2026-09-14 ==== */
+
+/* 2026-10-04 — Élément visé par une ancre (bloc d'images d'une pièce, entrée de liste),
+   aux couleurs du corpus. `.dots-target` double `:target` : dots-vue pose cette classe sur
+   l'élément visé quand une URL à ancre est ouverte à froid. */
+.document-area #article li:target,
+.document-area #article li.dots-target {
+  background: #fdf1f0;
+  box-shadow: inset 3px 0 0 #cf0b05;
+}

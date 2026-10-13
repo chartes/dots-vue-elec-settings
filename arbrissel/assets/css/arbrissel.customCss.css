@@ -1,6 +1,10 @@
 /* Arbrissel — feuille reconstruite le 13/10/2026 : celle de la version précédente, sans le
    socle générique D12. */
 
+/* Thème Diple de l'ÉLEC : paragraphes espacés (marge par défaut du navigateur), sans
+   alinéa ; hteiml les colle et les met en retrait. */
+#main #article p { margin: 1em 0; text-indent: 0; }
+
 /* ============================================================================
    Robert d'Arbrissel, entre philologie et histoire — CSS spécifique du corpus.
 

@@ -7,6 +7,14 @@
 
 /* rouge : #A73136 ; gris clair : #E8E8E8 ; gris foncé : #4A4A4A */
 
+/* Couleurs du corpus dans l'application (barre, sommaire, accents) : reprises de la
+   feuille précédente. */
+:root {
+  --fill-color: #8d2632;
+  --meta-area-fill-color: #f5eeee;
+  --default-text-color: #28211f;
+}
+
 #article #content {
   font-family: Arial, Verdana, sans-serif;
   font-size: 14px;
@@ -579,3 +587,136 @@
   #article #edition-text { border-right: none; }
   #article .apparatusNote { position: static; width: auto; margin: 0.3em 0; }
 }
+
+/* ==========================================================================
+   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
+   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
+   ========================================================================== */
+
+/* Pas de volet Mirador : les fac-similés sont dans le texte. */
+.document-views .mirador-view { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ============================================================================
+   D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
+
+   POURQUOI
+   --------
+   Certains libellés de sommaire sont longs parce que le texte de l'éditeur
+   l'est : l'analyse d'un acte, une rubrique médiévale, le résumé d'un
+   testament. Les amputer dans le registre de fragments serait mutiler la
+   donnée. On les tronque donc À L'AFFICHAGE, sur deux lignes.
+
+   Le texte complet reste dans le DOM : il est sélectionnable, trouvable par
+   la recherche du navigateur, et lu en entier par les lecteurs d'écran.
+   Rien n'est perdu, seule la hauteur de la ligne du sommaire est bornée.
+
+   PORTÉE — délibérément étroite
+   -----------------------------
+   `#toc-tree a.toc-title` : l'ancre de titre de l'arbre du sommaire émis par
+   TOC.vue, et rien d'autre. Pas de sélecteur sur `a`, `li`, `.tree` ni
+   `.container`, qui servent ailleurs dans la page.
+
+   `display:-webkit-box` est requis par `-webkit-line-clamp` ; l'ancre est un
+   enfant de `.li.container{display:flex}` et reste donc un élément de flex.
+   Les navigateurs sans line-clamp affichent le titre entier : dégradation
+   sans casse.
+
+   NE PAS élargir ce sélecteur : une règle trop large a déjà cassé un autre
+   corpus sur ce projet.
+   ============================================================================ */
+
+#toc-tree a.toc-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* === SECTION GARDE DEBUT (page de garde commune, 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
+/* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev
+   (comptes.customCss.css § 8, mesures du 2026-10-08) ; seule la couleur suit le corpus (--fill-color).
+   La table des matières est le sommaire de DoTS-vue (.bottom-toc), placé SOUS le titre, pleine largeur,
+   au même retrait que le texte (padding par défaut de DoTS-vue : 20px 10% 120px), sur la seule page
+   de garde (wrapper qui contient .titlestmt). */
+.document-area #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+.document-area #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color, #8f0e21) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+.document-area #article .titlestmt .editors { text-align: center; text-indent: 0; }
+.document-area #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
+.document-area #article .titlestmt .editor {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #333;
+  margin-bottom: 0.75rem;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+.document-area #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color, #8f0e21);
+  border-top: 1px solid #e2c5cb;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+.document-area .wrapper:has(.titlestmt) { display: block !important; }
+.document-area .wrapper:has(.titlestmt) > .bottom-toc,
+.document-area .wrapper:has(.titlestmt) > #article.bottom-toc,
+.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > .bottom-toc,
+.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > #article.bottom-toc {
+  display: block !important;
+  order: 0;
+  flex: none;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 20px 10% 120px;
+}
+.document-area .wrapper:has(.titlestmt) > .bottom-toc ul { margin: 15px 0; font-size: 15px; line-height: 20px; }
+.document-area .wrapper:has(.titlestmt) > .bottom-toc li a,
+.document-area .wrapper:has(.titlestmt) > .bottom-toc li .toc-title { padding-top: 4px; padding-bottom: 4px; font-size: 15px; }
+/* === SECTION GARDE FIN === */

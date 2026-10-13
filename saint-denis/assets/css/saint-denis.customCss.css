@@ -491,3 +491,12 @@
   padding: .5em; list-style-position: inside; line-height: 130%;
 }
 .document-area #article:not(.bottom-toc) em.sup { font-style: normal; vertical-align: top; font-size: 80%; }
+
+/* ==========================================================================
+   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
+   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
+   ========================================================================== */
+
+.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
+.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
+.description-section nav a:hover { background:var(--fill-color); color:white; }

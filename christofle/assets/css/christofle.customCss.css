@@ -277,6 +277,299 @@
 /* [dots] exposants de hteiml (<hi rend="super">) */
 #article .super { vertical-align: super; font-size: 75%; line-height: 0; }
 
+/* ---------- Index en tableau et filtre par jour des mois ----------
+   Repris tels quels de la feuille précédente (christofle.customCss.css avant le 13/10) :
+   ces deux dispositifs n'existaient pas sur l'ÉLEC. */
+
+/* --- Index historique unifié des lieux et des personnes --- */
+.christofle-index {
+  max-width: 60rem;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.christofle-index-intro { margin: 0 0 1.35rem; }
+.christofle-index-intro p {
+  margin: 0 0 .8rem;
+  color: #28211f;
+  font-style: normal;
+}
+
+
+/* Personnes : casse normale comme dans l'ÉLEC historique. */
+.christofle-index .chr-personne .surname,
+.christofle-index .chr-personne .forename {
+  font-variant: normal;
+  font-variant-caps: normal;
+  text-transform: none;
+}
+
+/* Lieux : vedette en petites capitales ; type de lieu en romain. */
+.christofle-index .placeName-entry {
+  font-variant: small-caps;
+  font-variant-caps: small-caps;
+}
+.christofle-index .placeName-entry .term {
+  font-variant: normal;
+  font-variant-caps: normal;
+  font-style: normal;
+  text-transform: none;
+}
+
+/* Localisation : département en romain, canton en italique. */
+.christofle-index .location .canton { font-style: italic; }
+
+.christofle-index .persName-note,
+.christofle-index .index-seealso {
+  font-style: italic;
+  color: #555;
+}
+
+.document-area #article .christofle-index a.internalLink,
+.document-area #article .christofle-index a.linkToIndex {
+  color: #8d2632;
+  text-decoration: none;
+  border-bottom: 1px dotted #8d2632;
+}
+.document-area #article .christofle-index a.internalLink:hover,
+.document-area #article .christofle-index a.linkToIndex:hover {
+  color: #5a121c;
+  border-bottom-color: #5a121c;
+}
+
+/* --- Index des lieux et des personnes en tableau (2026-10-06) ---
+   Page parent de l'index (christofle-index-unified) : un tableau Nom / Type /
+   Minutes, avec tri, filtres par colonne, compteur, « Effacer » et export CSV
+   (module de Montferrand, préfixé chr-). Les pages par lettre gardent leurs fiches.
+   dots-vue (tei.css) met tout tableau en display:block + overflow-x:scroll : un
+   en-tête collant n'y colle plus. On rend au tableau son modèle de table. */
+.document-views .text-view #article .christofle-index-unified {
+  --chr-accent: var(--fill-color, #8d2632);
+  max-width: 64rem;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau-cadre {
+  margin: 1.2rem 0 2rem;
+}
+.document-views .text-view #article .christofle-index-unified table.chr-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;      /* un th collant garde ses filets */
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: #777;
+  font-size: .8rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* En-têtes : titres de colonnes ET ligne des filtres collent en haut, pour
+   filtrer sans remonter. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--chr-accent);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+/* Une ligne désignée par un lien est placée en haut par Document.vue : l'en-tête
+   collant la couvrirait. Il cesse de coller tant qu'une ligne porte dots-target. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau:has(.dots-target) thead {
+  position: static;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 Arial, Helvetica, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri::after {
+  content: "\2195";               /* ↕ : colonne triable, non triée */
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau th[aria-sort="ascending"] button.chr-tri::after {
+  content: "\25B2";               /* ▲ */
+  color: var(--chr-accent);
+  font-size: .75em;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau th[aria-sort="descending"] button.chr-tri::after {
+  content: "\25BC";               /* ▼ */
+  color: var(--chr-accent);
+  font-size: .75em;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri:hover,
+.document-views .text-view #article .christofle-index-unified .chr-tableau th[aria-sort="ascending"] button.chr-tri,
+.document-views .text-view #article .christofle-index-unified .chr-tableau th[aria-sort="descending"] button.chr-tri {
+  color: var(--chr-accent);
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri:hover { background: #ece7e2; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau button.chr-tri:focus-visible {
+  outline: 2px solid var(--chr-accent);
+  outline-offset: -2px;
+}
+
+/* Cellules : filet fin, zébrage léger, survol. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau td {
+  padding: .35rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau tbody tr:hover > td { background: #f3efe9; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau tbody tr:target > td:first-child,
+.document-views .text-view #article .christofle-index-unified .chr-tableau tbody tr.dots-target > td:first-child {
+  box-shadow: inset 3px 0 0 var(--chr-accent);
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-vide { color: #c4bdb6; }
+
+/* Largeurs : Type étroit, Minutes à droite en chiffres alignés. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-c-type {
+  width: 8.5rem;
+  white-space: nowrap;
+  color: #555;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-c-minutes {
+  width: 30%;
+  font-variant-numeric: tabular-nums;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-sep { color: #b0a8a1; }
+
+/* Nom : sous-entrée « Lieu › sous-entrée », le lieu parent en gris. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-parent,
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-chevron {
+  color: #8a837c;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-location {
+  color: #6b645e;
+  font-size: .9em;
+}
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-location::before { content: "["; margin: 0 .15em 0 .3em; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau .chr-location::after { content: "]"; margin-left: .15em; }
+.document-views .text-view #article .christofle-index-unified .chr-tableau .index-seealso { font-size: .9em; }
+
+/* Écran étroit : le tableau défile de côté dans son cadre (l'en-tête ne colle plus). */
+@media (max-width: 760px) {
+  .document-views .text-view #article .christofle-index-unified .chr-tableau-cadre { overflow-x: auto; }
+  .document-views .text-view #article .christofle-index-unified table.chr-tableau { min-width: 36rem; }
+  .document-views .text-view #article .christofle-index-unified .chr-tableau thead { position: static; }
+}
+
+/* Filtres par colonne. dots-vue met les tableaux en flex : sans !important,
+   l'attribut hidden posé par le filtre ne masquerait pas la ligne. */
+.document-views .text-view #article .christofle-index-unified .chr-tableau tr[hidden] {
+  display: none !important;
+}
+.document-views .text-view #article .christofle-index-unified .chr-barre-filtres {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+.document-views .text-view #article .christofle-index-unified .chr-compteur {
+  font-variant-numeric: tabular-nums;
+}
+.document-views .text-view #article .christofle-index-unified .chr-effacer,
+.document-views .text-view #article .christofle-index-unified .chr-csv {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: var(--chr-accent);
+  font-size: .8rem;
+  cursor: pointer;
+}
+.document-views .text-view #article .christofle-index-unified .chr-effacer:hover,
+.document-views .text-view #article .christofle-index-unified .chr-csv:hover {
+  border-color: var(--chr-accent);
+}
+.document-views .text-view #article .christofle-index-unified .chr-csv { margin-left: auto; }
+.document-views .text-view #article .christofle-index-unified .chr-effacer[hidden] { display: none; }
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres input,
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres input:focus,
+.document-views .text-view #article .christofle-index-unified tr.chr-filtres select:focus {
+  outline: 2px solid var(--chr-accent);
+  outline-offset: -1px;
+}
+
+/* --- Drill mois -> jours : filtre par jour (hack radio :checked, aucun JS) --- */
+.christofle-mois .mois-intro { color: #5a4a4a; font-style: italic; margin: 0 0 1rem; }
+/* les radios de filtre sont masquées : on interagit via les <label> de la barre */
+.christofle-mois .jf-radio { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.jours-nav { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: .3rem; padding: .55rem .3rem; margin: 0 0 1.5rem; background: #fbf8f8;
+  border-top: 1px solid #d7d1ca; border-bottom: 1px solid #d7d1ca; }
+.jours-nav .jours-label { font-family: Arial, Helvetica, sans-serif; font-size: .85rem; color: #a05a63; margin-right: .3rem; }
+.jours-nav .jour-link { display: inline-block; min-width: 1.9rem; text-align: center; padding: .15rem .45rem;
+  border: 1px solid #e0cccc; border-radius: 4px; color: #8d2632; cursor: pointer; font-size: .9rem;
+  user-select: none; transition: background .12s; }
+.jours-nav .jour-link:hover { background: #f0e0e0; }
+.jours-nav .jour-all { font-family: Arial, Helvetica, sans-serif; font-size: .82rem; }
+/* FILTRE générique (aucun id par jour) : un jour coché masque les autres groupes.
+   « Tous » est hors de .jours-index -> aucun groupe coché -> tout visible. */
+.jours-index:has(.jour-group .jf-radio:checked) .jour-group:not(:has(.jf-radio:checked)) { display: none; }
+/* groupes de jour */
+.jour-group { margin: 0 0 1.6rem; scroll-margin-top: 4rem; }
+/* 2026-09-14 : `color: #8d2632` retiré (déjà sans effet — mesuré rgb(32, 32, 32)
+   sur ?refId=mois-01, 16 occurrences ; le socle D12 l'emportait). */
+.jour-group .jour-head { font-family: Arial, Helvetica, sans-serif; font-size: .95rem; font-weight: 700;
+  border-bottom: 1px solid #e0dcd5; padding-bottom: .2rem; margin: 0 0 .6rem; }
+.jour-note { padding: .2rem 0; border-bottom: 1px dotted #eadfe0; }
+.jour-note .note-link { display: block; color: inherit; text-decoration: none; }
+.jour-note .note-link:hover { background: #faf4f4; }
+.jour-note .note-num { font-weight: 700; color: #8d2632; }
+.jour-note .note-type { font-variant: small-caps; color: #7a4a50; }
+.jour-note .note-summary { color: #33292a; }
+
 /* ---------- Petits écrans : une colonne ---------- */
 @media screen and (max-width: 900px) {
   #article #facsimile, #article #edition-text, #article #specific-menu-paratext,

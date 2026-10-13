@@ -93,6 +93,8 @@
   margin: 30px 14% 0;
   font-family: Arial, sans-serif;
 }
+/* [dots] les tableaux filtrables prennent toute la largeur */
+#article .contenu:has(.bl-tableau-cadre) { margin-left: 0; margin-right: 0; }
 #article .contenu h1 {
   font-size: large;
   font-family: "Times New Roman", serif;
@@ -160,13 +162,6 @@
 #article .bl-mosaique .imagefeuillet { float: left; margin: 0 1em 1em; }
 #article .bl-mosaique img { width: 220px; }
 
-/* Index par fête [dots] : remplace le filtre « Fête » du formulaire de l'index */
-#article .bl-par-fete { padding-left: 0; margin-top: 2em; }
-#article .bl-fete h4 { font-size: medium; }
-#article .bl-fete ul { margin-top: 0.2em; }
-#article .bl-fete li { margin: 0.1em 0; }
-#article .bl-fete:target h4, #article tr:target { background: #FCE9E9; }
-
 /* Zones d'une image (introduction) */
 #article .bl-zones img { max-width: none; }  /* les coordonnées des zones supposent la taille réelle */
 #article .bl-zones { display: block; overflow-x: auto; }
@@ -183,6 +178,196 @@
 #article .list-group ul { list-style: none; text-align: center; padding: 0; }
 #article .list-group li { display: inline-block; margin: 5px 12px; }
 #article .list-group img { max-height: 95px; width: auto; }
+
+/* ---------- Tableaux triables et filtrables (index, interventions, annexes) ----------
+   Repris tels quels de la feuille précédente (bellelay.customCss.css avant le 13/10),
+   .bellelay-edition devenu #article. */
+/* ==== Index du manuscrit en tableau (2026-10-06) ====
+   Comme Montferrand : tri par colonne, un filtre par colonne dans l'en-tête (listes
+   Genre, Mode et Fête ; champ avec suggestions pour l'incipit), compteur, « Effacer »,
+   export CSV (module de comptes.xsl, préfixé bl- dans bellelay.xsl). Remplace l'encadré
+   « Recherche par critères » et ses ~770 règles générées (D9, retirées).
+   Les règles génériques des tableaux de Bellelay (bordure noire, texte centré) sont
+   reprises ici par une sélection plus précise (#legacy-indexmanuscrit). */
+#article :is(#legacy-indexmanuscrit, .bl-interventions) {
+  --bl-accent: var(--fill-color, #8f241d);
+  --bl-entete-collant: 80px;   /* hauteur de la barre de navigation collante (comme Montferrand) */
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) table.bl-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;      /* un th collant garde ses filets */
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: #777;
+  font-size: .8rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* En-têtes : titres de colonnes ET ligne des filtres collent en haut, pour
+   filtrer sans remonter. */
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau thead {
+  position: sticky;
+  top: var(--bl-entete-collant);
+  z-index: 2;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--bl-accent);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+/* Une ligne désignée par un lien est placée en haut par Document.vue : l'en-tête
+   collant la couvrirait. Il cesse de coller tant qu'une ligne porte dots-target. */
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau:has(.dots-target) thead {
+  position: static;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau button.bl-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau button.bl-tri::after {
+  content: "\2195";               /* ↕ : colonne triable, non triée */
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau th[aria-sort="ascending"] button.bl-tri::after {
+  content: "\25B2";               /* ▲ */
+  color: var(--bl-accent);
+  font-size: .75em;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau th[aria-sort="descending"] button.bl-tri::after {
+  content: "\25BC";               /* ▼ */
+  color: var(--bl-accent);
+  font-size: .75em;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau button.bl-tri:hover,
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau th[aria-sort="ascending"] button.bl-tri,
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau th[aria-sort="descending"] button.bl-tri {
+  color: var(--bl-accent);
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau button.bl-tri:hover { background: #ece7e2; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau button.bl-tri:focus-visible {
+  outline: 2px solid var(--bl-accent);
+  outline-offset: -2px;
+}
+
+/* Cellules : filet fin, zébrage léger, survol. */
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td {
+  padding: .35rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau tbody tr:hover > td { background: #f3efe9; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau tbody tr:target > td:first-child,
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau tbody tr.dots-target > td:first-child {
+  box-shadow: inset 3px 0 0 var(--bl-accent);
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau .bl-vide { color: #c4bdb6; }
+
+/* Colonnes : Genre, Mode étroits ; Incipit en gras ; Fête et Feuillets sans retour à la ligne. */
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau .bl-c1 { white-space: nowrap; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau .bl-c2 { width: 5.5rem; text-align: center; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c3 { font-weight: 600; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c4,
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c7 { color: #555; font-size: .9em; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c6 { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Écran étroit : le tableau défile de côté dans son cadre (l'en-tête ne colle plus). */
+@media (max-width: 760px) {
+  #article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau-cadre { overflow-x: auto; }
+  #article :is(#legacy-indexmanuscrit, .bl-interventions) table.bl-tableau { min-width: 48rem; }
+  #article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau thead { position: static; }
+}
+
+/* Filtres par colonne. dots-vue met les tableaux en flex : sans !important,
+   l'attribut hidden posé par le filtre ne masquerait pas la ligne. */
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau tr[hidden] {
+  display: none !important;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-barre-filtres {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-compteur {
+  font-variant-numeric: tabular-nums;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-effacer:hover,
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-csv:hover {
+  border-color: var(--bl-accent);
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-csv { margin-left: auto; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-effacer[hidden] { display: none; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) tr.bl-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) tr.bl-filtres input,
+#article :is(#legacy-indexmanuscrit, .bl-interventions) tr.bl-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+#article :is(#legacy-indexmanuscrit, .bl-interventions) tr.bl-filtres input:focus,
+#article :is(#legacy-indexmanuscrit, .bl-interventions) tr.bl-filtres select:focus {
+  outline: 2px solid var(--bl-accent);
+  outline-offset: -1px;
+}
+/* 2026-10-07 : les six listes d'interventions (div.bl-interventions) prennent le même
+   tableau ; colonne des feuillets étroite, remarques en texte courant. */
+#article .bl-interventions { margin: 1.2rem 0 2rem; }
+#article .bl-interventions .bl-tableau .bl-i1 { width: 6.5rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+#article .bl-interventions .bl-tableau .bl-i2 { width: 9rem; }
+#article .bl-interventions .bl-tableau td.bl-i3 { font-weight: 600; }
+#article .bl-interventions .bl-tableau td.bl-i4 { color: #444; }
+/* Annexe 1 de l'étude (tableau comparatif triable) : chiffres centrés, psaume à gauche. */
+#article .bl-comparatif .bl-tableau td { text-align: center !important; font-variant-numeric: tabular-nums; }
+#article .bl-comparatif .bl-tableau td:last-child { text-align: left !important; }
+#article .bl-comparatif .bl-tableau td.bl-k1 { font-weight: 600; }
+/* ==== fin index du manuscrit en tableau ==== */
+
 
 /* ---------- Petits écrans : une colonne ---------- */
 @media screen and (max-width: 900px) {

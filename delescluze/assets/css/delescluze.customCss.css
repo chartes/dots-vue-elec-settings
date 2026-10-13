@@ -724,11 +724,10 @@
 #main #article .dl-tableau .dl-fiche-autorites { font-size: .85rem; }
 #main #article .dl-tableau td,
 #main #article .dl-tableau dd { text-align: left; }
+/* Étiquette (Carnet 1, Introduction…) au-dessus de ses liens : toute la largeur de la
+   colonne pour les liens */
 #main #article .dl-tableau dl.dl-fiche-mentions {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  column-gap: .7rem;
-  row-gap: .2rem;
+  display: block;
   margin: 0;
   padding: 0;
   border: 0;
@@ -742,7 +741,10 @@
   letter-spacing: .05em;
   white-space: nowrap;
 }
-#main #article .dl-tableau dl.dl-fiche-mentions > dd { margin: 0; }
+#main #article .dl-tableau dl.dl-fiche-mentions > dd { margin: 0 0 .3rem; }
+#main #article .dl-tableau dl.dl-fiche-mentions > dt { line-height: 1.4; }
+#main #article .dl-tableau th.dl-c-mentions,
+#main #article .dl-tableau td.dl-c-mentions { width: 28%; }
 #main #article .dl-tableau td a {
   color: #3d3833;
   font-weight: normal;
@@ -753,6 +755,34 @@
 #main #article .dl-tableau .dl-sep { color: #b3aaa1; }
 #main #article .dl-tableau .dl-passage,
 #main #article .dl-tableau .dl-passage a { color: #8a837c; font-style: italic; }
+
+/* Lignes compactes (2026-10-13) : biographie longue limitée à 4 lignes tant que « Lire la
+   suite » est fermé ; mentions nombreuses (plus de 5) repliées sous leur résumé. Sans
+   JavaScript : details natif, :has() pour la biographie. */
+#main #article .dl-tableau td.dl-c-notice:has(> details.dl-suite:not([open])) > .dl-notice-texte {
+  max-height: 6em;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  mask-image: linear-gradient(to bottom, #000 60%, transparent);
+}
+#main #article .dl-tableau details.dl-suite > summary,
+#main #article .dl-tableau details.dl-mentions-replie > summary {
+  display: inline-block;
+  margin: .1rem 0 .3rem;
+  color: #A73136;
+  font-size: .85rem;
+  cursor: pointer;
+  list-style: none;
+}
+#main #article .dl-tableau details.dl-suite > summary::-webkit-details-marker,
+#main #article .dl-tableau details.dl-mentions-replie > summary::-webkit-details-marker { display: none; }
+#main #article .dl-tableau details.dl-suite > summary:hover,
+#main #article .dl-tableau details.dl-mentions-replie > summary:hover { text-decoration: underline; }
+#main #article .dl-tableau details.dl-suite .dl-suite-moins,
+#main #article .dl-tableau details.dl-suite[open] .dl-suite-plus { display: none; }
+#main #article .dl-tableau details.dl-suite[open] .dl-suite-moins { display: inline; }
+#main #article .dl-tableau details.dl-mentions-replie > summary::before { content: "▸ "; }
+#main #article .dl-tableau details.dl-mentions-replie[open] > summary::before { content: "▾ "; }
 
 /* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13) ====
    Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la

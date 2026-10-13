@@ -582,3 +582,292 @@
 /* 2026-10-13 : le sommaire n'est plus déplacé sous le titre (règles .wrapper:has(.titlestmt)
    retirées, comme pour Dubourg) : il sautait à l'arrivée de la page de titre. */
 /* === SECTION GARDE FIN === */
+
+/* Index des personnes en tableau triable et filtrable (2026-10-13, remplace les fiches
+   repliables par lettre) : marqueurs tf-* de tableau-filtrable.xsl, comportement dans
+   delescluze.customJs.js. Mêmes règles que les tableaux des Édits, au rouge de Delescluze. */
+#main #article .tf-cadre { margin: 1.2rem 0 2rem; }
+#main #article table.tf-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+#main #article .tf-tableau .tf-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: #77706a;
+  font: .8rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-align: left;
+}
+#main #article .tf-tableau thead {
+  position: sticky;
+  top: 80px;
+  z-index: 2;
+}
+/* Arrivée par un lien (dots-target) : l'en-tête collant couvrirait la ligne, sauf après un « voir ». */
+#main #article .tf-tableau:has(.dots-target):not(.tf-par-voir) thead { position: static; }
+#main #article .tf-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid #A73136;
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+#main #article .tf-tableau button.tf-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#main #article .tf-tableau button.tf-tri::after {
+  content: "\2195";
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: #A73136; font-size: .75em; }
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: #A73136; font-size: .75em; }
+#main #article .tf-tableau button.tf-tri:hover,
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri,
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: #A73136; }
+#main #article .tf-tableau button.tf-tri:hover { background: #ece7e2; }
+#main #article .tf-tableau button.tf-tri:focus-visible { outline: 2px solid #315ba7; outline-offset: -2px; }
+#main #article .tf-tableau td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+#main #article .tf-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+#main #article .tf-tableau tbody tr:hover > td { background: #f3efe9; }
+#main #article .tf-tableau tbody tr:target > td:first-child,
+#main #article .tf-tableau tbody tr.dots-target > td:first-child,
+#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 #A73136; }
+#main #article .tf-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
+#main #article .tf-tableau .tf-vide { color: #c4bdb6; }
+#main #article .tf-tableau tr[hidden] { display: none !important; }
+#main #article .tf-barre {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+#main #article .tf-compteur { font-variant-numeric: tabular-nums; }
+#main #article .tf-effacer,
+#main #article .tf-csv {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: #315ba7;
+  font-size: .8rem;
+  cursor: pointer;
+}
+#main #article .tf-effacer:hover,
+#main #article .tf-csv:hover { border-color: #315ba7; }
+#main #article .tf-csv { margin-left: auto; }
+#main #article .tf-effacer[hidden] { display: none; }
+#main #article tr.tf-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+#main #article tr.tf-filtres input,
+#main #article tr.tf-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+#main #article tr.tf-filtres input:focus,
+#main #article tr.tf-filtres select:focus { outline: 2px solid #315ba7; outline-offset: -1px; }
+@media (max-width: 760px) {
+  #main #article .tf-cadre { overflow-x: auto; }
+  #main #article table.tf-tableau { min-width: 40rem; }
+  #main #article .tf-tableau thead { position: static; }
+}
+#main #article .dl-tableau td.dl-c-nom { min-width: 11rem; }
+#main #article .dl-tableau .dl-fiche-vedette { font-weight: 600; color: #3d3833; }
+#main #article .dl-tableau .dl-fiche-formes { display: block; margin-top: .2rem; font-size: .85rem; color: #8a837c; }
+#main #article .dl-tableau td.dl-c-dates { color: #8a837c; }
+#main #article .dl-tableau td.dl-c-fonction { font-style: italic; color: #5f5a55; }
+#main #article .dl-tableau .dl-etiquette { color: #8a837c; font-size: .78rem; font-variant: small-caps; letter-spacing: .05em; }
+#main #article .dl-tableau .dl-fiche-autorites { font-size: .85rem; }
+#main #article .dl-tableau td,
+#main #article .dl-tableau dd { text-align: left; }
+#main #article .dl-tableau dl.dl-fiche-mentions {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: .7rem;
+  row-gap: .2rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+#main #article .dl-tableau dl.dl-fiche-mentions > dt {
+  margin: 0;
+  color: #8a837c;
+  font-weight: normal;
+  font-size: .8rem;
+  font-variant: small-caps;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+#main #article .dl-tableau dl.dl-fiche-mentions > dd { margin: 0; }
+#main #article .dl-tableau td a {
+  color: #3d3833;
+  font-weight: normal;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+#main #article .dl-tableau td a:hover { color: #000; text-decoration: underline solid #6f6a65; }
+#main #article .dl-tableau .dl-sep { color: #b3aaa1; }
+#main #article .dl-tableau .dl-passage,
+#main #article .dl-tableau .dl-passage a { color: #8a837c; font-style: italic; }
+
+/* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13) ====
+   Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
+   CSS de chaque corpus qui en a. Deux ids en tête de sélecteur : il l'emporte sur les
+   règles propres au corpus.
+   - Paragraphes dans une cellule : ni justifiés ni en retrait (une colonne étroite
+     justifiée ouvre de grands blancs entre les mots).
+   - Petit écran : chaque ligne devient une fiche ; le nom de la colonne (data-label,
+     posé par le script du projet) précède chaque valeur ; les en-têtes de tri deviennent
+     des boutons à la ligne ; les filtres s'empilent, chacun avec son libellé.
+   - Champs de saisie à 16px sur écran tactile : en dessous, Safari iOS zoome la page
+     à la saisie et ne dézoome pas. */
+#main #article .tf-cadre td p {
+  margin: 0;
+  text-align: left;
+  text-indent: 0;
+}
+#main #article .tf-cadre td p + p { margin-top: .4em; }
+
+@media (max-width: 760px), (pointer: coarse) {
+  #main #article .tf-cadre tr.tf-filtres input,
+  #main #article .tf-cadre tr.tf-filtres select { font-size: 16px; }
+}
+
+@media (max-width: 760px) {
+  #main #article .tf-cadre { overflow: visible; }
+  #main #article .tf-cadre table,
+  #main #article .tf-cadre thead,
+  #main #article .tf-cadre tbody,
+  #main #article .tf-cadre tr,
+  #main #article .tf-cadre th,
+  #main #article .tf-cadre td {
+    display: block;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  #main #article .tf-cadre thead { position: static; }
+  #main #article .tf-cadre caption { display: block; width: auto; }
+  #main #article .tf-cadre .tf-barre { flex-wrap: wrap; }
+  #main #article .tf-cadre .tf-csv { margin-left: 0; }
+
+  /* En-têtes : boutons de tri côte à côte */
+  #main #article .tf-cadre thead tr:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    padding: .2rem 0 .5rem;
+  }
+  #main #article .tf-cadre thead tr:first-child th {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre thead button.tf-tri {
+    width: auto;
+    padding: .3rem .7rem;
+    border: 1px solid #d6cfc8;
+    border-radius: 999px;
+    background: #fff;
+  }
+
+  /* Filtres : un par ligne, libellé à gauche */
+  #main #article .tf-cadre tr.tf-filtres {
+    padding: .4rem .5rem;
+    border: 1px solid #e3ddd6;
+    border-radius: 4px;
+    background: #faf8f5;
+  }
+  /* Libellé posé à gauche en position absolue : le contenu de la cellule (liens séparés
+     de virgules, etc.) reste du texte courant, ce qu'une grille découperait */
+  #main #article .tf-cadre tr.tf-filtres td,
+  #main #article .tf-cadre tbody td {
+    position: relative;
+    padding: .2rem 0 .2rem calc(30% + .6rem);
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre tr.tf-filtres td::before,
+  #main #article .tf-cadre tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: .35rem;
+    width: 30%;
+    color: #77706a;
+    font: 600 .7rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  /* Lignes : fiches */
+  #main #article .tf-cadre tbody tr {
+    margin: 0 0 .6rem;
+    padding: .5rem .7rem;
+    border: 1px solid #e3ddd6;
+    border-radius: 4px;
+    background: #fff;
+  }
+  #main #article .tf-cadre tbody tr:nth-child(even) > td,
+  #main #article .tf-cadre tbody tr:hover > td { background: none; }
+  #main #article .tf-cadre tbody tr.dots-target,
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); }
+  #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
+  /* Première colonne (l'entrée) : titre de la fiche, sans libellé */
+  #main #article .tf-cadre tr.tf-filtres td::before { top: .55rem; }
+  #main #article .tf-cadre tbody td:first-child {
+    display: block;
+    padding: .2rem 0 .35rem;
+    font-weight: 600;
+  }
+  #main #article .tf-cadre tbody td:first-child::before { content: none; }
+  /* Cellule vide (tiret) : rien à montrer dans une fiche */
+  #main #article .tf-cadre tbody td:has(> .tf-vide:only-child) { display: none; }
+  #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
+}
+/* ==== fin tableau filtrable ==== */

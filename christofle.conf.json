@@ -57,6 +57,7 @@
     }
   ],
   "collectionCustomCss": "christofle",
+  "collectionCustomJs": "christofle",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

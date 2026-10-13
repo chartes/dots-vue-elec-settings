@@ -47,6 +47,7 @@
   },
   "aboutPageSettings": [],
   "collectionCustomCss": "edits",
+  "collectionCustomJs": "edits",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:editor",

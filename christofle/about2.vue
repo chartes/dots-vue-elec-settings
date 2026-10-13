@@ -11,7 +11,7 @@
                               <span class="persName"> Fianu Kouky</span> : <span class="persName"> Fortier Anne</span> ; <span class="persName"> Clavaud Florence</span> ; dirs.</span>
                            <cite class="title">L’année 1437 dans la pratique de Pierre Christofle, notaire du Châtelet d’Orléans</cite>
                            <span class="publisher">École nationale des chartes</span> Paris <span class="date">2015-....</span>
-                           <span class="note note-inline onLineAccess">Édition numérique en ligne : <a class="ref d5-local" href="/christofle">http://elec.enc.sorbonne.fr/christofle/</a> (consulté le [date de consultation]).</span>
+                           <span class="note note-inline onLineAccess">Édition numérique en ligne : <a class="ref d5-local" href="/christofle">https://dev.chartes.psl.eu/elec/christofle</a> (consulté le [date de consultation]).</span>
                         </span>
                      </p>
                      <p class="p">Pour citer une page de la présente édition, utiliser la mention suivante : <span class="bibl">
@@ -30,7 +30,7 @@
                            <cite class="title">Note 136 (12 avril 1437)</cite>
                            <cite class="title">L’année 1437 dans la pratique de Pierre Christofle, notaire du Châtelet d’Orléans</cite>
                            <span class="publisher">École nationale des chartes</span> Paris <span class="date">2015-....</span>
-                           <span class="note note-inline onLineAccess">En ligne : <a class="ref d5-local" href="/christofle/document/christofle_1437?refId=minute-136">http://elec.enc.sorbonne.fr/christofle/notes/note-136.html</a> (consulté le [date de consultation]).</span>
+                           <span class="note note-inline onLineAccess">En ligne : <a class="ref d5-local" href="/christofle/document/christofle_1437?refId=minute-136">https://dev.chartes.psl.eu/elec/christofle/document/christofle_1437?refId=minute-136</a> (consulté le [date de consultation]).</span>
                         </span>
                      </p>
                   </section>

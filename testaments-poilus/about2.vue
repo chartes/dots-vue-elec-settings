@@ -7,7 +7,7 @@
                      suivante : <span class="bibl"><span class="respStmt"><span class="persName"><span class="surname">Nougaret</span> (<span class="forename">Christine</span>)</span>, <span class="persName"><span class="surname">Clavaud</span> (<span class="forename">Florence</span>)</span> (dirs.)</span>, <cite class="title">Testaments
                            de guerre de Poilus parisiens (1914-1918) : une édition
                            critique</cite>. Paris : <span class="publisher">École nationale des
-                           chartes</span>, <span class="date">2017-....</span> <span class="note">Édition numérique en ligne : <a href="http://elec.enc.sorbonne.fr/testaments-de-poilus/">http://elec.enc.sorbonne.fr/testaments-de-poilus/</a> (consulté le
+                           chartes</span>, <span class="date">2017-....</span> <span class="note">Édition numérique en ligne : <a href="/testaments-poilus">https://dev.chartes.psl.eu/elec/testaments-poilus</a> (consulté le
                            [date de consultation]).</span></span></p><p class="p">Pour citer une page de la présente édition, utiliser la mention suivante : <span class="bibl"><span class="respStmt"><span class="persName"><span class="surname">Nougaret</span> (<span class="forename">Christine</span>)</span>, <span class="persName"><span class="surname">Clavaud</span> (<span class="forename">Florence</span>)</span> (dirs.)</span>, <cite class="title">[Titre de la page citée]</cite>, dans <cite class="title">Testaments de guerre de Poilus parisiens (1914-1918) : une édition
                            critique</cite>. Paris : <span class="publisher">École nationale des
                            chartes</span>, <span class="date">2017-....</span> <span class="note">En
@@ -16,7 +16,7 @@
                            guerre de Poilus parisiens (1914-1918) : une édition
                            critique</cite>. Paris : <span class="publisher">École nationale des
                            chartes</span>, <span class="date">2017-....</span> <span class="note">En
-                           ligne : <a class="tp-renvoi-testament internalLink" href="/testaments-poilus/document/testaments-poilus-edition?refId=will-005">http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-005.html</a>
+                           ligne : <a class="tp-renvoi-testament internalLink" href="/testaments-poilus/document/testaments-poilus-edition?refId=will-005">https://dev.chartes.psl.eu/elec/testaments-poilus/document/testaments-poilus-edition?refId=will-005</a>
                            (consulté le [date de consultation]).</span></span></p></section><section class="div level2" id="mentionsLegales-licence"><h2 class="head">Licence</h2><section class="div level3" id="div1-2-1"><p class="p">L’interface, les fonctionnalités, la forme et le contenu du présent site
                         constituent, ensemble, <em class="bold">une œuvre protégée par les lois en
                            vigueur sur la propriété intellectuelle</em>.</p></section><section class="div level3" id="div1-2-2"><h3 class="head">Réutilisation des images numériques</h3><p class="p noindent">Les reproductions des documents des Archives nationales sont destinées à un usage privé.

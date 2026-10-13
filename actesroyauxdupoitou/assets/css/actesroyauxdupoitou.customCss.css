@@ -1,11 +1,30 @@
-:root { --fill-color:#74472f; --meta-area-fill-color:#f6f0eb; --default-text-color:#2c2521; }
-.document-area #article { font-family:Georgia,"Times New Roman",serif; line-height:1.65; max-width:74rem; margin:auto; }
-.document-area #article .transcription { background:#fcfaf7; border:1px solid #ddcfc3; padding:1.5rem; }
-.document-area #article .date { color:#74472f; font-weight:600; }
-.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
-.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
-.description-section nav a:hover { background:var(--fill-color); color:white; }
+/* Actes royaux du Poitou — feuille reconstruite le 13/10/2026.
+   Le site historique était servi par Diple (thème neutre, diple_html.css, et thème ENC,
+   enc.css), dont hteiml descend : la CSS de hteiml que charge dots-vue en fait l'essentiel.
+   On n'y ajoute que ce qui distinguait le thème historique, limité à #main #article, puis,
+   repris tels quels de la feuille précédente, les dispositifs de l'application (couleur
+   du corpus, sommaire, notes en pied, cibles d'ancre). Retirés : le socle générique D12,
+   la section de la page de garde (garde.xsl retiré le 12/10) et l'habillage Georgia /
+   cadre beige, étranger au site historique. */
 
+/* Couleurs du corpus dans l'application (cartes, sommaire, accents). */
+:root { --fill-color:#74472f; --meta-area-fill-color:#f6f0eb; --default-text-color:#2c2521; }
+
+/* ---------- Thème historique (diple_html.css, enc.css) ---------- */
+#main #article { font-family: "CartaNovaTexte", Georgia, serif; font-size: 16px; line-height: 133%; }
+/* En-tête de l'acte : filet pointillé arrondi (header) */
+#main #article header.front { padding: 1ex; border: dotted #CCC 1px; border-radius: 1ex; background: none; }
+#main #article header.front ul { margin-top: 0; margin-bottom: 0; }
+#main #article .argument p { text-indent: 0; }
+#main #article section.tradition { margin-top: 1em; }
+/* Témoins : puces carrées, un cran plus petits ; sigle en italique */
+#main #article li.witness { font-size: 90%; list-style: square; }
+#main #article .witness small.n, #main #article .witness label { font-style: italic; color: #000; }
+#main #article p.trailer { font-style: italic; }
+#main #article .byline { text-align: right; margin-left: 45%; text-indent: 0; font-variant: small-caps; }
+#main #article .docAuthor { text-align: right; text-indent: 0; }
+/* Page de l'édition imprimée, en rouge */
+#main #article span.pb, #main #article a.pb { color: #BC052D; }
 
 /* --------------------------------------------------------------------------
    Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
@@ -35,194 +54,6 @@
   .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
 }
 /* ==== fin D11 ==== */
-/* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
-/* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
-   Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
-   au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
-   est conservée : elle est lue dans --fill-color, avec un repli sur celle de DoTS. */
-.document-area #article:not(.bottom-toc),
-.document-area main {
-  --d12-accent: var(--fill-color, #8f0e21);
-  --d12-encre: var(--document-text-color, #303030);
-  --d12-filet: #dcd8d3;
-  --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
-  --d12-rayon: var(--button-border-radius, 4px);
-}
-
-/* Texte : mesure de lecture régulière, encre et interligne de l'application.
-   La largeur est bornée parce qu'elle atteignait 1 184 px chez christofle
-   (mesuré le 2026-09-12), soit des lignes de plus de 130 caractères. 72rem est
-   la valeur déjà retenue par les corpus qui s'en étaient souciés (bellelay 72,
-   actesroyauxdupoitou 74) ; un corpus peut la surcharger après ce bloc. */
-.document-area #article:not(.bottom-toc) {
-  max-width: min(100%, 72rem);
-  margin-inline: auto;
-  color: var(--d12-encre);
-  font-size: var(--font-default-size, 16px);
-  /* 1.6 et non le jeton --font-default-line-heigth (1.4) : celui-ci est calibré pour
-     l'interface, et la comparaison avant/après du 2026-09-12 montrait l'interligne
-     tomber de 26,4 px à 22,4 px chez christofle, actesroyauxdupoitou, sanctoral_elec
-     et les testaments — trop serré pour de la prose éditoriale en serif. */
-  line-height: 1.6;
-}
-.document-area #article:not(.bottom-toc) p {
-  margin: 0 0 .9em;
-}
-
-/* Titres : famille secondaire de l'application, graisse tenue, accent sobre.
-   Pas de bandeau plein : un filet gauche, comme les blocs de DoTS. */
-.document-area #article:not(.bottom-toc) h1,
-.document-area #article:not(.bottom-toc) h2,
-.document-area #article:not(.bottom-toc) h3,
-.document-area #article:not(.bottom-toc) h4 {
-  color: #202020;
-  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: .01em;
-}
-.document-area #article:not(.bottom-toc) h1 { font-size: 1.6rem; margin: 0 0 1rem; }
-.document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
-.document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
-.document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
-
-/* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
-.document-area #article:not(.bottom-toc) a {
-  color: var(--d12-accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-.document-area #article:not(.bottom-toc) a:hover,
-.document-area #article:not(.bottom-toc) a:focus-visible {
-  text-decoration: var(--text-decoration-hover, underline dotted);
-}
-.document-area #article:not(.bottom-toc) a:focus-visible {
-  outline: 2px solid var(--d12-accent);
-  outline-offset: 2px;
-}
-
-/* Tableaux : filets fins, en-tête sur fond doux, pas de quadrillage lourd. */
-.document-area #article:not(.bottom-toc) table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  font-size: .95em;
-}
-.document-area #article:not(.bottom-toc) th,
-.document-area #article:not(.bottom-toc) td {
-  padding: .4rem .6rem;
-  border: 0;
-  border-bottom: 1px solid var(--d12-filet);
-  text-align: left;
-  vertical-align: top;
-}
-.document-area #article:not(.bottom-toc) th {
-  background: var(--d12-fond-doux);
-  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
-  font-size: .8rem;
-  font-weight: 600;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  color: #4a4a4a;
-}
-/* Un tableau large défile dans son cadre, la page ne défile jamais de côté. */
-.document-area #article:not(.bottom-toc) .table-wrap {
-  overflow-x: auto;
-}
-
-/* Citations, blocs éditoriaux, légendes. */
-.document-area #article:not(.bottom-toc) blockquote,
-.document-area #article:not(.bottom-toc) .citation {
-  margin: 1rem 0;
-  padding: .1rem 0 .1rem 1rem;
-  border-left: 3px solid var(--d12-filet);
-  color: #45403c;
-}
-.document-area #article:not(.bottom-toc) figcaption,
-.document-area #article:not(.bottom-toc) .legendeillustration {
-  color: #5a5450;
-  font-size: .85rem;
-  line-height: 1.4;
-}
-.document-area #article:not(.bottom-toc) hr {
-  height: 0;
-  margin: 1.6rem 0;
-  border: 0;
-  border-top: 1px solid var(--d12-filet);
-}
-
-/* Colonne de texte : elle prend la place disponible dans la rangée.
-   Pourquoi : sur une page COQUILLE — une unité non éditoriale, qui ne rend que son titre
-   (le `liber` de cjc, la `rubrique` paratextes de delescluze) — la colonne se rétractait
-   sur la largeur du titre : mesuré le 2026-09-12, 65 px chez cjc (« Livre I » coupé en deux
-   lignes) et 92 px chez delescluze, parent compris, la visionneuse occupant le reste de la
-   rangée. Même procédé que D11 pour le sommaire des enfants (`flex` sur l'enfant du
-   `wrapper`), et sans effet quand la page a du contenu.
-   La chaîne mesurée sur cjc : `#article` (65 px) ← `#main` (65) ← `.row.remove-bottom-padding`
-   (65, en `display:flex`) ← `.wrapper` (1 225 px). C'est donc la RANGÉE qui se rétracte, pas
-   `#article` : une première version de cette règle visait `.wrapper > #article` et ne pouvait
-   pas s'appliquer, `#article` n'étant pas enfant du `wrapper`. La visionneuse, elle, est en
-   `position: absolute` (500 px) et n'entre pas dans le calcul. */
-.document-area .wrapper > .row {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-/* Images : jamais plus larges que la colonne. */
-.document-area #article:not(.bottom-toc) img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Contrôles éditoriaux (onglets, boutons, menus dépliants des corpus) : même
-   grammaire visuelle que les boutons de l'application — coins légers, filet fin,
-   accent réservé à l'état actif. */
-.document-area #article:not(.bottom-toc) button,
-.document-area #article:not(.bottom-toc) input[type="reset"],
-.document-area #article:not(.bottom-toc) input[type="submit"],
-.document-area #article:not(.bottom-toc) summary {
-  font-family: var(--font-primary, "Roboto"), Arial, Helvetica, sans-serif;
-  font-size: .9rem;
-}
-.document-area #article:not(.bottom-toc) input[type="reset"],
-.document-area #article:not(.bottom-toc) input[type="submit"],
-.document-area #article:not(.bottom-toc) button {
-  padding: .35rem .7rem;
-  border: 1px solid var(--d12-filet);
-  border-radius: var(--d12-rayon);
-  background: #fff;
-  color: var(--d12-encre);
-  cursor: pointer;
-}
-.document-area #article:not(.bottom-toc) input[type="reset"]:hover,
-.document-area #article:not(.bottom-toc) input[type="submit"]:hover,
-.document-area #article:not(.bottom-toc) button:hover {
-  border-color: var(--d12-accent);
-  color: var(--d12-accent);
-}
-
-/* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
-.document-area #article:not(.bottom-toc) .footnotes,
-.document-area #article:not(.bottom-toc) .apparatus,
-.document-area #article:not(.bottom-toc) .note {
-  font-size: var(--font-small-size, 14px);
-  line-height: 1.5;
-}
-.document-area #article:not(.bottom-toc) .footnotes {
-  margin-top: 2rem;
-  padding-top: .8rem;
-  border-top: 1px solid var(--d12-filet);
-}
-.document-area #article:not(.bottom-toc) a.noteref,
-.document-area #article:not(.bottom-toc) .noteref {
-  text-decoration: none;
-}
-
-@media (max-width: 768px) {
-  .document-area #article:not(.bottom-toc) h1 { font-size: 1.4rem; }
-  .document-area #article:not(.bottom-toc) h2 { font-size: 1.2rem; }
-  .document-area #article:not(.bottom-toc) table { font-size: .9em; }
-}
-/* ==== D12-SOCLE-FIN ==== */
 
 /* ============================================================================
    D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
@@ -299,61 +130,3 @@
   background: #f6f0eb;
   box-shadow: inset 3px 0 0 #74472f;
 }
-
-/* === SECTION GARDE DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
-/* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev
-   (comptes.customCss.css § 8, mesures du 2026-10-08) ; seule la couleur suit le corpus (--fill-color).
-   La table des matières est le sommaire de DoTS-vue (.bottom-toc), placé SOUS le titre, pleine largeur,
-   au même retrait que le texte (padding par défaut de DoTS-vue : 20px 10% 120px), sur la seule page
-   de garde (wrapper qui contient .titlestmt). */
-.document-area #article .titlestmt {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 2rem 1.25rem;
-  font-family: "Georgia", "Iowan Old Style", serif;
-  text-align: center;
-}
-.document-area #article .titlestmt h1 {
-  margin: 0 0 1rem !important;
-  color: var(--fill-color, #8f0e21) !important;
-  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
-  line-height: 1.3 !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
-  text-align: center !important;
-}
-.document-area #article .titlestmt .editors { text-align: center; text-indent: 0; }
-.document-area #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
-.document-area #article .titlestmt .editor {
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
-  color: #333;
-  margin-bottom: 0.75rem;
-  font-variant: small-caps;
-  letter-spacing: 0.03em;
-}
-.document-area #article .titlestmt .date {
-  display: inline-block;
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-  color: var(--fill-color, #8f0e21);
-  border-top: 1px solid #e2c5cb;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-}
-.document-area .wrapper:has(.titlestmt) { display: block !important; }
-.document-area .wrapper:has(.titlestmt) > .bottom-toc,
-.document-area .wrapper:has(.titlestmt) > #article.bottom-toc,
-.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > .bottom-toc,
-.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > #article.bottom-toc {
-  display: block !important;
-  order: 0;
-  flex: none;
-  width: auto;
-  max-width: none;
-  margin: 0;
-  padding: 20px 10% 120px;
-}
-.document-area .wrapper:has(.titlestmt) > .bottom-toc ul { margin: 15px 0; font-size: 15px; line-height: 20px; }
-.document-area .wrapper:has(.titlestmt) > .bottom-toc li a,
-.document-area .wrapper:has(.titlestmt) > .bottom-toc li .toc-title { padding-top: 4px; padding-bottom: 4px; font-size: 15px; }
-/* === SECTION GARDE FIN === */

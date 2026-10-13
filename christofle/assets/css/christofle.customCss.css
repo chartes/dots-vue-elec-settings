@@ -703,20 +703,6 @@
   padding-top: 0.5rem;
   margin-top: 0.5rem;
 }
-.document-area .wrapper:has(.titlestmt) { display: block !important; }
-.document-area .wrapper:has(.titlestmt) > .bottom-toc,
-.document-area .wrapper:has(.titlestmt) > #article.bottom-toc,
-.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > .bottom-toc,
-.document-area.toc-aside-is-opened .wrapper:has(.titlestmt) > #article.bottom-toc {
-  display: block !important;
-  order: 0;
-  flex: none;
-  width: auto;
-  max-width: none;
-  margin: 0;
-  padding: 20px 10% 120px;
-}
-.document-area .wrapper:has(.titlestmt) > .bottom-toc ul { margin: 15px 0; font-size: 15px; line-height: 20px; }
-.document-area .wrapper:has(.titlestmt) > .bottom-toc li a,
-.document-area .wrapper:has(.titlestmt) > .bottom-toc li .toc-title { padding-top: 4px; padding-bottom: 4px; font-size: 15px; }
+/* 2026-10-13 : le sommaire n'est plus déplacé sous le titre (règles .wrapper:has(.titlestmt)
+   retirées, comme pour Dubourg) : il sautait à l'arrivée de la page de titre. */
 /* === SECTION GARDE FIN === */

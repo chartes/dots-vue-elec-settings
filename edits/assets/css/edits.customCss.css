@@ -592,6 +592,8 @@ p.apparatus span.app:hover { background: transparent; }
 #main #article .tf-tableau .tf-vide { color: #c4bdb6; }
 #main #article .tf-tableau tr[hidden] { display: none !important; }
 #main #article .ed-index td.ed-c-nom { min-width: 12rem; }
+#main #article .ed-index-glossaire th.ed-c-nom,
+#main #article .ed-index-glossaire td.ed-c-nom { width: 28%; }
 #main #article .ed-index .ed-c-renvois a { white-space: nowrap; }
 #main #article .tf-barre {
   display: flex;

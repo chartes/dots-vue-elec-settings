@@ -66,19 +66,35 @@
 
   /* ---------- Texte courant ---------- */
   & blockquote { margin: 0; }
+  /* Citation de plusieurs paragraphes (div.cit_n) : même écart que les paragraphes du texte
+     (ils sortaient collés, et la lettrine de chacun débordait sur la ligne du dessus). */
+  .cit_n > p { margin: 0 0 1rem; }
   & fieldset { border: none; }
   & q { font-style: italic; }
   .head { color: var(--accent); }
   & h1.head {
     color: var(--fill-color, var(--accent));
     font-variant: small-caps;
+    font-size: 1.6rem; /* comme les titres de chapitre : Lettre, Bibliographie, Références */
   }
-  .rubric { color: #8e3a7e; } /* prune clair, distinct des titres (contraste ~7:1) */
+  & h2.head {
+    font-size: 1.15rem;
+    color: #585858;
+  } /* sous-titre : « Bibliographie sur les chroniques latines » */
+  .rubric { color: #5f004d; } /* prune clair, distinct des titres (contraste ~7:1) */
 
   .ornament {
     color: var(--accent);
     font-size: 200%;
-    line-height: 1.4;
+    line-height: 0; /* la lettrine ne grandit pas la première ligne : interligne régulier */
+  }
+
+  span.author {
+    font-variant: small-caps;
+  }
+
+  a.bibl {
+    color: var(--accent);
   }
 
   p:not(.noindent) {
@@ -200,6 +216,9 @@
       font-weight: normal;
       white-space: nowrap;
       scroll-margin-top: 90px;
+
+      /* Lien vers le chapitre (« Préface.8 ») : prune clair des rubriques */
+      > a { color: #8e3a7e; border-bottom-color: #8e3a7e; }
     }
     > dd { margin: 0; }
     > dt.dots-target,
@@ -220,18 +239,25 @@
     /* Apparat : séparé des notes par un filet */
     p.apparatus {
       margin-bottom: 1.25rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--rule);
+      padding-left: 0;
       line-height: 1.55;
     }
     .apparatus {
       * ::after { content: " "; }
-      span.note { display: block; }
-
-      /* Lettre d'appel alignée sur les numéros des notes (25px) */
+      /* Même mise en page que les notes (aside.note de html.css) : trait vertical au même
+         endroit, lettre calée à droite juste avant, comme les numéros 1, 2, 3 */
+      span.note {
+        display: block;
+        position: relative;
+        margin-bottom: .3em;
+        line-height: 1.25; /* trait à la hauteur du texte, comme les notes */
+        margin-left: 2.5em;    /* comme aside.note */
+        padding-left: 1.3em;   /* même colonne de texte que les notes */
+        border-left: 1px solid #ccc;
+      }
       span.note > a {
-        display: inline-block;
-        min-width: 25px;
+        position: absolute;
+        right: calc(100% + .76em); /* fin de la lettre là où finissent les numéros */
         color: var(--fill-color, var(--accent));
         font-weight: 700;
         text-decoration: none;
@@ -246,7 +272,30 @@
     }
 
     /* Notes resserrées, numéros à la taille du texte */
-    aside.note { margin-bottom: .55rem; }
+    /* Trait vertical à la hauteur du texte (2026-10-14) : html.css met .5ex de retrait en
+       haut et en bas de chaque note, que le trait recouvre ; l'écart passe dans la marge. */
+    aside.note { margin-bottom: .75rem; padding-top: 0; padding-bottom: 0; }
+
+    /* Texte des notes aligné, avec ou sans signe (2026-10-14) : le signe de la citation
+       (= identique, : approchant) se place avant la colonne du texte, entre le trait et lui. */
+    aside.note { padding-left: 1.3em; }
+    /* Le numéro (absolu, placé depuis le début du texte) recule d'autant que la colonne a
+       avancé (1.3em au lieu de .5em), réglé pour finir là où finissent les lettres de l'apparat. */
+    aside.note a.noteback { margin-left: calc(-7ex - .68em); }
+    aside.note .cit-signe {
+      display: inline-block;
+      width: 1.3em;
+      margin-left: -1.3em;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte,
+       5ex de large, d'où un trait trop long). */
+    aside.note a.noteback:hover {
+      border-bottom: none;
+      text-decoration: underline;
+    }
     aside.note a.noteback { font-size: 14px; }
   }
 }

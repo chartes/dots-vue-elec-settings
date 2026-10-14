@@ -1,16 +1,23 @@
-/* Actes royaux du Poitou — feuille reconstruite le 13/10/2026.
+/* Actes royaux du Poitou — feuille en blocs (2026-10-14), reconstruite le 13/10/2026.
    Le site historique était servi par Diple (thème neutre, diple_html.css, et thème ENC,
    enc.css), dont hteiml descend : la CSS de hteiml que charge dots-vue en fait l'essentiel.
-   On n'y ajoute que ce qui distinguait le thème historique, limité à #main #article, puis,
-   repris tels quels de la feuille précédente, les dispositifs de l'application (couleur
-   du corpus, sommaire, notes en pied, cibles d'ancre). Retirés : le socle générique D12,
-   la section de la page de garde (garde.xsl retiré le 12/10) et l'habillage Georgia /
-   cadre beige, étranger au site historique. */
+   1. Couleurs du corpus
+   2. Historique ÉLEC : ce qui distinguait le thème du site d'origine (#main #article)
+   3. Blocs hteiml génériques : notes de bas de page, bibliographie (identiques d'un corpus à l'autre)
+   4. Propre au projet
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11, D42), cibles d'ancre, page de titre */
+
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
 
 /* Couleurs du corpus dans l'application (cartes, sommaire, accents). */
 :root { --fill-color:#74472f; --meta-area-fill-color:#f6f0eb; --default-text-color:#2c2521; }
 
-/* ---------- Thème historique (diple_html.css, enc.css) ---------- */
+/*=============================================================
+ 2. HISTORIQUE ÉLEC (diple_html.css, enc.css)
+ =============================================================*/
+
 #main #article { font-family: "CartaNovaTexte", Georgia, serif; font-size: 16px; line-height: 133%; }
 /* En-tête de l'acte : filet pointillé arrondi (header) */
 #main #article header.front { padding: 1ex; border: dotted #CCC 1px; border-radius: 1ex; background: none; }
@@ -25,6 +32,77 @@
 #main #article .docAuthor { text-align: right; text-indent: 0; }
 /* Page de l'édition imprimée, en rouge */
 #main #article span.pb, #main #article a.pb { color: #BC052D; }
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes aside.note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes aside.note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 14px;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes aside.note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* ==== BLOC BIBLIOGRAPHIE (listBibl de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a une bibliographie en listBibl
+   (modèle : chroniques latines, 2026-10-14). */
+.document-views #article .listBibl li::marker { color: var(--fill-color); }
+/* ==== fin bloc bibliographie ==== */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
+/* Notes en pied des actes et des introductions (2026-10-02) : ces styles étaient
+   écrits en dur dans actesroyauxdupoitou.xsl (attributs style). Mêmes valeurs ici,
+   pour pouvoir les régler depuis la CSS. */
+/* a.notebottom : le panneau de notes de dots-vue recopie chaque note (et recopiait
+   l'attribut style avec elle). */
+.document-area #main #article a.noteref,
+.document-area #main #article a.noteback,
+.document-area #main #article a.notebottom {
+  text-decoration: none;
+  color: #a73136;
+  font-weight: bold;
+}
+
+/* Pied de notes : taille et encre du corpus (filet et retraits : bloc générique des notes,
+   2026-10-14 ; l'ancien filet border-top faisait doublon avec la barre du bloc). */
+.document-area #main #article section.footnotes {
+  font-size: .9rem;
+  color: #333;
+}
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
 
 /* --------------------------------------------------------------------------
    Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
@@ -99,32 +177,6 @@
   overflow-wrap: anywhere;
 }
 
-/* Notes en pied des actes et des introductions (2026-10-02) : ces styles étaient
-   écrits en dur dans actesroyauxdupoitou.xsl (attributs style). Mêmes valeurs ici,
-   pour pouvoir les régler depuis la CSS. */
-/* a.notebottom : le panneau de notes de dots-vue recopie chaque note (et recopiait
-   l'attribut style avec elle). */
-.document-area #main #article a.noteref,
-.document-area #main #article a.noteback,
-.document-area #main #article a.notebottom {
-  text-decoration: none;
-  color: #a73136;
-  font-weight: bold;
-}
-.document-area #main #article section.footnotes {
-  margin: 1.2rem 0 0;
-  padding-top: .7rem;
-  border-top: 1px solid #d7d1ca;
-  font-size: .9rem;
-  color: #333;
-}
-.document-area #main #article section.footnotes aside.note {
-  margin: .5rem 0;
-  padding-top: 0;    /* 2026-10-14 : trait vertical à la hauteur du texte */
-  padding-bottom: 0;
-  line-height: 1.3;
-}
-
 /* 2026-10-04 — Élément visé par une ancre (note en pied, retour vers l'appel, saut de page),
    surligné aux couleurs du corpus. `.dots-target` double `:target` : dots-vue pose cette
    classe sur l'élément visé quand une URL à ancre est ouverte à froid (le fragment est
@@ -138,11 +190,6 @@
   background: #f6f0eb;
   box-shadow: inset 3px 0 0 #74472f;
 }
-
-/* ==========================================================================
-   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
-   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
-   ========================================================================== */
 
 /* === SECTION GARDE DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
 /* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev

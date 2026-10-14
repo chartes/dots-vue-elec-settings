@@ -1,8 +1,13 @@
+/* Chroniques latines de Saint-Denis — feuille en blocs (2026-10-14).
+   Modèle des blocs génériques des autres corpus (notes, apparat, bibliographie).
+   1. Couleurs du corpus
+   2. Texte de l'édition (feuille de Philippe, 12/10)
+   3. Blocs hteiml génériques : notes de bas de page, apparat critique, bibliographie
+   4. Propre au projet : page « Références »
+   5. Mécanismes communs dots-vue : page de titre */
+
 /*=============================================================
- PART 1
- Updating the css color schema for:
-  - the collection chroniqueslatines
-  - its children (unless otherwise specified)
+ 1. COULEURS DU CORPUS
  =============================================================*/
 
 /* Using css variables */
@@ -11,10 +16,7 @@
 }
 
 /*=============================================================
- PART 2
- Updating the css of specific elements (HTML) for:
-  - the collection chroniqueslatines
-  - its children (unless otherwise specified)
+ 2. TEXTE DE L'ÉDITION
  =============================================================*/
 
 .document-views #article {
@@ -22,47 +24,6 @@
   --muted: #8a837c;
   --rule: #e4e4e4;
   --highlight: #fbf3d5;
-
-  /* ---------- Titre et éditeurs ---------- */
-  .titlestmt {
-    max-width: 42rem;
-    margin: 0 auto;
-    padding: 2rem 1.25rem;
-    font-family: "Georgia", "Iowan Old Style", serif;
-    text-align: center;
-
-    .editors-label {
-      font-style: italic;
-      color: #666;
-      font-variant: normal;
-    }
-    .editors { text-align: center; }
-    h1 {
-      margin: 0 0 1rem !important;
-      color: var(--accent) !important;
-      font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
-      line-height: 1.3 !important;
-      font-weight: 600 !important;
-      letter-spacing: .01em !important;
-      text-align: center !important;
-    }
-    .editor {
-      margin-bottom: .75rem;
-      font-size: clamp(1rem, 2.5vw, 1.15rem);
-      font-variant: small-caps;
-      letter-spacing: .03em;
-      color: #333;
-    }
-    .date {
-      display: inline-block;
-      margin-top: .5rem;
-      padding-top: .5rem;
-      border-top: 1px solid #e2c5cb;
-      font-size: 1.15rem;
-      letter-spacing: .05em;
-      color: var(--accent);
-    }
-  }
 
   /* ---------- Texte courant ---------- */
   & blockquote { margin: 0; }
@@ -95,7 +56,6 @@
     float: none !important;
     margin-right: 0 !important;
   }
-  .listBibl li::marker { color: var(--accent); }
 
   /* ---------- Navigation ---------- */
   a.here {
@@ -107,6 +67,95 @@
     display: inline;
     padding-right: 1em;
   }
+}
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes aside.note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes aside.note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 14px;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes aside.note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */
+
+/* ==== BLOC BIBLIOGRAPHIE (listBibl de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a une bibliographie en listBibl
+   (modèle : chroniques latines, 2026-10-14). */
+.document-views #article .listBibl li::marker { color: var(--fill-color); }
+/* ==== fin bloc bibliographie ==== */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
+.document-views #article {
+  --accent: #5f004d;
+  --muted: #8a837c;
+  --rule: #e4e4e4;
+  --highlight: #fbf3d5;
 
   /* ---------- Page « Références » ---------- */
 
@@ -213,79 +262,68 @@
     > dt.dots-target,
     > dt.dots-target + dd { background: var(--highlight); }
   }
+}
 
-  /* ---------- Notes de bas de page ---------- */
-  .footnotes {
-    &::before {
-      content: "";
-      display: block;
-      width: 33.333%;
-      height: 2px;
-      margin-bottom: 1em;
-      background: var(--rule);
+/* Notes des citations (2026-10-14) : le signe (= identique, : approchant) se place avant la
+   colonne du texte, entre le trait et lui ; texte aligné avec ou sans signe (padding-left du
+   bloc générique des notes). */
+.document-views #article .footnotes aside.note .cit-signe {
+  display: inline-block;
+  width: 1.3em;
+  margin-left: -1.3em;
+  text-align: center;
+  color: #8a837c;
+}
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+.document-views #article {
+  --accent: #5f004d;
+  --muted: #8a837c;
+  --rule: #e4e4e4;
+  --highlight: #fbf3d5;
+
+  /* ---------- Titre et éditeurs ---------- */
+  .titlestmt {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem;
+    font-family: "Georgia", "Iowan Old Style", serif;
+    text-align: center;
+
+    .editors-label {
+      font-style: italic;
+      color: #666;
+      font-variant: normal;
     }
-
-    /* Apparat : séparé des notes par un filet */
-    p.apparatus {
-      margin-bottom: 1.25rem;
-      padding-left: 0;
-      line-height: 1.55;
+    .editors { text-align: center; }
+    h1 {
+      margin: 0 0 1rem !important;
+      color: var(--accent) !important;
+      font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+      line-height: 1.3 !important;
+      font-weight: 600 !important;
+      letter-spacing: .01em !important;
+      text-align: center !important;
     }
-    .apparatus {
-      * ::after { content: " "; }
-      /* Même mise en page que les notes (aside.note de html.css) : trait vertical au même
-         endroit, lettre calée à droite juste avant, comme les numéros 1, 2, 3 */
-      span.note {
-        display: block;
-        position: relative;
-        margin-bottom: .3em;
-        line-height: 1.25; /* trait à la hauteur du texte, comme les notes */
-        margin-left: 2.5em;    /* comme aside.note */
-        padding-left: 1.3em;   /* même colonne de texte que les notes */
-        border-left: 1px solid #ccc;
-      }
-      span.note > a {
-        position: absolute;
-        right: calc(100% + .76em); /* fin de la lettre là où finissent les numéros */
-        color: var(--fill-color, var(--accent));
-        font-weight: 700;
-        text-decoration: none;
-        border-bottom: none;
-      }
-      /* Lemme fermé par un crochet */
-      .lem::after {
-        content: "]\00a0";
-        color: var(--muted);
-      }
-      .wit { font-family: inherit; }
+    .editor {
+      margin-bottom: .75rem;
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      font-variant: small-caps;
+      letter-spacing: .03em;
+      color: #333;
     }
-
-    /* Notes resserrées, numéros à la taille du texte */
-    /* Trait vertical à la hauteur du texte (2026-10-14) : html.css met .5ex de retrait en
-       haut et en bas de chaque note, que le trait recouvre ; l'écart passe dans la marge. */
-    aside.note { margin-bottom: .75rem; padding-top: 0; padding-bottom: 0; }
-
-    /* Texte des notes aligné, avec ou sans signe (2026-10-14) : le signe de la citation
-       (= identique, : approchant) se place avant la colonne du texte, entre le trait et lui. */
-    aside.note { padding-left: 1.3em; }
-    /* Le numéro (absolu, placé depuis le début du texte) recule d'autant que la colonne a
-       avancé (1.3em au lieu de .5em), réglé pour finir là où finissent les lettres de l'apparat. */
-    aside.note a.noteback { margin-left: calc(-7ex - .68em); }
-    aside.note .cit-signe {
+    .date {
       display: inline-block;
-      width: 1.3em;
-      margin-left: -1.3em;
-      text-align: center;
-      color: var(--muted);
+      margin-top: .5rem;
+      padding-top: .5rem;
+      border-top: 1px solid #e2c5cb;
+      font-size: 1.15rem;
+      letter-spacing: .05em;
+      color: var(--accent);
     }
-
-    /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte,
-       5ex de large, d'où un trait trop long). */
-    aside.note a.noteback:hover {
-      border-bottom: none;
-      text-decoration: underline;
-    }
-    aside.note a.noteback { font-size: 14px; }
   }
 }
 

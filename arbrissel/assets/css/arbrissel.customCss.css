@@ -1,5 +1,20 @@
-/* Arbrissel — feuille reconstruite le 13/10/2026 : celle de la version précédente, sans le
-   socle générique D12. */
+/* Arbrissel — feuille en blocs (2026-10-14), reconstruite le 13/10/2026 (celle de la version
+   précédente, sans le socle générique D12).
+   1. Couleurs du corpus
+   2. Historique ÉLEC : thème Diple / ENC du site d'origine, limité à la zone de texte
+   3. Blocs hteiml génériques : notes de bas de page (identique d'un corpus à l'autre)
+   4. Propre au projet
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), cibles d'ancre, page de titre */
+
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
+
+/* Aucune : couleurs par défaut de dots-vue. */
+
+/*=============================================================
+ 2. HISTORIQUE ÉLEC (diple_html.css, enc.css)
+ =============================================================*/
 
 /* Thème Diple de l'ÉLEC : paragraphes espacés (marge par défaut du navigateur), sans
    alinéa ; hteiml les colle et les met en retrait. */
@@ -157,6 +172,52 @@
 #main #article a.bookmark { color: #ccc; border-bottom: none; }
 #main #article a.bookmark:hover { color: #BC052D; }
 
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes aside.note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes aside.note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 14px;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes aside.note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
+/* Rien pour l'instant. */
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
 
 /* --------------------------------------------------------------------------
    Volet Mirador en mode texte (2026-09-11, D7 — même correctif que

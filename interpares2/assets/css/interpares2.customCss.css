@@ -1,3 +1,21 @@
+/* InterPARES 2 — feuille en blocs (2026-10-14), reconstruite le 13/10/2026.
+   1. Couleurs du corpus
+   2. Historique ÉLEC : theme/interpares2.css, enc.css, diple_html.css, limités à #main #article
+   3. Blocs hteiml génériques : aucun (pas de notes hteiml dans les pages)
+   4. Propre au projet : glossaire en tableau
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11, D42), cibles d'ancre,
+      page de titre, tableau filtrable */
+
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
+
+/* Aucune : couleurs par défaut de dots-vue. */
+
+/*=============================================================
+ 2. HISTORIQUE ÉLEC (theme/interpares2.css, enc.css, diple_html.css)
+ =============================================================*/
+
 /* InterPARES 2 — feuille reconstruite le 13/10/2026 : celle de la version précédente
    (2026-09-09, tirée de theme/interpares2.css de l'ÉLEC et limitée à #main #article),
    sans le socle générique D12. */
@@ -198,91 +216,15 @@
 #main #article a.bookmark { color: #ccc; border-bottom: none; }
 #main #article a.bookmark:hover { color: #BC052D; }
 
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
 
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
+/* Aucun. */
 
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
-/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
-   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
-   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
-   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
-.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
-.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
-/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
-   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
-.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
-.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
-@media (max-width: 768px) {
-  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
-}
-/* ==== fin D11 ==== */
-
-/* ============================================================================
-   D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
-
-   POURQUOI
-   --------
-   Certains libellés de sommaire sont longs parce que le texte de l'éditeur
-   l'est : l'analyse d'un acte, une rubrique médiévale, le résumé d'un
-   testament. Les amputer dans le registre de fragments serait mutiler la
-   donnée. On les tronque donc À L'AFFICHAGE, sur deux lignes.
-
-   Le texte complet reste dans le DOM : il est sélectionnable, trouvable par
-   la recherche du navigateur, et lu en entier par les lecteurs d'écran.
-   Rien n'est perdu, seule la hauteur de la ligne du sommaire est bornée.
-
-   PORTÉE — délibérément étroite
-   -----------------------------
-   `#toc-tree a.toc-title` : l'ancre de titre de l'arbre du sommaire émis par
-   TOC.vue, et rien d'autre. Pas de sélecteur sur `a`, `li`, `.tree` ni
-   `.container`, qui servent ailleurs dans la page.
-
-   `display:-webkit-box` est requis par `-webkit-line-clamp` ; l'ancre est un
-   enfant de `.li.container{display:flex}` et reste donc un élément de flex.
-   Les navigateurs sans line-clamp affichent le titre entier : dégradation
-   sans casse.
-
-   NE PAS élargir ce sélecteur : une règle trop large a déjà cassé un autre
-   corpus sur ce projet.
-   ============================================================================ */
-
-#toc-tree a.toc-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  overflow-wrap: anywhere;
-}
-
-/* 2026-10-04 — Élément visé par une ancre (note en pied, retour vers l'appel), surligné.
-   `.dots-target` double `:target` : dots-vue pose cette classe sur l'élément visé quand une
-   URL à ancre est ouverte à froid (le fragment est monté après que le navigateur a résolu
-   l'ancre), comme dans les autres corpus. Couleurs : celles du socle D12 de ce fichier. */
-.document-area #main #article .footnote.note:target,
-.document-area #main #article .footnote.note.dots-target,
-.document-area #main #article a.noteref:target,
-.document-area #main #article a.noteref.dots-target {
-  background: var(--meta-area-fill-color, #f5f5f5);
-  box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21);
-}
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
 
 /* ==== Glossaire en tableau (2026-10-07) ====
    Comme le glossaire de Montferrand : tri par colonne, un filtre par colonne dans l'en-tête
@@ -481,6 +423,95 @@
 #main #article .ip-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
 #main #article .ip-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--ip-accent); }
 /* ==== fin glossaire en tableau ==== */
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
+   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
+.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
+.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
+/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
+   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
+.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ============================================================================
+   D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
+
+   POURQUOI
+   --------
+   Certains libellés de sommaire sont longs parce que le texte de l'éditeur
+   l'est : l'analyse d'un acte, une rubrique médiévale, le résumé d'un
+   testament. Les amputer dans le registre de fragments serait mutiler la
+   donnée. On les tronque donc À L'AFFICHAGE, sur deux lignes.
+
+   Le texte complet reste dans le DOM : il est sélectionnable, trouvable par
+   la recherche du navigateur, et lu en entier par les lecteurs d'écran.
+   Rien n'est perdu, seule la hauteur de la ligne du sommaire est bornée.
+
+   PORTÉE — délibérément étroite
+   -----------------------------
+   `#toc-tree a.toc-title` : l'ancre de titre de l'arbre du sommaire émis par
+   TOC.vue, et rien d'autre. Pas de sélecteur sur `a`, `li`, `.tree` ni
+   `.container`, qui servent ailleurs dans la page.
+
+   `display:-webkit-box` est requis par `-webkit-line-clamp` ; l'ancre est un
+   enfant de `.li.container{display:flex}` et reste donc un élément de flex.
+   Les navigateurs sans line-clamp affichent le titre entier : dégradation
+   sans casse.
+
+   NE PAS élargir ce sélecteur : une règle trop large a déjà cassé un autre
+   corpus sur ce projet.
+   ============================================================================ */
+
+#toc-tree a.toc-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* 2026-10-04 — Élément visé par une ancre (note en pied, retour vers l'appel), surligné.
+   `.dots-target` double `:target` : dots-vue pose cette classe sur l'élément visé quand une
+   URL à ancre est ouverte à froid (le fragment est monté après que le navigateur a résolu
+   l'ancre), comme dans les autres corpus. Couleurs : celles du socle D12 de ce fichier. */
+.document-area #main #article .footnote.note:target,
+.document-area #main #article .footnote.note.dots-target,
+.document-area #main #article a.noteref:target,
+.document-area #main #article a.noteref.dots-target {
+  background: var(--meta-area-fill-color, #f5f5f5);
+  box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21);
+}
 
 /* 2026-10-12 : page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document
    est ouvert sans refId) : même bloc que Montferrand, les chroniques latines et Du Bourg. */

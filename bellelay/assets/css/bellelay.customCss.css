@@ -1,3 +1,20 @@
+/* Bellelay — feuille en blocs (2026-10-14), reconstruite le 13/10/2026.
+   1. Couleurs du corpus
+   2. Historique ÉLEC : Bellelay.css du site d'origine, limitée à #article
+   3. Blocs hteiml génériques : aucun (les notes des pages sont celles du site, .bl-page .footnotes)
+   4. Propre au projet : index et interventions en tableau, carte d'accueil de la collection
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), cibles d'ancre, tableau filtrable */
+
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
+
+:root { --fill-color: #8f241d; }
+
+/*=============================================================
+ 2. HISTORIQUE ÉLEC (Bellelay.css)
+ =============================================================*/
+
 /* Bellelay — feuille reconstruite le 13/10/2026.
    Base : la CSS du site historique (el.enc.sorbonne.fr/bellelay/css/Bellelay.css), dont on
    garde les règles du contenu, limitées à #article (dots-vue injecte cette feuille dans
@@ -178,6 +195,24 @@
 #article .list-group ul { list-style: none; text-align: center; padding: 0; }
 #article .list-group li { display: inline-block; margin: 5px 12px; }
 #article .list-group img { max-height: 95px; width: auto; }
+
+/* ---------- Petits écrans : une colonne ---------- */
+@media screen and (max-width: 900px) {
+  #article .imagefeuillet, #article .bl-mosaique { float: none; max-width: 100%; }
+  #article .descripiece, #article .descriptionfeuillet, #article .interventionsfeuillet,
+  #article .feuilletdossier, #article .contenu { margin-left: 0; margin-right: 0; }
+  #article .titrepage { padding-left: 1em; min-width: 0; }
+}
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* Aucun. */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
 
 /* ---------- Tableaux triables et filtrables (index, interventions, annexes) ----------
    Repris tels quels de la feuille précédente (bellelay.customCss.css avant le 13/10),
@@ -368,22 +403,6 @@
 #article .bl-comparatif .bl-tableau td.bl-k1 { font-weight: 600; }
 /* ==== fin index du manuscrit en tableau ==== */
 
-
-/* ---------- Petits écrans : une colonne ---------- */
-@media screen and (max-width: 900px) {
-  #article .imagefeuillet, #article .bl-mosaique { float: none; max-width: 100%; }
-  #article .descripiece, #article .descriptionfeuillet, #article .interventionsfeuillet,
-  #article .feuilletdossier, #article .contenu { margin-left: 0; margin-right: 0; }
-  #article .titrepage { padding-left: 1em; min-width: 0; }
-}
-
-/* ==========================================================================
-   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
-   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
-   ========================================================================== */
-
-:root { --fill-color: #8f241d; }
-
 #center { max-width: 100%; overflow-x: hidden; }
 
 /* ---- carte de la collection (page d'accueil DoTS-vue) ; couleurs et police plus bas
@@ -393,41 +412,6 @@ body:has(a[href$="/bellelay/document/bellelay-edition"]) .resources-grid { displ
 body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card { max-width: 42rem; margin: 0 auto; border: 1px solid var(--line, #d7d3cd); border-radius: 6px; background: #fff; box-shadow: 0 8px 24px rgba(36, 36, 36, .08); }
 body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line { display: block; text-align: center; text-decoration: none; }
 body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-header-first-line::after { content: "Accueil, introduction, étude générale, manuscrit, interventions, index et analyse"; display: block; }
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
-/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
-   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
-   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
-   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
-.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
-.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
-/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
-   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
-.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
-.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
-@media (max-width: 768px) {
-  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
-}
-/* ==== fin D11 ==== */
 
 /* ==== Accueil de collection (2026-09-14) : titre lisible, plus de titre rouge ====
    Mesuré sur http://localhost:5173/bellelay, viewport 1440x1000, AVANT correction :
@@ -504,6 +488,45 @@ body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-he
   color: #686868;
 }
 /* ==== fin accueil de collection 2026-09-14 ==== */
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
+   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
+.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
+.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
+/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
+   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
+.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
 
 /* 2026-10-04 — Élément visé par une ancre (bloc d'images d'une pièce, entrée de liste),
    aux couleurs du corpus. `.dots-target` double `:target` : dots-vue pose cette classe sur

@@ -1,3 +1,21 @@
+/* Saint-Denis — feuille en blocs (2026-10-14), reconstruite le 13/10/2026.
+   1. Couleurs du corpus
+   2. Historique ÉLEC : Pleade (module-tei.css, pleade.css, module-eadeac.css), pages du site
+   3. Blocs hteiml génériques : aucun (apparat et notes suivent Pleade)
+   4. Propre au projet : recherche, images, Inventaire, index des auteurs, carte d'accueil
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11, D42), cibles d'ancre */
+
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
+
+/* Couleurs du corpus dans l'application (cartes, sommaire, accents). */
+:root { --fill-color:#315d71; --meta-area-fill-color:#edf3f4; --default-text-color:#20282b; }
+
+/*=============================================================
+ 2. HISTORIQUE ÉLEC (Pleade)
+ =============================================================*/
+
 /* Saint-Denis — feuille reconstruite le 13/10/2026.
    Présentation des actes : la CSS du site historique (Pleade, saint-denis.enc.sorbonne.fr,
    theme/css/module-tei.css et pleade.css), sur les classes que saint-denis.xsl reprend de
@@ -6,9 +24,6 @@
    l'application). Suivent, repris tels quels de la feuille précédente, tous les dispositifs
    propres à cette édition (pages du site, images, Inventaire, index des auteurs, sommaire).
    Les écarts à Pleade sont marqués [dots]. */
-
-/* Couleurs du corpus dans l'application (cartes, sommaire, accents). */
-:root { --fill-color:#315d71; --meta-area-fill-color:#edf3f4; --default-text-color:#20282b; }
 
 /* ---------- Pleade : texte ---------- */
 #main #article { font-family: Verdana, Arial, sans-serif; font-size: 13px; line-height: 1.6; color: black; }
@@ -129,6 +144,31 @@
   color:#666;
 }
 
+/* 2026-10-05 — Mises en forme du TEI sans règle jusqu'ici (audit du 05/10), reprises de la
+   feuille de l'ancien site (Pleade, theme/css/module-eadeac.css) :
+   - hi[@rend="cite"] → span.cite : <cite> sur l'ancien site, sans règle, donc italique ;
+   - p[@rend="smaller"] → p.smaller : « .smaller { font-size: 90% } » ;
+   - list[@rend="encadré"] → ul.encadré : bloc encadré (90 %, filet noir, marges 2em) ;
+   - emph[@rend="sup"] → em.sup : <sup> droit sur l'ancien site (« sup { vertical-align: top;
+     font-size: 80% } ») ; hteiml le sortait en exposant italique. */
+.document-area #article:not(.bottom-toc) span.cite { font-style: italic; }
+.document-area #article:not(.bottom-toc) p.smaller { font-size: 90%; }
+.document-area #article:not(.bottom-toc) ul.encadré {
+  font-size: 90%; border: 1px solid black; margin-left: 2em; margin-right: 2em;
+  padding: .5em; list-style-position: inside; line-height: 130%;
+}
+.document-area #article:not(.bottom-toc) em.sup { font-style: normal; vertical-align: top; font-size: 80%; }
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* Aucun. */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
 /* Recherche dots-cli-es */
 #main #article .sd-search {
   margin:1.4rem 0 2rem;
@@ -156,40 +196,7 @@
 }
 /* autopilote 2026-09-11 : images servies depuis /images/saint-denis/ */
 .sd-graphic { max-width: 100%; height: auto; display: block; margin: .5em 0; }
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
 
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
-/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
-   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
-   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
-   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
-.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
-.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
-/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
-   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
-.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
-.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
-@media (max-width: 768px) {
-  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
-}
-/* ==== fin D11 ==== */
 /* ==== Images rapatriées le 2026-09-12 (folios du Cartulaire blanc, illustrations de chapitre) ====
    Les 831 liens vers la visionneuse de l'ancien site sont devenus des <details> qui déplient
    l'image servie en local. Deux précautions apprises en D6/E2 :
@@ -246,44 +253,6 @@
    le socle D12 fixe la taille des titres par `#article h1`, qui l'emporte sur deux classes. */
 .document-area #article:not(.bottom-toc) .isd-notice p.isd-rubrique {
   margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555; text-indent: 0;
-}
-
-/* ============================================================================
-   D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
-
-   POURQUOI
-   --------
-   Certains libellés de sommaire sont longs parce que le texte de l'éditeur
-   l'est : l'analyse d'un acte, une rubrique médiévale, le résumé d'un
-   testament. Les amputer dans le registre de fragments serait mutiler la
-   donnée. On les tronque donc À L'AFFICHAGE, sur deux lignes.
-
-   Le texte complet reste dans le DOM : il est sélectionnable, trouvable par
-   la recherche du navigateur, et lu en entier par les lecteurs d'écran.
-   Rien n'est perdu, seule la hauteur de la ligne du sommaire est bornée.
-
-   PORTÉE — délibérément étroite
-   -----------------------------
-   `#toc-tree a.toc-title` : l'ancre de titre de l'arbre du sommaire émis par
-   TOC.vue, et rien d'autre. Pas de sélecteur sur `a`, `li`, `.tree` ni
-   `.container`, qui servent ailleurs dans la page.
-
-   `display:-webkit-box` est requis par `-webkit-line-clamp` ; l'ancre est un
-   enfant de `.li.container{display:flex}` et reste donc un élément de flex.
-   Les navigateurs sans line-clamp affichent le titre entier : dégradation
-   sans casse.
-
-   NE PAS élargir ce sélecteur : une règle trop large a déjà cassé un autre
-   corpus sur ce projet.
-   ============================================================================ */
-
-#toc-tree a.toc-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  overflow-wrap: anywhere;
 }
 
 /* ============================================================================
@@ -461,6 +430,92 @@
   text-decoration-style: dotted;
 }
 
+/* ==========================================================================
+   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
+   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
+   ========================================================================== */
+
+.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
+.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
+.description-section nav a:hover { background:var(--fill-color); color:white; }
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
+   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
+.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
+.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
+/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
+   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
+.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* ============================================================================
+   D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
+
+   POURQUOI
+   --------
+   Certains libellés de sommaire sont longs parce que le texte de l'éditeur
+   l'est : l'analyse d'un acte, une rubrique médiévale, le résumé d'un
+   testament. Les amputer dans le registre de fragments serait mutiler la
+   donnée. On les tronque donc À L'AFFICHAGE, sur deux lignes.
+
+   Le texte complet reste dans le DOM : il est sélectionnable, trouvable par
+   la recherche du navigateur, et lu en entier par les lecteurs d'écran.
+   Rien n'est perdu, seule la hauteur de la ligne du sommaire est bornée.
+
+   PORTÉE — délibérément étroite
+   -----------------------------
+   `#toc-tree a.toc-title` : l'ancre de titre de l'arbre du sommaire émis par
+   TOC.vue, et rien d'autre. Pas de sélecteur sur `a`, `li`, `.tree` ni
+   `.container`, qui servent ailleurs dans la page.
+
+   `display:-webkit-box` est requis par `-webkit-line-clamp` ; l'ancre est un
+   enfant de `.li.container{display:flex}` et reste donc un élément de flex.
+   Les navigateurs sans line-clamp affichent le titre entier : dégradation
+   sans casse.
+
+   NE PAS élargir ce sélecteur : une règle trop large a déjà cassé un autre
+   corpus sur ce projet.
+   ============================================================================ */
+
+#toc-tree a.toc-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
 /* 2026-10-04 — Élément visé par une ancre, surligné aux couleurs du corpus. `.dots-target`
    double `:target` : dots-vue pose cette classe sur l'élément visé quand une URL à ancre est
    ouverte à froid (le fragment est monté après que le navigateur a résolu l'ancre). Les
@@ -482,27 +537,3 @@
 .document-area #main #article section.sd-index-auteurs.dots-target {
   box-shadow: inset 3px 0 0 #315d71;
 }
-
-/* 2026-10-05 — Mises en forme du TEI sans règle jusqu'ici (audit du 05/10), reprises de la
-   feuille de l'ancien site (Pleade, theme/css/module-eadeac.css) :
-   - hi[@rend="cite"] → span.cite : <cite> sur l'ancien site, sans règle, donc italique ;
-   - p[@rend="smaller"] → p.smaller : « .smaller { font-size: 90% } » ;
-   - list[@rend="encadré"] → ul.encadré : bloc encadré (90 %, filet noir, marges 2em) ;
-   - emph[@rend="sup"] → em.sup : <sup> droit sur l'ancien site (« sup { vertical-align: top;
-     font-size: 80% } ») ; hteiml le sortait en exposant italique. */
-.document-area #article:not(.bottom-toc) span.cite { font-style: italic; }
-.document-area #article:not(.bottom-toc) p.smaller { font-size: 90%; }
-.document-area #article:not(.bottom-toc) ul.encadré {
-  font-size: 90%; border: 1px solid black; margin-left: 2em; margin-right: 2em;
-  padding: .5em; list-style-position: inside; line-height: 130%;
-}
-.document-area #article:not(.bottom-toc) em.sup { font-style: normal; vertical-align: top; font-size: 80%; }
-
-/* ==========================================================================
-   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
-   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
-   ========================================================================== */
-
-.description-section nav { display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1rem; }
-.description-section nav a { border:1px solid var(--fill-color); border-radius:999px; color:var(--fill-color); padding:.35rem .7rem; text-decoration:none; }
-.description-section nav a:hover { background:var(--fill-color); color:white; }

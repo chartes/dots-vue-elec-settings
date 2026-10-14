@@ -1,3 +1,21 @@
+/* Delescluze — feuille en blocs (2026-10-14), reconstruite le 13/10/2026.
+   1. Couleurs du corpus
+   2. Historique ÉLEC : theme/delescluze.css du site d'origine et mise en page de ses pages
+   3. Blocs hteiml génériques : notes de bas de page (identique d'un corpus à l'autre)
+   4. Propre au projet : repère des menus, index des personnes
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), cibles d'ancre,
+      bibliographie commune, page de titre, tableau filtrable */
+
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
+
+/* Aucune : couleurs par défaut de dots-vue. */
+
+/*=============================================================
+ 2. HISTORIQUE ÉLEC (theme/delescluze.css)
+ =============================================================*/
+
 /* Delescluze — feuille reconstruite le 13/10/2026.
    Base : la feuille de la version précédente (2026-09-09), elle-même tirée de
    theme/delescluze.css de l'ÉLEC (F. Clavaud et N. Pashkeeva, 2014) et réécrite sur les
@@ -137,42 +155,6 @@
 #main #article .dl-mode-tr:checked ~ * .reg { display: none; }
 #main #article .dl-mode-tr:checked ~ * del { text-decoration: line-through; }
 
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
-/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
-   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
-   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
-   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
-.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
-.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
-/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
-   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
-.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
-.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
-@media (max-width: 768px) {
-  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
-}
-/* ==== fin D11 ==== */
-
 /* ==== D14d (2026-09-12, autopilote) : conformité au site ÉLEC historique ==== */
 /* 1. Cote du fac-similé sous l'image : l'ancien site l'affichait en <figcaption>
       (« Archives nationales, 494AP/1, dossier 4 : carnet 1, page 5 »). */
@@ -225,35 +207,6 @@
 #main #article ul.dl-mois-liste a[aria-current="page"] { font-weight: bold; color: #A73136; }
 /* ==== fin D14d ==== */
 
-/* ==== 2026-09-12, 19:30 : les 39 lignes du menu déroulant « Aller à la lettre » ont été
-   RETIRÉES d'ici. Ce menu n'existe plus (l'utilisateur a demandé une table des matières à
-   gauche à la place), donc ses règles ne visaient plus aucun élément : elles ne faisaient que
-   masquer, par leur seule présence, l'endroit où se règle vraiment la colonne — voir
-   « table des matières des lettres » ci-dessous. La version d'avant est dans
-   `delescluze.customCss.css.bak_lettresnues_20260912`. ==== */
-
-/* ==== Repère de l'élément courant dans les menus (2026-09-12) ====
-   Trois tentatives ont échoué avant la bonne : `aria-current` sur l'ancre, une classe sur le
-   <li>, puis un second jeton de classe sur l'ancre — DoTS-vue réécrit les ancres internes, perd
-   `aria-current`, retire les classes des <li> et ne garde que le PREMIER jeton de classe des
-   <a>. Les règles qui visaient `a.dl-lettre-courante` / `a.dl-mois-courant` ont donc été
-   retirées le 2026-09-12 à 19:30 : plus aucune ancre ne porte ces classes, l'élément courant est
-   un <strong>, stylé juste en dessous. ==== */
-
-/* La lettre (ou le mois) courante est un <strong>, pas un lien : DoTS-vue normalise la classe
-   des ancres internes, donc aucun attribut ni classe ne survit sur un <a> ; un élément distinct,
-   lui, traverse la réécriture (mesuré le 2026-09-12). */
-#main #article ul.dl-mois-liste strong.dl-mois-courant {
-  color: #A73136;
-  font-weight: bold;
-}
-
-/* ==== 2026-09-12, 20:30 : les 60 lignes de la table des matières des lettres ont été RETIRÉES.
-   « en vrai enlève les lettre a b c d e c'est déjà dans la toc » — vérifié avant de retirer : le
-   sommaire de DoTS-vue liste les 19 unités « Index des personnes : lettre A » … « lettre V ».
-   La XSL n'émet plus aucune liste de lettres ; ces règles ne visaient donc plus rien.
-   Version précédente : delescluze.customCss.css.bak_lettresnues_20260912. ==== */
-
 /* --------------------------------------------------------------------------
    Restitutions du 2026-09-29 (vers, textes insérés, post-scriptum, adresses,
    lacunes illisibles) — règles reprises de theme/delescluze.css de l'ÉLEC.
@@ -293,32 +246,109 @@
 /* Page sans image numérique (lettre14-page01) : mention de l'ÉLEC. */
 #main #article .facsimile-absent { font-style: italic; }
 
-/* 2026-10-04 — Élément visé par une ancre, surligné aux couleurs du corpus. `.dots-target`
-   double `:target` : dots-vue pose cette classe sur l'élément visé quand une URL à ancre est
-   ouverte à froid (le fragment est monté après que le navigateur a résolu l'ancre). Les
-   grands blocs ne sont pas repeints : un filet ou leur seul titre. */
-.document-area #main #article aside.edition:target,
-.document-area #main #article aside.edition.dots-target,
-.document-area #main #article a.noteref:target,
-.document-area #main #article a.noteref.dots-target,
-.document-area #main #article a.pb:target,
-.document-area #main #article a.pb.dots-target {
-  background: #faf8f5;
-  box-shadow: inset 3px 0 0 #A73136;
+/* --------------------------------------------------------------------------
+   Page du site historique — theme/delescluze.css (#facsimile, #text, .account)
+   -------------------------------------------------------------------------- */
+#main #article .dl-page { display: flow-root; margin: 0 0 2.5em; }
+#main #article .dl-facsimile { float: left; width: 38%; margin-right: 3%; }
+#main #article .dl-facsimile img { max-width: 100%; height: auto; }
+#main #article .dl-facsimile .facsimile-desc { font-size: 80%; font-style: normal; }
+#main #article .dl-text { overflow: hidden; }  /* la colonne de texte reste à droite du fac-similé */
+#main #article .dl-text, #main #article .dl-text :is(section, div, table, h1, h2, h3, h4) { clear: none; }  /* [dots] hteiml dégage les sections sous le fac-similé */
+
+/* Onglets Édition / Transcription : petites capitales, l'état actif en rouge gras (#text-menu) */
+#main #article .dl-mode + label {
+  display: inline-block; margin: 0 .6rem .8rem 0; padding: 0; border: none; background: none;
+  color: #000; font: normal 100% Arial, Helvetica, sans-serif; font-variant: small-caps; cursor: pointer;
 }
-.document-area #main #article div.facsimile:target,
-.document-area #main #article div.facsimile.dots-target {
-  box-shadow: inset 3px 0 0 #A73136;
+#main #article .dl-mode:checked + label { color: #A73136; font-weight: bold; background: none; }
+
+/* Ajouts de l'éditeur : sans marque dans l'édition, absents de la transcription */
+#main #article .add { text-decoration: none; }
+#main #article .dl-mode-tr:checked ~ * .add { display: none; }
+
+/* Tableaux de comptes (.account) */
+#main #article .dl-text table { border-collapse: separate; border: 1px solid black; margin: 8px 0; width: 50%; font-size: inherit; }
+#main #article .dl-text td, #main #article .dl-text th { border: 1px solid black; padding: 2px 4px; text-align: left; background: none; font-weight: normal; text-transform: none; letter-spacing: 0; }
+#main #article .dl-text th[scope="colgroup"] { font-weight: bold; }
+
+/* Jour : la date en titre centré et gras (time.head) ; [dots] hteiml espace beaucoup les sections */
+#main #article .dl-text section.div { margin: 0 0 1em; padding: 0; }
+#main #article .dl-text .head { text-align: center; font-weight: bold; }
+
+@media screen and (max-width: 900px) {
+  #main #article .dl-facsimile { float: none; width: auto; margin: 0 0 1em; }
 }
-.document-area #main #article section.div:target > h1,
-.document-area #main #article section.div.dots-target > h1,
-.document-area #main #article section.div:target > h2,
-.document-area #main #article section.div.dots-target > h2,
-.document-area #main #article section.div:target > h3,
-.document-area #main #article section.div.dots-target > h3 {
-  background: #faf8f5;
-  box-shadow: inset 3px 0 0 #A73136;
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
 }
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes aside.note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes aside.note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 14px;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes aside.note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
+/* ==== 2026-09-12, 19:30 : les 39 lignes du menu déroulant « Aller à la lettre » ont été
+   RETIRÉES d'ici. Ce menu n'existe plus (l'utilisateur a demandé une table des matières à
+   gauche à la place), donc ses règles ne visaient plus aucun élément : elles ne faisaient que
+   masquer, par leur seule présence, l'endroit où se règle vraiment la colonne — voir
+   « table des matières des lettres » ci-dessous. La version d'avant est dans
+   `delescluze.customCss.css.bak_lettresnues_20260912`. ==== */
+
+/* ==== Repère de l'élément courant dans les menus (2026-09-12) ====
+   Trois tentatives ont échoué avant la bonne : `aria-current` sur l'ancre, une classe sur le
+   <li>, puis un second jeton de classe sur l'ancre — DoTS-vue réécrit les ancres internes, perd
+   `aria-current`, retire les classes des <li> et ne garde que le PREMIER jeton de classe des
+   <a>. Les règles qui visaient `a.dl-lettre-courante` / `a.dl-mois-courant` ont donc été
+   retirées le 2026-09-12 à 19:30 : plus aucune ancre ne porte ces classes, l'élément courant est
+   un <strong>, stylé juste en dessous. ==== */
+
+/* La lettre (ou le mois) courante est un <strong>, pas un lien : DoTS-vue normalise la classe
+   des ancres internes, donc aucun attribut ni classe ne survit sur un <a> ; un élément distinct,
+   lui, traverse la réécriture (mesuré le 2026-09-12). */
+#main #article ul.dl-mois-liste strong.dl-mois-courant {
+  color: #A73136;
+  font-weight: bold;
+}
+
+/* ==== 2026-09-12, 20:30 : les 60 lignes de la table des matières des lettres ont été RETIRÉES.
+   « en vrai enlève les lettre a b c d e c'est déjà dans la toc » — vérifié avant de retirer : le
+   sommaire de DoTS-vue liste les 19 unités « Index des personnes : lettre A » … « lettre V ».
+   La XSL n'émet plus aucune liste de lettres ; ces règles ne visaient donc plus rien.
+   Version précédente : delescluze.customCss.css.bak_lettresnues_20260912. ==== */
 
 /* ==========================================================================
    Index des personnes en fiches repliables (2026-10-07), sur le modèle de la page
@@ -463,131 +493,6 @@
 #main #article .dl-index details.dl-lettre.dots-target::details-content { content-visibility: visible; display: block; }
 #main #article .dl-index details.dl-lettre.dots-target > summary .dl-lettre-titre::before { transform: rotate(90deg); }
 #main #article .dl-index details.dl-lettre { scroll-margin-top: 90px; }
-
-/* ==========================================================================
-   Bibliographie (modele commun commun/bibliographie.xsl, 2026-10-08) : meme bloc
-   dans les corpus qui l'utilisent, seul le prefixe de sélecteur change.
-   Base : CSS de la (8) (intertitres en petites capitales, notices en retrait
-   suspendu, auteur en petites capitales) ; cote en gras ; titre d'article entre guillemets.
-   ========================================================================== */
-
-#main #article section.biblio { --biblio-filet: #e3ddd6; color: var(--document-text-color, #303030); }
-#main #article section.biblio h1.biblio-titre { margin: 0 0 1.2rem; font-size: 1.6rem; color: var(--fill-color, #5f004d); }
-#main #article section.biblio h2.biblio-rubrique {
-  margin: 1.8rem 0 .7rem;
-  padding-bottom: .2rem;
-  border-bottom: 1px solid var(--biblio-filet);
-  color: var(--fill-color, #5f004d);
-  font-size: 1.05rem;
-  font-variant: small-caps;
-  letter-spacing: .04em;
-  line-height: 1.4;
-}
-#main #article section.biblio h3.biblio-sous-titre {
-  margin: 1.2rem 0 .3rem;
-  color: #8a837c;
-  font-size: .9rem;
-  font-weight: 600;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-}
-#main #article section.biblio h4.biblio-depot { margin: .9rem 0 .25rem; font-size: .98rem; font-style: italic; font-weight: normal; }
-#main #article section.biblio p.biblio-notice {
-  margin: 0 0 .55rem;
-  padding-left: 1.6em;
-  text-indent: -1.6em;
-  line-height: 1.6;
-  text-align: left;
-}
-#main #article section.biblio .biblio-fonds p.biblio-notice { margin-bottom: .2rem; }
-#main #article section.biblio p.biblio-notice .author { font-variant: small-caps; letter-spacing: .02em; }
-#main #article section.biblio p.biblio-notice .biblio-cote { font-weight: 600; font-variant-numeric: tabular-nums; }
-#main #article section.biblio p.biblio-notice .note { color: #555; font-size: .92em; }
-#main #article section.biblio section.biblio a { color: inherit; text-decoration: underline dotted #b9afa5; text-underline-offset: .18em; }
-#main #article section.biblio section.biblio a:hover { color: #000; text-decoration-style: solid; }
-
-/* --------------------------------------------------------------------------
-   Page du site historique — theme/delescluze.css (#facsimile, #text, .account)
-   -------------------------------------------------------------------------- */
-#main #article .dl-page { display: flow-root; margin: 0 0 2.5em; }
-#main #article .dl-facsimile { float: left; width: 38%; margin-right: 3%; }
-#main #article .dl-facsimile img { max-width: 100%; height: auto; }
-#main #article .dl-facsimile .facsimile-desc { font-size: 80%; font-style: normal; }
-#main #article .dl-text { overflow: hidden; }  /* la colonne de texte reste à droite du fac-similé */
-#main #article .dl-text, #main #article .dl-text :is(section, div, table, h1, h2, h3, h4) { clear: none; }  /* [dots] hteiml dégage les sections sous le fac-similé */
-
-/* Onglets Édition / Transcription : petites capitales, l'état actif en rouge gras (#text-menu) */
-#main #article .dl-mode + label {
-  display: inline-block; margin: 0 .6rem .8rem 0; padding: 0; border: none; background: none;
-  color: #000; font: normal 100% Arial, Helvetica, sans-serif; font-variant: small-caps; cursor: pointer;
-}
-#main #article .dl-mode:checked + label { color: #A73136; font-weight: bold; background: none; }
-
-/* Ajouts de l'éditeur : sans marque dans l'édition, absents de la transcription */
-#main #article .add { text-decoration: none; }
-#main #article .dl-mode-tr:checked ~ * .add { display: none; }
-
-/* Tableaux de comptes (.account) */
-#main #article .dl-text table { border-collapse: separate; border: 1px solid black; margin: 8px 0; width: 50%; font-size: inherit; }
-#main #article .dl-text td, #main #article .dl-text th { border: 1px solid black; padding: 2px 4px; text-align: left; background: none; font-weight: normal; text-transform: none; letter-spacing: 0; }
-#main #article .dl-text th[scope="colgroup"] { font-weight: bold; }
-
-/* Jour : la date en titre centré et gras (time.head) ; [dots] hteiml espace beaucoup les sections */
-#main #article .dl-text section.div { margin: 0 0 1em; padding: 0; }
-#main #article .dl-text .head { text-align: center; font-weight: bold; }
-
-@media screen and (max-width: 900px) {
-  #main #article .dl-facsimile { float: none; width: auto; margin: 0 0 1em; }
-}
-
-/* ==========================================================================
-   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
-   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
-   ========================================================================== */
-
-/* === SECTION GARDE DEBUT (page de garde commune, 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
-/* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev
-   (comptes.customCss.css § 8, mesures du 2026-10-08) ; seule la couleur suit le corpus (--fill-color).
-   La table des matières est le sommaire de DoTS-vue (.bottom-toc), placé SOUS le titre, pleine largeur,
-   au même retrait que le texte (padding par défaut de DoTS-vue : 20px 10% 120px), sur la seule page
-   de garde (wrapper qui contient .titlestmt). */
-.document-area #article .titlestmt {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 2rem 1.25rem;
-  font-family: "Georgia", "Iowan Old Style", serif;
-  text-align: center;
-}
-.document-area #article .titlestmt h1 {
-  margin: 0 0 1rem !important;
-  color: var(--fill-color, #8f0e21) !important;
-  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
-  line-height: 1.3 !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
-  text-align: center !important;
-}
-.document-area #article .titlestmt .editors { text-align: center; text-indent: 0; }
-.document-area #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
-.document-area #article .titlestmt .editor {
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
-  color: #333;
-  margin-bottom: 0.75rem;
-  font-variant: small-caps;
-  letter-spacing: 0.03em;
-}
-.document-area #article .titlestmt .date {
-  display: inline-block;
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-  color: var(--fill-color, #8f0e21);
-  border-top: 1px solid #e2c5cb;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-}
-/* 2026-10-13 : le sommaire n'est plus déplacé sous le titre (règles .wrapper:has(.titlestmt)
-   retirées, comme pour Dubourg) : il sautait à l'arrivée de la page de titre. */
-/* === SECTION GARDE FIN === */
 
 /* Index des personnes en tableau triable et filtrable (2026-10-13, remplace les fiches
    repliables par lettre) : marqueurs tf-* de tableau-filtrable.xsl, comportement dans
@@ -749,8 +654,7 @@
 }
 #main #article .dl-tableau dl.dl-fiche-mentions > dd { margin: 0 0 .3rem; }
 #main #article .dl-tableau dl.dl-fiche-mentions > dt { line-height: 1.4; }
-#main #article .dl-tableau th.dl-c-mentions,
-@media (min-width: 761px) { #main #article .dl-tableau td.dl-c-mentions { width: 28%; } } /* sur petit écran, la ligne est un bloc pleine largeur */
+@media (min-width: 761px) { #main #article .dl-tableau th.dl-c-mentions, #main #article .dl-tableau td.dl-c-mentions { width: 28%; } } /* sur petit écran, la ligne est un bloc pleine largeur */
 #main #article .dl-tableau td a {
   color: #3d3833;
   font-weight: normal;
@@ -789,6 +693,158 @@
 #main #article .dl-tableau details.dl-suite[open] .dl-suite-moins { display: inline; }
 #main #article .dl-tableau details.dl-mentions-replie > summary::before { content: "▸ "; }
 #main #article .dl-tableau details.dl-mentions-replie[open] > summary::before { content: "▾ "; }
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
+/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
+   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
+   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
+/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
+   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
+.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
+.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
+/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
+   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
+.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
+.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
+@media (max-width: 768px) {
+  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
+  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
+}
+/* ==== fin D11 ==== */
+
+/* 2026-10-04 — Élément visé par une ancre, surligné aux couleurs du corpus. `.dots-target`
+   double `:target` : dots-vue pose cette classe sur l'élément visé quand une URL à ancre est
+   ouverte à froid (le fragment est monté après que le navigateur a résolu l'ancre). Les
+   grands blocs ne sont pas repeints : un filet ou leur seul titre. */
+.document-area #main #article aside.edition:target,
+.document-area #main #article aside.edition.dots-target,
+.document-area #main #article a.noteref:target,
+.document-area #main #article a.noteref.dots-target,
+.document-area #main #article a.pb:target,
+.document-area #main #article a.pb.dots-target {
+  background: #faf8f5;
+  box-shadow: inset 3px 0 0 #A73136;
+}
+.document-area #main #article div.facsimile:target,
+.document-area #main #article div.facsimile.dots-target {
+  box-shadow: inset 3px 0 0 #A73136;
+}
+.document-area #main #article section.div:target > h1,
+.document-area #main #article section.div.dots-target > h1,
+.document-area #main #article section.div:target > h2,
+.document-area #main #article section.div.dots-target > h2,
+.document-area #main #article section.div:target > h3,
+.document-area #main #article section.div.dots-target > h3 {
+  background: #faf8f5;
+  box-shadow: inset 3px 0 0 #A73136;
+}
+
+/* ==========================================================================
+   Bibliographie (modele commun commun/bibliographie.xsl, 2026-10-08) : meme bloc
+   dans les corpus qui l'utilisent, seul le prefixe de sélecteur change.
+   Base : CSS de la (8) (intertitres en petites capitales, notices en retrait
+   suspendu, auteur en petites capitales) ; cote en gras ; titre d'article entre guillemets.
+   ========================================================================== */
+
+#main #article section.biblio { --biblio-filet: #e3ddd6; color: var(--document-text-color, #303030); }
+#main #article section.biblio h1.biblio-titre { margin: 0 0 1.2rem; font-size: 1.6rem; color: var(--fill-color, #5f004d); }
+#main #article section.biblio h2.biblio-rubrique {
+  margin: 1.8rem 0 .7rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid var(--biblio-filet);
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  line-height: 1.4;
+}
+#main #article section.biblio h3.biblio-sous-titre {
+  margin: 1.2rem 0 .3rem;
+  color: #8a837c;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+#main #article section.biblio h4.biblio-depot { margin: .9rem 0 .25rem; font-size: .98rem; font-style: italic; font-weight: normal; }
+#main #article section.biblio p.biblio-notice {
+  margin: 0 0 .55rem;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+  line-height: 1.6;
+  text-align: left;
+}
+#main #article section.biblio .biblio-fonds p.biblio-notice { margin-bottom: .2rem; }
+#main #article section.biblio p.biblio-notice .author { font-variant: small-caps; letter-spacing: .02em; }
+#main #article section.biblio p.biblio-notice .biblio-cote { font-weight: 600; font-variant-numeric: tabular-nums; }
+#main #article section.biblio p.biblio-notice .note { color: #555; font-size: .92em; }
+#main #article section.biblio section.biblio a { color: inherit; text-decoration: underline dotted #b9afa5; text-underline-offset: .18em; }
+#main #article section.biblio section.biblio a:hover { color: #000; text-decoration-style: solid; }
+
+/* === SECTION GARDE DEBUT (page de garde commune, 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
+/* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev
+   (comptes.customCss.css § 8, mesures du 2026-10-08) ; seule la couleur suit le corpus (--fill-color).
+   La table des matières est le sommaire de DoTS-vue (.bottom-toc), placé SOUS le titre, pleine largeur,
+   au même retrait que le texte (padding par défaut de DoTS-vue : 20px 10% 120px), sur la seule page
+   de garde (wrapper qui contient .titlestmt). */
+.document-area #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+.document-area #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color, #8f0e21) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+.document-area #article .titlestmt .editors { text-align: center; text-indent: 0; }
+.document-area #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
+.document-area #article .titlestmt .editor {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #333;
+  margin-bottom: 0.75rem;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+.document-area #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color, #8f0e21);
+  border-top: 1px solid #e2c5cb;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+/* 2026-10-13 : le sommaire n'est plus déplacé sous le titre (règles .wrapper:has(.titlestmt)
+   retirées, comme pour Dubourg) : il sautait à l'arrivée de la page de titre. */
+/* === SECTION GARDE FIN === */
 
 /* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13 ; 2026-10-14) ====
    Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la

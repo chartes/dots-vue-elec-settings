@@ -1,11 +1,14 @@
-/* Christofle — feuille reconstruite le 13/10/2026.
-   Base : la CSS historique de l'ÉLEC (elec.enc.sorbonne.fr/christofle/theme/christofle.css,
-   F. Clavaud et N. Pashkeeva, 2014), dont on garde les règles du contenu, limitées à
-   #article (dots-vue injecte cette feuille dans toute l'application). L'en-tête, le menu
-   principal et le pied de page de l'ÉLEC sont remplacés par ceux de dots-vue.
-   Les écarts à la feuille historique sont marqués [dots]. */
+/* Christofle — feuille en blocs (2026-10-14), reconstruite le 13/10/2026.
+   1. Couleurs du corpus
+   2. Historique ÉLEC : christofle.css du site d'origine (F. Clavaud et N. Pashkeeva, 2014), limitée à #article
+   3. Blocs hteiml génériques : aucun (notes et apparat suivent la feuille historique)
+   4. Propre au projet : index en tableau, filtre par jour des mois
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11, D42), page de titre,
+      tableau filtrable, liste repliable */
 
-/* rouge : #A73136 ; gris clair : #E8E8E8 ; gris foncé : #4A4A4A */
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
 
 /* Couleurs du corpus dans l'application (barre, sommaire, accents) : reprises de la
    feuille précédente. */
@@ -14,6 +17,19 @@
   --meta-area-fill-color: #f5eeee;
   --default-text-color: #28211f;
 }
+
+/*=============================================================
+ 2. HISTORIQUE ÉLEC (christofle.css)
+ =============================================================*/
+
+/* Christofle — feuille reconstruite le 13/10/2026.
+   Base : la CSS historique de l'ÉLEC (elec.enc.sorbonne.fr/christofle/theme/christofle.css,
+   F. Clavaud et N. Pashkeeva, 2014), dont on garde les règles du contenu, limitées à
+   #article (dots-vue injecte cette feuille dans toute l'application). L'en-tête, le menu
+   principal et le pied de page de l'ÉLEC sont remplacés par ceux de dots-vue.
+   Les écarts à la feuille historique sont marqués [dots]. */
+
+/* rouge : #A73136 ; gris clair : #E8E8E8 ; gris foncé : #4A4A4A */
 
 #article #content {
   font-family: Arial, Verdana, sans-serif;
@@ -284,6 +300,26 @@
 
 /* [dots] exposants de hteiml (<hi rend="super">) */
 #article .super { vertical-align: super; font-size: 75%; line-height: 0; }
+
+/* ---------- Petits écrans : une colonne ---------- */
+@media screen and (max-width: 900px) {
+  #article #facsimile, #article #edition-text, #article #specific-menu-paratext,
+  #article .titlePage #image { float: none; width: auto; margin-left: 0; }
+  #article #text, #article .paratext > section, #article .index > section,
+  #article .actTypes > section, #article #titlePage { margin-left: 0; margin-right: 0; border-left: none; }
+  #article #edition-text { border-right: none; }
+  #article .apparatusNote { position: static; width: auto; margin: 0.3em 0; }
+}
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* Aucun. */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
 
 /* ---------- Index en tableau et filtre par jour des mois ----------
    Repris tels quels de la feuille précédente (christofle.customCss.css avant le 13/10) :
@@ -578,23 +614,15 @@
 .jour-note .note-type { font-variant: small-caps; color: #7a4a50; }
 .jour-note .note-summary { color: #33292a; }
 
-/* ---------- Petits écrans : une colonne ---------- */
-@media screen and (max-width: 900px) {
-  #article #facsimile, #article #edition-text, #article #specific-menu-paratext,
-  #article .titlePage #image { float: none; width: auto; margin-left: 0; }
-  #article #text, #article .paratext > section, #article .index > section,
-  #article .actTypes > section, #article #titlePage { margin-left: 0; margin-right: 0; border-left: none; }
-  #article #edition-text { border-right: none; }
-  #article .apparatusNote { position: static; width: auto; margin: 0.3em 0; }
-}
-
-/* ==========================================================================
-   Repris tels quels de la feuille précédente (2026-10-13, après revue avant/après) :
-   règles de l'application (couleurs du corpus, sommaire, page de titre, accueil).
-   ========================================================================== */
-
 /* Pas de volet Mirador : les fac-similés sont dans le texte. */
 .document-views .mirador-view { display: none !important; }
+
+/* Christofle, index des types d'actes : date de la minute en gris. */
+#main #article .lr-colonnes .chr-type-date { color: #8a837c; }
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
 
 /* --------------------------------------------------------------------------
    Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
@@ -938,5 +966,3 @@
   #main #article details.lr-entree > summary { gap: .5rem; }
   #main #article .lr-entree-corps { padding-left: .6rem; }
 }
-/* Christofle, index des types d'actes : date de la minute en gris. */
-#main #article .lr-colonnes .chr-type-date { color: #8a837c; }

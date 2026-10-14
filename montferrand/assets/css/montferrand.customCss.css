@@ -1,8 +1,14 @@
+/* Comptes consulaires de Montferrand — feuille en blocs (2026-10-14).
+   1. Couleurs du corpus
+   2. Historique ÉLEC : texte des comptes (comptes.xsl, div.montferrand-historic), appels,
+      registres, liens bleus de l'ÉLEC
+   3. Blocs hteiml génériques : notes de bas de page (identique d'un corpus à l'autre)
+   4. Propre au projet : glossaire et index en tableaux, cartes de définition, cible surlignée,
+      page d'un registre, bibliographie, espacements
+   5. Mécanismes communs dots-vue : page de titre, tableau filtrable */
+
 /*=============================================================
- PART 1
- Updating the css color schema for:
-  - the collection comptes
-  - its children (unless otherwise specified)
+ 1. COULEURS DU CORPUS
  =============================================================*/
 
 /* Using css variables */
@@ -11,11 +17,9 @@
 }
 
 /*=============================================================
- PART 2
- Updating the css of specific elements (HTML) for:
-  - the collection comptes
-  - its children (unless otherwise specified)
+ 2. HISTORIQUE ÉLEC (texte des comptes)
  =============================================================*/
+
 /* Principe (2026-10-01) : ce fichier ne garde que ce que dots-vue ne fait pas.
    - Tout le texte rendu par comptes.xsl est dans div.montferrand-historic :
      toutes les règles portent le même préfixe,
@@ -179,6 +183,47 @@
   text-decoration: underline solid 1px;
   text-underline-offset: 3px;
 }
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes aside.note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes aside.note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 14px;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes aside.note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
 
 /* ==========================================================================
    5. GLOSSAIRE ET INDEX DES NOMS — tableaux triables (2026-09-28)
@@ -645,50 +690,6 @@
 }
 
 /* ==========================================================================
-   8. Page de garde (titleStmt rendu par hteiml, hors .montferrand-historic)
-   ========================================================================== */
-.titlestmt {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 2rem 1.25rem;
-  font-family: "Georgia", "Iowan Old Style", serif;
-  text-align: center;
-}
-.titlestmt .editors-label {
-  font-style: italic;
-  color: #666;
-  font-variant: normal;
-}
-.titlestmt h1 {
-  margin: 0 0 1rem !important;
-  color: #8f0e21 !important;
-  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
-  line-height: 1.3 !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
-  text-align: center !important;
-}
-.titlestmt .editors {
-  text-align: center;
-}
-.titlestmt .editor {
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
-  color: #333;
-  margin-bottom: 0.75rem;
-  font-variant: small-caps;
-  letter-spacing: 0.03em;
-}
-.titlestmt .date {
-  display: inline-block;
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-  color: #8f0e21;
-  border-top: 1px solid #e2c5cb;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-/* ==========================================================================
    9. Page d'un registre (CC155…) : la XSL donne la table de ses comptes
       (années, articles, folios) ; elle remplace le sommaire des enfants de
       dots-vue, qui ne donnait que les titres (2026-10-02).
@@ -841,6 +842,60 @@ section.div h1.head {
 .document-views .text-view #article .montferrand-historic table.table th.label { background: #f4f1ee; font-weight: 600; text-align: left; }
 .document-views .text-view #article .montferrand-historic table.mf-table-lignes td:last-child { text-align: right; }
 
+/* Numéros des notes en pied à la couleur du corpus (2026-10-14) : rouge ici, violet aux
+   Chroniques ; alignement, taille et survol : bloc générique des notes. */
+#main #article aside.note a.noteback {
+  color: var(--fill-color, #8f0e21);
+}
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+/* ==========================================================================
+   8. Page de garde (titleStmt rendu par hteiml, hors .montferrand-historic)
+   ========================================================================== */
+.titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+.titlestmt .editors-label {
+  font-style: italic;
+  color: #666;
+  font-variant: normal;
+}
+.titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: #8f0e21 !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+.titlestmt .editors {
+  text-align: center;
+}
+.titlestmt .editor {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #333;
+  margin-bottom: 0.75rem;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+.titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: #8f0e21;
+  border-top: 1px solid #e2c5cb;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 /* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13 ; 2026-10-14) ====
    Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
    CSS de chaque corpus qui en a. Deux ids en tête de sélecteur : il l'emporte sur les
@@ -986,24 +1041,3 @@ section.div h1.head {
   #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
 }
 /* ==== fin tableau filtrable ==== */
-
-/* Notes en pied : trait vertical à la hauteur du texte (2026-10-14). html.css met .5ex de
-   retrait en haut et en bas de chaque note, que le trait recouvre (il dépassait le texte,
-   ou faisait une seule ligne continue d'une note à l'autre) ; l'écart passe dans la marge. */
-#main #article aside.note {
-  margin-bottom: .5em;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-/* 2026-10-14 : numéros des notes en pied à la couleur du corpus et à la taille de ceux de la
-   vue « notes » (bouton t¹, panneau .aside-noteref de dots-vue), comme pour les Chroniques
-   (en violet là-bas, en rouge ici) ; au survol, le chiffre seul est souligné (html.css
-   soulignait toute la boîte de 5ex, d'où un trait trop long). */
-#main #article aside.note a.noteback {
-  color: var(--fill-color, #8f0e21);
-  font-size: 14px;
-}
-#main #article aside.note a.noteback:hover {
-  border-bottom: none;
-  text-decoration: underline;
-}

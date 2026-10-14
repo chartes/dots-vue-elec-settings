@@ -225,22 +225,25 @@
     /* Apparat : séparé des notes par un filet */
     p.apparatus {
       margin-bottom: 1.25rem;
+      padding-left: 0;
       line-height: 1.55;
     }
     .apparatus {
       * ::after { content: " "; }
-      span.note { display: block; }
-
-      /* Lettre d'appel alignée sur les numéros des notes (25px) */
+      /* Même mise en page que les notes (aside.note de html.css) : trait vertical au même
+         endroit, lettre calée à droite juste avant, comme les numéros 1, 2, 3 */
+      span.note {
+        display: block;
+        position: relative;
+        margin-left: 2.5em;    /* comme aside.note */
+        padding-left: .25em;   /* + l'espace insécable qui suit la lettre = .5em, comme aside.note */
+        border-left: 1px solid #ccc;
+      }
       span.note > a {
-        display: inline-block;
-        min-width: 25px;
-        margin-right: .5em;
-        padding-right: .5em;
-        border-right: 1px solid #ccc; /* petit trait, comme après les numéros des notes */
+        position: absolute;
+        right: calc(100% + .76em); /* fin de la lettre là où finissent les numéros */
         color: var(--fill-color, var(--accent));
         font-weight: 700;
-        text-align: right;
         text-decoration: none;
         border-bottom: none;
       }

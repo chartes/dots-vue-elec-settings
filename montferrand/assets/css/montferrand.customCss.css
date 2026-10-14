@@ -694,6 +694,10 @@
       dots-vue, qui ne donnait que les titres (2026-10-02).
    ========================================================================== */
 .document-area:has(.montferrand-historic .mf-registre) .bottom-toc { display: none; }
+/* 2026-10-14 : … dès le chargement. Pendant que dots-vue charge le registre, la table n'est pas
+   encore là et sa liste des comptes s'affichait un instant (deux rendus de suite en passant de
+   registre à registre) : on la masque aussi d'après ses liens, qui visent des comptes (C1…). */
+.document-area #article.bottom-toc:has(a.toc-title[data-href*="refId=C1"]) { display: none; }
 /* La page n'a que son titre et cette table : sans cela, la rangée de texte de
    dots-vue (.wrapper en flex) se rétracte sur la largeur du titre. */
 .document-area:has(.montferrand-historic .mf-registre) .wrapper > .row { flex: 1 1 auto; min-width: 0; }

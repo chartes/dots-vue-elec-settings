@@ -238,7 +238,7 @@
         margin-bottom: .3em;
         line-height: 1.25; /* trait à la hauteur du texte, comme les notes */
         margin-left: 2.5em;    /* comme aside.note */
-        padding-left: .25em;   /* + l'espace insécable qui suit la lettre = .5em, comme aside.note */
+        padding-left: 1.3em;   /* même colonne de texte que les notes */
         border-left: 1px solid #ccc;
       }
       span.note > a {
@@ -261,6 +261,27 @@
     /* Trait vertical à la hauteur du texte (2026-10-14) : html.css met .5ex de retrait en
        haut et en bas de chaque note, que le trait recouvre ; l'écart passe dans la marge. */
     aside.note { margin-bottom: .75rem; padding-top: 0; padding-bottom: 0; }
+
+    /* Texte des notes aligné, avec ou sans signe (2026-10-14) : le signe de la citation
+       (= identique, : approchant) se place avant la colonne du texte, entre le trait et lui. */
+    aside.note { padding-left: 1.3em; }
+    /* Le numéro (absolu, placé depuis le début du texte) recule d'autant que la colonne a
+       avancé (1.3em au lieu de .5em), réglé pour finir là où finissent les lettres de l'apparat. */
+    aside.note a.noteback { margin-left: calc(-7ex - .68em); }
+    aside.note .cit-signe {
+      display: inline-block;
+      width: 1.3em;
+      margin-left: -1.3em;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte,
+       5ex de large, d'où un trait trop long). */
+    aside.note a.noteback:hover {
+      border-bottom: none;
+      text-decoration: underline;
+    }
     aside.note a.noteback { font-size: 14px; }
   }
 }

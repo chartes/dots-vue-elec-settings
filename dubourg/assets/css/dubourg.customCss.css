@@ -87,6 +87,13 @@
   font-size: 160%;
   font-weight: 900;
 }
+/* Sous-titres d'une page de partie (2026-10-14) : titre de la présentation et des lettres
+   en h2, un cran sous le h1. */
+#main #article h2.head {
+  margin: 1.5em 0 0.75em;
+  font-size: 125%;
+  font-weight: 700;
+}
 /* Ces mêmes pages (parties, présentation de l'index) perdent aussi toutes leurs marges :
    on rend un espace autour des titres et entre les paragraphes. Les lettres, qui ne sont
    pas sous .dots-ui, ne sont pas touchées. */

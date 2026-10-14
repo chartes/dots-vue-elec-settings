@@ -72,13 +72,15 @@
   & h1.head {
     color: var(--fill-color, var(--accent));
     font-variant: small-caps;
+    font-size: 1.6rem; /* comme les titres de chapitre : Lettre, Bibliographie, Références */
   }
+  & h2.head { font-size: 1.15rem; } /* sous-titre : « Bibliographie sur les chroniques latines » */
   .rubric { color: #8e3a7e; } /* prune clair, distinct des titres (contraste ~7:1) */
 
   .ornament {
     color: var(--accent);
     font-size: 200%;
-    line-height: 1.4;
+    line-height: 0; /* la lettrine ne grandit pas la première ligne : interligne régulier */
   }
 
   p:not(.noindent) {
@@ -200,6 +202,9 @@
       font-weight: normal;
       white-space: nowrap;
       scroll-margin-top: 90px;
+
+      /* Lien vers le chapitre (« Préface.8 ») : prune clair des rubriques */
+      > a { color: #8e3a7e; border-bottom-color: #8e3a7e; }
     }
     > dd { margin: 0; }
     > dt.dots-target,
@@ -220,8 +225,6 @@
     /* Apparat : séparé des notes par un filet */
     p.apparatus {
       margin-bottom: 1.25rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--rule);
       line-height: 1.55;
     }
     .apparatus {
@@ -232,8 +235,12 @@
       span.note > a {
         display: inline-block;
         min-width: 25px;
+        margin-right: .5em;
+        padding-right: .5em;
+        border-right: 1px solid #ccc; /* petit trait, comme après les numéros des notes */
         color: var(--fill-color, var(--accent));
         font-weight: 700;
+        text-align: right;
         text-decoration: none;
         border-bottom: none;
       }

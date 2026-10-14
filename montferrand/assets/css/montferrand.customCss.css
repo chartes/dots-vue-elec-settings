@@ -931,3 +931,12 @@ section.div h1.head {
   #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
 }
 /* ==== fin tableau filtrable ==== */
+
+/* Notes en pied : trait vertical à la hauteur du texte (2026-10-14). html.css met .5ex de
+   retrait en haut et en bas de chaque note, que le trait recouvre (il dépassait le texte,
+   ou faisait une seule ligne continue d'une note à l'autre) ; l'écart passe dans la marge. */
+#main #article aside.note {
+  margin-bottom: .5em;
+  padding-top: 0;
+  padding-bottom: 0;
+}

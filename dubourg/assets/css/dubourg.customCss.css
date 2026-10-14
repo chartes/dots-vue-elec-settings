@@ -68,10 +68,30 @@
   text-indent: 0;
 }
 
-/* hteiml met tout <front> sur fond gris (en-tête des lettres) : fond blanc, le reste de
-   sa mise en page (marges, retrait) est gardé. */
+/* hteiml met tout <front> sur fond gris (en-tête des lettres) : fond blanc.
+   2026-10-14 : sans le cadre, ses marges et son retrait intérieur (html.css) laissaient un
+   grand blanc au-dessus du titre et sous les témoins, et décalaient titre et analyse de
+   20 px par rapport au texte de la lettre : on les resserre. */
 #main #article section.front {
   background-color: #fff;
+  margin: 0 0 1.5em;
+  padding: 0;
+}
+#main #article article.text {
+  padding-top: 0;
+}
+#main #article article.text > section.front > h1.head {
+  padding-top: 0;
+}
+#main #article section.front > section.tradition {
+  margin-top: 1em;
+  padding: 0;
+}
+#main #article section.front ul.listWit {
+  margin: .5em 0;
+}
+#main #article article.text > section.body {
+  padding-top: 0;
 }
 
 /* Analyse de la lettre : la feuille historique écrit ses articles en <i> à la suite ; sur
@@ -493,3 +513,12 @@
   #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
 }
 /* ==== fin tableau filtrable ==== */
+
+/* Notes en pied : trait vertical à la hauteur du texte (2026-10-14). html.css met .5ex de
+   retrait en haut et en bas de chaque note, que le trait recouvre (il dépassait le texte,
+   ou faisait une seule ligne continue d'une note à l'autre) ; l'écart passe dans la marge. */
+#main #article aside.note {
+  margin-bottom: .5em;
+  padding-top: 0;
+  padding-bottom: 0;
+}

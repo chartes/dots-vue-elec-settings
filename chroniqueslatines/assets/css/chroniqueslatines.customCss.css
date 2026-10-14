@@ -235,6 +235,8 @@
       span.note {
         display: block;
         position: relative;
+        margin-bottom: .3em;
+        line-height: 1.25; /* trait à la hauteur du texte, comme les notes */
         margin-left: 2.5em;    /* comme aside.note */
         padding-left: .25em;   /* + l'espace insécable qui suit la lettre = .5em, comme aside.note */
         border-left: 1px solid #ccc;
@@ -256,7 +258,9 @@
     }
 
     /* Notes resserrées, numéros à la taille du texte */
-    aside.note { margin-bottom: .55rem; }
+    /* Trait vertical à la hauteur du texte (2026-10-14) : html.css met .5ex de retrait en
+       haut et en bas de chaque note, que le trait recouvre ; l'écart passe dans la marge. */
+    aside.note { margin-bottom: .75rem; padding-top: 0; padding-bottom: 0; }
     aside.note a.noteback { font-size: 14px; }
   }
 }

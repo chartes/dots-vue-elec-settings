@@ -55,6 +55,7 @@
     }
   ],
   "collectionCustomCss": "dubourg",
+  "collectionCustomJs": "dubourg",
   "topBreadcrumbButtonLabel": [
     "extensions.dots:shortTitle"
   ],

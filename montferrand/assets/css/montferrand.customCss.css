@@ -813,6 +813,14 @@ section.div h1.head {
 .document-views .text-view #article .montferrand-historic section.front {
   background-color: #fff;
 }
+/* 2026-10-14 : page d'un registre : marges de html.css empilées (lettre 20px, front 16+20px,
+   .docTitle 1em 1em 4em 1em, liste 1.5rem) : grand blanc au-dessus et sous le titre, titre
+   décalé de 36px. On resserre et on aligne le titre sur la liste des comptes. */
+.document-views .text-view #article .montferrand-historic article.registre { padding-top: 0; }
+.document-views .text-view #article .montferrand-historic article.registre > section.front { margin: 0; padding: 0; }
+.document-views .text-view #article .montferrand-historic article.registre .docTitle { margin: 0 0 1rem; }
+.document-views .text-view #article .montferrand-historic .mf-registre { margin-top: 0; }
+.document-views .text-view #article .montferrand-historic .mf-registre-resume { text-indent: 0; }
 
 /* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13) ====
    Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la

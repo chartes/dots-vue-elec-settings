@@ -214,10 +214,13 @@ ul.index li {
 /* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
    est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
    passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée (sur une page de regroupement,
+/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
    « Index et glossaire », c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
 .document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
 .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
+/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
+   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
+.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
 .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
 @media (max-width: 768px) {
   .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }

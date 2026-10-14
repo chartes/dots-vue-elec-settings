@@ -824,3 +824,85 @@
   #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
 }
 /* ==== fin tableau filtrable ==== */
+
+/* ==========================================================================
+   Liste repliable (module commun liste-repliable.xsl, 2026-10-14) : groupes ouverts
+   (● titre (N)), entrées repliées (○ titre … N unités), contenu déplié en dessous.
+   ========================================================================== */
+#main #article details.lr-groupe > summary,
+#main #article details.lr-entree > summary { list-style: none; cursor: pointer; }
+#main #article details.lr-groupe > summary::-webkit-details-marker,
+#main #article details.lr-entree > summary::-webkit-details-marker { display: none; }
+#main #article .lr-liste { max-width: 44rem; }
+#main #article details.lr-groupe > summary { display: block; }
+#main #article .lr-groupe-titre {
+  display: block;
+  margin: 1.6rem 0 .4rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid #e3ddd6;
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  text-align: left;
+}
+#main #article .lr-groupe-titre::before {
+  content: "\25CB";              /* ○ replié */
+  display: inline-block;
+  width: 1.2rem;
+  font-variant: normal;
+  font-size: .9em;
+}
+#main #article details.lr-groupe[open] > summary .lr-groupe-titre::before,
+#main #article details.lr-groupe:has(.dots-target) > summary .lr-groupe-titre::before { content: "\25CF"; } /* ● ouvert */
+#main #article details.lr-groupe > summary:hover .lr-groupe-titre { color: color-mix(in srgb, var(--fill-color, #5f004d) 75%, black); }
+#main #article .lr-groupe-nb { color: #8a837c; font-variant: normal; font-size: .85em; letter-spacing: 0; }
+#main #article details.lr-entree { border-bottom: 1px solid #f0ece8; scroll-margin-top: 90px; text-align: left; }
+#main #article details.lr-entree > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .3rem .2rem .3rem 1.2rem;
+  font-size: 1rem;
+  position: relative;
+}
+#main #article details.lr-entree > summary::before {
+  content: "\25CB";              /* ○ replié */
+  position: absolute;
+  left: .15rem;
+  color: var(--fill-color, #5f004d);
+  font-size: 1.05em;
+  line-height: 1.25;
+}
+#main #article details.lr-entree[open] > summary::before,
+#main #article details.lr-entree.dots-target > summary::before,
+#main #article details.lr-entree:has(.dots-target) > summary::before { content: "\25CF"; } /* ● ouvert */
+#main #article details.lr-entree > summary:hover { background: #f7f4f1; }
+#main #article .lr-entree-titre { flex: 1 1 auto; }
+#main #article .lr-entree-nb {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#main #article .lr-entree-corps { padding: .2rem .2rem .7rem 1.2rem; font-size: .93rem; }
+/* Entrée visée par un renvoi (ou contenant la cible) : affichée ouverte et surlignée. */
+#main #article details.lr-groupe:has(.dots-target)::details-content,
+#main #article details.lr-entree.dots-target::details-content,
+#main #article details.lr-entree:has(.dots-target)::details-content { content-visibility: visible; display: block; }
+#main #article details.lr-entree.dots-target > summary { background: #fbf3d5; }
+/* Entrée visée par l'ancre de l'URL : ouverte et marquée (lr-vise) par le customJs du corpus. */
+#main #article details.lr-entree.lr-vise > summary { background: #fbf3d5; }
+#main #article details.lr-entree.lr-vise, #main #article .lr-entree-corps .lr-vise { scroll-margin-top: 90px; }
+/* Liste courte en colonnes dans le corps d'une entrée. */
+#main #article ul.lr-colonnes { columns: 12rem; column-gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
+#main #article ul.lr-colonnes > li { margin: 0; padding: .05rem 0; break-inside: avoid; text-indent: 0; }
+#main #article ul.lr-colonnes > li::before,
+#main #article ul.lr-colonnes > li::marker { content: none; }
+@media (max-width: 760px) {
+  #main #article details.lr-entree > summary { gap: .5rem; }
+  #main #article .lr-entree-corps { padding-left: .6rem; }
+}
+/* Christofle, index des types d'actes : date de la minute en gris. */
+#main #article .lr-colonnes .chr-type-date { color: #8a837c; }

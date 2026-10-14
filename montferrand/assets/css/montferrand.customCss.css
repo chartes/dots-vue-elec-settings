@@ -976,3 +976,15 @@ section.div h1.head {
   padding-top: 0;
   padding-bottom: 0;
 }
+/* 2026-10-14 : numéros des notes en pied à la couleur du corpus et à la taille de ceux de la
+   vue « notes » (bouton t¹, panneau .aside-noteref de dots-vue), comme pour les Chroniques
+   (en violet là-bas, en rouge ici) ; au survol, le chiffre seul est souligné (html.css
+   soulignait toute la boîte de 5ex, d'où un trait trop long). */
+#main #article aside.note a.noteback {
+  color: var(--fill-color, #8f0e21);
+  font-size: 14px;
+}
+#main #article aside.note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}

@@ -396,15 +396,17 @@
   color: #77706a;
 }
 
-/* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13) ====
+/* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13 ; 2026-10-14) ====
    Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
    CSS de chaque corpus qui en a. Deux ids en tête de sélecteur : il l'emporte sur les
    règles propres au corpus.
    - Paragraphes dans une cellule : ni justifiés ni en retrait (une colonne étroite
      justifiée ouvre de grands blancs entre les mots).
-   - Petit écran : chaque ligne devient une fiche ; le nom de la colonne (data-label,
-     posé par le script du projet) précède chaque valeur ; les en-têtes de tri deviennent
-     des boutons à la ligne ; les filtres s'empilent, chacun avec son libellé.
+   - Petit écran, sur le modèle de la recherche des cartulaires (dev.chartes.psl.eu/elec/
+     cartulaires/search) : les en-têtes de tri forment une rangée de boutons de même
+     largeur, l'indicateur au-dessus du nom, entre deux filets ; chaque ligne devient un
+     bloc de valeurs empilées, sans cadre ni libellé, séparé du suivant par un filet.
+     Les filtres (que la recherche n'a pas) s'empilent, chacun avec son libellé.
    - Champs de saisie à 16px sur écran tactile : en dessous, Safari iOS zoome la page
      à la saisie et ne dézoome pas. */
 #main #article .tf-cadre td p {
@@ -433,53 +435,78 @@
     max-width: 100%;
     box-sizing: border-box;
   }
-  #main #article .tf-cadre thead { position: static; }
+  #main #article .tf-cadre thead { position: static; background: none; }
   #main #article .tf-cadre caption { display: block; width: auto; }
   #main #article .tf-cadre .tf-barre { flex-wrap: wrap; }
   #main #article .tf-cadre .tf-csv { margin-left: 0; }
 
-  /* En-têtes : boutons de tri côte à côte */
+  /* En-têtes : rangée de boutons de même largeur, indicateur au-dessus du nom */
   #main #article .tf-cadre thead tr:first-child {
     display: flex;
-    flex-wrap: wrap;
-    gap: .35rem;
-    padding: .2rem 0 .5rem;
+    gap: .25rem;
+    padding: .5rem 0;
+    border-top: 2px solid var(--fill-color, #8f0e21);
+    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    background: none;
   }
   #main #article .tf-cadre thead tr:first-child th {
+    flex: 1 1 0;
     padding: 0;
     border: 0;
     background: none;
   }
   #main #article .tf-cadre thead button.tf-tri {
-    width: auto;
-    padding: .3rem .7rem;
-    border: 1px solid #d6cfc8;
-    border-radius: 999px;
-    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .2rem;
+    width: 100%;
+    padding: .2rem .1rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: #222;
+    font: 600 .8rem/1.2 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
+  #main #article .tf-cadre thead button.tf-tri::after {
+    order: -1;
+    display: block;
+    margin: 0;
+    padding: .15rem .45rem;
+    border-radius: 3px;
+    background: #ece9e6;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.1;
+  }
+  #main #article .tf-cadre thead button.tf-tri:hover { background: none; }
 
   /* Filtres : un par ligne, libellé à gauche */
   #main #article .tf-cadre tr.tf-filtres {
+    margin-top: .6rem;
     padding: .4rem .5rem;
     border: 1px solid #e3ddd6;
     border-radius: 4px;
     background: #faf8f5;
   }
-  /* Libellé posé à gauche en position absolue : le contenu de la cellule (liens séparés
-     de virgules, etc.) reste du texte courant, ce qu'une grille découperait */
-  #main #article .tf-cadre tr.tf-filtres td,
-  #main #article .tf-cadre tbody td {
+  /* Libellé posé à gauche en position absolue : le contenu de la cellule reste du texte
+     courant, ce qu'une grille découperait */
+  #main #article .tf-cadre tr.tf-filtres td {
     position: relative;
     padding: .2rem 0 .2rem calc(30% + .6rem);
     border: 0;
     background: none;
   }
-  #main #article .tf-cadre tr.tf-filtres td::before,
-  #main #article .tf-cadre tbody td::before {
+  #main #article .tf-cadre tr.tf-filtres td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;
-    top: .35rem;
+    top: .55rem;
     width: 30%;
     color: #77706a;
     font: 600 .7rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
@@ -487,28 +514,29 @@
     text-transform: uppercase;
   }
 
-  /* Lignes : fiches */
+  /* Lignes : valeurs empilées, sans cadre ni libellé, un filet entre deux lignes */
   #main #article .tf-cadre tbody tr {
-    margin: 0 0 .6rem;
-    padding: .5rem .7rem;
-    border: 1px solid #e3ddd6;
-    border-radius: 4px;
-    background: #fff;
+    margin: 0;
+    padding: .7rem .2rem;
+    border: 0;
+    border-bottom: 1px solid #e3ddd6;
+    border-radius: 0;
+    background: none;
   }
+  #main #article .tf-cadre tbody td {
+    padding: .1rem 0;
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre tbody td::before { content: none; }
   #main #article .tf-cadre tbody tr:nth-child(even) > td,
   #main #article .tf-cadre tbody tr:hover > td { background: none; }
   #main #article .tf-cadre tbody tr.dots-target,
-  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); }
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
   #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
-  /* Première colonne (l'entrée) : titre de la fiche, sans libellé */
-  #main #article .tf-cadre tr.tf-filtres td::before { top: .55rem; }
-  #main #article .tf-cadre tbody td:first-child {
-    display: block;
-    padding: .2rem 0 .35rem;
-    font-weight: 600;
-  }
-  #main #article .tf-cadre tbody td:first-child::before { content: none; }
-  /* Cellule vide (tiret) : rien à montrer dans une fiche */
+  /* Première colonne (l'entrée) en tête du bloc */
+  #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
+  /* Cellule vide (tiret) : rien à montrer */
   #main #article .tf-cadre tbody td:has(> .tf-vide:only-child) { display: none; }
   #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
 }

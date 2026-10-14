@@ -50,6 +50,7 @@
     }
   ],
   "collectionCustomCss": "montferrand",
+  "collectionCustomJs": "montferrand",
   "topBreadcrumbButtonLabel": [
     "extensions.dots:shortTitle"
   ],

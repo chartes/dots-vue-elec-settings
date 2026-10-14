@@ -93,10 +93,6 @@
     font-variant: small-caps;
   }
 
-  a.bibl {
-    color: var(--accent);
-  }
-
   p:not(.noindent) {
     text-indent: 0;
   }
@@ -271,6 +267,14 @@
       .wit { font-family: inherit; }
     }
 
+       a.noteback  {
+        position: absolute;
+        color: var(--fill-color, var(--accent));
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: none;
+      }
+
     /* Notes resserrées, numéros à la taille du texte */
     /* Trait vertical à la hauteur du texte (2026-10-14) : html.css met .5ex de retrait en
        haut et en bas de chaque note, que le trait recouvre ; l'écart passe dans la marge. */
@@ -281,7 +285,10 @@
     aside.note { padding-left: 1.3em; }
     /* Le numéro (absolu, placé depuis le début du texte) recule d'autant que la colonne a
        avancé (1.3em au lieu de .5em), réglé pour finir là où finissent les lettres de l'apparat. */
-    aside.note a.noteback { margin-left: calc(-7ex - .68em); }
+    aside.note a.noteback {
+      margin-left: calc(-8ex - .68em);
+      font-size: 0.9em;
+    }
     aside.note .cit-signe {
       display: inline-block;
       width: 1.3em;
@@ -296,7 +303,9 @@
       border-bottom: none;
       text-decoration: underline;
     }
-    aside.note a.noteback { font-size: 14px; }
   }
 }
 
+a.bibl {
+  color: var(--fill-color);
+}

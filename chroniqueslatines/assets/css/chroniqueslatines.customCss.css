@@ -66,6 +66,9 @@
 
   /* ---------- Texte courant ---------- */
   & blockquote { margin: 0; }
+  /* Citation de plusieurs paragraphes (div.cit_n) : même écart que les paragraphes du texte
+     (ils sortaient collés, et la lettrine de chacun débordait sur la ligne du dessus). */
+  .cit_n > p { margin: 0 0 1rem; }
   & fieldset { border: none; }
   & q { font-style: italic; }
   .head { color: var(--accent); }

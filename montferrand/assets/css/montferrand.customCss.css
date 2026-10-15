@@ -287,7 +287,6 @@
   gap: 1rem;
   margin: .5rem 0 .6rem;
   padding: .4rem 0;
-  border-bottom: 1px solid #e3ddd6;
   color: #7a726b;
   font-size: .85rem;
   font-variant: small-caps;
@@ -855,6 +854,8 @@
    10. Bibliographie : bloc générique « bibliographie » (section 3), sigle deviné par la XSL
        (texte avant les deux-points), filtre dans le customJs (2026-10-15).
    ========================================================================== */
+/* Pas de titre « Bibliographie » au-dessus de la liste : il répète le fil d'Ariane (2026-10-15). */
+.document-views .text-view #article .montferrand-historic section#biblio > h1.head { display: none; }
 
 section.div h1.head {
   margin-top: 2rem;

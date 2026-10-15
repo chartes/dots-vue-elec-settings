@@ -118,12 +118,10 @@
   padding-left: 1.3em;
 }
 /* Numéro calé pour finir là où finissent les lettres de l'apparat. */
-document-views #article .footnotes aside.note a.noteback {
-  margin-left: calc(-8ex - .68em);
+.document-views #article .footnotes aside.note a.noteback {
+  margin-left: calc(-7ex - .68em);
   font-size: 0.9em;
-  color: var(--fill-color);
   font-weight: 700;
-  line-height: 1.25;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes aside.note a.noteback:hover {

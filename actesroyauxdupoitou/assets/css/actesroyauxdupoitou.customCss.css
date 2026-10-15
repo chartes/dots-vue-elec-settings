@@ -37,7 +37,7 @@
  3. BLOCS HTEIML GÉNÉRIQUES
  =============================================================*/
 
-/* ==== BLOC NOTES DE BAS DE PAGE (aside.note de hteiml) ====
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
    latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
    « propre au projet ». */
@@ -52,14 +52,14 @@
 /* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
    de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
    aligné, avec ou sans signe de citation avant lui. */
-.document-views #article .footnotes aside.note {
+.document-views #article .footnotes :is(aside, div).note {
   margin-bottom: .75rem;
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 1.3em;
 }
 /* Numéro calé pour finir là où finissent les lettres de l'apparat. */
-.document-views #article .footnotes aside.note a.noteback {
+.document-views #article .footnotes :is(aside, div).note a.noteback {
   margin-left: calc(-7ex - .68em);
   font-size: 0.9em;
   color: var(--fill-color);
@@ -67,7 +67,7 @@
   line-height: 1.25;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
-.document-views #article .footnotes aside.note a.noteback:hover {
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
   border-bottom: none;
   text-decoration: underline;
 }

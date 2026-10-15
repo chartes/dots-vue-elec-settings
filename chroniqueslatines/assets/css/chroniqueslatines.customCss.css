@@ -33,7 +33,6 @@
   .head { color: var(--accent); }
   & h1.head {
     color: var(--fill-color, var(--accent));
-    font-variant: small-caps;
     font-size: 1.6rem; /* comme les titres de chapitre : Lettre, Bibliographie, Références */
   }
   & h2.head { font-size: 1.15rem; } /* sous-titre : « Bibliographie sur les chroniques latines » */
@@ -328,3 +327,6 @@
   }
 }
 
+ins {
+  text-decoration: none;
+}

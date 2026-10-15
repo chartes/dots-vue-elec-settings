@@ -2,38 +2,76 @@
 // que des classes ; aucun JavaScript dans le HTML. Chargé par dots-vue via
 // "collectionCustomJs": "chroniqueslatines".
 
-// --- Page Références : ouvrir l'œuvre visée par l'ancre de l'URL ---
-// Un renvoi de note (…?refId=chroniqueslatines_refs#caesar, ou #caesar--chroniqueslatines_0-2
-// pour un chapitre) amène sur une œuvre repliée (details.lr-entree). On l'ouvre avec son groupe
-// (details.lr-groupe), on pose sur la cible la classe dots-target, que la CSS du corpus
-// surligne, et on la place sous l'en-tête. Le front ne pose plus dots-target lui-même, et le
-// contenu arrive après la navigation : d'où l'observation du document plutôt que :target.
+// Page Références : l'œuvre visée par un renvoi de note (…?refId=chroniqueslatines_refs#caesar,
+// ou #caesar--chroniqueslatines_0-2 pour un chapitre) est ouverte, placée et surlignée par le bloc
+// commun « Arrivée sur une ancre » ci-dessous (il ouvre les details qui la contiennent).
 
-function viser () {
-  const id = decodeURIComponent(location.hash.slice(1))
-  const el = id && document.getElementById(id)
-  if (!el || !el.closest('details.lr-groupe, details.lr-entree')) return
-  document.querySelectorAll('details.lr-groupe .dots-target, details.lr-entree.dots-target').forEach(x => { if (x !== el) x.classList.remove('dots-target') })
-  for (let d = el.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true
-  el.classList.add('dots-target')
-  el.scrollIntoView({ block: 'start' })
+// --- Arrivée sur une ancre : bloc commun à tous les corpus (2026-10-15), copié à l'identique ---
+// Quand l'URL vise un élément de la page (#note1, ?refId=…#Daugerant, renvoi d'un tableau…) :
+// on ouvre les details repliés qui le contiennent, on le place juste sous ce qui reste collé en
+// haut (barre de navigation de dots-vue, en-tête et barre de filtres d'un tableau) et on le
+// surligne d'un jaune qui fond en 3 s (classe cible-arrivee, bloc CSS « Arrivée sur une ancre »).
+// Le front ne pose plus .dots-target et monte le contenu après la navigation : d'où
+// l'observation du document plutôt que :target.
+
+// Hauteur occupée en haut de l'écran par ce qui colle au-dessus de la cible
+function hauteurCollee (cible) {
+  let h = 0
+  document.querySelectorAll('nav.navigation-row').forEach(n => {
+    const s = getComputedStyle(n)
+    if (s.position === 'sticky' || s.position === 'fixed') h = Math.max(h, (parseFloat(s.top) || 0) + n.offsetHeight)
+  })
+  const t = cible.closest('table')
+  if (t && t.tHead && cible.closest('tbody') && getComputedStyle(t.tHead).position === 'sticky') h += t.tHead.offsetHeight
+  const cadre = cible.closest('.tf-cadre')
+  const barre = cadre && cadre.querySelector('.tf-barre')
+  if (barre && getComputedStyle(barre).position === 'sticky') h += barre.offsetHeight
+  return h
 }
 
-if (!window.clComportements) {
-  window.clComportements = true
-  const vues = new WeakSet()
-  let adresse = ''
+function placerSous (cible) {
+  const y = cible.getBoundingClientRect().top + window.scrollY - hauteurCollee(cible) - 12
+  if (Math.abs(window.scrollY - y) > 3) window.scrollTo({ top: Math.max(0, y), behavior: 'instant' })
+}
+
+function arriverSur (cible) {
+  for (let d = cible.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true
+  document.querySelectorAll('.cible-arrivee').forEach(x => x.classList.remove('cible-arrivee'))
+  void cible.offsetWidth
+  cible.classList.add('cible-arrivee')
+  placerSous(cible)
+  // le front peut encore faire défiler la page ou décaler la mise en page (images) : on recale
+  setTimeout(() => placerSous(cible), 300)
+  setTimeout(() => placerSous(cible), 1000)
+}
+
+function cibleDeLUrl () {
+  const id = decodeURIComponent(location.hash.slice(1))
+  const el = id && document.getElementById(id)
+  return el && el.closest('#article') ? el : null
+}
+
+if (!window.arriveeAncre) {
+  window.arriveeAncre = true
+  let faite = ''
   const passe = () => {
-    let nouvelle = location.href !== adresse
-    document.querySelectorAll('details.lr-groupe').forEach(l => {
-      if (!vues.has(l)) { vues.add(l); nouvelle = true }
-    })
-    if (!nouvelle) return
-    adresse = location.href
-    if (document.querySelector('details.lr-groupe')) viser()
+    if (location.href === faite) return
+    const el = cibleDeLUrl()
+    if (!el) return
+    faite = location.href
+    setTimeout(() => arriverSur(el), 150)
   }
   new MutationObserver(passe).observe(document.documentElement, { childList: true, subtree: true })
   window.addEventListener('hashchange', passe)
   window.addEventListener('popstate', passe)
+  // Clic sur un lien vers l'ancre déjà dans l'URL : pas de hashchange, on rejoue l'arrivée
+  document.addEventListener('click', event => {
+    const a = event.target.closest('a[href*="#"]')
+    if (!a || a.closest('.tf-cadre') && a.matches('a.tf-voir')) return
+    const u = new URL(a.href, location.href)
+    if (u.href !== location.href) return
+    const el = cibleDeLUrl()
+    if (el) { event.preventDefault(); arriverSur(el) }
+  })
   passe()
 }

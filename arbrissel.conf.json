@@ -41,6 +41,7 @@
   },
   "aboutPageSettings": [],
   "collectionCustomCss": "arbrissel",
+  "collectionCustomJs": "arbrissel",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

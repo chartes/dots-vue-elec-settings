@@ -422,6 +422,27 @@
  5. MÉCANISMES COMMUNS DOTS-VUE
  =============================================================*/
 
+/* ==== Arrivée sur une ancre (bloc commun 2026-10-15, identique dans tous les corpus) ====
+   Élément visé par l'URL (note, ligne de tableau, entrée d'index…) : jaune 1,8 s puis fondu
+   jusqu'à 3 s, comme à Montferrand et aux cartulaires. La classe cible-arrivee est posée par le
+   bloc « Arrivée sur une ancre » du customJs du corpus, qui place aussi la cible sous ce qui
+   reste collé en haut. Une ligne de tableau : on anime aussi ses cellules (leur fond, zébré,
+   masquerait celui de la ligne) ; un details : son résumé. */
+@keyframes elec-cible {
+  0%, 60% { background-color: #fbeeb8; }
+  100%    { background-color: transparent; }
+}
+#main #article .cible-arrivee,
+#main #article tr.cible-arrivee > td,
+#main #article details.cible-arrivee > summary { animation: elec-cible 3s ease-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  #main #article .cible-arrivee,
+  #main #article tr.cible-arrivee > td,
+  #main #article details.cible-arrivee > summary { animation: none; outline: 2px solid #fbeeb8; }
+}
+/* ==== fin arrivée sur une ancre ==== */
+
+
 /* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est
    ouvert sans refId) : reprise de la page de garde de Montferrand et des chroniques
    latines, à la couleur du corpus. */

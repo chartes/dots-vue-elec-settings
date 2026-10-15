@@ -63,6 +63,7 @@
     }
   ],
   "collectionCustomCss": "saint-denis",
+  "collectionCustomJs": "saint-denis",
   "customRoutes": [
     {
       "name": "Search",

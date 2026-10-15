@@ -46,6 +46,7 @@
   },
   "aboutPageSettings": [],
   "collectionCustomCss": "actesroyauxdupoitou",
+  "collectionCustomJs": "actesroyauxdupoitou",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

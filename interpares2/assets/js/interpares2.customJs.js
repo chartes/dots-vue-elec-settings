@@ -211,6 +211,8 @@ if (!window.tfComportements) {
 // on ouvre les details repliés qui le contiennent, on le place juste sous ce qui reste collé en
 // haut (barre de navigation de dots-vue, en-tête et barre de filtres d'un tableau) et on le
 // surligne d'un jaune qui fond en 3 s (classe cible-arrivee, bloc CSS « Arrivée sur une ancre »).
+// Pas de jaune pour un clic sur un numéro de note dans la même page (appel → note, note → appel) :
+// la cible est seulement placée.
 // Le front ne pose plus .dots-target et monte le contenu après la navigation : d'où
 // l'observation du document plutôt que :target.
 
@@ -234,11 +236,13 @@ function placerSous (cible) {
   if (Math.abs(window.scrollY - y) > 3) window.scrollTo({ top: Math.max(0, y), behavior: 'instant' })
 }
 
-function arriverSur (cible) {
+function arriverSur (cible, jaune = true) {
   for (let d = cible.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true
   document.querySelectorAll('.cible-arrivee').forEach(x => x.classList.remove('cible-arrivee'))
-  void cible.offsetWidth
-  cible.classList.add('cible-arrivee')
+  if (jaune) {
+    void cible.offsetWidth
+    cible.classList.add('cible-arrivee')
+  }
   placerSous(cible)
   // le front peut encore faire défiler la page ou décaler la mise en page (images) : on recale
   setTimeout(() => placerSous(cible), 300)
@@ -251,27 +255,37 @@ function cibleDeLUrl () {
   return el && el.closest('#article') ? el : null
 }
 
+// Lien ou cible qui relève d'une note (appel, retour, corps de note)
+const estNote = x => !!x && (x.matches('[class*="note"]') || !!x.closest('[class*="note"], .footnotes'))
+
 if (!window.arriveeAncre) {
   window.arriveeAncre = true
   let faite = ''
+  let sansJaune = false
   const passe = () => {
     if (location.href === faite) return
     const el = cibleDeLUrl()
     if (!el) return
     faite = location.href
-    setTimeout(() => arriverSur(el), 150)
+    const jaune = !sansJaune
+    sansJaune = false
+    setTimeout(() => arriverSur(el, jaune), 150)
   }
   new MutationObserver(passe).observe(document.documentElement, { childList: true, subtree: true })
   window.addEventListener('hashchange', passe)
   window.addEventListener('popstate', passe)
-  // Clic sur un lien vers l'ancre déjà dans l'URL : pas de hashchange, on rejoue l'arrivée
+  // Clic sur un lien de la page : numéro de note → pas de jaune ; lien vers l'ancre déjà dans
+  // l'URL → pas de hashchange, on rejoue l'arrivée
   document.addEventListener('click', event => {
     const a = event.target.closest('a[href*="#"]')
     if (!a || a.closest('.tf-cadre') && a.matches('a.tf-voir')) return
     const u = new URL(a.href, location.href)
-    if (u.href !== location.href) return
+    if (u.pathname + u.search !== location.pathname + location.search) return
+    const vise = document.getElementById(decodeURIComponent(u.hash.slice(1)))
+    const note = estNote(a) || estNote(vise)
+    if (u.href !== location.href) { sansJaune = note; return }
     const el = cibleDeLUrl()
-    if (el) { event.preventDefault(); arriverSur(el) }
-  })
+    if (el) { event.preventDefault(); arriverSur(el, !note) }
+  }, true)
   passe()
 }

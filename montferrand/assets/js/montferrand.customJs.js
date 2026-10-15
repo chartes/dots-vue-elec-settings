@@ -217,7 +217,8 @@ function filtrerBiblio (champ) {
     e.hidden = !v
     if (v) k++
   })
-  c.querySelector('.biblio-nb, .mf-biblio-nb').textContent = k
+  const nb = c.querySelector('.biblio-nb, .mf-biblio-nb')
+  if (nb) nb.textContent = k
 }
 
 if (!window.mfBiblio) {

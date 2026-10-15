@@ -237,26 +237,19 @@
     &::-webkit-details-marker { display: none; }
   }
 
+  /* Titre du groupe (Romains, Bible…) : un h2 dans le summary (2026-10-15), mis en forme et
+     espacé par hteiml comme les autres intertitres ; plus de petites capitales ni de point. */
   & details.listBibl > summary {
-    margin: 1.8rem 0 .7rem;
-    padding-bottom: .2rem;
-    border-bottom: 1px solid #e3ddd6;
-    color: var(--fill-color, var(--accent));
-    font-variant: small-caps;
-    letter-spacing: .04em;
-    &::before { content: "○ "; }
+    display: block;
 
     /* Nombre d'œuvres : « Romains (12) » */
-    > span.listBibl {
+    span.listBibl {
       margin-left: .35em;
       color: var(--muted);
       font-size: .85em;
-      font-variant: normal;
-      letter-spacing: 0;
+      font-weight: normal;
     }
   }
-  & details.listBibl[open] > summary::before,
-  & details.listBibl:has(.dots-target) > summary::before { content: "● "; }
 
   /* Une œuvre : titre à gauche, nombre de passages à droite */
   & details.bibl {

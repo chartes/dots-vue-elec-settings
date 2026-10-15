@@ -139,24 +139,23 @@ function exporter (cadre) {
   setTimeout(() => URL.revokeObjectURL(a.href), 1000)
 }
 
-// Renvoi « Voir » de l'index (a.tf-voir, XSL interpares2) : comportement historique d'ip,
-// repris tel quel. Efface TOUJOURS les filtres (le gabarit ne les efface que si la ligne est
-// cachée), ne pose pas dots-target (seulement tf-vise), défile en douceur sous la barre
-// (si elle existe, même non collante) et l'en-tête.
+// Renvoi vers une ligne d'un tableau de la page : la rendre visible (filtres effacés si elle
+// était cachée), la surligner et la placer sous l'en-tête collant. Ligne absente de la page :
+// le lien suit son cours (autre fragment).
 function voir (lien, event) {
   const cible = document.getElementById(decodeURIComponent((lien.getAttribute('href') || '').split('#')[1] || ''))
   const cadre = cible && cible.closest('.tf-cadre')
   if (!cadre) return
   event.preventDefault()
   event.stopPropagation()
-  effacer(cadre)
-  cadre.querySelectorAll('.dots-target, .tf-vise').forEach(x => {
-    x.classList.remove('dots-target')
-    x.classList.remove('tf-vise')
-  })
+  if (cible.hidden) effacer(cadre)
+  // tf-vise reste posé jusqu'au renvoi suivant ;
+  // tf-par-voir sur la table : la CSS peut garder l'en-tête collant après un renvoi
+  document.querySelectorAll('.tf-cadre .tf-vise').forEach(x => x.classList.remove('tf-vise'))
   cible.classList.add('tf-vise')
+  const t = cible.closest('table')
+  if (t) t.classList.add('tf-par-voir')
   // placement sous l'en-tête collant et jaune qui fond : bloc commun « Arrivée sur une ancre »
-  // (défilement immédiat : sur une page aussi longue, un défilement animé s'arrête avant la ligne)
   arriverSur(cible)
 }
 

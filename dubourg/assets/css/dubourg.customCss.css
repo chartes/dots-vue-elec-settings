@@ -161,6 +161,8 @@
 #main #article section.front ul.listWit {
   margin: .5em 0;
 }
+/* 2026-10-15 : un peu plus d'air entre le titre de la lettre et sa date (17px, la marge du h1). */
+#main #article section.front > h1.head + p.date { margin-top: 1.5rem; }
 #main #article article.text > section.body {
   padding-top: 0;
 }

@@ -1,35 +1,21 @@
-/* Comptes consulaires de Montferrand — feuille en blocs (2026-10-14).
-   1. Couleurs du corpus
-   2. Historique ÉLEC : texte des comptes (comptes.xsl, div.montferrand-historic), appels,
-      registres, liens bleus de l'ÉLEC
-   3. Blocs hteiml génériques : notes de bas de page (identique d'un corpus à l'autre)
-   4. Propre au projet : glossaire et index en tableaux, cartes de définition, cible surlignée,
-      page d'un registre, bibliographie, espacements
-   5. Mécanismes communs dots-vue : page de titre, tableau filtrable */
-
 /*=============================================================
- 1. COULEURS DU CORPUS
+ PART 1
+ Updating the css color schema for:
+  - the collection montferrand
+  - its children (unless otherwise specified)
  =============================================================*/
 
 /* Using css variables */
 :root {
-  --fill-color: #8f0e21;
+  --fill-color: #5f004d;
 }
 
 /*=============================================================
- 2. HISTORIQUE ÉLEC (texte des comptes)
+ PART 2
+ Updating the css of specific elements (HTML) for:
+  - the collection montferrand
+  - its children (unless otherwise specified)
  =============================================================*/
-
-/* Principe (2026-10-01) : ce fichier ne garde que ce que dots-vue ne fait pas.
-   - Tout le texte rendu par comptes.xsl est dans div.montferrand-historic :
-     toutes les règles portent le même préfixe,
-     .document-views .text-view #article .montferrand-historic,
-     donc la même priorité ; l'ordre du fichier décide seul.
-   - dots-vue n'injecte qu'une feuille de corpus à la fois (<style id="customCss">,
-     remplacée à chaque changement de collection) : le préfixe sert à viser le
-     texte de l'édition, pas à protéger les autres corpus.
-   - Retirés : D7 (Mirador), D11 (sommaire des enfants), D12 (socle commun) ;
-     on garde le rendu natif de dots-vue. */
 
 .document-views .text-view #article {
   --mf-gris: #77706a;         /* numéros, folios, dates éditoriales */

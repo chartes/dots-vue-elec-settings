@@ -1,34 +1,21 @@
-/* Du Bourg — feuille en blocs (2026-10-14).
-   1. Couleurs du corpus
-   2. Historique ÉLEC : theme/dubourg.css du site d'origine, limitée à #main #article
-   3. Blocs hteiml génériques : notes de bas de page (identique d'un corpus à l'autre)
-   4. Propre au projet : en-tête des lettres, pages de partie, index des personnes
-   5. Mécanismes communs dots-vue : page de titre, tableau filtrable */
-
 /*=============================================================
- 1. COULEURS DU CORPUS
+ PART 1
+ Updating the css color schema for:
+  - the collection dubourg
+  - its children (unless otherwise specified)
  =============================================================*/
 
-/* Aucune : couleurs par défaut de dots-vue. */
+/* Using css variables */
+:root {
+  --fill-color: #5f004d;
+}
 
 /*=============================================================
- 2. HISTORIQUE ÉLEC (theme/dubourg.css)
+ PART 2
+ Updating the css of specific elements (HTML) for:
+  - the collection dubourg
+  - its children (unless otherwise specified)
  =============================================================*/
-
-/* Correspondance d'Antoine Du Bourg — CSS de collection.
-
-   Reprise de la feuille du thème historique de l'ÉLEC
-   (http://elec.enc.sorbonne.fr/dubourg/theme/dubourg.css), adaptée au HTML que produit
-   transform/dubourg/dubourg.xsl dans dots-vue. dots-vue injecte cette feuille dans toute
-   l'application : chaque règle est limitée au texte du document (#main #article).
-
-   Le renderer déclaré dans elec.conf.json charge d'abord la CSS de hteiml (html.css) dans
-   la couche documentBase : les règles ci-dessous l'emportent sur elle. hteiml met un
-   alinéa à tout paragraphe (p:not(.list)) et supprime leurs marges (p { margin: 0 }) ;
-   on retire l'alinéa là où le texte est centré ou au fer à droite, et on rend aux
-   paragraphes de la lettre l'espacement de l'ÉLEC. */
-
-/* Texte de l'édition justifié (ÉLEC : article.front, article.group). */
 #main #article {
   text-align: justify;
 }
@@ -131,9 +118,12 @@
   padding-left: 1.3em;
 }
 /* Numéro calé pour finir là où finissent les lettres de l'apparat. */
-.document-views #article .footnotes aside.note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 14px;
+document-views #article .footnotes aside.note a.noteback {
+  margin-left: calc(-8ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes aside.note a.noteback:hover {

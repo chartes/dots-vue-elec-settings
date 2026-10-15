@@ -77,6 +77,9 @@
 #main #article section.front p > i + i::before {
   content: " ";
 }
+/* 2026-10-15 : l'analyse n'a pas d'alinéa, comme sur l'ÉLEC (un simple <p> : Diple ne mettait
+   de retrait qu'aux p.indent) ; celui de hteiml la décalait par rapport au titre et à la date. */
+#main #article section.front > p:not(.date) { text-indent: 0; }
 
 /* Notes : plus près du texte, séparées par un court filet comme sur l'ÉLEC
    (hteiml : 43 px de marge et 16 px de retrait au-dessus, sans filet). */

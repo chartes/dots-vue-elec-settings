@@ -118,7 +118,7 @@
   padding-left: 1.3em;
 }
 /* Numéro calé pour finir là où finissent les lettres de l'apparat. */
-document-views #article .footnotes aside.note a.noteback {
+.document-views #article .footnotes aside.note a.noteback {
   margin-left: calc(-8ex - .68em);
   font-size: 0.9em;
   color: var(--fill-color);

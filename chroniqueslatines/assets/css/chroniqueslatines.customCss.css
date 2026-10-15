@@ -226,11 +226,11 @@
   --rule: #e4e4e4;
   --highlight: #fbf3d5;
 
-  /* ---------- Page « Références » ---------- */
+  /* ---------- Page « Références » : liste repliable (module liste-repliable.xsl, classes lr-*) ---------- */
 
   /* Groupe et œuvre repliables : rond creux fermé, plein ouvert */
-  & details.listBibl > summary,
-  & details.bibl > summary {
+  & details.lr-groupe > summary,
+  & details.lr-entree > summary {
     position: relative;
     list-style: none;
     cursor: pointer;
@@ -239,12 +239,12 @@
 
   /* Titre du groupe (Romains, Bible…) : un h2 dans le summary (2026-10-15), mis en forme et
      espacé par hteiml comme les autres intertitres ; plus de petites capitales ni de point. */
-  & details.listBibl > summary {
+  & details.lr-groupe > summary {
     display: block;
 
-    /* Nombre d'œuvres : « Romains (12) » */
-    span.listBibl {
-      margin-left: .35em;
+    /* Nombre d'œuvres : « Romains (12) » (une espace le sépare déjà du titre) */
+    .lr-groupe-nb {
+      margin-left: .1em;
       color: var(--muted);
       font-size: .85em;
       font-weight: normal;
@@ -252,7 +252,7 @@
   }
 
   /* Une œuvre : titre à gauche, nombre de passages à droite */
-  & details.bibl {
+  & details.lr-entree {
     border-bottom: 1px solid #f1ece6;
     scroll-margin-top: 90px;
 
@@ -270,8 +270,8 @@
         font-size: 1.05em;
         line-height: 1.25;
       }
-      > span.bibl:first-child { flex: 1 1 auto; }
-      > span.bibl:last-child {
+      > .lr-entree-titre { flex: 1 1 auto; }
+      > .lr-entree-nb {
         flex: 0 0 auto;
         color: var(--muted);
         font-size: .85rem;
@@ -285,13 +285,13 @@
     &.dots-target > summary { background: var(--highlight); }
 
     .author { font-variant: small-caps; letter-spacing: .02em; }
-    > div.bibl { padding: .2rem .2rem .7rem 1.2rem; font-size: .93rem; }
+    > .lr-entree-corps { padding: .2rem .2rem .7rem 1.2rem; font-size: .93rem; }
   }
 
   /* Œuvre visée par un renvoi : ouverte même dans un groupe replié */
-  & details.bibl.dots-target::details-content,
-  & details.bibl:has(.dots-target)::details-content,
-  & details.listBibl:has(.dots-target)::details-content {
+  & details.lr-entree.dots-target::details-content,
+  & details.lr-entree:has(.dots-target)::details-content,
+  & details.lr-groupe:has(.dots-target)::details-content {
     content-visibility: visible;
     display: block;
   }

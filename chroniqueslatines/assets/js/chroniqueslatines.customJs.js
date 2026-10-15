@@ -4,16 +4,16 @@
 
 // --- Page Références : ouvrir l'œuvre visée par l'ancre de l'URL ---
 // Un renvoi de note (…?refId=chroniqueslatines_refs#caesar, ou #caesar--chroniqueslatines_0-2
-// pour un chapitre) amène sur une œuvre repliée (details.bibl). On l'ouvre avec son groupe
-// (details.listBibl), on pose sur la cible la classe dots-target, que la CSS du corpus
+// pour un chapitre) amène sur une œuvre repliée (details.lr-entree). On l'ouvre avec son groupe
+// (details.lr-groupe), on pose sur la cible la classe dots-target, que la CSS du corpus
 // surligne, et on la place sous l'en-tête. Le front ne pose plus dots-target lui-même, et le
 // contenu arrive après la navigation : d'où l'observation du document plutôt que :target.
 
 function viser () {
   const id = decodeURIComponent(location.hash.slice(1))
   const el = id && document.getElementById(id)
-  if (!el || !el.closest('details.listBibl, details.bibl')) return
-  document.querySelectorAll('details.listBibl .dots-target, details.bibl.dots-target').forEach(x => { if (x !== el) x.classList.remove('dots-target') })
+  if (!el || !el.closest('details.lr-groupe, details.lr-entree')) return
+  document.querySelectorAll('details.lr-groupe .dots-target, details.lr-entree.dots-target').forEach(x => { if (x !== el) x.classList.remove('dots-target') })
   for (let d = el.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true
   el.classList.add('dots-target')
   el.scrollIntoView({ block: 'start' })
@@ -25,12 +25,12 @@ if (!window.clComportements) {
   let adresse = ''
   const passe = () => {
     let nouvelle = location.href !== adresse
-    document.querySelectorAll('details.listBibl').forEach(l => {
+    document.querySelectorAll('details.lr-groupe').forEach(l => {
       if (!vues.has(l)) { vues.add(l); nouvelle = true }
     })
     if (!nouvelle) return
     adresse = location.href
-    if (document.querySelector('details.listBibl')) viser()
+    if (document.querySelector('details.lr-groupe')) viser()
   }
   new MutationObserver(passe).observe(document.documentElement, { childList: true, subtree: true })
   window.addEventListener('hashchange', passe)

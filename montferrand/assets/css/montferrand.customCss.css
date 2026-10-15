@@ -208,24 +208,18 @@
 /* ==== fin bloc notes ==== */
 
 /* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====
-   Allure de la page « Références » des chroniques latines (rubrique repliable « ● Titre (N) »,
+   Allure de la page « Références » des chroniques latines (rubrique repliable « Titre (N) »,
    une ligne par référence entre deux filets, l'année en gris à droite, auteurs en petites
-   capitales), avec les espacements et les tailles de hteiml : la rubrique a la taille et les
-   marges d'un intertitre h2, la référence celles d'un paragraphe (16px, interligne 1,4,
-   16px d'une référence à l'autre). */
+   capitales), avec les espacements et les tailles de hteiml : le titre de rubrique est un
+   vrai intertitre (h2, h3 dans une sous-rubrique) que hteiml met en forme comme ailleurs ;
+   la référence a la taille et l'interligne d'un paragraphe. */
 .document-views #article .biblio { margin: 0 0 1.2rem; }
 .document-views #article details.biblio > summary {
-  position: relative;
-  margin: 1em 0;
-  font-size: 1.15rem;
-  font-weight: 900;
-  line-height: 1.4;
+  display: block;
   list-style: none;
   cursor: pointer;
 }
 .document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
-.document-views #article details.biblio > summary::before { content: "○ "; }
-.document-views #article details.biblio[open] > summary::before { content: "● "; }
 .document-views #article .biblio-compte {
   margin-left: .3em;
   color: #8a837c;
@@ -281,37 +275,11 @@
   text-decoration: underline dotted #b9afa5;
   text-underline-offset: .18em;
 }
-.document-views #article p.biblio-barre {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: .5rem 0 .6rem;
-  padding: .4rem 0;
-  color: #7a726b;
-  font-size: .85rem;
-  font-variant: small-caps;
-  letter-spacing: .05em;
-  text-indent: 0;
-}
-.document-views #article input.biblio-filtre {
-  margin-left: auto;
-  width: min(18rem, 60%);
-  padding: .3rem .55rem;
-  border: 1px solid #d6cfc8;
-  border-radius: 3px;
-  background: #fff;
-  font: inherit;
-  font-variant: normal;
-  letter-spacing: normal;
-}
 @media (max-width: 700px) {
   .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
-  .document-views #article p.biblio-barre { flex-direction: column; align-items: stretch; }
-  .document-views #article input.biblio-filtre { width: 100%; margin-left: 0; font-size: 16px; }
 }
 /* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
 .document-views #article .biblio details.biblio { margin-left: 1.2rem; }
-.document-views #article .biblio details.biblio > summary { font-size: 1.05rem; }
 /* ==== fin bloc bibliographie ==== */
 
 /*=============================================================
@@ -852,10 +820,8 @@
 
 /* ==========================================================================
    10. Bibliographie : bloc générique « bibliographie » (section 3), sigle deviné par la XSL
-       (texte avant les deux-points), filtre dans le customJs (2026-10-15).
+       (texte avant les deux-points) (2026-10-15).
    ========================================================================== */
-/* Pas de titre « Bibliographie » au-dessus de la liste : il répète le fil d'Ariane (2026-10-15). */
-.document-views .text-view #article .montferrand-historic section#biblio > h1.head { display: none; }
 
 section.div h1.head {
   margin-top: 2rem;

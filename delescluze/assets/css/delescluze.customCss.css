@@ -803,9 +803,8 @@
 #main #article section.biblio section.biblio a:hover { color: #000; text-decoration-style: solid; }
 /* 2026-10-15 : même allure que le bloc « bibliographie » des autres corpus (page
    « Références » des chroniques) ; la XSL de Delescluze est gardée pour son regroupement des
-   sources par dépôt. Rubriques précédées de ●, une ligne par notice entre deux filets fins. */
+   sources par dépôt. Une ligne par notice entre deux filets fins. */
 #main #article section.biblio h2.biblio-rubrique { font-weight: 600; }
-#main #article section.biblio h2.biblio-rubrique::before { content: "● "; }
 #main #article section.biblio p.biblio-notice {
   margin: 0;
   padding: .4rem .4rem .4rem 1.6em;

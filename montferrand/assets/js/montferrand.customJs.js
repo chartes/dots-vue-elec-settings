@@ -206,25 +206,3 @@ if (!window.tfComportements) {
   document.addEventListener('input', saisie)
   document.addEventListener('change', saisie)
 }
-
-// --- Bibliographie : filtre de la liste des références ---
-function filtrerBiblio (champ) {
-  const q = plat(champ.value)
-  const c = champ.closest('.biblio, .mf-biblio')
-  let k = 0
-  c.querySelectorAll('li.bibl, .mf-bib').forEach(e => {
-    const v = !q || plat(e.textContent).indexOf(q) >= 0
-    e.hidden = !v
-    if (v) k++
-  })
-  const nb = c.querySelector('.biblio-nb, .mf-biblio-nb')
-  if (nb) nb.textContent = k
-}
-
-if (!window.mfBiblio) {
-  window.mfBiblio = true
-  document.addEventListener('input', event => {
-    const el = event.target
-    if (el instanceof Element && el.matches('input.biblio-filtre, input.mf-biblio-filtre')) filtrerBiblio(el)
-  })
-}

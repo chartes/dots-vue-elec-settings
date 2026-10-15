@@ -1,7 +1,7 @@
 /*=============================================================
  PART 1
  Updating the css color schema for:
-  - the collection chroniqueslatines
+  - the collection dubourg
   - its children (unless otherwise specified)
  =============================================================*/
 
@@ -13,11 +13,9 @@
 /*=============================================================
  PART 2
  Updating the css of specific elements (HTML) for:
-  - the collection chroniqueslatines
+  - the collection dubourg
   - its children (unless otherwise specified)
  =============================================================*/
-
-/* Texte de l'édition justifié (ÉLEC : article.front, article.group). */
 #main #article {
   text-align: justify;
 }
@@ -74,39 +72,14 @@
   text-indent: 0;
 }
 
-/* hteiml met tout <front> sur fond gris (en-tête des lettres) : fond blanc, le reste de
-   sa mise en page (marges, retrait) est gardé. */
-#main #article section.front {
-  background-color: #fff;
-  border: 1px dotted rgba(95, 0, 77, 0.3); /* #5f004d à 30 % */
-  padding: 0.5em 0.75em;
-}
-
 /* Analyse de la lettre : la feuille historique écrit ses articles en <i> à la suite ; sur
    l'ÉLEC, une espace venait de l'indentation du HTML, que indent="no" supprime. */
 #main #article section.front p > i + i::before {
   content: " ";
 }
-
-/* Titre d'une page de partie (« Enquête sur la Great Bible ») : dots-vue affiche ces pages
-   comme un sommaire, sous .dots-ui, dont la remise à zéro (:where(.dots-ui) h1) ramène les
-   titres au corps du texte. On leur rend la taille des titres de hteiml. */
-#main #article h1.head {
-  font-size: 160%;
-  font-weight: 900;
-}
-/* Ces mêmes pages (parties, présentation de l'index) perdent aussi toutes leurs marges :
-   on rend un espace autour des titres et entre les paragraphes. Les lettres, qui ne sont
-   pas sous .dots-ui, ne sont pas touchées. */
-.dots-ui #main #article h1.head {
-  margin: 1.5em 0 0.75em;
-}
-.dots-ui #main #article h1.head:first-child {
-  margin-top: 0.5em;
-}
-.dots-ui #main #article p {
-  margin: 0 0 0.6em;
-}
+/* 2026-10-15 : l'analyse n'a pas d'alinéa, comme sur l'ÉLEC (un simple <p> : Diple ne mettait
+   de retrait qu'aux p.indent) ; celui de hteiml la décalait par rapport au titre et à la date. */
+#main #article section.front > p:not(.date) { text-indent: 0; }
 
 /* Notes : plus près du texte, séparées par un court filet comme sur l'ÉLEC
    (hteiml : 43 px de marge et 16 px de retrait au-dessus, sans filet). */
@@ -122,12 +95,337 @@
   border-top: 1px solid #999;
 }
 
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes :is(aside, div).note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes :is(aside, div).note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* Le filet historique (court, gris, ci-dessus) remplace la barre du bloc générique. */
+#main #article section.footnotes::before { height: 0; background: none; }
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
+/* hteiml met tout <front> sur fond gris (en-tête des lettres) : fond blanc.
+   2026-10-14 : sans le cadre, ses marges et son retrait intérieur (html.css) laissaient un
+   grand blanc au-dessus du titre et sous les témoins, et décalaient titre et analyse de
+   20 px par rapport au texte de la lettre : on les resserre. */
+#main #article section.front {
+  background-color: #fff;
+  margin: 0 0 1.5em;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  padding: 0.5em 0.75em;
+}
+#main #article article.text {
+  padding-top: 0;
+}
+#main #article article.text > section.front > h1.head {
+  padding-top: 0;
+}
+#main #article section.front > section.tradition {
+  margin-top: 1em;
+  padding: 0;
+}
+#main #article section.front ul.listWit {
+  margin: .5em 0;
+}
+/* 2026-10-15 : plus d'air entre le titre de la lettre et sa date (17px, la marge du h1) : autant
+   qu'entre la date et l'analyse. */
+#main #article section.front > h1.head + p.date { margin-top: 2rem; }
+/* Signature d'une présentation (« Olivier Poncet, École nationale des chartes-Paris », page
+   Great Bible), 2026-10-15 : dots-vue rend cette page en sommaire (.dots-ui), et ses règles de
+   page d'accueil d'un document (main.css : .dots-ui .byline { text-align: left; margin: 25px 0
+   90px }) écrasaient celles de hteiml. On rend celles de hteiml : à droite, en retrait. */
+#main #article .byline {
+  margin: 4ex 0 0 var(--double-indent, 10%);
+  text-align: right;
+  text-indent: 0;
+  margin-left: 45%;
+  font-variant: small-caps;
+}
+#main #article article.text > section.body {
+  padding-top: 0;
+}
+
+/* Titre d'une page de partie (« Enquête sur la Great Bible ») : dots-vue affiche ces pages
+   comme un sommaire, sous .dots-ui, dont la remise à zéro (:where(.dots-ui) h1) ramène les
+   titres au corps du texte. On leur rend la taille des titres de hteiml. */
+#main #article h1.head {
+  font-size: 160%;
+  font-weight: 900;
+  color: var(--fill-color);
+}
+/* Sous-titres d'une page de partie (2026-10-14) : titre de la présentation et des lettres
+   en h2, un cran sous le h1. */
+#main #article h2.head {
+  margin: 1.5em 0 0.75em;
+  font-size: 125%;
+  font-weight: 700;
+  color: #585858;
+}
+/* Ces mêmes pages (parties, présentation de l'index) perdent aussi toutes leurs marges :
+   on rend un espace autour des titres et entre les paragraphes. Les lettres, qui ne sont
+   pas sous .dots-ui, ne sont pas touchées. */
+#main #article h1.head {
+  margin: 1.5em 0 0.75em;
+}
+#main #article h1.head:first-child {
+  margin-top: 0.5em;
+}
+#main #article p {
+  margin: 0 0 0.6em;
+}
+
 /* Index : à l'arrivée par un renvoi du texte, le nom de la fiche visée est surligné en jaune,
    comme dans Montferrand (.dots-target : posée par dots-vue sur une URL à ancre ouverte à froid). */
 #main #article li:target > .index-name,
 #main #article li.dots-target > .index-name {
   background-color: #fbeeb8;
 }
+
+/* ==========================================================================
+   Index des personnes : tableau triable et filtrable (2026-10-13)
+   Le HTML vient de dubourg.xsl (module commun tableau-filtrable.xsl : classes tf-*,
+   table.dub-tableau). Reprise des règles de Montferrand (.mf-tableau), scopées ici à
+   #main #article. Le comportement (tri, filtres, CSV, renvois) est dans le script du corpus.
+   ========================================================================== */
+
+/* dots-vue met les tableaux en display:block + overflow-x:scroll : on rend à la table
+   son modèle de table, pour que l'en-tête collant puisse coller. */
+#main #article .dub-tableau-cadre {
+  margin: 1.2rem 0 2rem;
+}
+#main #article table.dub-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+#main #article .dub-tableau-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: #77706a;
+  font: .8rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-align: left;
+}
+
+/* En-têtes : titres de colonnes et ligne des filtres collent sous la barre de navigation. */
+#main #article .dub-tableau thead {
+  position: sticky;
+  top: 80px;
+  z-index: 2;
+}
+#main #article .dub-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--fill-color);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+/* Une entrée désignée (renvoi depuis le texte) est placée sous le haut de l'écran : l'en-tête
+   cesse de coller tant qu'un élément du tableau porte dots-target ; un tri le libère. Après un
+   renvoi « voir » (.tf-par-voir posé par le script), la barre des filtres reste. */
+#main #article .dub-tableau:has(.dots-target):not(.tf-par-voir) thead {
+  position: static;
+}
+#main #article .dub-tableau button.tf-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#main #article .dub-tableau button.tf-tri::after {
+  content: "\2195";               /* ↕ : colonne triable, non triée */
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+#main #article .dub-tableau th[aria-sort="ascending"] button.tf-tri::after {
+  content: "\25B2";               /* ▲ */
+  color: var(--fill-color);
+  font-size: .75em;
+}
+#main #article .dub-tableau th[aria-sort="descending"] button.tf-tri::after {
+  content: "\25BC";               /* ▼ */
+  color: var(--fill-color);
+  font-size: .75em;
+}
+#main #article .dub-tableau button.tf-tri:hover,
+#main #article .dub-tableau th[aria-sort="ascending"] button.tf-tri,
+#main #article .dub-tableau th[aria-sort="descending"] button.tf-tri {
+  color: var(--fill-color);
+}
+#main #article .dub-tableau button.tf-tri:hover { background: #ece7e2; }
+#main #article .dub-tableau button.tf-tri:focus-visible {
+  outline: 2px solid #315BA7;
+  outline-offset: -2px;
+}
+
+/* Cellules : filet fin, zébrage léger, survol. La notice reprend le texte courant. */
+#main #article .dub-tableau td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+#main #article .dub-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+#main #article .dub-tableau tbody tr:hover > td { background: #f3efe9; }
+#main #article .dub-tableau tbody tr:target > td:first-child,
+#main #article .dub-tableau tbody tr.dots-target > td:first-child {
+  box-shadow: inset 3px 0 0 var(--fill-color);
+}
+#main #article .dub-tableau tbody tr:target > td,
+#main #article .dub-tableau tbody tr.dots-target > td {
+  background: #fbeeb8;
+}
+#main #article .dub-tableau .tf-vide { color: #c4bdb6; }
+#main #article .dub-tableau td p {
+  margin: 0;
+  text-indent: 0;
+}
+#main #article .dub-tableau td.dub-c-dates { white-space: nowrap; font-variant-numeric: tabular-nums; }
+#main #article .dub-tableau td.dub-c-lettres { min-width: 8rem; }
+#main #article .dub-tableau td.dub-c-lettres a { color: #315BA7; }
+#main #article .dub-tableau td.dub-c-lettres a:hover { text-decoration: underline; text-underline-offset: 3px; }
+#main #article .dub-tableau td a.tf-voir { color: #315BA7; }
+
+/* Écran étroit : le tableau défile de côté dans son cadre (l'en-tête ne colle plus). */
+@media (max-width: 760px) {
+  #main #article .dub-tableau-cadre { overflow-x: auto; }
+  #main #article table.dub-tableau { min-width: 40rem; }
+  #main #article .dub-tableau thead { position: static; }
+}
+
+/* Filtres par colonne : dots-vue met les tableaux en flex, d'où le !important. */
+#main #article .dub-tableau tr[hidden] {
+  display: none !important;
+}
+#main #article .tf-barre {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+#main #article .tf-compteur {
+  font-variant-numeric: tabular-nums;
+}
+#main #article .tf-effacer,
+#main #article .tf-csv {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: #315BA7;
+  font-size: .8rem;
+  cursor: pointer;
+}
+#main #article .tf-effacer:hover,
+#main #article .tf-csv:hover {
+  border-color: #315BA7;
+}
+#main #article .tf-csv {
+  margin-left: auto;
+}
+#main #article .tf-effacer[hidden] {
+  display: none;
+}
+#main #article .dub-tableau tr.tf-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+#main #article .dub-tableau tr.tf-filtres input,
+#main #article .dub-tableau tr.tf-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+#main #article .dub-tableau tr.tf-filtres input:focus,
+#main #article .dub-tableau tr.tf-filtres select:focus {
+  outline: 2px solid #315BA7;
+  outline-offset: -1px;
+}
+#main #article .dub-tableau .tf-intervalle {
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+}
+#main #article .dub-tableau .tf-intervalle input {
+  width: 3.2rem;
+  min-width: 0;
+}
+#main #article .dub-tableau .tf-tiret {
+  color: #77706a;
+}
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
 
 /* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est
    ouvert sans refId) : reprise de la page de garde de Montferrand et des chroniques
@@ -172,3 +470,149 @@
   padding-top: 0.5rem;
   margin-top: 0.5rem;
 }
+
+/* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13 ; 2026-10-14) ====
+   Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
+   CSS de chaque corpus qui en a. Deux ids en tête de sélecteur : il l'emporte sur les
+   règles propres au corpus.
+   - Paragraphes dans une cellule : ni justifiés ni en retrait (une colonne étroite
+     justifiée ouvre de grands blancs entre les mots).
+   - Petit écran, sur le modèle de la recherche des cartulaires (dev.chartes.psl.eu/elec/
+     cartulaires/search) : les en-têtes de tri forment une rangée de boutons de même
+     largeur, l'indicateur au-dessus du nom, entre deux filets ; chaque ligne devient un
+     bloc de valeurs empilées, sans cadre ni libellé, séparé du suivant par un filet.
+     Les filtres (que la recherche n'a pas) s'empilent, chacun avec son libellé.
+   - Champs de saisie à 16px sur écran tactile : en dessous, Safari iOS zoome la page
+     à la saisie et ne dézoome pas. */
+#main #article .tf-cadre td p {
+  margin: 0;
+  text-align: left;
+  text-indent: 0;
+}
+#main #article .tf-cadre td p + p { margin-top: .4em; }
+
+@media (max-width: 760px), (pointer: coarse) {
+  #main #article .tf-cadre tr.tf-filtres input,
+  #main #article .tf-cadre tr.tf-filtres select { font-size: 16px; }
+}
+
+@media (max-width: 760px) {
+  #main #article .tf-cadre { overflow: visible; }
+  #main #article .tf-cadre table,
+  #main #article .tf-cadre thead,
+  #main #article .tf-cadre tbody,
+  #main #article .tf-cadre tr,
+  #main #article .tf-cadre th,
+  #main #article .tf-cadre td {
+    display: block;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  #main #article .tf-cadre thead { position: static; background: none; }
+  #main #article .tf-cadre caption { display: block; width: auto; }
+  #main #article .tf-cadre .tf-barre { flex-wrap: wrap; }
+  #main #article .tf-cadre .tf-csv { margin-left: 0; }
+
+  /* En-têtes : rangée de boutons de même largeur, indicateur au-dessus du nom */
+  #main #article .tf-cadre thead tr:first-child {
+    display: flex;
+    gap: .25rem;
+    padding: .5rem 0;
+    border-top: 2px solid var(--fill-color, #8f0e21);
+    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    background: none;
+  }
+  #main #article .tf-cadre thead tr:first-child th {
+    flex: 1 1 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre thead button.tf-tri {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .2rem;
+    width: 100%;
+    padding: .2rem .1rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: #222;
+    font: 600 .8rem/1.2 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  #main #article .tf-cadre thead button.tf-tri::after {
+    order: -1;
+    display: block;
+    margin: 0;
+    padding: .15rem .45rem;
+    border-radius: 3px;
+    background: #ece9e6;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.1;
+  }
+  #main #article .tf-cadre thead button.tf-tri:hover { background: none; }
+
+  /* Filtres : un par ligne, libellé à gauche */
+  #main #article .tf-cadre tr.tf-filtres {
+    margin-top: .6rem;
+    padding: .4rem .5rem;
+    border: 1px solid #e3ddd6;
+    border-radius: 4px;
+    background: #faf8f5;
+  }
+  /* Libellé posé à gauche en position absolue : le contenu de la cellule reste du texte
+     courant, ce qu'une grille découperait */
+  #main #article .tf-cadre tr.tf-filtres td {
+    position: relative;
+    padding: .2rem 0 .2rem calc(30% + .6rem);
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre tr.tf-filtres td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: .55rem;
+    width: 30%;
+    color: #77706a;
+    font: 600 .7rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  /* Lignes : valeurs empilées, sans cadre ni libellé, un filet entre deux lignes */
+  #main #article .tf-cadre tbody tr {
+    margin: 0;
+    padding: .7rem .2rem;
+    border: 0;
+    border-bottom: 1px solid #e3ddd6;
+    border-radius: 0;
+    background: none;
+  }
+  #main #article .tf-cadre tbody td {
+    padding: .1rem 0;
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre tbody td::before { content: none; }
+  #main #article .tf-cadre tbody tr:nth-child(even) > td,
+  #main #article .tf-cadre tbody tr:hover > td { background: none; }
+  #main #article .tf-cadre tbody tr.dots-target,
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
+  /* Première colonne (l'entrée) en tête du bloc */
+  #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
+  /* Cellule vide (tiret) : rien à montrer */
+  #main #article .tf-cadre tbody td:has(> .tf-vide:only-child) { display: none; }
+  #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
+}
+/* ==== fin tableau filtrable ==== */

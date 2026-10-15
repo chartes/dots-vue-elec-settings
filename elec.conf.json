@@ -65,6 +65,7 @@
   ],
 
   "collectionCustomCss": "elec",
+  "collectionCustomJs": "elec",
   "excludeCollectionIds": ["corpus", "bfm", "ENCPOS", "theater"],
   "searchConfig": {
     "facets": [

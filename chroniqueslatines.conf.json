@@ -46,7 +46,7 @@
     }
   ],
   "collectionCustomCss": "chroniqueslatines",
-  "collectionCustomJs": "chroniqueslatines",
+  "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

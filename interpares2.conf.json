@@ -44,7 +44,7 @@
   },
   "aboutPageSettings": [],
   "collectionCustomCss": "interpares2",
-  "collectionCustomJs": "interpares2",
+  "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

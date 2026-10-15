@@ -57,7 +57,7 @@
     }
   ],
   "collectionCustomCss": "christofle",
-  "collectionCustomJs": "christofle",
+  "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

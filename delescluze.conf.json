@@ -52,7 +52,7 @@
     }
   ],
   "collectionCustomCss": "delescluze",
-  "collectionCustomJs": "delescluze",
+  "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

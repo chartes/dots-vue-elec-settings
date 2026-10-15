@@ -63,7 +63,7 @@
     }
   ],
   "collectionCustomCss": "saint-denis",
-  "collectionCustomJs": "saint-denis",
+  "collectionCustomJs": "elec",
   "customRoutes": [
     {
       "name": "Search",

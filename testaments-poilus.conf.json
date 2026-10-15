@@ -61,7 +61,7 @@
     }
   ],
   "collectionCustomCss": "testaments-poilus",
-  "collectionCustomJs": "testaments-poilus",
+  "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

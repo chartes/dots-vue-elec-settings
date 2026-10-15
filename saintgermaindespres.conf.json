@@ -43,7 +43,7 @@
   },
   "aboutPageSettings": [],
   "collectionCustomCss": "saintgermaindespres",
-  "collectionCustomJs": "saintgermaindespres",
+  "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

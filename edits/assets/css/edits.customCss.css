@@ -32,6 +32,11 @@
   }
 }
 
+/* Pas de filet entre les articles, comme sur l'ÉLEC (aucune bordure dans ses feuilles) :
+   html.css de hteiml en met un sous chaque section du corps (.body > .div), ce qui encadrait
+   le bloc de date en fin d'édit. Règle de Philippe (31/08), remise le 2026-10-15. */
+#main #article .body > .div { border-bottom: none; }
+
 /* 2026-10-15 : retirés pour revenir au rendu de hteiml : cadre pointillé du fieldset (l'en-tête
    d'édit est désormais le section.front de hteiml), police Libre Baskerville grise du texte,
    des notes et des témoins, liens bleus, filet des articles annulé. */

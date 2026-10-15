@@ -210,20 +210,20 @@ if (!window.tfComportements) {
 // --- Bibliographie : filtre de la liste des références ---
 function filtrerBiblio (champ) {
   const q = plat(champ.value)
-  const c = champ.closest('.mf-biblio')
+  const c = champ.closest('.biblio, .mf-biblio')
   let k = 0
-  c.querySelectorAll('.mf-bib').forEach(e => {
+  c.querySelectorAll('li.bibl, .mf-bib').forEach(e => {
     const v = !q || plat(e.textContent).indexOf(q) >= 0
     e.hidden = !v
     if (v) k++
   })
-  c.querySelector('.mf-biblio-nb').textContent = k
+  c.querySelector('.biblio-nb, .mf-biblio-nb').textContent = k
 }
 
 if (!window.mfBiblio) {
   window.mfBiblio = true
   document.addEventListener('input', event => {
     const el = event.target
-    if (el instanceof Element && el.matches('input.mf-biblio-filtre')) filtrerBiblio(el)
+    if (el instanceof Element && el.matches('input.biblio-filtre, input.mf-biblio-filtre')) filtrerBiblio(el)
   })
 }

@@ -229,9 +229,84 @@ table.app.table td.rdg {
 /* ==== fin bloc apparat ==== */
 
 /* ==== BLOC BIBLIOGRAPHIE (listBibl de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a une bibliographie en listBibl
-   (modèle : chroniques latines, 2026-10-14). */
-.document-views #article .listBibl li::marker { color: var(--fill-color); }
+   Bloc générique, identique dans chaque corpus qui a une bibliographie (2026-10-15).
+   HTML attendu : celui de hteiml (div.listBibl > h2.head, ul.listBibl > li.bibl, span.author,
+   cite.title) ; un sigle en tête de référence porte la classe « sigle » ; une longue
+   bibliographie peut avoir une barre p.biblio-barre avec un champ input.biblio-filtre.
+   Ne pas le modifier dans un corpus : régler l'écart dans le bloc « propre au projet ». */
+/* Rubrique (titre d'une liste) : petites capitales espacées, filet fin dessous */
+.document-views #article div.listBibl > h2.head {
+  margin: 2rem 0 .7rem;
+  padding-bottom: .25rem;
+  border-bottom: 1px solid #e3ddd6;
+  color: var(--fill-color);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: .06em;
+  line-height: 1.3;
+}
+.document-views #article div.listBibl > h2.head a.bookmark { display: none; }
+/* Liste : pas de puce ; retrait suspendu, la 2e ligne d'une référence rentre sous la 1re */
+.document-views #article ul.listBibl {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+.document-views #article li.bibl {
+  margin: 0 0 .45em;
+  padding-left: 2.2em;
+  text-indent: -2.2em;
+  line-height: 1.5;
+  text-align: left;
+}
+.document-views #article li.bibl::marker { content: none; }
+.document-views #article li.bibl[hidden] { display: none; }
+/* Auteur et sigle en petites capitales ; titres en italique */
+.document-views #article li.bibl .author,
+.document-views #article li.bibl .sigle {
+  font-variant: small-caps;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+.document-views #article li.bibl .sigle { color: var(--fill-color); }
+.document-views #article li.bibl cite.title { font-style: italic; }
+/* Lien porté par une référence (renvoi vers une autre page) : discret, souligné en pointillé */
+.document-views #article li.bibl a {
+  color: inherit;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+/* Barre d'une longue bibliographie : nombre de références et champ de filtre */
+.document-views #article p.biblio-barre {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: .5rem 0 1.2rem;
+  padding: .4rem 0;
+  border-top: 1px solid #e3ddd6;
+  border-bottom: 1px solid #e3ddd6;
+  color: #7a726b;
+  font-size: .85rem;
+  font-variant: small-caps;
+  letter-spacing: .05em;
+  text-indent: 0;
+}
+.document-views #article input.biblio-filtre {
+  margin-left: auto;
+  width: min(18rem, 60%);
+  padding: .3rem .55rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-variant: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 700px) {
+  .document-views #article p.biblio-barre { flex-direction: column; align-items: stretch; }
+  .document-views #article input.biblio-filtre { width: 100%; margin-left: 0; font-size: 16px; }
+}
 /* ==== fin bloc bibliographie ==== */
 
 /*=============================================================

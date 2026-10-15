@@ -1,13 +1,8 @@
-/* Chroniques latines de Saint-Denis — feuille en blocs (2026-10-14).
-   Modèle des blocs génériques des autres corpus (notes, apparat, bibliographie).
-   1. Couleurs du corpus
-   2. Texte de l'édition (feuille de Philippe, 12/10)
-   3. Blocs hteiml génériques : notes de bas de page, apparat critique, bibliographie
-   4. Propre au projet : page « Références »
-   5. Mécanismes communs dots-vue : page de titre */
-
 /*=============================================================
- 1. COULEURS DU CORPUS
+ PART 1
+ Updating the css color schema for:
+  - the collection chroniqueslatines
+  - its children (unless otherwise specified)
  =============================================================*/
 
 /* Using css variables */
@@ -16,7 +11,10 @@
 }
 
 /*=============================================================
- 2. TEXTE DE L'ÉDITION
+ PART 2
+ Updating the css of specific elements (HTML) for:
+  - the collection chroniqueslatines
+  - its children (unless otherwise specified)
  =============================================================*/
 
 .document-views #article {
@@ -96,8 +94,11 @@
 }
 /* Numéro calé pour finir là où finissent les lettres de l'apparat. */
 .document-views #article .footnotes aside.note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 14px;
+  margin-left: calc(-8ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes aside.note a.noteback:hover {

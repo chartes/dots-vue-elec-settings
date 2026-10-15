@@ -161,8 +161,18 @@
 #main #article section.front ul.listWit {
   margin: .5em 0;
 }
-/* 2026-10-15 : un peu plus d'air entre le titre de la lettre et sa date (17px, la marge du h1). */
-#main #article section.front > h1.head + p.date { margin-top: 1.5rem; }
+/* 2026-10-15 : plus d'air entre le titre de la lettre et sa date (17px, la marge du h1) : autant
+   qu'entre la date et l'analyse. */
+#main #article section.front > h1.head + p.date { margin-top: 2rem; }
+/* Signature d'une présentation (« Olivier Poncet, École nationale des chartes-Paris », page
+   Great Bible), 2026-10-15 : dots-vue rend cette page en sommaire (.dots-ui), et ses règles de
+   page d'accueil d'un document (main.css : .dots-ui .byline { text-align: left; margin: 25px 0
+   90px }) écrasaient celles de hteiml. On rend celles de hteiml : à droite, en retrait. */
+.row.dots-ui #main #article .byline {
+  margin: 4ex 0 0 var(--double-indent, 10%);
+  text-align: right;
+  text-indent: 0;
+}
 #main #article article.text > section.body {
   padding-top: 0;
 }

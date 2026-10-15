@@ -443,6 +443,14 @@
  5. MÉCANISMES COMMUNS DOTS-VUE
  =============================================================*/
 
+/* ==== Pendant le chargement d'une page (bloc commun 2026-10-15, identique dans tous les corpus) ====
+   dots-vue affiche la liste des sous-parties (.bottom-toc) avant que le texte de la page soit
+   arrivé : on voyait un instant cette liste seule en passant d'une partie à l'autre. Tant que la
+   colonne de texte (.row) n'a pas son #main, la liste est masquée ; une vraie page de
+   regroupement, qui a son #main, la garde. (Un :has() dans un :has() est interdit en CSS, d'où ~.) */
+.document.wrapper > .row:not(:has(#main)) ~ .bottom-toc { visibility: hidden; }
+/* ==== fin pendant le chargement ==== */
+
 /* ==== Arrivée sur une ancre (bloc commun 2026-10-15, identique dans tous les corpus) ====
    Élément visé par l'URL (note, ligne de tableau, entrée d'index…) : jaune 1,8 s puis fondu
    jusqu'à 3 s, comme à Montferrand et aux cartulaires. La classe cible-arrivee est posée par le

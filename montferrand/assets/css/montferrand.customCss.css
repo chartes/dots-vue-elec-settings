@@ -759,12 +759,9 @@
       dots-vue, qui ne donnait que les titres (2026-10-02).
    ========================================================================== */
 .document-area:has(.montferrand-historic .mf-registre) .bottom-toc { display: none; }
-/* 2026-10-14 : … dès le chargement. Pendant que dots-vue charge le registre, la table n'est pas
-   encore là et sa liste des comptes s'affichait un instant (deux rendus de suite en passant de
-   registre à registre) : on la masque aussi d'après ses liens, qui visent des comptes (C1…).
-   2026-10-15 : sauf le sommaire de l'édition entière, qui liste les registres (CC…) : y déplier
-   un registre faisait apparaître ses comptes et masquait tout le sommaire. */
-.document-area #article.bottom-toc:has(a.toc-title[data-href*="refId=C1"]):not(:has(a.toc-title[data-href*="refId=CC"])) { display: none; }
+/* 2026-10-14 : … dès le chargement. 2026-10-15 : la liste des comptes qui s'affichait un instant
+   pendant le chargement d'un registre est masquée par le bloc commun « Pendant le chargement d'une
+   page » (section 5), qui remplace la règle repérant les liens vers des comptes (C1…). */
 /* La page n'a que son titre et cette table : sans cela, la rangée de texte de
    dots-vue (.wrapper en flex) se rétracte sur la largeur du titre. */
 .document-area:has(.montferrand-historic .mf-registre) .wrapper > .row { flex: 1 1 auto; min-width: 0; }
@@ -868,6 +865,14 @@ section.div h1.head {
 /*=============================================================
  5. MÉCANISMES COMMUNS DOTS-VUE
  =============================================================*/
+
+/* ==== Pendant le chargement d'une page (bloc commun 2026-10-15, identique dans tous les corpus) ====
+   dots-vue affiche la liste des sous-parties (.bottom-toc) avant que le texte de la page soit
+   arrivé : on voyait un instant cette liste seule en passant d'une partie à l'autre. Tant que la
+   colonne de texte (.row) n'a pas son #main, la liste est masquée ; une vraie page de
+   regroupement, qui a son #main, la garde. (Un :has() dans un :has() est interdit en CSS, d'où ~.) */
+.document.wrapper > .row:not(:has(#main)) ~ .bottom-toc { visibility: hidden; }
+/* ==== fin pendant le chargement ==== */
 
 /* ==========================================================================
    8. Page de garde (titleStmt rendu par hteiml, hors .montferrand-historic)

@@ -1,9 +1,12 @@
-/* Bellelay — feuille en blocs (2026-10-14), reconstruite le 13/10/2026.
+/* Bellelay — feuille en blocs, refaite le 15/10/2026 sur le rendu hteiml (le rendu du site PHP
+   historique, Bellelay.css, est abandonné à la demande de Maxime).
    1. Couleurs du corpus
-   2. Historique ÉLEC : Bellelay.css du site d'origine, limitée à #article
-   3. Blocs hteiml génériques : aucun (les notes des pages sont celles du site, .bl-page .footnotes)
-   4. Propre au projet : index et interventions en tableau, carte d'accueil de la collection
-   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), cibles d'ancre, tableau filtrable */
+   2. Historique ÉLEC : aucun
+   3. Blocs hteiml génériques : notes de bas de page, bibliographie (identiques d'un corpus à l'autre)
+   4. Propre au projet : images (feuillets, vignettes, zones), loupes, index et interventions en
+      tableau, carte d'accueil de la collection
+   5. Mécanismes communs dots-vue : arrivée sur une ancre, page de titre, volet Mirador, sommaire
+      (D11), tableau filtrable */
 
 /*=============================================================
  1. COULEURS DU CORPUS
@@ -12,207 +15,171 @@
 :root { --fill-color: #8f241d; }
 
 /*=============================================================
- 2. HISTORIQUE ÉLEC (Bellelay.css)
+ 2. HISTORIQUE ÉLEC
  =============================================================*/
 
-/* Bellelay — feuille reconstruite le 13/10/2026.
-   Base : la CSS du site historique (el.enc.sorbonne.fr/bellelay/css/Bellelay.css), dont on
-   garde les règles du contenu, limitées à #article (dots-vue injecte cette feuille dans
-   toute l'application). Le bandeau, le menu principal et le cadre .window du site sont
-   remplacés par ceux de dots-vue. Les identifiants uniques du site (#contenu,
-   #feuilletdossier…) sont devenus des classes : une rubrique affiche plusieurs pages.
-   Les écarts à la feuille historique sont marqués [dots]. */
-
-/* rouge : #C00 / #C10E09 ; gris : #333, #F5F5F5 */
-
-#article .bl-page, #article .bl-rubrique {
-  font-family: "Times New Roman", serif;
-  font-size: 16px;
-  line-height: 1.4;
-}
-#article .bl-page a, #article .bl-rubrique a { color: #C00; text-decoration: none; font-style: normal; }
-#article .bl-page a:hover, #article .bl-rubrique a:hover { color: #666; }
-#article .bl-fin { clear: both; }
-/* [dots] hteiml dégage (clear) les titres et sections sous les images flottantes */
-#article .bl-page :is(h1, h2, h3, h4, section, div, dl, ul) { clear: none; }
-#article .bl-page .barre { clear: both; }
-
-/* Barre du titre de page : bandeau rouge */
-#article .barre { height: 25px; margin: 0 0 0.5em; clear: both; }
-#article .titrepage {
-  float: left;
-  background: #C10E09;
-  min-width: 40%;  /* [dots] 471px sur le site */
-  max-width: 100%;
-  height: 20px;
-  font-family: Arial, sans-serif;
-  font-size: small;
-  padding-left: 80px;
-  padding-right: 1em;
-  color: white;
-  font-weight: bold;
-  line-height: 20px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#article h2 { padding-left: 9%; font-size: large; }
-#article .bl-page h3 {
-  font-size: medium;
-  margin: 0.5em;
-  padding: 0 20px 0.5em;
-  color: #000;
-  border-bottom: dashed 1px #F5F5F5;
-}
-#article .bl-page h4 { font-size: small; text-align: left; color: #000; margin: 10px 0 0; }
-
-#article .bl-page ul { text-align: justify; line-height: 150%; padding-left: 2em; padding-right: 2em; }
-#article .bl-page li { margin-top: 0.5em; margin-bottom: 0.3em; }
-
-/* Onglets d'une pièce */
-#article ul.onglets {
-  border-bottom: 1px solid #000;
-  padding: 0 0 1px;
-  margin: 1em 0 0;
-  line-height: 1.8;  /* [dots] les onglets passent à la ligne sur écran étroit */
-  text-align: left;
-}
-#article .onglets li { display: inline; padding-left: 0; margin-left: 0; }
-#article .onglets li a {
-  background-color: #F5F5F5;
-  border: 1px solid #000;
-  margin-left: 0.3em;
-  margin-right: 0.2em;
-  padding: 0.2em;
-}
-#article .onglets li a:hover { background-color: #FFF; border: 1px solid #000; }
-#article .onglets li.etapon a { background-color: #C00; color: #FFF; font-weight: bold; border-bottom: 1px solid #C00; }
-#article .onglets li.etapon a:hover { color: #FFF; background: #C00; }
-#article ul.bl-choix { margin-bottom: 1.5em; } /* [dots] choix de la liste d'interventions (menu déroulant sur le site) */
-
-/* Fiche d'une pièce */
-#article dl { margin-left: 1em; margin-right: 2em; }
-#article dt { margin-top: 0.5em; border-bottom: dashed 1px #F5F5F5; border-left: dashed 1px #F5F5F5; padding: 0.1em; }
-#article dd { padding-left: 1em; margin-left: 0; }
-#article .descripiece {
-  margin-left: 256px;
-  margin-top: 24px;
-  margin-bottom: 2em;  /* [dots] 150px sur le site */
-  font-family: "Times New Roman", serif;
-  display: flow-root;  /* [dots] la fiche reste à droite des images, même quand elle les dépasse */
-}
-#article .descripiece dt { font-weight: bold; }
-#article .descripiece dd { text-align: justify; }
-
-/* Texte courant (#contenu sur le site) */
-#article .contenu {
-  margin: 30px 14% 0;
-  font-family: Arial, sans-serif;
-}
-/* [dots] les tableaux filtrables prennent toute la largeur */
-#article .contenu:has(.bl-tableau-cadre) { margin-left: 0; margin-right: 0; }
-#article .contenu h1 {
-  font-size: large;
-  font-family: "Times New Roman", serif;
-  text-align: left;
-  margin: 10px 0 5px -30px;
-}
-#article .contenu p {
-  margin: 5px 0;
-  padding-left: 0;
-  text-align: justify;
-  line-height: 150%;
-  font-family: Arial, sans-serif;
-  text-indent: 0;  /* [dots] hteiml met les paragraphes en retrait */
-}
-#article .contenu img { margin-top: 8px; margin-bottom: 3px; max-width: 100%; height: auto; }
-#article .contenu sup { vertical-align: 4px; margin-left: 1px; font-size: x-small; }
-#article .contenu a.noteref sup { font-weight: 900; color: #ab4b35; }
-#article .contenu blockquote { font-style: italic; font-size: small; }
-#article .contenu .description, #article .contenu .legendeillustration {
-  margin: 0 5%;
-  font-size: x-small;
-  text-align: justify;
-  font-family: Arial, sans-serif;
-}
-#article .contenu .exemple { margin-left: 8%; }
-#article .contenu .citation { margin-left: 6%; margin-right: 6%; }
-#article .contenu .puces { margin-left: 2em; }
-#article .contenu figure { margin: 1em 0; text-align: center; border: none; padding: 0; }  /* [dots] hteiml encadre les figures */
-
-/* Notes de bas de page (.footnotebody sur le site) */
-#article .bl-page .footnotes { font-size: small; margin: 1em 5%; }
-#article .bl-page .footnotes .note { margin: 5px 0; }
-
-/* Tableaux */
-#article .bl-page table { margin-bottom: 20px; border-collapse: collapse; width: 100%; }
-#article .bl-page caption { margin-bottom: 15px; }
-#article .bl-page th, #article .bl-page td { padding: 2px 4px; }
-#article .rowindex { border: thin solid #000; text-align: center; }
-#article .contenu td p { text-indent: 0; }
-
-/* Feuillet : image à gauche, pièces du feuillet à droite */
-#article .imagefeuillet { float: left; margin-bottom: 2em; max-width: 72%; }  /* [dots] 160px de marge basse sur le site */
-#article .imagefeuillet img { max-width: 100%; height: auto; display: block; }
-#article .imagefeuillet .credit { margin-top: 2px; text-align: center; font-size: small; }
-#article .descriptionfeuillet, #article .interventionsfeuillet {
-  margin: 30px 6px 0 76%;
-  border: thin solid black;
-  font-size: small;
-}
-#article .descriptionfeuillet { margin-top: 120px; }
-#article .descriptionfeuillet li, #article .descriptiondossier li { text-align: left; }
-#article .descriptionfeuillet h3, #article .interventionsfeuillet h3 { margin: 0.5em 0; padding: 0 0.5em 0.5em; }
-#article .remarques { margin-left: 3px; font-size: x-small; }
-
-/* Dossier d'une pièce (feuillets et pièces du feuillet) */
-#article .feuilletdossier { margin-left: 74%; margin-right: 5px; font-size: small; }  /* [dots] 730px sur le site */
-#article .feuilletdossier ul { margin-left: 5px; padding-left: 1.2em; }
-#article .navfeuilletdossier { border: thin solid black; margin-bottom: 10px; }
-#article .descriptiondossier { border: thin solid black; margin-top: 30px; }
-#article .titrenavdossier { text-align: center; padding-left: 0; padding-right: 0; }
-#article hr.bl-separateur { visibility: hidden; clear: both; }
-
-/* Images associées d'une pièce : vignettes côte à côte, à gauche de la fiche */
-#article .bl-mosaique { float: left; }
-#article .bl-mosaique .imagefeuillet { float: left; margin: 0 1em 1em; }
-#article .bl-mosaique img { width: 220px; }
-
-/* Zones d'une image (introduction) */
-#article .bl-zones img { max-width: none; }  /* les coordonnées des zones supposent la taille réelle */
-#article .bl-zones { display: block; overflow-x: auto; }
-#article .bl-annotations { margin: 0.5em 0 1.5em; font-size: small; }
-#article .bl-annotations summary { cursor: pointer; font-weight: bold; }
-
-/* Loupes : l'exemple apparaît quand on coche */
-#article .toggle-cb { display: none; }
-#article .toggle-control { cursor: pointer; color: #C00; }
-#article .toggle-target { display: none; }
-#article .toggle-cb:checked + .toggle-target { display: block; }
-
-/* Logos de l'accueil */
-#article .list-group ul { list-style: none; text-align: center; padding: 0; }
-#article .list-group li { display: inline-block; margin: 5px 12px; }
-#article .list-group img { max-height: 95px; width: auto; }
-
-/* ---------- Petits écrans : une colonne ---------- */
-@media screen and (max-width: 900px) {
-  #article .imagefeuillet, #article .bl-mosaique { float: none; max-width: 100%; }
-  #article .descripiece, #article .descriptionfeuillet, #article .interventionsfeuillet,
-  #article .feuilletdossier, #article .contenu { margin-left: 0; margin-right: 0; }
-  #article .titrepage { padding-left: 1em; min-width: 0; }
-}
+/* Aucun : le rendu est celui de hteiml (15/10/2026). */
 
 /*=============================================================
  3. BLOCS HTEIML GÉNÉRIQUES
  =============================================================*/
 
-/* Aucun. */
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes :is(aside, div).note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes :is(aside, div).note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====
+   Allure de la page « Références » des chroniques latines (rubrique repliable « Titre (N) »,
+   une ligne par référence entre deux filets, l'année en gris à droite, auteurs en petites
+   capitales), avec les espacements et les tailles de hteiml : le titre de rubrique est un
+   vrai intertitre (h2, h3 dans une sous-rubrique) que hteiml met en forme comme ailleurs ;
+   la référence a la taille et l'interligne d'un paragraphe. */
+.document-views #article .biblio { margin: 0 0 1.2rem; }
+.document-views #article details.biblio > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
+.document-views #article .biblio-compte {
+  margin-left: .3em;
+  color: #8a837c;
+  font-size: .85em;
+  font-weight: normal;
+  font-variant: normal;
+  letter-spacing: 0;
+}
+.document-views #article ul.biblio-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.document-views #article ul.biblio-liste > li.bibl {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: .5em .4rem .5em 0;
+  border-bottom: 1px solid #f1ece6;
+  font-size: 1rem;
+  text-indent: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+.document-views #article ul.biblio-liste > li.bibl::marker { content: none; }
+.document-views #article ul.biblio-liste > li.bibl:hover { background: #f7f4f1; }
+.document-views #article ul.biblio-liste > li.bibl[hidden] { display: none; }
+/* Référence entière, retrait suspendu */
+.document-views #article li.bibl > .bibl-texte {
+  flex: 1 1 auto;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+/* Année, à droite, alignée d'une ligne à l'autre */
+.document-views #article li.bibl > .bibl-annee {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
+.document-views #article li.bibl .author,
+.document-views #article li.bibl .sigle {
+  font-variant: small-caps;
+  font-weight: normal;
+  letter-spacing: .02em;
+}
+.document-views #article li.bibl cite.title { font-style: italic; }
+.document-views #article li.bibl a {
+  color: inherit;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+@media (max-width: 700px) {
+  .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
+}
+/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
+.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
+/* ==== fin bloc bibliographie ==== */
 
 /*=============================================================
  4. PROPRE AU PROJET
  =============================================================*/
+
+/* ---------- Titres des pages à sous-pages (15/10/2026) ----------
+   dots-vue affiche une rubrique ou une partie (Introduction, I. L'organisation du manuscrit…)
+   comme un sommaire, sous .dots-ui, dont la remise à zéro (main.css : :where(.dots-ui) h1…)
+   ramène les titres au corps du texte. On leur rend les tailles de hteiml (html.css), comme
+   Du Bourg pour ses pages de partie ; les autres pages ne sont pas sous .dots-ui. */
+.dots-ui #main #article :is(h1, h2, h3, h4).head { font-weight: 900; }
+.dots-ui #main #article h1.head { font-size: 160%; padding-top: 1em; line-height: 115%; }
+.dots-ui #main #article h2.head { font-size: 140%; margin: 1em 0; }
+.dots-ui #main #article h3.head { font-size: 130%; margin: .5em 0; }
+.dots-ui #main #article h4.head { font-size: 120%; margin: .5em 0; }
+.dots-ui #main #article p.p { margin-bottom: 1em; }  /* comme une page sans sous-pages (16px) */
+
+/* ---------- Images, loupes, liens vers les autres pages d'une pièce (15/10/2026) ---------- */
+/* Image d'un feuillet : en entier dans la colonne de texte ; crédit en dessous. */
+#main #article .imagefeuillet { margin: 1em 0; }
+#main #article .imagefeuillet img { display: block; max-width: 100%; height: auto; max-height: 85vh; margin: 0 auto; }  /* hteiml : 40vh, trop petit pour lire un feuillet */
+#main #article .imagefeuillet .credit { margin-top: .3em; text-align: center; font-size: .85rem; color: #6b6b6b; }
+/* Illustrations des pages (tableau des modes, exemples) : à leur taille, jamais étirées ni écrasées
+   (une règle de largeur pleine et le max-height: 40vh de hteiml déformaient modalite.jpg, 350 × 478). */
+#main #article figure img { width: auto; max-width: 100%; height: auto; max-height: none; }
+#main #article figure .bl-zones img { max-width: none; }  /* zones : coordonnées en pixels de l image */
+/* Images associées d'une pièce : vignettes côte à côte, chacune mène à sa page. */
+#main #article .bl-mosaique { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1em 0; }
+#main #article .bl-mosaique .imagefeuillet { margin: 0; }
+#main #article .bl-mosaique img { width: 220px; max-width: 100%; height: auto; }
+/* Image à zones (introduction) : les coordonnées des zones supposent la taille réelle. */
+#main #article .bl-zones { display: block; overflow-x: auto; }
+#main #article .bl-zones img { max-width: none; }
+#main #article .bl-annotations { margin: .5em 0 1.5em; font-size: .9rem; }
+#main #article .bl-annotations summary { cursor: pointer; font-weight: 600; }
+/* Loupes (grattage, repentir, rajout) : l'exemple apparaît quand on coche. */
+#main #article .toggle-cb { display: none; }
+#main #article .toggle-control { cursor: pointer; color: var(--fill-color); }
+#main #article .toggle-target { display: none; }
+#main #article .toggle-cb:checked + .toggle-target { display: block; }
+/* Autres pages d'une pièce (Description, Commentaires…), ex-onglets du site. */
+#main #article .bl-voir-aussi { text-indent: 0; font-size: .9rem; }
+/* Logos de l'accueil sur une ligne. */
+#main #article .list-group ul { list-style: none; text-align: center; padding: 0; }
+#main #article .list-group li { display: inline-block; margin: 5px 12px; }
+#main #article .list-group img { max-height: 95px; width: auto; }
 
 /* ---------- Tableaux triables et filtrables (index, interventions, annexes) ----------
    Repris tels quels de la feuille précédente (bellelay.customCss.css avant le 13/10),
@@ -336,7 +303,7 @@
 #article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c3 { font-weight: 600; }
 #article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c4,
 #article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c7 { color: #555; font-size: .9em; }
-#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c6 { white-space: nowrap; font-variant-numeric: tabular-nums; }
+#article :is(#legacy-indexmanuscrit, .bl-interventions) .bl-tableau td.bl-c6 { font-variant-numeric: tabular-nums; }  /* 15/10 : retour à la ligne permis, sinon le tableau déborde sommaire ouvert */
 
 /* Écran étroit : le tableau défile de côté dans son cadre (l'en-tête ne colle plus). */
 @media (max-width: 760px) {

@@ -801,6 +801,20 @@
 #main #article section.biblio p.biblio-notice .note { color: #555; font-size: .92em; }
 #main #article section.biblio section.biblio a { color: inherit; text-decoration: underline dotted #b9afa5; text-underline-offset: .18em; }
 #main #article section.biblio section.biblio a:hover { color: #000; text-decoration-style: solid; }
+/* 2026-10-15 : même allure que le bloc « bibliographie » des autres corpus (page
+   « Références » des chroniques) ; la XSL de Delescluze est gardée pour son regroupement des
+   sources par dépôt. Rubriques précédées de ●, une ligne par notice entre deux filets fins. */
+#main #article section.biblio h2.biblio-rubrique { font-weight: 600; }
+#main #article section.biblio h2.biblio-rubrique::before { content: "● "; }
+#main #article section.biblio p.biblio-notice {
+  margin: 0;
+  padding: .4rem .4rem .4rem 1.6em;
+  border-bottom: 1px solid #f1ece6;
+  line-height: 1.5;
+}
+#main #article section.biblio p.biblio-notice:hover { background: #f7f4f1; }
+#main #article section.biblio .biblio-fonds p.biblio-notice { margin-bottom: 0; }
+#main #article section.biblio p.biblio-notice .author { font-weight: normal; }
 
 /* === SECTION GARDE DEBUT (page de garde commune, 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
 /* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev

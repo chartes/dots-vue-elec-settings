@@ -207,6 +207,114 @@
 }
 /* ==== fin bloc notes ==== */
 
+/* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====
+   Allure de la page « Références » des chroniques latines (rubrique repliable « ● Titre (N) »,
+   une ligne par référence entre deux filets, l'année en gris à droite, auteurs en petites
+   capitales), avec les espacements et les tailles de hteiml : la rubrique a la taille et les
+   marges d'un intertitre h2, la référence celles d'un paragraphe (16px, interligne 1,4,
+   16px d'une référence à l'autre). */
+.document-views #article .biblio { margin: 0 0 1.2rem; }
+.document-views #article details.biblio > summary {
+  position: relative;
+  margin: 1em 0;
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.4;
+  list-style: none;
+  cursor: pointer;
+}
+.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
+.document-views #article details.biblio > summary::before { content: "○ "; }
+.document-views #article details.biblio[open] > summary::before { content: "● "; }
+.document-views #article .biblio-compte {
+  margin-left: .3em;
+  color: #8a837c;
+  font-size: .85em;
+  font-weight: normal;
+  font-variant: normal;
+  letter-spacing: 0;
+}
+.document-views #article ul.biblio-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.document-views #article ul.biblio-liste > li.bibl {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: .5em .4rem .5em 0;
+  border-bottom: 1px solid #f1ece6;
+  font-size: 1rem;
+  text-indent: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+.document-views #article ul.biblio-liste > li.bibl::marker { content: none; }
+.document-views #article ul.biblio-liste > li.bibl:hover { background: #f7f4f1; }
+.document-views #article ul.biblio-liste > li.bibl[hidden] { display: none; }
+/* Référence entière, retrait suspendu */
+.document-views #article li.bibl > .bibl-texte {
+  flex: 1 1 auto;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+/* Année, à droite, alignée d'une ligne à l'autre */
+.document-views #article li.bibl > .bibl-annee {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
+.document-views #article li.bibl .author,
+.document-views #article li.bibl .sigle {
+  font-variant: small-caps;
+  font-weight: normal;
+  letter-spacing: .02em;
+}
+.document-views #article li.bibl cite.title { font-style: italic; }
+.document-views #article li.bibl a {
+  color: inherit;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+.document-views #article p.biblio-barre {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: .5rem 0 .6rem;
+  padding: .4rem 0;
+  border-bottom: 1px solid #e3ddd6;
+  color: #7a726b;
+  font-size: .85rem;
+  font-variant: small-caps;
+  letter-spacing: .05em;
+  text-indent: 0;
+}
+.document-views #article input.biblio-filtre {
+  margin-left: auto;
+  width: min(18rem, 60%);
+  padding: .3rem .55rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-variant: normal;
+  letter-spacing: normal;
+}
+@media (max-width: 700px) {
+  .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
+  .document-views #article p.biblio-barre { flex-direction: column; align-items: stretch; }
+  .document-views #article input.biblio-filtre { width: 100%; margin-left: 0; font-size: 16px; }
+}
+/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
+.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
+.document-views #article .biblio details.biblio > summary { font-size: 1.05rem; }
+/* ==== fin bloc bibliographie ==== */
+
 /*=============================================================
  4. PROPRE AU PROJET
  =============================================================*/
@@ -744,54 +852,9 @@
 }
 
 /* ==========================================================================
-   10. Bibliographie : une référence par ligne, sigle en gras en tête, filtre (2026-10-02).
+   10. Bibliographie : bloc générique « bibliographie » (section 3), sigle deviné par la XSL
+       (texte avant les deux-points), filtre dans le customJs (2026-10-15).
    ========================================================================== */
-.document-views .text-view #article .montferrand-historic .mf-biblio { margin: 1rem 0 2.5rem; }
-.document-views .text-view #article .montferrand-historic .mf-biblio-barre {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin: 0 0 .8rem;
-  padding-bottom: .6rem;
-  border-bottom: 2px solid var(--mf-accent);
-  color: var(--mf-gris);
-  font: .82rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: .03em;
-}
-.document-views .text-view #article .montferrand-historic .mf-biblio-filtre {
-  width: min(20rem, 60%);
-  padding: .3rem .55rem;
-  border: 1px solid #d6cfc8;
-  border-radius: 3px;
-  background: #fff;
-  font: .85rem var(--font-primary, "Roboto"), Arial, sans-serif;
-  text-transform: none;
-  letter-spacing: normal;
-}
-.document-views .text-view #article .montferrand-historic .mf-biblio-filtre:focus { outline: 2px solid #315BA7; outline-offset: -1px; }
-.document-views .text-view #article .montferrand-historic .mf-biblio-liste {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-/* Retrait suspendu, comme une bibliographie imprimée : la 2e ligne d'une référence
-   s'aligne en retrait sous la première. */
-.document-views .text-view #article .montferrand-historic .mf-bib {
-  margin: 0;
-  padding: .45rem .4rem .45rem 2rem;
-  text-indent: -1.6rem;
-  border-bottom: 1px solid #ece7e2;
-  line-height: 1.5;
-  text-align: left;
-}
-.document-views .text-view #article .montferrand-historic .mf-bib[hidden] { display: none; }
-.document-views .text-view #article .montferrand-historic .mf-bib-sigle { color: #1f1f1f; font-weight: 700; }
-@media (max-width: 700px) {
-  .document-views .text-view #article .montferrand-historic .mf-biblio-barre { flex-direction: column; align-items: stretch; }
-  .document-views .text-view #article .montferrand-historic .mf-biblio-filtre { width: 100%; }
-}
 
 section.div h1.head {
   margin-top: 2rem;

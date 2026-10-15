@@ -139,6 +139,10 @@
  4. PROPRE AU PROJET
  =============================================================*/
 
+/* Paragraphes sans alinéa, alignés sur le titre, comme les chroniques latines, les Édits et Du Bourg
+   (hteiml met 32 px de retrait en première ligne). */
+.document-views #article p:not(.noindent) { text-indent: 0; }
+
 /* ---------- Titres des pages à sous-pages (15/10/2026) ----------
    dots-vue affiche une rubrique ou une partie (Introduction, I. L'organisation du manuscrit…)
    comme un sommaire, sous .dots-ui, dont la remise à zéro (main.css : :where(.dots-ui) h1…)

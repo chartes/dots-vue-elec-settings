@@ -198,7 +198,10 @@
 /* Numéro calé pour finir là où finissent les lettres de l'apparat. */
 .document-views #article .footnotes aside.note a.noteback {
   margin-left: calc(-7ex - .68em);
-  font-size: 14px;
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes aside.note a.noteback:hover {
@@ -858,11 +861,7 @@ section.div h1.head {
 .document-views .text-view #article .montferrand-historic table.table th.label { background: #f4f1ee; font-weight: 600; text-align: left; }
 .document-views .text-view #article .montferrand-historic table.mf-table-lignes td:last-child { text-align: right; }
 
-/* Numéros des notes en pied à la couleur du corpus (2026-10-14) : rouge ici, violet aux
-   Chroniques ; alignement, taille et survol : bloc générique des notes. */
-#main #article aside.note a.noteback {
-  color: var(--fill-color, #8f0e21);
-}
+/* Numéros des notes en pied : couleur, taille, alignement et survol dans le bloc générique des notes. */
 
 /*=============================================================
  5. MÉCANISMES COMMUNS DOTS-VUE

@@ -55,7 +55,14 @@
   },
 
   "footerSettings": {
-    "footerTitle": "Élec"
+    "footerTitle": "ELEC",
+    "footerSubtitles": [
+      "Édition en ligne de l'école des chartes"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
 
   "aboutPageSettings": [

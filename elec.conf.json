@@ -49,7 +49,7 @@
     },
     "listSection": {
       "displayMode": "card",
-      "cardCollectionPerPage": 5,
+      "cardCollectionPerPage": 9,
       "logo": ""
     }
   },

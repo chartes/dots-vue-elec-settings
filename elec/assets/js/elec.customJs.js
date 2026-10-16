@@ -165,7 +165,7 @@ function voir (lien, event) {
 // (documents chargés après coup par dots-vue) : pour ce qui doit se faire à l'affichage.
 function aLAffichage (selecteur, fn) {
   const vus = new WeakSet()
-  const passe = () => document.querySelectorAll('.document-views ' + selecteur).forEach(el => {
+  const passe = () => document.querySelectorAll(selecteur).forEach(el => {
     if (vus.has(el)) return
     vus.add(el)
     fn(el)
@@ -193,7 +193,6 @@ if (!window.tfComportements) {
   document.addEventListener('click', event => {
     const el = event.target.closest('button.tf-tri, button.tf-effacer, button.tf-csv, a.tf-voir')
     if (!el) return
-    if (!el.closest('.document-views')) return
     if (el.matches('.tf-tri')) trier(el)
     else if (el.matches('.tf-effacer')) effacer(el.closest('.tf-cadre'))
     else if (el.matches('.tf-csv')) exporter(el.closest('.tf-cadre'))
@@ -202,8 +201,7 @@ if (!window.tfComportements) {
 
   const saisie = event => {
     const el = event.target
-    if (!(el instanceof Element) || !el.closest('.document-views')) return
-    if (el.matches('.tf-filtres input, .tf-filtres select')) filtrer(el.closest('.tf-cadre'))
+    if (el instanceof Element && el.matches('.tf-filtres input, .tf-filtres select')) filtrer(el.closest('.tf-cadre'))
   }
   document.addEventListener('input', saisie)
   document.addEventListener('change', saisie)

@@ -1,150 +1,311 @@
-/* Chroniques latines de Saint-Denis — CSS custom DoTS Vue.
+/*=============================================================
+ PART 1
+ Updating the css color schema for:
+  - the collection chroniqueslatines
+  - its children (unless otherwise specified)
+ =============================================================*/
 
-   Attention au nommage : la clé de chargement est le NOM DU FICHIER
-   (App.vue, getCustomCss). Le dossier ne contenait qu'un
-   christofle.customCss.css copié-collé, donc "chroniqueslatines" n'avait
-   aucune feuille custom. */
-
-/* --------------------------------------------------------------------------
-   Puces rouges de l'ÉLEC historique.
-
-   Sur elec.enc.sorbonne.fr la puce n'est pas une couleur de marqueur mais une
-   IMAGE : enc.css applique `ul { list-style-image: url('img/puce_rouge.png') }`
-   à toutes les listes du site. Ce fichier est un carré de 7 × 6 px, couleur
-   dominante #8d2e34.
-
-   On le reproduit ici avec un SVG en data-URI (mêmes dimensions, même teinte,
-   aucun fichier externe à déployer), limité à la zone de texte pour ne pas
-   repeindre les listes de l'interface (sommaire, navigation).
-   -------------------------------------------------------------------------- */
-#article ul,
-.document-area #article ul {
-  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='6'%3E%3Crect width='7' height='6' fill='%238d2e34'/%3E%3C/svg%3E");
-  padding-top: .3em;
+/* Using css variables */
+:root {
+  --fill-color: #5f004d;
 }
 
-/* Comme sur ELEC, les listes imbriquées reprennent les marqueurs standard. */
-#article ul ul { list-style: circle; }
-#article ul ul ul { list-style: disc; }
+/*=============================================================
+ PART 2
+ Updating the css of specific elements (HTML) for:
+  - the collection chroniqueslatines
+  - its children (unless otherwise specified)
+ =============================================================*/
 
-/* Page « Références citées » : l'ÉLEC rend `ul.listBibl > li`, le fragment
-   local rend `ul.refs-list > li.refs-entry`. */
-.refs-list {
-  padding-left: 1.4em;
-  margin: 1rem 0;
+.document-views #article {
+  --accent: #5f004d;
+  --muted: #8a837c;
+  --rule: #e4e4e4;
+  --highlight: #fbf3d5;
+
+  /* ---------- Titre et éditeurs ---------- */
+  .titlestmt {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem;
+    font-family: "Georgia", "Iowan Old Style", serif;
+    text-align: center;
+
+    .editors-label {
+      font-style: italic;
+      color: #666;
+      font-variant: normal;
+    }
+    .editors { text-align: center; }
+    h1 {
+      margin: 0 0 1rem !important;
+      color: var(--accent) !important;
+      font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+      line-height: 1.3 !important;
+      font-weight: 600 !important;
+      letter-spacing: .01em !important;
+      text-align: center !important;
+    }
+    .editor {
+      margin-bottom: .75rem;
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      font-variant: small-caps;
+      letter-spacing: .03em;
+      color: #333;
+    }
+    .date {
+      display: inline-block;
+      margin-top: .5rem;
+      padding-top: .5rem;
+      border-top: 1px solid #e2c5cb;
+      font-size: 1.15rem;
+      letter-spacing: .05em;
+      color: var(--accent);
+    }
+  }
+
+  /* ---------- Texte courant ---------- */
+  & blockquote { margin: 0; }
+  /* Citation de plusieurs paragraphes (div.cit_n) : même écart que les paragraphes du texte
+     (ils sortaient collés, et la lettrine de chacun débordait sur la ligne du dessus). */
+  .cit_n > p { margin: 0 0 1rem; }
+  & fieldset { border: none; }
+  & q { font-style: italic; }
+  .head { color: var(--accent); }
+  & h1.head {
+    color: var(--fill-color, var(--accent));
+    font-variant: small-caps;
+    font-size: 1.6rem; /* comme les titres de chapitre : Lettre, Bibliographie, Références */
+  }
+  & h2.head {
+    font-size: 1.15rem;
+    color: #585858;
+  } /* sous-titre : « Bibliographie sur les chroniques latines » */
+  .rubric { color: #5f004d; } /* prune clair, distinct des titres (contraste ~7:1) */
+
+  .ornament {
+    color: var(--accent);
+    font-size: 200%;
+    line-height: 0; /* la lettrine ne grandit pas la première ligne : interligne régulier */
+  }
+
+  span.author {
+    font-variant: small-caps;
+  }
+
+  p:not(.noindent) {
+    text-indent: 0;
+  }
+
+  .cb {
+    color: grey;
+    float: none !important;
+    margin-right: 0 !important;
+  }
+  .listBibl li::marker { color: var(--accent); }
+
+  /* ---------- Navigation ---------- */
+  a.here {
+    border: 1px solid #888;
+    padding: 0 .5ex;
+    margin: 0 0 0 .5ex;
+  }
+  .liber ul.children li {
+    display: inline;
+    padding-right: 1em;
+  }
+
+  /* ---------- Page « Références » ---------- */
+
+  /* Groupe et œuvre repliables : rond creux fermé, plein ouvert */
+  & details.listBibl > summary,
+  & details.bibl > summary {
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+    &::-webkit-details-marker { display: none; }
+  }
+
+  & details.listBibl > summary {
+    margin: 1.8rem 0 .7rem;
+    padding-bottom: .2rem;
+    border-bottom: 1px solid #e3ddd6;
+    color: var(--fill-color, var(--accent));
+    font-variant: small-caps;
+    letter-spacing: .04em;
+    &::before { content: "○ "; }
+
+    /* Nombre d'œuvres : « Romains (12) » */
+    > span.listBibl {
+      margin-left: .35em;
+      color: var(--muted);
+      font-size: .85em;
+      font-variant: normal;
+      letter-spacing: 0;
+    }
+  }
+  & details.listBibl[open] > summary::before,
+  & details.listBibl:has(.dots-target) > summary::before { content: "● "; }
+
+  /* Une œuvre : titre à gauche, nombre de passages à droite */
+  & details.bibl {
+    border-bottom: 1px solid #f1ece6;
+    scroll-margin-top: 90px;
+
+    > summary {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: .35rem .4rem .35rem 1.4rem;
+      &:hover { background: #f7f4f1; }
+      &::before {
+        content: "○";
+        position: absolute;
+        left: .15rem;
+        color: var(--fill-color, var(--accent));
+        font-size: 1.05em;
+        line-height: 1.25;
+      }
+      > span.bibl:first-child { flex: 1 1 auto; }
+      > span.bibl:last-child {
+        flex: 0 0 auto;
+        color: var(--muted);
+        font-size: .85rem;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+    }
+    &[open] > summary::before,
+    &.dots-target > summary::before,
+    &:has(.dots-target) > summary::before { content: "●"; }
+    &.dots-target > summary { background: var(--highlight); }
+
+    .author { font-variant: small-caps; letter-spacing: .02em; }
+    > div.bibl { padding: .2rem .2rem .7rem 1.2rem; font-size: .93rem; }
+  }
+
+  /* Œuvre visée par un renvoi : ouverte même dans un groupe replié */
+  & details.bibl.dots-target::details-content,
+  & details.bibl:has(.dots-target)::details-content,
+  & details.listBibl:has(.dots-target)::details-content {
+    content-visibility: visible;
+    display: block;
+  }
+
+  & p.cl-edition {
+    margin: .1rem 0 .5rem;
+    color: #555;
+    font-size: .88rem;
+    text-indent: 0;
+    text-align: left;
+  }
+  .cl-etiquette, .cl-sep, .cl-fois, .cl-vide { color: var(--muted); }
+
+  & dl.cl-chapitres {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: .15rem 1rem;
+    margin: 0;
+
+    > dt {
+      margin: 0;
+      font-weight: normal;
+      white-space: nowrap;
+      scroll-margin-top: 90px;
+
+      /* Lien vers le chapitre (« Préface.8 ») : prune clair des rubriques */
+      > a { color: #8e3a7e; border-bottom-color: #8e3a7e; }
+    }
+    > dd { margin: 0; }
+    > dt.dots-target,
+    > dt.dots-target + dd { background: var(--highlight); }
+  }
+
+  /* ---------- Notes de bas de page ---------- */
+  .footnotes {
+    &::before {
+      content: "";
+      display: block;
+      width: 33.333%;
+      height: 2px;
+      margin-bottom: 1em;
+      background: var(--rule);
+    }
+
+    /* Apparat : séparé des notes par un filet */
+    p.apparatus {
+      margin-bottom: 1.25rem;
+      padding-left: 0;
+      line-height: 1.55;
+    }
+    .apparatus {
+      * ::after { content: " "; }
+      /* Même mise en page que les notes (aside.note de html.css) : trait vertical au même
+         endroit, lettre calée à droite juste avant, comme les numéros 1, 2, 3 */
+      span.note {
+        display: block;
+        position: relative;
+        margin-bottom: .3em;
+        line-height: 1.25; /* trait à la hauteur du texte, comme les notes */
+        margin-left: 2.5em;    /* comme aside.note */
+        padding-left: 1.3em;   /* même colonne de texte que les notes */
+        border-left: 1px solid #ccc;
+      }
+      span.note > a {
+        position: absolute;
+        right: calc(100% + .76em); /* fin de la lettre là où finissent les numéros */
+        color: var(--fill-color, var(--accent));
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: none;
+      }
+      /* Lemme fermé par un crochet */
+      .lem::after {
+        content: "]\00a0";
+        color: var(--muted);
+      }
+      .wit { font-family: inherit; }
+    }
+
+       a.noteback  {
+        position: absolute;
+        color: var(--fill-color, var(--accent));
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: none;
+      }
+
+    /* Notes resserrées, numéros à la taille du texte */
+    /* Trait vertical à la hauteur du texte (2026-10-14) : html.css met .5ex de retrait en
+       haut et en bas de chaque note, que le trait recouvre ; l'écart passe dans la marge. */
+    aside.note { margin-bottom: .75rem; padding-top: 0; padding-bottom: 0; }
+
+    /* Texte des notes aligné, avec ou sans signe (2026-10-14) : le signe de la citation
+       (= identique, : approchant) se place avant la colonne du texte, entre le trait et lui. */
+    aside.note { padding-left: 1.3em; }
+    /* Le numéro (absolu, placé depuis le début du texte) recule d'autant que la colonne a
+       avancé (1.3em au lieu de .5em), réglé pour finir là où finissent les lettres de l'apparat. */
+    aside.note a.noteback {
+      margin-left: calc(-8ex - .68em);
+      font-size: 0.9em;
+    }
+    aside.note .cit-signe {
+      display: inline-block;
+      width: 1.3em;
+      margin-left: -1.3em;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte,
+       5ex de large, d'où un trait trop long). */
+    aside.note a.noteback:hover {
+      border-bottom: none;
+      text-decoration: underline;
+    }
+  }
 }
-.refs-list > .refs-entry {
-  margin: 0 0 .45rem;
-}
 
-/* --------------------------------------------------------------------------
-   Citations : appel dans le texte + liste en pied d'article.
-   La XSL (chroniqueslatines.xsl, mode citation-entry) reproduit le bloc
-   `<div class="cit">` de l'ÉLEC, jusque-là absent en local — les appels
-   `<a class="noteref" href="#citN">` pointaient donc dans le vide.
-   -------------------------------------------------------------------------- */
-.citations-list {
-  margin-top: 1.5rem;
-  font-size: .92em;
-}
-.citations-list .cit {
-  margin: .2rem 0;
-}
-.citations-list .cit > a.note {
-  font-weight: 700;
-  text-decoration: none;
-  margin-right: .35rem;
-}
-
-/* --------------------------------------------------------------------------
-   Page de garde : blocs du teiHeader rétablis par chroniqueslatines.xsl.
-
-   L'ÉLEC en tirait deux pages — /credits (titleStmt + respStmt + revisionDesc)
-   et /licence (publicationStmt + address + availability). Le HTEIML rendait les
-   deux premiers seulement : l'adresse, la licence Creative Commons et
-   l'historique des révisions étaient dans le XML mais jamais affichés. Ils le
-   sont désormais sur la garde, avec les noms de classe de l'ÉLEC.
-   -------------------------------------------------------------------------- */
-#article .titleStmt .title { font-size: 1.15rem; font-weight: 600; }
-#article .principal,
-#article .respStmt { margin: .3rem 0; }
-#article .fileDesc label,
-#article .fileDesc legend {
-  display: block;
-  margin: 1.4rem 0 .4rem;
-  font-weight: 600;
-}
-
-/* Historique des révisions : rendu en table.data par le HTEIML. */
-#article .revisionDesc {
-  border-collapse: collapse;
-  margin: 1rem 0 1.5rem;
-  width: 100%;
-}
-#article .revisionDesc caption {
-  text-align: left;
-  font-weight: 600;
-  padding-bottom: .4rem;
-}
-#article .revisionDesc td {
-  border-top: 1px solid #e6dddf;
-  padding: .35rem .7rem .35rem 0;
-  vertical-align: top;
-}
-
-#article .address { margin: .8rem 0; font-style: normal; }
-#article .address .addrLine { display: block; }
-
-#article .availability {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e6dddf;
-}
-#article .availability .ident { font-weight: 700; }
-
-/* --------------------------------------------------------------------------
-   Référence d'une citation : hors du fil du texte.
-
-   Le HTEIML place la référence (« I, 1, 1-2 ») juste après l'appel, en clair
-   dans le paragraphe. L'ÉLEC ne le fait pas : diple.css la masque
-   (`.cit_n .bibl { display:none }`) et ne la montre qu'au survol. On la masque
-   donc ici aussi — la référence complète, auteur et titre compris, est de toute
-   façon donnée en pied d'article, et le numéro d'appel y conduit.
-
-   ⚠ Ne pas cibler `.cit_n > .listBibl` : la citation contient un <blockquote>,
-   élément de bloc dans un <span> inline, ce qui casse le span au parsing. La
-   référence se retrouve alors sœur du bloc, hors de tout .cit_n. On la vise
-   donc directement, et on la révèle au survol de son appel (sélecteur de frère
-   adjacent), sans dépendre du onmouseover du HTEIML — lequel vise
-   `this.parentNode`, c'est-à-dire le <sup>, et ne bascule rien.
-   -------------------------------------------------------------------------- */
-#article .listBibl { display: none; }
-#article sup:hover + .listBibl,
-#article sup:focus-within + .listBibl {
-  display: inline;
-  margin-left: .35rem;
-  padding: .05rem .4rem;
-  background: #fff;
-  border: 1px solid #ccc;
-  font-size: .92em;
-}
-
-/* --------------------------------------------------------------------------
-   Visionneuse Mirador : retirée du flux en mode texte seul.
-
-   Le conteneur est masqué par `visibility: hidden`, qui CONSERVE sa place :
-   609 px de vide au-dessus du texte. Tout saut vers une ancre — le retour
-   depuis une référence, par exemple — atterrissait donc décalé d'autant.
-   `display: none` le sort du flux. La règle est limitée à `.text-mode-only`,
-   donc sans effet sur les corpus qui affichent réellement des images.
-   -------------------------------------------------------------------------- */
-.text-mode-only .mirador-view { display: none; }
-
-/* Liste des citations en pied d'article : une citation peut renvoyer à
-   plusieurs ouvrages — le même passage se lit chez Grégoire de Tours, chez
-   Frédégaire et dans le Liber historiae Francorum. Chaque source sur sa ligne,
-   sans quoi les trois références se suivent et se lisent comme une seule. */
-.citations-list .cit-source {
-  display: block;
-  margin-left: 1.4em;
+a.bibl {
+  color: var(--fill-color);
 }

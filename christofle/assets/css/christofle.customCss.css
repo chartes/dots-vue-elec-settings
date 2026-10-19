@@ -750,6 +750,14 @@
 [collid="christofle"] #main #article .footnotes .apparatus .lem-blanc { display: none; }
 /* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
 [collid="christofle"] #main #article :is(table, th, td, caption) { font-family: inherit; }
+/* 2026-10-19 : en-tête des minutes au modèle des actes (header.front) : cadre pointillé, n° et date centrés,
+   analyse en italique, comme les cartulaires et Du Bourg. */
+[collid="christofle"] #main #article header.front { position: relative; background: #fff; border: 1.75px dotted rgba(95, 0, 77, 0.3); border-radius: 0; padding: .5em .75em; margin: 0 0 1.5em; }
+[collid="christofle"] #main #article header.front > .docNum { display: block; text-align: center; font-weight: 700; font-size: 1.2em; line-height: 1.2; margin: 0 0 .2em; }
+[collid="christofle"] #main #article header.front > .docDate { display: block; text-align: center; margin: 0 0 1.5rem; }
+[collid="christofle"] #main #article header.front > .argument { margin: 0; font-size: .85rem; font-style: italic; line-height: 1.4; text-align: justify; }
+[collid="christofle"] #main #article header.front > .argument p { margin: 0; text-indent: 0; }
+[collid="christofle"] #main #article header.front .recordType { font-style: normal; font-weight: 600; }
 /* ==== fin appels de note ==== */
 /* ==== Titres et espacements des pages de texte (2026-10-19, modèle : Montferrand) ====
    Tailles de hteiml en gras ; environ 17 px entre un titre et son texte : sans le retrait de hteiml

@@ -133,6 +133,22 @@
 }
 [collid="cartulaires"] #main #article .footnotes p.apparatus { margin: 0; padding: 0; }  /* sans le retrait de hteiml */
 [collid="cartulaires"] #main #article .footnotes .apparatus span.note { line-height: 1.15; margin-bottom: .875rem; }  /* même pas que les notes */
+/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
+[collid="cartulaires"] #main #article .footnotes p.apparatus:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 1px;
+  margin: 1.25rem 0 1rem;
+  background: #e4e4e4;
+}
+/* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
+   grand retrait du pied de page. */
+[collid="cartulaires"] #main #article section.back:empty { display: none; }
+[collid="cartulaires"] #main #article .footnotes { margin-top: 1.5rem; padding-top: 0; }
+/* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
+   dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
+[collid="cartulaires"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
 /* ==== fin appels de note ==== */
 
 /* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====
@@ -429,6 +445,23 @@ span.note-inline {
      le sont exactement. */
   --acte-blanc: 1.5rem;
 }
+
+/* 2026-10-19 : cadre de l'en-tête sur le modèle de Du Bourg (projet publié) : pointillé prune fin,
+   fond blanc, retrait resserré (hteiml : tirets gris, coins arrondis). */
+[collid="cartulaires"] #main #article header.front {
+  background-color: #fff;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  border-radius: 0;
+  padding: 0.5em 0.75em;
+  margin: 0 0 1.5em;
+}
+/* Pages à sous-parties (introductions, Édition) : dots-vue les met sous .dots-ui, dont la remise à
+   zéro ramène h1-h4 à la taille du texte ; mêmes tailles que Bellelay et Du Bourg. */
+[collid="cartulaires"] .dots-ui #main #article :is(h1, h2, h3, h4).head:not(header.front > *) { font-weight: 900; }
+[collid="cartulaires"] .dots-ui #main #article h1.head:not(header.front > *) { font-size: 160%; padding-top: 1em; line-height: 115%; margin: 0 0 .5em; }
+[collid="cartulaires"] .dots-ui #main #article h2.head:not(header.front > *) { font-size: 140%; margin: 1em 0; }
+[collid="cartulaires"] .dots-ui #main #article h3.head:not(header.front > *) { font-size: 130%; margin: .5em 0; }
+[collid="cartulaires"] .dots-ui #main #article h4.head:not(header.front > *) { font-size: 120%; margin: .5em 0; }
 
 /* n° de l'acte : 1re ligne, centré */
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .docNum {

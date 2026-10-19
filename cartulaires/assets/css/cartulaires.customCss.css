@@ -876,6 +876,10 @@ span.note-inline {
 /* Le sommaire que dots-vue ajoute sous la page (#article.bottom-toc : « I (573, 11 septembre) »…, 395 lignes
    pour NDCH) redit la liste des actes du tableau : caché sur les pages de groupe qui ont leur tableau. */
 .document-area:has(#main #article div.group > .tf-cadre) #article.bottom-toc { display: none; }
+/* Même chose sur les notices introductives (section.front) : la liste de leurs sous-parties sous le texte
+   (L'établissement, Orientation archivistique…) est retirée (décision de Maxime, 19/10) ; elles restent
+   dans le sommaire de gauche et les flèches. */
+.document-area:has(#main #article section.front) #article.bottom-toc { display: none; }
 /* === SECTION EDITION FIN === */
 
 /* === SECTION TITRES DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */

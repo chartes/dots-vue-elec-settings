@@ -461,15 +461,34 @@ span.note-inline {
 /* Pages à sous-parties (introductions, Édition) : dots-vue les met sous .dots-ui, dont la remise à
    zéro ramène h1-h4 à la taille du texte ; mêmes tailles que Bellelay et Du Bourg. */
 [collid="cartulaires"] .dots-ui #main #article :is(h1, h2, h3, h4).head:not(header.front > *) { font-weight: 900; }
-[collid="cartulaires"] .dots-ui #main #article h1.head:not(header.front > *) { font-size: 160%; padding-top: 1em; line-height: 115%; margin: 0 0 .5em; }
+[collid="cartulaires"] .dots-ui #main #article h1.head:not(header.front > *) { font-size: 160%; padding-top: 0; line-height: 115%; margin: 0 0 .5em; }
 [collid="cartulaires"] .dots-ui #main #article h2.head:not(header.front > *) { font-size: 140%; margin: 1em 0; }
 [collid="cartulaires"] .dots-ui #main #article h3.head:not(header.front > *) { font-size: 130%; margin: .5em 0; }
 [collid="cartulaires"] .dots-ui #main #article h4.head:not(header.front > *) { font-size: 120%; margin: .5em 0; }
+/* 2026-10-19 : espacements des notices sur le modèle de Montferrand (17 px entre un titre et son texte) :
+   hteiml met 1 rem / 1,25 rem de retrait à chaque section imbriquée, qui s'additionnent, et 1 em au-dessus
+   du h1 ; h2 et h3 en interligne normal (h2 : 2 fois la taille du texte). Toutes les pages qui ne sont pas
+   des actes (pas de header.front), sous .dots-ui ou non. */
+[collid="cartulaires"] #main #article:not(:has(header.front)) section.div { padding: 0; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) h1.head { padding-top: 0; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) :is(h2, h3, h4).head { line-height: 1.3; margin: 1.5rem 0 .75rem; }
 
 /* Notices introductives et introductions (<front> du TEI, section.front) : hteiml les met sur fond
    gris avec un retrait ; texte ordinaire, comme le reste des pages (l'en-tête des actes, header.front,
    garde son cadre). */
 [collid="cartulaires"] #main #article section.front { background: none; padding: 0; }
+/* Bloc de présentation de la notice (établissement, carte de situation, type d'édition, total des actes) :
+   même cadre que l'en-tête des actes, texte droit et sans retrait ; signature à droite, en italique. */
+[collid="cartulaires"] #main #article section.front > div.argument {
+  margin: 0 0 1rem;
+  padding: .6em .9em;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  font-size: .95rem;
+  font-style: normal;
+  line-height: 1.5;
+}
+[collid="cartulaires"] #main #article section.front > div.argument p { margin: .2em 0; text-indent: 0; font-style: normal; }
+[collid="cartulaires"] #main #article section.front > div.byline { text-align: right; font-style: italic; font-size: .9rem; color: #5a5257; margin: 0 0 1.5rem; }
 
 /* n° de l'acte : 1re ligne, centré */
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .docNum {

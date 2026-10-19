@@ -71,12 +71,7 @@
 
 #main #article h1 { font-weight: bold; }  /* 2026-10-19 : police Georgia retirée (police de hteiml) */
 
-#main #article h1 {
-  font-size: 1.6em;
-  border-bottom: 1px solid #000;
-  padding-bottom: 10px;
-  margin: 0 0 1em;
-}
+/* 2026-10-19 : filet sous le titre retiré ; tailles de hteiml (bloc « Titres et espacements »). */
 
 
 /* --------------------------------------------------------------------------
@@ -108,33 +103,29 @@
 /* 2026-10-12 : la CSS de hteiml (renderer d'elec.conf.json) met tout <front> sur fond gris ;
    fond blanc, le reste de sa mise en page gardé (comme Du Bourg et Montferrand). */
 #main #article .front { background-color: #fff; }
+/* 2026-10-19 : en-tête des pièces au modèle des actes des autres corpus (cadre pointillé, comme Du Bourg). */
+#main #article section.front { border: 1.75px dotted rgba(95, 0, 77, 0.3); border-radius: 0; padding: .5em .75em; margin: 0 0 1.5em; }
+#main #article section.front > h1.head { font-size: 1.3em; margin: 0 0 .75rem; }
+#main #article section.front > .argument { margin-left: 0; padding-left: 0; }  /* sans le retrait de hteiml */
 #main #article .docDate { font-variant: small-caps; }
 #main #article .argument { font-size: .95em; }
 
+/* 2026-10-19 : tradition sans l'encadré rose de l'ancien site : liste simple, un peu plus petite. */
 #main #article .tradition,
-#main #article .listWit {
-  border-left: 3px solid #e6c3c9;
-  background: #fbf8f4;
-  margin: 1rem 0;
-  padding: .8rem 1rem;
-  font-size: .95em;
-}
+#main #article .listWit { margin: .5rem 0 0; padding: 0; font-size: .9em; }
 #main #article .witness { display: block; }
 
-#main #article .transcription {
-  border-top: 1px solid #e6c3c9;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-}
+/* 2026-10-19 : texte sans filet ni grand blanc au-dessus. */
+#main #article .transcription { margin-top: 0; padding-top: 0; }
 
 
 /* --------------------------------------------------------------------------
    6. Images et tableaux — theme/base.css
    -------------------------------------------------------------------------- */
 
-#main #article table { font-size: .857em; border-collapse: collapse; }
+#main #article table { font-size: .95em; border-collapse: collapse; }
 #main #article th,
-#main #article td { border: 1px solid #ddd; padding: 2px 6px; vertical-align: top; }
+#main #article td { border: 1px solid #ddd; padding: .35em .6em; vertical-align: top; }  /* 2026-10-19 : cellules aérées */
 #main #article sup { top: -.3em; }
 
 

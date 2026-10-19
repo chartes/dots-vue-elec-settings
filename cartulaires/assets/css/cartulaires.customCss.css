@@ -648,10 +648,14 @@ span.note-inline {
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article div.cartu-desc > .desc {
   display: block;
   padding-left: .7em;
-  border-left: 2px solid #e6dfe3;
   color: #4a4146;
   font-size: .95em;
 }
+
+/* 2026-10-19 : index plus aérés, d'une entrée à l'autre (toutes les ressources), sans filet devant la
+   description (décision de Maxime). */
+[collid="cartulaires"] #main #article ul.index > li { margin-bottom: .7rem; }
+[collid="cartulaires"] #main #article ul.index > li > ul > li { margin-bottom: .35rem; }
 
 /* 2026-10-06 : index, vignette de page (pb → aside.pb-component), remontée en tête
    de l'entrée par la XSL : posée dans la marge de gauche, devant la puce. Sur une

@@ -59,8 +59,7 @@
     "editByLevel": null,
     "editByCiteType": [
       "partie",
-      "acte",
-      "index-complet"
+      "acte"
     ],
     "countByCiteType": []
   },

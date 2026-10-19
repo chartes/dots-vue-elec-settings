@@ -6,6 +6,8 @@
 //      classes tf-*) : tri, filtres, « Effacer », export CSV, renvoi « Voir » vers une ligne.
 //   2. Arrivée sur une ancre : la cible visée par l'URL est placée sous ce qui reste collé en haut
 //      et surlignée d'un jaune qui fond (bloc CSS « Arrivée sur une ancre » de chaque corpus).
+//   3. Bibliographie (module commun transform/commun/bibliographie.xsl, li.bibl) : un clic sur une
+//      référence la copie dans le presse-papiers, en texte brut ; « Copié » s'affiche un instant.
 // Un corpus qui a un comportement propre (Bellelay : présélection par fête) garde son
 // <corpus>.customJs.js, qui importe celui-ci puis ajoute le sien.
 
@@ -289,4 +291,32 @@ if (!window.arriveeAncre) {
     if (el) { event.preventDefault(); arriverSur(el, !note) }
   }, true)
   passe()
+}
+
+// --- Bibliographie : copier une référence au clic (2026-10-19) ---
+// Le texte copié est celui de la référence (span.bibl-texte), sans l'année de tri ; un clic sur un
+// lien de la référence garde son comportement. Retour visuel : span.bibl-copie « Copié » ajouté
+// après le texte puis retiré (style dans le bloc CSS de chaque corpus, lisible sans lui).
+if (!window.biblCopie) {
+  window.biblCopie = true
+
+  aLAffichage('li.bibl > .bibl-texte', el => {
+    el.setAttribute('title', 'Cliquer pour copier la référence')
+  })
+
+  document.addEventListener('click', event => {
+    if (event.target.closest('a')) return
+    const texte = event.target.closest('li.bibl > .bibl-texte')
+    if (!texte || !navigator.clipboard) return
+    const ref = texte.innerText.replace(/\s+/g, ' ').trim()
+    navigator.clipboard.writeText(ref).then(() => {
+      const li = texte.parentNode
+      li.querySelectorAll('.bibl-copie').forEach(x => x.remove())
+      const ok = document.createElement('span')
+      ok.className = 'bibl-copie'
+      ok.textContent = ' Copié'
+      texte.after(ok)
+      setTimeout(() => ok.remove(), 1500)
+    })
+  })
 }

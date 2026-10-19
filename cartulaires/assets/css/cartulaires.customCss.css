@@ -228,6 +228,10 @@
 /* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
 .document-views #article .biblio details.biblio { margin-left: 1.2rem; }
 /* ==== fin bloc bibliographie ==== */
+/* Copier une référence au clic (JS commun elec.customJs.js, bloc 3). */
+#main #article li.bibl > .bibl-texte { cursor: copy; }
+#main #article li.bibl > .bibl-texte:hover { background: #faf6f9; }
+#main #article li.bibl > .bibl-copie { margin-left: .5em; font-size: .85em; color: var(--fill-color, #5f004d); font-weight: 600; }
 
 /*=============================================================
  4. PROPRE AU PROJET

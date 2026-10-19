@@ -1321,6 +1321,7 @@ span.note-inline {
    de l'apparat retirées (lemme souligné, apparat gris en petit) ; pied de page en Roboto, comme ailleurs. */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .footnotes { font-family: "Roboto", sans-serif; font-size: .9rem; line-height: 1.4; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article :is(.footnotes a.noteback, .footnotes .apparatus span.note > a) { color: var(--fill-color, #5f004d); font-weight: 700; text-decoration: none; }  /* et non le bleu des liens Pleade */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area details.sd-folio { margin-bottom: 1rem; }  /* blanc entre le folio (libellé ou image) et le texte qui suit */
 /* ==== fin Cartulaire blanc de Saint-Denis ==== */
 
 /*=============================================================

@@ -659,7 +659,7 @@
   #main #article table.tf-tableau { min-width: 40rem; }
   #main #article .tf-tableau thead { position: static; }
 }
-#main #article .tp-tableau { font-family: Georgia, 'Times New Roman', serif; }
+/* 2026-10-19 : police Georgia des tableaux retirée (police du texte) */
 /* Les URL citées en entier dans les références (archives en ligne) peuvent se couper :
    sinon elles élargissent la colonne et font déborder le tableau */
 #main #article .tp-tableau td { overflow-wrap: anywhere; }
@@ -770,6 +770,9 @@
 [collid="testaments-poilus"] #main #article .footnotes .apparatus .lem-blanc { display: none; }
 /* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
 [collid="testaments-poilus"] #main #article :is(table, th, td, caption) { font-family: inherit; }
+/* Signature d'une page d'introduction (« par Christine Nougaret (juin 2016) ») : à droite, en italique,
+   séparée du texte, comme dans les autres corpus. */
+[collid="testaments-poilus"] #main #article .byline { text-align: right; font-style: italic; font-size: .9rem; color: #5a5257; margin: 0 0 1.5rem; }
 /* ==== fin appels de note ==== */
 /* ==== Titres et espacements des pages de texte (2026-10-19, modèle : Montferrand) ====
    Tailles de hteiml en gras ; environ 17 px entre un titre et son texte : sans le retrait de hteiml

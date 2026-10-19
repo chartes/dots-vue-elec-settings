@@ -18,7 +18,7 @@
  2. HISTORIQUE ÉLEC (diple_html.css, enc.css)
  =============================================================*/
 
-#main #article { font-family: "CartaNovaTexte", Georgia, serif; font-size: 16px; line-height: 133%; }
+/* 2026-10-19 : police historique retirée (police de hteiml dans dots-vue) : #main #article { font-family: "CartaNovaTexte", Georgia, serif; font-size: 16px; line-height: 133% } */
 /* En-tête de l'acte : filet pointillé arrondi (header) */
 #main #article header.front { padding: 1ex; border: dotted #CCC 1px; border-radius: 1ex; background: none; }
 #main #article header.front ul { margin-top: 0; margin-bottom: 0; }
@@ -175,6 +175,101 @@
 /*=============================================================
  5. MÉCANISMES COMMUNS DOTS-VUE
  =============================================================*/
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */
+/* ==== Appels de note et d'apparat (2026-10-19, modèle : Montferrand) ====
+   dots-vue en fait une pastille noire (index.css « a.noteref sup ») ; ici un simple exposant
+   bleu, comme sur l'ÉLEC historique et dans Montferrand ; la lettre d'apparat en italique.
+   Borné au corpus (la feuille est injectée dans toute l'application). */
+[collid="actesroyauxdupoitou"] #main #article a.noteref,
+[collid="actesroyauxdupoitou"] #main #article a.noteref sup { color: #44747e; }
+[collid="actesroyauxdupoitou"] #main #article a.noteref sup {
+  display: inline;
+  transform: none;
+  margin: 0 0 0 .08em;
+  padding: 0;
+  background: none;
+  font: 600 .72em/0 var(--font-primary, "Roboto"), Arial, sans-serif;
+  vertical-align: super;
+}
+[collid="actesroyauxdupoitou"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }
+[collid="actesroyauxdupoitou"] #main #article a.noteref:hover sup { background: none; text-decoration: underline; }
+/* Apparat en pied de page sans le fond gris de hteiml (Montferrand n'en a pas). */
+[collid="actesroyauxdupoitou"] #main #article .footnotes p.apparatus { background: none; }
+/* Lettres d'apparat comme les numéros de note : « a. », filet dans la même colonne que les notes. */
+[collid="actesroyauxdupoitou"] #main #article .footnotes .apparatus span.note { margin-left: 0; }
+[collid="actesroyauxdupoitou"] #main #article .footnotes .apparatus span.note > a::after { content: "."; }
+/* Numéros de note et lettres d'apparat placés de la même façon : collés à gauche du filet, même
+   retrait, même taille (le numéro était calé par une marge négative, la lettre en position absolue :
+   les deux colonnes ne tombaient pas au même endroit). Même blanc entre l'apparat et les notes. */
+[collid="actesroyauxdupoitou"] #main #article .footnotes :is(aside, div).note { position: relative; }
+[collid="actesroyauxdupoitou"] #main #article .footnotes :is(aside, div).note > a.noteback,
+[collid="actesroyauxdupoitou"] #main #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  top: 0;
+  right: calc(100% + .6em);
+  margin: 0;
+  font-size: .9em;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+[collid="actesroyauxdupoitou"] #main #article .footnotes p.apparatus { margin: 0; padding: 0; }  /* sans le retrait de hteiml */
+[collid="actesroyauxdupoitou"] #main #article .footnotes .apparatus span.note { line-height: 1.15; margin-bottom: .875rem; }  /* même pas que les notes */
+/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
+[collid="actesroyauxdupoitou"] #main #article .footnotes p.apparatus:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 1px;
+  margin: 1.25rem 0 1rem;
+  background: #e4e4e4;
+}
+/* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
+   grand retrait du pied de page. */
+[collid="actesroyauxdupoitou"] #main #article section.back:empty { display: none; }
+[collid="actesroyauxdupoitou"] #main #article .footnotes { margin-top: 1.5rem; padding-top: 0; }
+/* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
+   dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
+[collid="actesroyauxdupoitou"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
+/* Lemme qui n'est qu'un blanc du manuscrit (classe lem-blanc) : pas de lemme ni de
+   « ] » dans l'apparat, la note dit déjà « Blanc dans B ». Le blanc reste visible dans le texte. */
+[collid="actesroyauxdupoitou"] #main #article .footnotes .apparatus .lem-blanc { display: none; }
+/* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
+[collid="actesroyauxdupoitou"] #main #article :is(table, th, td, caption) { font-family: inherit; }
+/* ==== fin appels de note ==== */
 
 /* ==== Arrivée sur une ancre (bloc commun 2026-10-15, identique dans tous les corpus) ====
    Élément visé par l'URL (note, ligne de tableau, entrée d'index…) : jaune 1,8 s puis fondu

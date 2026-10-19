@@ -152,6 +152,8 @@
 /* Lemme qui n'est qu'un blanc du manuscrit (classe lem-blanc, Cartulaire blanc) : pas de lemme ni de
    « ] » dans l'apparat, la note dit déjà « Blanc dans B ». Le blanc reste visible dans le texte. */
 [collid="cartulaires"] #main #article .footnotes .apparatus .lem-blanc { display: none; }
+/* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
+[collid="cartulaires"] #main #article :is(table, th, td, caption) { font-family: inherit; }
 /* ==== fin appels de note ==== */
 
 /* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====

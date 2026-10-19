@@ -115,8 +115,24 @@
 /* Apparat en pied de page sans le fond gris de hteiml (Montferrand n'en a pas). */
 [collid="cartulaires"] #main #article .footnotes p.apparatus { background: none; }
 /* Lettres d'apparat comme les numéros de note : « a. », filet dans la même colonne que les notes. */
-[collid="cartulaires"] #main #article .footnotes .apparatus span.note { margin-left: 0; margin-bottom: .75rem; }
+[collid="cartulaires"] #main #article .footnotes .apparatus span.note { margin-left: 0; }
 [collid="cartulaires"] #main #article .footnotes .apparatus span.note > a::after { content: "."; }
+/* Numéros de note et lettres d'apparat placés de la même façon : collés à gauche du filet, même
+   retrait, même taille (le numéro était calé par une marge négative, la lettre en position absolue :
+   les deux colonnes ne tombaient pas au même endroit). Même blanc entre l'apparat et les notes. */
+[collid="cartulaires"] #main #article .footnotes :is(aside, div).note { position: relative; }
+[collid="cartulaires"] #main #article .footnotes :is(aside, div).note > a.noteback,
+[collid="cartulaires"] #main #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  top: 0;
+  right: calc(100% + .6em);
+  margin: 0;
+  font-size: .9em;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+[collid="cartulaires"] #main #article .footnotes p.apparatus { margin: 0; padding: 0; }  /* sans le retrait de hteiml */
+[collid="cartulaires"] #main #article .footnotes .apparatus span.note { line-height: 1.15; margin-bottom: .875rem; }  /* même pas que les notes */
 /* ==== fin appels de note ==== */
 
 /* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====

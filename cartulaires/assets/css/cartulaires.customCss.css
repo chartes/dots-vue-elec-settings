@@ -875,28 +875,27 @@ span.note-inline {
    propres à cette édition (pages du site, images, Inventaire, index des auteurs, sommaire).
    Les écarts à Pleade sont marqués [dots]. */
 
-/* ---------- Pleade : texte ---------- */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article { font-family: Verdana, Arial, sans-serif; font-size: 13px; line-height: 1.6; color: black; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a { color: #139EDF; text-decoration: none; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a:hover { text-decoration: underline; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article :not(.noteref) > sup { vertical-align: super; font-size: 75%; line-height: 0; }  /* [dots] « top » chez Pleade : avec l'interligne de la transcription, l'exposant tombait entre deux lignes */
+/* ---------- Texte : police et interligne des autres cartulaires (Roboto, hteiml par défaut) depuis le
+   2026-10-19 ; les règles Pleade (Verdana 13 px, liens bleus) sont retirées. ---------- */
 
-/* ---------- Pleade : acte (module-tei.css) ---------- */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .front { background: none; border: none; padding: 0; margin: 0; }  /* [dots] hteiml grise l'en-tête */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-title { text-align: center; font-size: 130%; font-weight: bold; color: black; margin: 1em 0 .5em; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-docDate { text-align: center; font-size: 130%; margin: 0 0 1em; text-indent: 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary-refurl { font-size: 100%; text-align: justify; margin: 0 0 1em; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary { font-size: 100%; text-align: justify; font-style: italic; line-height: 200%; }
+/* ---------- Acte : classes Pleade (DOM de saint-denis.xsl), présentation des actes des cartulaires
+   (n° et date centrés, analyse en italique, témoins en plus petit, blancs de 1,5 rem). ---------- */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article header.front > .tei-tradition:last-child { margin-bottom: 0; }  /* cadre de hteiml (header), comme les autres cartulaires */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-title { text-align: center; font-size: 1.2rem; font-weight: 700; line-height: 1.2; margin: 0 0 .24rem; }  /* comme le n° d'acte des cartulaires (.docNum) */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-docDate { text-align: center; font-size: 1rem; line-height: 1.4; margin: 0 0 1.5rem; text-indent: 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary-refurl { font-size: .85rem; line-height: 1.4; text-align: left; margin: 0 0 1rem; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary { font-size: .85rem; line-height: 1.4; text-align: justify; font-style: italic; margin: 0 0 1.5rem; }  /* comme l'analyse (.argument) */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary p { text-indent: 0; margin: 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-body hr { border: none; border-top: 1px solid #ccc; margin: 1em 0; clear: both; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition { text-align: left; font-size: 100%; margin-top: 10px; line-height: 170%; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition p { text-indent: 0; margin: .4em 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-body hr { display: none; }  /* les cartulaires séparent les blocs par des blancs, sans filet */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition { text-align: left; font-size: .85rem; line-height: 1.4; margin: 0 0 1.5rem; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition p { text-indent: 0; margin: .3em 0; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition .listWit-head { margin-bottom: 0; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-label { font-style: italic; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-notes { margin-top: 2.5em; font-size: 100%; line-height: 170%; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-notes { font-size: .85rem; line-height: 1.4; margin: 0 0 1.5rem; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments { margin-top: 1.5rem; }  /* blanc sous le cadre de l'en-tête */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments p { text-align: justify; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-transcription { font-size: 120%; text-align: justify; line-height: 180%; margin-top: 2.5em; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-transcription { font-size: 1rem; line-height: 1.4; text-align: justify; margin-top: 0; }  /* comme le texte des actes (p.p) */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .title,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article cite.title,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .foreign { font-style: italic; }
@@ -1007,7 +1006,7 @@ span.note-inline {
   font-size: 90%; border: 1px solid black; margin-left: 2em; margin-right: 2em;
   padding: .5em; list-style-position: inside; line-height: 130%;
 }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) em.sup { font-style: normal; vertical-align: top; font-size: 80%; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) em.sup { font-style: normal; font-size: .75em; line-height: 0; vertical-align: super; }  /* exposant ordinaire, comme le <sup> de hteiml */
 
 /* Recherche dots-cli-es */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search {

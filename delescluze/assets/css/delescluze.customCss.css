@@ -870,6 +870,9 @@
 [collid="delescluze"] #main #article .footnotes .apparatus .lem-blanc { display: none; }
 /* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
 [collid="delescluze"] #main #article :is(table, th, td, caption) { font-family: inherit; }
+/* 2026-10-19 : titre de page (h1.head.page) aux tailles de hteiml, comme les autres corpus : la règle
+   des h2 (« .head.page »), placée après celle des h1, le ramenait à la taille d'un h2. */
+[collid="delescluze"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
 /* ==== fin appels de note ==== */
 
 /* ==== Arrivée sur une ancre (bloc commun 2026-10-15, identique dans tous les corpus) ====

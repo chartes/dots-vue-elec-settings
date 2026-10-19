@@ -494,10 +494,13 @@ span.note-inline {
 [collid="cartulaires"] #main #article section.front > div.argument p { margin: .2em 0; text-indent: 0; font-style: normal; }
 [collid="cartulaires"] #main #article section.front > div.byline { text-align: right; font-style: italic; font-size: .9rem; color: #5a5257; margin: 0 0 1.5rem; }
 
-/* Repère de page en tête de l'analyse ({p. 1}, MAUB-AB-01 n° 1) : dans la marge de gauche, hors du flux ;
+/* Repères de page de l'en-tête (analyse : {p. 1}, MAUB-AB-01 n° 1 ; date : NDVC-AB n° 1072) : dans la marge de gauche, hors du flux ;
    en ligne avec une marge négative, il entraînait le texte de l'analyse hors du cadre. */
 [collid="cartulaires"] #main #article header.front { position: relative; }
-[collid="cartulaires"] #main #article header.front .argument a.pb:first-child { position: absolute; left: -3.75rem; margin: 0; }
+[collid="cartulaires"] #main #article header.front a.pb { position: absolute; left: auto; right: calc(100% + .6rem); margin: 0; white-space: nowrap; }
+/* plusieurs repères à la suite (page sans texte, NDVC-AB n° 1072) : les uns sous les autres */
+[collid="cartulaires"] #main #article header.front a.pb + a.pb { margin-top: 1.3em; }
+[collid="cartulaires"] #main #article header.front a.pb + a.pb + a.pb { margin-top: 2.6em; }
 
 /* Titre (rubrique) en tête de la transcription d'un acte (« Privilegium Innocentii II… », NDPA-EG) : même
    rang que la tête latine dans l'en-tête (italique, taille du texte), et non un intertitre gras. */

@@ -906,7 +906,7 @@ span.note-inline {
 /* Même chose sur les notices introductives (section.front) : la liste de leurs sous-parties sous le texte
    (L'établissement, Orientation archivistique…) est retirée (décision de Maxime, 19/10) ; elles restent
    dans le sommaire de gauche et les flèches. */
-.document-area:has(#main #article section.front) #article.bottom-toc { display: none; }
+.document-area:has(#main #article section.front > div.argument) #article.bottom-toc { display: none; }  /* seulement si la notice a son bloc de présentation : une introduction sans texte propre garde la liste de ses parties */
 /* === SECTION EDITION FIN === */
 
 /* === SECTION TITRES DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */

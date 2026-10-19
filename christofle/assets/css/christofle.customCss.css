@@ -751,6 +751,20 @@
 /* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
 [collid="christofle"] #main #article :is(table, th, td, caption) { font-family: inherit; }
 /* ==== fin appels de note ==== */
+/* ==== Titres et espacements des pages de texte (2026-10-19, modèle : Montferrand) ====
+   Tailles de hteiml en gras ; environ 17 px entre un titre et son texte : sans le retrait de hteiml
+   au-dessus du h1 ni celui des sections imbriquées (1 rem / 1,25 rem qui s'additionnent), h2-h4 en
+   interligne normal (h2 : deux fois la taille du texte). Les blancs ne sont resserrés que hors des actes
+   (pas de header.front). */
+[collid="christofle"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
+[collid="christofle"] #main #article h2.head { font-size: 140%; }
+[collid="christofle"] #main #article h3.head { font-size: 130%; }
+[collid="christofle"] #main #article h4.head { font-size: 120%; }
+[collid="christofle"] #main #article :is(h2, h3, h4).head { font-weight: 900; line-height: 1.3; }
+[collid="christofle"] #main #article:not(:has(header.front)) :is(h2, h3, h4).head { margin: 1.5rem 0 .75rem; padding-top: 0; }
+[collid="christofle"] #main #article:not(:has(header.front)) section.div { padding: 0; }
+/* ==== fin titres et espacements ==== */
+
 
 /* ==== Arrivée sur une ancre (bloc commun 2026-10-15, identique dans tous les corpus) ====
    Élément visé par l'URL (note, ligne de tableau, entrée d'index…) : jaune 1,8 s puis fondu

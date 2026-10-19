@@ -505,6 +505,12 @@ span.note-inline {
   font-size: 1.05em; font-weight: 400; font-style: italic; line-height: 1.45; margin: 0 0 1rem;
 }
 
+/* Cadre de l'en-tête moins haut : la section tradition (retrait 1 rem / 1,25 rem de hteiml) et les listes de
+   témoins (marges du navigateur) ajoutaient leurs blancs au blanc voulu entre les blocs (1,5 rem). */
+[collid="cartulaires"] #main #article header.front section.tradition { padding: 0; }
+[collid="cartulaires"] #main #article header.front ul.listWit { margin-top: 0; margin-bottom: .3rem; }
+[collid="cartulaires"] #main #article header.front .according { margin: 0; }
+
 /* n° de l'acte : 1re ligne, centré */
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .docNum {
   display: block;

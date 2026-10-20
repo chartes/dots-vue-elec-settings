@@ -931,6 +931,9 @@ span.note-inline {
    (L'établissement, Orientation archivistique…) est retirée (décision de Maxime, 19/10) ; elles restent
    dans le sommaire de gauche et les flèches. */
 .document-area:has(#main #article section.front > div.argument) #article.bottom-toc { display: none; }  /* seulement si la notice a son bloc de présentation : une introduction sans texte propre garde la liste de ses parties */
+/* À l'inverse, une page Édition sans tableau (NDRC-AB : trois parties) n'a que ce sommaire pour contenu :
+   gardé même sommaire latéral ouvert, où D11 le masque comme doublon (décision de Maxime, 20/10). */
+.document-area.toc-aside-is-opened:has(#main #article div.group):not(:has(#main #article div.group > .tf-cadre)) .wrapper > #article.bottom-toc { display: block; }
 /* === SECTION EDITION FIN === */
 
 /* === SECTION TITRES DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */

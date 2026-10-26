@@ -979,9 +979,12 @@
 [collid="testaments-poilus"] #main #article .footnotes .apparatus span.note > a:empty::before,
 [collid="edits"] #main #article .footnotes .apparatus span.note > a:empty::before {
   content: counter(lettre-app, lower-alpha);
+  font-size: 16px;
   color: var(--fill-color);
   font-weight: 700;
 }
+[collid="testaments-poilus"] #main #article .footnotes .apparatus span.note > a:empty,
+[collid="edits"] #main #article .footnotes .apparatus span.note > a:empty { right: calc(100% + .76rem); }
 /* Numéro de la XSL (1, 2…) remplacé par la lettre automatique */
 [collid="testaments-poilus"] #main #article .footnotes .apparatus span.note > a:not(:empty),
 [collid="edits"] #main #article .footnotes .apparatus span.note > a:not(:empty) { font-size: 0; right: calc(100% + .76rem); }
@@ -993,3 +996,6 @@
   font-weight: 700;
 }
 /* fin bloc apparat sans lettre */
+
+/* Page d'un jour : le testament du jour s'affiche, la TOC du bas de dots-vue est masquée (la liste est déjà dans le testament). */
+body:has(.tp-jour-testament) .bottom-toc { display: none; }

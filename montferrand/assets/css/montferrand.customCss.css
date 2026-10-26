@@ -59,29 +59,12 @@
   /* --------------------------------------------------------------------------
      2. Appels de note et d'apparat : dots-vue en fait une pastille
         (index.css « a.noteref sup » : inline-block, translateY, padding, fond) ;
-        ici un simple exposant bleu, comme a.refnote de l'ÉLEC. La lettre
+        les appels gardent cette pastille (comme Du Bourg). La lettre
         d'apparat (a.noteref.apparatus-call) est en italique pour la distinguer
         du chiffre de note savante.
      -------------------------------------------------------------------------- */
-  & a.noteref,
-  & a.noteref sup {
-    color: var(--mf-bleu);
-  }
-  & a.noteref sup {
-    display: inline;
-    transform: none;
-    margin: 0 0 0 .08em;
-    padding: 0;
-    background: none;
-    font: 600 .72em/0 var(--font-primary, "Roboto"), Arial, sans-serif;
-    vertical-align: super;
-  }
+  /* Appels de note : pastille de dots-vue (a.noteref sup), sans surcharge, comme dans Du Bourg. */
   & a.apparatus-call sup { font-style: italic; }
-  /* dots-vue recolore la pastille au survol (a.noteref:hover sup) : pas de fond. */
-  & a.noteref:hover sup {
-    background: none;
-    text-decoration: underline;
-  }
 
   /* --------------------------------------------------------------------------
      3. Registres : articles numérotés en gouttière (numéro aligné à droite,
@@ -985,3 +968,38 @@ section.div h1.head {
   #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
 }
 /* ==== fin tableau filtrable ==== */
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */

@@ -195,14 +195,7 @@
 #main #article img { max-width: 100%; height: auto; }
 
 
-/* --------------------------------------------------------------------------
-   7. Notes de bas de fragment (ossature fournie par la feuille générique hteiml)
-   -------------------------------------------------------------------------- */
 
-#main #article .noteref,
-#main #article .noteback { color: #BC052D; }
-#main #article .footnotes { font-size: 90%; line-height: 1.15; }
-#main #article .footnotes p { margin: 0; text-indent: 0; }
 
 #main #article a.bookmark { color: #ccc; border-bottom: none; }
 #main #article a.bookmark:hover { color: #BC052D; }
@@ -402,16 +395,9 @@
 }
 
 /* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
-.document-area #article:not(.bottom-toc) .footnotes,
-.document-area #article:not(.bottom-toc) .apparatus,
-.document-area #article:not(.bottom-toc) .note {
+.document-area #article:not(.bottom-toc) .apparatus {
   font-size: var(--font-small-size, 14px);
   line-height: 1.5;
-}
-.document-area #article:not(.bottom-toc) .footnotes {
-  margin-top: 2rem;
-  padding-top: .8rem;
-  border-top: 1px solid var(--d12-filet);
 }
 .document-area #article:not(.bottom-toc) a.noteref,
 .document-area #article:not(.bottom-toc) .noteref {
@@ -471,3 +457,74 @@
 .document-area #article:not(.bottom-toc) section.div.dots-target {
   box-shadow: inset 3px 0 0 #BC052D;
 }
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes :is(aside, div).note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes :is(aside, div).note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */

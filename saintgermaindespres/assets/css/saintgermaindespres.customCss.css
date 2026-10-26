@@ -129,13 +129,7 @@
 #main #article sup { top: -.3em; }
 
 
-/* --------------------------------------------------------------------------
-   7. Notes de bas de fragment
-   -------------------------------------------------------------------------- */
 
-#main #article .noteref,
-#main #article .noteback { color: #bc052d; }
-#main #article .footnotes { font-size: 90%; line-height: 1.25; }
 
 #main #article a.bookmark:hover { color: #bc052d; }
 
@@ -203,123 +197,9 @@
 
 /* Aucun. */
 
-/*=============================================================
- 4. PROPRE AU PROJET
- =============================================================*/
 
-/* Rien pour l'instant. */
 
-/*=============================================================
- 5. MÉCANISMES COMMUNS DOTS-VUE
- =============================================================*/
-
-/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
-   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
-   « propre au projet ». */
-.document-views #article .footnotes::before {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 2px;
-  margin-bottom: 1em;
-  background: #e4e4e4;
-}
-/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
-   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
-   aligné, avec ou sans signe de citation avant lui. */
-.document-views #article .footnotes :is(aside, div).note {
-  margin-bottom: .75rem;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1.3em;
-}
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
-.document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
-  font-weight: 700;
-  line-height: 1.25;
-}
-/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
-.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
-  border-bottom: none;
-  text-decoration: underline;
-}
-/* ==== fin bloc notes ==== */
-/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
-   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
-   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
-.document-views #article .footnotes p.apparatus {
-  margin-bottom: 1.25rem;
-  padding-left: 0;
-  line-height: 1.55;
-}
-.document-views #article .footnotes .apparatus * ::after { content: " "; }
-.document-views #article .footnotes .apparatus span.note {
-  display: block;
-  position: relative;
-  margin-bottom: .3em;
-  line-height: 1.25;
-  margin-left: 2.5em;
-  padding-left: 1.3em;
-  border-left: 1px solid #ccc;
-}
-.document-views #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  right: calc(100% + .76em);
-  color: var(--fill-color);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: none;
-}
-/* Lemme fermé par un crochet */
-.document-views #article .footnotes .apparatus .lem::after {
-  content: "]\00a0";
-  color: #8a837c;
-}
-.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
-/* ==== fin bloc apparat ==== */
-/* ==== Appels de note et d'apparat (2026-10-19, modèle : Montferrand) ====
-   dots-vue en fait une pastille noire (index.css « a.noteref sup ») ; ici un simple exposant
-   bleu, comme sur l'ÉLEC historique et dans Montferrand ; la lettre d'apparat en italique.
-   Borné au corpus (la feuille est injectée dans toute l'application). */
-[collid="saintgermaindespres"] #main #article a.noteref,
-[collid="saintgermaindespres"] #main #article a.noteref sup { color: #44747e; }
-[collid="saintgermaindespres"] #main #article a.noteref sup {
-  display: inline;
-  transform: none;
-  margin: 0 0 0 .08em;
-  padding: 0;
-  background: none;
-  font: 600 .72em/0 var(--font-primary, "Roboto"), Arial, sans-serif;
-  vertical-align: super;
-}
-[collid="saintgermaindespres"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }
-[collid="saintgermaindespres"] #main #article a.noteref:hover sup { background: none; text-decoration: underline; }
-/* Apparat en pied de page sans le fond gris de hteiml (Montferrand n'en a pas). */
-[collid="saintgermaindespres"] #main #article .footnotes p.apparatus { background: none; }
-/* Lettres d'apparat comme les numéros de note : « a. », filet dans la même colonne que les notes. */
-[collid="saintgermaindespres"] #main #article .footnotes .apparatus span.note { margin-left: 0; }
-[collid="saintgermaindespres"] #main #article .footnotes .apparatus span.note > a::after { content: "."; }
-/* Numéros de note et lettres d'apparat placés de la même façon : collés à gauche du filet, même
-   retrait, même taille (le numéro était calé par une marge négative, la lettre en position absolue :
-   les deux colonnes ne tombaient pas au même endroit). Même blanc entre l'apparat et les notes. */
-[collid="saintgermaindespres"] #main #article .footnotes :is(aside, div).note { position: relative; }
-[collid="saintgermaindespres"] #main #article .footnotes :is(aside, div).note > a.noteback,
-[collid="saintgermaindespres"] #main #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  top: 0;
-  right: calc(100% + .6em);
-  margin: 0;
-  font-size: .9em;
-  line-height: 1.45;
-  white-space: nowrap;
-}
-[collid="saintgermaindespres"] #main #article .footnotes p.apparatus { margin: 0; padding: 0; }  /* sans le retrait de hteiml */
-[collid="saintgermaindespres"] #main #article .footnotes .apparatus span.note { line-height: 1.15; margin-bottom: .875rem; }  /* même pas que les notes */
+[collid="saintgermaindespres"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }    /* même pas que les notes */
 /* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
 [collid="saintgermaindespres"] #main #article .footnotes p.apparatus:not(:last-child)::after {
   content: "";
@@ -332,13 +212,10 @@
 /* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
    grand retrait du pied de page. */
 [collid="saintgermaindespres"] #main #article section.back:empty { display: none; }
-[collid="saintgermaindespres"] #main #article .footnotes { margin-top: 1.5rem; padding-top: 0; }
 /* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
    dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
 [collid="saintgermaindespres"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
-/* Lemme qui n'est qu'un blanc du manuscrit (classe lem-blanc) : pas de lemme ni de
-   « ] » dans l'apparat, la note dit déjà « Blanc dans B ». Le blanc reste visible dans le texte. */
-[collid="saintgermaindespres"] #main #article .footnotes .apparatus .lem-blanc { display: none; }
+
 /* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
 [collid="saintgermaindespres"] #main #article :is(table, th, td, caption) { font-family: inherit; }
 /* ==== fin appels de note ==== */
@@ -402,13 +279,9 @@
 /* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
    est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
    passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
-   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
-.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
-.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
-/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
-   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
-.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
+/* Sommaire latéral ouvert : la liste des enfants est masquée (doublon), comme avant le 2026-10-14.
+   Le 14/10 elle était gardée sous le titre des pages de regroupement, ce qui faisait deux sommaires. */
+.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
 .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
 @media (max-width: 768px) {
   .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
@@ -498,3 +371,38 @@
   padding-top: 0.5rem;
   margin-top: 0.5rem;
 }
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */

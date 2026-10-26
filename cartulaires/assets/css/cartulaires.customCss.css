@@ -16,123 +16,13 @@
 
 /* Celles de cartulaires.conf.json. */
 
-/*=============================================================
- 2. HISTORIQUE ÉLEC
- =============================================================*/
 
-/* Aucun. */
-
-/*=============================================================
- 3. BLOCS HTEIML GÉNÉRIQUES
- =============================================================*/
-
-/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
-   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
-   « propre au projet ». */
-.document-views #article .footnotes::before {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 2px;
-  margin-bottom: 1em;
-  background: #e4e4e4;
-}
-/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
-   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
-   aligné, avec ou sans signe de citation avant lui. */
-.document-views #article .footnotes :is(aside, div).note {
-  margin-bottom: .75rem;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 1.3em;
-}
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
-.document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
-  font-weight: 700;
-  line-height: 1.25;
-}
-/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
-.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
-  border-bottom: none;
-  text-decoration: underline;
-}
-/* ==== fin bloc notes ==== */
-/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
-   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
-   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
-.document-views #article .footnotes p.apparatus {
-  margin-bottom: 1.25rem;
-  padding-left: 0;
-  line-height: 1.55;
-}
-.document-views #article .footnotes .apparatus * ::after { content: " "; }
-.document-views #article .footnotes .apparatus span.note {
-  display: block;
-  position: relative;
-  margin-bottom: .3em;
-  line-height: 1.25;
-  margin-left: 2.5em;
-  padding-left: 1.3em;
-  border-left: 1px solid #ccc;
-}
-.document-views #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  right: calc(100% + .76em);
-  color: var(--fill-color);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: none;
-}
-/* Lemme fermé par un crochet */
-.document-views #article .footnotes .apparatus .lem::after {
-  content: "]\00a0";
-  color: #8a837c;
-}
-.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
 /* ==== fin bloc apparat ==== */
-/* ==== Appels de note et d'apparat (2026-10-19, modèle : Montferrand) ====
-   dots-vue en fait une pastille noire (index.css « a.noteref sup ») ; ici un simple exposant
-   bleu, comme sur l'ÉLEC historique et dans Montferrand ; la lettre d'apparat en italique.
-   Borné aux pages des cartulaires (la feuille est injectée dans toute l'application). */
-[collid="cartulaires"] #main #article a.noteref,
-[collid="cartulaires"] #main #article a.noteref sup { color: #44747e; }
-[collid="cartulaires"] #main #article a.noteref sup {
-  display: inline;
-  transform: none;
-  margin: 0 0 0 .08em;
-  padding: 0;
-  background: none;
-  font: 600 .72em/0 var(--font-primary, "Roboto"), Arial, sans-serif;
-  vertical-align: super;
-}
+
 [collid="cartulaires"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }
-[collid="cartulaires"] #main #article a.noteref:hover sup { background: none; text-decoration: underline; }
-/* Apparat en pied de page sans le fond gris de hteiml (Montferrand n'en a pas). */
-[collid="cartulaires"] #main #article .footnotes p.apparatus { background: none; }
-/* Lettres d'apparat comme les numéros de note : « a. », filet dans la même colonne que les notes. */
-[collid="cartulaires"] #main #article .footnotes .apparatus span.note { margin-left: 0; }
-[collid="cartulaires"] #main #article .footnotes .apparatus span.note > a::after { content: "."; }
-/* Numéros de note et lettres d'apparat placés de la même façon : collés à gauche du filet, même
-   retrait, même taille (le numéro était calé par une marge négative, la lettre en position absolue :
-   les deux colonnes ne tombaient pas au même endroit). Même blanc entre l'apparat et les notes. */
-[collid="cartulaires"] #main #article .footnotes :is(aside, div).note { position: relative; }
-[collid="cartulaires"] #main #article .footnotes :is(aside, div).note > a.noteback,
-[collid="cartulaires"] #main #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  top: 0;
-  right: calc(100% + .6em);
-  margin: 0;
-  font-size: .9em;
-  line-height: 1.45;
-  white-space: nowrap;
-}
-[collid="cartulaires"] #main #article .footnotes p.apparatus { margin: 0; padding: 0; }  /* sans le retrait de hteiml */
-[collid="cartulaires"] #main #article .footnotes .apparatus span.note { line-height: 1.15; margin-bottom: .875rem; }  /* même pas que les notes */
+/* 2026-10-22 : l'apparat des cartulaires est du texte libre (notes à lettre regroupées par la XSL) : pas
+   l'espace que le bloc commun ajoute après chaque élément (« B , Bituricensis C . »). */
+[collid="cartulaires"] #main #article .footnotes .apparatus span.note *:not(a)::after { content: none; }    /* même pas que les notes */
 /* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
 [collid="cartulaires"] #main #article .footnotes p.apparatus:not(:last-child)::after {
   content: "";
@@ -145,13 +35,10 @@
 /* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
    grand retrait du pied de page. */
 [collid="cartulaires"] #main #article section.back:empty { display: none; }
-[collid="cartulaires"] #main #article .footnotes { margin-top: 1.5rem; padding-top: 0; }
 /* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
    dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
 [collid="cartulaires"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
-/* Lemme qui n'est qu'un blanc du manuscrit (classe lem-blanc, Cartulaire blanc) : pas de lemme ni de
-   « ] » dans l'apparat, la note dit déjà « Blanc dans B ». Le blanc reste visible dans le texte. */
-[collid="cartulaires"] #main #article .footnotes .apparatus .lem-blanc { display: none; }
+
 /* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
 [collid="cartulaires"] #main #article :is(table, th, td, caption) { font-family: inherit; }
 /* ==== fin appels de note ==== */
@@ -598,29 +485,30 @@ span.note-inline {
   font-weight: 600;
 }
 
-/* --------------------------------------------------------------------------
-   3. Notes
-   a) « je trouve l'espacement entre les notes un peu grand » : DocumentPage.vue
-      pose `.footnotes aside.note { margin: 0 0 40px }`. On le ramène à 14 px.
-   b) BUG « la mise en forme des notes a l'air d'avoir sauté : je ne vois pas
-      d'italique dans La Roche, alors qu'ils sont dans le fichier XML ».
-      Cause : DocumentPage.vue pose `.footnotes aside.note > i { font-style:
-      inherit }` (et main.css `.aside-noteref-content > i { font-style:
-      inherit }`). Comme aside.note est en romain, tout <i> ENFANT DIRECT d'une
-      note redevient romain. La Roche encode ses italiques en <hi rend="i">
-      → <i> : elles disparaissaient. Saint-Merry, lui, les encode en <title>
-      → <cite class="title"> : elles passaient. D'où l'impression que « ça a
-      sauté » pour un corpus et pas pour l'autre.
-   -------------------------------------------------------------------------- */
-:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes aside.note {
-  margin: 0 0 14px;
+/* 2026-10-22 : pictogramme du témoin (choix de Maxime, après l'œil puis la miniature). L'image de la page
+   de l'édition est portée par le témoin édité (witness[@ana='edited']/@facs, plus d'image sur les pb du
+   texte). dots-vue la rend en aside.pb-component : on garde son pictogramme « image » (icone-media.svg,
+   24 px, image transparente posée dessus pour le clic), mais au bout de la ligne du témoin, dans le flux,
+   au lieu de la boîte flottante de 60 × 30 px. Le clic ouvre la page dans Mirador. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component {
+  display: inline-block; float: none; position: static;
+  margin: 0 0 0 .4em; vertical-align: middle; line-height: 0;
 }
-/* le repère « p. N » qui sépare deux pages de notes portait 10 px + 22 px de
-   marges : ramené au même ordre de grandeur que l'écart entre deux notes. */
-:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes .note-page {
-  margin-top: 12px;
-  margin-bottom: 10px;
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb { position: static; display: inline-block; width: auto; padding: 0; margin: 0; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb-label, :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb-label-text { display: none; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb-thumbnail-parent {
+  /* 2026-10-22 : le SVG fait 24 × 30 px ; dans une boîte de 24 × 24 il était rogné en haut et en bas.
+     Boîte aux proportions du pictogramme, un peu plus petite, et gris foncé pour qu'on la voie. */
+  position: relative; display: inline-block; width: 16px; height: 20px; margin: 0;
+  background-position: center; background-size: contain; filter: brightness(.45);
 }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb-thumbnail-parent img {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component:hover .pb-thumbnail-parent { filter: none; }
+
+
+
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes aside.note i,
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) .aside-noteref-content i {
   font-style: italic;
@@ -794,7 +682,6 @@ span.note-inline {
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-dos:target {
   animation: cartu-cible 3s ease-out 1;
 }
-:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .note[id],
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-dos { scroll-margin-top: 90px; }
 @media (prefers-reduced-motion: reduce) {
   :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .note[id].dots-target,
@@ -820,6 +707,11 @@ span.note-inline {
   font-size: .72rem;
   color: #8a8a8a;
   white-space: nowrap;
+  /* 2026-10-22 : depuis que l'image de l'édition passe par le témoin (plus de vignette sur les pb du texte),
+     le repère reste le lien de hteiml vers lui-même (href="#pbt1_p074") : simple repère, pas un lien. */
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
 }
 
 /* 2026-10-07 : NDVC-AB, index : page du livre après le numéro d'acte « 293 (p. 274) » */
@@ -1382,11 +1274,7 @@ span.note-inline {
 /* Le lien Pleade historique, devenu ancre vers la rubrique de la même page. */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-ancre {
   text-decoration-style: dotted;
-}
-/* 2026-10-19 : notes et apparat au format commun des cartulaires (modèle Montferrand) : règles Pleade
-   de l'apparat retirées (lemme souligné, apparat gris en petit) ; pied de page en Roboto, comme ailleurs. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .footnotes { font-family: "Roboto", sans-serif; font-size: .9rem; line-height: 1.4; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article :is(.footnotes a.noteback, .footnotes .apparatus span.note > a) { color: var(--fill-color, #5f004d); font-weight: 700; text-decoration: none; }  /* et non le bleu des liens Pleade */
+}  /* et non le bleu des liens Pleade */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area details.sd-folio { margin-bottom: 1rem; }  /* blanc entre le folio (libellé ou image) et le texte qui suit */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article section.front { background: none; border: none; padding: 0; margin: 0; }  /* introduction du chapitre (<front>) : hteiml la mettait sur fond gris */
 /* ==== fin Cartulaire blanc de Saint-Denis ==== */
@@ -1620,3 +1508,46 @@ span.note-inline {
   #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
 }
 /* ==== fin tableau filtrable ==== */
+
+/* Restauré (2026-10-26) : règle des repères « p. N » de notes, retirée par erreur avec les règles de notes. */
+/* le repère « p. N » qui sépare deux pages de notes portait 10 px + 22 px de
+   marges : ramené au même ordre de grandeur que l'écart entre deux notes. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes .note-page {
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */

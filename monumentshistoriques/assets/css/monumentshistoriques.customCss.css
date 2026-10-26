@@ -27,6 +27,9 @@
      9 occurrences. */
   --mh-fond-survol: #E2DED0;
 
+  /* Accent bordeaux : titres d'index, vedettes, liens, filets. Utilisé partout dans cette feuille. */
+  --mh-accent: #8d2632;
+
   /* Fond des barres de formulaire de recherche. screen.css L. 1256. */
   --mh-fond-formulaire: #D4D0C8;
 
@@ -458,7 +461,7 @@
   width: max-content;
   max-width: min(24rem, calc(100vw - 1.5rem));
   padding: .55rem .75rem;
-  border: 1px solid #8d2632;
+  border: 1px solid var(--mh-accent);
   background: #fffbe8;
   color: #28211f;
   box-shadow: 0 4px 18px rgba(0, 0, 0, .22);
@@ -574,7 +577,7 @@
   letter-spacing: .01em;
 }
 .mh-edition .mh-bulle-lien {
-  color: #8d2632;
+  color: var(--mh-accent);
   font-weight: 700;
   text-decoration: underline;
   text-decoration-color: #c9a0a5;
@@ -583,7 +586,7 @@
 .mh-edition .mh-bulle-lien:hover,
 .mh-edition .mh-bulle-lien:focus-visible {
   background: #f6e7e7;
-  text-decoration-color: #8d2632;
+  text-decoration-color: var(--mh-accent);
 }
 /* Mention sans lien : la base Autor de la Médiathèque ne répond plus
    (err=1201, vérifié le 2026-09-15). On la donne pour ce qu'elle est. */
@@ -611,7 +614,7 @@
    s'accrocher. Coût mesuré : voir RAPPORT.md. */
 .mh-edition .mh-tip:focus-visible,
 .mh-edition [tabindex]:focus-visible {
-  outline: 2px solid #8d2632;
+  outline: 2px solid var(--mh-accent);
   outline-offset: 2px;
 }
 
@@ -633,7 +636,7 @@
 .mh-edition .mh-noteref { text-decoration: none; }
 .mh-edition .mh-noteref sup { font-size: .75em; }
 .mh-edition .mh-noteref-horsfragment {
-  color: #8d2632;
+  color: var(--mh-accent);
   cursor: help;
   border-bottom: 1px dotted #c9a0a5;
 }
@@ -643,17 +646,7 @@
 .mh-edition .mh-note { margin: .35rem 0; }
 .mh-edition .mh-note-retour { font-weight: 700; text-decoration: none; }
 
-/* Le doublon d'appareil : le modèle générique tei2html rappelle TOUTES les
-   notes dans une <section class="footnotes"> à la fin de l'article
-   (tei2html.xsl l. 213-221, appelé depuis le modèle tei:text). Mesuré sur
-   les 102 années rendues en entier : 43 sections, 190 identifiants DOM en
-   double et 233 href internes morts (190 « #nX_ » + 43 « #pb…/… »),
-   la totalité à l'intérieur de cette section, zéro ailleurs.
-   Le chemin réellement emprunté par DoTS-vue (/document?resource=…&ref=…)
-   n'a pas de tei:text et n'en produit donc pas ; la règle ci-dessous ne sert
-   que pour un appel sans ref. Le correctif de fond est décrit dans
-   RAPPORT.md (il touche au corps de la XSL, on ne l'applique pas ici). */
-.mh-edition section.footnotes { display: none; }
+
 
 
 /* ============================================================================
@@ -973,7 +966,7 @@
 .mh-edition .mh-index-titre {
   margin: 0 0 1rem;
   padding-bottom: .3rem;
-  border-bottom: 2px solid #8d2632;
+  border-bottom: 2px solid var(--mh-accent);
   font: 700 1.9rem/1.25 Georgia, "Times New Roman", serif;
 }
 
@@ -1022,7 +1015,7 @@
 /* Vedette : commune, pays, personne. 16/14 de la source -> 1.08em. */
 .mh-edition .mh-index-vedette {
   display: block;
-  color: #8d2632;
+  color: var(--mh-accent);
   font-size: 1.08em;
   font-weight: 700;
 }
@@ -1037,7 +1030,7 @@
   font-weight: 400;
 }
 .mh-edition .mh-index-commune {
-  color: #8d2632;
+  color: var(--mh-accent);
   font-size: 1.08em;
   font-weight: 700;
 }
@@ -1067,7 +1060,7 @@
   cursor: help;
 }
 .mh-edition .mh-index-idno[tabindex]:focus-visible {
-  outline: 2px solid #8d2632;
+  outline: 2px solid var(--mh-accent);
   outline-offset: 2px;
 }
 
@@ -1116,7 +1109,7 @@
   margin-bottom: .2rem;
 }
 .mh-edition .mh-index-occurrences:focus-visible {
-  outline: 2px solid #8d2632;
+  outline: 2px solid var(--mh-accent);
   outline-offset: 2px;
 }
 .mh-edition .mh-index-renvois-liste {
@@ -1140,7 +1133,7 @@
   text-underline-offset: 2px;
 }
 .mh-edition .mh-index-lien:hover,
-.mh-edition .mh-index-lien:focus-visible { text-decoration-color: #8d2632; color: #8d2632; }
+.mh-edition .mh-index-lien:focus-visible { text-decoration-color: var(--mh-accent); color: var(--mh-accent); }
 /* Les 22 renvois dont la source ne donne pas la date : le numero d'ordre de
    l'ELEC tient lieu de libelle, et il est signale comme tel. */
 .mh-edition .mh-index-lien--sans-libelle {
@@ -1171,7 +1164,7 @@
    prend le role de titre de page. */
 .mh-edition .mh-index--fragment > .mh-index-unite > .mh-index-tete {
   margin-top: 0;
-  border-bottom: 2px solid #8d2632;
+  border-bottom: 2px solid var(--mh-accent);
   font-size: 1.6rem;
 }
 
@@ -1205,14 +1198,13 @@
 
 
 .mh-nav { margin: 0 0 1.5rem; border-block: 1px solid #d7cec3; padding: .65rem 0; font-family: Georgia, "Times New Roman", serif; }
-.mh-nav-index > summary { color: #8d2632; cursor: pointer; font-weight: 700; }
-.mh-nav-index > ul { columns: 2 18rem; margin: .65rem 0 0; padding-left: 1.4rem; }
-.mh-nav-index li { break-inside: avoid; margin: .2rem 0; }
-.mh-nav a { color: #8d2632; text-decoration-thickness: .06em; text-underline-offset: .15em; }
+/* Barre vide (plus de menu « Les index ») : sans contenu, elle ne trace pas ses bordures. */
+.mh-nav:not(:has(> *)) { display: none; }
+.mh-nav a { color: var(--mh-accent); text-decoration-thickness: .06em; text-underline-offset: .15em; }
 .mh-nav-prevnext { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; margin-top: .75rem; }
 .mh-nav-prevnext > :last-child { text-align: right; }
 .mh-nav-prevnext strong, .mh-nav-presentation { text-align: center; }
-@media (max-width: 700px) { .mh-nav-index > ul { columns: 1; } .mh-nav-prevnext { gap: .4rem; font-size: .9em; } }
+@media (max-width: 700px) { .mh-nav-prevnext { gap: .4rem; font-size: .9em; } }
 
 
 /* ============================================================================
@@ -1495,7 +1487,7 @@
     @bottom-center {
       content: "Droits : Ministère de la Culture et de la Communication / Médiathèque de l'architecture et du patrimoine ; École nationale des chartes. La source ne précise aucune licence.";
       font: italic 6.8pt/1.25 Georgia, "Times New Roman", serif;
-      color: #8d2632;
+      color: var(--mh-accent);
       vertical-align: bottom;
     }
   }
@@ -1777,7 +1769,7 @@
 }
 .mh-edition .mh-signature-droits { color: #6b645b; }
 .mh-edition .mh-signature a:not(.mh-signature-lien) {
-  color: #8d2632;
+  color: var(--mh-accent);
   text-decoration: none;
   border-bottom: 1px dotted #b9a9a9;
 }
@@ -1792,7 +1784,7 @@
    gras et en lien (index.html L. 840). */
 .mh-edition .mh-courriel {
   font-weight: 700;
-  color: #8d2632;
+  color: var(--mh-accent);
   text-decoration: none;
   border-bottom: 1px dotted #b9a9a9;
 }
@@ -1954,7 +1946,7 @@
 }
 .mh-edition .mh-decennie-garde li { margin: 0; }
 .mh-edition .mh-decennie-garde a {
-  color: #8d2632;
+  color: var(--mh-accent);
   text-decoration-thickness: .06em;
   text-underline-offset: .15em;
 }
@@ -2017,3 +2009,123 @@
   box-shadow: 0 0 0 6px #fff;
   margin-right: .5rem;
 }
+
+/* Autorités (personnes et lieux) : liste par lettre, même gabarit que les index des cartulaires. */
+.mh-autorites-lettre {
+  margin: 1.6rem 0 .4rem;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #e3dcd2;
+}
+.mh-autorites-entree {
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--mh-fond-survol);
+}
+.mh-autorites-vedette {
+  font-weight: 600;
+  color: var(--mh-accent);
+}
+.mh-autorites-lien {
+  white-space: nowrap;
+  color: var(--mh-accent);
+}
+.mh-autorites-suite {
+  margin: .1rem 0 0 1.2rem;
+  font-size: .9rem;
+  line-height: 1.4;
+  color: #555;
+}
+
+/* Barre de lettres des listes d'autorités : un lien par lettre présente. */
+.mh-lettres ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem .7rem;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: .5rem 0;
+  border-block: 1px solid var(--mh-fond-survol);
+  font-size: 1rem;
+}
+.mh-lettres a {
+  color: var(--mh-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.mh-lettres a:hover,
+.mh-lettres a:focus-visible {
+  text-decoration: underline;
+}
+.mh-autorites-lettre {
+  scroll-margin-top: 1rem;
+}
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes :is(aside, div).note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes :is(aside, div).note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */

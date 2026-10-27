@@ -421,3 +421,20 @@
 ins {
   text-decoration: none;
 }
+
+/* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
+   h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
+   à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
+.document-views #article h1 { color: #5f004d !important; }
+.document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
+/* ==== fin bloc titres ==== */
+
+/* ==== BLOC LIENS (2026-10-27) : couleur des liens et des numéros de note, identique dans chaque corpus
+   Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
+   appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
+   (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article .footnotes a.noteback { color: #5f004d !important; }
+/* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
+.document-views #article a.pb { color: #8a8a8a !important; }
+/* ==== fin bloc liens ==== */

@@ -95,7 +95,7 @@
 /* ---------- Note (minute) ---------- */
 #article #facsimile {
   float: left;
-  width: 30%;
+  width: 28%;  /* 2026-10-27 : 30 % → 28 % pour laisser un blanc avant le texte */
   position: relative;
 }
 #article #facsimile figure {
@@ -120,7 +120,7 @@
 #article #facsimile details[open] summary { cursor: zoom-out; }
 #article #facsimile img.grande { width: 100%; height: auto; }
 
-#article #text { margin-left: 30%; margin-bottom: 20px; }
+#article #text { margin-left: 31%; margin-bottom: 20px; }  /* 2026-10-27 : 30 % → 31 % (blanc de 3 % après le fac-similé) */
 #article #edition { position: relative; }
 /* [dots] hteiml dégage (clear) et encadre sections, en-têtes et figures */
 #article #text, #article #edition, #article #edition-text, #article header.recordMetadata { clear: none; }
@@ -133,6 +133,7 @@
   padding-right: 8px;
 }
 #article #edition-text p { text-align: justify; margin-right: 2px; text-indent: 0; }
+#article #edition-text > div > p { margin: 0 2px 0.8em 0; }  /* 2026-10-27 : paragraphes de la minute aérés */
 
 #article header.recordMetadata { font-size: 90%; margin-bottom: 20px; }
 #article header.recordMetadata h2 {
@@ -204,7 +205,7 @@
   color: #A73136;
 }
 
-#article .paratext > section, #article .index > section, #article .actTypes > section {
+#article .index > section, #article .actTypes > section {
   clear: none;  /* [dots] hteiml */
   margin-left: 22%;
   margin-right: 10%;
@@ -212,16 +213,25 @@
   text-align: justify;
   border-left: solid 1px #E8E8E8;
 }
+/* 2026-10-27 : texte de l'introduction sans encadré (validé pour Christofle) */
+#article .paratext > section {
+  clear: none;  /* [dots] hteiml */
+  margin-left: 22%;
+  margin-right: 10%;
+  padding: 0;
+  text-align: justify;
+  border-left: none;
+}
 /* [dots] sans menu de gauche (édition des notes, mois, partie servie seule), le texte
    n'a pas à laisser la place du menu */
 #article .paratext > section:first-child { margin-left: 0; }
 #article .paratext :lang(frm):before { content: "« "; }
 #article .paratext :lang(frm):after { content: " »"; }
-#article .paratext figure { display: inline-block; vertical-align: top; margin-left: 0; }
+#article .paratext figure { display: inline-block; vertical-align: top; margin-left: 0; padding: 0; border: 0; background: transparent; }
 #article .paratext figure img {
   margin: 8px;
-  border: solid 0.2px #4A4A4A;
-  border-radius: 5px;
+  border: none;  /* 2026-10-27 : cadre retiré (validé pour Christofle) */
+  border-radius: 0;
   max-width: 100%;
   height: auto;
 }
@@ -1056,3 +1066,56 @@
 }
 .document-views #article .footnotes .apparatus .wit { font-family: inherit; }
 /* ==== fin bloc apparat ==== */
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes :is(aside, div).note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes :is(aside, div).note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
+   h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
+   à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
+.document-views #article h1 { color: #5f004d !important; }
+.document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
+/* ==== fin bloc titres ==== */
+
+/* ==== BLOC LIENS (2026-10-27) : couleur des liens et des numéros de note, identique dans chaque corpus
+   Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
+   appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
+   (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article .footnotes a.noteback { color: #5f004d !important; }
+/* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
+.document-views #article a.pb { color: #8a8a8a !important; }
+/* ==== fin bloc liens ==== */

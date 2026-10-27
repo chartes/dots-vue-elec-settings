@@ -34,6 +34,13 @@
   margin: 0 auto; }
 
 #main #article p { text-align: justify; }
+/* Aucun retrait de première ligne dans Delescluze, sur aucune page (demande du 2026-10-27) :
+   les paragraphes restent alignés sur le titre et sur les lignes suivantes. */
+#main #article p, #main #article .p { text-indent: 0; }
+/* Une illustration éditoriale n'est pas un encadré : le cadre reste réservé
+   aux composants qui en demandent explicitement un. */
+#main #article > section.div.page > figure,
+#main #article > section.div.page > section.div > figure { padding: 0; border: 0; background: transparent; }
 
 
 /* --------------------------------------------------------------------------
@@ -774,12 +781,6 @@
   margin: 1.25rem 0 1rem;
   background: #e4e4e4;
 }
-/* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
-   grand retrait du pied de page. */
-[collid="delescluze"] #main #article section.back:empty { display: none; }
-/* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
-   dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
-[collid="delescluze"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
 
 /* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
 [collid="delescluze"] #main #article :is(table, th, td, caption) { font-family: inherit; }
@@ -840,23 +841,6 @@
   pointer-events: none;
 }
 
-/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
-/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
-   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
-   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
-   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
-.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
-.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
-/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
-   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
-.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
-.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
-@media (max-width: 768px) {
-  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
-}
-/* ==== fin D11 ==== */
 
 /* 2026-10-04 — Élément visé par une ancre, surligné aux couleurs du corpus. `.dots-target`
    double `:target` : dots-vue pose cette classe sur l'élément visé quand une URL à ancre est
@@ -1109,3 +1093,43 @@
 }
 .document-views #article .footnotes .apparatus .wit { font-family: inherit; }
 /* ==== fin bloc apparat ==== */
+
+/* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
+   h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
+   à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
+.document-views #article h1 { color: #5f004d !important; }
+.document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
+/* ==== fin bloc titres ==== */
+
+/* ==== INDEX DES PERSONNES EN LISTE (2026-10-27) : modèle des index des cartulaires. Une entrée
+   par personne (li.dl-personne, ancre = son @xml:id), vedette en petites capitales, dates et
+   fonction, numéros d'actes en liens. Remplace le tableau triable (dl-index-complet). ==== */
+#main #article .dl-personnes { list-style: none; margin: 0 0 2rem; padding: 0; }
+#main #article .dl-personnes > li { margin: 0; padding: .6em 0 .7em; border-bottom: 1px solid #ebe6e0; text-indent: 0; line-height: 1.45; scroll-margin-top: 90px; }
+#main #article .dl-personnes > li:target,
+#main #article .dl-personnes > li.dots-target { background: #fbf3d5; }
+#main #article .dl-personnes .dl-fiche-vedette { font-variant: small-caps; font-size: 1.08em; letter-spacing: .02em; color: #000; }
+#main #article .dl-personnes .dl-fiche-dates { color: #5f5a55; }
+#main #article .dl-personnes .dl-fiche-fonction { color: #5f5a55; font-style: italic; }
+#main #article .dl-personnes .dl-fiche-formes { display: block; font-size: .85rem; color: #8a837c; }
+#main #article .dl-personnes .dl-etiquette { font-variant: small-caps; letter-spacing: .03em; }
+#main #article .dl-personnes .dl-fiche-corps { margin-top: .3em; font-size: .95rem; }
+#main #article .dl-personnes .dl-fiche-corps p { margin: 0 0 .4em; text-align: left; }
+#main #article .dl-personnes .dl-fiche-autorites { font-size: .85rem; margin: 0; }
+#main #article .dl-personnes .dl-personne-mentions { margin-top: .3em; font-size: .92rem; }
+#main #article .dl-personnes .dl-personne-mentions dl { margin: 0; }
+#main #article .dl-personnes .dl-personne-mentions dt { font-variant: small-caps; color: #5f5a55; margin-top: .2em; }
+#main #article .dl-personnes .dl-personne-mentions dd { margin: 0 0 0 1.2em; }
+#main #article .dl-personnes .dl-passage,
+#main #article .dl-personnes .dl-passage a { color: #8a837c; font-style: italic; }
+/* ==== fin index des personnes en liste ==== */
+
+/* ==== BLOC LIENS (2026-10-27) : couleur des liens et des numéros de note, identique dans chaque corpus
+   Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
+   appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
+   (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article .footnotes a.noteback { color: #5f004d !important; }
+/* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
+.document-views #article a.pb { color: #8a8a8a !important; }
+/* ==== fin bloc liens ==== */

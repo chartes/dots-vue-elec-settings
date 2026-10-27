@@ -1,17 +1,6 @@
 /* cid — CSS de collection créée le 2026-09-11 (dots-autopilot, tâche D11) pour ne porter que la règle ci-dessous.
    Avant : "collectionCustomCss": false dans cid.conf.json (aucune CSS de collection). */
 
-/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
-/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
-   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
-   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-.document-area.toc-aside-is-opened .wrapper > .bottom-toc, .document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { display: none; }
-.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
-@media (max-width: 768px) {
-  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
-}
-/* ==== fin D11 ==== */
 /* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
 /* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
    Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
@@ -302,3 +291,20 @@
 }
 .document-views #article .footnotes .apparatus .wit { font-family: inherit; }
 /* ==== fin bloc apparat ==== */
+
+/* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
+   h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
+   à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
+.document-views #article h1 { color: #5f004d !important; }
+.document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
+/* ==== fin bloc titres ==== */
+
+/* ==== BLOC LIENS (2026-10-27) : couleur des liens et des numéros de note, identique dans chaque corpus
+   Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
+   appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
+   (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article .footnotes a.noteback { color: #5f004d !important; }
+/* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
+.document-views #article a.pb { color: #8a8a8a !important; }
+/* ==== fin bloc liens ==== */

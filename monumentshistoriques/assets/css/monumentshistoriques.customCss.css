@@ -2059,6 +2059,12 @@
   scroll-margin-top: 1rem;
 }
 
+/* Pages d'autorités (personnes, monuments) : pas de bloc « Présentation» avant la liste.
+   Le lien est le premier <nav class="mh-nav"> de l'article, seulement sur ces deux pages. */
+.mh-edition:has(> #mh-autorites-personnes, > #mh-autorites-monuments) > .mh-nav:first-child {
+  display: none;
+}
+
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
    latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc

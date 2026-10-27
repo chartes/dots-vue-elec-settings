@@ -27,6 +27,12 @@
    site historique. Écarts marqués [dots]. */
 
 .document-area #article { max-width:74rem; margin:auto; }
+/* Pages de présentation (accueil, projet, introduction) : sans alinéa
+   automatique, contrairement aux transcriptions de testament. */
+.document-area #article > section.div.level1 > p { text-indent: 0; }
+/* L'enveloppe et les autres illustrations de présentation ne reçoivent pas
+   le cadre générique de hteiml. */
+.document-area #article > section.div.level1 > figure { padding: 0; border: 0; background: transparent; }
 .document-area #article .summary,.document-area #article .physdesc,.document-area #article .reference { background:#fbf6f5; border-left:4px solid #a73136; margin:1rem 0; padding:.8rem 1rem; }
 .document-area #article .dateline,.document-area #article .signed { text-align:center; }
 .document-area #article .orig { color:#6b625f; } .document-area #article .reg { color:#171313; }

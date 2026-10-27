@@ -163,6 +163,7 @@
 /* Illustrations des pages (tableau des modes, exemples) : à leur taille, jamais étirées ni écrasées
    (une règle de largeur pleine et le max-height: 40vh de hteiml déformaient modalite.jpg, 350 × 478). */
 #main #article figure img { width: auto; max-width: 100%; height: auto; max-height: none; }
+#main #article > section.div > figure { padding: 0; border: 0; background: transparent; }
 #main #article figure .bl-zones img { max-width: none; }  /* zones : coordonnées en pixels de l image */
 /* Images associées d'une pièce : vignettes côte à côte, chacune mène à sa page. */
 #main #article .bl-mosaique { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1em 0; }

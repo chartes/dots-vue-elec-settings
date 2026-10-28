@@ -32,9 +32,9 @@
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 2,
-    "editByLevel": 2,
+    "editByLevel": 1,
     "editByCiteType": [
-      "section"
+      "contribution"
     ],
     "displayTopToc": true,
     "displayLeftToc": true

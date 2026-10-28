@@ -802,3 +802,24 @@
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* 2026-10-28 (Maxime, presentation : « des blancs pour rien ») : une URL affichée en toutes lettres est un seul mot ;
+   dans une note ou un paragraphe justifié, elle passait entière à la ligne et la ligne d'avant s'étirait. Coupure
+   permise n'importe où, et pas de justification là où le texte cite une URL. */
+[collid="interpares2"] #main #article a[href^="http"] { overflow-wrap: anywhere; }
+[collid="interpares2"] #main #article :is(p, li, .note):has(> a[href^="http"]) { text-align: left; }
+
+/* 2026-10-28 (Maxime, interpares1 : « tableau, comportement dots-vue générique ? ») : tableaux ordinaires (table.table
+   de hteiml) au style simple des autres corpus (modèle : tableaux d'introduction des cartulaires) au lieu du thème de
+   l'ancien site (12 px, toutes cellules encadrées, en-tête gris) ; ligne vide sous l'en-tête masquée. Le glossaire
+   (tableau filtrable) et les tableaux sansbord gardent leurs règles. */
+[collid="interpares2"] #main #article table.table:not(.sansbord) { margin: 1.5rem 0 2rem; font-size: .9em; line-height: 1.4; }
+[collid="interpares2"] #main #article table.table:not(.sansbord) th {
+  padding: .4em .6em; text-align: left; vertical-align: bottom; font-weight: 600;
+  background: #f6f3ef; border: 0; border-bottom: 2px solid var(--fill-color, #5f004d);
+}
+[collid="interpares2"] #main #article table.table:not(.sansbord) td {
+  padding: .45em .6em; border: 0; border-bottom: 1px solid #ece7e2; font-size: inherit;
+}
+[collid="interpares2"] #main #article table.table:not(.sansbord):not(:has(td:nth-child(3))) td:first-child { font-weight: 600; width: 9em; }   /* tableaux terme / description */
+[collid="interpares2"] #main #article table.table tr:has(> td[colspan]:empty) { display: none; }

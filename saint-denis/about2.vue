@@ -2,7 +2,7 @@
   <section>
     <h2>Les textes</h2>
     <p>L’édition réunit trois ensembles de textes, qui couvrent l’histoire du chartrier de l’abbaye de Saint-Denis depuis le haut Moyen Âge jusqu’au début du XIV<sup>e</sup> siècle.</p>
-    <h3><a href="/saint-denis/document/saint-denis-site?refId=sd-les-textes--actes-du-haut-moyen-age--introduction">Les actes du haut Moyen Âge</a></h3>
+    <h3><a href="/saint-denis/document/saint-denis-site?refId=sd-actes-haut-moyen-age">Les actes du haut Moyen Âge</a></h3>
     <p>Daniel Sonzogni, <i>Les actes du fonds d’archives de Saint-Denis, VI<sup>e</sup>-X<sup>e</sup> siècle : étude critique et catalogue raisonné</i>, ouvrage confié par l’auteur à l’École nationale des chartes pour insertion dans l’application « Chartes de l’abbaye de Saint-Denis ».</p>
     <h3><a href="/saint-denis/document/saint-denis-site?refId=sd-les-textes--cartulaire-blanc--presentation">Le Cartulaire blanc</a></h3>
     <p>Le Cartulaire blanc de l’abbaye de Saint-Denis nous est parvenu dans son état original, en deux épais volumes, de grand format, de belle facture et d’excellente conservation (Paris, Archives nationales, LL 1157-1158). Sa réalisation s’est étirée des années 1250 au début des années 1300.</p>

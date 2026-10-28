@@ -758,3 +758,10 @@ body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-he
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* 2026-10-28 (Maxime, legacy-document1069 : ouvrages d'un même auteur, « _____ » dans la source) : entrée en retrait
+   sous celle de l'auteur, ouverte par un tiret long ; pas de filet entre les ouvrages d'un même auteur. */
+[collid="bellelay"] #main #article ul.biblio-liste > li.bibl:has(+ li.bl-meme-auteur) { border-bottom-color: transparent; padding-bottom: .15em; }
+[collid="bellelay"] #main #article ul.biblio-liste > li.bibl.bl-meme-auteur { padding-top: .15em; }
+[collid="bellelay"] #main #article ul.biblio-liste > li.bl-meme-auteur > .bibl-texte { padding-left: 3.2em; }
+[collid="bellelay"] #main #article li.bl-meme-auteur .bl-idem { color: #8a837c; margin-right: .2em; }

@@ -23,6 +23,12 @@
 /* 2026-10-22 : l'apparat des cartulaires est du texte libre (notes à lettre regroupées par la XSL) : pas
    l'espace que le bloc commun ajoute après chaque élément (« B , Bituricensis C . »). */
 [collid="cartulaires"] #main #article .footnotes .apparatus span.note *:not(a)::after { content: none; }    /* même pas que les notes */
+/* 2026-10-28 (Maxime, SMCP-PR_0003 : « les barres qui entourent le champ de l'apparat font bizarre ») :
+   pas de filet vertical devant les lettres de l'apparat. */
+[collid="cartulaires"] #main #article .footnotes .apparatus span.note { border-left: 0; }
+/* 2026-10-28 : note sans appel rendue à sa place (« (Collacio fit) », « (Signa) », cartulaires.xsl, p.note-place) :
+   petite, en italique, sans retrait, comme une mention de la copie. */
+#main #article p.note-place { font-size: .9em; font-style: italic; text-indent: 0; margin: .4em 0; color: #555; }
 /* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
 [collid="cartulaires"] #main #article .footnotes p.apparatus:not(:last-child)::after {
   content: "";
@@ -506,6 +512,30 @@ span.note-inline {
   position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
 }
 :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component:hover .pb-thumbnail-parent { filter: none; }
+/* 2026-10-28 (Maxime, SMPA-EG_0007, STEP-AB_0001, HDPO-HD_0010 : « l'icône des images se promène », « des blancs
+   dans le texte », « la page à gauche, et la vignette à gauche aussi ») : saut de page du texte sorti du flux, dans
+   la marge de gauche : « {p. N} » puis le pictogramme des témoins (16 × 20 px, gris foncé). Dans la ligne, la
+   boîte de 60 × 77 px doublait la hauteur de la ligne qui la portait. Repère : #article, qui commence au bord du texte. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article { position: relative; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) {
+  position: absolute; left: -6.5rem; width: 6rem; margin: 0; float: none;
+  display: inline-block; line-height: 1; text-indent: 0; font-style: normal;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb {
+  position: static; display: flex; flex-direction: row-reverse; justify-content: flex-start; align-items: center;
+  gap: .35em; width: auto; height: auto; min-height: 0; padding: 0; margin: 0;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-label { display: none; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-label-text { display: inline; font-size: .75rem; color: #8a837c; white-space: nowrap; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-thumbnail-parent {
+  position: relative; display: inline-block; flex: none; width: 16px; height: 20px; margin: 0;
+  background-position: center; background-size: contain; filter: brightness(.45);
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-thumbnail-parent img {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *):hover .pb-thumbnail-parent { filter: none; }
+
 
 
 
@@ -1561,8 +1591,9 @@ span.note-inline {
   vertical-align: top;
   border-bottom: 1px solid #ece7e2;
 }
-/* colonnes de numéros (sigles A, B, C et cote) : chiffres alignés, pas de coupure */
-[collid] #main #article table.cartu-tableau-simple tbody tr:not(:has(> [colspan])) > td:is(:nth-child(-n+3), :last-child) {
+/* cellules courtes (sigles A, B, C, numéros, cotes ; td.cartu-court posé par la XSL le 2026-10-28) : chiffres
+   alignés, pas de coupure. Avant : les trois premières colonnes et la dernière, ce qui bloquait l'analyse de SMPA-AB-02. */
+[collid] #main #article table.cartu-tableau-simple tbody td.cartu-court {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
@@ -1642,8 +1673,9 @@ span.note-inline {
 .document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
 /* ==== fin bloc titres ==== */
 
-/* NDRC-AB : « Dissertation critique » (section.div.dissertation, cartulaires.xsl) un peu plus petite que le texte. */
-[collid="NDRC-AB"] #main #article section.div.dissertation { font-size: .9em; }
+/* « Dissertation critique » (section.div.dissertation, cartulaires.xsl) un peu plus petite que le texte :
+   NDRC-AB d'abord, tous les cartulaires le 2026-10-28 (Maxime, STEP-AB_0001). */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article section.div.dissertation { font-size: .9em; }
 
 /* 2026-10-27 : bibliographie, ouvrage du même auteur que le précédent (« —— », classe posée par bibliographie.xsl) : léger retrait. */
 .document-views #article li.bibl.bibl-meme-auteur { margin-left: 1em; }
@@ -1665,3 +1697,46 @@ span.note-inline {
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* 2026-10-28 (Maxime, NDPR-AB_etablissement : « espace bizarre ») : une URL affichée en toutes lettres est un seul
+   mot ; dans un paragraphe justifié elle passait entière à la ligne et la ligne d'avant s'étirait. Coupure permise
+   n'importe où, seulement quand le mot ne tient pas ; et paragraphe non justifié (sinon le navigateur passe à la ligne
+   avant l'URL et étire la ligne d'avant). */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article a[target="_blank"] { overflow-wrap: anywhere; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article p:has(> a[target="_blank"]) { text-align: left; }
+
+/* 2026-10-28 (Maxime, SGGO-PR_group : « table par noms de lieux et de personnes, c'est pas des sous-parties du
+   groupe » ; NDPA-EG-03_group-1-2 : « dans les sous-groupes j'ai les autres parties ») : le sommaire du bas de
+   dots-vue (getRefIdBottomTOC, DocumentPage.vue) s'arrête au frère suivant de l'unité courante ; quand elle est
+   la dernière de son parent, il continue jusqu'à la fin du document. Correction côté CSS (pas de Vue) : une
+   ligne moins en retrait que la première (retrait = (niveau - 1) × 15 px) n'est plus sous l'unité courante ;
+   elle et tout ce qui suit sont masqués. Correction de fond, une ligne : s'arrêter à i.level <= current.level. */
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 15px"]) > li[style*="margin-left: 0px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 15px"]) > li[style*="margin-left: 0px"] ~ li { display: none; }
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 30px"]) > li[style*="margin-left: 0px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 30px"]) > li[style*="margin-left: 0px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 30px"]) > li[style*="margin-left: 15px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 30px"]) > li[style*="margin-left: 15px"] ~ li { display: none; }
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 0px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 0px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 15px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 15px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 30px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 30px"] ~ li { display: none; }
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 0px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 0px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 15px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 15px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 30px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 30px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 45px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 45px"] ~ li { display: none; }
+
+/* 2026-10-28 : notes du censier de SMPA-EG restées en paragraphes (p.cartu-note-censier, cartulaires.xsl) : présentées
+   comme des notes, en attendant leur reconversion. */
+[collid="cartulaires"] #main #article p.cartu-note-censier { font-size: .85em; line-height: 1.35; text-indent: 0; margin: .15em 0; color: #444; }
+[collid="cartulaires"] #main #article p.cartu-note-censier.premiere { margin-top: 1.2em; padding-top: .6em; border-top: 1px solid #e4e4e4; }
+
+/* 2026-10-28 : table des actes du Cartulaire blanc en tableau filtrable (cartulaires-saint-denis.xsl) : en-têtes longs
+   (« Édition de la notice dans l'inventaire ») sur plusieurs lignes, sinon le tableau déborde de l'article. */
+#cartulaire-blanc[collid] #main #article table.tf-tableau button.tf-tri { white-space: normal; }

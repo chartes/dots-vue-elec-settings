@@ -359,3 +359,8 @@
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* 2026-10-29 : gloses en lettres (1986 art_31 et art_35) en tête du pied de page, puis les notes chiffrées, comme sur
+   l'ancien site ÉLEC (a … q'', puis 1 … 89). Les div.page sont déjà transparentes (display: contents). */
+[collid="cid"] #main #article section.footnotes { display: flex; flex-direction: column; }
+[collid="cid"] #main #article section.footnotes aside.glose { order: -1; }

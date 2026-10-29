@@ -209,13 +209,20 @@ if (!window.tfComportements) {
   document.addEventListener('change', saisie)
 }
 
-// --- Arrivée sur une ancre : bloc commun à tous les corpus (2026-10-15), copié à l'identique ---
+// --- Arrivée sur une ancre : bloc commun à tous les corpus (2026-10-15, revu le 2026-10-29) ---
 // Quand l'URL vise un élément de la page (#note1, ?refId=…#Daugerant, renvoi d'un tableau…) :
 // on ouvre les details repliés qui le contiennent, on le place juste sous ce qui reste collé en
-// haut (barre de navigation de dots-vue, en-tête et barre de filtres d'un tableau) et on le
-// surligne d'un jaune qui fond en 3 s (classe cible-arrivee, bloc CSS « Arrivée sur une ancre »).
-// Pas de jaune pour un clic sur un numéro de note dans la même page (appel → note, note → appel) :
-// la cible est seulement placée.
+// haut (barre de navigation de dots-vue, en-tête et barre de filtres d'un tableau) et, si l'on
+// vient d'un lien du texte, on le surligne d'un jaune qui fond en 3 s (classe cible-arrivee,
+// bloc CSS « Arrivée sur une ancre »).
+// Pas de jaune (la cible est seulement placée) :
+// - sur un titre (h1-h6, ou bloc qui commence par un titre) ;
+// - quand le sommaire est ouvert (latéral : .toc-aside-is-opened ; du haut : .breadcrumb-panel) ;
+// - quand on vient d'un clic hors du texte : sommaire (latéral, du haut, liste des sous-parties
+//   .bottom-toc), fil d'Ariane, barre de navigation ;
+// - pour un clic sur un numéro de note dans la même page (appel → note, note → appel).
+// Le jaune reste pour un lien du texte (note, renvoi, index…) vers une autre page ou un autre
+// endroit de la page, et pour une URL ouverte telle quelle.
 // Le front ne pose plus .dots-target et monte le contenu après la navigation : d'où
 // l'observation du document plutôt que :target.
 
@@ -239,10 +246,15 @@ function placerSous (cible) {
   if (Math.abs(window.scrollY - y) > 3) window.scrollTo({ top: Math.max(0, y), behavior: 'instant' })
 }
 
+const TITRES = 'h1, h2, h3, h4, h5, h6'
+const estTitre = el => el.matches(TITRES) || !!(el.firstElementChild && el.firstElementChild.matches(TITRES))
+const sommaireOuvert = () => !!document.querySelector('.document-area.toc-aside-is-opened, .breadcrumb-panel.is-opened')
+const HORS_TEXTE = '#toc-tree, .toc-content, .bottom-toc, .breadcrumb-panel, nav.navigation-row'
+
 function arriverSur (cible, jaune = true) {
   for (let d = cible.closest('details'); d; d = d.parentElement && d.parentElement.closest('details')) d.open = true
   document.querySelectorAll('.cible-arrivee').forEach(x => x.classList.remove('cible-arrivee'))
-  if (jaune) {
+  if (jaune && !estTitre(cible) && !sommaireOuvert()) {
     void cible.offsetWidth
     cible.classList.add('cible-arrivee')
   }
@@ -255,7 +267,7 @@ function arriverSur (cible, jaune = true) {
 function cibleDeLUrl () {
   const id = decodeURIComponent(location.hash.slice(1))
   const el = id && document.getElementById(id)
-  return el && el.closest('#article') ? el : null
+  return el && el.closest('#article') && !el.closest('.bottom-toc') ? el : null
 }
 
 // Lien ou cible qui relève d'une note (appel, retour, corps de note)
@@ -264,31 +276,48 @@ const estNote = x => !!x && (x.matches('[class*="note"]') || !!x.closest('[class
 if (!window.arriveeAncre) {
   window.arriveeAncre = true
   let faite = ''
-  let sansJaune = false
+  // Dernier clic sur un lien : { t: heure, sansJaune } ; vaut pour l'arrivée qui suit (10 s au plus,
+  // le temps que dots-vue charge l'autre page). Gardé aussi en sessionStorage : un lien du texte
+  // vers une autre page recharge toute l'application (et referme le sommaire).
+  let clic = null
+  const noterClic = c => {
+    clic = c
+    try { c ? sessionStorage.setItem('elec-clic', JSON.stringify(c)) : sessionStorage.removeItem('elec-clic') } catch (e) {}
+  }
+  const dernierClic = () => {
+    if (clic) return clic
+    try { return JSON.parse(sessionStorage.getItem('elec-clic')) } catch (e) { return null }
+  }
   const passe = () => {
     if (location.href === faite) return
     const el = cibleDeLUrl()
     if (!el) return
     faite = location.href
-    const jaune = !sansJaune
-    sansJaune = false
+    const c = dernierClic()
+    const jaune = !(c && c.sansJaune && Date.now() - c.t < 10000)
+    noterClic(null)
     setTimeout(() => arriverSur(el, jaune), 150)
   }
   new MutationObserver(passe).observe(document.documentElement, { childList: true, subtree: true })
   window.addEventListener('hashchange', passe)
   window.addEventListener('popstate', passe)
-  // Clic sur un lien de la page : numéro de note → pas de jaune ; lien vers l'ancre déjà dans
-  // l'URL → pas de hashchange, on rejoue l'arrivée
   document.addEventListener('click', event => {
-    const a = event.target.closest('a[href*="#"]')
-    if (!a || a.closest('.tf-cadre') && a.matches('a.tf-voir')) return
+    const a = event.target instanceof Element && event.target.closest('a, .toc-title')
+    if (!a) return
+    // sommaire, fil d'Ariane, barre de navigation (ou sommaire ouvert) → pas de jaune à l'arrivée
+    const c = { t: Date.now(), sansJaune: !!a.closest(HORS_TEXTE) || sommaireOuvert() }
+    noterClic(c)
+    if (c.sansJaune || !a.matches('a[href*="#"]') || a.closest('.tf-cadre') && a.matches('a.tf-voir')) return
     const u = new URL(a.href, location.href)
     if (u.pathname + u.search !== location.pathname + location.search) return
+    // même page : numéro de note → pas de jaune ; lien vers l'ancre déjà dans l'URL → pas de
+    // hashchange, on rejoue l'arrivée
     const vise = document.getElementById(decodeURIComponent(u.hash.slice(1)))
-    const note = estNote(a) || estNote(vise)
-    if (u.href !== location.href) { sansJaune = note; return }
+    c.sansJaune = estNote(a) || estNote(vise)
+    noterClic(c)
+    if (u.href !== location.href) return
     const el = cibleDeLUrl()
-    if (el) { event.preventDefault(); arriverSur(el, !note) }
+    if (el) { event.preventDefault(); arriverSur(el, !c.sansJaune); noterClic(null) }
   }, true)
   passe()
 }

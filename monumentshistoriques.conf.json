@@ -62,6 +62,7 @@
   },
   "aboutPageSettings": [],
   "collectionCustomCss": "monumentshistoriques",
+  "collectionCustomJs": "elec",
   "customRoutes": [
     {
       "name": "Search",

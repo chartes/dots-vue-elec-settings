@@ -779,6 +779,32 @@ section.div h1.head {
  5. MÉCANISMES COMMUNS DOTS-VUE
  =============================================================*/
 
+/* ==== Arrivée sur une ancre (bloc commun 2026-10-15, revu le 2026-10-29, identique dans tous les corpus) ====
+   Élément visé par l'URL quand on vient d'un lien du texte (note, renvoi, ligne de tableau,
+   entrée d'index…) : jaune 1,8 s puis fondu jusqu'à 3 s. La classe cible-arrivee est posée par
+   le bloc « Arrivée sur une ancre » du JS générique (elec.customJs.js), qui place aussi la cible
+   sous ce qui reste collé en haut ; il ne la pose pas sur un titre, ni quand on vient du sommaire
+   ou que le sommaire est ouvert (les deux dernières règles en sont le garde-fou). Une ligne de
+   tableau : on anime aussi ses cellules (leur fond, zébré, masquerait celui de la ligne) ; un
+   details : son résumé. */
+@keyframes elec-cible {
+  0%, 60% { background-color: #fbeeb8; }
+  100%    { background-color: transparent; }
+}
+#main #article .cible-arrivee,
+#main #article tr.cible-arrivee > td,
+#main #article details.cible-arrivee > summary { animation: elec-cible 3s ease-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  #main #article .cible-arrivee,
+  #main #article tr.cible-arrivee > td,
+  #main #article details.cible-arrivee > summary { animation: none; outline: 2px solid #fbeeb8; }
+}
+#main #article :is(h1, h2, h3, h4, h5, h6).cible-arrivee,
+.toc-aside-is-opened #main #article .cible-arrivee,
+.toc-aside-is-opened #main #article tr.cible-arrivee > td,
+.toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
+/* ==== fin arrivée sur une ancre ==== */
+
 /* ==========================================================================
    8. Page de garde (titleStmt rendu par hteiml, hors .montferrand-historic)
    ========================================================================== */

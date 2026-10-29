@@ -207,6 +207,14 @@
 /* Repère d'article ([2.1.1], [1.pr.0]) en tête de paragraphe : gras discret, gris. */
 [collid="cjc"] #main #article p > b.label:first-child { color: #585858; }
 
+/* Subdivisions numérotées en liste (cjc.xsl, 2026-10-29 : un <p class="repere"> par repère [pr.], [1], [3.1]…) :
+   une ligne par subdivision, repère en tête, retrait suspendu pour que les numéros s'alignent. */
+[collid="cjc"] #main #article p.repere { text-indent: -1.5em; padding-left: 1.5em; margin: 0 0 .5em; }
+[collid="cjc"] #main #article p.repere b.label { margin-right: .3em; color: #585858; }
+/* Lettres développées des abréviations (spécimens des notices) : italique, sans crochets ; romain dans un passage
+   déjà en italique (citation latine soulignée, titre). */
+[collid="cjc"] #main #article :is(i, em, cite, .foreign, .title) i.ex { font-style: normal; }
+
 /* Notes en liste continue, comme sur l'ÉLEC (règle de Maxime, 28/10) : hteiml les regroupe par page de
    l'imprimé ou par folio (div.page + repère « p. 1 ») ; on retire le regroupement. */
 [collid="cjc"] #main #article .footnotes div.page { display: contents; }

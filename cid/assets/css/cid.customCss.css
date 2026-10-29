@@ -223,7 +223,11 @@
 [collid="cid"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
 [collid="cid"] #main #article h2.head { font-size: 140%; }
 [collid="cid"] #main #article h3.head { font-size: 125%; }
-[collid="cid"] #main #article :is(h4, h5, h6).head { font-size: 112%; }
+[collid="cid"] #main #article h4.head { font-size: 112%; }
+/* 2026-10-29 (relecture de Maxime, « titres : homogénéiser ») : corps décroissants jusqu'à h6 (h4 à h6 étaient tous à
+   112 %), comme la CJC ; niveaux des titres corrigés dans cid.xsl (plus de saut h1 → h3). */
+[collid="cid"] #main #article h5.head { font-size: 105%; }
+[collid="cid"] #main #article h6.head { font-size: 100%; }
 [collid="cid"] #main #article :is(h2, h3, h4, h5, h6).head { font-weight: 900; line-height: 1.3; margin: 1.5rem 0 .75rem; padding-top: 0; }
 /* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc : la dernière, juste
    avant les notes, n'en a pas besoin (le pied de page a son filet court). */
@@ -255,24 +259,52 @@
 }
 [collid="cid"] #main #article table.table:not(.sansbord) th { background: #f6f3ef; font-weight: 600; vertical-align: bottom; }
 [collid="cid"] #main #article table.table:not(.sansbord) td p { margin: 0; text-indent: 0; }
-/* Repère de page dans un tableau : calé à droite dans le tableau (dans la marge, il le ferait défiler). */
+/* Repère de page dans un tableau (petit écran) : calé à droite dans le tableau (dans la marge, il le ferait
+   défiler). Sur grand écran, il passe dans la marge gauche avec les autres (plus bas). */
 [collid="cid"] #main #article table.table a.pb { margin-right: 0; margin-left: .5em; }
 
-/* Planches et figures : centrées, légende plus petite sous l'image. */
-[collid="cid"] #main #article figure.figure { margin: 1.5rem auto; text-align: center; }
-[collid="cid"] #main #article figure.figure figcaption {
-  margin-top: .5rem;
+/* Planches et figures (2026-10-29, relecture de Maxime : « image, texte de description sur fond gris ? un peu
+   bizarre ») : hteiml (html.css) encadre la figure d'un filet gris et met la légende (figcaption.head) sur fond
+   #ddd. Ici, ni cadre ni fond : image centrée, légende sous l'image en petit corps gris foncé, centrée et
+   limitée à la largeur de l'image (600 px) ; légende en plusieurs paragraphes (div.caption, 1985) à gauche,
+   sans alinéa. Figure vide (20, image absente de la source) : masquée. */
+[collid="cid"] #main #article figure.figure {
+  position: static;   /* html.css : relative ; les repères de page doivent se placer sur la colonne (plus bas) */
+  margin: 1.75rem auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: center;
+}
+[collid="cid"] #main #article figure.figure img { padding: 0; }
+[collid="cid"] #main #article figure.figure :is(figcaption, div.caption) {
+  max-width: 600px;
+  margin: .6rem auto 0;
+  padding: 0;
+  background: none;
   font-size: .9rem;
   font-weight: normal;
+  line-height: 1.45;
   color: #555;
   text-align: center;
 }
+[collid="cid"] #main #article figure.figure div.caption p { margin: 0 0 .4rem; text-indent: 0; text-align: inherit; }
+[collid="cid"] #main #article figure.figure div.caption:has(> p + p) { text-align: left; }
+[collid="cid"] #main #article figure.figure:not(:has(*)) { display: none; }
 
-/* Bibliographies (bloc bibliographie, 28/10) : le repère de page d'une référence (« {p. 318} ») reste dans la
-   marge, comme dans les paragraphes, au lieu de flotter sur l'année. */
-@media screen and (min-width: 1025px) {   /* en dessous, hteiml met le repère en bloc, calé à droite */
-  [collid="cid"] #main #article ul.biblio-liste > li.bibl { position: relative; }
-  [collid="cid"] #main #article li.bibl a.pb { float: none; position: absolute; left: calc(100% + .8rem); top: .6em; }
+/* Repères de page de l'imprimé (a.pb « {p. 37} ») dans la marge GAUCHE (2026-10-29, relecture de Maxime :
+   « pourquoi les pb sont à droite et pas à gauche », comme la CJC) : hteiml les fait flotter à droite. Position
+   absolue sans « top » (la hauteur reste celle de la ligne où ils tombent), rapportée à la colonne de l'article
+   (article.text) et non au parent, pour que tous s'alignent dans la même marge, qu'ils tombent dans un
+   paragraphe, une liste, une citation, un tableau, une légende ou une référence bibliographique. Sur petit écran,
+   pas de marge : ils restent dans le texte (bloc calé à droite de hteiml). */
+@media (min-width: 769px) {
+  [collid="cid"] #main #article article.text { position: relative; }
+  [collid="cid"] #main #article article.text a.pb {
+    position: absolute; float: none; left: auto; right: calc(100% + .8rem); top: auto;
+    display: inline; margin: 0; text-indent: 0; text-align: right;
+    white-space: nowrap; font-size: .8rem; line-height: inherit;
+  }
 }
 
 /* Notes en liste continue, comme sur l'ÉLEC (demande de Maxime, 28/10) : hteiml les regroupe par page de

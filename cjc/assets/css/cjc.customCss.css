@@ -184,8 +184,23 @@
 [collid="cjc"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
 [collid="cjc"] #main #article h2.head { font-size: 140%; }
 [collid="cjc"] #main #article h3.head { font-size: 125%; }
-[collid="cjc"] #main #article :is(h4, h5, h6).head { font-size: 112%; }
+[collid="cjc"] #main #article h4.head { font-size: 112%; }
 [collid="cjc"] #main #article :is(h2, h3, h4, h5, h6).head { font-weight: 900; line-height: 1.3; margin: 1.5rem 0 .75rem; padding-top: 0; }
+
+/* Hiérarchie des titres (2026-10-29, relecture de Maxime sur le Codi, l. 1 : « titres : homogénéiser, h1 puis h2
+   à h6 dans l'autre couleur, regarde les espacements ») : le niveau est corrigé dans cjc.xsl (modèle tei:head : un
+   titre de page en h1, ses sections en h2, puis h3…) ; les couleurs viennent du bloc commun « titres » (h1 violet,
+   h2 à h6 gris). Corps décroissants jusqu'à h6 (h4 à h6 étaient tous à 112 %), mêmes marges que la CID. */
+[collid="cjc"] #main #article h5.head { font-size: 105%; }
+[collid="cjc"] #main #article h6.head { font-size: 100%; }
+/* Intitulé d'une liste (« Traits orientaux », « Légende ») : sorti en h6 par l'ancien modèle tei:head de cjc.xsl,
+   hors hiérarchie ; c'est désormais le p.list de hteiml (sans style) : gras gris, collé à sa liste. */
+[collid="cjc"] #main #article div.list > p.list { margin: .9rem 0 .3rem; text-indent: 0; font-weight: 700; color: #585858; }
+
+/* Numéro collé à son intitulé dans les titres (« 1.Graphies », « [3.1]Ici dit des jugemanz ») : hteiml
+   sort le numéro dans un b.label, et le texte qui suit n'a pas de blanc (168 cas sur la seule édition du
+   livre 3, 5 seulement en ont un). Même écart que devant les libellés en p.label plus haut. */
+[collid="cjc"] #main #article .head > b.label { margin-right: .4em; }
 /* Titre de Jostice et plet (section.front) : sans le cadre gris de hteiml, comme la CID. */
 [collid="cjc"] #main #article article.text > section.front {
   background: none;
@@ -214,6 +229,14 @@
 /* Lettres développées des abréviations (spécimens des notices) : italique, sans crochets ; romain dans un passage
    déjà en italique (citation latine soulignée, titre). */
 [collid="cjc"] #main #article :is(i, em, cite, .foreign, .title) i.ex { font-style: normal; }
+
+/* Apparat (2026-10-29, relecture de Maxime sur l'app5 du Codi, l. 3 : « espace » ; entrée affichée « santance]
+   fermance exponctué, santance ajouté H . ») : le bloc générique « apparat » met un blanc après CHAQUE élément de
+   l'entrée (.apparatus * ::after), utile au rendu hteiml nu ; or cjc.xsl compose lui-même ses entrées, blancs compris
+   (« lemme] leçon sigle », « ; », « : »). Le blanc ajouté tombait devant la ponctuation (« H . », « H , supprimé »,
+   « de edendo ] », « P +] », 1 800 cas sur le rendu servi) ou coupait les mots (lettres développées « n ce »,
+   lettrine « L i »). Retiré dans la CJC ; le crochet du lemme (.lem::after) reste. */
+[collid="cjc"] #main #article .footnotes .apparatus :not(.lem)::after { content: none; }
 
 /* Notes en liste continue, comme sur l'ÉLEC (règle de Maxime, 28/10) : hteiml les regroupe par page de
    l'imprimé ou par folio (div.page + repère « p. 1 ») ; on retire le regroupement. */

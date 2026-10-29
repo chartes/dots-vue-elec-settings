@@ -204,6 +204,9 @@
 [collid="architectes"] #main #article section#bibliographie section.div { margin: 0; padding: 0; border: 0; }
 [collid="architectes"] #main #article section#bibliographie section.div + section.div { margin-top: 1.5rem; }
 [collid="architectes"] #main #article section#bibliographie p.p { margin: 0 0 .3em; font-style: italic; color: var(--ar-gris); }
+/* 2026-10-29 : dépôt et ses séries sur une ligne (« Archives nationales : F19, F21 », architectes-repertoire.xsl) :
+   une référence comme les autres, en romain. */
+[collid="architectes"] #main #article section#bibliographie p.p.biblio-depot { font-style: normal; color: inherit; }
 
 /* ---------- Index des personnes : une entrée par ligne, retrait suspendu ---------- */
 [collid="architectes"] #main #article ul.index { list-style: none; margin: 1rem 0 2rem; padding: 0; }

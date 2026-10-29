@@ -1,0 +1,79 @@
+{
+  "collectionId": "architectes",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Architectes diocésains"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Répertoire des architectes diocésains du XIXᵉ siècle",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Parcourir le répertoire",
+      "singleResourceButtonText": "Ouvrir le document"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Répertoire des architectes diocésains du XIXᵉ siècle",
+    "footerSubtitles": [
+      "Sous la direction de Jean-Michel Leniaud",
+      "Avec la collaboration d’Annick Bouvier, Béatrice Bouvier, Laurence de L’Estoile et Nicolas Padiou"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 3,
+    "editByLevel": 3,
+    "editByCiteType": [
+      "notice"
+    ],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [
+    {
+      "tabName": "Crédits",
+      "compName": "about1"
+    }
+  ],
+  "collectionCustomCss": "architectes",
+  "collectionCustomJs": "elec",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
+}

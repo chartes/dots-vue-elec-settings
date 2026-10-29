@@ -1,500 +1,34 @@
+/* CJC (Corpus Juris Civilis) — feuille en blocs (2026-10-28), écrite en partant du rendu hteiml nu
+   (transform/cjc.xsl) ; remplace le socle générique D12 posé le 2026-09-11 par dots-autopilot, le thème
+   de coloration syntaxique (hljs) et les règles de l'ancienne feuille XSL.
+   1. Couleurs du corpus
+   2. Historique ÉLEC : thème du site d'origine (josticeetplet/theme), limité à la zone de texte
+   3. Blocs hteiml génériques : notes de bas de page, apparat critique, bibliographie (identiques d'un corpus à l'autre)
+   4. Propre au projet
+   5. Mécanismes communs dots-vue : cibles d'ancre, page de titre, titres, liens, colonne, sommaire */
+
 /*=============================================================
- PART 1
- Updating the css color schema for:
-  - the collection miroir
-  - its children (unless otherwise specified)
+ 1. COULEURS DU CORPUS
  =============================================================*/
 
-/* Using css variables */
 :root {
-    --fill-color: #8f0e21;
+  --fill-color: #8f0e21;
 }
 
 /*=============================================================
- PART 2
- Updating the css of specific elements (HTML) for:
-  - the collection miroir
-  - its children (unless otherwise specified)
+ 2. HISTORIQUE ÉLEC (josticeetplet/theme_josticeetplet.css)
  =============================================================*/
 
-.title{
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-  }
-
-  h4{
-    color: inherit;
-    font-weight: bold;
-    line-height: inherit;
-  }
-  h4.edition{
-    color: inherit;
-    font-weight: bold;
-    line-height: inherit;
-    margin: 38px 0 10px 0;
-  }
-.msIdentifier {
-    text-align: center;
-    color: #999;
-    font-size: 2em;
-    font-weight: bold;
-    padding: 1em 0 1ex 2ex;
-  }
-
-div.msIdentifier
-{
-    font-weight: bold;
-    margin-bottom: 1em;
-    display:inline-block;
-}
-
-span
-{
-    padding-right: 3px;
-}
-
-.dateline
-{
-    display:inline-block;
-    text-indent: unset;
-}
-
-.head.manuscrit{
-    color:black;
-    font-weight: bold;
-    font-size: 2em;
-
-}
-
-.head.imprime{
-    color:black;
-    font-weight: bold;
-    font-size: 2em;
-}
-li.witness .msIdentifier{
- font-size: inherit;
- display: inline-block;
-}
-
-li.witness a{
-    display: inline-block;
-   }
-
-.msIdentifier{
-    font-weight: bold;
-    padding: 1em 0 1ex 2ex;
-    font-size: larger;
-    text-align: inherit;
-    color: black
-}
-
-table,
-td {
-    border: 1px solid #333;
-
-}
-
-table th{
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-}
-tr.msItem {font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, sans-serif;font-size:12px;line-height: normal;margin-bottom:1em;}
-
-span.locus {display: block;}
-
-th.locus{
-    width: 15%;
-}
-
-th.incipit{
-    width: 40%;
-}
-
-div.incipit{
-    padding-top: 1.5em;
-}
-
-h4.head.manuscrit{
-    color: inherit;
-    font-weight: bold;
-    line-height: inherit;
-    font-size: 1.5em;
-}
-
-h4.head{
-    color: inherit;
-    font-weight: bold;
-    line-height: inherit;
-    font-size: 1.5em;
-}
-
-h4.incipit{
-    color: inherit;
-    font-weight: bold;
-    line-height: inherit;
-    font-size: larger;
-    padding-bottom: 1em;
-}
-
-h3.head.soustraduction{
-    font-size: 2em;
-}
-
-h5.titleMsPart{
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-h5{
-    font-size: 140%;
-}
-
-.highlight{
-    background: yellow;
-    font-weight: inherit;
-  }
-/**/
-
-/*
-
-XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
-
-*/
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #fff;
-  color: black;
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: #006a00;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal {
-  color: #aa0d91;
-}
-
-.hljs-name {
-  color: #008;
-}
-
-.hljs-variable,
-.hljs-template-variable {
-  color: #660;
-}
-
-.hljs-string {
-  color: #c41a16;
-}
-
-.hljs-regexp,
-.hljs-link {
-  color: #080;
-}
-
-.hljs-title,
-.hljs-tag,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-number,
-.hljs-meta {
-  color: #1c00cf;
-}
-
-.hljs-section,
-.hljs-class .hljs-title,
-.hljs-type,
-.hljs-attr,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-params {
-  color: #5c2699;
-}
-
-.hljs-attribute,
-.hljs-subst {
-  color: #000;
-}
-
-.hljs-formula {
-  background-color: #eee;
-  font-style: italic;
-}
-
-.hljs-addition {
-  background-color: #baeeba;
-}
-
-.hljs-deletion {
-  background-color: #ffc8bd;
-}
-
-.hljs-selector-id,
-.hljs-selector-class {
-  color: #9b703f;
-}
-
-.hljs-doctag,
-.hljs-strong {
-  font-weight: bold;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-
-div.msItem {font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, sans-serif;font-size:12px;line-height: normal;margin-bottom:1em;}
-div.msItem cite.title {font-weight: bold;}
-div.msItem p {text-indent:0;margin-top:0.3em;}
-ul.poList > li.bibl {margin-top:1em;}
-footer.note {margin-left:1.5em;padding-left:0.5em;border-left:dotted 1px;}
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
-/* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
-   Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
-   au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
-   est conservée : elle est lue dans --fill-color, avec un repli sur celle de DoTS. */
-.document-area #article:not(.bottom-toc),
-.document-area main {
-  --d12-accent: var(--fill-color, #8f0e21);
-  --d12-encre: var(--document-text-color, #303030);
-  --d12-filet: #dcd8d3;
-  --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
-  --d12-rayon: var(--button-border-radius, 4px);
-}
-
-/* Texte : mesure de lecture régulière, encre et interligne de l'application.
-   La largeur est bornée parce qu'elle atteignait 1 184 px chez christofle
-   (mesuré le 2026-09-12), soit des lignes de plus de 130 caractères. 72rem est
-   la valeur déjà retenue par les corpus qui s'en étaient souciés (bellelay 72,
-   actesroyauxdupoitou 74) ; un corpus peut la surcharger après ce bloc. */
-.document-area #article:not(.bottom-toc) {
-  max-width: min(100%, 72rem);
-  margin-inline: auto;
-  color: var(--d12-encre);
-  font-size: var(--font-default-size, 16px);
-  /* 1.6 et non le jeton --font-default-line-heigth (1.4) : celui-ci est calibré pour
-     l'interface, et la comparaison avant/après du 2026-09-12 montrait l'interligne
-     tomber de 26,4 px à 22,4 px chez christofle, actesroyauxdupoitou, sanctoral_elec
-     et les testaments — trop serré pour de la prose éditoriale en serif. */
-  line-height: 1.6;
-}
-.document-area #article:not(.bottom-toc) p {
-  margin: 0 0 .9em;
-}
-
-/* Titres : famille secondaire de l'application, graisse tenue, accent sobre.
-   Pas de bandeau plein : un filet gauche, comme les blocs de DoTS. */
-.document-area #article:not(.bottom-toc) h1,
-.document-area #article:not(.bottom-toc) h2,
-.document-area #article:not(.bottom-toc) h3,
-.document-area #article:not(.bottom-toc) h4 {
-  color: #202020;
-  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: .01em;
-}
-.document-area #article:not(.bottom-toc) h1 { font-size: 1.6rem; margin: 0 0 1rem; }
-.document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
-.document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
-.document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
-
-/* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
-.document-area #article:not(.bottom-toc) a {
-  color: var(--d12-accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-.document-area #article:not(.bottom-toc) a:hover,
-.document-area #article:not(.bottom-toc) a:focus-visible {
-  text-decoration: var(--text-decoration-hover, underline dotted);
-}
-.document-area #article:not(.bottom-toc) a:focus-visible {
-  outline: 2px solid var(--d12-accent);
-  outline-offset: 2px;
-}
-
-/* Tableaux : filets fins, en-tête sur fond doux, pas de quadrillage lourd. */
-.document-area #article:not(.bottom-toc) table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  font-size: .95em;
-}
-.document-area #article:not(.bottom-toc) th,
-.document-area #article:not(.bottom-toc) td {
-  padding: .4rem .6rem;
-  border: 0;
-  border-bottom: 1px solid var(--d12-filet);
-  text-align: left;
-  vertical-align: top;
-}
-.document-area #article:not(.bottom-toc) th {
-  background: var(--d12-fond-doux);
-  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
-  font-size: .8rem;
-  font-weight: 600;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  color: #4a4a4a;
-}
-/* Un tableau large défile dans son cadre, la page ne défile jamais de côté. */
-.document-area #article:not(.bottom-toc) .table-wrap {
-  overflow-x: auto;
-}
-
-/* Citations, blocs éditoriaux, légendes. */
-.document-area #article:not(.bottom-toc) blockquote,
-.document-area #article:not(.bottom-toc) .citation {
-  margin: 1rem 0;
-  padding: .1rem 0 .1rem 1rem;
-  border-left: 3px solid var(--d12-filet);
-  color: #45403c;
-}
-.document-area #article:not(.bottom-toc) figcaption,
-.document-area #article:not(.bottom-toc) .legendeillustration {
-  color: #5a5450;
-  font-size: .85rem;
-  line-height: 1.4;
-}
-.document-area #article:not(.bottom-toc) hr {
-  height: 0;
-  margin: 1.6rem 0;
-  border: 0;
-  border-top: 1px solid var(--d12-filet);
-}
-
-/* Colonne de texte : elle prend la place disponible dans la rangée.
-   Pourquoi : sur une page COQUILLE — une unité non éditoriale, qui ne rend que son titre
-   (le `liber` de cjc, la `rubrique` paratextes de delescluze) — la colonne se rétractait
-   sur la largeur du titre : mesuré le 2026-09-12, 65 px chez cjc (« Livre I » coupé en deux
-   lignes) et 92 px chez delescluze, parent compris, la visionneuse occupant le reste de la
-   rangée. Même procédé que D11 pour le sommaire des enfants (`flex` sur l'enfant du
-   `wrapper`), et sans effet quand la page a du contenu.
-   La chaîne mesurée sur cjc : `#article` (65 px) ← `#main` (65) ← `.row.remove-bottom-padding`
-   (65, en `display:flex`) ← `.wrapper` (1 225 px). C'est donc la RANGÉE qui se rétracte, pas
-   `#article` : une première version de cette règle visait `.wrapper > #article` et ne pouvait
-   pas s'appliquer, `#article` n'étant pas enfant du `wrapper`. La visionneuse, elle, est en
-   `position: absolute` (500 px) et n'entre pas dans le calcul. */
-.document-area .wrapper > .row {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-/* Images : jamais plus larges que la colonne. */
-.document-area #article:not(.bottom-toc) img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Contrôles éditoriaux (onglets, boutons, menus dépliants des corpus) : même
-   grammaire visuelle que les boutons de l'application — coins légers, filet fin,
-   accent réservé à l'état actif. */
-.document-area #article:not(.bottom-toc) button,
-.document-area #article:not(.bottom-toc) input[type="reset"],
-.document-area #article:not(.bottom-toc) input[type="submit"],
-.document-area #article:not(.bottom-toc) summary {
-  font-family: var(--font-primary, "Roboto"), Arial, Helvetica, sans-serif;
-  font-size: .9rem;
-}
-.document-area #article:not(.bottom-toc) input[type="reset"],
-.document-area #article:not(.bottom-toc) input[type="submit"],
-.document-area #article:not(.bottom-toc) button {
-  padding: .35rem .7rem;
-  border: 1px solid var(--d12-filet);
-  border-radius: var(--d12-rayon);
-  background: #fff;
-  color: var(--d12-encre);
-  cursor: pointer;
-}
-.document-area #article:not(.bottom-toc) input[type="reset"]:hover,
-.document-area #article:not(.bottom-toc) input[type="submit"]:hover,
-.document-area #article:not(.bottom-toc) button:hover {
-  border-color: var(--d12-accent);
-  color: var(--d12-accent);
-}
-
-/* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
-.document-area #article:not(.bottom-toc) .apparatus {
-  font-size: var(--font-small-size, 14px);
-  line-height: 1.5;
-}
-.document-area #article:not(.bottom-toc) a.noteref,
-.document-area #article:not(.bottom-toc) .noteref {
-  text-decoration: none;
-}
-
-@media (max-width: 768px) {
-  .document-area #article:not(.bottom-toc) h1 { font-size: 1.4rem; }
-  .document-area #article:not(.bottom-toc) h2 { font-size: 1.2rem; }
-  .document-area #article:not(.bottom-toc) table { font-size: .9em; }
-}
-/* ==== D12-SOCLE-FIN ==== */
-
-/* ============================================================================
-   D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
-
-   POURQUOI
-   --------
-   Certains libellés de sommaire sont longs parce que le texte de l'éditeur
-   l'est : l'analyse d'un acte, une rubrique médiévale, le résumé d'un
-   testament. Les amputer dans le registre de fragments serait mutiler la
-   donnée. On les tronque donc À L'AFFICHAGE, sur deux lignes.
-
-   Le texte complet reste dans le DOM : il est sélectionnable, trouvable par
-   la recherche du navigateur, et lu en entier par les lecteurs d'écran.
-   Rien n'est perdu, seule la hauteur de la ligne du sommaire est bornée.
-
-   PORTÉE — délibérément étroite
-   -----------------------------
-   `#toc-tree a.toc-title` : l'ancre de titre de l'arbre du sommaire émis par
-   TOC.vue, et rien d'autre. Pas de sélecteur sur `a`, `li`, `.tree` ni
-   `.container`, qui servent ailleurs dans la page.
-
-   `display:-webkit-box` est requis par `-webkit-line-clamp` ; l'ancre est un
-   enfant de `.li.container{display:flex}` et reste donc un élément de flex.
-   Les navigateurs sans line-clamp affichent le titre entier : dégradation
-   sans casse.
-
-   NE PAS élargir ce sélecteur : une règle trop large a déjà cassé un autre
-   corpus sur ce projet.
-   ============================================================================ */
-
-#toc-tree a.toc-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  overflow-wrap: anywhere;
-}
+/* Images : 600 px au plus sur l'ÉLEC ; ici bornées aussi à la colonne. */
+[collid="cjc"] #main #article img { max-width: min(600px, 100%); height: auto; }
+/* Jostice et plet : la leçon de l'éditrice (div/head type="gp", G. Pastore) en bleu, comme sur l'ÉLEC. */
+[collid="cjc"] #main #article h1.gp,
+[collid="cjc"] #main #article .gp > p { color: #315ba7; }
+[collid="cjc"] #main #article p.byline { font-variant: small-caps; }
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
@@ -567,6 +101,237 @@ footer.note {margin-left:1.5em;padding-left:0.5em;border-left:dotted 1px;}
 .document-views #article .footnotes .apparatus .wit { font-family: inherit; }
 /* ==== fin bloc apparat ==== */
 
+/* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====
+   Allure de la page « Références » des chroniques latines (rubrique repliable « Titre (N) »,
+   une ligne par référence entre deux filets, l'année en gris à droite, auteurs en petites
+   capitales), avec les espacements et les tailles de hteiml : le titre de rubrique est un
+   vrai intertitre (h2, h3 dans une sous-rubrique) que hteiml met en forme comme ailleurs ;
+   la référence a la taille et l'interligne d'un paragraphe. */
+.document-views #article .biblio { margin: 0 0 1.2rem; }
+.document-views #article details.biblio > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
+.document-views #article .biblio-compte {
+  margin-left: .3em;
+  color: #8a837c;
+  font-size: .85em;
+  font-weight: normal;
+  font-variant: normal;
+  letter-spacing: 0;
+}
+.document-views #article ul.biblio-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.document-views #article ul.biblio-liste > li.bibl {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: .5em .4rem .5em 0;
+  border-bottom: 1px solid #f1ece6;
+  font-size: 1rem;
+  text-indent: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+.document-views #article ul.biblio-liste > li.bibl::marker { content: none; }
+.document-views #article ul.biblio-liste > li.bibl:hover { background: #f7f4f1; }
+.document-views #article ul.biblio-liste > li.bibl[hidden] { display: none; }
+/* Référence entière, retrait suspendu */
+.document-views #article li.bibl > .bibl-texte {
+  flex: 1 1 auto;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+/* Année, à droite, alignée d'une ligne à l'autre */
+.document-views #article li.bibl > .bibl-annee {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
+.document-views #article li.bibl .author,
+.document-views #article li.bibl .sigle {
+  font-variant: small-caps;
+  font-weight: normal;
+  letter-spacing: .02em;
+}
+.document-views #article li.bibl cite.title { font-style: italic; }
+.document-views #article li.bibl a {
+  color: inherit;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+@media (max-width: 700px) {
+  .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
+}
+/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
+.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
+/* ==== fin bloc bibliographie ==== */
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
+/* Titres et espacements des pages de texte (modèle : CID, Arbrissel, Montferrand). */
+[collid="cjc"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
+[collid="cjc"] #main #article h2.head { font-size: 140%; }
+[collid="cjc"] #main #article h3.head { font-size: 125%; }
+[collid="cjc"] #main #article :is(h4, h5, h6).head { font-size: 112%; }
+[collid="cjc"] #main #article :is(h2, h3, h4, h5, h6).head { font-weight: 900; line-height: 1.3; margin: 1.5rem 0 .75rem; padding-top: 0; }
+/* Titre de Jostice et plet (section.front) : sans le cadre gris de hteiml, comme la CID. */
+[collid="cjc"] #main #article article.text > section.front {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+/* Paragraphes (§) de Jostice et plet : hteiml ferme chaque section du corps par un filet et 3 em de
+   blanc ; ici les § se suivent, comme sur l'ÉLEC. */
+[collid="cjc"] #main #article .body > .div { border-bottom: none; }
+/* Les sections emboîtées (§ > leçon gp) cumulaient le retrait haut et bas de html.css (16 + 20 px chacune). */
+[collid="cjc"] #main #article .body section.div { padding-top: 0; padding-bottom: 0; }
+/* Source latine (« Traduit du Dig., liv. 4… ») : ligne sans puce. */
+[collid="cjc"] #main #article .div.original ul.listWit { margin-left: 0; padding-left: 0; }
+[collid="cjc"] #main #article .div.original li.witness { list-style: none; }
+[collid="cjc"] #main #article section.front section.div { padding-top: 0; padding-bottom: 0; }
+/* Repère de titre du Codi (head > label, que hteiml sort en p) : en ligne, avant l'intitulé. */
+[collid="cjc"] #main #article .head > p.label { display: inline; margin: 0 .4em 0 0; text-indent: 0; }
+/* Repère d'article ([2.1.1], [1.pr.0]) en tête de paragraphe : gras discret, gris. */
+[collid="cjc"] #main #article p > b.label:first-child { color: #585858; }
+
+/* Notes en liste continue, comme sur l'ÉLEC (règle de Maxime, 28/10) : hteiml les regroupe par page de
+   l'imprimé ou par folio (div.page + repère « p. 1 ») ; on retire le regroupement. */
+[collid="cjc"] #main #article .footnotes div.page { display: contents; }
+[collid="cjc"] #main #article .footnotes .note-page { display: none; }
+
+/* --- Notices : description de manuscrit (cjc.xsl, bloc 3) --- */
+/* Conspectus siglorum : sigle puis cote. Le blanc qui les séparait (nœud texte seul) est retiré
+   par la compression des espaces de dots-vue (« AParis ») ; écart rendu en CSS. */
+[collid="cjc"] #main #article li.witness > i:first-child { margin-right: .5em; }
+[collid="cjc"] #main #article div.msDesc { margin: 0 0 2.5rem; }
+/* Cote en tête de notice */
+[collid="cjc"] #main #article p.ms-cote { margin: 0 0 1rem; font-size: 1.1rem; text-indent: 0; }
+[collid="cjc"] #main #article p.ms-cote .ms-cote-principale { font-weight: 700; }
+[collid="cjc"] #main #article p.ms-cote .ms-sigle { color: #555; }
+/* Rubriques : Contenu, Description matérielle, Histoire */
+[collid="cjc"] #main #article section.ms-rubrique { margin: 0 0 1.5rem; }
+[collid="cjc"] #main #article p.ms-rubrique-titre {
+  margin: 1.5rem 0 .6rem;
+  padding-bottom: .2rem;
+  border-bottom: 1px solid #e4e4e4;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: .03em;
+  color: #585858;
+  text-indent: 0;
+}
+[collid="cjc"] #main #article p.summary { text-indent: 0; }
+/* Champs à intitulé (Support, Composition, Écriture, Décor…) : intitulé en petites capitales */
+[collid="cjc"] #main #article .ms-champ { margin: 0 0 .5rem; }
+[collid="cjc"] #main #article .ms-intitule { font-variant: small-caps; font-weight: 700; color: #444; }
+[collid="cjc"] #main #article :is(.handDesc, .decoNote) p { text-indent: 0; margin: 0 0 .5rem; }
+[collid="cjc"] #main #article .decoNote { margin: 0 0 .75rem; }
+/* Contenu : groupes d'items puis grille Locus / Incipit (feuille d'août 2026) */
+[collid="cjc"] #main #article section.msItem { margin: 0 0 1.25rem; }
+[collid="cjc"] #main #article section.msItem section.msItem { margin-left: 1rem; }
+[collid="cjc"] #main #article p.msItem-titre { margin: .75rem 0 .4rem; font-weight: 700; text-indent: 0; }
+[collid="cjc"] #main #article p.msItem-titre .locus { font-weight: normal; color: #666; }
+[collid="cjc"] #main #article :is(div.incipit, div.explicit) { margin: 0 0 .4rem; }
+[collid="cjc"] #main #article .table-wrap { overflow-x: auto; margin: .5rem 0 1rem; }
+[collid="cjc"] #main #article table.msItems { width: 100%; border-collapse: collapse; font-size: .92rem; line-height: 1.45; }
+[collid="cjc"] #main #article table.msItems :is(th, td) {
+  padding: .35rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #e4e0dc;
+  text-align: left;
+  vertical-align: top;
+  font-family: inherit;
+}
+[collid="cjc"] #main #article table.msItems th {
+  background: #f5f3f1;
+  color: #444;
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+[collid="cjc"] #main #article table.msItems th.locus { width: 28%; }
+[collid="cjc"] #main #article table.msItems td cite.title { display: block; margin: 0; font-style: normal; font-weight: 600; }
+[collid="cjc"] #main #article table.msItems td span.locus { display: block; color: #666; }
+[collid="cjc"] #main #article table.msItems td div.incipit { margin: 0; }
+/* Stemma : image centrée ; arbre encodé (sans image) en liste emboîtée */
+[collid="cjc"] #main #article figure { margin: 1.5rem auto; text-align: center; }
+[collid="cjc"] #main #article div.stemma { margin: 1rem 0 1.5rem; }
+[collid="cjc"] #main #article .stemma ul { margin: .2rem 0 .2rem 1.2rem; padding-left: .8rem; border-left: 1px solid #ccc; list-style: none; }
+[collid="cjc"] #main #article .stemma .stemma-noeud { font-style: italic; }
+[collid="cjc"] #main #article .stemma.extant > .stemma-noeud { font-style: normal; font-weight: 700; }
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+/* ==== Arrivée sur une ancre (bloc commun 2026-10-15, identique dans tous les corpus) ====
+   Élément visé par l'URL (note, ligne de tableau, entrée d'index…) : jaune 1,8 s puis fondu
+   jusqu'à 3 s, comme à Montferrand et aux cartulaires. La classe cible-arrivee est posée par le
+   bloc « Arrivée sur une ancre » du customJs du corpus, qui place aussi la cible sous ce qui
+   reste collé en haut. Une ligne de tableau : on anime aussi ses cellules (leur fond, zébré,
+   masquerait celui de la ligne) ; un details : son résumé. */
+@keyframes elec-cible {
+  0%, 60% { background-color: #fbeeb8; }
+  100%    { background-color: transparent; }
+}
+#main #article .cible-arrivee,
+#main #article tr.cible-arrivee > td,
+#main #article details.cible-arrivee > summary { animation: elec-cible 3s ease-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  #main #article .cible-arrivee,
+  #main #article tr.cible-arrivee > td,
+  #main #article details.cible-arrivee > summary { animation: none; outline: 2px solid #fbeeb8; }
+}
+/* ==== fin arrivée sur une ancre ==== */
+
+/* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est ouvert
+   sans refId) : même bloc que la CID, Montferrand, les chroniques latines, Du Bourg et Arbrissel ;
+   lignes « Manuscrit » et « Édition imprimée » (p.source). */
+#main #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+#main #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  border: 0 !important;
+}
+#main #article .titlestmt :is(.editors, .source) { text-align: center; text-indent: 0; }
+#main #article .titlestmt .source { margin: 1rem 0; font-size: .95rem; color: #444; }
+#main #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
+#main #article .titlestmt .editor { font-variant: small-caps; letter-spacing: 0.03em; color: #333; }
+#main #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color);
+  border-top: 1px solid var(--fill-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+#main #article .titlestmt .subtitle { text-align: center; text-indent: 0; font-style: italic; color: #555; margin: 0 0 1rem; }
+
 /* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
    h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
    à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
@@ -583,3 +348,41 @@ footer.note {margin-left:1.5em;padding-left:0.5em;border-left:dotted 1px;}
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* Colonne de texte sur une page COQUILLE (le `liber` du CJC, qui ne rend que son titre et la liste de
+   ses titres) : la rangée se rétractait sur la largeur du titre (65 px mesurés le 2026-09-12,
+   « Livre I » coupé en deux lignes). Repris du socle D12 retiré. */
+.document-area .wrapper > .row {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Volet Mirador en mode texte (2026-09-11, D7, même correctif que saintgermaindespres) : le volet
+   invisible restait dans le flux et faisait défiler la page de travers. */
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Sommaire : titres longs (rubriques du Code, du Digeste) tronqués À L'AFFICHAGE sur deux lignes
+   (D42, 2026-09-14) ; le texte complet reste dans le DOM. Ne pas élargir ce sélecteur. */
+#toc-tree a.toc-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* Page de titre d'une ressource (édition ou notice) : dots-vue ajoute dessous la liste des unités
+   (#article.bottom-toc, niveau 0) ; le sommaire est déjà à gauche. Masquée seulement sous une page de titre
+   (.titlestmt), comme dans la CID ; les pages de regroupement gardent leur liste. */
+[collid="cjc"] .document.wrapper:has(.titlestmt) > #article.bottom-toc { display: none; }
+
+/* Textes liminaires (<front> : principes d'édition, présentation) : hteiml les met sur fond gris avec un retrait
+   (section.front) ; texte ordinaire, comme le reste des pages (même règle que les cartulaires). */
+[collid="cjc"] #main #article section.front { background: none; padding: 0; }

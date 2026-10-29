@@ -35,6 +35,7 @@
     null
   ],
   "collectionCustomCss": "cjc",
+  "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
 

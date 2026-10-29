@@ -1,0 +1,573 @@
+/* Répertoire des architectes diocésains du XIXe siècle — feuille en blocs (2026-10-28), sur le rendu
+   hteiml de architectes-repertoire.xsl.
+   1. Couleurs du corpus
+   2. Historique ÉLEC : règles de page de l'ancien site (bâtiments en retrait, renvois en ligne)
+   3. Blocs hteiml génériques : bibliographie, titres des pages à sous-pages (identiques d'un corpus à l'autre)
+   4. Propre au projet : notice (dates, citations, rubriques, bâtiments, renvois), présentation,
+      index des personnes, index des bâtiments
+   5. Mécanismes communs dots-vue : arrivée sur une ancre, page de titre, volet Mirador, tableau
+      filtrable, titres, liens
+   La customCss est injectée dans toutes les pages de dots-vue : toute règle propre est scopée
+   par [collid="architectes"]. */
+
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
+
+/* Aucune : couleurs par défaut de dots-vue. Gris des textes secondaires : */
+[collid="architectes"] { --ar-gris: #6f6a65; --ar-filet: #ebe6e0; }
+
+/*=============================================================
+ 2. HISTORIQUE ÉLEC (styles de page de l'ancien site, notices/N.html)
+ =============================================================*/
+
+/* div.batiment { margin-left: 4em; text-indent: -2em } : un bâtiment par ligne, retrait suspendu. */
+[collid="architectes"] #main #article ul.ar-liste-batiments { list-style: none; margin: 0; padding: 0; }
+[collid="architectes"] #main #article ul.ar-liste-batiments > li {
+  margin: 0 0 .45em;
+  padding-left: 2em;
+  text-indent: -2em;
+  line-height: 1.45;
+}
+/* p.pers a { border-bottom: none } : renvois en une ligne, « Voir aussi : A ; B ; C. » */
+[collid="architectes"] #main #article p.ar-renvois { text-align: left; text-indent: 0; line-height: 1.5; }
+
+/*=============================================================
+ 3. BLOCS HTEIML GÉNÉRIQUES
+ =============================================================*/
+
+/* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====
+   Allure de la page « Références » des chroniques latines (rubrique repliable « Titre (N) »,
+   une ligne par référence entre deux filets, l'année en gris à droite, auteurs en petites
+   capitales), avec les espacements et les tailles de hteiml : le titre de rubrique est un
+   vrai intertitre (h2, h3 dans une sous-rubrique) que hteiml met en forme comme ailleurs ;
+   la référence a la taille et l'interligne d'un paragraphe. */
+.document-views #article .biblio { margin: 0 0 1.2rem; }
+.document-views #article details.biblio > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
+.document-views #article .biblio-compte {
+  margin-left: .3em;
+  color: #8a837c;
+  font-size: .85em;
+  font-weight: normal;
+  font-variant: normal;
+  letter-spacing: 0;
+}
+.document-views #article ul.biblio-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.document-views #article ul.biblio-liste > li.bibl {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: .5em .4rem .5em 0;
+  border-bottom: 1px solid #f1ece6;
+  font-size: 1rem;
+  text-indent: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+.document-views #article ul.biblio-liste > li.bibl::marker { content: none; }
+.document-views #article ul.biblio-liste > li.bibl:hover { background: #f7f4f1; }
+.document-views #article ul.biblio-liste > li.bibl[hidden] { display: none; }
+/* Référence entière, retrait suspendu */
+.document-views #article li.bibl > .bibl-texte {
+  flex: 1 1 auto;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+/* Année, à droite, alignée d'une ligne à l'autre */
+.document-views #article li.bibl > .bibl-annee {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
+.document-views #article li.bibl .author,
+.document-views #article li.bibl .sigle {
+  font-variant: small-caps;
+  font-weight: normal;
+  letter-spacing: .02em;
+}
+.document-views #article li.bibl cite.title { font-style: italic; }
+.document-views #article li.bibl a {
+  color: inherit;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+@media (max-width: 700px) {
+  .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
+}
+/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
+.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
+/* ==== fin bloc bibliographie ==== */
+
+/* ---------- Titres des pages à sous-pages (modèle : Bellelay, 15/10/2026) ----------
+   dots-vue affiche la présentation, les index et la bibliographie sous .dots-ui, dont la remise à
+   zéro (main.css : :where(.dots-ui) h1…) ramène les titres au corps du texte et les paragraphes à
+   une marge nulle. On leur rend les tailles de hteiml (html.css). */
+[collid="architectes"].dots-ui #main #article :is(h1, h2, h3, h4).head,
+[collid="architectes"] .dots-ui #main #article :is(h1, h2, h3, h4).head { font-weight: 900; }
+[collid="architectes"].dots-ui #main #article h1.head,
+[collid="architectes"] .dots-ui #main #article h1.head { font-size: 160%; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
+[collid="architectes"].dots-ui #main #article h2.head,
+[collid="architectes"] .dots-ui #main #article h2.head { font-size: 140%; margin: 1.5rem 0 .75rem; }
+[collid="architectes"].dots-ui #main #article h3.head,
+[collid="architectes"] .dots-ui #main #article h3.head { font-size: 130%; margin: 1.25rem 0 .5rem; }
+[collid="architectes"].dots-ui #main #article p.p,
+[collid="architectes"] .dots-ui #main #article p.p { margin-bottom: 1em; }
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
+/* ---------- Texte courant ----------
+   Paragraphes sans alinéa et justifiés, partout (hteiml met 32 px de retrait, sauf après une
+   citation : la notice alternait les deux). Colonne de lecture d'une largeur raisonnable. */
+[collid="architectes"] #main #article { max-width: 52rem; margin: 0 auto; }
+/* Page d'une lettre : dots-vue n'y met que le titre (la liste des notices est son sommaire, hors de
+   #article) ; le titre reste aligné sur cette liste, pas sur une colonne centrée. */
+[collid="architectes"] #main #article:has(> section.lettre) { max-width: none; }
+[collid="architectes"] #main #article :is(p, .p) { text-indent: 0; }
+[collid="architectes"] #main #article p.p { text-align: justify; hyphens: auto; }
+[collid="architectes"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .5em; padding-top: 0; }
+[collid="architectes"] #main #article a.bookmark { display: none; }   /* « § » après chaque titre */
+
+/* ---------- Notice ---------- */
+/* Lieux et dates de naissance et de mort (premier paragraphe) : sous le nom, en gris. */
+[collid="architectes"] #main #article section.notice > h1.head + p.p {
+  margin: -.2em 0 1.4em;
+  color: var(--ar-gris);
+  font-size: 1.05rem;
+  font-style: italic;
+  text-align: left;
+}
+/* Rapports et lettres cités : retrait, filet à gauche, sans fond gris ni alinéa. */
+[collid="architectes"] #main #article blockquote.quote {
+  margin: 1em 0 1.2em 1.5em;
+  padding: .1em 0 .1em 1em;
+  border-left: 3px solid #d9d2ca;
+  background: none;
+  color: #3d3833;
+  font-size: .97rem;
+}
+[collid="architectes"] #main #article blockquote.quote p.p { margin: 0 0 .6em; }
+[collid="architectes"] #main #article blockquote.quote p.p:last-child { margin-bottom: 0; }
+/* Rubriques de fin de notice (Bibliographie, Bâtiments) : intertitre discret, filet au-dessus. */
+[collid="architectes"] #main #article section.ar-rubrique { margin: 2rem 0 0; padding-top: 1rem; border-top: 1px solid var(--ar-filet); }
+[collid="architectes"] #main #article h2.ar-rubrique {
+  margin: 0 0 .6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  line-height: 1.3;
+}
+[collid="architectes"] #main #article .ar-sources ul.biblio-liste > li.bibl { font-size: .95rem; padding: .35em .4rem .35em 0; }
+/* Bâtiment, puis à la ligne les autres architectes qui y ont travaillé. */
+[collid="architectes"] #main #article .ar-liste-batiments .ar-bat { font-weight: 600; }
+[collid="architectes"] #main #article .ar-liste-batiments .ar-avec { display: block; text-indent: 0; color: var(--ar-gris); font-size: .9rem; }
+/* Renvois : la première ligne ouvre un filet, l'étiquette en petites capitales. */
+[collid="architectes"] #main #article section.ar-rubrique + p.ar-renvois,
+[collid="architectes"] #main #article .biblio + p.ar-renvois { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--ar-filet); }
+[collid="architectes"] #main #article p.ar-renvois { margin: 0 0 .7em; font-size: .95rem; }
+[collid="architectes"] #main #article p.ar-renvois .ar-etiquette { font-variant: small-caps; font-weight: 700; letter-spacing: .04em; color: #585858; }
+
+/* ---------- Présentation ---------- */
+[collid="architectes"] #main #article p.signature { margin: 1em 0 2em; text-align: right; font-style: italic; }
+/* « Architectes les plus cités », « Bâtiments les plus cités » : listes de liens, à gauche. */
+[collid="architectes"] #main #article p.signature ~ p.p { text-align: left; font-size: .95rem; }
+
+/* ---------- Bibliographie générale ----------
+   hteiml ferme chaque section par 3 em de blanc et un filet ; les rubriques (Archives, Périodiques…)
+   se suivent ici à l'écart d'un intertitre. « Archives nationales » : nom du dépôt, en italique. */
+[collid="architectes"] #main #article section#bibliographie section.div { margin: 0; padding: 0; border: 0; }
+[collid="architectes"] #main #article section#bibliographie section.div + section.div { margin-top: 1.5rem; }
+[collid="architectes"] #main #article section#bibliographie p.p { margin: 0 0 .3em; font-style: italic; color: var(--ar-gris); }
+
+/* ---------- Index des personnes : une entrée par ligne, retrait suspendu ---------- */
+[collid="architectes"] #main #article ul.index { list-style: none; margin: 1rem 0 2rem; padding: 0; }
+[collid="architectes"] #main #article ul.index > li {
+  margin: 0;
+  padding: .3em 0 .3em 1.6em;
+  border-bottom: 1px solid #f1ece6;
+  text-indent: -1.6em;
+  line-height: 1.45;
+  scroll-margin-top: 90px;
+}
+[collid="architectes"] #main #article ul.index > li::marker { content: none; }
+[collid="architectes"] #main #article ul.index dfn.term { font-style: normal; font-weight: 600; color: #3d3833; }
+[collid="architectes"] #main #article ul.index > li:is(:target, .dots-target) { background: #fbf3d5; }
+
+/* ---------- Index des bâtiments : colonnes ---------- */
+/* La page s'élargit pour le tableau. */
+[collid="architectes"] #main #article:has(.ar-batiments) { max-width: 74rem; }
+[collid="architectes"] #main #article .ar-tableau td.ar-c1,
+[collid="architectes"] #main #article .ar-tableau tbody td:nth-child(1) { font-weight: 600; color: #3d3833; }
+[collid="architectes"] #main #article .ar-tableau tbody td:nth-child(2) { color: var(--ar-gris); }
+[collid="architectes"] #main #article .ar-tableau tbody td:nth-child(5) { text-align: right; font-variant-numeric: tabular-nums; color: var(--ar-gris); }
+@media (min-width: 761px) {
+  [collid="architectes"] #main #article .ar-tableau th.ar-c4 { width: 34%; }
+  [collid="architectes"] #main #article .ar-tableau th.ar-c5 { width: 7.5rem; }
+}
+[collid="architectes"] #main #article .ar-tableau .tf-intervalle { display: flex; align-items: center; gap: .15rem; }
+[collid="architectes"] #main #article .ar-tableau .tf-intervalle input { min-width: 0; padding-left: .2rem; padding-right: .1rem; }
+[collid="architectes"] #main #article .ar-tableau td a {
+  color: #3d3833;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+
+/* Tableaux : police du texte, et non le « sans-serif » générique du navigateur. */
+[collid="architectes"] #main #article :is(table, th, td, caption) { font-family: inherit; }
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+/* ==== Arrivée sur une ancre (bloc commun 2026-10-15, identique dans tous les corpus) ====
+   Élément visé par l'URL (note, ligne de tableau, entrée d'index…) : jaune 1,8 s puis fondu
+   jusqu'à 3 s, comme à Montferrand et aux cartulaires. La classe cible-arrivee est posée par le
+   bloc « Arrivée sur une ancre » du customJs du corpus, qui place aussi la cible sous ce qui
+   reste collé en haut. Une ligne de tableau : on anime aussi ses cellules (leur fond, zébré,
+   masquerait celui de la ligne) ; un details : son résumé. */
+@keyframes elec-cible {
+  0%, 60% { background-color: #fbeeb8; }
+  100%    { background-color: transparent; }
+}
+#main #article .cible-arrivee,
+#main #article tr.cible-arrivee > td,
+#main #article details.cible-arrivee > summary { animation: elec-cible 3s ease-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  #main #article .cible-arrivee,
+  #main #article tr.cible-arrivee > td,
+  #main #article details.cible-arrivee > summary { animation: none; outline: 2px solid #fbeeb8; }
+}
+/* ==== fin arrivée sur une ancre ==== */
+
+/* Page de titre (transform/teiHeader2html.xsl, servie quand le document est ouvert sans refId) :
+   même bloc que Bellelay, les Édits, Montferrand, les chroniques latines et Du Bourg. */
+[collid="architectes"] #main #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+[collid="architectes"] #main #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  border: 0 !important;
+}
+[collid="architectes"] #main #article .titlestmt .editors { text-align: center; text-indent: 0; }
+[collid="architectes"] #main #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
+[collid="architectes"] #main #article .titlestmt .editor { font-variant: small-caps; letter-spacing: 0.03em; color: #333; }
+[collid="architectes"] #main #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color);
+  border-top: 1px solid var(--fill-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Volet Mirador en mode texte (2026-09-11, D7 — même correctif que Bellelay et Saint-Germain) :
+   le volet invisible restait dans le flux et faisait défiler la page de travers. */
+[collid="architectes"] .text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ==== Tableau filtrable : tableau, barre, filtres (modèle : Delescluze, 2026-10-13), aux couleurs de dots-vue ; scopé ici car il s'écarte du bloc des autres corpus ==== */
+[collid="architectes"] #main #article .tf-cadre { margin: 1.2rem 0 2rem; }
+[collid="architectes"] #main #article table.tf-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+[collid="architectes"] #main #article .tf-tableau .tf-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: #77706a;
+  font: .8rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-align: left;
+}
+[collid="architectes"] #main #article .tf-tableau thead {
+  position: sticky;
+  top: 80px;
+  z-index: 2;
+}
+/* Arrivée par un lien (dots-target) : l'en-tête collant couvrirait la ligne, sauf après un « voir ». */
+[collid="architectes"] #main #article .tf-tableau:has(.dots-target):not(.tf-par-voir) thead { position: static; }
+[collid="architectes"] #main #article .tf-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--fill-color, #5f004d);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+[collid="architectes"] #main #article .tf-tableau button.tf-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+[collid="architectes"] #main #article .tf-tableau button.tf-tri::after {
+  content: "\2195";
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+[collid="architectes"] #main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: var(--fill-color, #5f004d); font-size: .75em; }
+[collid="architectes"] #main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: var(--fill-color, #5f004d); font-size: .75em; }
+[collid="architectes"] #main #article .tf-tableau button.tf-tri:hover,
+[collid="architectes"] #main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri,
+[collid="architectes"] #main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: var(--fill-color, #5f004d); }
+[collid="architectes"] #main #article .tf-tableau button.tf-tri:hover { background: #ece7e2; }
+[collid="architectes"] #main #article .tf-tableau button.tf-tri:focus-visible { outline: 2px solid #315ba7; outline-offset: -2px; }
+[collid="architectes"] #main #article .tf-tableau td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+[collid="architectes"] #main #article .tf-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+[collid="architectes"] #main #article .tf-tableau tbody tr:hover > td { background: #f3efe9; }
+[collid="architectes"] #main #article .tf-tableau tbody tr:target > td:first-child,
+[collid="architectes"] #main #article .tf-tableau tbody tr.dots-target > td:first-child,
+[collid="architectes"] #main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); }
+[collid="architectes"] #main #article .tf-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
+[collid="architectes"] #main #article .tf-tableau .tf-vide { color: #c4bdb6; }
+[collid="architectes"] #main #article .tf-tableau tr[hidden] { display: none !important; }
+[collid="architectes"] #main #article .tf-barre {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+[collid="architectes"] #main #article .tf-compteur { font-variant-numeric: tabular-nums; }
+[collid="architectes"] #main #article .tf-effacer,
+[collid="architectes"] #main #article .tf-csv {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: #315ba7;
+  font-size: .8rem;
+  cursor: pointer;
+}
+[collid="architectes"] #main #article .tf-effacer:hover,
+[collid="architectes"] #main #article .tf-csv:hover { border-color: #315ba7; }
+[collid="architectes"] #main #article .tf-csv { margin-left: auto; }
+[collid="architectes"] #main #article .tf-effacer[hidden] { display: none; }
+[collid="architectes"] #main #article tr.tf-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+[collid="architectes"] #main #article tr.tf-filtres input,
+[collid="architectes"] #main #article tr.tf-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+[collid="architectes"] #main #article tr.tf-filtres input:focus,
+[collid="architectes"] #main #article tr.tf-filtres select:focus { outline: 2px solid #315ba7; outline-offset: -1px; }
+
+/* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13 ; 2026-10-14) ====
+   Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
+   CSS de chaque corpus qui en a ; scopé ici comme le bloc précédent, qu'il doit pouvoir surcharger. */
+[collid="architectes"] #main #article .tf-cadre td p {
+  margin: 0;
+  text-align: left;
+  text-indent: 0;
+}
+[collid="architectes"] #main #article .tf-cadre td p + p { margin-top: .4em; }
+
+@media (max-width: 760px), (pointer: coarse) {
+  [collid="architectes"] #main #article .tf-cadre tr.tf-filtres input,
+  [collid="architectes"] #main #article .tf-cadre tr.tf-filtres select { font-size: 16px; }
+}
+
+@media (max-width: 760px) {
+  [collid="architectes"] #main #article .tf-cadre { overflow: visible; }
+  [collid="architectes"] #main #article .tf-cadre table,
+  [collid="architectes"] #main #article .tf-cadre thead,
+  [collid="architectes"] #main #article .tf-cadre tbody,
+  [collid="architectes"] #main #article .tf-cadre tr,
+  [collid="architectes"] #main #article .tf-cadre th,
+  [collid="architectes"] #main #article .tf-cadre td {
+    display: block;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  [collid="architectes"] #main #article .tf-cadre thead { position: static; background: none; }
+  [collid="architectes"] #main #article .tf-cadre caption { display: block; width: auto; }
+  [collid="architectes"] #main #article .tf-cadre .tf-barre { flex-wrap: wrap; }
+  [collid="architectes"] #main #article .tf-cadre .tf-csv { margin-left: 0; }
+
+  /* En-têtes : rangée de boutons de même largeur, indicateur au-dessus du nom */
+  [collid="architectes"] #main #article .tf-cadre thead tr:first-child {
+    display: flex;
+    gap: .25rem;
+    padding: .5rem 0;
+    border-top: 2px solid var(--fill-color, #8f0e21);
+    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    background: none;
+  }
+  [collid="architectes"] #main #article .tf-cadre thead tr:first-child th {
+    flex: 1 1 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  [collid="architectes"] #main #article .tf-cadre thead button.tf-tri {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .2rem;
+    width: 100%;
+    padding: .2rem .1rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: #222;
+    font: 600 .8rem/1.2 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  [collid="architectes"] #main #article .tf-cadre thead button.tf-tri::after {
+    order: -1;
+    display: block;
+    margin: 0;
+    padding: .15rem .45rem;
+    border-radius: 3px;
+    background: #ece9e6;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.1;
+  }
+  [collid="architectes"] #main #article .tf-cadre thead button.tf-tri:hover { background: none; }
+
+  /* Filtres : un par ligne, libellé à gauche */
+  [collid="architectes"] #main #article .tf-cadre tr.tf-filtres {
+    margin-top: .6rem;
+    padding: .4rem .5rem;
+    border: 1px solid #e3ddd6;
+    border-radius: 4px;
+    background: #faf8f5;
+  }
+  [collid="architectes"] #main #article .tf-cadre tr.tf-filtres td {
+    position: relative;
+    padding: .2rem 0 .2rem calc(30% + .6rem);
+    border: 0;
+    background: none;
+  }
+  [collid="architectes"] #main #article .tf-cadre tr.tf-filtres td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: .55rem;
+    width: 30%;
+    color: #77706a;
+    font: 600 .7rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  /* Lignes : valeurs empilées, sans cadre ni libellé, un filet entre deux lignes */
+  [collid="architectes"] #main #article .tf-cadre tbody tr {
+    margin: 0;
+    padding: .7rem .2rem;
+    border: 0;
+    border-bottom: 1px solid #e3ddd6;
+    border-radius: 0;
+    background: none;
+  }
+  [collid="architectes"] #main #article .tf-cadre tbody td {
+    padding: .1rem 0;
+    border: 0;
+    background: none;
+  }
+  [collid="architectes"] #main #article .tf-cadre tbody td::before { content: none; }
+  [collid="architectes"] #main #article .tf-cadre tbody tr:nth-child(even) > td,
+  [collid="architectes"] #main #article .tf-cadre tbody tr:hover > td { background: none; }
+  [collid="architectes"] #main #article .tf-cadre tbody tr.dots-target,
+  [collid="architectes"] #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  [collid="architectes"] #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
+  /* Première colonne (l'entrée) en tête du bloc */
+  [collid="architectes"] #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
+  /* Cellule vide (tiret) : rien à montrer */
+  [collid="architectes"] #main #article .tf-cadre tbody td:has(> .tf-vide:only-child) { display: none; }
+  [collid="architectes"] #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
+}
+/* ==== fin tableau filtrable ==== */
+
+/* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
+   h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
+   à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
+.document-views #article h1 { color: #5f004d !important; }
+.document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
+/* ==== fin bloc titres ==== */
+
+/* ==== BLOC LIENS (2026-10-27) : couleur des liens et des numéros de note, identique dans chaque corpus
+   Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
+   appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
+   (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article .footnotes a.noteback { color: #5f004d !important; }
+/* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
+.document-views #article a.pb { color: #8a8a8a !important; }
+/* ==== fin bloc liens ==== */

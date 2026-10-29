@@ -377,11 +377,11 @@ span.note-inline {
    garde son cadre). */
 [collid="cartulaires"] #main #article section.front { background: none; padding: 0; }
 /* Bloc de présentation de la notice (établissement, carte de situation, type d'édition, total des actes) :
-   même cadre que l'en-tête des actes, texte droit et sans retrait ; signature à droite, en italique. */
+   sans cadre (demande du 28/10 : « Notice introductive : cadre enlever »), texte droit et sans retrait ;
+   signature à droite, en italique. */
 [collid="cartulaires"] #main #article section.front > div.argument {
   margin: 0 0 1rem;
-  padding: .6em .9em;
-  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  padding: 0;
   font-size: .95rem;
   font-style: normal;
   line-height: 1.5;
@@ -442,6 +442,15 @@ span.note-inline {
   font-weight: 400;
   font-style: italic;
   line-height: 1.45;
+}
+
+/* 2026-10-28 — Hôtel-Dieu de Paris (Brièle) : le titre de l'acte est un titre d'éditeur, pas une rubrique :
+   noir, gras, centré. Les autres cartulaires gardent la rubrique violette en italique. */
+[collid="cartulaires"] #main #article article[id^="HDPAR-HD_"] header.front > h1.head {
+  color: #333 !important; /* dots-vue impose le violet aux h1 en !important */
+  font-weight: 700;
+  font-style: normal;
+  text-align: center;
 }
 
 /* tableau de la tradition : plus petit, et le même blanc avant et après */

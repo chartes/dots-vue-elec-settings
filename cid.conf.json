@@ -2,7 +2,7 @@
   "collectionId": "cid",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Cid"
+      "collectionShortTitle": "CID"
     },
     "pageHeader": {
       "collectionAltTitle": "Actes des congrès de la Commission internationale de diplomatique",
@@ -68,7 +68,8 @@
     "editByCiteType": [
       "article"
     ],
-    "leftTocFragmentIsDocument": true
+    "displayTopToc": true,
+    "displayLeftToc": true
   },
   "aboutPageSettings": [
     {
@@ -82,6 +83,7 @@
     null
   ],
   "collectionCustomCss": "cid",
+  "collectionCustomJs": "elec",
   "customRoutes": [
     {
       "name": "Search",

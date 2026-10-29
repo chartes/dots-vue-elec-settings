@@ -402,3 +402,6 @@
    l'ancien site ÉLEC (a … q'', puis 1 … 89). Les div.page sont déjà transparentes (display: contents). */
 [collid="cid"] #main #article section.footnotes { display: flex; flex-direction: column; }
 [collid="cid"] #main #article section.footnotes aside.glose { order: -1; }
+
+/* 2026-10-29 : séparateur entre deux parties d'un article (<metamark rend="*"/>, cid.xsl) : astérisque centrée. */
+[collid="cid"] #main #article p.metamark-separateur { text-align: center; text-indent: 0; margin: 1.2em 0; letter-spacing: .3em; color: #6f6a65; }

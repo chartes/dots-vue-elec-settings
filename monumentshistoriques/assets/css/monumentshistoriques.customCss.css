@@ -1197,6 +1197,75 @@
 }
 
 
+/* ==== INDEX À LA MANIÈRE DOTS-VUE (2026-10-29) ====
+   Maxime, sur mh-index-toursit : « propose un truc pour dotsifier les index des monuments historiques ?
+   ça fait vue HTML un peu mais j'aime bien les classes, peut-être change le rouge par du violet ».
+   Les classes mh-index-* et la structure de la XSL sont gardées ; seul l'habillage change, pour les huit
+   index (communes, Mérimée, non répertoriés, Palissy, pays, personnes, rapporteurs, stations) :
+   - police de dots-vue (Roboto) au lieu du Georgia, corps et interlignage des autres corpus ;
+   - violet du thème (#5f004d) au lieu du rouge #8d2632 : titre de l'unité, vedettes, filet de la cible ;
+   - intertitres (région, département, lettre, pays) en gris comme les h2 des autres corpus ;
+   - filets clairs, survol discret, renvois en liens bleus de dots-vue (BLOC LIENS) ;
+   - compteurs et références Mérimée/Palissy en petit gris, sans chasse fixe. */
+[collid="monumentshistoriques"] .mh-edition .mh-index {
+  --mh-accent: #5f004d;
+  --mh-chute-filet: #5f004d;
+  max-width: 52rem;
+  color: #202020;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+[collid="monumentshistoriques"] .mh-edition .mh-index :is(.mh-index-titre, .mh-index-tete) { font-family: inherit; }
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-titre,
+[collid="monumentshistoriques"] .mh-edition .mh-index.mh-index--fragment > .mh-index-unite > .mh-index-tete {
+  margin: 0 0 1.2rem;
+  padding: 0 0 .6rem;
+  border-bottom: 1px solid #e3dcd4;
+  color: #5f004d !important;
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-tete {
+  margin: 1.6rem 0 .6rem;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid #ece7e2;
+  color: #585858 !important;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-tete--lettre { border-bottom: none; font-size: 1.5rem; letter-spacing: .03em; }
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-tete--departement { border-bottom: none; font-size: 1.05rem; }
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-entree {
+  margin: 0;
+  padding: .55rem .4rem .55rem 0;
+  border-bottom: 1px solid #f0ebe5;
+}
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-entree:hover { background: #faf8f6; }
+[collid="monumentshistoriques"] .mh-edition .mh-index :is(.mh-index-vedette, .mh-index-commune) { color: #5f004d; font-size: 1.02em; font-weight: 600; }
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-vedette--qualifiee { color: #4a4540; font-size: 1em; font-weight: 400; }
+[collid="monumentshistoriques"] .mh-edition .mh-index :is(.mh-index-stations, .mh-index-desc, .mh-index-affaire, .mh-index-note) { color: #4a4540; }
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-stations { font-size: .95em; }
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-notice { color: #4a4540; }
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-lien {
+  color: #315ba7;
+  font-weight: 500;
+  text-decoration: underline dotted #9fb3d6;
+  text-underline-offset: .18em;
+}
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-lien:hover { text-decoration-color: currentColor; }
+[collid="monumentshistoriques"] .mh-edition .mh-index :is(.mh-index-idno, .mh-index-compte) {
+  color: #77706a;
+  font-family: inherit;
+  font-size: .8em;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-occurrences { color: #585858; font-size: .85em; font-weight: 600; }
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-occurrences:hover { color: #5f004d; }
+/* ==== fin index à la manière dots-vue ==== */
+
 .mh-nav { margin: 0 0 1.5rem; border-block: 1px solid #d7cec3; padding: .65rem 0; font-family: Georgia, "Times New Roman", serif; }
 /* Barre vide (plus de menu « Les index ») : sans contenu, elle ne trace pas ses bordures. */
 .mh-nav:not(:has(> *)) { display: none; }

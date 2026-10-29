@@ -2,7 +2,7 @@
   "collectionId": "elec",
   "renderer": {
     "css": [
-      "https://dots.chartes.psl.eu/assets/html.css"
+      "/renderer/html.css"
     ],
     "documentContainer": "#center",
     "pageSelectors": [

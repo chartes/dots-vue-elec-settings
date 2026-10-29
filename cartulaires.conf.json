@@ -14,7 +14,7 @@
       "customCollectionDescription": ""
     },
     "listSection": {
-      "displayMode": "list",
+      "displayMode": "toc",
       "cardCollectionPerPage": 30,
       "logo": "logo_cartulaires.png",
       "browseButtonText": "Découvrir la collection",
@@ -88,6 +88,9 @@
   ],
   "collectionCustomCss": "cartulaires",
   "collectionCustomJs": "elec",
+  "topBreadcrumbButtonLabel": [
+    "extensions.dots:shortTitle"
+  ],
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",

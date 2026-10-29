@@ -1,7 +1,7 @@
 <template>
   <article class="home">
     <div class="home-content app-width-padding">
-     <p>{{dtsCollectionDescription}}</p>
+     <p>Le <em>Miroir des classiques</em> est un répertoire des traductions des classiques latins et grecs faites en français et en occitan au Moyen Âge. Sont présentées, sous le titre de chaque ouvrage traduit, les différentes traductions dans leur ordre chronologique ainsi que leurs remaniements éventuels. Pour chaque traduction, caractérisée rapidement, est fournie une analyse précise des manuscrits et des éditions (incunables et éditions du XVI<sup>e</sup> siècle) qui la conservent. Les notices seront publiées sur ce site au fur et à mesure de leur achèvement.</p>
     </div>
   </article>
 

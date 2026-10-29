@@ -7,7 +7,7 @@
 
 /* Using css variables */
 :root {
-    --fill-color: #8f0e21;
+  --fill-color: #5f004d;
 }
 
 /*=============================================================
@@ -16,12 +16,19 @@
   - the collection miroir
   - its children (unless otherwise specified)
  =============================================================*/
+
+/*=============================================================
+CSS historique du projet miroir (https://elec.chartes.psl.eu/miroir/)
+ =============================================================*/
+
+
+
 .about > h1 {
   font-style: italic !important;
 }
 button {
   &.expanded {
-    fill: var(--fill-color)
+    color: var(--fill-color);
   }
 }
 div.msItem {font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, sans-serif;font-size:12px;line-height: normal;margin-bottom:1em;}
@@ -39,105 +46,595 @@ footer.note {margin-left:1.5em;padding-left:0.5em;border-left:dotted 1px;}
     font-size: 13px !important;
 }
 
+/*=============================================================
+CSS dots-vue du projet miroir
+ =============================================================*/
+
+/* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est
+   ouvert sans refId) : reprise de la page de garde de Montferrand et des chroniques
+   latines, à la couleur du corpus. */
+#main #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+#main #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+#main #article .titlestmt .editors {
+  text-align: center;
+  text-indent: 0;
+}
+#main #article .titlestmt .editors-label {
+  font-style: italic;
+  color: #666;
+  font-variant: normal;
+}
+#main #article .titlestmt .editor {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #333;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+#main #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color);
+  border-top: 1px solid var(--fill-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+h12, h3, h4, h5, .head>cite {
+  color: #585858;
+}
+
+h1.head, h1.head>cite {
+  color: var(--fill-color);
+}
+
+:root {
+  --gutter-lg: clamp(5rem, 14vw, 9rem); /* bande extérieure : « vers latin… » */
+  --gutter-l: 3em;                      /* bande intérieure : numéros de vers */
+}
+
+.lg {
+  padding-left: calc(var(--gutter-lg) + var(--gutter-l));
+}
 
 .lg-n {
-    position: absolute;
-    margin-left: -3em;
-    margin-left: -12rem;
+  float: left;
+  width: calc(var(--gutter-lg) - 1em);
+  margin-left: calc(-1 * (var(--gutter-lg) + var(--gutter-l)));
+  text-align: right;
+  line-height: 1.3;
+}
+
+@media (max-width: 40em) {
+  .lg {
+    padding-left: 0;
+  }
+
+  .lg-n {
+    float: none;
+    display: block;
+    width: auto;
+    margin-left: 0;
+    text-align: left;
+  }
+
 }
 
 .corr {
     text-decoration: underline;
 }
 
-.note:target::before {
-  content: "☞";
-  position: absolute;
-  margin: 0 1ex 0 -7.5ex;
-  font-size: 16px;
-    left: 300px;
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
 }
 
-/*=============================================================
- PART 3
- Updating the css of the DTS API tei response for:
-  - the collection miroir
-  - its children (unless otherwise specified)
- =============================================================*/
-.document-views > * {
-  .row:not(.remove-bottom-padding):not(.bottom-toc) {
-    & tei > div {
-      margin: 20px 100px 20px 100px;
-      padding: 30px 30px 44px;
-      border-radius: 5px;
-      border: 1px solid #d8d0be;
-      box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.3);
-      background: url('../images/piece_fond.jpg') center top #fffbf5;
-      text-align: center;
-      color: #3e3b36;
-      @media screen and (max-width: 500px) {
-        margin: 20px 5px 20px 5px;
-      }
-    }
-    & tei > div > p {
-      text-align: center;
-      font-size: larger;
-      padding-top: 14px;
-      padding-left: 10px;
-      padding-bottom: 10px;
-      font-weight: bold;
-      margin-bottom: 0.5em;
-      margin-top: 1em;
-      font-variant: small-caps;
-      color: #4e4940;
-      text-shadow: 1px 2px 2px #bbb;
-    }
+.document-views #article .footnotes {
+  margin-top: 0em;
+}
+
+.note:target, .note:target a {
+  color: var(--fill-color);
+}
+
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes :is(aside, div).note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes :is(aside, div).note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+.author {
+  font-variant: small-caps;
+}
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */
+
+ .document-views #article .biblio { margin: 0 0 1.2rem; }
+.document-views #article details.biblio > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
+.document-views #article .biblio-compte {
+  margin-left: .3em;
+  color: #8a837c;
+  font-size: .85em;
+  font-weight: normal;
+  font-variant: normal;
+  letter-spacing: 0;
+}
+.document-views #article ul.biblio-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.document-views #article ul.biblio-liste > li.bibl {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: .5em .4rem .5em 0;
+  border-bottom: 1px solid #f1ece6;
+  font-size: 1rem;
+  text-indent: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+.document-views #article ul.biblio-liste > li.bibl::marker { content: none; }
+.document-views #article ul.biblio-liste > li.bibl:hover { background: #f7f4f1; }
+.document-views #article ul.biblio-liste > li.bibl[hidden] { display: none; }
+/* Référence entière, retrait suspendu */
+.document-views #article li.bibl > .bibl-texte {
+  flex: 1 1 auto;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+/* Année, à droite, alignée d'une ligne à l'autre */
+.document-views #article li.bibl > .bibl-annee {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
+.document-views #article li.bibl .author,
+.document-views #article li.bibl .sigle {
+  font-variant: small-caps;
+  font-weight: normal;
+  letter-spacing: .02em;
+}
+.document-views #article li.bibl cite.title { font-style: italic; }
+.document-views #article li.bibl a {
+  color: inherit;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+@media (max-width: 700px) {
+  .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
+}
+/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
+.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
+/* ==== fin bloc bibliographie ==== */
+
+
+ /*---------- Tableaux triables et filtrables (2026-10-19) ----------
+   Liste des actes de la page Édition, tables de l'introduction, table chronologique, appendice,
+   annexes, concordance : marqueurs tf-* de tableau-filtrable.xsl (constructeur cartu-tf du module
+   tableaux), comportement dans le JS générique de l'ÉLEC. Mêmes règles que les tableaux des Édits,
+   de Montferrand et de Du Bourg. */
+#main #article .tf-cadre { margin: 1.2rem 0 2rem; }
+
+#main #article table.tf-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+#main #article .tf-tableau .tf-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: #77706a;
+  font: .8rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-align: left;
+}
+
+#main #article .tf-tableau thead {
+  position: sticky;
+  top: 80px;
+  z-index: 2;
+}
+
+/* Arrivée par un lien (dots-target) : l'en-tête collant couvrirait la ligne, sauf après un « voir ». */
+#main #article .tf-tableau:has(.dots-target):not(.tf-par-voir) thead { position: static; }
+
+#main #article .tf-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--fill-color, #8f0e21);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+
+#main #article .tf-tableau button.tf-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+#main #article .tf-tableau button.tf-tri::after {
+  content: "\2195";
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: var(--fill-color, #8f0e21); font-size: .75em; }
+
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: var(--fill-color, #8f0e21); font-size: .75em; }
+
+#main #article .tf-tableau button.tf-tri:hover,
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri,
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: var(--fill-color, #8f0e21); }
+
+#main #article .tf-tableau button.tf-tri:hover { background: #ece7e2; }
+
+#main #article .tf-tableau button.tf-tri:focus-visible { outline: 2px solid #315ba7; outline-offset: -2px; }
+
+#main #article .tf-tableau td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+
+#main #article .tf-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+
+#main #article .tf-tableau tbody tr:hover > td { background: #f3efe9; }
+
+#main #article .tf-tableau tbody tr:target > td:first-child,
+#main #article .tf-tableau tbody tr.dots-target > td:first-child,
+#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); }
+
+#main #article .tf-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
+
+#main #article .tf-tableau .tf-vide { color: #c4bdb6; }
+
+#main #article .tf-tableau tr[hidden] { display: none !important; }
+
+#main #article .tf-barre {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+
+#main #article .tf-compteur { font-variant-numeric: tabular-nums; }
+
+#main #article .tf-effacer,
+#main #article .tf-csv {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: #315ba7;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+#main #article .tf-effacer:hover,
+#main #article .tf-csv:hover { border-color: #315ba7; }
+
+#main #article .tf-csv { margin-left: auto; }
+
+#main #article .tf-effacer[hidden] { display: none; }
+
+#main #article tr.tf-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+
+#main #article tr.tf-filtres input,
+#main #article tr.tf-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+
+#main #article tr.tf-filtres input:focus,
+#main #article tr.tf-filtres select:focus { outline: 2px solid #315ba7; outline-offset: -1px; }
+
+@media (max-width: 760px) {
+
+  #main #article .tf-cadre { overflow-x: auto; }
+
+  #main #article table.tf-tableau { min-width: 40rem; }
+
+  #main #article .tf-tableau thead { position: static; }
+}
+
+#main #article .tf-cadre td p {
+  margin: 0;
+  text-align: left;
+  text-indent: 0;
+}
+
+#main #article .tf-cadre td p + p { margin-top: .4em; }
+
+@media (max-width: 760px), (pointer: coarse) {
+
+  #main #article .tf-cadre tr.tf-filtres input,
+  #main #article .tf-cadre tr.tf-filtres select { font-size: 16px; }
+}
+
+@media (max-width: 760px) {
+
+  #main #article .tf-cadre { overflow: visible; }
+
+  #main #article .tf-cadre table,
+  #main #article .tf-cadre thead,
+  #main #article .tf-cadre tbody,
+  #main #article .tf-cadre tr,
+  #main #article .tf-cadre th,
+  #main #article .tf-cadre td {
+    display: block;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
   }
-  head, trailer, label {
-    font-family: "Linux Libertine", "Times New Roman", Times, "Liberation Serif", FreeSerif, serif;
-    font-variant: small-caps;
-    font-weight: bold;
-    font-size: larger;
-    color: #4e4940;
-    text-shadow: 1px 2px 2px #bbb;
-    background-color: transparent;
-    padding-left: 0 !important;
+
+  #main #article .tf-cadre thead { position: static; background: none; }
+
+  #main #article .tf-cadre caption { display: block; width: auto; }
+
+  #main #article .tf-cadre .tf-barre { flex-wrap: wrap; }
+
+  #main #article .tf-cadre .tf-csv { margin-left: 0; }
+
+
+  /* En-têtes : rangée de boutons de même largeur, indicateur au-dessus du nom */
+  #main #article .tf-cadre thead tr:first-child {
+    display: flex;
+    gap: .25rem;
+    padding: .5rem 0;
+    border-top: 2px solid var(--fill-color, #8f0e21);
+    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    background: none;
   }
-  l {
+
+  #main #article .tf-cadre thead tr:first-child th {
+    flex: 1 1 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  #main #article .tf-cadre thead button.tf-tri {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .2rem;
+    width: 100%;
+    padding: .2rem .1rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: #222;
+    font: 600 .8rem/1.2 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: none;
     white-space: normal;
-    font-variant: normal;
+    overflow-wrap: anywhere;
   }
-  stage, sp, s {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    margin-left: 0;
-    font-family: "Linux Libertine", "Times New Roman", Times, "Liberation Serif", FreeSerif, serif !important;
+
+  #main #article .tf-cadre thead button.tf-tri::after {
+    order: -1;
+    display: block;
+    margin: 0;
+    padding: .15rem .45rem;
+    border-radius: 3px;
+    background: #ece9e6;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.1;
   }
-  stage, sp {
-    font-variant: small-caps;
-    & > p {
-      margin-top: 16px;
-    }
+
+  #main #article .tf-cadre thead button.tf-tri:hover { background: none; }
+
+
+  /* Filtres : un par ligne, libellé à gauche */
+  #main #article .tf-cadre tr.tf-filtres {
+    margin-top: .6rem;
+    padding: .4rem .5rem;
+    border: 1px solid #e3ddd6;
+    border-radius: 4px;
+    background: #faf8f5;
   }
-  speaker {
-    font-weight: normal;
+
+  /* Libellé posé à gauche en position absolue : le contenu de la cellule reste du texte
+     courant, ce qu'une grille découperait */
+  #main #article .tf-cadre tr.tf-filtres td {
+    position: relative;
+    padding: .2rem 0 .2rem calc(30% + .6rem);
+    border: 0;
+    background: none;
   }
-  speaker > hi[rend] {
-    font-style: italic;
-    color: #827E62;
+
+  #main #article .tf-cadre tr.tf-filtres td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: .55rem;
+    width: 30%;
+    color: #77706a;
+    font: 600 .7rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: .03em;
+    text-transform: uppercase;
   }
-  stage {
-    color: #827E62;
+
+
+  /* Lignes : valeurs empilées, sans cadre ni libellé, un filet entre deux lignes */
+  #main #article .tf-cadre tbody tr {
+    margin: 0;
+    padding: .7rem .2rem;
+    border: 0;
+    border-bottom: 1px solid #e3ddd6;
+    border-radius: 0;
+    background: none;
   }
-  s {
-    font-variant: normal;
-    padding-left: 5px;
-    & > hi {
-      background-color: transparent;
-      color: #3e3b36;
-    }
+
+  #main #article .tf-cadre tbody td {
+    padding: .1rem 0;
+    border: 0;
+    background: none;
   }
-  span.left {
-    font-weight: bold !important;
-  }
+
+  #main #article .tf-cadre tbody td::before { content: none; }
+
+  #main #article .tf-cadre tbody tr:nth-child(even) > td,
+  #main #article .tf-cadre tbody tr:hover > td { background: none; }
+
+  #main #article .tf-cadre tbody tr.dots-target,
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+
+  #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
+
+  /* Première colonne (l'entrée) en tête du bloc */
+  #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
+
+  /* Cellule vide (tiret) : rien à montrer */
+  #main #article .tf-cadre tbody td:has(> .tf-vide:only-child) { display: none; }
+
+  #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
+}
+
+#main #article .index ul { list-style: none; }
+#main #article .index ul li { font-variant: small-caps; }
+#main #article .index ul li > a { font-variant: normal; }
+
+@keyframes disparition-fond {
+  from { background-color: #fbeeb8; }
+  to   { background-color: transparent; }
+}
+
+.cible-arrivee:not(:has(> .head, > small.lg-n)) {
+  animation: disparition-fond 3s ease-out 1;
+}
+
+.index a {
+  color: var(--fill-color);
+}
+
+span.note-inline-app {
+  font-size: 0.9em;
+  color: #8a837c;
 }

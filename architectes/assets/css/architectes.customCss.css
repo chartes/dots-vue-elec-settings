@@ -172,7 +172,18 @@
   letter-spacing: .04em;
   line-height: 1.3;
 }
-[collid="architectes"] #main #article .ar-sources ul.biblio-liste > li.bibl { font-size: .95rem; padding: .35em .4rem .35em 0; }
+/* Bibliographie d'une notice (2026-10-29) : renvois abrégés (« Bauchal, p. 600 »), en liste serrée
+   comme les bâtiments, sans les filets ni le survol de la page de bibliographie, retrait suspendu
+   pour les références longues ; pas de blanc sous la liste avant la rubrique suivante. */
+[collid="architectes"] #main #article .ar-sources .biblio { margin: 0; }
+[collid="architectes"] #main #article .ar-sources ul.biblio-liste > li.bibl {
+  padding: .15em 0;
+  border-bottom: 0;
+  font-size: .95rem;
+  line-height: 1.45;
+}
+[collid="architectes"] #main #article .ar-sources ul.biblio-liste > li.bibl:hover { background: none; }
+[collid="architectes"] #main #article .ar-sources li.bibl > .bibl-texte { padding-left: 1.2em; text-indent: -1.2em; }
 /* Bâtiment, puis à la ligne les autres architectes qui y ont travaillé. */
 [collid="architectes"] #main #article .ar-liste-batiments .ar-bat { font-weight: 600; }
 [collid="architectes"] #main #article .ar-liste-batiments .ar-avec { display: block; text-indent: 0; color: var(--ar-gris); font-size: .9rem; }

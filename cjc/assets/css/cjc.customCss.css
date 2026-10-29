@@ -424,12 +424,23 @@
    (section.front) ; texte ordinaire, comme le reste des pages (même règle que les cartulaires). */
 [collid="cjc"] #main #article section.front { background: none; padding: 0; }
 
-/* 2026-10-29 : repères de folio de l'édition (a.pb « [f. 31v] ») dans la marge de gauche, à la hauteur de la ligne
+/* 2026-10-29 : repères de folio de l'édition (.pb « [f. 31v] ») dans la marge de gauche, à la hauteur de la ligne
    où ils tombent (position absolue sans « top » : la ligne reste celle du texte), comme dans les cartulaires.
-   Sur petit écran, pas de marge : ils restent dans le texte. */
-[collid="cjc"] #main #article *:has(> a.pb) { position: relative; }
+   Sur petit écran, pas de marge : ils restent dans le texte. Repères sans image : span.pb, plus de lien (cjc.xsl) ;
+   colonnes des éditions foliotées par <cb> : span.pb.cb (« [f. 6a] »). */
+[collid="cjc"] #main #article *:has(> .pb) { position: relative; }
+[collid="cjc"] #main #article span.pb { color: #8a8a8a; cursor: default; }
 @media (min-width: 769px) {
-  [collid="cjc"] #main #article a.pb { position: absolute; left: auto; right: calc(100% + .8rem); margin: 0; text-indent: 0;
+  [collid="cjc"] #main #article .pb { position: absolute; left: auto; right: calc(100% + .8rem); margin: 0; text-indent: 0;
     white-space: nowrap; font-size: .8rem; line-height: inherit; }
-  [collid="cjc"] #main #article p.repere > a.pb { right: calc(100% + .8rem - 1.5em); }
+  /* 2026-10-29 : l'ancien décalage de 1,5 em pour p.repere faisait chevaucher le repère et le numéro [1.2.6] mis en
+     retrait négatif (Codi) : la marge se mesure du bord du paragraphe, retrait compris. */
 }
+@media (max-width: 768px) {
+  [collid="cjc"] #main #article .pb { margin: 0 .25em; font-size: .8rem; }
+}
+/* 2026-10-29 : Institutes — fin de ligne du manuscrit (<lb/>) : trait discret, sans retour à la ligne. */
+[collid="cjc"] #main #article .lb-ms { color: #b0a89f; font-size: .8em; margin: 0 .1em; }
+/* 2026-10-29 : leçon qui porte une infobulle (<choice> : leçon du manuscrit, de l'édition Olivier-Martin, correction) :
+   soulignement pointillé discret, pour qu'on sache qu'il y a quelque chose à survoler. */
+[collid="cjc"] #main #article span.choice[title] { text-decoration: underline dotted #b0a89f; text-underline-offset: .2em; cursor: help; }

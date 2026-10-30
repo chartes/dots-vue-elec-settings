@@ -16,8 +16,6 @@
 /* Rédacteur d'un alinéa ajouté (Bénédictins, Carpentier, Henschel, Favre) */
 [collid="ducange"] #main #article .dc-redacteur { margin: .9em 0 .15em; padding-top: .35em; border-top: 1px solid #ece7e1; color: #7a6f63;
   font-size: .8em; font-variant: small-caps; letter-spacing: .03em; }
-/* Ajout d'une couche ultérieure dans un alinéa : discret filet pointillé, rédacteur en infobulle */
-[collid="ducange"] #main #article .add[title] { text-decoration: underline dotted #c9bfb3; text-underline-offset: .2em; }
 /* Citations dans le fil du texte : en italique comme dans l'édition Favre ; gloses entre guillemets */
 [collid="ducange"] #main #article .quote { font-style: italic; }
 [collid="ducange"] #main #article .quote .mentioned, [collid="ducange"] #main #article .quote i { font-style: normal; }

@@ -407,3 +407,26 @@
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* Relecture du 30/10 : notes de leçon (note type="a") en apparat, appelées par une lettre, après les notes numérotées */
+[collid="actesroyauxdupoitou"] #article .footnotes.apparatus { margin-top: .6em; padding-top: .4em; border-top: 1px solid #e2ded0; font-size: .92em; }
+[collid="actesroyauxdupoitou"] #article .footnotes.apparatus .noteback { font-style: italic; }
+/* Parties du discours diplomatique (seg@function) : nom en infobulle ; la case « Montrer les parties de l'acte »
+   les signale dans le texte (étiquette en petites capitales avant chaque partie, verbe/bénéficiaire/donation soulignés). */
+[collid="actesroyauxdupoitou"] #article .arp-parties-choix { display: inline-flex; gap: .4em; align-items: center; margin: .5em 0 0; font-size: .85em; color: #6b6260; cursor: pointer; }
+[collid="actesroyauxdupoitou"] #article :has(.arp-parties-cb:checked) .arp-partie:not(.arp-verb, .arp-beneficiary, .arp-donatio)::before {
+  content: attr(data-partie);
+  margin-right: .35em;
+  padding: 0 .3em;
+  border-radius: 2px;
+  background: #f3ece2;
+  color: #7a5a3a;
+  font-size: .75em;
+  font-style: normal;
+  font-variant: small-caps;
+  letter-spacing: .03em;
+}
+[collid="actesroyauxdupoitou"] #article :has(.arp-parties-cb:checked) :is(.arp-verb, .arp-beneficiary, .arp-donatio) {
+  text-decoration: underline dotted #b08a5a;
+  text-underline-offset: .2em;
+}

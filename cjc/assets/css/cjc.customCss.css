@@ -445,3 +445,6 @@
 
 /* Relecture du 30/10 (page de comparaison avant/après) : rubriques des incipit en italique (proposition B) */
 [collid="cjc"] #article .rubric { font-style: italic; }
+
+/* Relecture du 30/10 : réclame en bas de page (fw catchword) : « [réclame : …] » en gris, plus petit */
+[collid="cjc"] #article .reclame { color: #8a8a8a; font-size: .85em; }

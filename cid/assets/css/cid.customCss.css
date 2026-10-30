@@ -405,3 +405,6 @@
 
 /* 2026-10-29 : séparateur entre deux parties d'un article (<metamark rend="*"/>, cid.xsl) : astérisque centrée. */
 [collid="cid"] #main #article p.metamark-separateur { text-align: center; text-indent: 0; margin: 1.2em 0; letter-spacing: .3em; color: #6f6a65; }
+
+/* Relecture du 30/10 : lettres espacées de l'imprimé (phr rend="ls", 7) */
+[collid="cid"] #article .phr.ls { letter-spacing: .18em; }

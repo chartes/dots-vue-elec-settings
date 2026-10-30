@@ -446,4 +446,4 @@ ins {
 /* ==== fin bloc liens ==== */
 
 /* Relecture du 30/10 (page de comparaison avant/après) : leçon corrigée par l'éditeur : « ] corr. » dans l'apparat (proposition A) */
-[collid="chroniqueslatines"] #article .footnotes .apparatus .lem.corraut::after { content: "] a0 corr."; color: #8a837c; }
+[collid="chroniqueslatines"] #article .footnotes .apparatus .lem.corraut::after { content: "]\00a0 corr."; color: #8a837c; }

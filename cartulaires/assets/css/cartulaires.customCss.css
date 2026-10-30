@@ -1760,4 +1760,4 @@ span.note-inline {
 
 /* Relecture du 30/10 (page de comparaison avant/après) : leçon fautive conservée : romain + « (sic) » (proposition B) */
 [collid="cartulaires"] #article em.sic { font-style: normal; }
-[collid="cartulaires"] #article em.sic::after { content: " a0(sic)"; font-size: .75em; font-style: italic; color: #777; }
+[collid="cartulaires"] #article em.sic::after { content: "\00a0(sic)"; font-size: .75em; font-style: italic; color: #777; }

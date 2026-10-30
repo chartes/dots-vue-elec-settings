@@ -2320,10 +2320,6 @@
 .mh-edition .mh-index-entree:has(> .mh-index-personne) > details.mh-index-renvois[open] > summary.mh-index-occurrences::before { content: "▾ "; }
 .mh-edition .mh-index-entree:has(> .mh-index-personne) > details.mh-index-renvois[open] > .mh-index-renvois-liste { margin-top: .3rem; }
 .mh-edition .mh-index-entree:has(> .mh-index-personne) .mh-autorites-donnee { float: none; margin-left: .5em; }
-/* Pages de regroupement (décennie, région) : le titre colle à la liste des sous-parties de dots-vue. */
-.mh-edition .mh-index-unite--groupe { margin-bottom: 0; padding-bottom: 0; }
-.mh-edition .mh-index-unite--groupe > .mh-index-tete { margin-bottom: .4rem; }
-article.mh-edition:has(.mh-index-unite--groupe) { padding-bottom: 0; }
 /* Tous les index (pays étrangers, Palissy, communes, Mérimée, rapporteurs…) : vedette en petites capitales au lieu
    du violet ; dans une vedette qualifiée, seule la commune, le complément « (80 - Somme ; Picardie) » reste en romain. */
 [collid="monumentshistoriques"] .mh-edition .mh-index :is(.mh-index-vedette:not(.mh-index-vedette--qualifiee), .mh-index-commune) {
@@ -2333,3 +2329,7 @@ article.mh-edition:has(.mh-index-unite--groupe) { padding-bottom: 0; }
   letter-spacing: .02em;
 }
 [collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-vedette--qualifiee { font-variant: normal; }
+/* Pages de regroupement (décennie, région) : titre comme ailleurs dans dots-vue (h1.head, sans filet), en gris
+   foncé plutôt qu'en violet, collé à la liste des sous-parties. */
+.mh-edition .mh-groupe > h1.head { color: #2b2b2b; font-size: 1.6rem; font-weight: 700; line-height: 1.25; margin: 0 0 .3rem; border: 0; padding: 0; }
+article.mh-edition:has(> .mh-groupe) { padding-bottom: 0; }

@@ -264,10 +264,16 @@ function arriverSur (cible, jaune = true) {
   setTimeout(() => placerSous(cible), 1000)
 }
 
+// Ancre vide (span ou a sans texte posé en tête d'un paragraphe : renvois des Monuments historiques) : le
+// jaune va au bloc qui la contient, sinon rien ne se verrait. Les Monuments historiques rendent leur texte
+// dans article.mh-edition, sans #article.
+const ancreVide = el => !el.textContent.replace(/[\s\u200b-\u200d\u00a0]/g, '') && !el.querySelector('img')
 function cibleDeLUrl () {
   const id = decodeURIComponent(location.hash.slice(1))
-  const el = id && document.getElementById(id)
-  return el && el.closest('#article') && !el.closest('.bottom-toc') ? el : null
+  let el = id && document.getElementById(id)
+  if (!el || !el.closest('#article, .mh-edition') || el.closest('.bottom-toc')) return null
+  if (ancreVide(el) && el.parentElement) el = el.parentElement
+  return el
 }
 
 // Lien ou cible qui relève d'une note (appel, retour, corps de note)

@@ -1,3 +1,273 @@
+/* Cartulaires — feuille en blocs (2026-10-19), comme les autres corpus.
+   1. Couleurs du corpus : celles de la conf (aucune règle ici)
+   2. Historique ÉLEC : aucun
+   3. Blocs hteiml génériques : notes de bas de page, bibliographie (identiques d'un corpus à l'autre)
+   4. Propre au projet : vignettes de page, notes en ligne et apparat, présentation des actes
+      (demandes d'Olivier Canteaut), index, tableaux et pages Édition, Cartulaire blanc de Saint-Denis
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), page de titre, tableau filtrable,
+      arrivée sur une ancre
+   Retirés le 19/10 : tri de la liste des actes par boutons radio (W1) et page de groupe (W2), morts
+   depuis la page Édition au module tableau filtrable ; ancienne page de garde (garde.xsl) ; ancienne
+   bibliographie (biblio-page), remplacée par le bloc commun. */
+
+/*=============================================================
+ 1. COULEURS DU CORPUS
+ =============================================================*/
+
+/* Celles de cartulaires.conf.json. */
+
+
+/* ==== fin bloc apparat ==== */
+
+[collid="cartulaires"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }
+/* 2026-10-22 : l'apparat des cartulaires est du texte libre (notes à lettre regroupées par la XSL) : pas
+   l'espace que le bloc commun ajoute après chaque élément (« B , Bituricensis C . »). */
+[collid="cartulaires"] #main #article .footnotes .apparatus span.note *:not(a)::after { content: none; }    /* même pas que les notes */
+/* 2026-10-28 (Maxime, SMCP-PR_0003 : « les barres qui entourent le champ de l'apparat font bizarre ») :
+   pas de filet vertical devant les lettres de l'apparat. */
+[collid="cartulaires"] #main #article .footnotes .apparatus span.note { border-left: 0; }
+/* 2026-10-28 : note sans appel rendue à sa place (« (Collacio fit) », « (Signa) », cartulaires.xsl, p.note-place) :
+   petite, en italique, sans retrait, comme une mention de la copie. */
+#main #article p.note-place { font-size: .9em; font-style: italic; text-indent: 0; margin: .4em 0; color: #555; }
+/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
+[collid="cartulaires"] #main #article .footnotes p.apparatus:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 1px;
+  margin: 1.25rem 0 1rem;
+  background: #e4e4e4;
+}
+/* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
+   grand retrait du pied de page. */
+[collid="cartulaires"] #main #article section.back:empty { display: none; }
+/* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
+   dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
+[collid="cartulaires"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
+
+/* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
+[collid="cartulaires"] #main #article :is(table, th, td, caption) { font-family: inherit; }
+/* ==== fin appels de note ==== */
+
+/* ==== BLOC BIBLIOGRAPHIE (2026-10-15, module bibliographie.xsl) ====
+   Allure de la page « Références » des chroniques latines (rubrique repliable « Titre (N) »,
+   une ligne par référence entre deux filets, l'année en gris à droite, auteurs en petites
+   capitales), avec les espacements et les tailles de hteiml : le titre de rubrique est un
+   vrai intertitre (h2, h3 dans une sous-rubrique) que hteiml met en forme comme ailleurs ;
+   la référence a la taille et l'interligne d'un paragraphe. */
+.document-views #article .biblio { margin: 0 0 1.2rem; }
+.document-views #article details.biblio > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
+.document-views #article .biblio-compte {
+  margin-left: .3em;
+  color: #8a837c;
+  font-size: .85em;
+  font-weight: normal;
+  font-variant: normal;
+  letter-spacing: 0;
+}
+.document-views #article ul.biblio-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.document-views #article ul.biblio-liste > li.bibl {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: .5em .4rem .5em 0;
+  border-bottom: 1px solid #f1ece6;
+  font-size: 1rem;
+  text-indent: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+.document-views #article ul.biblio-liste > li.bibl::marker { content: none; }
+.document-views #article ul.biblio-liste > li.bibl:hover { background: #f7f4f1; }
+.document-views #article ul.biblio-liste > li.bibl[hidden] { display: none; }
+/* Référence entière, retrait suspendu */
+.document-views #article li.bibl > .bibl-texte {
+  flex: 1 1 auto;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+/* Année, à droite, alignée d'une ligne à l'autre */
+.document-views #article li.bibl > .bibl-annee {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
+.document-views #article li.bibl .author,
+.document-views #article li.bibl .sigle {
+  font-variant: small-caps;
+  font-weight: normal;
+  letter-spacing: .02em;
+}
+.document-views #article li.bibl cite.title { font-style: italic; }
+.document-views #article li.bibl a {
+  color: inherit;
+  text-decoration: underline dotted #b9afa5;
+  text-underline-offset: .18em;
+}
+@media (max-width: 700px) {
+  .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
+}
+/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
+.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
+/* ==== fin bloc bibliographie ==== */
+/* Copier une référence au clic (JS commun elec.customJs.js, bloc 3). */
+#main #article li.bibl > .bibl-texte { cursor: copy; }
+#main #article li.bibl > .bibl-texte:hover { background: #faf6f9; }
+#main #article li.bibl > .bibl-copie { margin-left: .5em; font-size: .85em; color: var(--fill-color, #5f004d); font-weight: 600; }
+
+/*=============================================================
+ 4. PROPRE AU PROJET
+ =============================================================*/
+
+/* ---------- Tableaux triables et filtrables (2026-10-19) ----------
+   Liste des actes de la page Édition, tables de l'introduction, table chronologique, appendice,
+   annexes, concordance : marqueurs tf-* de tableau-filtrable.xsl (constructeur cartu-tf du module
+   tableaux), comportement dans le JS générique de l'ÉLEC. Mêmes règles que les tableaux des Édits,
+   de Montferrand et de Du Bourg. */
+#main #article .tf-cadre { margin: 1.2rem 0 2rem; }
+#main #article table.tf-tableau {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow: visible;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: .93rem;
+  line-height: 1.45;
+  text-align: left;
+}
+#main #article .tf-tableau .tf-legende {
+  caption-side: top;
+  padding: 0 0 .5rem;
+  color: #77706a;
+  font: .8rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif;
+  text-align: left;
+}
+#main #article .tf-tableau thead {
+  position: sticky;
+  top: 80px;
+  z-index: 2;
+}
+/* Arrivée par un lien (dots-target) : l'en-tête collant couvrirait la ligne, sauf après un « voir ». */
+#main #article .tf-tableau:has(.dots-target):not(.tf-par-voir) thead { position: static; }
+#main #article .tf-tableau thead th {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--fill-color, #8f0e21);
+  background: #f4f1ee;
+  vertical-align: bottom;
+}
+#main #article .tf-tableau button.tf-tri {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .6rem .45rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #4a4a4a;
+  font: 600 .78rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+  letter-spacing: .03em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#main #article .tf-tableau button.tf-tri::after {
+  content: "\2195";
+  display: inline-block;
+  margin-left: .35em;
+  color: #b9b2ab;
+  font-size: .95em;
+  letter-spacing: 0;
+}
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: var(--fill-color, #8f0e21); font-size: .75em; }
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: var(--fill-color, #8f0e21); font-size: .75em; }
+#main #article .tf-tableau button.tf-tri:hover,
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri,
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: var(--fill-color, #8f0e21); }
+#main #article .tf-tableau button.tf-tri:hover { background: #ece7e2; }
+#main #article .tf-tableau button.tf-tri:focus-visible { outline: 2px solid #315ba7; outline-offset: -2px; }
+#main #article .tf-tableau td {
+  padding: .4rem .6rem;
+  border: 0;
+  border-bottom: 1px solid #ebe7e3;
+  vertical-align: top;
+  text-align: left;
+}
+#main #article .tf-tableau tbody tr:nth-child(even) > td { background: #faf8f6; }
+#main #article .tf-tableau tbody tr:hover > td { background: #f3efe9; }
+#main #article .tf-tableau tbody tr:target > td:first-child,
+#main #article .tf-tableau tbody tr.dots-target > td:first-child,
+#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); }
+#main #article .tf-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
+#main #article .tf-tableau .tf-vide { color: #c4bdb6; }
+#main #article .tf-tableau tr[hidden] { display: none !important; }
+#main #article .tf-barre {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: .4rem 0 .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+#main #article .tf-compteur { font-variant-numeric: tabular-nums; }
+#main #article .tf-effacer,
+#main #article .tf-csv {
+  padding: .1rem .6rem;
+  border: 1px solid #c9c2bc;
+  border-radius: 3px;
+  background: #fff;
+  color: #315ba7;
+  font-size: .8rem;
+  cursor: pointer;
+}
+#main #article .tf-effacer:hover,
+#main #article .tf-csv:hover { border-color: #315ba7; }
+#main #article .tf-csv { margin-left: auto; }
+#main #article .tf-effacer[hidden] { display: none; }
+#main #article tr.tf-filtres td {
+  padding: .2rem .3rem .4rem;
+  background: #faf8f5;
+  border-bottom: 1px solid #e3ddd6;
+  vertical-align: top;
+}
+#main #article tr.tf-filtres input,
+#main #article tr.tf-filtres select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .15rem .35rem;
+  border: 1px solid #d6cfc8;
+  border-radius: 3px;
+  background: #fff;
+  font: inherit;
+  font-size: .8rem;
+  color: #333;
+}
+#main #article tr.tf-filtres input:focus,
+#main #article tr.tf-filtres select:focus { outline: 2px solid #315ba7; outline-offset: -1px; }
+@media (max-width: 760px) {
+  #main #article .tf-cadre { overflow-x: auto; }
+  #main #article table.tf-tableau { min-width: 40rem; }
+  #main #article .tf-tableau thead { position: static; }
+}
+
+
 /* Cartulaires : les liens <pb facs> et les témoins @facs sont convertis en
    composants PageBreak. Comme Du Cange, on garde le marqueur générique de
    PageBreak.vue — une ICÔNE média cliquable (image en opacity:0 + icône en
@@ -49,3 +319,1445 @@ span.note-inline {
 .notes-rubric + .apparatus-rubric {
   margin-top: 1.5em;
 }
+
+/* ==========================================================================
+   V5-PRESENTATION (2026-09-18) — demandes d'Olivier Canteaut sur la
+   présentation des actes, des notes et des sommaires.
+   Sauvegarde avant modification : *.bak_v5presentation_20260918.
+
+   Toutes les règles sont préfixées par `:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"])` : la feuille
+   d'un corpus est injectée GLOBALEMENT dans l'application, et cet attribut
+   (posé par DoTS-vue sur le conteneur de la page « document ») est le seul
+   point d'ancrage qui garantisse qu'on ne déforme pas les 24 autres corpus.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Présentation d'un acte
+   « n° (centré) / date (centrée) / blanc / analyse en italique / blanc /
+     liste des témoins en plus petit / blanc / "D'après a." / blanc / Texte.
+     Les blancs devant être à peu près identiques. »
+   Le n° est produit par cartulaires.xsl (<div class="docNum">, bloc
+   V5-PRESENTATION) ; le reste du cartouche vient de hteiml.
+   -------------------------------------------------------------------------- */
+
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front {
+  /* 2026-09-21 : en `em`, le blanc se mesurait sur la police de chaque bloc et
+     valait 25,2 px apres la tete latine de La Roche (1,05 em) contre 24 px
+     ailleurs. « Les blancs devant etre a peu pres identiques » : en `rem`, ils
+     le sont exactement. */
+  --acte-blanc: 1.5rem;
+}
+
+/* 2026-10-19 : cadre de l'en-tête sur le modèle de Du Bourg (projet publié) : pointillé prune fin,
+   fond blanc, retrait resserré (hteiml : tirets gris, coins arrondis). */
+[collid="cartulaires"] #main #article header.front {
+  background-color: #fff;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  border-radius: 0;
+  padding: 0.5em 0.75em;
+  margin: 0 0 1.5em;
+}
+/* Pages à sous-parties (introductions, Édition) : dots-vue les met sous .dots-ui, dont la remise à
+   zéro ramène h1-h4 à la taille du texte ; mêmes tailles que Bellelay et Du Bourg. */
+[collid="cartulaires"] .dots-ui #main #article :is(h1, h2, h3, h4).head:not(header.front > *) { font-weight: 900; }
+[collid="cartulaires"] .dots-ui #main #article h1.head:not(header.front > *) { font-size: 160%; padding-top: 0; line-height: 115%; margin: 0 0 .5em; }
+[collid="cartulaires"] .dots-ui #main #article h2.head:not(header.front > *) { font-size: 140%; margin: 1em 0; }
+[collid="cartulaires"] .dots-ui #main #article h3.head:not(header.front > *) { font-size: 130%; margin: .5em 0; }
+[collid="cartulaires"] .dots-ui #main #article h4.head:not(header.front > *) { font-size: 120%; margin: .5em 0; }
+/* 2026-10-19 : espacements des notices sur le modèle de Montferrand (17 px entre un titre et son texte) :
+   hteiml met 1 rem / 1,25 rem de retrait à chaque section imbriquée, qui s'additionnent, et 1 em au-dessus
+   du h1 ; h2 et h3 en interligne normal (h2 : 2 fois la taille du texte). Toutes les pages qui ne sont pas
+   des actes (pas de header.front), sous .dots-ui ou non. */
+[collid="cartulaires"] #main #article:not(:has(header.front)) section.div { padding: 0; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) h1.head { padding-top: 0; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) :is(h2, h3, h4).head { line-height: 1.3; margin: 1.5rem 0 .75rem; }
+
+/* Notices introductives et introductions (<front> du TEI, section.front) : hteiml les met sur fond
+   gris avec un retrait ; texte ordinaire, comme le reste des pages (l'en-tête des actes, header.front,
+   garde son cadre). */
+[collid="cartulaires"] #main #article section.front { background: none; padding: 0; }
+/* Bloc de présentation de la notice (établissement, carte de situation, type d'édition, total des actes) :
+   sans cadre (demande du 28/10 : « Notice introductive : cadre enlever »), texte droit et sans retrait ;
+   signature à droite, en italique. */
+[collid="cartulaires"] #main #article section.front > div.argument {
+  margin: 0 0 1rem;
+  padding: 0;
+  font-size: .95rem;
+  font-style: normal;
+  line-height: 1.5;
+}
+[collid="cartulaires"] #main #article section.front > div.argument p { margin: .2em 0; text-indent: 0; font-style: normal; }
+[collid="cartulaires"] #main #article section.front > div.byline { text-align: right; font-style: italic; font-size: .9rem; color: #5a5257; margin: 0 0 1.5rem; }
+
+/* Repères de page de l'en-tête (analyse : {p. 1}, MAUB-AB-01 n° 1 ; date : NDVC-AB n° 1072) : dans la marge de gauche, hors du flux ;
+   en ligne avec une marge négative, il entraînait le texte de l'analyse hors du cadre. */
+[collid="cartulaires"] #main #article header.front { position: relative; }
+[collid="cartulaires"] #main #article header.front a.pb { position: absolute; left: auto; right: calc(100% + .6rem); margin: 0; white-space: nowrap; }
+/* plusieurs repères à la suite (page sans texte, NDVC-AB n° 1072) : les uns sous les autres */
+[collid="cartulaires"] #main #article header.front a.pb + a.pb { margin-top: 1.3em; }
+[collid="cartulaires"] #main #article header.front a.pb + a.pb + a.pb { margin-top: 2.6em; }
+
+/* Titre (rubrique) en tête de la transcription d'un acte (« Privilegium Innocentii II… », NDPA-EG) : même
+   rang que la tête latine dans l'en-tête (italique, taille du texte), et non un intertitre gras. */
+[collid="cartulaires"] #main #article section.body section.transcription > .head:first-child {
+  font-size: 1.05em; font-weight: 400; font-style: italic; line-height: 1.45; margin: 0 0 1rem;
+}
+
+/* Cadre de l'en-tête moins haut : la section tradition (retrait 1 rem / 1,25 rem de hteiml) et les listes de
+   témoins (marges du navigateur) ajoutaient leurs blancs au blanc voulu entre les blocs (1,5 rem). */
+[collid="cartulaires"] #main #article header.front section.tradition { padding: 0; }
+[collid="cartulaires"] #main #article header.front ul.listWit { margin-top: 0; margin-bottom: .3rem; }
+[collid="cartulaires"] #main #article header.front .according { margin: 0; }
+
+/* n° de l'acte : 1re ligne, centré */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .docNum {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 1.2;
+  margin: 0 0 0.2em;
+}
+
+/* date : centrée juste en dessous, puis un blanc */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .docDate {
+  display: block;
+  text-align: center;
+  margin: 0 0 var(--acte-blanc);
+}
+
+/* analyse (argument), ou tête latine des actes qui n'ont pas d'argument
+   (La Roche) : même rang typographique, suivie du même blanc */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .argument {
+  margin: 0 0 var(--acte-blanc);
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .argument > p:last-child {
+  margin-bottom: 0;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > h1.head,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > h2.head,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > h3.head {
+  margin: 0 0 var(--acte-blanc);
+  font-size: 1.05em;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+/* 2026-10-28 — Hôtel-Dieu de Paris (Brièle) : le titre de l'acte est un titre d'éditeur, pas une rubrique :
+   noir, gras, centré. Les autres cartulaires gardent la rubrique violette en italique. */
+[collid="cartulaires"] #main #article article[id^="HDPAR-HD_"] header.front > h1.head {
+  color: #333 !important; /* dots-vue impose le violet aux h1 en !important */
+  font-weight: 700;
+  font-style: normal;
+  text-align: center;
+}
+
+/* tableau de la tradition : plus petit, et le même blanc avant et après */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > section.tradition,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .div.tradition {
+  margin: 0 0 var(--acte-blanc);
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front .listWit {
+  margin: 0;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front li.witness {
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+/* Repère de page de l'édition-témoin ([37]) placé DANS l'analyse : DoTS-vue le
+   pose en `.pb { display:block; width:100%; padding:20px 0 }`, ce qui ouvre un
+   trou de ~53 px au milieu du cartouche et casse l'égalité des blancs demandée.
+   Dans le seul cartouche d'acte des cartulaires, on le remet dans le fil. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front a.pb,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front a.ed {
+  display: inline;
+  width: auto;
+  padding: 0 0 0 0.35em;
+  float: none;
+}
+
+/* « D'après a. », puis le blanc qui le sépare du texte */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article header.front > .according {
+  margin: 0 0 var(--acte-blanc);
+}
+
+/* --------------------------------------------------------------------------
+   2. Témoins
+   « les témoins qui sont des éditions (a, b, c…) ont normalement un titre à
+     mettre en italique ». Le <title> TEI sort en <cite class="title"> : on
+     s'assure qu'il reste en italique dans la tradition, quelle que soit la
+     règle générique qui passerait par là.
+   (Le point après le sigle est produit par la XSL, pas ici.)
+   -------------------------------------------------------------------------- */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness cite.title,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness .title {
+  font-style: italic;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness small.n {
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* 2026-10-22 : pictogramme du témoin (choix de Maxime, après l'œil puis la miniature). L'image de la page
+   de l'édition est portée par le témoin édité (witness[@ana='edited']/@facs, plus d'image sur les pb du
+   texte). dots-vue la rend en aside.pb-component : on garde son pictogramme « image » (icone-media.svg,
+   24 px, image transparente posée dessus pour le clic), mais au bout de la ligne du témoin, dans le flux,
+   au lieu de la boîte flottante de 60 × 30 px. Le clic ouvre la page dans Mirador. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component {
+  display: inline-block; float: none; position: static;
+  margin: 0 0 0 .4em; vertical-align: middle; line-height: 0;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb { position: static; display: inline-block; width: auto; padding: 0; margin: 0; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb-label, :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb-label-text { display: none; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb-thumbnail-parent {
+  /* 2026-10-22 : le SVG fait 24 × 30 px ; dans une boîte de 24 × 24 il était rogné en haut et en bas.
+     Boîte aux proportions du pictogramme, un peu plus petite, et gris foncé pour qu'on la voie. */
+  position: relative; display: inline-block; width: 16px; height: 20px; margin: 0;
+  background-position: center; background-size: contain; filter: brightness(.45);
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component .pb-thumbnail-parent img {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li.witness > aside.pb-component:hover .pb-thumbnail-parent { filter: none; }
+/* 2026-10-28 (Maxime, SMPA-EG_0007, STEP-AB_0001, HDPO-HD_0010 : « l'icône des images se promène », « des blancs
+   dans le texte », « la page à gauche, et la vignette à gauche aussi ») : saut de page du texte sorti du flux, dans
+   la marge de gauche : « {p. N} » puis le pictogramme des témoins (16 × 20 px, gris foncé). Dans la ligne, la
+   boîte de 60 × 77 px doublait la hauteur de la ligne qui la portait. Repère : #article, qui commence au bord du texte. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article { position: relative; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) {
+  position: absolute; left: -6.5rem; width: 6rem; margin: 0; float: none;
+  display: inline-block; line-height: 1; text-indent: 0; font-style: normal;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb {
+  position: static; display: flex; flex-direction: row-reverse; justify-content: flex-start; align-items: center;
+  gap: .35em; width: auto; height: auto; min-height: 0; padding: 0; margin: 0;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-label { display: none; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-label-text { display: inline; font-size: .75rem; color: #8a837c; white-space: nowrap; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-thumbnail-parent {
+  position: relative; display: inline-block; flex: none; width: 16px; height: 20px; margin: 0;
+  background-position: center; background-size: contain; filter: brightness(.45);
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-thumbnail-parent img {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *):hover .pb-thumbnail-parent { filter: none; }
+
+
+
+
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes aside.note i,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) .aside-noteref-content i {
+  font-style: italic;
+}
+/* on ne réintroduit pas d'italique là où l'imbrication doit l'annuler */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes aside.note i i,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes aside.note i em,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes aside.note i .title,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) .aside-noteref-content i i,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) .aside-noteref-content i em {
+  font-style: normal;
+}
+
+/* --------------------------------------------------------------------------
+   4. Sommaires
+   « tout ce qui est dépliable apparaît avec une flèche, le reste avec un rond.
+     […] ne peut-on prévoir un symbole moins différent des flèches que ce rond
+     blanc ? Peut-être en le colorant comme les flèches ? »
+   Le rond vient de html.css : `.tree li::before { content: "○"; color: #999 }`.
+   Les nœuds dépliables portent la classe `more` (leur flèche est une icône SVG
+   en var(--fill-color)) et n'ont pas de ::before. On remplace donc le rond des
+   seules feuilles par une puce pleine, dans la couleur des flèches.
+   -------------------------------------------------------------------------- */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) .tree li:not(.more):not(.less)::before {
+  content: "•";
+  color: var(--fill-color, #5f004d);
+  font-weight: 700;
+  font-size: 1.15em;
+  line-height: 1;
+}
+/* --------------------------------------------------------------------------
+   5. Onglet « Notice »
+   « pour l'onglet "Notice", mettrions-nous "Notice bibliographique" pour le
+     distinguer de la Notice introductive ? »
+   2026-09-21 : plus rien ici. Le libellé était masqué (font-size: 0) et redonné
+   en ::after — le bouton gardait « Notice » pour un lecteur d'écran. Il est
+   désormais lu dans la configuration du corpus
+   (documentPageSettings.metadataTabLabel), DocumentPage.vue l'affichant tel
+   quel ; « Notice » reste la valeur par défaut des autres corpus.
+   -------------------------------------------------------------------------- */
+
+/* ==== fin V5-PRESENTATION ==== */
+
+/* 2026-10-07 : index, description de l'entrée (div.cartu-desc, cartulaires.xsl) affichée
+   directement sous la ligne de l'entrée (la pastille « + » est retirée : « overkill »). */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article div.cartu-desc { display: block; margin: .1em 0 .3em; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article div.cartu-desc > .desc {
+  display: block;
+  padding-left: .7em;
+  color: #4a4146;
+  font-size: .95em;
+}
+
+/* 2026-10-19 : index plus aérés, d'une entrée à l'autre (toutes les ressources), sans filet devant la
+   description (décision de Maxime). */
+[collid="cartulaires"] #main #article ul.index > li { margin-bottom: .7rem; }
+[collid="cartulaires"] #main #article ul.index > li > ul > li { margin-bottom: .35rem; }
+/* Lettre de l'index (p.list de hteiml, sans style) : en intertitre, comme un h2 des notices. */
+[collid="cartulaires"] #main #article div.index > p.list:first-child { font-size: 140%; font-weight: 900; line-height: 1.3; margin: 0 0 1rem; text-indent: 0; }
+
+/* 2026-10-06 : index, vignette de page (pb → aside.pb-component), remontée en tête
+   de l'entrée par la XSL : posée dans la marge de gauche, devant la puce. Sur une
+   ligne à elle, elle prenait la puce (qui s'aligne sur la première ligne). */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id]:has(> aside.pb-component) {
+  position: relative;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] > aside.pb-component {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin: 0 1.6em 0 0;
+}
+
+/* 2026-10-06 : index, entrée d'arrivée d'un renvoi (« Voir Boignevilla », lien
+   depuis un acte) : fond jaune pâle passager, comme Montferrand (comptes, § 7) :
+   3 s dont 1,8 s pleines. Document.vue pose .dots-target sur l'élément visé
+   (:target ne joue pas quand le fragment est monté après l'ancre). */
+@keyframes cartu-cible {
+  0%, 60% { background-color: #fbeeb8; }
+  100%    { background-color: transparent; }
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id]:target,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id].dots-target {
+  animation: cartu-cible 3s ease-out 1;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] { scroll-margin-top: 90px; }
+@media (prefers-reduced-motion: reduce) {
+  :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id]:target,
+  :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id].dots-target {
+    animation: none;
+    background-color: #fbeeb8;
+  }
+}
+
+/* 2026-10-06 : index, une sous-entrée par ligne. La feuille coupe chaque « ; — » par un
+   br.cartu-sous ; le retrait suspendu met les sous-entrées en retrait sous la vedette
+   (« Berte (famille) … ; / — (Florent) … ; / — (Jean) … »). */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id]:has(> br.cartu-sous) {
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+}
+
+/* 2026-10-06 : index, repère de page sans image Gallica (« p. 823 », « p. 614–622 ») :
+   discret, dans la marge de gauche, comme les vignettes Gallica de NDCH. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id]:has(> .cartu-pb-marge) { position: relative; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] > .cartu-pb-marge {
+  position: absolute;
+  top: .2em;
+  right: 100%;
+  margin-right: 1.8em;
+  color: #9a9396;
+  font-size: .72rem;
+  line-height: 1.3;
+  text-indent: 0;
+  white-space: nowrap;
+}
+
+/* 2026-10-06 : index, sous-listes (Issy, Paris, Chartres, Châtelet…) : en retrait, un tiret devant
+   chaque ligne ; sans cela on les confondait avec les entrées. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] ul,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] ol {
+  margin: .15em 0 .35em 1.4em;
+  padding: 0;
+  list-style: none;
+  text-indent: 0;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] ul > li,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] ol > li {
+  margin: .1em 0;
+  padding-left: 1.1em;
+  text-indent: -1.1em;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] ul > li::before,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article li[id] ol > li::before { content: "— "; color: #8a7f86; }
+
+/* 2026-10-06 : index, renvoi à une note ou à la mention au dos (a.cartu-renvoi,
+   cartulaires.xsl) : un seul lien « 278 [note 7] », « 98 [au dos] ». Le numéro d'acte garde
+   l'aspect des autres renvois ; la précision est une pastille discrète, dans le style de
+   celle des descriptions, qui prend la couleur du site au survol. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article a.cartu-renvoi {
+  white-space: nowrap;
+  text-decoration: none;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article a.cartu-renvoi > .cartu-renvoi-acte {
+  text-decoration: underline;
+  text-underline-offset: .12em;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article a.cartu-renvoi > .cartu-renvoi-precision {
+  display: inline-block;
+  padding: 0 .4em;
+  border: 1px solid #d9d2d6;
+  border-radius: 999px;
+  color: #8a7f86;
+  font-size: .78rem;
+  font-style: italic;
+  line-height: 1.35;
+  vertical-align: .1em;
+  text-indent: 0; /* sinon hérite du retrait négatif des entrées à sous-entrées */
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article a.cartu-renvoi:hover > .cartu-renvoi-precision,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article a.cartu-renvoi:focus-visible > .cartu-renvoi-precision {
+  border-color: var(--fill-color, #5f004d);
+  color: var(--fill-color, #5f004d);
+}
+
+/* acte : arrivée d'un renvoi de l'index sur une note ou sur la mention au dos, même jaune
+   passager que les entrées d'index */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .note[id].dots-target,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .note[id]:target,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-dos.dots-target,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-dos:target {
+  animation: cartu-cible 3s ease-out 1;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-dos { scroll-margin-top: 90px; }
+@media (prefers-reduced-motion: reduce) {
+  :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .note[id].dots-target,
+  :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-dos.dots-target {
+    animation: none;
+    background-color: #fbeeb8;
+  }
+}
+
+/* 2026-10-07 : repère de page SANS vignette Gallica, dans le texte d'un acte (« {p. 249} »,
+   SMPA-AB, etc.) : la règle de dots-vue destinée au conteneur des vignettes
+   (.pb { display:block; width:100%; padding:20px 0 }) lui donnait toute la largeur ; flottant à
+   gauche (a.facs de hteiml), il coupait la ligne : « … et son / [blanc] / pelerinage » (acte 119).
+   Il retrouve sa taille naturelle, dans la marge, sans prendre de place dans le texte. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article a.pb {
+  display: inline-block;
+  width: auto;
+  padding: 0;
+  position: static;
+  float: left;
+  margin: .15em 0 0 -5.2em;
+  line-height: 1.2;
+  font-size: .72rem;
+  color: #8a8a8a;
+  white-space: nowrap;
+  /* 2026-10-22 : depuis que l'image de l'édition passe par le témoin (plus de vignette sur les pb du texte),
+     le repère reste le lien de hteiml vers lui-même (href="#pbt1_p074") : simple repère, pas un lien. */
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* 2026-10-07 : NDVC-AB, index : page du livre après le numéro d'acte « 293 (p. 274) » */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-page {
+  color: #6f6f6f;
+  font-size: .9em;
+  white-space: nowrap;
+}
+
+/* 2026-10-07 : SCOR-EG, table des matières (concordance date → acte) : même tableau triable que la
+   liste des actes, mais c'est le contenu de la page : pas de hauteur maximale ni d'ascenseur interne */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-concordance .cartu-actes-table tbody {
+  max-height: none;
+  overflow: visible;
+}
+
+/* 2026-10-07 : SSCO-AB, « Table du cartulaire » en tableau */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: .95em;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres :is(th, td) {
+  display: table-cell;
+  padding: .3em .6em;
+  border-bottom: 1px solid #e3e0da;
+  text-align: left;
+  vertical-align: top;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres thead th {
+  border-bottom: 2px solid #b9b2a6;
+  font-weight: 600;
+  white-space: nowrap;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres tr.cartu-tm-partie th {
+  padding-top: 1.2em;
+  border-bottom: 1px solid #b9b2a6;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  color: #5a5248;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres :is(.cartu-tm-n, .cartu-tm-p) {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres :is(.cartu-tm-date, .cartu-tm-fol) {
+  white-space: nowrap;
+  color: #555;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres .cartu-tm-deest { font-style: italic; color: #8a8a8a; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres tbody tr:not(.cartu-tm-partie):hover { background: #f6f3ee; }
+
+/* 2026-10-07 : la colonne du texte est un élément flex de .wrapper ; sans contenu large
+   (un index aux lignes courtes) elle se rétractait à ~330 px et tout passait à la ligne trop
+   tôt. Même règle que les autres corpus (cjc, delescluze, bellelay, christofle…). */
+.document-area .wrapper > .row {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* 2026-10-08 : index sur une seule page, lettres repliables (modèle Delescluze, index-personnes) :
+   details.cartu-lettre « A (130) », entrées dedans. Une entrée visée par un lien (dots-target)
+   ouvre sa lettre. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre { scroll-margin-top: 90px; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre > summary { display: block; list-style: none; cursor: pointer; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre > summary::-webkit-details-marker { display: none; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-lettre-titre {
+  margin: 1.1rem 0 .3rem;
+  padding-bottom: .25rem;
+  border-bottom: 1px solid #e6dfe3;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-lettre-titre::before {
+  content: "";
+  display: inline-block;
+  margin: 0 .55rem .1em .1rem;
+  border-left: 6px solid #8a7f86;
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  transition: transform .15s;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre[open] > summary .cartu-lettre-titre::before,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre:has(.dots-target) > summary .cartu-lettre-titre::before,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre.dots-target > summary .cartu-lettre-titre::before { transform: rotate(90deg); }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre > summary:hover .cartu-lettre-titre { color: #000; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .cartu-lettre-nb { color: #8a7f86; font-weight: normal; font-size: .82em; letter-spacing: 0; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre:has(.dots-target)::details-content,
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article details.cartu-lettre.dots-target::details-content { content-visibility: visible; display: block; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article ul.cartu-lettre-entrees { margin: .2rem 0 .6rem; }
+
+/* === SECTION ORDINAUX DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
+/* === SECTION ORDINAUX FIN === */
+
+/* === SECTION EDITION DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
+/* Page Édition (cartulaires-edition.xsl) : liste des actes au module tableau filtrable (bloc 5).
+   Le titre de groupe est sous .dots-ui, dont la remise à zéro rapetisse h1 : même taille que Bellelay. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article div.group > h1.head { font-size: 160%; font-weight: 900; padding-top: 1em; line-height: 115%; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-edition .cartu-tm-partie-col { min-width: 12em; font-size: .9em; color: #5a5257; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-edition th.cartu-tm-n { width: 5em; }
+/* === SECTION EDITION FIN === */
+
+/* === SECTION TITRES DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
+/* === SECTION TITRES FIN === */
+
+/* === SECTION TABLEAUX DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
+/* 2026-10-08 : tableaux analytiques des introductions (ex. HDPAR-HD_front) : table.cartu-table-matieres
+   (règles plus haut) ; ici seulement le titre du tableau, la ligne de folio et la taille. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-analytique {
+  font-size: .88em;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres > caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  padding: .4em 0;
+  color: #5a5248;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres tr.cartu-tm-pb td {
+  padding: .1em .6em 0;
+  border-bottom: none;
+  font-size: .85em;
+  color: #8a7f74;
+}
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-matieres tr.cartu-tm-pb:hover { background: none; }
+@media (max-width: 640px) {
+  :is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article table.cartu-table-analytique { font-size: .75em; }
+}
+/* Appendices en inventaire (VNDP-AB_back) : filtre au-dessus du tableau, colonnes étroites sauf Article */
+.document-area #article table.cartu-appendice-table td.cartu-app-rubrique,
+.document-area #article table.cartu-appendice-table td.cartu-app-lieu { white-space: nowrap; color: #5a5257; }
+.document-area #article table.cartu-appendice-table tr[hidden] { display: none; }
+.document-area #article table.cartu-appendice-table td.cartu-app-article { white-space: normal; width: 70%; }
+.document-area #article table.cartu-appendice-table td.cartu-app-lieu { white-space: normal; max-width: 12rem; }
+.document-area #article table.cartu-appendice-table .cartu-app-note { margin-left: .5em; color: #8a7f86; font-size: .82em; font-style: italic; }
+.document-area #article .cartu-app-note::before { content: "["; } .document-area #article .cartu-app-note::after { content: "]"; }
+/* 2026-10-08 (tableaux2) : annexes de SAPC-AB (liste des abbesses, corpus des sceaux) : colonnes du tableau des sceaux */
+.document-area #article table.cartu-appendice-table td.cartu-app-nom { white-space: normal; width: 18%; }
+.document-area #article table.cartu-sceaux-table td.cartu-app-article p { margin: 0 0 .35em; }
+.document-area #article table.cartu-sceaux-table tr.cartu-tm-partie strong { color: #5a5248; }
+/* === SECTION TABLEAUX FIN === */
+
+
+/* ==== Cartulaire blanc de Saint-Denis (2026-10-19) : sous-collection saint-denis-cartulaire-blanc ====
+   Les sept chapitres sont rendus par cartulaires-saint-denis.xsl (DOM du site Pleade) : leurs règles,
+   reprises telles quelles de saint-denis.customCss.css (blocs 2 et 4), ne valent que sur leurs pages
+   (conteneur div#<chapitre>[collid], plus précis que les règles des autres cartulaires). */
+/* Saint-Denis — feuille reconstruite le 13/10/2026.
+   Présentation des actes : la CSS du site historique (Pleade, saint-denis.enc.sorbonne.fr,
+   theme/css/module-tei.css et pleade.css), sur les classes que saint-denis.xsl reprend de
+   Pleade (tei-doc-title, tei-docDate, tei-summary, tei-tradition, tei-comments,
+   tei-transcription…), limitée à #main #article (la feuille est injectée dans toute
+   l'application). Suivent, repris tels quels de la feuille précédente, tous les dispositifs
+   propres à cette édition (pages du site, images, Inventaire, index des auteurs, sommaire).
+   Les écarts à Pleade sont marqués [dots]. */
+
+/* ---------- Texte : police et interligne des autres cartulaires (Roboto, hteiml par défaut) depuis le
+   2026-10-19 ; les règles Pleade (Verdana 13 px, liens bleus) sont retirées. ---------- */
+
+/* ---------- Acte : classes Pleade (DOM de saint-denis.xsl), présentation des actes des cartulaires
+   (n° et date centrés, analyse en italique, témoins en plus petit, blancs de 1,5 rem). ---------- */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article header.front > .tei-tradition:last-child { margin-bottom: 0; }  /* cadre de hteiml (header), comme les autres cartulaires */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-title { text-align: center; font-size: 1.2rem; font-weight: 700; line-height: 1.2; margin: 0 0 .24rem; }  /* comme le n° d'acte des cartulaires (.docNum) */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-docDate { text-align: center; font-size: 1rem; line-height: 1.4; margin: 0 0 1.5rem; text-indent: 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary-refurl { font-size: .85rem; line-height: 1.4; text-align: left; margin: 0 0 1rem; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary { font-size: .85rem; line-height: 1.4; text-align: justify; font-style: italic; margin: 0 0 1.5rem; }  /* comme l'analyse (.argument) */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary p { text-indent: 0; margin: 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-body hr { display: none; }  /* les cartulaires séparent les blocs par des blancs, sans filet */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition { text-align: left; font-size: .85rem; line-height: 1.4; margin: 0 0 1.5rem; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition p { text-indent: 0; margin: .3em 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition .listWit-head { margin-bottom: 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-label { font-style: italic; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-notes { font-size: .85rem; line-height: 1.4; margin: 0 0 1.5rem; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments { margin-top: 1.5rem; }  /* blanc sous le cadre de l'en-tête */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments p { text-align: justify; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-transcription { font-size: 1rem; line-height: 1.4; text-align: justify; margin-top: 0; }  /* comme le texte des actes (p.p) */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .title,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article cite.title,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .foreign { font-style: italic; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary .foreign { font-style: normal; }  /* .tei-foreign-n : droit dans l'analyse en italique */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .quote-summary,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .quote-rubric { font-style: normal; }
+/* [dots] apparat en pied (hteiml) : une note par ligne */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .noteref-orphan { color: #8a8a8a; }
+
+
+/* ==================================================================
+   Saint-Denis V2 — restitution visuelle du site ÉLEC historique
+   Palette relevée dans le CSS Pleade historique :
+   rouge #A73136 ; gris #E8E8E8 ; lien #139EDF ; menu ~190px.
+   ================================================================== */
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] {
+  --sd-legacy-red:#A73136;
+  --sd-legacy-gray:#E8E8E8;
+  --sd-legacy-link:#139EDF;
+  --sd-legacy-dark:#4A4A4A;
+  --sd-legacy-border:#CECECE;
+}
+/* Pages éditoriales récupérées */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-part,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-subpart,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page {
+  max-width:76rem;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-part-title {
+  margin-top:2rem;
+  padding:.45rem .65rem;
+  background:var(--sd-legacy-gray);
+  border-left:4px solid var(--sd-legacy-red);
+  color:var(--sd-legacy-dark);
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-subpart-title {
+  margin-top:1.5rem;
+  color:var(--sd-legacy-red);
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page {
+  margin-top:1rem;
+  margin-bottom:2.25rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-page-title {
+  color:var(--sd-legacy-dark);
+  font-size:1.65rem;
+  border-bottom:1px solid var(--sd-legacy-border);
+  padding-bottom:.35rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-legacy-h2 {
+  color:var(--sd-legacy-dark);
+  font:700 1.25rem/1.3 Arial,Helvetica,sans-serif;
+  margin:1.6rem 0 .7rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-legacy-h3 {
+  color:var(--sd-legacy-red);
+  font:700 1.05rem/1.3 Arial,Helvetica,sans-serif;
+  margin:1.3rem 0 .6rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page a {
+  color:var(--sd-legacy-link);
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page table {
+  display:block;
+  overflow-x:auto;
+  width:100%;
+  border-collapse:collapse;
+  font-size:.92rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page td,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page th {
+  border:1px solid #d6d6d6;
+  padding:.4rem .5rem;
+  vertical-align:top;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page tr:nth-child(even) {
+  background:#fafafa;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page .date {
+  font-size:.9em;
+  color:#666;
+}
+
+/* 2026-10-05 — Mises en forme du TEI sans règle jusqu'ici (audit du 05/10), reprises de la
+   feuille de l'ancien site (Pleade, theme/css/module-eadeac.css) :
+   - hi[@rend="cite"] → span.cite : <cite> sur l'ancien site, sans règle, donc italique ;
+   - p[@rend="smaller"] → p.smaller : « .smaller { font-size: 90% } » ;
+   - list[@rend="encadré"] → ul.encadré : bloc encadré (90 %, filet noir, marges 2em) ;
+   - emph[@rend="sup"] → em.sup : <sup> droit sur l'ancien site (« sup { vertical-align: top;
+     font-size: 80% } ») ; hteiml le sortait en exposant italique. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) span.cite { font-style: italic; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) p.smaller { font-size: 90%; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) ul.encadré {
+  font-size: 90%; border: 1px solid black; margin-left: 2em; margin-right: 2em;
+  padding: .5em; list-style-position: inside; line-height: 130%;
+}
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) em.sup { font-style: normal; font-size: .75em; line-height: 0; vertical-align: super; }  /* exposant ordinaire, comme le <sup> de hteiml */
+
+/* Recherche dots-cli-es */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search {
+  margin:1.4rem 0 2rem;
+  padding:1rem 1.1rem 1.2rem;
+  border:1px solid var(--sd-legacy-border);
+  border-top:5px solid var(--sd-legacy-red);
+  background:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search h2 {
+  margin:.1rem 0 1rem;
+  padding:0;
+  border:0;
+  background:none;
+  color:var(--sd-legacy-red);
+  font-size:1.35rem;
+  font-weight:700;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search-help {
+  margin:.75rem 0 0;
+  font-size:.9rem;
+  color:#666;
+}
+/* autopilote 2026-09-11 : images servies depuis /images/saint-denis/ */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .sd-graphic { max-width: 100%; height: auto; display: block; margin: .5em 0; }
+
+/* ==== Images rapatriées le 2026-09-12 (folios du Cartulaire blanc, illustrations de chapitre) ====
+   Les 831 liens vers la visionneuse de l'ancien site sont devenus des <details> qui déplient
+   l'image servie en local. Deux précautions apprises en D6/E2 :
+   — html.css de DoTS-vue impose `details > * { display: none }` : il faut ré-autoriser summary
+     et contenu, SINON le menu s'affiche vide ;
+   — le `display` du contenu doit être porté par `[open]`, sinon la règle écrase aussi le
+     masquage natif de l'état fermé et l'image reste visible en permanence. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio > summary,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration > summary { display: list-item; cursor: pointer; color: #7a1f1a; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio[open] > :not(summary),
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] > :not(summary) { display: block; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio:not([open]) > :not(summary),
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration:not([open]) > :not(summary) { display: none; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio > summary { display: inline list-item; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio-libelle,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-libelle { text-decoration: underline; text-underline-offset: 2px; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio[open],
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] { display: block; margin: .6rem 0 1rem; }
+/* L'image est un folio complet (~500 ko, 2 000 px de haut) : on la borne à la colonne de texte
+   et on la laisse défiler dans son cadre plutôt que d'étirer la page. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio-img,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-img {
+  display: block; max-width: min(100%, 46rem); max-height: 80vh; width: auto; height: auto;
+  margin: .5rem 0; border: 1px solid #d8d2c8; background: #fff; object-fit: contain;
+}
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-pdf::after { content: ""; }
+/* ==== fin images rapatriées ==== */
+
+/* ==== 2026-09-14 (agentsd) : visionneuses de série sans équivalent local ====
+   Les cinq renvois « Tome N (Archives nationales LL ...) » de « Feuilleter les images » ne
+   désignaient aucune image : ils ne sont plus des liens. On ne les déguise pas en liens morts
+   (pas de bleu, pas de soulignement plein) mais on signale qu'il y a quelque chose à savoir,
+   l'explication étant dans l'intitulé de survol posé par la feuille XSL. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-visionneuse-absente {
+  color: inherit;
+  cursor: help;
+  border-bottom: 1px dotted #9aa8ae;
+}
+/* ==== fin visionneuses de série ==== */
+
+/* ==== D21 (2026-09-12) : Inventaire général des chartes ==== */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-section { margin: 1.4rem 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-section-info { margin: .2rem 0; color: #555; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-libelle { font-weight: 700; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-notice { margin: 1.1rem 0; padding: .8rem 1rem; border-left: 3px solid #d8d2c8; background: #fcfbfa; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-champs { display: grid; grid-template-columns: minmax(9rem, auto) 1fr; gap: .15rem .9rem; margin: .4rem 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-champs dt { color: #555; font-size: .9rem; }
+/* ==== fin Inventaire ==== */
+/* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
+   l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :
+   <p class="isd-rubrique">. Taille, graisse et couleur de l'ancienne règle des titres h1-h3 de notice (retirée le
+   2026-10-09 : plus aucun titre dans les notices), sans retrait d'alinéa. Sélecteur avec l'id :
+   le socle D12 fixe la taille des titres par `#article h1`, qui l'emporte sur deux classes. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) .isd-notice p.isd-rubrique {
+  margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555; text-indent: 0;
+}
+
+/* ============================================================================
+   D43 (2026-09-24) — Index des auteurs d'actes (Cartulaire blanc, Inventaire).
+
+   Rendus par saint-denis.xsl au bas des deux pages « Parcourir », depuis le
+   compagnon saint-denis-index-auteurs.xml. Aucun composant Vue : la rubrique
+   est du HTML produit par la feuille, le pliage est celui de <details>.
+
+   PORTÉE — toutes les règles sont préfixées par `#main #article`, la zone de
+   texte TEI. La customCss est injectée globalement : sans ce préfixe, des
+   sélecteurs aussi communs que `details` ou `summary` fuiraient sur les
+   autres corpus de l'application.
+   ============================================================================ */
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs {
+  margin-top: 2.5rem;
+  padding-top: 1.4rem;
+  border-top: 2px solid var(--sd-legacy-red);
+  /* Le lien historique de la page mène ici : ne pas se caler sous l'en-tête fixe. */
+  scroll-margin-top: 5rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs-titre {
+  margin: 0 0 .3rem;
+  font-size: 1.15rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs-chapeau {
+  margin: 0 0 1rem;
+  color: var(--sd-legacy-dark);
+  font-size: .9rem;
+}
+
+/* Barre des initiales. Même vocabulaire de pastilles que la navigation de
+   description, pour que la page reste d'une seule pièce. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-bottom: 1.2rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien {
+  min-width: 1.9rem;
+  padding: .2rem .45rem;
+  border: 1px solid var(--sd-legacy-border);
+  border-radius: 3px;
+  color: var(--fill-color);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien:hover,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien:focus {
+  background: var(--fill-color);
+  border-color: var(--fill-color);
+  color: #fff;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-groupe {
+  /* L'ancre d'une initiale ne doit pas se caler sous l'en-tête fixe. */
+  scroll-margin-top: 5rem;
+  margin-bottom: 1.4rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-initiale {
+  margin: 0 0 .35rem;
+  padding-bottom: .15rem;
+  border-bottom: 1px solid var(--sd-legacy-border);
+  color: var(--sd-legacy-red);
+  font-size: 1rem;
+  letter-spacing: .06em;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article ul.sd-index-termes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article li.sd-index-terme {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px dotted #ddd;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  padding: .25rem .2rem;
+  cursor: pointer;
+  list-style-position: outside;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire:hover {
+  background: #f3f8f8;
+}
+
+/* `display:flex` sur un summary supprime le triangle de pliage du navigateur :
+   on le redessine, sans quoi rien n'indique que le terme s'ouvre. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::-webkit-details-marker { display: none; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::marker { content: ""; }
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::before {
+  content: "\25B8";
+  flex: 0 0 .9rem;
+  color: var(--sd-legacy-red);
+  font-size: .8rem;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-details[open] > .sd-index-sommaire::before {
+  content: "\25BE";
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-libelle {
+  flex: 1 1 auto;
+}
+
+/* Le compte d'occurrences, à droite, aligné d'un terme à l'autre. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-nb {
+  flex: 0 0 auto;
+  min-width: 2.6rem;
+  padding: 0 .4rem;
+  border-radius: 999px;
+  background: var(--sd-legacy-gray);
+  color: var(--sd-legacy-dark);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .75rem;
+  text-align: center;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-details[open] > .sd-index-sommaire {
+  font-weight: 700;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-renvois {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin: .1rem 0 .6rem;
+  padding: .5rem .2rem .5rem 1.2rem;
+  border-left: 3px solid var(--sd-legacy-gray);
+  /* « auteurs laïques » aligne 647 renvois : on borne la hauteur du bloc
+     déplié plutôt que de pousser la page sur plusieurs écrans. */
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi {
+  padding: .1rem .4rem;
+  border: 1px solid var(--sd-legacy-border);
+  border-radius: 3px;
+  background: #fff;
+  color: var(--fill-color);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .78rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi:hover,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi:focus {
+  background: var(--fill-color);
+  border-color: var(--fill-color);
+  color: #fff;
+}
+
+/* Le lien Pleade historique, devenu ancre vers la rubrique de la même page. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-ancre {
+  text-decoration-style: dotted;
+}  /* et non le bleu des liens Pleade */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area details.sd-folio { margin-bottom: 1rem; }  /* blanc entre le folio (libellé ou image) et le texte qui suit */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article section.front { background: none; border: none; padding: 0; margin: 0; }  /* introduction du chapitre (<front>) : hteiml la mettait sur fond gris */
+/* ==== fin Cartulaire blanc de Saint-Denis ==== */
+
+/*=============================================================
+ 5. MÉCANISMES COMMUNS DOTS-VUE
+ =============================================================*/
+
+/* ==== Arrivée sur une ancre (bloc commun 2026-10-15, revu le 2026-10-29, identique dans tous les corpus) ====
+   Élément visé par l'URL quand on vient d'un lien du texte (note, renvoi, ligne de tableau,
+   entrée d'index…) : jaune 1,8 s puis fondu jusqu'à 3 s. La classe cible-arrivee est posée par
+   le bloc « Arrivée sur une ancre » du JS générique (elec.customJs.js), qui place aussi la cible
+   sous ce qui reste collé en haut ; il ne la pose pas sur un titre, ni quand on vient du sommaire
+   ou que le sommaire est ouvert (les deux dernières règles en sont le garde-fou). Une ligne de
+   tableau : on anime aussi ses cellules (leur fond, zébré, masquerait celui de la ligne) ; un
+   details : son résumé. */
+@keyframes elec-cible {
+  0%, 60% { background-color: #fbeeb8; }
+  100%    { background-color: transparent; }
+}
+#main #article .cible-arrivee,
+#main #article tr.cible-arrivee > td,
+#main #article details.cible-arrivee > summary { animation: elec-cible 3s ease-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  #main #article .cible-arrivee,
+  #main #article tr.cible-arrivee > td,
+  #main #article details.cible-arrivee > summary { animation: none; outline: 2px solid #fbeeb8; }
+}
+#main #article :is(h1, h2, h3, h4, h5, h6).cible-arrivee,
+.toc-aside-is-opened #main #article .cible-arrivee,
+.toc-aside-is-opened #main #article tr.cible-arrivee > td,
+.toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
+/* ==== fin arrivée sur une ancre ==== */
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+/* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est ouvert sans
+   refId) : même bloc que les Édits, Montferrand, les chroniques latines et Du Bourg. */
+#main #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: "Georgia", "Iowan Old Style", serif;
+  text-align: center;
+}
+#main #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  border: 0 !important;
+}
+#main #article .titlestmt .editors { text-align: center; text-indent: 0; }
+#main #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
+#main #article .titlestmt .editor { font-variant: small-caps; letter-spacing: 0.03em; color: #333; }
+#main #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color);
+  border-top: 1px solid var(--fill-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13 ; 2026-10-14) ====
+   Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
+   CSS de chaque corpus qui en a. Deux ids en tête de sélecteur : il l'emporte sur les
+   règles propres au corpus.
+   - Paragraphes dans une cellule : ni justifiés ni en retrait (une colonne étroite
+     justifiée ouvre de grands blancs entre les mots).
+   - Petit écran, sur le modèle de la recherche des cartulaires (dev.chartes.psl.eu/elec/
+     cartulaires/search) : les en-têtes de tri forment une rangée de boutons de même
+     largeur, l'indicateur au-dessus du nom, entre deux filets ; chaque ligne devient un
+     bloc de valeurs empilées, sans cadre ni libellé, séparé du suivant par un filet.
+     Les filtres (que la recherche n'a pas) s'empilent, chacun avec son libellé.
+   - Champs de saisie à 16px sur écran tactile : en dessous, Safari iOS zoome la page
+     à la saisie et ne dézoome pas. */
+#main #article .tf-cadre td p {
+  margin: 0;
+  text-align: left;
+  text-indent: 0;
+}
+#main #article .tf-cadre td p + p { margin-top: .4em; }
+
+@media (max-width: 760px), (pointer: coarse) {
+  #main #article .tf-cadre tr.tf-filtres input,
+  #main #article .tf-cadre tr.tf-filtres select { font-size: 16px; }
+}
+
+@media (max-width: 760px) {
+  #main #article .tf-cadre { overflow: visible; }
+  #main #article .tf-cadre table,
+  #main #article .tf-cadre thead,
+  #main #article .tf-cadre tbody,
+  #main #article .tf-cadre tr,
+  #main #article .tf-cadre th,
+  #main #article .tf-cadre td {
+    display: block;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  #main #article .tf-cadre thead { position: static; background: none; }
+  #main #article .tf-cadre caption { display: block; width: auto; }
+  #main #article .tf-cadre .tf-barre { flex-wrap: wrap; }
+  #main #article .tf-cadre .tf-csv { margin-left: 0; }
+
+  /* En-têtes : rangée de boutons de même largeur, indicateur au-dessus du nom */
+  #main #article .tf-cadre thead tr:first-child {
+    display: flex;
+    gap: .25rem;
+    padding: .5rem 0;
+    border-top: 2px solid var(--fill-color, #8f0e21);
+    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    background: none;
+  }
+  #main #article .tf-cadre thead tr:first-child th {
+    flex: 1 1 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre thead button.tf-tri {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .2rem;
+    width: 100%;
+    padding: .2rem .1rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: #222;
+    font: 600 .8rem/1.2 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  #main #article .tf-cadre thead button.tf-tri::after {
+    order: -1;
+    display: block;
+    margin: 0;
+    padding: .15rem .45rem;
+    border-radius: 3px;
+    background: #ece9e6;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.1;
+  }
+  #main #article .tf-cadre thead button.tf-tri:hover { background: none; }
+
+  /* Filtres : un par ligne, libellé à gauche */
+  #main #article .tf-cadre tr.tf-filtres {
+    margin-top: .6rem;
+    padding: .4rem .5rem;
+    border: 1px solid #e3ddd6;
+    border-radius: 4px;
+    background: #faf8f5;
+  }
+  /* Libellé posé à gauche en position absolue : le contenu de la cellule reste du texte
+     courant, ce qu'une grille découperait */
+  #main #article .tf-cadre tr.tf-filtres td {
+    position: relative;
+    padding: .2rem 0 .2rem calc(30% + .6rem);
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre tr.tf-filtres td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: .55rem;
+    width: 30%;
+    color: #77706a;
+    font: 600 .7rem/1.3 var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  /* Lignes : valeurs empilées, sans cadre ni libellé, un filet entre deux lignes */
+  #main #article .tf-cadre tbody tr {
+    margin: 0;
+    padding: .7rem .2rem;
+    border: 0;
+    border-bottom: 1px solid #e3ddd6;
+    border-radius: 0;
+    background: none;
+  }
+  #main #article .tf-cadre tbody td {
+    padding: .1rem 0;
+    border: 0;
+    background: none;
+  }
+  #main #article .tf-cadre tbody td::before { content: none; }
+  #main #article .tf-cadre tbody tr:nth-child(even) > td,
+  #main #article .tf-cadre tbody tr:hover > td { background: none; }
+  #main #article .tf-cadre tbody tr.dots-target,
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
+  /* Première colonne (l'entrée) en tête du bloc */
+  #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
+  /* Cellule vide (tiret) : rien à montrer */
+  #main #article .tf-cadre tbody td:has(> .tf-vide:only-child) { display: none; }
+  #main #article .tf-cadre tbody tr[hidden] { display: none !important; }
+}
+/* ==== fin tableau filtrable ==== */
+
+/* Restauré (2026-10-26) : règle des repères « p. N » de notes, retirée par erreur avec les règles de notes. */
+/* le repère « p. N » qui sépare deux pages de notes portait 10 px + 22 px de
+   marges : ramené au même ordre de grandeur que l'écart entre deux notes. */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article .footnotes .note-page {
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+
+/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
+   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
+   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+/* ==== fin bloc apparat ==== */
+
+/* ==== TABLEAU SIMPLE (2026-10-27) : tableaux des introductions (table.cartu-tableau-simple, ex. HDPAR-HD_front),
+   sans tri ni filtre. Filets entre les lignes, en-tête marqué, intertitres (Rois., Évêques.) et lignes de folio
+   (Cah. 3, fol. 7-9) distingués des données ; colonnes de numéros sans retour à la ligne. ==== */
+[collid] #main #article table.cartu-tableau-simple {
+  width: 100%;
+  margin: 1.5rem 0 2rem;
+  border-collapse: collapse;
+  font-size: .9em;
+  line-height: 1.35;
+}
+[collid] #main #article table.cartu-tableau-simple caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  padding: 0 0 .5em;
+}
+[collid] #main #article table.cartu-tableau-simple thead th {
+  padding: .35em .5em;
+  text-align: left;
+  vertical-align: bottom;
+  font-weight: 600;
+  background: #f6f3ef;
+  border-bottom: 1px solid #d9d2c9;
+}
+[collid] #main #article table.cartu-tableau-simple thead tr:last-child th { border-bottom: 2px solid var(--fill-color, #8f0e21); }
+[collid] #main #article table.cartu-tableau-simple tbody td {
+  padding: .25em .5em;
+  vertical-align: top;
+  border-bottom: 1px solid #ece7e2;
+}
+/* cellules courtes (sigles A, B, C, numéros, cotes ; td.cartu-court posé par la XSL le 2026-10-28) : chiffres
+   alignés, pas de coupure. Avant : les trois premières colonnes et la dernière, ce qui bloquait l'analyse de SMPA-AB-02. */
+[collid] #main #article table.cartu-tableau-simple tbody td.cartu-court {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+/* intertitres : Rois., Évêques. — Évêques de Paris., Abbés et prieurs. */
+[collid] #main #article table.cartu-tableau-simple tbody tr.cartu-tm-partie > th {
+  padding: .7em .5em .3em;
+  text-align: left;
+  font-weight: 600;
+  background: #efe9e1;
+  border-bottom: 1px solid #d9d2c9;
+}
+/* lignes de folio : Cah. 3, fol. 7-9. — Copie b. */
+[collid] #main #article table.cartu-tableau-simple tbody tr:not(.cartu-tm-pb):has(> td[colspan]) > td {
+  padding-top: .6em;
+  font-style: italic;
+  color: #6b6260;
+}
+/* repères de page de l'imprimé : discrets */
+[collid] #main #article table.cartu-tableau-simple tbody tr.cartu-tm-pb > td {
+  padding: .15em .5em;
+  text-align: right;
+  font-size: .8em;
+  color: #9a9088;
+  border-bottom: none;
+}
+/* appel de note dans une cellule : pastille de dots-vue, un peu moins espacée */
+[collid] #main #article table.cartu-tableau-simple a.noteref sup { margin: 0 0 0 .2em; }
+/* colonnes des sigles A, B, C : étroites */
+[collid] #main #article table.cartu-tableau-simple thead tr:last-child th:nth-child(-n+3) { width: 3.5em; }
+/* repère de page dans le tableau : l'étiquette seule, sans la vignette (qui crée un grand blanc) */
+[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb :is(.pb-thumbnail-parent, img) { display: none; }
+[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb aside.pb-component { float: none; position: static; display: inline; margin: 0; }
+[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb article.pb { display: inline; position: static; width: auto; height: auto; min-height: 0; padding: 0; margin: 0; }
+[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb .pb-label-text { display: inline; }
+/* ==== fin tableau simple ==== */
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
+}
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes :is(aside, div).note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes :is(aside, div).note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
+   h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
+   à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
+.document-views #article h1 { color: #5f004d !important; }
+.document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
+/* ==== fin bloc titres ==== */
+
+/* « Dissertation critique » (section.div.dissertation, cartulaires.xsl) un peu plus petite que le texte :
+   NDRC-AB d'abord, tous les cartulaires le 2026-10-28 (Maxime, STEP-AB_0001). */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article section.div.dissertation { font-size: .9em; }
+
+/* 2026-10-27 : bibliographie, ouvrage du même auteur que le précédent (« —— », classe posée par bibliographie.xsl) : léger retrait. */
+.document-views #article li.bibl.bibl-meme-auteur { margin-left: 1em; }
+
+/* ==== CORPUS SIGILLORUM (SAPC-AB, annexes ; 2026-10-27) : classes posées par cartulaires.xsl ====
+   sigillant (« I. INNOCENTIUS III. ») détaché, date et cote en retrait, description plus en retrait. */
+.document-views #article p.sceau-sigillant { margin: 1.1em 0 .15em; text-indent: 0; }
+.document-views #article p.sceau-lieu { margin: 1.1em 0 .15em; text-indent: 0; font-style: italic; }
+.document-views #article p.sceau-cote { margin: .35em 0 0 1.5em; text-indent: 0; font-variant-numeric: tabular-nums; }
+.document-views #article p.sceau-description { margin: 0 0 0 3em; text-indent: 0; color: #555; }
+/* ==== fin corpus sigillorum ==== */
+
+/* ==== BLOC LIENS (2026-10-27) : couleur des liens et des numéros de note, identique dans chaque corpus
+   Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
+   appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
+   (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) {
+  color: #5f004d !important;
+}
+.document-views #article .footnotes a.noteback { color: #5f004d !important; }
+/* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
+.document-views #article a.pb { color: #8a8a8a !important; }
+/* ==== fin bloc liens ==== */
+
+/* 2026-10-28 (Maxime, NDPR-AB_etablissement : « espace bizarre ») : une URL affichée en toutes lettres est un seul
+   mot ; dans un paragraphe justifié elle passait entière à la ligne et la ligne d'avant s'étirait. Coupure permise
+   n'importe où, seulement quand le mot ne tient pas ; et paragraphe non justifié (sinon le navigateur passe à la ligne
+   avant l'URL et étire la ligne d'avant). */
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article a[target="_blank"] { overflow-wrap: anywhere; }
+:is([collid="cartulaires"], [collid="MAUB-AB"], [collid="NDPA-EG"], [collid="SCCO-AB"], [collid="SMPA-AB"], [collid="cartulaires_index"], [collid="INDEX-LIEUX"], [collid="INDEX-PERSONNES"], [collid="SMPA-EG"], [collid="HDPAR-HD"], [collid="HDPO-HD"], [collid="MAUB-AB-01"], [collid="NDCH-EG"], [collid="NDMA-AB"], [collid="NDMT-AB"], [collid="NDMV-AB"], [collid="NDPA-EG-01"], [collid="NDPA-EG-02"], [collid="NDPA-EG-03"], [collid="NDPA-EG-04"], [collid="NDPR-AB"], [collid="NDVC-AB"], [collid="SAPC-AB"], [collid="SCCO-AB-01"], [collid="SCCO-AB-02"], [collid="SCCO-AB-03"], [collid="SCHA-PR"], [collid="SCOR-EG"], [collid="SGDP-AB"], [collid="SGGO-PR"], [collid="SGLY-PR"], [collid="SLES-PR"], [collid="SMCP-PR"], [collid="SMMI-AB"], [collid="SMPA-AB-01"], [collid="SMPA-AB-02"], [collid="SMPA-AB-03"], [collid="SMPO-AB"], [collid="SSCO-AB"], [collid="STEP-AB"], [collid="VNDP-AB"], [collid="NDRC-AB"], [collid="MAUB-AB-02"]) #main #article p:has(> a[target="_blank"]) { text-align: left; }
+
+/* 2026-10-28 (Maxime, SGGO-PR_group : « table par noms de lieux et de personnes, c'est pas des sous-parties du
+   groupe » ; NDPA-EG-03_group-1-2 : « dans les sous-groupes j'ai les autres parties ») : le sommaire du bas de
+   dots-vue (getRefIdBottomTOC, DocumentPage.vue) s'arrête au frère suivant de l'unité courante ; quand elle est
+   la dernière de son parent, il continue jusqu'à la fin du document. Correction côté CSS (pas de Vue) : une
+   ligne moins en retrait que la première (retrait = (niveau - 1) × 15 px) n'est plus sous l'unité courante ;
+   elle et tout ce qui suit sont masqués. Correction de fond, une ligne : s'arrêter à i.level <= current.level. */
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 15px"]) > li[style*="margin-left: 0px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 15px"]) > li[style*="margin-left: 0px"] ~ li { display: none; }
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 30px"]) > li[style*="margin-left: 0px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 30px"]) > li[style*="margin-left: 0px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 30px"]) > li[style*="margin-left: 15px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 30px"]) > li[style*="margin-left: 15px"] ~ li { display: none; }
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 0px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 0px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 15px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 15px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 30px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 45px"]) > li[style*="margin-left: 30px"] ~ li { display: none; }
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 0px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 0px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 15px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 15px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 30px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 30px"] ~ li,
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 45px"],
+[collid="cartulaires"] .bottom-toc > ul.tree:has(> li:first-child[style*="margin-left: 60px"]) > li[style*="margin-left: 45px"] ~ li { display: none; }
+
+/* 2026-10-28 : notes du censier de SMPA-EG restées en paragraphes (p.cartu-note-censier, cartulaires.xsl) : présentées
+   comme des notes, en attendant leur reconversion. */
+[collid="cartulaires"] #main #article p.cartu-note-censier { font-size: .85em; line-height: 1.35; text-indent: 0; margin: .15em 0; color: #444; }
+[collid="cartulaires"] #main #article p.cartu-note-censier.premiere { margin-top: 1.2em; padding-top: .6em; border-top: 1px solid #e4e4e4; }
+
+/* 2026-10-28 : table des actes du Cartulaire blanc en tableau filtrable (cartulaires-saint-denis.xsl) : en-têtes longs
+   (« Édition de la notice dans l'inventaire ») sur plusieurs lignes, sinon le tableau déborde de l'article. */
+#cartulaire-blanc[collid] #main #article table.tf-tableau button.tf-tri { white-space: normal; }
+
+/* Relecture du 30/10 (page de comparaison avant/après) : leçon fautive conservée : romain + « (sic) » (proposition B) */
+[collid="cartulaires"] #article em.sic { font-style: normal; }
+[collid="cartulaires"] #article em.sic::after { content: " a0(sic)"; font-size: .75em; font-style: italic; color: #777; }

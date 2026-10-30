@@ -439,8 +439,6 @@
 @media (max-width: 768px) {
   [collid="cjc"] #main #article .pb { margin: 0 .25em; font-size: .8rem; }
 }
-/* 2026-10-29 : Institutes — fin de ligne du manuscrit (<lb/>) : trait discret, sans retour à la ligne. */
-[collid="cjc"] #main #article .lb-ms { color: #b0a89f; font-size: .8em; margin: 0 .1em; }
 /* 2026-10-29 : leçon qui porte une infobulle (<choice> : leçon du manuscrit, de l'édition Olivier-Martin, correction) :
    soulignement pointillé discret, pour qu'on sache qu'il y a quelque chose à survoler. */
 [collid="cjc"] #main #article span.choice[title] { text-decoration: underline dotted #b0a89f; text-underline-offset: .2em; cursor: help; }

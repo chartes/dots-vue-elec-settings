@@ -2333,3 +2333,16 @@
    foncé plutôt qu'en violet, collé à la liste des sous-parties. */
 .mh-edition .mh-groupe > h1.head { color: #2b2b2b; font-size: 1.6rem; font-weight: 700; line-height: 1.25; margin: 0 0 .3rem; border: 0; padding: 0; }
 article.mh-edition:has(> .mh-groupe) { padding-bottom: 0; }
+/* Titres des pages d'index (lettres, départements, pays, sections Palissy, stations…) : même gabarit que les pages
+   de regroupement, gris foncé, sans filet. */
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-titre,
+[collid="monumentshistoriques"] .mh-edition .mh-index.mh-index--fragment > .mh-index-unite > .mh-index-tete,
+[collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-tete {
+  color: #2b2b2b !important;
+  border-bottom: none !important;
+  padding-bottom: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: normal;
+}

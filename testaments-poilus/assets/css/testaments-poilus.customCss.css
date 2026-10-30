@@ -1059,3 +1059,9 @@ body:has(.tp-jour-testament) .bottom-toc { display: none; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* Relecture du 30/10 (page de comparaison avant/après) : forme rétablie par l'éditeur soulignée en pointillé (proposition A) */
+[collid="testaments-poilus"] #article .tp-ed.tp-var:not(:empty) { border-bottom: 1px dotted #999; }
+
+/* Relecture du 30/10 (page de comparaison avant/après) : région du lieu sous le département (index des lieux, proposition B) */
+[collid="testaments-poilus"] #article .tp-region { display: block; font-size: .85em; color: #777; }

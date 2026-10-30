@@ -444,3 +444,6 @@
 /* 2026-10-29 : leçon qui porte une infobulle (<choice> : leçon du manuscrit, de l'édition Olivier-Martin, correction) :
    soulignement pointillé discret, pour qu'on sache qu'il y a quelque chose à survoler. */
 [collid="cjc"] #main #article span.choice[title] { text-decoration: underline dotted #b0a89f; text-underline-offset: .2em; cursor: help; }
+
+/* Relecture du 30/10 (page de comparaison avant/après) : rubriques des incipit en italique (proposition B) */
+[collid="cjc"] #article .rubric { font-style: italic; }

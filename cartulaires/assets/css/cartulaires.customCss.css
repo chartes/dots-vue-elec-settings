@@ -1757,3 +1757,7 @@ span.note-inline {
 /* 2026-10-28 : table des actes du Cartulaire blanc en tableau filtrable (cartulaires-saint-denis.xsl) : en-têtes longs
    (« Édition de la notice dans l'inventaire ») sur plusieurs lignes, sinon le tableau déborde de l'article. */
 #cartulaire-blanc[collid] #main #article table.tf-tableau button.tf-tri { white-space: normal; }
+
+/* Relecture du 30/10 (page de comparaison avant/après) : leçon fautive conservée : romain + « (sic) » (proposition B) */
+[collid="cartulaires"] #article em.sic { font-style: normal; }
+[collid="cartulaires"] #article em.sic::after { content: " a0(sic)"; font-size: .75em; font-style: italic; color: #777; }

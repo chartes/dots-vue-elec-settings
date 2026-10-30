@@ -2247,3 +2247,20 @@
 .toc-aside-is-opened #main #article tr.cible-arrivee > td,
 .toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
 /* ==== fin arrivée sur une ancre ==== */
+
+/* Relecture du 30/10 (page de comparaison avant/après, propositions A) */
+/* Séances : noms soulignés au survol seulement ; cote d'archives (pb) dans la marge gauche, comme CID/CJC */
+.mh-edition .mh-pers.mh-tip { text-decoration: none; }
+.mh-edition .mh-pers.mh-tip:hover, .mh-edition .mh-pers.mh-tip:focus-visible { text-decoration: underline dotted #9a8e80; }
+@media (min-width: 769px) {
+  article.mh-edition { position: relative; }
+  .mh-edition .mh-pb.mh-tip { position: absolute; right: calc(100% + .8rem); white-space: nowrap; font-size: .8rem; color: #8a8a8a; text-indent: 0; }
+}
+/* Autorités : vedette et notice sur une ligne, « → voir ENC » en fin, identifiant Autor discret à droite */
+.mh-edition p.mh-autorites-ligne { margin: 0; padding: 0; text-indent: 0 !important; text-align: left !important; }
+.mh-edition .mh-autorites-suite { display: inline; margin: 0; padding: 0; font-size: inherit; color: inherit; }
+.mh-edition .mh-autorites-vedette { font-weight: 700; color: var(--fill-color, #5f004d); }
+.mh-edition .mh-autorites-donnee { float: right; font-size: .8em; color: #8a8a8a; margin-left: 1em; }
+/* Stations de tourisme : deux colonnes, date aux couleurs du thème */
+.mh-edition li.mh-index-entree[id^="tou-"] { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem; align-items: baseline; }
+.mh-edition li.mh-index-entree[id^="tou-"] a.mh-index-lien { color: var(--fill-color, #5f004d) !important; text-decoration: none !important; border: 0 !important; font-weight: 600; }

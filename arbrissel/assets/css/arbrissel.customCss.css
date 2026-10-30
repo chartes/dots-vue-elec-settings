@@ -376,3 +376,6 @@
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* Relecture du 30/10 (page de comparaison avant/après) : fin de titre de collection en italique (proposition A) */
+[collid="arbrissel"] #article .st { font-style: italic; }

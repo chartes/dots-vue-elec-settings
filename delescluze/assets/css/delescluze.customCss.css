@@ -1290,3 +1290,8 @@
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* Relecture du 30/10 (page de comparaison avant/après) : paragraphe coupé par un changement de page (pb break="no") : flèche en fin de page et en reprise, sans alinéa (proposition A) */
+[collid="delescluze"] #article p.coupe-reprise { text-indent: 0 !important; }
+[collid="delescluze"] #article p.coupe-reprise::before { content: "→ "; color: #999; }
+[collid="delescluze"] #article p.coupe-fin::after { content: " →"; color: #999; }

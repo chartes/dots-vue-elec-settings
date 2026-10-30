@@ -1125,3 +1125,6 @@
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+
+/* Relecture du 30/10 (page de comparaison avant/après) : ajout marginal en bloc, filet à gauche (proposition B) */
+[collid="christofle"] #article .add { display: block; font-size: .875em; color: #666; border-left: 2px solid #ccc; padding-left: .6em; margin: .3em 0; }

@@ -771,3 +771,8 @@ body:has(a[href$="/bellelay/document/bellelay-edition"]) .document-card .card-he
 [collid="bellelay"] #main #article ul.biblio-liste > li.bibl.bl-meme-auteur { padding-top: .15em; }
 [collid="bellelay"] #main #article ul.biblio-liste > li.bl-meme-auteur > .bibl-texte { padding-left: 3.2em; }
 [collid="bellelay"] #main #article li.bl-meme-auteur .bl-idem { color: #8a837c; margin-right: .2em; }
+
+/* Relecture du 30/10 (page de comparaison avant/après) : remarque sur une pièce : italique entre parenthèses (proposition B) */
+[collid="bellelay"] #article .remarques { font-style: italic; }
+[collid="bellelay"] #article .remarques::before { content: "("; }
+[collid="bellelay"] #article .remarques::after { content: ")"; }

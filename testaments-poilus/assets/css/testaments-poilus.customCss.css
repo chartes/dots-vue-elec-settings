@@ -37,12 +37,6 @@
 .document-area #article .dateline,.document-area #article .signed { text-align:center; }
 .document-area #article .orig { color:#6b625f; } .document-area #article .reg { color:#171313; }
 .document-area #article .tp-facsimile { display:block; width:min(100%, 44rem); height:auto; margin:1.4rem auto; border:1px solid #d7d1ca; box-shadow:0 .2rem .8rem rgba(45,37,36,.14); }
-.document-area #article .tp-index { max-width:62rem; margin:0 auto; }
-.document-area #article .tp-index .index-entry { border-bottom:1px dotted #e0dcd5; padding:.65rem 0; }
-.document-area #article .tp-index .index-entry h4 { margin:0 0 .3rem; font-size:1.05rem; }
-.document-area #article .tp-index .surname { font-variant:small-caps; font-weight:700; }
-.document-area #article .tp-index .dates, .document-area #article .tp-index .bibl { color:#655b58; }
-.document-area #article .tp-index .bio { margin:.25rem 0; }
 .document-area #article .note:target, .document-area #article .fn-app:target,
 .document-area #article .note.dots-target, .document-area #article .fn-app.dots-target { background:#fff3cc; outline:2px solid #d2a323; }
 
@@ -146,19 +140,7 @@
 }
 
 /* --- 5. Index : sommaire des notices, retour en haut, notice visée -------- */
-.document-area #article .tp-anchor { display: block; height: 0; scroll-margin-top: 90px; }
-.document-area #article .tp-entry-nav ul { margin: .2rem 0 1.2rem; padding: 0; list-style: none; }
-.document-area #article .tp-entry-nav li { display: inline; font-variant: small-caps; }
-.document-area #article .tp-entry-nav li:not(:last-child)::after { content: " · "; color: #777; font-variant: normal; }
-.document-area #article .tp-entry-nav a { color: #a73136; text-decoration: none; }
-.document-area #article .tp-entry-nav a:hover { text-decoration: underline; }
-.document-area #article .tp-backtotop { margin: .6rem 0 1.6rem; font-size: .85rem; }
 /* ancien .marked (« ☞ » devant la notice atteinte depuis un renvoi), en :target */
-.document-area #article .index-entry { scroll-margin-top: 90px; }
-.document-area #article .index-entry:target,
-.document-area #article .index-entry.dots-target { background: #fff8e7; outline: 2px solid #d2a323; }
-.document-area #article .index-entry:target > h4::before,
-.document-area #article .index-entry.dots-target > h4::before { content: "☞ "; color: #a73136; }
 /* ==== fin D14e-1 ==== */
 
 /* ===== E2 (2026-09-12) : agrandissement des fac-similes dans la page =====
@@ -432,19 +414,9 @@
    page ; sa lettre sert de titre, comme sur les 38 pages-lettres de l'ÉLEC.
    -------------------------------------------------------------------------- */
 .document-area #article .tp-index-letter { margin:0 0 1.6rem; }
-.document-area #article .tp-index-initial { font-size:1.6rem; color:#a73136; font-weight:700; margin:1.2rem 0 .4rem; border-bottom:1px solid #e0dcd5; }
-.document-area #article .tp-index .addName { font-style:italic; }
-.document-area #article .tp-index .displayedLocation { font-weight:400; color:#655b58; }
-
 /* Fac-similés : la vignette ouvre la pleine résolution, comme l'agrandissement
    qu'offrait l'ÉLEC. Le lien ne doit pas souligner l'image. */
-.document-area #article a.tp-facsimile-link:hover .tp-facsimile { box-shadow:0 .2rem 1rem rgba(45,37,36,.3); }
-
 /* Barre des lettres de l'index, précalculée dans la source. */
-.document-area #article .tp-letter-nav { margin:.4rem 0 1rem; font-size:1.05rem; }
-.document-area #article .tp-letter-link { text-decoration:none; border-bottom:1px solid rgba(167,49,54,.35); padding:0 .15rem; }
-.document-area #article .tp-letter-link:hover { border-bottom-color:currentColor; }
-
 /* ==========================================================================
    2026-09-14 (agent_tp) — index : les lettres passent dans le sommaire.
 

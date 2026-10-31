@@ -1157,8 +1157,6 @@
   color: #443c34;
   font-size: .92em;
 }
-.mh-edition .mh-index-desc { color: #443c34; }
-
 /* ---- fragment DTS (une unite ouverte seule) ------------------------------ */
 /* Le fragment n'a pas ses unites soeurs : pas de ruban, et le titre de l'unite
    prend le role de titre de page. */
@@ -1266,14 +1264,7 @@
 [collid="monumentshistoriques"] .mh-edition .mh-index .mh-index-occurrences:hover { color: #5f004d; }
 /* ==== fin index à la manière dots-vue ==== */
 
-.mh-nav { margin: 0 0 1.5rem; border-block: 1px solid #d7cec3; padding: .65rem 0; font-family: Georgia, "Times New Roman", serif; }
 /* Barre vide (plus de menu « Les index ») : sans contenu, elle ne trace pas ses bordures. */
-.mh-nav:not(:has(> *)) { display: none; }
-.mh-nav a { color: var(--mh-accent); text-decoration-thickness: .06em; text-underline-offset: .15em; }
-.mh-nav-prevnext { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; margin-top: .75rem; }
-.mh-nav-prevnext > :last-child { text-align: right; }
-.mh-nav-prevnext strong, .mh-nav-presentation { text-align: center; }
-@media (max-width: 700px) { .mh-nav-prevnext { gap: .4rem; font-size: .9em; } }
 
 
 /* ============================================================================
@@ -1787,45 +1778,6 @@
   color: #4a443d;
   text-align: center;
 }
-.mh-edition .mh-signature-intitule {
-  margin: 0 0 .7rem;
-  font-size: .78rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #7a736a;
-  text-align: center;
-}
-.mh-edition .mh-signature-logos {
-  margin: 0 0 .9rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1.6rem;
-  text-align: center;
-}
-.mh-edition .mh-signature-lien {
-  display: inline-block;
-  border-bottom: 0;
-  text-decoration: none;
-}
-.mh-edition .mh-signature-logo {
-  display: block;
-  height: 56px;
-  width: auto;
-  max-width: 100%;
-  opacity: .88;
-  transition: opacity .15s ease-in-out;
-}
-.mh-edition .mh-signature-lien:hover .mh-signature-logo,
-.mh-edition .mh-signature-lien:focus-visible .mh-signature-logo { opacity: 1; }
-
-.mh-edition .mh-signature-droits,
-.mh-edition .mh-signature-contact {
-  margin: .25rem 0;
-  text-align: center;
-}
-.mh-edition .mh-signature-droits { color: #6b645b; }
 .mh-edition .mh-signature a:not(.mh-signature-lien) {
   color: var(--mh-accent);
   text-decoration: none;
@@ -1853,10 +1805,6 @@
 }
 
 /* ---- 5. petites largeurs ------------------------------------------------- */
-@media (max-width: 560px) {
-  .mh-edition .mh-signature-logos { gap: 1rem; }
-  .mh-edition .mh-signature-logo { height: 44px; }
-}
 
 /* ---- 6. impression ------------------------------------------------------- */
 /* Le repère de chute n'a pas de sens sur le papier : la page imprimée ne vient
@@ -1917,8 +1865,7 @@
     font-size: 8pt;
     break-inside: avoid;
   }
-  .mh-edition .mh-signature-logo { height: 32px; opacity: 1; }
-  .mh-edition .mh-signature a { color: inherit; border-bottom: 0; }
+    .mh-edition .mh-signature a { color: inherit; border-bottom: 0; }
 }
 
 
@@ -1991,26 +1938,6 @@
    gauche. Ses selecteurs sont donc partis avec elle.)
    ========================================================================= */
 
-.mh-edition .mh-decennie-garde ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: .35rem 1.6rem;
-  margin: 1.2rem auto 0;
-  padding: 0;
-  max-width: 44rem;
-  list-style: none;
-  font-family: Georgia, "Times New Roman", serif;
-}
-.mh-edition .mh-decennie-garde li { margin: 0; }
-.mh-edition .mh-decennie-garde a {
-  color: var(--mh-accent);
-  text-decoration-thickness: .06em;
-  text-underline-offset: .15em;
-}
-
-
-
 /* ============================================================================
    LE LOGO DE LA MEDIATHEQUE, DANS LE PIED DE PAGE                (2026-09-21)
    ---------------------------------------------------------------------------
@@ -2069,11 +1996,6 @@
 }
 
 /* Autorités (personnes et lieux) : liste par lettre, même gabarit que les index des cartulaires. */
-.mh-autorites-lettre {
-  margin: 1.6rem 0 .4rem;
-  font-size: 1.3rem;
-  border-bottom: 1px solid #e3dcd2;
-}
 .mh-autorites-entree {
   padding: .6rem 0;
   border-bottom: 1px solid var(--mh-fond-survol);
@@ -2094,35 +2016,8 @@
 }
 
 /* Barre de lettres des listes d'autorités : un lien par lettre présente. */
-.mh-lettres ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .25rem .7rem;
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: .5rem 0;
-  border-block: 1px solid var(--mh-fond-survol);
-  font-size: 1rem;
-}
-.mh-lettres a {
-  color: var(--mh-accent);
-  font-weight: 600;
-  text-decoration: none;
-}
-.mh-lettres a:hover,
-.mh-lettres a:focus-visible {
-  text-decoration: underline;
-}
-.mh-autorites-lettre {
-  scroll-margin-top: 1rem;
-}
-
 /* Pages d'autorités (personnes, monuments) : pas de bloc « Présentation» avant la liste.
    Le lien est le premier <nav class="mh-nav"> de l'article, seulement sur ces deux pages. */
-.mh-edition:has(> #mh-autorites-personnes, > #mh-autorites-monuments) > .mh-nav:first-child {
-  display: none;
-}
-
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
    latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc

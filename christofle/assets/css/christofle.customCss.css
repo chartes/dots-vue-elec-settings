@@ -44,54 +44,9 @@
 }
 
 /* ---------- Barres de navigation des notes ---------- */
-#article #specific-menu-minutes {
-  margin: 0 0 0.2%;
-  border-bottom: solid 1px #E8E8E8;
-  padding: 0;
-  width: 100%;
-  text-align: center;
-  font-family: Arial, Verdana, sans-serif;
-  font-size: 90%;
-  text-shadow: 1px 1px #E8E8E8;
-}
-#article #months-list, #article #letters-list { border-bottom: solid 1px #E8E8E8; }
-#article #days-list, #article #months-list, #article #mins-list,
-#article #specific-menu-index ul, #article #letters-list {
-  list-style: none;
-  padding: 1px;
-  margin: 0.4em 0;  /* [dots] */
-}
-#article #days-list li, #article #months-list li, #article #mins-list li,
-#article #specific-menu-index ul li, #article #letters-list li {
-  display: inline-block;
-  margin: 0;  /* [dots] hteiml espace les li */
-}
-#article #specific-menu-minutes a:link, #article #specific-menu-minutes a:visited,
-#article #specific-menu-index a:link, #article #specific-menu-index a:visited {
-  text-decoration: none;
-  color: black;
-  font-weight: normal;
-}
-#article #specific-menu-minutes a:hover, #article #specific-menu-minutes li.selected a,
-#article #specific-menu-index a:hover {
-  text-decoration: none;
-  color: #A73136;
-  font-weight: bold;
-}
-#article .sep { color: black; white-space: pre; } /* [dots] blancs gardés autour de « | » */
+ /* [dots] blancs gardés autour de « | » */
 
 /* Barre des lettres de l'index */
-#article #specific-menu-index {
-  text-align: center;
-  font-size: 90%;
-  border-bottom: solid 1px #E8E8E8;
-}
-#article #specific-menu-index ul li:not(:first-child) {
-  border-left: solid 1px black;
-  padding-left: 4px;
-  padding-right: 2px;
-}
-
 /* ---------- Note (minute) ---------- */
 #article #facsimile {
   float: left;
@@ -135,14 +90,6 @@
 #article #edition-text p { text-align: justify; margin-right: 2px; text-indent: 0; }
 #article #edition-text > div > p { margin: 0 2px 0.8em 0; }  /* 2026-10-27 : paragraphes de la minute aérés */
 
-#article header.recordMetadata { font-size: 90%; margin-bottom: 20px; }
-#article header.recordMetadata h2 {
-  font-weight: bold;
-  color: black;
-  text-align: center;
-  font-size: inherit;
-}
-#article .recordMetadata .recordSummary { font-style: italic; }
 #article .recordType { font-weight: bold; }
 
 #article .pb { font-style: italic; font-size: inherit; line-height: inherit; float: none; margin: 0; color: inherit; } /* [dots] hteiml (html.css) rejette le folio en marge droite */
@@ -188,23 +135,6 @@
 }
 
 /* ---------- Paratexte : introduction, édition des notes, mois ---------- */
-#article #specific-menu-paratext {
-  float: left;
-  width: 20%;
-  margin-bottom: 15px;
-}
-#article #specific-menu-paratext ul { list-style-type: none; padding-left: 0; }
-#article .paratext #specific-menu-paratext ul li { font-variant: small-caps; margin: 8px 0; }
-#article #specific-menu-paratext a:link, #article #specific-menu-paratext a:visited {
-  font-weight: normal;
-  color: black;
-  text-decoration: none;
-}
-#article #specific-menu-paratext a:hover, #article #specific-menu-paratext li.selected a {
-  font-weight: bold;
-  color: #A73136;
-}
-
 #article .index > section, #article .actTypes > section {
   clear: none;  /* [dots] hteiml */
   margin-left: 22%;
@@ -254,8 +184,6 @@
   margin: 1.2em 0 0.3em;
   border-bottom: dotted 1px #E8E8E8;
 }
-#article .mois article.mois-note p, #article article.notes-mois p { margin: 0.3em 0; text-indent: 0; }
-#article .mois .recordNumber { font-weight: bold; }
 #article #content article { margin: 0; padding: 0; } /* [dots] hteiml espace les article */
 #article .paratext p, #article .titlePage p { margin: 0.8em 0; text-indent: 0; } /* [dots] hteiml colle les paragraphes et les met en retrait */
 
@@ -280,7 +208,6 @@
   font-size: 14px;
 }
 #article .actTypes section article { margin: 5px 0; }
-#article .actTypes section article .actType-entry { font-weight: bold; }
 #article .index article p { margin: 0.3em 0; text-indent: 0; }
 #article .index article ul {
   list-style-type: none;
@@ -294,14 +221,10 @@
    (posé en JavaScript, ici par :target) */
 #article .index article:target > p { font-weight: bold; }
 #article .index article:target > p:before { content: "☞ "; font-size: 140%; }
-#article .index-2th-entry .placeName-entry:before { content: "- "; }
-#article .index-2th-entry .placeName-entry .term:before { content: "("; }
-#article .index-2th-entry .placeName-entry .term:after { content: ")"; }
-#article .location-full:before { content: " [ "; } /* [dots] blanc compris : Vue retire celui de la source */
-#article .location-full:after { content: " ]"; }
+ /* [dots] blanc compris : Vue retire celui de la source */
 #article .canton { font-style: italic; }
 #article p .placeName-entry { font-variant: small-caps; }
-#article .persName-Entry .surname { font-variant: normal; } /* [dots] hteiml met les noms en petites capitales ; l'ÉLEC, non */
+ /* [dots] hteiml met les noms en petites capitales ; l'ÉLEC, non */
 #article p .placeName-entry .term { font-variant: normal; }
 
 /* [dots] exposants de hteiml (<hi rend="super">) */
@@ -1026,8 +949,6 @@
 #main #article details.lr-entree:has(.dots-target)::details-content { content-visibility: visible; display: block; }
 #main #article details.lr-entree.dots-target > summary { background: #fbf3d5; }
 /* Entrée visée par l'ancre de l'URL : ouverte et marquée (lr-vise) par le customJs du corpus. */
-#main #article details.lr-entree.lr-vise > summary { background: #fbf3d5; }
-#main #article details.lr-entree.lr-vise, #main #article .lr-entree-corps .lr-vise { scroll-margin-top: 90px; }
 /* Liste courte en colonnes dans le corps d'une entrée. */
 #main #article ul.lr-colonnes { columns: 12rem; column-gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
 #main #article ul.lr-colonnes > li { margin: 0; padding: .05rem 0; break-inside: avoid; text-indent: 0; }

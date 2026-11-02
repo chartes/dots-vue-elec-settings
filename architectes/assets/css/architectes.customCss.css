@@ -178,6 +178,8 @@
 }
 [collid="architectes"] #main #article .ar-sources ul.biblio-liste > li.bibl:hover { background: none; }
 [collid="architectes"] #main #article .ar-sources li.bibl > .bibl-texte { padding-left: 1.2em; text-indent: -1.2em; }
+/* 2026-11-02 : référence du même auteur que la précédente (tiret long, XSL) : en retrait sous celle de l'auteur. */
+[collid="architectes"] #main #article li.bibl:has(.ar-idem) { margin-left: 1.5em; }
 /* Bâtiment, puis à la ligne les autres architectes qui y ont travaillé. */
 [collid="architectes"] #main #article .ar-liste-batiments .ar-bat { font-weight: 600; }
 [collid="architectes"] #main #article .ar-liste-batiments .ar-avec { display: block; text-indent: 0; color: var(--ar-gris); font-size: .9rem; }

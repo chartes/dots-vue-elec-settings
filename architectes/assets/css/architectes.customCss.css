@@ -5,7 +5,7 @@
    3. Blocs hteiml génériques : bibliographie, titres des pages à sous-pages (identiques d'un corpus à l'autre)
    4. Propre au projet : notice (dates, citations, rubriques, bâtiments, renvois), présentation,
       index des personnes, index des bâtiments
-   5. Mécanismes communs dots-vue : arrivée sur une ancre, page de titre, volet Mirador, tableau
+   5. Mécanismes communs dots-vue : arrivée sur une ancre, page de titre, tableau
       filtrable, titres, liens
    La customCss est injectée dans toutes les pages de dots-vue : toute règle propre est scopée
    par [collid="architectes"]. */
@@ -115,15 +115,9 @@
    dots-vue affiche la présentation, les index et la bibliographie sous .dots-ui, dont la remise à
    zéro (main.css : :where(.dots-ui) h1…) ramène les titres au corps du texte et les paragraphes à
    une marge nulle. On leur rend les tailles de hteiml (html.css). */
-[collid="architectes"].dots-ui #main #article :is(h1, h2, h3, h4).head,
 [collid="architectes"] .dots-ui #main #article :is(h1, h2, h3, h4).head { font-weight: 900; }
-[collid="architectes"].dots-ui #main #article h1.head,
 [collid="architectes"] .dots-ui #main #article h1.head { font-size: 160%; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
-[collid="architectes"].dots-ui #main #article h2.head,
 [collid="architectes"] .dots-ui #main #article h2.head { font-size: 140%; margin: 1.5rem 0 .75rem; }
-[collid="architectes"].dots-ui #main #article h3.head,
-[collid="architectes"] .dots-ui #main #article h3.head { font-size: 130%; margin: 1.25rem 0 .5rem; }
-[collid="architectes"].dots-ui #main #article p.p,
 [collid="architectes"] .dots-ui #main #article p.p { margin-bottom: 1em; }
 
 /*=============================================================
@@ -188,8 +182,7 @@
 [collid="architectes"] #main #article .ar-liste-batiments .ar-bat { font-weight: 600; }
 [collid="architectes"] #main #article .ar-liste-batiments .ar-avec { display: block; text-indent: 0; color: var(--ar-gris); font-size: .9rem; }
 /* Renvois : la première ligne ouvre un filet, l'étiquette en petites capitales. */
-[collid="architectes"] #main #article section.ar-rubrique + p.ar-renvois,
-[collid="architectes"] #main #article .biblio + p.ar-renvois { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--ar-filet); }
+[collid="architectes"] #main #article section.ar-rubrique + p.ar-renvois { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--ar-filet); }
 [collid="architectes"] #main #article p.ar-renvois { margin: 0 0 .7em; font-size: .95rem; }
 [collid="architectes"] #main #article p.ar-renvois .ar-etiquette { font-variant: small-caps; font-weight: 700; letter-spacing: .04em; color: #585858; }
 
@@ -225,7 +218,6 @@
 /* ---------- Index des bâtiments : colonnes ---------- */
 /* La page s'élargit pour le tableau. */
 [collid="architectes"] #main #article:has(.ar-batiments) { max-width: 74rem; }
-[collid="architectes"] #main #article .ar-tableau td.ar-c1,
 [collid="architectes"] #main #article .ar-tableau tbody td:nth-child(1) { font-weight: 600; color: #3d3833; }
 [collid="architectes"] #main #article .ar-tableau tbody td:nth-child(2) { color: var(--ar-gris); }
 [collid="architectes"] #main #article .ar-tableau tbody td:nth-child(5) { text-align: right; font-variant-numeric: tabular-nums; color: var(--ar-gris); }
@@ -303,16 +295,6 @@
   border-top: 1px solid var(--fill-color);
   padding-top: 0.5rem;
   margin-top: 0.5rem;
-}
-
-/* Volet Mirador en mode texte (2026-09-11, D7 — même correctif que Bellelay et Saint-Germain) :
-   le volet invisible restait dans le flux et faisait défiler la page de travers. */
-[collid="architectes"] .text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
 }
 
 /* ==== Tableau filtrable : tableau, barre, filtres (modèle : Delescluze, 2026-10-13), aux couleurs de dots-vue ; scopé ici car il s'écarte du bloc des autres corpus ==== */

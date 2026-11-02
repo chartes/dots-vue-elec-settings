@@ -5,14 +5,15 @@
    2. Historique ÉLEC : ce qui distinguait le thème du site d'origine (#main #article)
    3. Blocs hteiml génériques : notes de bas de page, bibliographie (identiques d'un corpus à l'autre)
    4. Propre au projet
-   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11, D42), cibles d'ancre, page de titre */
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D42 ; D11 retiré le 2026-11-02 : sommaire de dots-vue tel quel), cibles d'ancre, page de titre */
 
 /*=============================================================
  1. COULEURS DU CORPUS
  =============================================================*/
 
 /* Couleurs du corpus dans l'application (cartes, sommaire, accents). */
-:root { --fill-color:#74472f; --meta-area-fill-color:#f6f0eb; --default-text-color:#2c2521; }
+/* 2026-11-02 : violet ÉLEC (comme la racine elec et Du Bourg) au lieu du brun #74472f / #f6f0eb. */
+:root { --fill-color:#5f004d; --meta-area-fill-color:#e6e4e5; --default-text-color:#2c2521; }
 
 /*=============================================================
  2. HISTORIQUE ÉLEC (diple_html.css, enc.css)
@@ -204,23 +205,6 @@
   pointer-events: none;
 }
 
-/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
-/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
-   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
-   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
-   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
-.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
-.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
-/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
-   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
-.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
-.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
-@media (max-width: 768px) {
-  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
-}
-/* ==== fin D11 ==== */
 
 /* ============================================================================
    D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
@@ -370,25 +354,36 @@
 .document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
 
-/* Relecture du 30/10 : notes de leçon (note type="a") en apparat, appelées par une lettre, après les notes numérotées */
-[collid="actesroyauxdupoitou"] #article .footnotes.apparatus { margin-top: .6em; padding-top: .4em; border-top: 1px solid #e2ded0; font-size: .92em; }
-[collid="actesroyauxdupoitou"] #article .footnotes.apparatus .noteback { font-style: italic; }
-/* Parties du discours diplomatique (seg@function) : nom en infobulle ; la case « Montrer les parties de l'acte »
-   les signale dans le texte (étiquette en petites capitales avant chaque partie, verbe/bénéficiaire/donation soulignés). */
-[collid="actesroyauxdupoitou"] #article .arp-parties-choix { display: inline-flex; gap: .4em; align-items: center; margin: .5em 0 0; font-size: .85em; color: #6b6260; cursor: pointer; }
-[collid="actesroyauxdupoitou"] #article :has(.arp-parties-cb:checked) .arp-partie:not(.arp-verb, .arp-beneficiary, .arp-donatio)::before {
+/* Parties du discours diplomatique (seg@function) : nom en infobulle (XSL). 2026-11-02 : la case « Montrer les
+   parties de l'acte » est retirée ; chaque partie (arp-bloc) va à la ligne avec le blanc d'un paragraphe. Le blanc
+   n'est pas mis avant la première partie du paragraphe. */
+[collid="actesroyauxdupoitou"] #main #article .arp-bloc { display: block; margin-top: .9em; }
+[collid="actesroyauxdupoitou"] #main #article p > .arp-bloc:first-child { margin-top: 0; }
+/* Nom de la partie au-dessus, en intertitre gris (allure des h2 de Poitou : 140 %, gras 900, gris du bloc titres). */
+[collid="actesroyauxdupoitou"] #main #article .arp-bloc::before {
   content: attr(data-partie);
-  margin-right: .35em;
-  padding: 0 .3em;
-  border-radius: 2px;
-  background: #f3ece2;
-  color: #7a5a3a;
-  font-size: .75em;
+  display: block;
+  margin: .4em 0 .3em;
+  text-indent: 0;
+  font-size: 140%;
+  font-weight: 900;
   font-style: normal;
-  font-variant: small-caps;
-  letter-spacing: .03em;
+  line-height: 1.3;
+  color: #585858;
 }
-[collid="actesroyauxdupoitou"] #article :has(.arp-parties-cb:checked) :is(.arp-verb, .arp-beneficiary, .arp-donatio) {
-  text-decoration: underline dotted #b08a5a;
-  text-underline-offset: .2em;
-}
+
+/* 2026-11-02 (prototype, à étendre à tous les corpus) : repères de page dans la marge de GAUCHE
+   (html.css de hteiml les met à droite : float: right; margin-right: -4.5em), et un blanc entre
+   deux paragraphes (html.css : p { margin: 0 }, le texte faisait bloc). */
+#main #article :is(a, span).pb { float: left; margin-right: 0; margin-left: -4.5em; }
+#main #article p.p + p.p { margin-top: .9em; }
+/* Poitou : dans les actes, l'éditeur marque les alinéas par <lb/> à l'intérieur d'un seul <p> (738 ; début d'un
+   vidimus, « Item » d'une énumération, reprise après l'acte cité) : même blanc qu'entre deux paragraphes. */
+[collid="actesroyauxdupoitou"] #main #article span.alinea { display: block; height: .9em; }
+/* 2026-11-02 : repère de la page où commence l'acte (span.pb.depart, « {p. 17} ») en gris comme les autres repères
+   (a.pb, bloc liens) : la règle historique Diple le mettait en rouge. */
+.document-views #article span.pb { color: #8a8a8a !important; }
+/* 2026-11-02 : notes plus près du texte : 99 px entre le dernier mot et le filet des notes (16 sous le paragraphe,
+   20 + 20 en bas du corps et de l'acte, 43 au-dessus du pied de notes) ramenés à environ 30 px. */
+[collid="actesroyauxdupoitou"] #main #article :is(article.text, article.text > section.body) { padding-bottom: 0; }
+[collid="actesroyauxdupoitou"] #main #article section.footnotes { margin-top: 0; }

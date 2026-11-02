@@ -201,18 +201,22 @@
    une référence comme les autres, en romain. */
 [collid="architectes"] #main #article section#bibliographie p.p.biblio-depot { font-style: normal; color: inherit; }
 
-/* ---------- Index des personnes : une entrée par ligne, retrait suspendu ---------- */
+/* ---------- Index des personnes (2026-11-02 : présentation des index des cartulaires) ----------
+   Une entrée par ligne, sans filet, retrait suspendu ; nom en petites capitales (span.sc, XSL), « voir » en
+   italique devant les architectes, liens soulignés en pointillé. */
 [collid="architectes"] #main #article ul.index { list-style: none; margin: 1rem 0 2rem; padding: 0; }
 [collid="architectes"] #main #article ul.index > li {
-  margin: 0;
-  padding: .3em 0 .3em 1.6em;
-  border-bottom: 1px solid #f1ece6;
+  margin: 0 0 .7rem;
+  padding: 0 0 0 1.6em;
   text-indent: -1.6em;
+  text-align: left;
   line-height: 1.45;
   scroll-margin-top: 90px;
 }
 [collid="architectes"] #main #article ul.index > li::marker { content: none; }
-[collid="architectes"] #main #article ul.index dfn.term { font-style: normal; font-weight: 600; color: #3d3833; }
+[collid="architectes"] #main #article ul.index .sc { font-variant: small-caps; letter-spacing: .02em; }
+[collid="architectes"] #main #article ul.index .ar-voir { font-style: italic; }
+[collid="architectes"] #main #article ul.index a.ref { text-decoration: underline dotted #b9afa5; text-underline-offset: .18em; }
 [collid="architectes"] #main #article ul.index > li:is(:target, .dots-target) { background: #fbf3d5; }
 
 /* ---------- Index des bâtiments : colonnes ---------- */

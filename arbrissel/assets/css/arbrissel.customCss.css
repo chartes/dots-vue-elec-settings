@@ -4,7 +4,7 @@
    2. Historique ÉLEC : thème Diple / ENC du site d'origine, limité à la zone de texte
    3. Blocs hteiml génériques : notes de bas de page (identique d'un corpus à l'autre)
    4. Propre au projet
-   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), cibles d'ancre, page de titre */
+   5. Mécanismes communs dots-vue : volet Mirador, cibles d'ancre (pas de D11 : sommaire de dots-vue tel quel), page de titre */
 
 /*=============================================================
  1. COULEURS DU CORPUS
@@ -88,15 +88,6 @@
 
 #main #article h1,
 #main #article .h1 {
-  /* 2026-09-14 : titre ramené au gris sombre commun aux collections (#202020).
-     Ce n'est pas un choix de goût : c'est la valeur MESURÉE sur la majorité des corpus
-     (15 titres sur 5 collections), et la règle harmonisée
-     `.document-area #article:not(.bottom-toc) h1…{color:#202020}` existe déjà dans les 18
-     feuilles — elle était simplement battue ici par ce sélecteur à DEUX identifiants,
-     plus spécifique. L'accent rouge reste où il sert de repère (appels de note,
-     signets), pas sur les titres. Demande de l'utilisateur : « les titres en rouge
-     jsuis pas fan en vrai homogénéise ». */
-  color: #202020;
   font-size: 26px;
   font-weight: normal;
   text-align: left;
@@ -110,6 +101,7 @@
    3. Liens du texte — enc.css
    -------------------------------------------------------------------------- */
 
+/* Couleur utile aux appels de note (a.noteref), que le bloc liens commun exclut de son !important. */
 #main #article a { color: #315ba7; text-decoration: none; }
 #main #article a:visited { color: #2b1476; }
 #main #article a:hover { border-bottom: 1px solid; }
@@ -165,25 +157,10 @@
 
 
 
-[collid="arbrissel"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }    /* même pas que les notes */
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="arbrissel"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
-/* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
-   grand retrait du pied de page. */
-[collid="arbrissel"] #main #article section.back:empty { display: none; }
 /* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
    dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
 [collid="arbrissel"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
 
-/* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
-[collid="arbrissel"] #main #article :is(table, th, td, caption) { font-family: inherit; }
 /* ==== fin appels de note ==== */
 /* ==== Titres et espacements des pages de texte (2026-10-19, modèle : Montferrand) ====
    Tailles de hteiml en gras ; environ 17 px entre un titre et son texte : sans le retrait de hteiml
@@ -288,41 +265,6 @@
   margin-top: 0.5rem;
 }
 #main #article .titlestmt .subtitle { text-align: center; text-indent: 0; font-style: italic; color: #555; margin: 0 0 1rem; }
-
-/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
-   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
-   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
-.document-views #article .footnotes p.apparatus {
-  margin-bottom: 1.25rem;
-  padding-left: 0;
-  line-height: 1.55;
-}
-.document-views #article .footnotes .apparatus * ::after { content: " "; }
-.document-views #article .footnotes .apparatus span.note {
-  display: block;
-  position: relative;
-  margin-bottom: .3em;
-  line-height: 1.25;
-  margin-left: 2.5em;
-  padding-left: 1.3em;
-  border-left: 1px solid #ccc;
-}
-.document-views #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  right: calc(100% + .76em);
-  color: var(--fill-color);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: none;
-}
-/* Lemme fermé par un crochet */
-.document-views #article .footnotes .apparatus .lem::after {
-  content: "]\00a0";
-  color: #8a837c;
-}
-.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
-/* ==== fin bloc apparat ==== */
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques

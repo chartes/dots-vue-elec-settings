@@ -196,21 +196,58 @@
  4. PROPRE AU PROJET
  =============================================================*/
 
-/* Cartouche d'un testament (section.front de hteiml : titre, dates, tradition) : sans le fond gris
-   de hteiml, comme Du Bourg (Maxime préfère sans cadre) ; filet sous la tradition. */
-[collid="testaments"] #main #article article > .front {
-  margin: 0 0 1.5rem;
-  padding: 0 0 .75rem;
-  background: none;
-  border-bottom: 1px solid #e4e4e4;
+/* En-tête d'un testament (header.front, testaments.xsl) sur le modèle de l'en-tête d'acte des cartulaires
+   (2026-11-03) : cadre pointillé prune, numéro puis titre et date centrés, témoins en petit avec le sigle
+   en gras ; même blanc entre les blocs. */
+[collid="testaments"] #main #article header.front {
+  --acte-blanc: 1.5rem;
+  background-color: #fff;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  border-radius: 0;
+  padding: 0.5em 0.75em;
+  margin: 0 0 1.5em;
 }
-/* Dates du testament et de ses codicilles : hteiml les met bout à bout (« 29 avril.1401 »). */
-[collid="testaments"] #main #article .docDate { display: block; margin: 0 0 .5rem; }
+/* n° du testament : 1re ligne, centré */
+[collid="testaments"] #main #article header.front > .docNum {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 1.2;
+  margin: 0 0 0.2em;
+}
+/* nom du testateur : centré, sous le numéro */
+[collid="testaments"] #main #article header.front > h1.head {
+  margin: 0 0 .2em;
+  padding-top: 0;
+  font-size: 1.35em;
+  line-height: 1.3;
+  text-align: center;
+}
+/* date : centrée juste en dessous, puis un blanc ; dates du testament et de ses codicilles séparées
+   (hteiml les met bout à bout : « 29 avril.1401 ») */
+[collid="testaments"] #main #article header.front > .docDate {
+  display: block;
+  text-align: center;
+  text-indent: 0;
+  margin: 0 0 var(--acte-blanc);
+}
 [collid="testaments"] #main #article .docDate .date + .date::before { content: " ; "; }
-/* Tradition : liste des témoins, sans le filet de hteiml au-dessus. */
-[collid="testaments"] #main #article .front .tradition { border: 0; padding: 0; margin: 0; }
-[collid="testaments"] #main #article .front .listWit { margin: .25rem 0 0; padding-left: 1.2em; }
-[collid="testaments"] #main #article .front .witness { font-size: .95rem; text-align: left; }
+/* tradition : plus petite, sans les retraits de hteiml */
+[collid="testaments"] #main #article header.front section.tradition { padding: 0; margin: 0 0 .3rem; border: 0; }
+[collid="testaments"] #main #article header.front .listWit { margin: 0; }
+[collid="testaments"] #main #article header.front li.witness {
+  font-size: 0.85em;
+  line-height: 1.5;
+  text-align: left;
+}
+[collid="testaments"] #main #article li.witness small.n {
+  font-style: normal;
+  font-weight: 600;
+}
+/* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
+   dernière, juste avant l'apparat, n'en a pas besoin (le pied de page a déjà son filet court). */
+[collid="testaments"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
 /* Titre d'un acte (« [A. Testament, 9 août 1394.] ») : intertitre gris, comme sur l'ÉLEC. */
 [collid="testaments"] #main #article section.testament > h3.head,
 [collid="testaments"] #main #article section.codicille > h3.head { font-weight: 600; }

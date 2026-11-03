@@ -6,7 +6,8 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Le Miroir des classiques",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "collectionDescription": "",

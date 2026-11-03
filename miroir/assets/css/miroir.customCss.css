@@ -20,9 +20,6 @@
 /*=============================================================
 CSS historique du projet miroir (https://elec.chartes.psl.eu/miroir/)
  =============================================================*/
-
-
-
 .about > h1 {
   font-style: italic !important;
 }
@@ -49,6 +46,10 @@ footer.note {margin-left:1.5em;padding-left:0.5em;border-left:dotted 1px;}
 /*=============================================================
 CSS dots-vue du projet miroir
  =============================================================*/
+
+#main #article {
+  line-height: 28px;
+}
 
 /* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est
    ouvert sans refId) : reprise de la page de garde de Montferrand et des chroniques
@@ -94,7 +95,7 @@ CSS dots-vue du projet miroir
   margin-top: 0.5rem;
 }
 
-h12, h3, h4, h5, .head>cite {
+h1, h2, h3, h4, h5, .head>cite {
   color: #585858;
 }
 
@@ -131,7 +132,10 @@ h1.head, h1.head>cite {
     margin-left: 0;
     text-align: left;
   }
-
+  .cible-arrivee {
+    animation: none;
+    background-color: transparent;
+  }
 }
 
 .corr {
@@ -629,6 +633,7 @@ h1.head, h1.head>cite {
 .cible-arrivee:not(:has(> .head, > small.lg-n)) {
   animation: disparition-fond 3s ease-out 1;
 }
+
 
 .index a {
   color: var(--fill-color);

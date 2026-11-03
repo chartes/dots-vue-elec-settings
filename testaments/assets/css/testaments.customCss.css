@@ -224,6 +224,9 @@
   line-height: 1.3;
   text-align: center;
 }
+/* le « § » de hteiml (caché jusqu'au survol, 33 px) comptait dans le centrage : nom décalé de 21 px à gauche.
+   Hors du flux, il reste juste après le nom. */
+[collid="testaments"] #main #article header.front > h1.head a.bookmark { position: absolute; }
 /* date : centrée juste en dessous, puis un blanc ; dates du testament et de ses codicilles séparées
    (hteiml les met bout à bout : « 29 avril.1401 ») */
 [collid="testaments"] #main #article header.front > .docDate {

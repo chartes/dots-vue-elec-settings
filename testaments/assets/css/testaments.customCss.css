@@ -245,6 +245,16 @@
   font-style: normal;
   font-weight: 600;
 }
+/* Repères de page de l'édition Tuetey (« {p. 27} ») dans la marge de GAUCHE, comme Poitou (html.css de hteiml
+   les met à droite : float: right; margin-right: -4.5em). Dans l'en-tête, hors du cadre et hors du flux, comme
+   les cartulaires (en ligne, il décalait le numéro et le titre centrés). */
+[collid="testaments"] #main #article :is(a, span).pb { float: left; margin-right: 0; margin-left: -4.5em; }
+[collid="testaments"] #main #article header.front { position: relative; }
+/* dans une liste (legs énumérés), le retrait de la liste les ramenait dans la colonne de texte : placés
+   par rapport au testament, à la même marge que les autres */
+[collid="testaments"] #main #article article.text { position: relative; }
+[collid="testaments"] #main #article li a.pb { position: absolute; left: -4.5em; margin: 0; float: none; }
+[collid="testaments"] #main #article header.front a.pb { position: absolute; left: auto; right: calc(100% + 1.3rem); margin: 0; float: none; white-space: nowrap; }
 /* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
    dernière, juste avant l'apparat, n'en a pas besoin (le pied de page a déjà son filet court). */
 [collid="testaments"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }

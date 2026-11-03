@@ -1,0 +1,115 @@
+{
+  "collectionId": "testaments",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Testaments du Parlement"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Testaments enregistrés au Parlement de Paris sous le règne de Charles VI",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Consulter l’édition",
+      "singleResourceButtonText": "Ouvrir l’édition",
+      "columns": [
+        {
+          "key": "dublinCore.title",
+          "label": "Titre",
+          "width": "3fr"
+        },
+        {
+          "key": "dublinCore.creator",
+          "label": "Édition",
+          "width": "2fr"
+        },
+        {
+          "key": "dublinCore.issued",
+          "label": "Date",
+          "type": "date",
+          "width": "100px"
+        }
+      ]
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Testaments enregistrés au Parlement de Paris sous le règne de Charles VI",
+    "footerSubtitles": [
+      "Édition électronique de l’École nationale des chartes – PSL"
+    ],
+    "footerDescription": "Édition d’après les testaments transcrits par Marion Chaigne et l’édition d’Alexandre Tuetey (1880), registre X1A 9807 des Archives nationales.",
+    "footerLogos": {
+      "enc": {
+        "imgName": "logo_enc_white.svg",
+        "href": "https://www.chartes.psl.eu/",
+        "alt": "École nationale des chartes"
+      }
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 2,
+    "editByLevel": null,
+    "editByCiteType": [
+      "rubrique",
+      "testament"
+    ],
+    "countByCiteType": [],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "documentPageSettings": {
+    "metadataTabLabel": "Notice"
+  },
+  "aboutPageSettings": [],
+  "collectionCustomCss": "testaments",
+  "collectionCustomJs": "elec",
+  "topBreadcrumbButtonLabel": [
+    "extensions.dots:shortTitle"
+  ],
+  "metadataDisplayOrder": [
+    "dct:title",
+    "dct:contributor",
+    "dct:source",
+    "dct:publisher",
+    "dct:issued",
+    "dct:language",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "dct:identifier",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:funder",
+    "schema:encoding",
+    "dcat:accessURL"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "dct:contributor": "Contributeurs",
+    "dct:source": "Source",
+    "dct:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:language": "Langues",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "dct:identifier": "Identifiant",
+    "schema:editor": "Édition scientifique",
+    "schema:isBasedOn": "Source",
+    "schema:funder": "Financement",
+    "schema:encoding": "Exports",
+    "dcat:accessURL": "URL"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
+}

@@ -7,7 +7,8 @@
     "pageHeader": {
       "collectionAltTitle": "Édits de pacification",
       "aboutButtonText": "À propos",
-      "collectionBannerImg": "banner_edits.png"
+      "collectionBannerImg": "banner_edits.png",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "customCollectionDescription": ""
@@ -37,12 +38,12 @@
     "countByCiteType": [
       "edit"
     ],
-    "displayTopToc": true,
+    "displayTopToc": false,
     "displayLeftToc": true
   },
   "aboutPageSettings": [],
   "collectionCustomCss": "edits",
-  "collectionCustomJs": "edits",
+  "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:editor",

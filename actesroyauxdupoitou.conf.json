@@ -7,7 +7,7 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Actes royaux du Poitou",
-      "aboutButtonText": "Présentation"
+      "aboutButtonText": "À propos"
     },
     "descriptionSection": {
       "collectionDescription": "",
@@ -19,14 +19,13 @@
       "displayMode": "toc",
       "openState": true,
       "browseButtonText": "Consulter les douze tomes",
-      "singleResourceButtonText": "Ouvrir le document"
+      "singleResourceButtonText": "Accéder au document"
     }
   },
   "footerSettings": {
     "footerTitle": "Actes royaux du Poitou (1302-1483)",
     "footerSubtitles": [
-      "Édition de Paul Guérin",
-      "Édition électronique de Vincent Jolivet, Joana Casenave, Laura Gilli et Mathilde Henriquet"
+      "Édition de Paul Guérin"
     ],
     "footerDescription": null,
     "footerLogos": {

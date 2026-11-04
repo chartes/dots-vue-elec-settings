@@ -32,7 +32,7 @@
 #main #article .byline { text-align: right; margin-left: 45%; text-indent: 0; font-variant: small-caps; }
 #main #article .docAuthor { text-align: right; text-indent: 0; }
 /* Page de l'édition imprimée, en rouge */
-#main #article span.pb, #main #article a.pb { color: #BC052D; }
+#main #article span.pb, #main #article a.pb { color: var(--fill-color, #5f004d); }
 
 /*=============================================================
  3. BLOCS HTEIML GÉNÉRIQUES
@@ -122,7 +122,7 @@
    l'attribut style avec elle). */
 .document-area #main #article a.notebottom {
   text-decoration: none;
-  color: #a73136;
+  color: #5f004d;
   font-weight: bold;
 }
 
@@ -273,7 +273,7 @@
 }
 .document-area #article .titlestmt h1 {
   margin: 0 0 1rem !important;
-  color: var(--fill-color, #8f0e21) !important;
+  color: var(--fill-color, #5f004d) !important;
   font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
   line-height: 1.3 !important;
   font-weight: 600 !important;
@@ -293,7 +293,7 @@
   display: inline-block;
   font-size: 1.15rem;
   letter-spacing: 0.05em;
-  color: var(--fill-color, #8f0e21);
+  color: var(--fill-color, #5f004d);
   border-top: 1px solid #e2c5cb;
   padding-top: 0.5rem;
   margin-top: 0.5rem;
@@ -387,3 +387,41 @@
    20 + 20 en bas du corps et de l'acte, 43 au-dessus du pied de notes) ramenés à environ 30 px. */
 [collid="actesroyauxdupoitou"] #main #article :is(article.text, article.text > section.body) { padding-bottom: 0; }
 [collid="actesroyauxdupoitou"] #main #article section.footnotes { margin-top: 0; }
+
+/* ---- Cartouche de l'acte sur le modèle des cartulaires (2026-11-04) ----
+   Cadre pointillé prune à angles droits (la règle historique Diple : pointillé gris arrondi) ; n° de l'acte
+   (h1.head : « CLXXXVIII ») puis date centrés ; analyse sans retrait (hteiml : 100 px à gauche) ; témoins en
+   plus petit, sigle droit et gras ; même blanc (1,5 rem) entre les blocs. */
+[collid="actesroyauxdupoitou"] #main #article header.front {
+  --acte-blanc: 1.5rem;
+  position: relative;
+  background-color: #fff;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  border-radius: 0;
+  padding: 0.5em 0.75em;
+  margin: 0 0 1.5em;
+
+  > h1.head {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2em;
+    line-height: 1.2;
+    margin: 0 0 .2em;
+    padding-top: 0;
+    color: #333 !important;   /* n° gris foncé comme celui des cartulaires (le bloc titres met les h1 en violet) */
+    a.bookmark { position: absolute; }   /* le « § » caché ne décale pas le centrage */
+  }
+  > .docDate { display: block; text-align: center; text-indent: 0; margin: 0 0 var(--acte-blanc); }
+  > .argument { margin: 0 0 var(--acte-blanc); }
+  > .argument > p:last-child { margin-bottom: 0; }
+  > :is(section.tradition, .div.tradition) { padding: 0; margin: 0 0 var(--acte-blanc); border: 0; }
+  .listWit { margin: 0; }
+  li.witness { font-size: 0.85em; line-height: 1.5; }
+  li.witness small.n { font-style: normal; font-weight: 600; }
+  li.witness cite.title { font-style: italic; }
+  > .according { margin: 0 0 var(--acte-blanc); }
+  > .according:last-child { margin-bottom: 0; }
+}
+
+/* 2026-11-04 (responsive) : les URL longues se coupent (documentation : +61px sur téléphone). */
+[collid="actesroyauxdupoitou"] #main #article a[href^="http"] { overflow-wrap: anywhere; }

@@ -1077,3 +1077,7 @@
 [collid="delescluze"] #article p.coupe-reprise { text-indent: 0 !important; }
 [collid="delescluze"] #article p.coupe-reprise::before { content: "→ "; color: #999; }
 [collid="delescluze"] #article p.coupe-fin::after { content: " →"; color: #999; }
+
+/* 2026-11-04 (responsive) : la référence (élément flex) peut rétrécir et ses URL se couper
+   (sources et bibliographie : +57px sur téléphone). */
+[collid="delescluze"] #main #article li.bibl > .bibl-texte { min-width: 0; overflow-wrap: anywhere; }

@@ -829,3 +829,8 @@
 }
 [collid="interpares2"] #main #article table.table:not(.sansbord):not(:has(td:nth-child(3))) td:first-child { font-weight: 600; width: 9em; }   /* tableaux terme / description */
 [collid="interpares2"] #main #article table.table tr:has(> td[colspan]:empty) { display: none; }
+
+/* 2026-11-04 (responsive) : sur téléphone, les tableaux ordinaires défilent dans leur cadre (partie 2 : +56px). */
+@media (max-width: 760px) {
+  [collid="interpares2"] #main #article table.table { display: block; max-width: 100%; overflow-x: auto; }
+}

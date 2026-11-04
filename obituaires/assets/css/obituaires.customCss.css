@@ -760,3 +760,9 @@
 .document-area #article li.witness > details.obit-facs[open] { margin: .6rem 0 1rem; line-height: inherit; }
 .document-area #article ul.listWit > li.witness { list-style: none; }
 .document-area #article ul.listWit > li.witness::marker { content: none; }
+
+/* 2026-11-04 (responsive) : sur téléphone, le folio (.pb de hteiml, flottant à -4.5em dans la marge droite)
+   sortait de l'écran (+39px de défilement) ; il reste à droite, mais dans le cadre. */
+@media (max-width: 760px) {
+  [collid="obituaires"] #main #article .pb { margin-right: 0; margin-left: .5em; }
+}

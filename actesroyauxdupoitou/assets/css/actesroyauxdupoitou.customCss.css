@@ -244,19 +244,8 @@
   overflow-wrap: anywhere;
 }
 
-/* 2026-10-04 — Élément visé par une ancre (note en pied, retour vers l'appel, saut de page),
-   surligné aux couleurs du corpus. `.dots-target` double `:target` : dots-vue pose cette
-   classe sur l'élément visé quand une URL à ancre est ouverte à froid (le fragment est
-   monté après que le navigateur a résolu l'ancre), comme dans les autres corpus. */
-.document-area #main #article aside.note:target,
-.document-area #main #article aside.note.dots-target,
-.document-area #main #article a.noteref:target,
-.document-area #main #article a.noteref.dots-target,
-.document-area #main #article a.pb:target,
-.document-area #main #article a.pb.dots-target {
-  background: #f6f0eb;
-  box-shadow: inset 3px 0 0 #74472f;
-}
+/* 2026-11-04 : surlignage propre (beige, filet brun, depuis le 2026-10-04) retiré ; l'élément visé par
+   une ancre prend le jaune de hteiml (.note:target), comme les Testaments (Maxime : « exactement pareil »). */
 
 /* === SECTION GARDE DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
 /* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev

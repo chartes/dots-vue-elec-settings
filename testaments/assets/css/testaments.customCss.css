@@ -296,6 +296,12 @@
     font-size: 1em;
     line-height: inherit;
   }
+  /* Lettres et numéros dans une même colonne de 1,6 em calée à gauche : « a » commence là où
+     commence « 1. » (calés à droite, la lettre étroite partait 5 px plus loin que le numéro). */
+  .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+    width: 1.6em;
+    text-align: left;
+  }
 
   /* ---- Petit écran ---- */
   @media (max-width: 760px) {

@@ -2,9 +2,9 @@
    1. Couleurs du corpus : celles de la conf (aucune règle ici)
    2. Historique ÉLEC : aucun
    3. Blocs hteiml génériques : notes de bas de page, bibliographie (identiques d'un corpus à l'autre)
-   4. Propre au projet : vignettes de page, notes en ligne et apparat, présentation des actes
+   4. Propre au projet : notes en ligne et apparat, présentation des actes
       (demandes d'Olivier Canteaut), index, tableaux et pages Édition, Cartulaire blanc de Saint-Denis
-   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), page de titre, tableau filtrable,
+   5. Mécanismes communs dots-vue : sommaire (D11), page de titre, tableau filtrable,
       arrivée sur une ancre
    Retirés le 19/10 : tri de la liste des actes par boutons radio (W1) et page de groupe (W2), morts
    depuis la page Édition au module tableau filtrable ; ancienne page de garde (garde.xsl) ; ancienne
@@ -261,32 +261,6 @@
 }
 
 
-/* Cartulaires : les liens <pb facs> et les témoins @facs sont convertis en
-   composants PageBreak. Comme Du Cange, on garde le marqueur générique de
-   PageBreak.vue — une ICÔNE média cliquable (image en opacity:0 + icône en
-   fond) — et PAS la preview de l'image. Le clic ouvre le folio/manuscrit dans
-   Mirador. (On ne redéfinit donc plus .pb-thumbnail-parent/.pb-thumbnail :
-   les valeurs par défaut du composant suffisent.) */
-
-/* PageBreak est prévu à l'origine comme une petite icône marginale, donc son
-   article est positionné en absolu. Avec une véritable vignette, ce placement
-   peut la mettre sous le lien du folio suivant : le clic part alors vers #pb…
-   au lieu de Mirador. Les Cartulaires la conservent dans le flux du texte. */
-.pb-component {
-  display: inline-block;
-  float: none;
-  margin: 0.5rem 0.75rem 0.5rem 0;
-  vertical-align: middle;
-}
-
-.pb-component .pb {
-  position: static;
-}
-
-.pb-component .pb-label {
-  display: none;
-}
-
 /* Vraies notes éditoriales inline (note sans @n ni @xml:id) : rendues en
    place dans le texte, police plus petite, sans appel de note ni note de bas
    de page. On garde la classe .note (héritage 13px de html.css) + le
@@ -476,50 +450,8 @@ span.note-inline {
   font-weight: 600;
 }
 
-/* 2026-10-22 : pictogramme du témoin (choix de Maxime, après l'œil puis la miniature). L'image de la page
-   de l'édition est portée par le témoin édité (witness[@ana='edited']/@facs, plus d'image sur les pb du
-   texte). dots-vue la rend en aside.pb-component : on garde son pictogramme « image » (icone-media.svg,
-   24 px, image transparente posée dessus pour le clic), mais au bout de la ligne du témoin, dans le flux,
-   au lieu de la boîte flottante de 60 × 30 px. Le clic ouvre la page dans Mirador. */
-[collid="cartulaires"] #main #article li.witness > aside.pb-component {
-  display: inline-block; float: none; position: static;
-  margin: 0 0 0 .4em; vertical-align: middle; line-height: 0;
-}
-[collid="cartulaires"] #main #article li.witness > aside.pb-component .pb { position: static; display: inline-block; width: auto; padding: 0; margin: 0; }
-[collid="cartulaires"] #main #article li.witness > aside.pb-component .pb-label, [collid="cartulaires"] #main #article li.witness > aside.pb-component .pb-label-text { display: none; }
-[collid="cartulaires"] #main #article li.witness > aside.pb-component .pb-thumbnail-parent {
-  /* 2026-10-22 : le SVG fait 24 × 30 px ; dans une boîte de 24 × 24 il était rogné en haut et en bas.
-     Boîte aux proportions du pictogramme, un peu plus petite, et gris foncé pour qu'on la voie. */
-  position: relative; display: inline-block; width: 16px; height: 20px; margin: 0;
-  background-position: center; background-size: contain; filter: brightness(.45);
-}
-[collid="cartulaires"] #main #article li.witness > aside.pb-component .pb-thumbnail-parent img {
-  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
-}
-[collid="cartulaires"] #main #article li.witness > aside.pb-component:hover .pb-thumbnail-parent { filter: none; }
-/* 2026-10-28 (Maxime, SMPA-EG_0007, STEP-AB_0001, HDPO-HD_0010 : « l'icône des images se promène », « des blancs
-   dans le texte », « la page à gauche, et la vignette à gauche aussi ») : saut de page du texte sorti du flux, dans
-   la marge de gauche : « {p. N} » puis le pictogramme des témoins (16 × 20 px, gris foncé). Dans la ligne, la
-   boîte de 60 × 77 px doublait la hauteur de la ligne qui la portait. Repère : #article, qui commence au bord du texte. */
+/* Repère de positionnement : #article, qui commence au bord du texte. */
 [collid="cartulaires"] #main #article { position: relative; }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) {
-  position: absolute; left: -6.5rem; width: 6rem; margin: 0; float: none;
-  display: inline-block; line-height: 1; text-indent: 0; font-style: normal;
-}
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb {
-  position: static; display: flex; flex-direction: row-reverse; justify-content: flex-start; align-items: center;
-  gap: .35em; width: auto; height: auto; min-height: 0; padding: 0; margin: 0;
-}
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-label { display: none; }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-label-text { display: inline; font-size: .75rem; color: #8a837c; white-space: nowrap; }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-thumbnail-parent {
-  position: relative; display: inline-block; flex: none; width: 16px; height: 20px; margin: 0;
-  background-position: center; background-size: contain; filter: brightness(.45);
-}
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-thumbnail-parent img {
-  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
-}
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *):hover .pb-thumbnail-parent { filter: none; }
 
 
 
@@ -583,19 +515,6 @@ span.note-inline {
 [collid="cartulaires"] #main #article ul.index > li > ul > li { margin-bottom: .35rem; }
 /* Lettre de l'index (p.list de hteiml, sans style) : en intertitre, comme un h2 des notices. */
 [collid="cartulaires"] #main #article div.index > p.list:first-child { font-size: 140%; font-weight: 900; line-height: 1.3; margin: 0 0 1rem; text-indent: 0; }
-
-/* 2026-10-06 : index, vignette de page (pb → aside.pb-component), remontée en tête
-   de l'entrée par la XSL : posée dans la marge de gauche, devant la puce. Sur une
-   ligne à elle, elle prenait la puce (qui s'aligne sur la première ligne). */
-[collid="cartulaires"] #main #article li[id]:has(> aside.pb-component) {
-  position: relative;
-}
-[collid="cartulaires"] #main #article li[id] > aside.pb-component {
-  position: absolute;
-  top: 0;
-  right: 100%;
-  margin: 0 1.6em 0 0;
-}
 
 /* 2026-10-06 : index, entrée d'arrivée d'un renvoi (« Voir Boignevilla », lien
    depuis un acte) : fond jaune pâle passager, comme Montferrand (comptes, § 7) :
@@ -1314,23 +1233,6 @@ span.note-inline {
 .toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
 /* ==== fin arrivée sur une ancre ==== */
 
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 
 /* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est ouvert sans
    refId) : même bloc que les Édits, Montferrand, les chroniques latines et Du Bourg. */
@@ -1614,11 +1516,6 @@ span.note-inline {
 [collid] #main #article table.cartu-tableau-simple a.noteref sup { margin: 0 0 0 .2em; }
 /* colonnes des sigles A, B, C : étroites */
 [collid] #main #article table.cartu-tableau-simple thead tr:last-child th:nth-child(-n+3) { width: 3.5em; }
-/* repère de page dans le tableau : l'étiquette seule, sans la vignette (qui crée un grand blanc) */
-[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb :is(.pb-thumbnail-parent, img) { display: none; }
-[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb aside.pb-component { float: none; position: static; display: inline; margin: 0; }
-[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb article.pb { display: inline; position: static; width: auto; height: auto; min-height: 0; padding: 0; margin: 0; }
-[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb .pb-label-text { display: inline; }
 /* ==== fin tableau simple ==== */
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====

@@ -666,7 +666,6 @@
   padding-top: 0.5rem;
   margin-top: 0.5rem;
 }
-#main #article .titlestmt .subtitle { text-align: center; text-indent: 0; font-style: italic; color: #555; margin: 0 0 1rem; }
 
 /* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
    h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres

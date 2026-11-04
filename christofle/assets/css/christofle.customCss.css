@@ -5,12 +5,6 @@
   --default-text-color: #28211f;
 }
 
-/* Christofle affiche ses fac-similés en <img> inline (christofle-facsimile), pas
-   via le panneau Mirador. Ce dernier reste visibility:hidden mais garde sa largeur
-   (~1225px) dans le flex .document-views → débordement horizontal (~2469px) qui
-   décale la page à droite au clic d'un appel de note. On le retire de la mise en page. */
-.document-views .mirador-view { display: none !important; }
-
 .document-area #article {
   max-width: 74rem;
   margin: 0 auto;

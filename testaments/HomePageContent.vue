@@ -1,0 +1,5 @@
+<template>
+  <section>
+    <p>Au sein de la série des registres du parlement de Paris, les Archives nationales conservent un registre particulièrement intéressant dans lequel ont été transcrits des testaments enregistrés au parlement entre 1375 et 1421. Le présent projet vise à éditer l’intégralité des 236 testaments encore conservés à l’heure actuelle, en s’appuyant dans un premier temps sur l’édition des testaments de femmes réalisés dans le cadre de la thèse d’École des chartes de Marion Chaigne et sur la numérisation océrisée de l’édition d’autres testaments réalisée par Alexandre Tuetey. Enfin, les élèves de l’École des chartes apportent leur contribution en éditant chaque année des testaments inédits dans le cadre de leur scolarité. L’édition ainsi réalisée mettra à disposition des historiens et des chercheurs une source sérielle exceptionnelle du point de vue de l’histoire religieuse, économique, sociale et culturelle à Paris au début du XV<sup>e</sup> siècle.</p>
+  </section>
+</template>

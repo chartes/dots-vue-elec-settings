@@ -7,17 +7,20 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Testaments enregistrés au Parlement de Paris sous le règne de Charles VI",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": ""
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "toc",
       "openState": true,
       "browseButtonText": "Consulter l’édition",
-      "singleResourceButtonText": "Ouvrir l’édition",
+      "singleResourceButtonText": "Accéder au document",
       "columns": [
         {
           "key": "dublinCore.title",
@@ -41,9 +44,9 @@
   "footerSettings": {
     "footerTitle": "Testaments enregistrés au Parlement de Paris sous le règne de Charles VI",
     "footerSubtitles": [
-      "Édition électronique de l’École nationale des chartes – PSL"
+      "Édité par Marion Chaigne"
     ],
-    "footerDescription": "Édition d’après les testaments transcrits par Marion Chaigne et l’édition d’Alexandre Tuetey (1880), registre X1A 9807 des Archives nationales.",
+    "footerDescription": "",
     "footerLogos": {
       "enc": {
         "imgName": "logo_enc_white.svg",

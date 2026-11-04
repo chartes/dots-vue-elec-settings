@@ -115,6 +115,31 @@
 #main #article .listWit { margin: .5rem 0 0; padding: 0; font-size: .9em; }
 #main #article .witness { display: block; }
 
+/* 2026-11-04 : cartouche des pièces sur le modèle des cartulaires (Maxime : « logique cartulaires vu qu'il y a
+   des witness ») ; la bascule Transcription / Tradition du 02/11 est retirée, la tradition est toujours visible.
+   Seulement l'en-tête d'une pièce (section.front qui contient la tradition), pas la page de présentation :
+   cadre pointillé prune, titre puis « Extrait de… », témoins en plus petit, même blanc (1,5 rem) entre les blocs. */
+[collid="saintgermaindespres"] #main #article section.front:has(> section.tradition) {
+  --acte-blanc: 1.5rem;
+  position: relative;
+  background-color: #fff;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  border-radius: 0;
+  padding: 0.5em 0.75em;
+  margin: 0 0 1.5em;
+
+  /* titre centré, comme le n° du Poitou et des cartulaires ; le « § » caché sort du flux pour ne pas décaler le centrage */
+  > h1.head { font-size: 1.25em; line-height: 1.3; margin: 0 0 .3em; padding-top: 0; text-align: center;
+    a.bookmark { position: absolute; } }
+  /* date de la pièce (« Extrait de la délibération du… ») : centrée, en caractères ordinaires, comme la date des cartulaires */
+  > .docDate { display: block; text-align: center; font-variant: normal; margin: 0 0 var(--acte-blanc); }
+  > section.tradition { padding: 0; margin: 0; border: 0; font-size: 1em; }
+  .listWit { margin: 0; font-size: 1em; }
+  /* témoins comme dans les cartulaires, même sans sigle : puce carrée, retrait de 40 px */
+  .listWit { padding-left: 40px; }
+  li.witness { display: list-item; list-style: square; padding-left: 0; font-size: 0.85em; line-height: 1.5; }
+}
+
 /* 2026-10-19 : texte sans filet ni grand blanc au-dessus. */
 #main #article .transcription { margin-top: 0; padding-top: 0; }
 
@@ -166,6 +191,10 @@
 #main #article .sgdp-figure[open] .sgdp-figure-ouvrir,
 #main #article .sgdp-figure[open] .sgdp-figure-vignette { display: none; }
 #main #article .sgdp-figure[open] .sgdp-figure-fermer { display: inline-block; }
+/* 2026-11-04 : ouvert, « Réduire l'image » sous l'image (le summary précède l'image dans le HTML) : le
+   summary est posé en bas du details, dans un blanc réservé de la hauteur du bouton. */
+#main #article .sgdp-figure[open] { position: relative; padding-bottom: 1.9rem; }
+#main #article .sgdp-figure[open] > summary { position: absolute; left: 0; bottom: 0; }
 
 /* Ouvert, l'image deborde dans la marge interne de #article (padding 20px 10% 120px
    de DoTS-vue) : la colonne de texte ne fait que 875 px pour des images de 600 a

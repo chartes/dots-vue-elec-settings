@@ -5,7 +5,7 @@
    2. Historique ÉLEC : ce qui distinguait le thème du site d'origine (#main #article)
    3. Blocs hteiml génériques : notes de bas de page (identiques d'un corpus à l'autre)
    4. Propre au projet
-   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D42 ; D11 retiré le 2026-11-02 : sommaire de dots-vue tel quel), cibles d'ancre, page de titre */
+   5. Mécanismes communs dots-vue : sommaire (D42 ; D11 retiré le 2026-11-02 : sommaire de dots-vue tel quel), cibles d'ancre, page de titre */
 
 /*=============================================================
  1. COULEURS DU CORPUS
@@ -140,24 +140,6 @@
 .toc-aside-is-opened #main #article tr.cible-arrivee > td,
 .toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
 /* ==== fin arrivée sur une ancre ==== */
-
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
 
 
 /* ============================================================================

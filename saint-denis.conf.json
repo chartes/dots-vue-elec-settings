@@ -40,7 +40,8 @@
     "editByCiteType": [
       "acte",
       "notice",
-      "section"
+      "section",
+      "initiale"
     ],
     "displayTopToc": true,
     "displayLeftToc": true

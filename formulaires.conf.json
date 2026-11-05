@@ -17,6 +17,8 @@
       "openState": true,
       "logo": "logo_morchesne.png",
       "browseButtonText": "Parcourir la collection"
+,
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
@@ -30,13 +32,10 @@
     "editByCiteType": [
       "partie",
       "formulaire"
-    ],
-    "countByCiteType": [
-      "formulaire"
     ]
   },
   "aboutPageSettings": [],
-  "collectionCustomCss": "elec",
+  "collectionCustomCss": "formulaires",
   "customRoutes": [
     {
       "name": "Search",

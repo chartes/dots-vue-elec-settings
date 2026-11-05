@@ -14,7 +14,9 @@
     },
     "listSection": {
       "displayMode": "toc",
-      "openState": true
+      "openState": true,
+      "browseButtonText": "Parcourir l'édition",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {

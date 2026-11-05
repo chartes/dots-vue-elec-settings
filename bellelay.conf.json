@@ -39,9 +39,7 @@
     "editByCiteType": [
       "page"
     ],
-    "countByCiteType": [
-      "page"
-    ],
+    "countByCiteType": [],
     "leftTocFragmentIsDocument": false
   },
   "collectionCustomCss": "bellelay",

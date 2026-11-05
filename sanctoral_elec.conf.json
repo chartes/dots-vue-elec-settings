@@ -17,6 +17,8 @@
       "openState": true,
       "logo": "sanctoral_200.jpg",
       "browseButtonText": "Découvrir la collection"
+,
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
@@ -29,9 +31,6 @@
     "editByLevel": 1,
     "editByCiteType": [
       "section",
-      "dies"
-    ],
-    "countByCiteType": [
       "dies"
     ]
   },

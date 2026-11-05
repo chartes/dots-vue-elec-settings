@@ -7,7 +7,8 @@
     },
     "pageHeader": {
       "collectionAltTitle": "Actes royaux du Poitou",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "collectionDescription": "",

@@ -14,19 +14,103 @@
 
 /* Couleurs du corpus dans l'application (cartes, sommaire, accents). */
 /* 2026-11-02 : violet ÉLEC (comme la racine elec et Du Bourg) au lieu du brun #74472f / #f6f0eb. */
-:root { --fill-color:#5f004d; --meta-area-fill-color:#e6e4e5; --default-text-color:#2c2521; }
+:root {
+  --fill-color:#5f004d;
+}
 
+#main #article {
+  line-height: 28px;
+}
 /*=============================================================
  2. HISTORIQUE ÉLEC (diple_html.css, enc.css)
  =============================================================*/
 
-/* 2026-11-05 : règles historiques (diple_html.css, enc.css) retirées, sans effet mesuré sur 8 pages
-   (actes, introductions, présentation) : toutes reprises par le cartouche du 04/11 (section 4), le bloc liens
-   ou hteiml ; trailer, byline, docAuthor et label absents du TEI. */
+/* Design du cover
+   Page de titre de l'édition (.titlestmt) : titre, éditeurs, date. Contenu centré dans
+   une colonne de 42rem ; la taille du titre est fluide (clamp) entre 1.4rem et 2.1rem. */
 
-/*=============================================================
- 3. BLOCS HTEIML GÉNÉRIQUES
- =============================================================*/
+/* Conteneur : colonne centrée */
+#main #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+/* Titre */
+#main #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+/* Éditeurs : libellé en italique gris, noms en petites capitales */
+#main #article .titlestmt .editors {
+  text-align: center;
+  text-indent: 0;
+}
+#main #article .titlestmt .editors-label {
+  font-style: italic;
+  color: #666;
+  font-variant: normal;
+}
+#main #article .titlestmt .editor {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #333;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+/* Date : texte et filet supérieur dans la couleur d'accent */
+#main #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color);
+  border-top: 1px solid var(--fill-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+/* Version mobile (écran de 480px au plus) : marges du cover, date sur sa propre ligne */
+@media (max-width: 480px) {
+  .fileDesc {
+    padding: 1.25rem 1rem;
+  }
+
+  .fileDesc .date {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 1.2rem; /* légèrement réduite par rapport au desktop, mais toujours lisible */
+  }
+}
+
+/* fin du cover */
+
+/* Couleur des titres
+   h2 à h6 en gris ; h1.head (titre d'un édit) dans la couleur d'accent. */
+h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+}
+
+h1.head {
+  color: var(--fill-color);
+}
+/* fin couleur titres */
+
+/* design front d'un édit
+   Encadré pointillé autour du front d'un édit ; titre et date du document centrés. */
+#main #article .front {
+  background-color: #fff;
+  border: 1.75px dotted var(--fill-color);
+  border-radius: 0;
+}
+
+#main #article .front :is(.head, .docDate) {
+  text-align: center;
+  display: block;
+}
+/* fin design front  */
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
@@ -40,6 +124,15 @@
   margin-bottom: 1em;
   background: #e4e4e4;
 }
+
+.document-views #article .footnotes {
+  margin-top: 0em;
+}
+
+.note:target, .note:target a {
+  color: var(--fill-color);
+}
+
 /* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
    de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
    aligné, avec ou sans signe de citation avant lui. */
@@ -49,24 +142,13 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéros des notes (et lettres a, b, c des notes de leçon) dans une colonne de 1,6 em, à .76 em du
-   filet, calée à gauche, même police, en violet. 2026-11-05, repris des Testaments (Maxime : « a b c
-   en violet partout, alignés avec le 1 des notes, les notes en violet ») ; pas d'apparat dans les
-   Actes royaux, sélecteur .apparatus retiré. */
-.document-views #article .footnotes :is(aside, div).note { position: relative; }
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  position: absolute;
-  right: calc(100% + .76em);
-  margin: 0;
-  font-family: inherit;
-  font-size: 1em;
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
   font-weight: 700;
   line-height: 1.25;
-}
-.document-views #article .footnotes :is(aside, div).note a.noteback {
-  width: 1.6em;
-  text-align: left;
-  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -74,180 +156,3 @@
   text-decoration: underline;
 }
 /* ==== fin bloc notes ==== */
-
-
-/*=============================================================
- 4. PROPRE AU PROJET
- =============================================================*/
-
-/* 2026-11-05 (Maxime) : retirés car sans cible — bloc bibliographie (pas de bibliographie.xsl), bloc apparat
-   (les notes a, b, c sont des notes), a.notebottom et section.back:empty (plus produits), parties du discours
-   (seg@function plus affichés). */
-/* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
-   dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
-[collid="actesroyauxdupoitou"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
-
-/* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
-[collid="actesroyauxdupoitou"] #main #article :is(table, th, td, caption) { font-family: inherit; }
-/* ==== fin appels de note ==== */
-/* ==== Titres et espacements des pages de texte (2026-10-19, modèle : Montferrand) ====
-   Tailles de hteiml en gras ; environ 17 px entre un titre et son texte : sans le retrait de hteiml
-   au-dessus du h1 ni celui des sections imbriquées (1 rem / 1,25 rem qui s'additionnent), h2-h4 en
-   interligne normal (h2 : deux fois la taille du texte). Les blancs ne sont resserrés que hors des actes
-   (pas de header.front). */
-[collid="actesroyauxdupoitou"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
-[collid="actesroyauxdupoitou"] #main #article h2.head { font-size: 140%; }
-[collid="actesroyauxdupoitou"] #main #article h3.head { font-size: 130%; }
-[collid="actesroyauxdupoitou"] #main #article h4.head { font-size: 120%; }
-[collid="actesroyauxdupoitou"] #main #article :is(h2, h3, h4).head { font-weight: 900; line-height: 1.3; }
-[collid="actesroyauxdupoitou"] #main #article:not(:has(header.front)) :is(h2, h3, h4).head { margin: 1.5rem 0 .75rem; padding-top: 0; }
-[collid="actesroyauxdupoitou"] #main #article:not(:has(header.front)) section.div { padding: 0; }
-/* ==== fin titres et espacements ==== */
-
-
-/* ==== Arrivée sur une ancre (bloc commun 2026-10-15, revu le 2026-10-29, identique dans tous les corpus) ====
-   Élément visé par l'URL quand on vient d'un lien du texte (note, renvoi, ligne de tableau,
-   entrée d'index…) : jaune 1,8 s puis fondu jusqu'à 3 s. La classe cible-arrivee est posée par
-   le bloc « Arrivée sur une ancre » du JS générique (elec.customJs.js), qui place aussi la cible
-   sous ce qui reste collé en haut ; il ne la pose pas sur un titre, ni quand on vient du sommaire
-   ou que le sommaire est ouvert (les deux dernières règles en sont le garde-fou). Une ligne de
-   tableau : on anime aussi ses cellules (leur fond, zébré, masquerait celui de la ligne) ; un
-   details : son résumé. */
-@keyframes elec-cible {
-  0%, 60% { background-color: #fbeeb8; }
-  100%    { background-color: transparent; }
-}
-#main #article .cible-arrivee,
-#main #article tr.cible-arrivee > td,
-#main #article details.cible-arrivee > summary { animation: elec-cible 3s ease-out 1; }
-@media (prefers-reduced-motion: reduce) {
-  #main #article .cible-arrivee,
-  #main #article tr.cible-arrivee > td,
-  #main #article details.cible-arrivee > summary { animation: none; outline: 2px solid #fbeeb8; }
-}
-#main #article :is(h1, h2, h3, h4, h5, h6).cible-arrivee,
-.toc-aside-is-opened #main #article .cible-arrivee,
-.toc-aside-is-opened #main #article tr.cible-arrivee > td,
-.toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
-/* ==== fin arrivée sur une ancre ==== */
-
-
-/* 2026-11-04 : surlignage propre (beige, filet brun, depuis le 2026-10-04) retiré ; l'élément visé par
-   une ancre prend le jaune de hteiml (.note:target), comme les Testaments (Maxime : « exactement pareil »). */
-
-/* === SECTION GARDE DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
-/* Page de garde COMMUNE à tous les projets (commun/garde.xsl) : copie exacte de Montferrand dev
-   (comptes.customCss.css § 8, mesures du 2026-10-08) ; seule la couleur suit le corpus (--fill-color).
-   La table des matières est le sommaire de DoTS-vue (.bottom-toc), placé SOUS le titre, pleine largeur,
-   au même retrait que le texte (padding par défaut de DoTS-vue : 20px 10% 120px), sur la seule page
-   de garde (wrapper qui contient .titlestmt). */
-.document-area #article .titlestmt {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 2rem 1.25rem;
-  font-family: "Georgia", "Iowan Old Style", serif;
-  text-align: center;
-}
-.document-area #article .titlestmt h1 {
-  margin: 0 0 1rem !important;
-  color: var(--fill-color, #5f004d) !important;
-  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
-  line-height: 1.3 !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
-  text-align: center !important;
-}
-.document-area #article .titlestmt .editors { text-align: center; text-indent: 0; }
-.document-area #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
-.document-area #article .titlestmt .editor {
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
-  color: #333;
-  margin-bottom: 0.75rem;
-  font-variant: small-caps;
-  letter-spacing: 0.03em;
-}
-.document-area #article .titlestmt .date {
-  display: inline-block;
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-  color: var(--fill-color, #5f004d);
-  border-top: 1px solid #e2c5cb;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-}
-/* 2026-10-13 : le sommaire n'est plus déplacé sous le titre (règles .wrapper:has(.titlestmt)
-   retirées, comme pour Dubourg) : il sautait à l'arrivée de la page de titre. */
-/* === SECTION GARDE FIN === */
-
-
-/* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
-   h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
-   à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
-.document-views #article h1 { color: #5f004d !important; }
-.document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
-/* ==== fin bloc titres ==== */
-
-/* ==== BLOC LIENS (2026-10-27) : couleur des liens et des numéros de note, identique dans chaque corpus
-   Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
-   appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
-   (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
-.document-views #article .footnotes a.noteback { color: #5f004d !important; }
-/* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
-.document-views #article a.pb { color: #8a8a8a !important; }
-/* ==== fin bloc liens ==== */
-
-
-/* 2026-11-02 (prototype, à étendre à tous les corpus) : repères de page dans la marge de GAUCHE
-   (html.css de hteiml les met à droite : float: right; margin-right: -4.5em), et un blanc entre
-   deux paragraphes (html.css : p { margin: 0 }, le texte faisait bloc). */
-#main #article :is(a, span).pb { float: left; margin-right: 0; margin-left: -4.5em; }
-#main #article p.p + p.p { margin-top: .9em; }
-/* Poitou : dans les actes, l'éditeur marque les alinéas par <lb/> à l'intérieur d'un seul <p> (738 ; début d'un
-   vidimus, « Item » d'une énumération, reprise après l'acte cité) : même blanc qu'entre deux paragraphes. */
-[collid="actesroyauxdupoitou"] #main #article span.alinea { display: block; height: .9em; }
-/* 2026-11-02 : repère de la page où commence l'acte (span.pb.depart, « {p. 17} ») en gris comme les autres repères
-   (a.pb, bloc liens) : la règle historique Diple le mettait en rouge. */
-.document-views #article span.pb { color: #8a8a8a !important; }
-/* 2026-11-02 : notes plus près du texte : 99 px entre le dernier mot et le filet des notes (16 sous le paragraphe,
-   20 + 20 en bas du corps et de l'acte, 43 au-dessus du pied de notes) ramenés à environ 30 px. */
-[collid="actesroyauxdupoitou"] #main #article :is(article.text, article.text > section.body) { padding-bottom: 0; }
-[collid="actesroyauxdupoitou"] #main #article section.footnotes { margin-top: 0; }
-
-/* ---- Cartouche de l'acte sur le modèle des cartulaires (2026-11-04) ----
-   Cadre pointillé prune à angles droits (la règle historique Diple : pointillé gris arrondi) ; n° de l'acte
-   (h1.head : « CLXXXVIII ») puis date centrés ; analyse sans retrait (hteiml : 100 px à gauche) ; témoins en
-   plus petit, sigle droit et gras ; même blanc (1,5 rem) entre les blocs. */
-[collid="actesroyauxdupoitou"] #main #article header.front {
-  --acte-blanc: 1.5rem;
-  position: relative;
-  background-color: #fff;
-  border: 1.75px dotted rgba(95, 0, 77, 0.3);
-  border-radius: 0;
-  padding: 0.5em 0.75em;
-  margin: 0 0 1.5em;
-
-  > h1.head {
-    text-align: center;
-    font-weight: 700;
-    font-size: 1.2em;
-    line-height: 1.2;
-    margin: 0 0 .2em;
-    padding-top: 0;
-    color: #333 !important;   /* n° gris foncé comme celui des cartulaires (le bloc titres met les h1 en violet) */
-    a.bookmark { position: absolute; }   /* le « § » caché ne décale pas le centrage */
-  }
-  > .docDate { display: block; text-align: center; text-indent: 0; margin: 0 0 var(--acte-blanc); }
-  > .argument { margin: 0 0 var(--acte-blanc); }
-  > .argument > p:last-child { margin-bottom: 0; }
-  > :is(section.tradition, .div.tradition) { padding: 0; margin: 0 0 var(--acte-blanc); border: 0; }
-  .listWit { margin: 0; }
-  li.witness { font-size: 0.85em; line-height: 1.5; }
-  li.witness small.n { font-style: normal; font-weight: 600; }
-  li.witness cite.title { font-style: italic; }
-  > .according { margin: 0 0 var(--acte-blanc); }
-  > .according:last-child { margin-bottom: 0; }
-}
-
-/* 2026-11-04 (responsive) : les URL longues se coupent (documentation : +61px sur téléphone). */
-[collid="actesroyauxdupoitou"] #main #article a[href^="http"] { overflow-wrap: anywhere; }

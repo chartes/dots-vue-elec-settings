@@ -4,7 +4,7 @@
    2. Historique ÉLEC : thème Diple / ENC du site d'origine, limité à la zone de texte
    3. Blocs hteiml génériques : notes de bas de page (identique d'un corpus à l'autre)
    4. Propre au projet
-   5. Mécanismes communs dots-vue : volet Mirador, cibles d'ancre (pas de D11 : sommaire de dots-vue tel quel), page de titre */
+   5. Mécanismes communs dots-vue : cibles d'ancre (pas de D11 : sommaire de dots-vue tel quel), page de titre */
 
 /*=============================================================
  1. COULEURS DU CORPUS
@@ -202,25 +202,6 @@
 .toc-aside-is-opened #main #article tr.cible-arrivee > td,
 .toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
 /* ==== fin arrivée sur une ancre ==== */
-
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 
 /* 2026-10-04 — Élément visé par une ancre (note en pied, retour vers l'appel), surligné.
    `.dots-target` double `:target` : dots-vue pose cette classe sur l'élément visé quand une

@@ -5,7 +5,8 @@
    2. Historique ÉLEC : ce qui distinguait le thème du site d'origine (#main #article)
    3. Blocs hteiml génériques : notes de bas de page (identiques d'un corpus à l'autre)
    4. Propre au projet
-   5. Mécanismes communs dots-vue : sommaire (D42 ; D11 retiré le 2026-11-02 : sommaire de dots-vue tel quel), cibles d'ancre, page de titre */
+   5. Mécanismes communs dots-vue : cibles d'ancre, page de titre (sommaire de dots-vue tel quel : D11 retiré le
+      2026-11-02, D42 et volet Mirador le 2026-11-05) */
 
 /*=============================================================
  1. COULEURS DU CORPUS
@@ -141,44 +142,6 @@
 .toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
 /* ==== fin arrivée sur une ancre ==== */
 
-
-/* ============================================================================
-   D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
-
-   POURQUOI
-   --------
-   Certains libellés de sommaire sont longs parce que le texte de l'éditeur
-   l'est : l'analyse d'un acte, une rubrique médiévale, le résumé d'un
-   testament. Les amputer dans le registre de fragments serait mutiler la
-   donnée. On les tronque donc À L'AFFICHAGE, sur deux lignes.
-
-   Le texte complet reste dans le DOM : il est sélectionnable, trouvable par
-   la recherche du navigateur, et lu en entier par les lecteurs d'écran.
-   Rien n'est perdu, seule la hauteur de la ligne du sommaire est bornée.
-
-   PORTÉE — délibérément étroite
-   -----------------------------
-   `#toc-tree a.toc-title` : l'ancre de titre de l'arbre du sommaire émis par
-   TOC.vue, et rien d'autre. Pas de sélecteur sur `a`, `li`, `.tree` ni
-   `.container`, qui servent ailleurs dans la page.
-
-   `display:-webkit-box` est requis par `-webkit-line-clamp` ; l'ancre est un
-   enfant de `.li.container{display:flex}` et reste donc un élément de flex.
-   Les navigateurs sans line-clamp affichent le titre entier : dégradation
-   sans casse.
-
-   NE PAS élargir ce sélecteur : une règle trop large a déjà cassé un autre
-   corpus sur ce projet.
-   ============================================================================ */
-
-#toc-tree a.toc-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  overflow-wrap: anywhere;
-}
 
 /* 2026-11-04 : surlignage propre (beige, filet brun, depuis le 2026-10-04) retiré ; l'élément visé par
    une ancre prend le jaune de hteiml (.note:target), comme les Testaments (Maxime : « exactement pareil »). */

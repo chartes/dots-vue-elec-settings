@@ -1,0 +1,79 @@
+{
+  "collectionId": "mai68",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Mai 68"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Mai 68 et les intellectuels : questions à l’histoire orale",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Parcourir le site",
+      "singleResourceButtonText": "Ouvrir le document"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Mai 68 et les intellectuels : questions à l’histoire orale",
+    "footerSubtitles": [
+      "Séminaire de l’École nationale des chartes, 2003-2008",
+      "Sous la direction d’Agnès Callu"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 3,
+    "editByLevel": 3,
+    "editByCiteType": [
+      "page"
+    ],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [
+    {
+      "tabName": "Crédits",
+      "compName": "about1"
+    }
+  ],
+  "collectionCustomCss": "mai68",
+  "collectionCustomJs": "elec",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
+}

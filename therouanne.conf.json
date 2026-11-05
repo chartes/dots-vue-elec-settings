@@ -1,0 +1,80 @@
+{
+  "collectionId": "therouanne",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Thérouanne"
+    },
+    "pageHeader": {
+      "collectionBannerImg": "banner_therouanne.jpg",
+      "collectionAltTitle": "Thérouanne, archéologie d’une ville abandonnée",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Parcourir le site",
+      "singleResourceButtonText": "Ouvrir le document"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Thérouanne, archéologie d’une ville abandonnée",
+    "footerSubtitles": [
+      "Les fouilles de 1997 à 1999",
+      "Sous la direction de Ghislaine Noyé"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 2,
+    "editByLevel": 2,
+    "editByCiteType": [
+      "page"
+    ],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [
+    {
+      "tabName": "Crédits",
+      "compName": "about1"
+    }
+  ],
+  "collectionCustomCss": "therouanne",
+  "collectionCustomJs": "elec",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
+}

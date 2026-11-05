@@ -1,0 +1,78 @@
+{
+  "collectionId": "bede",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "BÈDE"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "BÈDE, bibliographie des études diplomatiques et éditions d’actes et documents du Moyen Âge français",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Parcourir la base",
+      "singleResourceButtonText": "Ouvrir le document"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "BÈDE, bibliographie des études diplomatiques et éditions d’actes et documents du Moyen Âge français",
+    "footerSubtitles": [
+      "Direction scientifique : Olivier Guyotjeannin"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 1,
+    "editByLevel": 1,
+    "editByCiteType": [
+      "page"
+    ],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [
+    {
+      "tabName": "Crédits",
+      "compName": "about1"
+    }
+  ],
+  "collectionCustomCss": "bede",
+  "collectionCustomJs": "elec",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
+}

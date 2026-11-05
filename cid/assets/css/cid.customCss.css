@@ -68,13 +68,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -89,7 +100,8 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -392,7 +404,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }

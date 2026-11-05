@@ -168,7 +168,7 @@
    -------------------------------------------------------------------------- */
 
 #main #article ul {
-  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='6'%3E%3Crect width='7' height='6' fill='%238d2e34'/%3E%3C/svg%3E");
+  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='6'%3E%3Crect width='7' height='6' fill='%235f004d'/%3E%3C/svg%3E");
   padding-top: .3em;
 }
 #main #article ul ul { list-style: circle; }
@@ -199,8 +199,6 @@
 #main #article table.sansbord { width: 30%; }
 #main #article table.sansbord td { border: none; }
 #main #article td.icone { width: 250px; }
-
-
 
 
 #main #article a.bookmark { color: #ccc; border-bottom: none; }
@@ -413,19 +411,7 @@
 #main #article .ip-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
 #main #article .ip-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--ip-accent); }
 
-[collid="interpares2"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }    /* même pas que les notes */
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="interpares2"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
-/* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
-   grand retrait du pied de page. */
-[collid="interpares2"] #main #article section.back:empty { display: none; }
+
 /* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
    dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
 [collid="interpares2"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
@@ -446,7 +432,6 @@
 [collid="interpares2"] #main #article:not(:has(header.front)) :is(h2, h3, h4).head { margin: 1.5rem 0 .75rem; padding-top: 0; }
 [collid="interpares2"] #main #article:not(:has(header.front)) section.div { padding: 0; }
 /* ==== fin titres et espacements ==== */
-
 
 
 /* ==== Arrivée sur une ancre (bloc commun 2026-10-15, revu le 2026-10-29, identique dans tous les corpus) ====
@@ -541,7 +526,7 @@
 .document-area #main #article a.noteref:target,
 .document-area #main #article a.noteref.dots-target {
   background: var(--meta-area-fill-color, #f5f5f5);
-  box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21);
+  box-shadow: inset 3px 0 0 var(--fill-color, #5f004d);
 }
 
 /* 2026-10-12 : page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document
@@ -579,8 +564,6 @@
    Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
    CSS de chaque corpus qui en a. Deux ids en tête de sélecteur : il l'emporte sur les
    règles propres au corpus.
-   - Paragraphes dans une cellule : ni justifiés ni en retrait (une colonne étroite
-     justifiée ouvre de grands blancs entre les mots).
    - Petit écran, sur le modèle de la recherche des cartulaires (dev.chartes.psl.eu/elec/
      cartulaires/search) : les en-têtes de tri forment une rangée de boutons de même
      largeur, l'indicateur au-dessus du nom, entre deux filets ; chaque ligne devient un
@@ -588,13 +571,6 @@
      Les filtres (que la recherche n'a pas) s'empilent, chacun avec son libellé.
    - Champs de saisie à 16px sur écran tactile : en dessous, Safari iOS zoome la page
      à la saisie et ne dézoome pas. */
-#main #article .tf-cadre td p {
-  margin: 0;
-  text-align: left;
-  text-indent: 0;
-}
-#main #article .tf-cadre td p + p { margin-top: .4em; }
-
 @media (max-width: 760px), (pointer: coarse) {
   #main #article .tf-cadre tr.tf-filtres input,
   #main #article .tf-cadre tr.tf-filtres select { font-size: 16px; }
@@ -615,7 +591,6 @@
     box-sizing: border-box;
   }
   #main #article .tf-cadre thead { position: static; background: none; }
-  #main #article .tf-cadre caption { display: block; width: auto; }
   #main #article .tf-cadre .tf-barre { flex-wrap: wrap; }
   #main #article .tf-cadre .tf-csv { margin-left: 0; }
 
@@ -624,8 +599,8 @@
     display: flex;
     gap: .25rem;
     padding: .5rem 0;
-    border-top: 2px solid var(--fill-color, #8f0e21);
-    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    border-top: 2px solid var(--fill-color, #5f004d);
+    border-bottom: 2px solid var(--fill-color, #5f004d);
     background: none;
   }
   #main #article .tf-cadre thead tr:first-child th {
@@ -711,7 +686,7 @@
   #main #article .tf-cadre tbody tr:nth-child(even) > td,
   #main #article .tf-cadre tbody tr:hover > td { background: none; }
   #main #article .tf-cadre tbody tr.dots-target,
-  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); padding-left: .7rem; }
   #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
   /* Première colonne (l'entrée) en tête du bloc */
   #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
@@ -725,35 +700,7 @@
    Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
    latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
-.document-views #article .footnotes p.apparatus {
-  margin-bottom: 1.25rem;
-  padding-left: 0;
-  line-height: 1.55;
-}
-.document-views #article .footnotes .apparatus * ::after { content: " "; }
-.document-views #article .footnotes .apparatus span.note {
-  display: block;
-  position: relative;
-  margin-bottom: .3em;
-  line-height: 1.25;
-  margin-left: 2.5em;
-  padding-left: 1.3em;
-  border-left: 1px solid #ccc;
-}
-.document-views #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  right: calc(100% + .76em);
-  color: var(--fill-color);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: none;
-}
-/* Lemme fermé par un crochet */
-.document-views #article .footnotes .apparatus .lem::after {
-  content: "]\00a0";
-  color: #8a837c;
-}
-.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+
 /* ==== fin bloc apparat ==== */
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
@@ -777,13 +724,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -803,7 +761,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
@@ -829,6 +787,11 @@
 }
 [collid="interpares2"] #main #article table.table:not(.sansbord):not(:has(td:nth-child(3))) td:first-child { font-weight: 600; width: 9em; }   /* tableaux terme / description */
 [collid="interpares2"] #main #article table.table tr:has(> td[colspan]:empty) { display: none; }
+
+/* 2026-11-03 : « un truc grisé, faut enlever » — hteiml peint toute section.front en gris (#f3f4f6) avec 20 px de
+   retrait : le titre et les signatures de chaque partie (« Partie 2 », « Rapport de l'équipe thématique 1 »,
+   « par Martine Cardin ») sont rendus sur le texte, sans fond ni cadre. Scopé : la customCss est injectée partout. */
+[collid="interpares2"] #main #article section.front { background: none; padding: 0; }
 
 /* 2026-11-04 (responsive) : sur téléphone, les tableaux ordinaires défilent dans leur cadre (partie 2 : +56px). */
 @media (max-width: 760px) {

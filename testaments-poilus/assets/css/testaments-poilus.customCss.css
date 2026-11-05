@@ -10,7 +10,7 @@
  1. COULEURS DU CORPUS
  =============================================================*/
 
-:root { --fill-color:#a73136; --meta-area-fill-color:#f8eeee; --default-text-color:#2d2524; }
+:root { --fill-color:#5f004d; --meta-area-fill-color:#e6e4e5; --default-text-color:#2d2524; }
 
 /*=============================================================
  2. HISTORIQUE ÉLEC (theme/testaments-poilus.css, ancien site)
@@ -33,7 +33,7 @@
 /* L'enveloppe et les autres illustrations de présentation ne reçoivent pas
    le cadre générique de hteiml. */
 .document-area #article > section.div.level1 > figure { padding: 0; border: 0; background: transparent; }
-.document-area #article .summary,.document-area #article .physdesc,.document-area #article .reference { background:#fbf6f5; border-left:4px solid #a73136; margin:1rem 0; padding:.8rem 1rem; }
+.document-area #article .summary,.document-area #article .physdesc,.document-area #article .reference { background:#fbf6f5; border-left:4px solid #5f004d; margin:1rem 0; padding:.8rem 1rem; }
 .document-area #article .dateline,.document-area #article .signed { text-align:center; }
 .document-area #article .orig { color:#6b625f; } .document-area #article .reg { color:#171313; }
 .document-area #article .tp-facsimile { display:block; width:min(100%, 44rem); height:auto; margin:1.4rem auto; border:1px solid #d7d1ca; box-shadow:0 .2rem .8rem rgba(45,37,36,.14); }
@@ -52,11 +52,11 @@
 .document-area #article .tp-mode { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
 .document-area #article .tp-mode-label {
   display: inline-block; margin: 0 .35rem 1rem 0; padding: .3rem .85rem;
-  border: 1px solid #a73136; border-radius: 3px; color: #a73136;
+  border: 1px solid #5f004d; border-radius: 3px; color: #5f004d;
   font-family: Arial, Helvetica, sans-serif; font-size: .88rem; cursor: pointer;
 }
-.document-area #article .tp-mode:checked + .tp-mode-label { background: #a73136; color: #fff; font-weight: 700; }
-.document-area #article .tp-mode:focus-visible + .tp-mode-label { outline: 2px solid #a73136; outline-offset: 2px; }
+.document-area #article .tp-mode:checked + .tp-mode-label { background: #5f004d; color: #fff; font-weight: 700; }
+.document-area #article .tp-mode:focus-visible + .tp-mode-label { outline: 2px solid #5f004d; outline-offset: 2px; }
 /* état choisi : on masque l'autre version (mêmes sélecteurs que delescluze) */
 .document-area #article .tp-mode-tr:checked ~ .tp-ed,
 .document-area #article .tp-mode-tr:checked ~ * .tp-ed { display: none; }
@@ -103,7 +103,7 @@
 .document-area #article .tp-facs-r { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
 .document-area #article .tp-facs-nav { margin: 0 0 .4rem; font-size: .8rem; line-height: 1.5; }
 .document-area #article .tp-facs-lab { color: #2d2524; cursor: pointer; }
-.document-area #article .tp-facs-lab:hover { color: #a73136; }
+.document-area #article .tp-facs-lab:hover { color: #5f004d; }
 .document-area #article .tp-facs-sep { color: #777; }
 .document-area #article .tp-facs-fig { display: none; margin: 0; }
 .document-area #article .tp-facs-imgs .tp-facsimile {
@@ -121,7 +121,7 @@
 .document-area #article .tp-facs-r7:checked ~ .tp-facs-nav .tp-facs-l7,
 .document-area #article .tp-facs-r8:checked ~ .tp-facs-nav .tp-facs-l8,
 .document-area #article .tp-facs-r9:checked ~ .tp-facs-nav .tp-facs-l9,
-.document-area #article .tp-facs-r10:checked ~ .tp-facs-nav .tp-facs-l10 { color: #a73136; font-weight: 700; }
+.document-area #article .tp-facs-r10:checked ~ .tp-facs-nav .tp-facs-l10 { color: #5f004d; font-weight: 700; }
 .document-area #article .tp-facs-r1:checked ~ .tp-facs-imgs > .tp-facs-f1,
 .document-area #article .tp-facs-r2:checked ~ .tp-facs-imgs > .tp-facs-f2,
 .document-area #article .tp-facs-r3:checked ~ .tp-facs-imgs > .tp-facs-f3,
@@ -134,7 +134,7 @@
 .document-area #article .tp-facs-r10:checked ~ .tp-facs-imgs > .tp-facs-f10 { display: block; }
 .document-area #article .tp-facs-r1:focus-visible ~ .tp-facs-nav .tp-facs-l1,
 .document-area #article .tp-facs-r2:focus-visible ~ .tp-facs-nav .tp-facs-l2,
-.document-area #article .tp-facs-r3:focus-visible ~ .tp-facs-nav .tp-facs-l3 { outline: 2px solid #a73136; outline-offset: 2px; }
+.document-area #article .tp-facs-r3:focus-visible ~ .tp-facs-nav .tp-facs-l3 { outline: 2px solid #5f004d; outline-offset: 2px; }
 @media (max-width: 768px) {
   .document-area #article .tp-facs { width: auto; margin: 0 0 1.2rem; }
 }
@@ -163,13 +163,13 @@
 
 /* Libelles : un seul des deux est montre, selon l'etat du <details>. */
 .document-area #article .tp-facs-ouvrir,
-.document-area #article .tp-facs-fermer { display: block; margin: .2rem 0 0; font-size: .78rem; color: #a73136; }
+.document-area #article .tp-facs-fermer { display: block; margin: .2rem 0 0; font-size: .78rem; color: #5f004d; }
 .document-area #article .tp-facs-zoom > summary .tp-facs-fermer { display: none; }
 .document-area #article .tp-facs-zoom[open] > summary .tp-facs-ouvrir { display: none; }
 .document-area #article .tp-facs-zoom[open] > summary .tp-facs-fermer { display: block; }
 .document-area #article .tp-facs-zoom > summary:hover .tp-facs-ouvrir,
 .document-area #article .tp-facs-zoom > summary:hover .tp-facs-fermer { text-decoration: underline; }
-.document-area #article .tp-facs-zoom > summary:focus-visible { outline: 2px solid #a73136; outline-offset: 2px; }
+.document-area #article .tp-facs-zoom > summary:focus-visible { outline: 2px solid #5f004d; outline-offset: 2px; }
 
 /* Image pleine taille : elle peut faire 17 250 px de haut, donc on la borne en
    hauteur et on laisse defiler a l'interieur plutot que d'etirer la page. */
@@ -195,33 +195,6 @@
    Sauvegarde du fichier : *.bak_agentwill_20260914
    ========================================================================== */
 
-/* --- A. Barre année / mois / jour / testament (nav#specific-menu-wills) ----
-   Mêmes codes que la barre de christofle (.christofle-note-nav), qui est
-   l'étalon de l'utilisateur, et que l'ÉLEC : listes en ligne, séparateur « | »,
-   élément courant en rouge et gras. L'élément courant sort en <strong> et non
-   en <a> (un lien vers la route courante vide la page dans DoTS-vue). */
-.document-area #article .tp-will-nav {
-  border-bottom: 1px solid #E8E8E8;
-  margin: 0 0 1.1rem;
-  padding: 0;
-  text-align: center;
-  font-size: 90%;
-}
-.document-area #article .tp-will-nav ul { list-style: none; padding: 2px 0; margin: 0; }
-.document-area #article .tp-will-nav .tp-years-list,
-.document-area #article .tp-will-nav .tp-months-list,
-.document-area #article .tp-will-nav .tp-days-list { border-bottom: 1px solid #E8E8E8; }
-.document-area #article .tp-will-nav li { display: inline-block; }
-.document-area #article .tp-will-nav li:not(:last-child):not(.tp-nav-prev)::after {
-  content: " | "; color: #c9bcbc;
-}
-.document-area #article .tp-will-nav a { color: #28211f; font-weight: 400; text-decoration: none; padding: 0 .28rem; }
-.document-area #article .tp-will-nav a:hover,
-.document-area #article .tp-will-nav a:focus { color: #a73136; font-weight: 700; text-decoration: none; }
-.document-area #article .tp-will-nav .tp-nav-courant { color: #a73136; font-weight: 700; padding: 0 .28rem; }
-.document-area #article .tp-will-nav .tp-nav-sep { color: #9a8f8c; }
-.document-area #article .tp-will-nav .tp-years-list { font-variant: small-caps; letter-spacing: .03em; }
-
 /* --- B. Les fac-similés reviennent EN COLONNE à gauche, comme #facsimile ---
    Le commentaire du bloc 4 disait la colonne impossible dans DoTS-vue (« le
    contenu qui suit ne remonte pas à côté du flottant »). Re-mesuré le
@@ -240,6 +213,7 @@
   /* les sections filles (summary / physdesc / reference) et le titre héritent
      eux aussi du `clear: both` de html.css : il les ferait tomber sous l'image */
   .document-area #article article.testament header.front section,
+  .document-area #article article.testament section.front section,
   .document-area #article article.testament section.body section,
   .document-area #article article.testament h2.tp-num { clear: none; }
   .document-area #article article.testament .tp-facs-imgs .tp-facsimile { max-width: 100%; }
@@ -409,11 +383,6 @@
  4. PROPRE AU PROJET
  =============================================================*/
 
-/* --------------------------------------------------------------------------
-   Index paginés par lettre. Chaque sous-liste listPerson/listPlace devient une
-   page ; sa lettre sert de titre, comme sur les 38 pages-lettres de l'ÉLEC.
-   -------------------------------------------------------------------------- */
-.document-area #article .tp-index-letter { margin:0 0 1.6rem; }
 /* Fac-similés : la vignette ouvre la pleine résolution, comme l'agrandissement
    qu'offrait l'ÉLEC. Le lien ne doit pas souligner l'image. */
 /* Barre des lettres de l'index, précalculée dans la source. */
@@ -450,8 +419,8 @@
   box-sizing: border-box;
   margin: 1.1rem 0 .35rem;
   padding-bottom: .2rem;
-  border-bottom: 1px solid rgba(167, 49, 54, .3);
-  color: #a73136;
+  border-bottom: 1px solid rgba(95, 0, 77, .3);
+  color: #5f004d;
   font-size: .82rem;
   font-weight: 700;
   letter-spacing: .04em;
@@ -467,7 +436,7 @@
 
 /* Index des testateurs et des lieux de décès en tableaux triables et filtrables
    (2026-10-13) : marqueurs tf-* de tableau-filtrable.xsl, comportement dans
-   testaments-poilus.customJs.js. Mêmes règles que les tableaux des Édits, en rouge #a73136. */
+   testaments-poilus.customJs.js. Mêmes règles que les tableaux des Édits, en violet #5f004d. */
 #main #article .tf-cadre { margin: 1.2rem 0 2rem; }
 #main #article table.tf-tableau {
   display: table;
@@ -499,7 +468,7 @@
 #main #article .tf-tableau thead th {
   padding: 0;
   border: 0;
-  border-bottom: 2px solid #a73136;
+  border-bottom: 2px solid #5f004d;
   background: #f4f1ee;
   vertical-align: bottom;
 }
@@ -527,11 +496,11 @@
   font-size: .95em;
   letter-spacing: 0;
 }
-#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: #a73136; font-size: .75em; }
-#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: #a73136; font-size: .75em; }
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: #5f004d; font-size: .75em; }
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: #5f004d; font-size: .75em; }
 #main #article .tf-tableau button.tf-tri:hover,
 #main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri,
-#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: #a73136; }
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: #5f004d; }
 #main #article .tf-tableau button.tf-tri:hover { background: #ece7e2; }
 #main #article .tf-tableau button.tf-tri:focus-visible { outline: 2px solid #315ba7; outline-offset: -2px; }
 #main #article .tf-tableau td {
@@ -545,7 +514,7 @@
 #main #article .tf-tableau tbody tr:hover > td { background: #f3efe9; }
 #main #article .tf-tableau tbody tr:target > td:first-child,
 #main #article .tf-tableau tbody tr.dots-target > td:first-child,
-#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 #a73136; }
+#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 #5f004d; }
 #main #article .tf-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
 #main #article .tf-tableau .tf-vide { color: #c4bdb6; }
 #main #article .tf-tableau tr[hidden] { display: none !important; }
@@ -607,7 +576,7 @@
 #main #article .tp-tableau td.tp-c-testament { white-space: nowrap; color: #555; }
 #main #article .tp-tableau .tp-refs { margin-top: .3rem; font-size: .82rem; color: #666; }
 #main #article .tp-tableau .tp-geonames { display: block; font-size: .78rem; }
-#main #article .tp-tableau td a { color: #a73136; }
+#main #article .tp-tableau td a { color: #5f004d; }
 #main #article .tp-tableau td.tp-c-morts { min-width: 14rem; }
 
 /*=============================================================
@@ -616,15 +585,7 @@
 
 
 [collid="testaments-poilus"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }    /* même pas que les notes */
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="testaments-poilus"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
+/* 2026-11-05 : filet sous l'apparat retiré (Maxime : « supprimer la barre du bas »). */
 /* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
    grand retrait du pied de page. */
 [collid="testaments-poilus"] #main #article section.back:empty { display: none; }
@@ -802,8 +763,8 @@
     display: flex;
     gap: .25rem;
     padding: .5rem 0;
-    border-top: 2px solid var(--fill-color, #8f0e21);
-    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    border-top: 2px solid var(--fill-color, #5f004d);
+    border-bottom: 2px solid var(--fill-color, #5f004d);
     background: none;
   }
   #main #article .tf-cadre thead tr:first-child th {
@@ -889,7 +850,7 @@
   #main #article .tf-cadre tbody tr:nth-child(even) > td,
   #main #article .tf-cadre tbody tr:hover > td { background: none; }
   #main #article .tf-cadre tbody tr.dots-target,
-  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); padding-left: .7rem; }
   #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
   /* Première colonne (l'entrée) en tête du bloc */
   #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
@@ -905,7 +866,8 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -937,25 +899,19 @@
 /* ==== APPARAT SANS LETTRE DANS LA SOURCE : lettres automatiques a, b, c… ====
    Certains apparats n'ont ni @n ni <rdg> (lemme + note) : la XSL n'a pas de lettre à afficher.
    Ici la lettre est numérotée par le CSS, dans l'ordre de l'apparat, avec le même rendu que le
-   bloc apparat commun (gras, couleur du corpus, à gauche du filet). Corpus concernés seulement :
-   testaments-poilus et edits. Un apparat qui porte sa lettre dans la source garde la sienne. */
-[collid="testaments-poilus"] #main #article .footnotes p.apparatus,
+   bloc apparat commun (gras, couleur du corpus, à gauche du filet). Corpus concerné seulement : edits (testaments-poilus a ses lettres dans la XSL, note-n).
+   Un apparat qui porte sa lettre dans la source garde la sienne. */
 [collid="edits"] #main #article .footnotes p.apparatus { counter-reset: lettre-app; }
-[collid="testaments-poilus"] #main #article .footnotes .apparatus span.note,
 [collid="edits"] #main #article .footnotes .apparatus span.note { counter-increment: lettre-app; }
-[collid="testaments-poilus"] #main #article .footnotes .apparatus span.note > a:empty::before,
 [collid="edits"] #main #article .footnotes .apparatus span.note > a:empty::before {
   content: counter(lettre-app, lower-alpha);
   font-size: 16px;
   color: var(--fill-color);
   font-weight: 700;
 }
-[collid="testaments-poilus"] #main #article .footnotes .apparatus span.note > a:empty,
 [collid="edits"] #main #article .footnotes .apparatus span.note > a:empty { right: calc(100% + .76rem); }
 /* Numéro de la XSL (1, 2…) remplacé par la lettre automatique */
-[collid="testaments-poilus"] #main #article .footnotes .apparatus span.note > a:not(:empty),
 [collid="edits"] #main #article .footnotes .apparatus span.note > a:not(:empty) { font-size: 0; right: calc(100% + .76rem); }
-[collid="testaments-poilus"] #main #article .footnotes .apparatus span.note > a:not(:empty)::before,
 [collid="edits"] #main #article .footnotes .apparatus span.note > a:not(:empty)::before {
   content: counter(lettre-app, lower-alpha);
   font-size: 16px;
@@ -964,8 +920,6 @@
 }
 /* fin bloc apparat sans lettre */
 
-/* Page d'un jour : le testament du jour s'affiche, la TOC du bas de dots-vue est masquée (la liste est déjà dans le testament). */
-body:has(.tp-jour-testament) .bottom-toc { display: none; }
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
@@ -988,13 +942,24 @@ body:has(.tp-jour-testament) .bottom-toc { display: none; }
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -1026,7 +991,7 @@ body:has(.tp-jour-testament) .bottom-toc { display: none; }
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
@@ -1037,3 +1002,31 @@ body:has(.tp-jour-testament) .bottom-toc { display: none; }
 
 /* Relecture du 30/10 (page de comparaison avant/après) : région du lieu sous le département (index des lieux, proposition B) */
 [collid="testaments-poilus"] #article .tp-region { display: block; font-size: .85em; color: #777; }
+
+/* ===== Relecture du 2/11 ===== */
+
+/* Navigation par année, mois et jour : liens en noir, comme Christofle. Le bloc « liens »
+   ci-dessus impose le bleu aux liens du texte avec !important ; la règle ci-dessous reprend
+   donc ses :not() pour passer devant (même poids, plus de classes). */
+
+/* Notice : le numéro et la date se suivent de près. Le titre était réglé à 1.5 de ligne, ce qui
+   creusait un blanc entre « 19 » et « 1914, 2 août » (le <br> les met sur deux lignes). */
+[collid="testaments-poilus"] #article h2.tp-num { line-height: 1.15; }
+
+/* Date et lieu sont deux <span> collés dans le XSL : « 2 aoûtParis ». Une virgule les sépare. */
+[collid="testaments-poilus"] #article .tp-docDate .placeName::before { content: ", "; }
+
+/* Page « Le projet » : la signature (« Christine Nougaret et Florence Clavaud ») va à droite. */
+[collid="testaments-poilus"] #article .signed { text-align: right; }
+
+/* Moins de blanc après le texte : la zone de texte gardait 120 px de fond de page. */
+[collid="testaments-poilus"] .document-views .text-view { padding-bottom: 2rem; }
+
+/* Verso d'enveloppe : plusieurs signatures de suite (« suivi de quatre signatures ») sortaient collées,
+   « DriancourtDriancourtDriancourt ». Un espace les sépare. */
+[collid="testaments-poilus"] #article .signature + .signature { margin-left: 1.5em; }
+
+/* Page d'un jour (jour-AAAA-MM-JJ) : le jour n'est pas un niveau d'édition (l'ajouter à editByCiteType
+   vide la page du testament dessous), dots-vue y ajoute donc la TOC du reste du corpus. Elle est
+   masquée dès que la page porte un testament. */
+[collid="testaments-poilus"] .document.wrapper:has(article.testament) > .bottom-toc { display: none; }

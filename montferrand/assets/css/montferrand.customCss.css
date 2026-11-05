@@ -179,13 +179,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -201,20 +212,6 @@
    vrai intertitre (h2, h3 dans une sous-rubrique) que hteiml met en forme comme ailleurs ;
    la référence a la taille et l'interligne d'un paragraphe. */
 .document-views #article .biblio { margin: 0 0 1.2rem; }
-.document-views #article details.biblio > summary {
-  display: block;
-  list-style: none;
-  cursor: pointer;
-}
-.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
-.document-views #article .biblio-compte {
-  margin-left: .3em;
-  color: #8a837c;
-  font-size: .85em;
-  font-weight: normal;
-  font-variant: normal;
-  letter-spacing: 0;
-}
 .document-views #article ul.biblio-liste {
   margin: 0;
   padding: 0;
@@ -249,24 +246,16 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-/* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
-.document-views #article li.bibl .author,
+/* Sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
 .document-views #article li.bibl .sigle {
   font-variant: small-caps;
   font-weight: normal;
   letter-spacing: .02em;
 }
 .document-views #article li.bibl cite.title { font-style: italic; }
-.document-views #article li.bibl a {
-  color: inherit;
-  text-decoration: underline dotted #b9afa5;
-  text-underline-offset: .18em;
-}
 @media (max-width: 700px) {
   .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
 }
-/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
-.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
 /* ==== fin bloc bibliographie ==== */
 
 /*=============================================================
@@ -852,9 +841,8 @@ section.div h1.head {
 /* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13 ; 2026-10-14) ====
    Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
    CSS de chaque corpus qui en a. Deux ids en tête de sélecteur : il l'emporte sur les
-   règles propres au corpus.
-   - Paragraphes dans une cellule : ni justifiés ni en retrait (une colonne étroite
-     justifiée ouvre de grands blancs entre les mots).
+   règles propres au corpus. (Montferrand, 2026-11-03 : règles des paragraphes dans une
+   cellule retirées, aucune cellule n'en contient.)
    - Petit écran, sur le modèle de la recherche des cartulaires (dev.chartes.psl.eu/elec/
      cartulaires/search) : les en-têtes de tri forment une rangée de boutons de même
      largeur, l'indicateur au-dessus du nom, entre deux filets ; chaque ligne devient un
@@ -862,13 +850,6 @@ section.div h1.head {
      Les filtres (que la recherche n'a pas) s'empilent, chacun avec son libellé.
    - Champs de saisie à 16px sur écran tactile : en dessous, Safari iOS zoome la page
      à la saisie et ne dézoome pas. */
-#main #article .tf-cadre td p {
-  margin: 0;
-  text-align: left;
-  text-indent: 0;
-}
-#main #article .tf-cadre td p + p { margin-top: .4em; }
-
 @media (max-width: 760px), (pointer: coarse) {
   #main #article .tf-cadre tr.tf-filtres input,
   #main #article .tf-cadre tr.tf-filtres select { font-size: 16px; }
@@ -995,41 +976,6 @@ section.div h1.head {
 }
 /* ==== fin tableau filtrable ==== */
 
-/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
-   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
-   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
-.document-views #article .footnotes p.apparatus {
-  margin-bottom: 1.25rem;
-  padding-left: 0;
-  line-height: 1.55;
-}
-.document-views #article .footnotes .apparatus * ::after { content: " "; }
-.document-views #article .footnotes .apparatus span.note {
-  display: block;
-  position: relative;
-  margin-bottom: .3em;
-  line-height: 1.25;
-  margin-left: 2.5em;
-  padding-left: 1.3em;
-  border-left: 1px solid #ccc;
-}
-.document-views #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  right: calc(100% + .76em);
-  color: var(--fill-color);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: none;
-}
-/* Lemme fermé par un crochet */
-.document-views #article .footnotes .apparatus .lem::after {
-  content: "]\00a0";
-  color: #8a837c;
-}
-.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
-/* ==== fin bloc apparat ==== */
-
 /* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
    h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
    à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
@@ -1041,7 +987,7 @@ section.div h1.head {
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }

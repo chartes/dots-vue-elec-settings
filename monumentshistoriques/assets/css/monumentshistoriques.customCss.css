@@ -28,7 +28,7 @@
   --mh-fond-survol: #E2DED0;
 
   /* Accent bordeaux : titres d'index, vedettes, liens, filets. Utilisé partout dans cette feuille. */
-  --mh-accent: #8d2632;
+  --mh-accent: #5f004d;
 
   /* Fond des barres de formulaire de recherche. screen.css L. 1256. */
   --mh-fond-formulaire: #D4D0C8;
@@ -2039,13 +2039,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -2060,7 +2071,8 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -2092,8 +2104,8 @@
 /* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
    h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
    à chaque corpus). !important : la norme passe devant les couleurs de titre des corpus. ==== */
-.document-views #article h1 { color: #5f004d !important; }
-.document-views #article :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
+.document-views :is(#article, .mh-edition) h1 { color: #5f004d !important; }  /* 02/11 : les pages MH n'ont pas de #article, seulement .mh-edition */
+.document-views :is(#article, .mh-edition) :is(h2, h3, h4, h5, h6) { color: #585858 !important; }
 /* ==== fin bloc titres ==== */
 
 /* ==== Crédits (2026-10-27, mh-presentation refId=credits) ====
@@ -2111,7 +2123,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
@@ -2154,7 +2166,7 @@
 /* Autorités : vedette et notice sur une ligne, « → voir ENC » en fin, identifiant Autor discret à droite */
 .mh-edition p.mh-autorites-ligne { margin: 0; padding: 0; text-indent: 0 !important; text-align: left !important; }
 .mh-edition .mh-autorites-suite { display: inline; margin: 0; padding: 0; font-size: inherit; color: inherit; }
-.mh-edition .mh-autorites-vedette { font-weight: 700; color: var(--fill-color, #5f004d); }
+.mh-edition .mh-autorites-vedette { font-weight: 400; font-variant: small-caps; letter-spacing: .03em; color: inherit; }  /* 02/11 (Maxime) : petites capitales plutôt que violet gras */
 .mh-edition .mh-autorites-donnee { float: right; font-size: .8em; color: #8a8a8a; margin-left: 1em; }
 /* Stations de tourisme : deux colonnes, date aux couleurs du thème */
 .mh-edition li.mh-index-entree[id^="tou-"] { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem; align-items: baseline; }
@@ -2241,3 +2253,13 @@ article.mh-edition:has(> .mh-groupe) { padding-bottom: 0; }
   line-height: 1.25;
   letter-spacing: normal;
 }
+
+/* Page « Crédits » (02/11, « page crédits bizarre ») : la table de mise en page de l'ÉLEC alignait ses colonnes avec des lignes
+   vides (jusqu'à quatre de suite) ; elles sont masquées, les deux colonnes se suivent, sans filet ni cadre. */
+.mh-edition section.credits table tr:not(:has(td:not(.mh-cell-vide))) { display: none; }
+.mh-edition section.credits table { border: 0; border-collapse: collapse; margin: 1.2rem 0; width: auto; }
+.mh-edition section.credits table td { border: 0; padding: .15rem 2.5rem .15rem 0; vertical-align: top; }
+
+/* Index Mérimée/Palissy (02/11, « une redite ») : la bulle du nom du monument ne redisait que le numéro, déjà affiché à côté
+   et porteur de la protection. Elle disparaît ; le nom reste un lien. */
+.mh-edition .mh-index-entree a.mh-monument > .mh-bulle { display: none !important; }

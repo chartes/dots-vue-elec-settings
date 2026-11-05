@@ -23,21 +23,11 @@
 /* 2026-10-22 : l'apparat des cartulaires est du texte libre (notes à lettre regroupées par la XSL) : pas
    l'espace que le bloc commun ajoute après chaque élément (« B , Bituricensis C . »). */
 [collid="cartulaires"] #main #article .footnotes .apparatus span.note *:not(a)::after { content: none; }    /* même pas que les notes */
-/* 2026-10-28 (Maxime, SMCP-PR_0003 : « les barres qui entourent le champ de l'apparat font bizarre ») :
-   pas de filet vertical devant les lettres de l'apparat. */
-[collid="cartulaires"] #main #article .footnotes .apparatus span.note { border-left: 0; }
 /* 2026-10-28 : note sans appel rendue à sa place (« (Collacio fit) », « (Signa) », cartulaires.xsl, p.note-place) :
    petite, en italique, sans retrait, comme une mention de la copie. */
 #main #article p.note-place { font-size: .9em; font-style: italic; text-indent: 0; margin: .4em 0; color: #555; }
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="cartulaires"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
+/* 2026-11-05 (Maxime : apparat « sur le modèle des chroniques latines », « supprimer la barre du bas ») :
+   filet sous l'apparat et suppression du trait vertical (28/10) retirés ; le bloc commun s'applique. */
 /* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
    grand retrait du pied de page. */
 [collid="cartulaires"] #main #article section.back:empty { display: none; }
@@ -161,7 +151,7 @@
 #main #article .tf-tableau thead th {
   padding: 0;
   border: 0;
-  border-bottom: 2px solid var(--fill-color, #8f0e21);
+  border-bottom: 2px solid var(--fill-color, #5f004d);
   background: #f4f1ee;
   vertical-align: bottom;
 }
@@ -189,11 +179,11 @@
   font-size: .95em;
   letter-spacing: 0;
 }
-#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: var(--fill-color, #8f0e21); font-size: .75em; }
-#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: var(--fill-color, #8f0e21); font-size: .75em; }
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: var(--fill-color, #5f004d); font-size: .75em; }
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: var(--fill-color, #5f004d); font-size: .75em; }
 #main #article .tf-tableau button.tf-tri:hover,
 #main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri,
-#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: var(--fill-color, #8f0e21); }
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: var(--fill-color, #5f004d); }
 #main #article .tf-tableau button.tf-tri:hover { background: #ece7e2; }
 #main #article .tf-tableau button.tf-tri:focus-visible { outline: 2px solid #315ba7; outline-offset: -2px; }
 #main #article .tf-tableau td {
@@ -207,7 +197,7 @@
 #main #article .tf-tableau tbody tr:hover > td { background: #f3efe9; }
 #main #article .tf-tableau tbody tr:target > td:first-child,
 #main #article .tf-tableau tbody tr.dots-target > td:first-child,
-#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); }
+#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); }
 #main #article .tf-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
 #main #article .tf-tableau .tf-vide { color: #c4bdb6; }
 #main #article .tf-tableau tr[hidden] { display: none !important; }
@@ -895,7 +885,6 @@ span.note-inline {
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article header.front > .tei-tradition:last-child { margin-bottom: 0; }  /* cadre de hteiml (header), comme les autres cartulaires */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-title { text-align: center; font-size: 1.2rem; font-weight: 700; line-height: 1.2; margin: 0 0 .24rem; }  /* comme le n° d'acte des cartulaires (.docNum) */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-docDate { text-align: center; font-size: 1rem; line-height: 1.4; margin: 0 0 1.5rem; text-indent: 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary-refurl { font-size: .85rem; line-height: 1.4; text-align: left; margin: 0 0 1rem; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary { font-size: .85rem; line-height: 1.4; text-align: justify; font-style: italic; margin: 0 0 1.5rem; }  /* comme l'analyse (.argument) */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary p { text-indent: 0; margin: 0; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-body hr { display: none; }  /* les cartulaires séparent les blocs par des blancs, sans filet */
@@ -903,8 +892,7 @@ span.note-inline {
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition p { text-indent: 0; margin: .3em 0; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition .listWit-head { margin-bottom: 0; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-label { font-style: italic; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-notes { font-size: .85rem; line-height: 1.4; margin: 0 0 1.5rem; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments { font-size: .85rem; line-height: 1.4; margin: 0 0 1.5rem; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments { margin-top: 1.5rem; }  /* blanc sous le cadre de l'en-tête */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments p { text-align: justify; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-transcription { font-size: 1rem; line-height: 1.4; text-align: justify; margin-top: 0; }  /* comme le texte des actes (p.p) */
@@ -925,7 +913,7 @@ span.note-inline {
    ================================================================== */
 
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] {
-  --sd-legacy-red:#A73136;
+  --sd-legacy-red:#5f004d;
   --sd-legacy-gray:#E8E8E8;
   --sd-legacy-link:#139EDF;
   --sd-legacy-dark:#4A4A4A;
@@ -1056,7 +1044,7 @@ span.note-inline {
    — le `display` du contenu doit être porté par `[open]`, sinon la règle écrase aussi le
      masquage natif de l'état fermé et l'image reste visible en permanence. */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio > summary,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration > summary { display: list-item; cursor: pointer; color: #7a1f1a; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration > summary { display: list-item; cursor: pointer; color: #3d0033; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio[open] > :not(summary),
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] > :not(summary) { display: block; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio:not([open]) > :not(summary),
@@ -1119,162 +1107,88 @@ span.note-inline {
    autres corpus de l'application.
    ============================================================================ */
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs {
+/* 2026-11-05 (Maxime : « j'aime bien la présentation » de l'index par pays étrangers des MH) : même mise en
+   page — vedette en petites capitales, « ▸ N occurrences » dépliable dessous, un renvoi par ligne, filet
+   entre les entrées. La rubrique vit sur la page « Parcourir » de #cartulaire-blanc depuis le 19/10. */
+#cartulaire-blanc[collid] #main #article .sd-index-auteurs {
+  max-width: 62rem;
   margin-top: 2.5rem;
   padding-top: 1.4rem;
-  border-top: 2px solid var(--sd-legacy-red);
-  /* Le lien historique de la page mène ici : ne pas se caler sous l'en-tête fixe. */
+  border-top: 2px solid #5f004d;
   scroll-margin-top: 5rem;
 }
+#cartulaire-blanc[collid] #main #article .sd-index-auteurs-titre { margin: 0 0 .3rem; font-size: 1.15rem; }
+#cartulaire-blanc[collid] #main #article .sd-index-auteurs-chapeau { margin: 0 0 1rem; color: #4a4540; font-size: .9rem; }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs-titre {
-  margin: 0 0 .3rem;
-  font-size: 1.15rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs-chapeau {
-  margin: 0 0 1rem;
-  color: var(--sd-legacy-dark);
-  font-size: .9rem;
-}
-
-/* Barre des initiales. Même vocabulaire de pastilles que la navigation de
-   description, pour que la page reste d'une seule pièce. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettres {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .35rem;
-  margin-bottom: 1.2rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien {
+/* Barre des initiales. */
+#cartulaire-blanc[collid] #main #article .sd-index-lettres { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.2rem; }
+#cartulaire-blanc[collid] #main #article .sd-index-lettre-lien {
   min-width: 1.9rem;
   padding: .2rem .45rem;
-  border: 1px solid var(--sd-legacy-border);
+  border: 1px solid #d8d0c8;
   border-radius: 3px;
   color: var(--fill-color);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .85rem;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
 }
+#cartulaire-blanc[collid] #main #article .sd-index-lettre-lien:hover,
+#cartulaire-blanc[collid] #main #article .sd-index-lettre-lien:focus { background: var(--fill-color); border-color: var(--fill-color); color: #fff; }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien:hover,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien:focus {
-  background: var(--fill-color);
-  border-color: var(--fill-color);
-  color: #fff;
+#cartulaire-blanc[collid] #main #article .sd-index-groupe { scroll-margin-top: 5rem; margin-bottom: 1.6rem; }
+#cartulaire-blanc[collid] #main #article .sd-index-initiale {
+  margin: 1.6rem 0 .6rem;
+  color: #5c3a1e;
+  font-size: 1.7rem;
+  letter-spacing: .05em;
 }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-groupe {
-  /* L'ancre d'une initiale ne doit pas se caler sous l'en-tête fixe. */
-  scroll-margin-top: 5rem;
-  margin-bottom: 1.4rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-initiale {
-  margin: 0 0 .35rem;
-  padding-bottom: .15rem;
-  border-bottom: 1px solid var(--sd-legacy-border);
-  color: var(--sd-legacy-red);
-  font-size: 1rem;
-  letter-spacing: .06em;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article ul.sd-index-termes {
+/* Entrées : modèle .mh-index-entree. */
+#cartulaire-blanc[collid] #main #article ul.sd-index-termes { margin: 0; padding: 0; list-style: none; }
+#cartulaire-blanc[collid] #main #article li.sd-index-terme {
   margin: 0;
+  padding: .55rem .4rem .55rem 0;
+  border-bottom: 1px solid #f0ebe5;
+}
+#cartulaire-blanc[collid] #main #article li.sd-index-terme:last-child { border-bottom: none; }
+#cartulaire-blanc[collid] #main #article li.sd-index-terme:hover { background: #faf8f6; }
+#cartulaire-blanc[collid] #main #article .sd-index-libelle {
+  display: block;
+  color: #2b2b2b;
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: .02em;
+}
+
+/* « N occurrences » : modèle .mh-index-renvois / .mh-index-occurrences. */
+#cartulaire-blanc[collid] #main #article .sd-index-details { margin: .15rem 0 0 1.2rem; }
+#cartulaire-blanc[collid] #main #article .sd-index-sommaire {
+  display: list-item;
+  list-style: disclosure-closed;
+  margin-left: .9rem;
+  color: #585858;
+  font-size: .85em;
+  font-weight: 600;
+  cursor: pointer;
+}
+#cartulaire-blanc[collid] #main #article .sd-index-details[open] > .sd-index-sommaire { list-style: disclosure-open; margin-bottom: .2rem; }
+#cartulaire-blanc[collid] #main #article .sd-index-sommaire:hover { color: #5f004d; }
+#cartulaire-blanc[collid] #main #article .sd-index-sommaire:focus-visible { outline: 2px solid #5f004d; outline-offset: 2px; }
+#cartulaire-blanc[collid] #main #article ul.sd-index-renvois {
+  margin: 0 0 .3rem 1.9rem;
   padding: 0;
   list-style: none;
+  font-size: .9em;
 }
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article li.sd-index-terme {
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px dotted #ddd;
+#cartulaire-blanc[collid] #main #article ul.sd-index-renvois > li { margin: 0 0 .1rem; }
+#cartulaire-blanc[collid] #main #article a.sd-index-renvoi {
+  color: #315ba7;
+  font-weight: 500;
+  text-decoration: underline dotted #9fb3d6;
+  text-underline-offset: .18em;
 }
+#cartulaire-blanc[collid] #main #article a.sd-index-renvoi:hover { text-decoration-color: currentColor; }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire {
-  display: flex;
-  align-items: baseline;
-  gap: .5rem;
-  padding: .25rem .2rem;
-  cursor: pointer;
-  list-style-position: outside;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire:hover {
-  background: #f3f8f8;
-}
-
-/* `display:flex` sur un summary supprime le triangle de pliage du navigateur :
-   on le redessine, sans quoi rien n'indique que le terme s'ouvre. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::-webkit-details-marker { display: none; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::marker { content: ""; }
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::before {
-  content: "\25B8";
-  flex: 0 0 .9rem;
-  color: var(--sd-legacy-red);
-  font-size: .8rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-details[open] > .sd-index-sommaire::before {
-  content: "\25BE";
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-libelle {
-  flex: 1 1 auto;
-}
-
-/* Le compte d'occurrences, à droite, aligné d'un terme à l'autre. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-nb {
-  flex: 0 0 auto;
-  min-width: 2.6rem;
-  padding: 0 .4rem;
-  border-radius: 999px;
-  background: var(--sd-legacy-gray);
-  color: var(--sd-legacy-dark);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .75rem;
-  text-align: center;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-details[open] > .sd-index-sommaire {
-  font-weight: 700;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-renvois {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .3rem;
-  margin: .1rem 0 .6rem;
-  padding: .5rem .2rem .5rem 1.2rem;
-  border-left: 3px solid var(--sd-legacy-gray);
-  /* « auteurs laïques » aligne 647 renvois : on borne la hauteur du bloc
-     déplié plutôt que de pousser la page sur plusieurs écrans. */
-  max-height: 16rem;
-  overflow-y: auto;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi {
-  padding: .1rem .4rem;
-  border: 1px solid var(--sd-legacy-border);
-  border-radius: 3px;
-  background: #fff;
-  color: var(--fill-color);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .78rem;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi:hover,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi:focus {
-  background: var(--fill-color);
-  border-color: var(--fill-color);
-  color: #fff;
-}
 
 /* Le lien Pleade historique, devenu ancre vers la rubrique de la même page. */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-ancre {
@@ -1412,8 +1326,8 @@ span.note-inline {
     display: flex;
     gap: .25rem;
     padding: .5rem 0;
-    border-top: 2px solid var(--fill-color, #8f0e21);
-    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    border-top: 2px solid var(--fill-color, #5f004d);
+    border-bottom: 2px solid var(--fill-color, #5f004d);
     background: none;
   }
   #main #article .tf-cadre thead tr:first-child th {
@@ -1499,7 +1413,7 @@ span.note-inline {
   #main #article .tf-cadre tbody tr:nth-child(even) > td,
   #main #article .tf-cadre tbody tr:hover > td { background: none; }
   #main #article .tf-cadre tbody tr.dots-target,
-  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); padding-left: .7rem; }
   #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
   /* Première colonne (l'entrée) en tête du bloc */
   #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
@@ -1523,7 +1437,8 @@ span.note-inline {
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -1576,7 +1491,7 @@ span.note-inline {
   background: #f6f3ef;
   border-bottom: 1px solid #d9d2c9;
 }
-[collid] #main #article table.cartu-tableau-simple thead tr:last-child th { border-bottom: 2px solid var(--fill-color, #8f0e21); }
+[collid] #main #article table.cartu-tableau-simple thead tr:last-child th { border-bottom: 2px solid var(--fill-color, #5f004d); }
 [collid] #main #article table.cartu-tableau-simple tbody td {
   padding: .25em .5em;
   vertical-align: top;
@@ -1642,13 +1557,24 @@ span.note-inline {
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -1683,9 +1609,7 @@ span.note-inline {
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) {
-  color: #5f004d !important;
-}
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }

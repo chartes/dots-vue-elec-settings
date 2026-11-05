@@ -10,7 +10,7 @@
  =============================================================*/
 
 /* Couleurs du corpus dans l'application (cartes, sommaire, accents). */
-:root { --fill-color:#315d71; --meta-area-fill-color:#edf3f4; --default-text-color:#20282b; }
+:root { --fill-color:#5f004d; --meta-area-fill-color:#e6e4e5; --default-text-color:#20282b; }
 
 /*=============================================================
  2. HISTORIQUE ÉLEC (Pleade)
@@ -40,7 +40,7 @@
 #main #article .tei-doc-body hr { border: none; border-top: 1px solid #ccc; margin: 1em 0; clear: both; }
 #main #article .tei-tradition { text-align: left; font-size: 100%; margin-top: 10px; line-height: 170%; }
 #main #article .tei-tradition p { text-indent: 0; margin: .4em 0; }
-#main #article .tei-comments, #main #article .tei-notes { margin-top: 2.5em; font-size: 100%; line-height: 170%; }
+#main #article .tei-comments { margin-top: 2.5em; font-size: 100%; line-height: 170%; }
 #main #article .tei-comments p { text-align: justify; }
 #main #article .tei-transcription { font-size: 120%; text-align: justify; line-height: 180%; margin-top: 2.5em; }
 #main #article .title, #main #article cite.title, #main #article .foreign { font-style: italic; }
@@ -56,7 +56,7 @@
    ================================================================== */
 
 :root {
-  --sd-legacy-red:#A73136;
+  --sd-legacy-red:#5f004d;
   --sd-legacy-gray:#E8E8E8;
   --sd-legacy-link:#139EDF;
   --sd-legacy-dark:#4A4A4A;
@@ -71,36 +71,15 @@
   margin-right:auto;
 }
 
-#main #article .sd-part-title {
-  margin-top:2rem;
-  padding:.45rem .65rem;
-  background:var(--sd-legacy-gray);
-  border-left:4px solid var(--sd-legacy-red);
-  color:var(--sd-legacy-dark);
-}
-
-#main #article .sd-subpart-title {
-  margin-top:1.5rem;
-  color:var(--sd-legacy-red);
-}
-
 #main #article .sd-static-page {
   margin-top:1rem;
   margin-bottom:2.25rem;
 }
 
-#main #article .sd-page-title {
-  color:var(--sd-legacy-dark);
-  font-size:1.65rem;
-  border-bottom:1px solid var(--sd-legacy-border);
-  padding-bottom:.35rem;
-}
-
-#main #article .sd-legacy-h2 {
-  color:var(--sd-legacy-dark);
-  font:700 1.25rem/1.3 Arial,Helvetica,sans-serif;
-  margin:1.6rem 0 .7rem;
-}
+/* Titres des pages du site : h1 (violet) puis h2, mises en forme comme dans les autres corpus
+   (2026-11-02) ; ni cadre gris ni police Arial de l'ancien site. */
+[collid="saint-denis"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
+[collid="saint-denis"] #main #article h2.head { font-size: 140%; font-weight: 900; line-height: 1.3; margin: 1.5rem 0 .75rem; padding-top: 0; }
 
 #main #article .sd-static-page a {
   color:var(--sd-legacy-link);
@@ -166,22 +145,16 @@
      et contenu, SINON le menu s'affiche vide ;
    — le `display` du contenu doit être porté par `[open]`, sinon la règle écrase aussi le
      masquage natif de l'état fermé et l'image reste visible en permanence. */
-.document-area .sd-folio > summary,
-.document-area .sd-illustration > summary { display: list-item; cursor: pointer; color: #7a1f1a; }
-.document-area .sd-folio[open] > :not(summary),
-.document-area .sd-illustration[open] > :not(summary) { display: block; }
-.document-area .sd-folio:not([open]) > :not(summary),
-.document-area .sd-illustration:not([open]) > :not(summary) { display: none; }
+.document-area .sd-folio > summary { display: list-item; cursor: pointer; color: var(--fill-color, #5f004d); }
+.document-area .sd-folio[open] > :not(summary) { display: block; }
+.document-area .sd-folio:not([open]) > :not(summary) { display: none; }
 .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
 .document-area .sd-folio > summary { display: inline list-item; }
-.document-area .sd-folio-libelle,
-.document-area .sd-illustration-libelle { text-decoration: underline; text-underline-offset: 2px; }
-.document-area .sd-folio[open],
-.document-area .sd-illustration[open] { display: block; margin: .6rem 0 1rem; }
+.document-area .sd-folio-libelle { text-decoration: underline; text-underline-offset: 2px; }
+.document-area .sd-folio[open] { display: block; margin: .6rem 0 1rem; }
 /* L'image est un folio complet (~500 ko, 2 000 px de haut) : on la borne à la colonne de texte
    et on la laisse défiler dans son cadre plutôt que d'étirer la page. */
-.document-area .sd-folio-img,
-.document-area .sd-illustration-img {
+.document-area .sd-folio-img {
   display: block; max-width: min(100%, 46rem); max-height: 80vh; width: auto; height: auto;
   margin: .5rem 0; border: 1px solid #d8d2c8; background: #fff; object-fit: contain;
 }
@@ -397,15 +370,7 @@
    ========================================================================== */
 
 [collid="saint-denis"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }    /* même pas que les notes */
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="saint-denis"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
+/* 2026-11-05 : filet sous l'apparat retiré (Maxime : « supprimer la barre du bas »). */
 /* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
    grand retrait du pied de page. */
 [collid="saint-denis"] #main #article section.back:empty { display: none; }
@@ -559,13 +524,13 @@
 .document-area #main #article span.witness:target,
 .document-area #main #article span.witness.dots-target {
   background: #edf3f4;
-  box-shadow: inset 3px 0 0 #315d71;
+  box-shadow: inset 3px 0 0 #5f004d;
 }
 .document-area #main #article div.sd-index-groupe:target,
 .document-area #main #article div.sd-index-groupe.dots-target,
 .document-area #main #article section.sd-index-auteurs:target,
 .document-area #main #article section.sd-index-auteurs.dots-target {
-  box-shadow: inset 3px 0 0 #315d71;
+  box-shadow: inset 3px 0 0 #5f004d;
 }
 
 /* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
@@ -574,7 +539,8 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -624,13 +590,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -650,7 +627,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }

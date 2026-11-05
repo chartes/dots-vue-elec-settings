@@ -30,7 +30,6 @@
 
 /* Les numéros de lectio et de dies sont en petites capitales chez Diple. */
 .document-area #article .num { font-variant:small-caps; line-height:100%; }
-.document-area #article .num sup { font-variant:normal; }
 
 /* --------------------------------------------------------------------------
    Les deux apparats.
@@ -64,18 +63,15 @@
 .document-area #article ul.sommaire a:hover { border-bottom-color:currentColor; }
 
 
-/* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
-/* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
-   Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
-   au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
-   est conservée : elle est lue dans --fill-color, avec un repli sur celle de DoTS. */
+/* ==== D12-SOCLE-DEBUT — issu de dots-autopilot/scripts/d12_socle_css.py ====
+   Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
+   2026-11-03 (allègement) : réduit aux règles qui agissent encore ici. Le reste ne visait
+   rien dans ce corpus (tableaux, citations, légendes, filets, images, boutons, menus) ou
+   était battu par le bloc « Hiérarchie des titres » et le BLOC TITRES. */
 .document-area #article:not(.bottom-toc),
 .document-area main {
   --d12-accent: var(--fill-color, #5f004d);
   --d12-encre: var(--document-text-color, #303030);
-  --d12-filet: #dcd8d3;
-  --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
-  --d12-rayon: var(--button-border-radius, 4px);
 }
 
 /* Texte : mesure de lecture régulière, encre et interligne de l'application.
@@ -98,21 +94,14 @@
   margin: 0 0 .9em;
 }
 
-/* Titres : famille secondaire de l'application, graisse tenue, accent sobre.
-   Pas de bandeau plein : un filet gauche, comme les blocs de DoTS. */
+/* Titres (police, interligne, h1-h3 : bloc « Hiérarchie des titres » ; couleur : BLOC TITRES). */
 .document-area #article:not(.bottom-toc) h1,
 .document-area #article:not(.bottom-toc) h2,
 .document-area #article:not(.bottom-toc) h3,
 .document-area #article:not(.bottom-toc) h4 {
-  color: #202020;
-  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, Helvetica, sans-serif;
   font-weight: 600;
-  line-height: 1.25;
   letter-spacing: .01em;
 }
-.document-area #article:not(.bottom-toc) h1 { font-size: 1.6rem; margin: 0 0 1rem; }
-.document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
-.document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
 .document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
 
 /* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
@@ -128,55 +117,6 @@
 .document-area #article:not(.bottom-toc) a:focus-visible {
   outline: 2px solid var(--d12-accent);
   outline-offset: 2px;
-}
-
-/* Tableaux : filets fins, en-tête sur fond doux, pas de quadrillage lourd. */
-.document-area #article:not(.bottom-toc) table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  font-size: .95em;
-}
-.document-area #article:not(.bottom-toc) th,
-.document-area #article:not(.bottom-toc) td {
-  padding: .4rem .6rem;
-  border: 0;
-  border-bottom: 1px solid var(--d12-filet);
-  text-align: left;
-  vertical-align: top;
-}
-.document-area #article:not(.bottom-toc) th {
-  background: var(--d12-fond-doux);
-  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
-  font-size: .8rem;
-  font-weight: 600;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  color: #4a4a4a;
-}
-/* Un tableau large défile dans son cadre, la page ne défile jamais de côté. */
-.document-area #article:not(.bottom-toc) .table-wrap {
-  overflow-x: auto;
-}
-
-/* Citations, blocs éditoriaux, légendes. */
-.document-area #article:not(.bottom-toc) blockquote,
-.document-area #article:not(.bottom-toc) .citation {
-  margin: 1rem 0;
-  padding: .1rem 0 .1rem 1rem;
-  border-left: 3px solid var(--d12-filet);
-  color: #45403c;
-}
-.document-area #article:not(.bottom-toc) figcaption,
-.document-area #article:not(.bottom-toc) .legendeillustration {
-  color: #5a5450;
-  font-size: .85rem;
-  line-height: 1.4;
-}
-.document-area #article:not(.bottom-toc) hr {
-  height: 0;
-  margin: 1.6rem 0;
-  border: 0;
-  border-top: 1px solid var(--d12-filet);
 }
 
 /* Colonne de texte : elle prend la place disponible dans la rangée.
@@ -196,53 +136,13 @@
   min-width: 0;
 }
 
-/* Images : jamais plus larges que la colonne. */
-.document-area #article:not(.bottom-toc) img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Contrôles éditoriaux (onglets, boutons, menus dépliants des corpus) : même
-   grammaire visuelle que les boutons de l'application — coins légers, filet fin,
-   accent réservé à l'état actif. */
-.document-area #article:not(.bottom-toc) button,
-.document-area #article:not(.bottom-toc) input[type="reset"],
-.document-area #article:not(.bottom-toc) input[type="submit"],
-.document-area #article:not(.bottom-toc) summary {
-  font-family: var(--font-primary, "Roboto"), Arial, Helvetica, sans-serif;
-  font-size: .9rem;
-}
-.document-area #article:not(.bottom-toc) input[type="reset"],
-.document-area #article:not(.bottom-toc) input[type="submit"],
-.document-area #article:not(.bottom-toc) button {
-  padding: .35rem .7rem;
-  border: 1px solid var(--d12-filet);
-  border-radius: var(--d12-rayon);
-  background: #fff;
-  color: var(--d12-encre);
-  cursor: pointer;
-}
-.document-area #article:not(.bottom-toc) input[type="reset"]:hover,
-.document-area #article:not(.bottom-toc) input[type="submit"]:hover,
-.document-area #article:not(.bottom-toc) button:hover {
-  border-color: var(--d12-accent);
-  color: var(--d12-accent);
-}
-
 /* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
-.document-area #article:not(.bottom-toc) .apparatus {
-  font-size: var(--font-small-size, 14px);
+.document-area #article:not(.bottom-toc) .apparatus {   /* 2026-11-05 : même taille que les notes (lettres alignées sur les numéros) */
   line-height: 1.5;
 }
 .document-area #article:not(.bottom-toc) a.noteref,
 .document-area #article:not(.bottom-toc) .noteref {
   text-decoration: none;
-}
-
-@media (max-width: 768px) {
-  .document-area #article:not(.bottom-toc) h1 { font-size: 1.4rem; }
-  .document-area #article:not(.bottom-toc) h2 { font-size: 1.2rem; }
-  .document-area #article:not(.bottom-toc) table { font-size: .9em; }
 }
 /* ==== D12-SOCLE-FIN ==== */
 
@@ -267,13 +167,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -288,7 +199,8 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -328,7 +240,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
@@ -405,9 +317,8 @@
   line-height: 1.28; /* hteiml : h2 { line-height: 200% } */
   margin: 1.1em 0 .35em;
 }
-#main #article h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; color: #4a4a4a; margin: .9em 0 .3em; }
+#main #article h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; margin: .9em 0 .3em; }
 #main #article h4 { line-height: 1.3; }
-#main #article h1 + h2 { margin-top: .35em; }
 
 /* 2026-11-03 : pas d'apparat vide (même correctif que les autres corpus). */
 .document-views #article .footnotes:empty,

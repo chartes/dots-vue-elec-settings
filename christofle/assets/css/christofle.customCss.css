@@ -3,7 +3,7 @@
    2. Historique ÉLEC : christofle.css du site d'origine (F. Clavaud et N. Pashkeeva, 2014), limitée à #article
    3. Blocs hteiml génériques : aucun (notes et apparat suivent la feuille historique)
    4. Propre au projet : index en tableau, filtre par jour des mois
-   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11, D42), page de titre,
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D42), page de titre,
       tableau filtrable, liste repliable */
 
 /*=============================================================
@@ -13,8 +13,8 @@
 /* Couleurs du corpus dans l'application (barre, sommaire, accents) : reprises de la
    feuille précédente. */
 :root {
-  --fill-color: #8d2632;
-  --meta-area-fill-color: #f5eeee;
+  --fill-color: #5f004d;
+  --meta-area-fill-color: #e6e4e5;
   --default-text-color: #28211f;
 }
 
@@ -33,13 +33,12 @@
 
 #article #content {
   /* 2026-10-19 : police historique (Arial 14 px) retirée : police de hteiml dans dots-vue */
-  overflow: auto;
   margin-bottom: 5%;
 }
 #article #content h1 {
   font-size: 110%;
   font-weight: bold;  /* [dots] hteiml allège les titres */
-  color: #A73136;
+  color: #5f004d;
   text-shadow: 1px 1px #E8E8E8;
 }
 
@@ -65,7 +64,7 @@
   display: block;
   font-size: 80%;
   font-weight: bold;
-  color: #A73136;
+  color: #5f004d;
 }
 /* [dots] la vignette s'ouvre en grand sans script */
 #article #facsimile summary { list-style: none; cursor: zoom-in; }
@@ -108,9 +107,9 @@
 #article #content #text a.linkToIndex:link, #article #content #text a.linkToIndex:visited {
   color: black;
   text-decoration: none;
-  border-bottom: 1px dotted #A73136;
+  border-bottom: 1px dotted #5f004d;
 }
-#article #content #text a.linkToIndex:hover { color: #A73136; }
+#article #content #text a.linkToIndex:hover { color: #5f004d; }
 
 /* Note d'apparat : affichée au survol de l'appel, dans la marge droite.
    L'ÉLEC le faisait en JavaScript (displayApparatusNote) ; [dots] ici en CSS,
@@ -167,10 +166,10 @@
 }
 
 /* Liens internes : rouge, gras et souligné au survol */
-#article #content a.internalLink:link { font-weight: normal; color: #A73136; text-decoration: none; }
+#article #content a.internalLink:link { font-weight: normal; color: #5f004d; text-decoration: none; }
 #article #content a.internalLink:visited, #article #content a.internalLink:hover {
   font-weight: bold;
-  color: #A73136;
+  color: #5f004d;
   text-decoration: underline;
 }
 #article #content a.externalLink:link { color: #4A4A4A; text-decoration: none; }
@@ -215,7 +214,7 @@
   margin: 0 0 0 20px;
   font-size: 90%;
 }
-#article .index h2.lettre { font-size: 110%; color: #A73136; margin-top: 1.5em; scroll-margin-top: 3em; }
+#article .index h2.lettre { font-size: 110%; color: #5f004d; margin-top: 1.5em; scroll-margin-top: 3em; }
 #article .index article { scroll-margin-top: 3em; } /* [dots] l'ancre ne passe pas sous la barre des lettres */
 /* Entrée visée depuis une note : en gras, précédée de ☞, comme .marked de l'ÉLEC
    (posé en JavaScript, ici par :target) */
@@ -300,14 +299,14 @@
 
 .document-area #article .christofle-index a.internalLink,
 .document-area #article .christofle-index a.linkToIndex {
-  color: #8d2632;
+  color: #5f004d;
   text-decoration: none;
-  border-bottom: 1px dotted #8d2632;
+  border-bottom: 1px dotted #5f004d;
 }
 .document-area #article .christofle-index a.internalLink:hover,
 .document-area #article .christofle-index a.linkToIndex:hover {
-  color: #5a121c;
-  border-bottom-color: #5a121c;
+  color: #3d0033;
+  border-bottom-color: #3d0033;
 }
 
 /* --- Index des lieux et des personnes en tableau (2026-10-06) ---
@@ -317,7 +316,7 @@
    dots-vue (tei.css) met tout tableau en display:block + overflow-x:scroll : un
    en-tête collant n'y colle plus. On rend au tableau son modèle de table. */
 .document-views .text-view #article .christofle-index-unified {
-  --chr-accent: var(--fill-color, #8d2632);
+  --chr-accent: var(--fill-color, #5f004d);
   max-width: 64rem;
 }
 .document-views .text-view #article .christofle-index-unified .chr-tableau-cadre {
@@ -520,26 +519,26 @@
 .jours-nav { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: baseline;
   gap: .3rem; padding: .55rem .3rem; margin: 0 0 1.5rem; background: #fbf8f8;
   border-top: 1px solid #d7d1ca; border-bottom: 1px solid #d7d1ca; }
-.jours-nav .jours-label { font-family: Arial, Helvetica, sans-serif; font-size: .85rem; color: #a05a63; margin-right: .3rem; }
+.jours-nav .jours-label { font-family: Arial, Helvetica, sans-serif; font-size: .85rem; color: #7a4a75; margin-right: .3rem; }
 .jours-nav .jour-link { display: inline-block; min-width: 1.9rem; text-align: center; padding: .15rem .45rem;
-  border: 1px solid #e0cccc; border-radius: 4px; color: #8d2632; cursor: pointer; font-size: .9rem;
+  border: 1px solid #d9cfd6; border-radius: 4px; color: #5f004d; cursor: pointer; font-size: .9rem;
   user-select: none; transition: background .12s; }
-.jours-nav .jour-link:hover { background: #f0e0e0; }
+.jours-nav .jour-link:hover { background: #eee6ec; }
 .jours-nav .jour-all { font-family: Arial, Helvetica, sans-serif; font-size: .82rem; }
 /* FILTRE générique (aucun id par jour) : un jour coché masque les autres groupes.
    « Tous » est hors de .jours-index -> aucun groupe coché -> tout visible. */
 .jours-index:has(.jour-group .jf-radio:checked) .jour-group:not(:has(.jf-radio:checked)) { display: none; }
 /* groupes de jour */
 .jour-group { margin: 0 0 1.6rem; scroll-margin-top: 4rem; }
-/* 2026-09-14 : `color: #8d2632` retiré (déjà sans effet — mesuré rgb(32, 32, 32)
+/* 2026-09-14 : la couleur d'accent (`color: #8d2632`) a été retirée (déjà sans effet — mesuré rgb(32, 32, 32)
    sur ?refId=mois-01, 16 occurrences ; le socle D12 l'emportait). */
 .jour-group .jour-head { font-family: Arial, Helvetica, sans-serif; font-size: .95rem; font-weight: 700;
   border-bottom: 1px solid #e0dcd5; padding-bottom: .2rem; margin: 0 0 .6rem; }
-.jour-note { padding: .2rem 0; border-bottom: 1px dotted #eadfe0; }
+.jour-note { padding: .2rem 0; border-bottom: 1px dotted #e4dde2; }
 .jour-note .note-link { display: block; color: inherit; text-decoration: none; }
-.jour-note .note-link:hover { background: #faf4f4; }
-.jour-note .note-num { font-weight: 700; color: #8d2632; }
-.jour-note .note-type { font-variant: small-caps; color: #7a4a50; }
+.jour-note .note-link:hover { background: #f6f2f5; }
+.jour-note .note-num { font-weight: 700; color: #5f004d; }
+.jour-note .note-type { font-variant: small-caps; color: #6b4a68; }
 .jour-note .note-summary { color: #33292a; }
 
 /* Pas de volet Mirador : les fac-similés sont dans le texte. */
@@ -549,15 +548,7 @@
 #main #article .lr-colonnes .chr-type-date { color: #8a837c; }
 
 [collid="christofle"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }    /* même pas que les notes */
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="christofle"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
+/* 2026-11-05 : filet sous l'apparat retiré (Maxime : « supprimer la barre du bas »). */
 /* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
    grand retrait du pied de page. */
 [collid="christofle"] #main #article section.back:empty { display: none; }
@@ -635,24 +626,7 @@
   pointer-events: none;
 }
 
-/* ==== D11 (2026-09-11, dots-autopilot/scripts/d11_apply_css.py) : une seule table des matières, à gauche ==== */
-/* Sommaire des enfants de DoTS-vue (.bottom-toc, à droite du texte par défaut) : masqué quand le sommaire latéral
-   est ouvert (doublon), sinon placé à gauche du texte. Il porte id="article" : sélecteurs avec l'identifiant pour
-   passer devant `#article { padding: 20px 10% 120px }` de DoTS-vue et les règles `#article` des corpus. */
-/* 2026-10-14 : sommaire latéral ouvert : la liste reste affichée quand la page n'a que son titre (page de regroupement,
-   c'est tout le contenu), sous le titre et non à gauche, où est le sommaire. */
-.document-area.toc-aside-is-opened .wrapper:has(> #article.bottom-toc) { flex-direction: column; }
-.document-area.toc-aside-is-opened .wrapper > #article.bottom-toc { order: 1; width: auto; max-width: none; padding: 0 0 1.5rem; }
-/* … sauf si la page a son propre texte (introduction de Christofle, tome du Poitou) : la liste y
-   ferait doublon avec le sommaire ouvert, on la masque comme avant (D11). */
-.document-area.toc-aside-is-opened .wrapper:has(> div:not(.bottom-toc) p) > #article.bottom-toc { display: none; }
-.document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { order: -1; flex: 0 0 auto; box-sizing: border-box; width: 19rem; max-width: 32%; min-height: 0; margin: 0; padding: 0 2rem 2rem 0; }
-@media (max-width: 768px) {
-  .document-area .wrapper:has(> .bottom-toc) { flex-direction: column; }
-  .document-area .wrapper > .bottom-toc, .document-area .wrapper > #article.bottom-toc { width: auto; max-width: none; padding: 0 0 1.5rem; }
-}
-/* ==== fin D11 ==== */
-
+/* D11 retiré (2026-11-02) : sommaire des enfants de dots-vue tel quel, comme les autres corpus. */
 /* ============================================================================
    D42 (2026-09-14) — Sommaire : titres longs, troncature d'AFFICHAGE.
 
@@ -706,7 +680,7 @@
 }
 .document-area #article .titlestmt h1 {
   margin: 0 0 1rem !important;
-  color: var(--fill-color, #8f0e21) !important;
+  color: var(--fill-color, #5f004d) !important;
   font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
   line-height: 1.3 !important;
   font-weight: 600 !important;
@@ -726,7 +700,7 @@
   display: inline-block;
   font-size: 1.15rem;
   letter-spacing: 0.05em;
-  color: var(--fill-color, #8f0e21);
+  color: var(--fill-color, #5f004d);
   border-top: 1px solid #e2c5cb;
   padding-top: 0.5rem;
   margin-top: 0.5rem;
@@ -784,8 +758,8 @@
     display: flex;
     gap: .25rem;
     padding: .5rem 0;
-    border-top: 2px solid var(--fill-color, #8f0e21);
-    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    border-top: 2px solid var(--fill-color, #5f004d);
+    border-bottom: 2px solid var(--fill-color, #5f004d);
     background: none;
   }
   #main #article .tf-cadre thead tr:first-child th {
@@ -871,7 +845,7 @@
   #main #article .tf-cadre tbody tr:nth-child(even) > td,
   #main #article .tf-cadre tbody tr:hover > td { background: none; }
   #main #article .tf-cadre tbody tr.dots-target,
-  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); padding-left: .7rem; }
   #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
   /* Première colonne (l'entrée) en tête du bloc */
   #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
@@ -965,7 +939,8 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -1015,13 +990,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -1041,7 +1027,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }

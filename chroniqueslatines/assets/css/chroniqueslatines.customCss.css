@@ -20,7 +20,6 @@
 .document-views #article {
   --accent: #5f004d;
   --muted: #8a837c;
-  --rule: #e4e4e4;
   --highlight: #fbf3d5;
 
   /* ---------- Texte courant ---------- */
@@ -28,7 +27,6 @@
   /* Citation de plusieurs paragraphes (div.cit_n) : même écart que les paragraphes du texte
      (ils sortaient collés, et la lettrine de chacun débordait sur la ligne du dessus). */
   .cit_n > p { margin: 0 0 1rem; }
-  & fieldset { border: none; }
   & q { font-style: italic; }
   .head { color: var(--accent); }
   & h1.head {
@@ -52,17 +50,6 @@
     color: grey;
     float: none !important;
     margin-right: 0 !important;
-  }
-
-  /* ---------- Navigation ---------- */
-  a.here {
-    border: 1px solid #888;
-    padding: 0 .5ex;
-    margin: 0 0 0 .5ex;
-  }
-  .liber ul.children li {
-    display: inline;
-    padding-right: 1em;
   }
 }
 
@@ -91,13 +78,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -112,7 +110,8 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -181,7 +180,6 @@
 }
 .document-views #article ul.biblio-liste > li.bibl::marker { content: none; }
 .document-views #article ul.biblio-liste > li.bibl:hover { background: #f7f4f1; }
-.document-views #article ul.biblio-liste > li.bibl[hidden] { display: none; }
 /* Référence entière, retrait suspendu */
 .document-views #article li.bibl > .bibl-texte {
   flex: 1 1 auto;
@@ -196,9 +194,8 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-/* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
-.document-views #article li.bibl .author,
-.document-views #article li.bibl .sigle {
+/* Auteur : comme les auteurs de la page « Références » (petites capitales, sans gras) */
+.document-views #article li.bibl .author {
   font-variant: small-caps;
   font-weight: normal;
   letter-spacing: .02em;
@@ -212,8 +209,6 @@
 @media (max-width: 700px) {
   .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
 }
-/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
-.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
 /* ==== fin bloc bibliographie ==== */
 
 /*=============================================================
@@ -221,11 +216,6 @@
  =============================================================*/
 
 .document-views #article {
-  --accent: #5f004d;
-  --muted: #8a837c;
-  --rule: #e4e4e4;
-  --highlight: #fbf3d5;
-
   /* ---------- Page « Références » : liste repliable (module liste-repliable.xsl, classes lr-*) ---------- */
 
   /* Groupe et œuvre repliables : rond creux fermé, plein ouvert */
@@ -377,11 +367,6 @@
 .row.dots-ui #main #article :is(h2, h3, h4, h5, h6) { margin: 1em 0; font-weight: 900; }
 
 .document-views #article {
-  --accent: #5f004d;
-  --muted: #8a837c;
-  --rule: #e4e4e4;
-  --highlight: #fbf3d5;
-
   /* ---------- Titre et éditeurs ---------- */
   .titlestmt {
     max-width: 42rem;
@@ -439,7 +424,7 @@ ins {
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }

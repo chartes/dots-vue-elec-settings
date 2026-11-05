@@ -50,7 +50,6 @@
 #main #article li { text-align: justify; }
 
 #main #article li { line-height: 1.33; margin: .5ex 0; }
-#main #article li p { margin: 0; text-indent: 0; }
 
 
 /* --------------------------------------------------------------------------
@@ -59,72 +58,13 @@
    notices d'obit : la hiérarchie ÉLEC est conservée telle quelle.
    -------------------------------------------------------------------------- */
 
-#main #article h1,
-#main #article .h1 {
-  /* 2026-09-14 : titre ramené au gris sombre commun aux collections (#202020).
-     Ce n'est pas un choix de goût : c'est la valeur MESURÉE sur la majorité des corpus
-     (15 titres sur 5 collections), et la règle harmonisée
-     `.document-area #article:not(.bottom-toc) h1…{color:#202020}` existe déjà dans les 18
-     feuilles — elle était simplement battue ici par ce sélecteur à DEUX identifiants,
-     plus spécifique. L'accent rouge reste où il sert de repère (appels de note,
-     signets), pas sur les titres. Demande de l'utilisateur : « les titres en rouge
-     jsuis pas fan en vrai homogénéise ». */
-  color: #202020;
-  /* 2026-11-03 : même famille, même graisse et même échelle que les autres corpus
-     (socle D12), hiérarchie lisible h1 > h2 > h3 et espacements resserrés :
-     « trop d'espace entre le titre et le texte ». */
-  font-family: var(--font-secondary, Arial), Arial, Helvetica, sans-serif;
-  font-size: 1.75rem;
-  font-weight: 600;
-  text-align: left;
-  line-height: 1.22;
-  margin: 0 0 .55em;
-  /* 2026-11-03 : plus de filet sous les titres (« les titres comme avant-propos ne
-     doivent pas être soulignés »). La règle de hiérarchie en fin de feuille fixe
-     seule marges et padding. */
-}
-
-#main #article h2 {
-  /* 2026-09-14 : titre ramené au gris sombre commun aux collections (#202020).
-     Ce n'est pas un choix de goût : c'est la valeur MESURÉE sur la majorité des corpus
-     (15 titres sur 5 collections), et la règle harmonisée
-     `.document-area #article:not(.bottom-toc) h1…{color:#202020}` existe déjà dans les 18
-     feuilles — elle était simplement battue ici par ce sélecteur à DEUX identifiants,
-     plus spécifique. L'accent rouge reste où il sert de repère (appels de note,
-     signets), pas sur les titres. Demande de l'utilisateur : « les titres en rouge
-     jsuis pas fan en vrai homogénéise ». */
-  color: #202020;
-  font-size: 1.3rem;
-  font-weight: 600;
-  border-bottom: none;
-  /* 2026-11-02 (« pourquoi j'ai des blancs comme ça ») : 1em de marge de chaque côté + 1em de remplissage au-dessus, sur
-     des sections qui ont déjà 16 px / 20 px de remplissage (hteiml) : une centaine de pixels entre deux entrées. */
-  margin: 1.3em 0 .45em;
-  padding: 0;
-}
+/* Tailles, graisses et marges : bloc « Hiérarchie des titres » en fin de feuille ;
+   couleurs : BLOC TITRES. */
 #main #article section.obit { padding: 0; }
-
-#main #article h3 {
-  color: #585858;
-  font-size: 1.12rem;
-  font-weight: 600;
-  border-bottom: none;
-  margin: 1.1em 0 .35em;
-  padding: 0;
-}
-
-#main #article h4 {
-  color: #585858;
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 1em 0 .3em;
-  padding: 0;
-}
 
 #main #article h1 a,
 #main #article h2 a,
-#main #article h3 a,
-#main #article h4 a { color: inherit; border-bottom-color: transparent; }
+#main #article h3 a { color: inherit; border-bottom-color: transparent; }
 
 
 /* --------------------------------------------------------------------------
@@ -142,35 +82,14 @@
 
 #main #article cite,
 #main #article .title { font-style: normal; }
-#main #article .title i,
-#main #article .title em { font-style: normal; }
-#main #article .title abbr { font-variant: small-caps; }
 
-/* Les noms et les quantièmes du calendrier sont composés en petites capitales,
+/* Les quantièmes du calendrier sont composés en petites capitales,
    et les <dfn> (gloses de vocabulaire) restent droits. */
-#main #article .sc { font-variant: small-caps; }
 #main #article dfn { font-style: normal; }
-#main #article dfn.sc { font-style: normal; font-variant: small-caps; }
 #main #article .num { font-family: inherit; line-height: 1; font-variant: small-caps; }
 #main #article .num sup { font-variant: normal; }
 
-#main #article p.indent { text-indent: 2em; }
 #main #article p.noindent { text-indent: 0; }
-#main #article p.right { text-align: right; }
-
-#main #article blockquote {
-  margin: 0 2em 1.5ex 1.5em;
-  padding: .3ex 1ex .3ex .5em;
-  border-left: 2px dotted #ccc;
-  text-align: justify;
-  line-height: 1.15;
-}
-#main #article blockquote p { text-indent: 0; margin: .7ex 0; }
-
-#main #article i i,
-#main #article i em,
-#main #article em i,
-#main #article em em { font-style: normal; }
 
 
 /* --------------------------------------------------------------------------
@@ -182,28 +101,12 @@
   list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='6'%3E%3Crect width='7' height='6' fill='%235f004d'/%3E%3C/svg%3E");
   padding-top: .3em;
 }
-#main #article ul ul { list-style: circle; }
-#main #article ul ul ul { list-style: disc; }
 
 
 /* --------------------------------------------------------------------------
-   6. Tableaux — html.css (le corpus n'a pas de feuille de thème propre)
-   Sélecteurs scopés : les règles nues repeignaient les tableaux de l'interface.
+   6. Images (le corpus n'a pas de tableau)
    -------------------------------------------------------------------------- */
 
-#main #article table { border-collapse: collapse; }
-#main #article th {
-  text-align: left;
-  vertical-align: top;
-  padding: 3px 1ex;
-  background-color: #E2DED0;
-  font-weight: normal;
-}
-#main #article td {
-  vertical-align: top;
-  border: 1px solid #CCC;
-  padding: 0 1ex;
-}
 #main #article img { max-width: 100%; height: auto; }
 
 
@@ -230,60 +133,30 @@
   pointer-events: none;
 }
 
-/* ==== D12-SOCLE-DEBUT — généré par dots-autopilot/scripts/d12_socle_css.py, ne pas modifier à la main ==== */
-/* Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
-   Les valeurs reprennent les jetons de l'application (dots-vue/src/assets/css/main.css)
-   au lieu de polices et de gris propres à chaque corpus. La teinte d'accent du corpus
-   est conservée : elle est lue dans --fill-color, avec un repli sur celle de DoTS. */
+/* ==== D12-SOCLE-DEBUT — issu de dots-autopilot/scripts/d12_socle_css.py ====
+   Socle sobre commun aux corpus ÉLEC servis par DoTS (tâche D12).
+   2026-11-03 (allègement) : réduit aux règles qui agissent encore ici. Le reste ne visait
+   rien dans ce corpus (tableaux, citations, filets, boutons, apparat, h4) ou était battu
+   en entier par les règles `#main #article …` du corpus, plus spécifiques (colonne,
+   tailles et marges des titres, couleur des liens, images). */
 .document-area #article:not(.bottom-toc),
 .document-area main {
   --d12-accent: var(--fill-color, #5f004d);
-  --d12-encre: var(--document-text-color, #303030);
-  --d12-filet: #dcd8d3;
-  --d12-fond-doux: var(--meta-area-fill-color, #f5f5f5);
-  --d12-rayon: var(--button-border-radius, 4px);
 }
 
-/* Texte : mesure de lecture régulière, encre et interligne de l'application.
-   La largeur est bornée parce qu'elle atteignait 1 184 px chez christofle
-   (mesuré le 2026-09-12), soit des lignes de plus de 130 caractères. 72rem est
-   la valeur déjà retenue par les corpus qui s'en étaient souciés (bellelay 72,
-   actesroyauxdupoitou 74) ; un corpus peut la surcharger après ce bloc. */
-.document-area #article:not(.bottom-toc) {
-  max-width: min(100%, 72rem);
-  margin-inline: auto;
-  color: var(--d12-encre);
-  font-size: var(--font-default-size, 16px);
-  /* 1.6 et non le jeton --font-default-line-heigth (1.4) : celui-ci est calibré pour
-     l'interface, et la comparaison avant/après du 2026-09-12 montrait l'interligne
-     tomber de 26,4 px à 22,4 px chez christofle, actesroyauxdupoitou, sanctoral_elec
-     et les testaments — trop serré pour de la prose éditoriale en serif. */
-  line-height: 1.6;
-}
 .document-area #article:not(.bottom-toc) p {
   margin: 0 0 .9em;
 }
 
-/* Titres : famille secondaire de l'application, graisse tenue, accent sobre.
-   Pas de bandeau plein : un filet gauche, comme les blocs de DoTS. */
+/* Titres (le reste : bloc « Hiérarchie des titres » et BLOC TITRES). */
 .document-area #article:not(.bottom-toc) h1,
 .document-area #article:not(.bottom-toc) h2,
-.document-area #article:not(.bottom-toc) h3,
-.document-area #article:not(.bottom-toc) h4 {
-  color: #202020;
-  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  line-height: 1.25;
+.document-area #article:not(.bottom-toc) h3 {
   letter-spacing: .01em;
 }
-.document-area #article:not(.bottom-toc) h1 { font-size: 1.6rem; margin: 0 0 1rem; }
-.document-area #article:not(.bottom-toc) h2 { font-size: 1.3rem; margin: 2rem 0 .75rem; }
-.document-area #article:not(.bottom-toc) h3 { font-size: 1.12rem; margin: 1.5rem 0 .6rem; }
-.document-area #article:not(.bottom-toc) h4 { font-size: 1rem; margin: 1.2rem 0 .5rem; }
 
-/* Liens : accent du corpus, soulignement discret plutôt que couleur vive. */
+/* Liens : soulignement discret (la couleur est fixée par `#main #article a` et le BLOC LIENS). */
 .document-area #article:not(.bottom-toc) a {
-  color: var(--d12-accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
@@ -296,53 +169,11 @@
   outline-offset: 2px;
 }
 
-/* Tableaux : filets fins, en-tête sur fond doux, pas de quadrillage lourd. */
-.document-area #article:not(.bottom-toc) table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  font-size: .95em;
-}
-.document-area #article:not(.bottom-toc) th,
-.document-area #article:not(.bottom-toc) td {
-  padding: .4rem .6rem;
-  border: 0;
-  border-bottom: 1px solid var(--d12-filet);
-  text-align: left;
-  vertical-align: top;
-}
-.document-area #article:not(.bottom-toc) th {
-  background: var(--d12-fond-doux);
-  font-family: var(--font-secondary, var(--font-primary, "Roboto")), Arial, sans-serif;
-  font-size: .8rem;
-  font-weight: 600;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  color: #4a4a4a;
-}
-/* Un tableau large défile dans son cadre, la page ne défile jamais de côté. */
-.document-area #article:not(.bottom-toc) .table-wrap {
-  overflow-x: auto;
-}
-
-/* Citations, blocs éditoriaux, légendes. */
-.document-area #article:not(.bottom-toc) blockquote,
-.document-area #article:not(.bottom-toc) .citation {
-  margin: 1rem 0;
-  padding: .1rem 0 .1rem 1rem;
-  border-left: 3px solid var(--d12-filet);
-  color: #45403c;
-}
-.document-area #article:not(.bottom-toc) figcaption,
-.document-area #article:not(.bottom-toc) .legendeillustration {
+/* Légendes. */
+.document-area #article:not(.bottom-toc) figcaption {
   color: #5a5450;
   font-size: .85rem;
   line-height: 1.4;
-}
-.document-area #article:not(.bottom-toc) hr {
-  height: 0;
-  margin: 1.6rem 0;
-  border: 0;
-  border-top: 1px solid var(--d12-filet);
 }
 
 /* Colonne de texte : elle prend la place disponible dans la rangée.
@@ -362,53 +193,10 @@
   min-width: 0;
 }
 
-/* Images : jamais plus larges que la colonne. */
-.document-area #article:not(.bottom-toc) img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Contrôles éditoriaux (onglets, boutons, menus dépliants des corpus) : même
-   grammaire visuelle que les boutons de l'application — coins légers, filet fin,
-   accent réservé à l'état actif. */
-.document-area #article:not(.bottom-toc) button,
-.document-area #article:not(.bottom-toc) input[type="reset"],
-.document-area #article:not(.bottom-toc) input[type="submit"],
+/* Menus dépliants (folios). */
 .document-area #article:not(.bottom-toc) summary {
   font-family: var(--font-primary, "Roboto"), Arial, Helvetica, sans-serif;
   font-size: .9rem;
-}
-.document-area #article:not(.bottom-toc) input[type="reset"],
-.document-area #article:not(.bottom-toc) input[type="submit"],
-.document-area #article:not(.bottom-toc) button {
-  padding: .35rem .7rem;
-  border: 1px solid var(--d12-filet);
-  border-radius: var(--d12-rayon);
-  background: #fff;
-  color: var(--d12-encre);
-  cursor: pointer;
-}
-.document-area #article:not(.bottom-toc) input[type="reset"]:hover,
-.document-area #article:not(.bottom-toc) input[type="submit"]:hover,
-.document-area #article:not(.bottom-toc) button:hover {
-  border-color: var(--d12-accent);
-  color: var(--d12-accent);
-}
-
-/* Notes et apparat : un cran plus petit, couleur d'encre atténuée. */
-.document-area #article:not(.bottom-toc) .apparatus {
-  font-size: var(--font-small-size, 14px);
-  line-height: 1.5;
-}
-.document-area #article:not(.bottom-toc) a.noteref,
-.document-area #article:not(.bottom-toc) .noteref {
-  text-decoration: none;
-}
-
-@media (max-width: 768px) {
-  .document-area #article:not(.bottom-toc) h1 { font-size: 1.4rem; }
-  .document-area #article:not(.bottom-toc) h2 { font-size: 1.2rem; }
-  .document-area #article:not(.bottom-toc) table { font-size: .9em; }
 }
 /* ==== D12-SOCLE-FIN ==== */
 
@@ -416,7 +204,6 @@
    Les 82 folios sont servis en local depuis /images/obituaires/jpg/. html.css de DoTS-vue impose
    `details > * { display: none }` : il faut ré-autoriser summary et contenu, et porter le
    `display` du contenu sur `[open]`, sinon l'image reste visible menu fermé. */
-.document-area .obit-facs > summary { display: list-item; cursor: pointer; }
 .document-area .obit-facs[open] > :not(summary) { display: block; }
 .document-area .obit-facs:not([open]) > :not(summary) { display: none; }
 .document-area .obit-facs { display: inline-block; margin: .2rem 0; }
@@ -487,13 +274,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -501,41 +299,6 @@
   text-decoration: underline;
 }
 /* ==== fin bloc notes ==== */
-
-/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
-   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
-   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
-.document-views #article .footnotes p.apparatus {
-  margin-bottom: 1.25rem;
-  padding-left: 0;
-  line-height: 1.55;
-}
-.document-views #article .footnotes .apparatus * ::after { content: " "; }
-.document-views #article .footnotes .apparatus span.note {
-  display: block;
-  position: relative;
-  margin-bottom: .3em;
-  line-height: 1.25;
-  margin-left: 2.5em;
-  padding-left: 1.3em;
-  border-left: 1px solid #ccc;
-}
-.document-views #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  right: calc(100% + .76em);
-  color: var(--fill-color);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: none;
-}
-/* Lemme fermé par un crochet */
-.document-views #article .footnotes .apparatus .lem::after {
-  content: "]\00a0";
-  color: #8a837c;
-}
-.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
-/* ==== fin bloc apparat ==== */
 
 /* ==== BLOC TITRES (2026-10-27) : couleur des titres, identique dans chaque corpus (modèle : Du Bourg).
    h1 en violet, h2 à h6 en gris. Seule la couleur est fixée (pas les tailles ni les marges, propres
@@ -548,7 +311,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
@@ -571,7 +334,7 @@
   font-weight: 600 !important;
   text-align: center !important;
 }
-.document-area #article .titlestmt :is(.editors, .source) { text-align: center; text-indent: 0; }
+#main #article .titlestmt :is(.editors, .source) { text-align: center; text-indent: 0; }  /* #main : la règle `#main #article p { justify }` du corpus est plus spécifique */
 .document-area #article .titlestmt .source { margin: 1rem 0; font-size: .95rem; color: #444; }
 .document-area #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
 .document-area #article .titlestmt .editor { font-variant: small-caps; letter-spacing: 0.03em; color: #333; }
@@ -585,7 +348,6 @@
   margin-top: 0.5rem;
 }
 .document-area #article .titlestmt .subtitle { text-align: center; text-indent: 0; font-style: italic; color: #555; margin: 0 0 1rem; }
-#main #article .titlestmt :is(.editors, .source) { text-align: center; }  /* la règle `#main #article p { justify }` du corpus est plus spécifique */
 /* ==== fin page de titre ==== */
 
 /* ==== Témoins (2026-11-03) : markup et allure des cartulaires ====
@@ -600,7 +362,9 @@
   text-indent: 0;
   font-size: .85rem;
   line-height: 1.5;
+  list-style: none;
 }
+.document-area #article ul.listWit > li.witness::marker { content: none; }
 .document-area #article li.witness small.n {
   font-style: normal;
   font-weight: 600;
@@ -677,13 +441,14 @@
 /* ==== Hiérarchie des titres (2026-11-03) ====
    Même police que les autres corpus : la générique appliquait « Roboto Condensed »
    (socle D12) alors que, partout ailleurs, les titres héritent de la police du texte.
-   h1 large et sans filet (titre non souligné) ; h2 : barre d'accent à gauche ; h3/h4 resserrés.
+   h1 large et sans filet (titre non souligné) ; h2 et h3 resserrés (pas de h4 dans ce corpus).
    Ces règles passent après le socle D12 et gagnent à spécificité égale. */
 #main #article h1 {
   font-family: inherit;
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
+  text-align: left;
   margin: 0 0 .35em;
   padding-top: 0; /* hteiml : h1 { padding-top: 1em } */
 }
@@ -692,7 +457,10 @@
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 1.28; /* hteiml : h2 { line-height: 200% } */
+  /* 2026-11-02 (« pourquoi j'ai des blancs comme ça ») : sections déjà remplies par hteiml (16 / 20 px). */
   margin: 1.1em 0 .35em;
+  padding: 0;
+  border-bottom: none;
   /* 2026-11-03 : plus de barre d'accent à gauche du h2 (« pourquoi j'ai un trait
      sur le h2 ? »). */
 }
@@ -701,20 +469,10 @@
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.3;
-  color: #4a4a4a;
   margin: .9em 0 .3em;
   padding: 0;
+  border-bottom: none;
 }
-#main #article h4 {
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #585858;
-  line-height: 1.3;
-  margin: .8em 0 .25em;
-  padding: 0;
-}
-#main #article h1 + h2 { margin-top: .35em; }
 
 /* ==== Renvois des notes (2026-11-03) ====
    Les cibles de renvoi sont des liens : on garde la couleur, sans le soulignement
@@ -746,20 +504,17 @@
 /* ==== Écart texte / notes de bas de page (2026-11-03) : « trop d'espace entre les notes et la fin du texte » ====
    Cumul mesuré sur acte7 : 20 px sous la transcription + 43 px de marge + 16 px de retrait des notes. */
 .document-views #article section.div.transcription { padding-bottom: 0; }
-.document-views #article section.footnotes { margin-top: 1.25rem; padding-top: 0; }
+.document-views #article section.footnotes { margin-top: 1.25rem; padding-top: 0; padding-bottom: 0; }
 .document-views #article section.div:has(+ section.footnotes) { padding-bottom: 0; }
 
 /* ==== Écart notes / pied de page (2026-11-03) : mesuré sur acte7, 166 px dont 120 px de retrait bas de #text-view
    (dots-vue), 20 px sous les notes et 12 px sous la dernière. Cadré sur le conteneur #obituairestmont. ==== */
 #obituairestmont .text-view { padding-bottom: 2rem; }
-.document-views #article section.footnotes { padding-bottom: 0; }
 .document-views #article section.footnotes > :last-child { margin-bottom: 0; }
 
 /* ==== Pictogramme du témoin de Metz (2026-11-03) : comme les cartulaires ==== */
 .document-area #article li.witness > details.obit-facs { margin: 0 0 0 .4em; vertical-align: middle; line-height: 0; }
 .document-area #article li.witness > details.obit-facs[open] { margin: .6rem 0 1rem; line-height: inherit; }
-.document-area #article ul.listWit > li.witness { list-style: none; }
-.document-area #article ul.listWit > li.witness::marker { content: none; }
 
 /* 2026-11-04 (responsive) : sur téléphone, le folio (.pb de hteiml, flottant à -4.5em dans la marge droite)
    sortait de l'écran (+39px de défilement) ; il reste à droite, mais dans le cadre. */

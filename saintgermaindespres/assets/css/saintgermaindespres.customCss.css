@@ -79,8 +79,8 @@
    -------------------------------------------------------------------------- */
 
 #main #article a,
-#main #article a:visited { color: #bc052d; text-decoration: none; }
-#main #article a:hover { text-decoration: underline; color: #bc052d; }
+#main #article a:visited { color: #5f004d; text-decoration: none; }
+#main #article a:hover { text-decoration: underline; color: #5f004d; }
 
 
 /* --------------------------------------------------------------------------
@@ -103,9 +103,12 @@
 /* 2026-10-12 : la CSS de hteiml (renderer d'elec.conf.json) met tout <front> sur fond gris ;
    fond blanc, le reste de sa mise en page gardé (comme Du Bourg et Montferrand). */
 #main #article .front { background-color: #fff; }
-/* 2026-10-19 : en-tête des pièces au modèle des actes des autres corpus (cadre pointillé, comme Du Bourg). */
-#main #article section.front { border: 1.75px dotted rgba(95, 0, 77, 0.3); border-radius: 0; padding: .5em .75em; margin: 0 0 1.5em; }
-#main #article section.front > h1.head { font-size: 1.3em; margin: 0 0 .75rem; }
+/* 2026-11-02 : plus de cadre pointillé autour de l'en-tête des pièces (ni de la page de présentation) :
+   titre et texte à plat, comme les autres corpus. La signature (« Philippe Plagnieux ») est à droite, en italique. */
+#main #article section.front { padding: 0; margin: 0 0 1.5em; }
+[collid="saintgermaindespres"] #main #article section.front > div.byline { text-align: right; font-style: italic; font-size: .9rem; color: #5a5257; margin: 0 0 1.5rem; }
+#main #article section.front > h1.head { font-size: 1.6em; margin: 0 0 .75rem; }
+#main #article section.front > h2.head { font-size: 1.4em; margin: 0 0 .75rem; }
 #main #article section.front > .argument { margin-left: 0; padding-left: 0; }  /* sans le retrait de hteiml */
 #main #article .docDate { font-variant: small-caps; }
 #main #article .argument { font-size: .95em; }
@@ -156,7 +159,7 @@
 
 
 
-#main #article a.bookmark:hover { color: #bc052d; }
+#main #article a.bookmark:hover { color: #5f004d; }
 
 /* ==== D14e-6 (2026-09-12) : agrandissement des 64 images dans la page ====
    Ancien site : les figures etaient de simples <img> en ligne, a leur taille
@@ -184,7 +187,7 @@
 #main #article .sgdp-figure-fermer {
   display: inline-block;
   margin-top: .3rem;
-  color: #bc052d;
+  color: #5f004d;
   font-size: .9em;
 }
 #main #article .sgdp-figure-fermer,
@@ -228,19 +231,6 @@
 
 
 
-[collid="saintgermaindespres"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }    /* même pas que les notes */
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="saintgermaindespres"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
-/* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
-   grand retrait du pied de page. */
-[collid="saintgermaindespres"] #main #article section.back:empty { display: none; }
 /* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
    dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
 [collid="saintgermaindespres"] #main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
@@ -255,8 +245,6 @@
    (pas de header.front). */
 [collid="saintgermaindespres"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
 [collid="saintgermaindespres"] #main #article h2.head { font-size: 140%; }
-[collid="saintgermaindespres"] #main #article h3.head { font-size: 130%; }
-[collid="saintgermaindespres"] #main #article h4.head { font-size: 120%; }
 [collid="saintgermaindespres"] #main #article :is(h2, h3, h4).head { font-weight: 900; line-height: 1.3; }
 [collid="saintgermaindespres"] #main #article:not(:has(header.front)) :is(h2, h3, h4).head { margin: 1.5rem 0 .75rem; padding-top: 0; }
 [collid="saintgermaindespres"] #main #article:not(:has(header.front)) section.div { padding: 0; }
@@ -356,11 +344,9 @@
 .document-area #main #article aside.note:target,
 .document-area #main #article aside.note.dots-target,
 .document-area #main #article a.noteref:target,
-.document-area #main #article a.noteref.dots-target,
-.document-area #main #article a.pb:target,
-.document-area #main #article a.pb.dots-target {
+.document-area #main #article a.noteref.dots-target {
   background: #fbf8f4;
-  box-shadow: inset 3px 0 0 #bc052d;
+  box-shadow: inset 3px 0 0 #5f004d;
 }
 
 /* 2026-10-12 : page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document
@@ -394,41 +380,6 @@
   margin-top: 0.5rem;
 }
 
-/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
-   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
-   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
-.document-views #article .footnotes p.apparatus {
-  margin-bottom: 1.25rem;
-  padding-left: 0;
-  line-height: 1.55;
-}
-.document-views #article .footnotes .apparatus * ::after { content: " "; }
-.document-views #article .footnotes .apparatus span.note {
-  display: block;
-  position: relative;
-  margin-bottom: .3em;
-  line-height: 1.25;
-  margin-left: 2.5em;
-  padding-left: 1.3em;
-  border-left: 1px solid #ccc;
-}
-.document-views #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  right: calc(100% + .76em);
-  color: var(--fill-color);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: none;
-}
-/* Lemme fermé par un crochet */
-.document-views #article .footnotes .apparatus .lem::after {
-  content: "]\00a0";
-  color: #8a837c;
-}
-.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
-/* ==== fin bloc apparat ==== */
-
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
    latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
@@ -450,13 +401,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -476,8 +438,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
-/* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
-.document-views #article a.pb { color: #8a8a8a !important; }
 /* ==== fin bloc liens ==== */
+

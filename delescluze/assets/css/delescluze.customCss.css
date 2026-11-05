@@ -86,7 +86,7 @@
    #4A4A4A, renvois soulignés d'un pointillé.
    -------------------------------------------------------------------------- */
 
-#main #article a { color: #A73136; text-decoration: none; font-weight: normal; }
+#main #article a { color: #5f004d; text-decoration: none; font-weight: normal; }
 #main #article a:hover { font-weight: bold; }
 #main #article a[href^="http"]:not([href*="localhost"]) { color: #4A4A4A; }
 
@@ -114,7 +114,7 @@
 
 
 #main #article a.bookmark { color: #ccc; border-bottom: none; }
-#main #article a.bookmark:hover { color: #A73136; }
+#main #article a.bookmark:hover { color: #5f004d; }
 
 
 /* --------------------------------------------------------------------------
@@ -141,11 +141,11 @@
 #main #article .dl-mode { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
 #main #article .dl-mode + label {
   display: inline-block; margin: 0 .4rem .6rem 0; padding: .15rem .7rem;
-  border: 1px solid #A73136; border-radius: 3px; color: #A73136; background: #fff;
+  border: 1px solid #5f004d; border-radius: 3px; color: #5f004d; background: #fff;
   font: bold .85rem Arial, Helvetica, sans-serif; cursor: pointer;
 }
-#main #article .dl-mode:checked + label { background: #A73136; color: #fff; }
-#main #article .dl-mode:focus-visible + label { outline: 2px solid #A73136; outline-offset: 2px; }
+#main #article .dl-mode:checked + label { background: #5f004d; color: #fff; }
+#main #article .dl-mode:focus-visible + label { outline: 2px solid #5f004d; outline-offset: 2px; }
 
 #main #article .dl-mode-ed:checked ~ .orig,
 #main #article .dl-mode-ed:checked ~ * .orig,
@@ -154,6 +154,13 @@
 #main #article .dl-mode-tr:checked ~ .reg,
 #main #article .dl-mode-tr:checked ~ * .reg { display: none; }
 #main #article .dl-mode-tr:checked ~ * del { text-decoration: line-through; }
+/* 2026-11-02 : les notes sont après les pages, hors de la portée des boutons (frères de .dl-mode) :
+   une date de note s'affichait en régularisée ET en forme originale (« Écrit le 30 décembre 1851 »
+   puis « Écrit le 30 X.bre 1851 »). Une seule forme, selon le mode de la lettre. */
+#main #article:has(.dl-mode-tr:checked) .footnotes .reg { display: none; }
+#main #article:not(:has(.dl-mode-tr:checked)) .footnotes .orig { display: none; }
+/* 2026-11-02 : le soulignement du manuscrit (hi rend="underline") n'est pas reproduit dans les notes, comme dans les autres corpus. */
+#main #article .footnotes .underline { text-decoration: none; }
 
 /* ==== D14d (2026-09-12, autopilote) : conformité au site ÉLEC historique ==== */
 /* 1. Cote du fac-similé sous l'image : l'ancien site l'affichait en <figcaption>
@@ -182,7 +189,7 @@
 #main #article details.dl-mois[open] > :not(summary) { display: block; }
 #main #article details.dl-mois > summary {
   font-size: 0.9rem;
-  color: #A73136;
+  color: #5f004d;
   list-style: none;
 }
 #main #article details.dl-mois > summary::after { content: " ▾"; }
@@ -204,7 +211,7 @@
 #main #article details.dl-mois:not([open]) > ul.dl-mois-liste { display: none; }
 #main #article ul.dl-mois-liste li { margin: 0; }
 #main #article ul.dl-mois-liste a:hover { text-decoration: underline; }
-#main #article ul.dl-mois-liste a[aria-current="page"] { font-weight: bold; color: #A73136; }
+#main #article ul.dl-mois-liste a[aria-current="page"] { font-weight: bold; color: #5f004d; }
 /* ==== fin D14d ==== */
 
 /* --------------------------------------------------------------------------
@@ -236,7 +243,9 @@
 #main #article .dl-mode-tr:checked ~ * .app { display: inline; position: relative; }
 #main #article .app .noteAnchor { color: #97ADD1; font-weight: normal; cursor: help; }
 #main #article .app .apparatusNote {
-  display: none; position: absolute; z-index: 5; left: 0; top: 1.4em; width: 18em;
+  /* Ancrée à la fenêtre et non au renvoi : jamais coupée par la colonne ni par la TOC ouverte. */
+  display: none; position: fixed; z-index: 50; left: 50%; bottom: 1rem; transform: translateX(-50%);
+  width: 30em; max-width: 90vw; max-height: 40vh; overflow-y: auto; box-shadow: 0 2px 8px rgba(0,0,0,.25);
   padding: .3em .5em; background: #fff; border: 1px solid #ccc;
   font-size: 80%; font-style: normal; color: #4A4A4A; text-decoration: none; text-align: left;
 }
@@ -253,7 +262,9 @@
 #main #article .dl-facsimile { float: left; width: 38%; margin-right: 3%; }
 #main #article .dl-facsimile img { max-width: 100%; height: auto; }
 #main #article .dl-facsimile .facsimile-desc { font-size: 80%; font-style: normal; }
-#main #article .dl-text { overflow: hidden; }  /* la colonne de texte reste à droite du fac-similé */
+/* La colonne de texte reste à droite du fac-similé ; flow-root et non overflow:hidden, qui coupait les
+   notes d'apparat (bulles absolues) dès que la TOC ouverte rétrécit la colonne. */
+#main #article .dl-text { display: flow-root; }
 #main #article .dl-text, #main #article .dl-text :is(section, div, table, h1, h2, h3, h4) { clear: none; }  /* [dots] hteiml dégage les sections sous le fac-similé */
 
 /* Onglets Édition / Transcription : petites capitales, l'état actif en rouge gras (#text-menu) */
@@ -261,7 +272,7 @@
   display: inline-block; margin: 0 .6rem .8rem 0; padding: 0; border: none; background: none;
   color: #000; font: normal 100% Arial, Helvetica, sans-serif; font-variant: small-caps; cursor: pointer;
 }
-#main #article .dl-mode:checked + label { color: #A73136; font-weight: bold; background: none; }
+#main #article .dl-mode:checked + label { color: #5f004d; font-weight: bold; background: none; }
 
 /* Ajouts de l'éditeur : sans marque dans l'édition, absents de la transcription */
 #main #article .add { text-decoration: none; }
@@ -300,7 +311,7 @@
 #main #article table.table:not(.dl-text table) th {
   padding: .45em .6em;
   border: 0;
-  border-bottom: 2px solid #A73136;
+  border-bottom: 2px solid #5f004d;
   background: #f6f3ef;
   font-size: .85rem;
   font-weight: 600;
@@ -364,13 +375,24 @@
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -497,11 +519,10 @@
    bibliographie (auteur en petites capitales, titres en italique, texte en noir), le lien se signale
    par un pointillé discret. */
 [collid="delescluze"] .document-views #main #article .footnotes a.bibl {
-  color: inherit !important;
-  text-decoration: underline dotted #b9afa5;
-  text-underline-offset: .18em;
+  /* 2026-11-02 : même lien que partout ailleurs (bleu, filet pointillé) ; le noir détonnait */
+  color: rgb(49, 91, 167) !important;
+  text-decoration: none;
 }
-[collid="delescluze"] .document-views #main #article .footnotes a.bibl:hover { text-decoration-color: currentColor; }
 [collid="delescluze"] #main #article .footnotes a.bibl .author { font-variant: small-caps; letter-spacing: .02em; }
 /* carnet1 (« propose un truc plus stylé niveau affichage Édition / Transcription ») : les deux boutons
    radio de chaque page (dl-mode-ed / dl-mode-tr, émis par la XSL) deviennent un sélecteur segmenté :
@@ -527,12 +548,12 @@
 [collid="delescluze"] #main #article .dl-mode:checked + label {
   position: relative;
   z-index: 1;
-  border-color: #A73136;
+  border-color: #5f004d;
   background: #f8eeee;
-  color: #A73136;
+  color: #5f004d;
   font-weight: 700;
 }
-[collid="delescluze"] #main #article .dl-mode:focus-visible + label { outline: 2px solid #A73136; outline-offset: 2px; }
+[collid="delescluze"] #main #article .dl-mode:focus-visible + label { outline: 2px solid #5f004d; outline-offset: 2px; }
 /* lettre01 (« la lettre est coupée ») : chaque page du manuscrit garde son fac-similé à gauche et son
    texte à droite (la phrase coupée suit la feuille, comme sur l'ancien site), mais le passage d'une page
    à l'autre laissait un grand blanc (marges de fin de texte + 2,5 em sous la page, et, quand l'image est
@@ -568,7 +589,7 @@
    des ancres internes, donc aucun attribut ni classe ne survit sur un <a> ; un élément distinct,
    lui, traverse la réécriture (mesuré le 2026-09-12). */
 #main #article ul.dl-mois-liste strong.dl-mois-courant {
-  color: #A73136;
+  color: #5f004d;
   font-weight: bold;
 }
 
@@ -706,15 +727,7 @@
    suite » est fermé ; mentions nombreuses (plus de 5) repliées sous leur résumé. Sans
    JavaScript : details natif, :has() pour la biographie. */
 [collid="delescluze"] #main #article :is(a.app-ref, .app > a.noteref) sup { font-style: italic; }    /* même pas que les notes */
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="delescluze"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
+/* 2026-11-05 : filet sous l'apparat retiré (Maxime : « supprimer la barre du bas »). */
 
 /* Tableaux : police du texte (2026-10-19), et non le « sans-serif » générique du navigateur. */
 [collid="delescluze"] #main #article :is(table, th, td, caption) { font-family: inherit; }
@@ -792,11 +805,11 @@
 .document-area #main #article a.pb:target,
 .document-area #main #article a.pb.dots-target {
   background: #faf8f5;
-  box-shadow: inset 3px 0 0 #A73136;
+  box-shadow: inset 3px 0 0 #5f004d;
 }
 .document-area #main #article div.facsimile:target,
 .document-area #main #article div.facsimile.dots-target {
-  box-shadow: inset 3px 0 0 #A73136;
+  box-shadow: inset 3px 0 0 #5f004d;
 }
 .document-area #main #article section.div:target > h1,
 .document-area #main #article section.div.dots-target > h1,
@@ -805,7 +818,7 @@
 .document-area #main #article section.div:target > h3,
 .document-area #main #article section.div.dots-target > h3 {
   background: #faf8f5;
-  box-shadow: inset 3px 0 0 #A73136;
+  box-shadow: inset 3px 0 0 #5f004d;
 }
 
 /* === SECTION GARDE DEBUT (page de garde commune, 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
@@ -823,7 +836,7 @@
 }
 .document-area #article .titlestmt h1 {
   margin: 0 0 1rem !important;
-  color: var(--fill-color, #8f0e21) !important;
+  color: var(--fill-color, #5f004d) !important;
   font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
   line-height: 1.3 !important;
   font-weight: 600 !important;
@@ -843,7 +856,7 @@
   display: inline-block;
   font-size: 1.15rem;
   letter-spacing: 0.05em;
-  color: var(--fill-color, #8f0e21);
+  color: var(--fill-color, #5f004d);
   border-top: 1px solid #e2c5cb;
   padding-top: 0.5rem;
   margin-top: 0.5rem;
@@ -901,8 +914,8 @@
     display: flex;
     gap: .25rem;
     padding: .5rem 0;
-    border-top: 2px solid var(--fill-color, #8f0e21);
-    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    border-top: 2px solid var(--fill-color, #5f004d);
+    border-bottom: 2px solid var(--fill-color, #5f004d);
     background: none;
   }
   #main #article .tf-cadre thead tr:first-child th {
@@ -988,7 +1001,7 @@
   #main #article .tf-cadre tbody tr:nth-child(even) > td,
   #main #article .tf-cadre tbody tr:hover > td { background: none; }
   #main #article .tf-cadre tbody tr.dots-target,
-  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); padding-left: .7rem; }
   #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
   /* Première colonne (l'entrée) en tête du bloc */
   #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
@@ -1004,7 +1017,8 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  padding: 0;
+  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -1067,7 +1081,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }

@@ -43,20 +43,6 @@
    vrai intertitre (h2, h3 dans une sous-rubrique) que hteiml met en forme comme ailleurs ;
    la référence a la taille et l'interligne d'un paragraphe. */
 .document-views #article .biblio { margin: 0 0 1.2rem; }
-.document-views #article details.biblio > summary {
-  display: block;
-  list-style: none;
-  cursor: pointer;
-}
-.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
-.document-views #article .biblio-compte {
-  margin-left: .3em;
-  color: #8a837c;
-  font-size: .85em;
-  font-weight: normal;
-  font-variant: normal;
-  letter-spacing: 0;
-}
 .document-views #article ul.biblio-liste {
   margin: 0;
   padding: 0;
@@ -92,13 +78,6 @@
   white-space: nowrap;
 }
 /* Auteur et sigle : comme les auteurs de la page « Références » (petites capitales, sans gras) */
-.document-views #article li.bibl .author,
-.document-views #article li.bibl .sigle {
-  font-variant: small-caps;
-  font-weight: normal;
-  letter-spacing: .02em;
-}
-.document-views #article li.bibl cite.title { font-style: italic; }
 .document-views #article li.bibl a {
   color: inherit;
   text-decoration: underline dotted #b9afa5;
@@ -107,8 +86,6 @@
 @media (max-width: 700px) {
   .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
 }
-/* Rubrique dans une rubrique (« Sources » > « Sources manuscrites ») : en retrait, un cran plus petite */
-.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
 /* ==== fin bloc bibliographie ==== */
 
 /* ---------- Titres des pages à sous-pages (modèle : Bellelay, 15/10/2026) ----------
@@ -218,7 +195,7 @@
 [collid="architectes"] #main #article ul.index > li::marker { content: none; }
 [collid="architectes"] #main #article ul.index .sc { font-variant: small-caps; letter-spacing: .02em; }
 [collid="architectes"] #main #article ul.index .ar-voir { font-style: italic; }
-[collid="architectes"] #main #article ul.index a.ref { text-decoration: underline dotted #b9afa5; text-underline-offset: .18em; }
+[collid="architectes"] #main #article ul.index a.ref { text-decoration: none; }  /* comme les liens des cartulaires : bleu, un seul filet pointillé (02/11) */
 [collid="architectes"] #main #article ul.index > li:is(:target, .dots-target) { background: #fbf3d5; }
 
 /* ---------- Index des bâtiments : colonnes ---------- */
@@ -293,15 +270,6 @@
 [collid="architectes"] #main #article .titlestmt .editors { text-align: center; text-indent: 0; }
 [collid="architectes"] #main #article .titlestmt .editors-label { font-style: italic; color: #666; font-variant: normal; }
 [collid="architectes"] #main #article .titlestmt .editor { font-variant: small-caps; letter-spacing: 0.03em; color: #333; }
-[collid="architectes"] #main #article .titlestmt .date {
-  display: inline-block;
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-  color: var(--fill-color);
-  border-top: 1px solid var(--fill-color);
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-}
 
 /* ==== Tableau filtrable : tableau, barre, filtres (modèle : Delescluze, 2026-10-13), aux couleurs de dots-vue ; scopé ici car il s'écarte du bloc des autres corpus ==== */
 [collid="architectes"] #main #article .tf-cadre { margin: 1.2rem 0 2rem; }
@@ -432,12 +400,6 @@
 /* ==== Tableau filtrable : texte des cellules et petit écran (2026-10-13 ; 2026-10-14) ====
    Bloc commun à tous les tableaux tf-* (module tableau-filtrable.xsl), identique dans la
    CSS de chaque corpus qui en a ; scopé ici comme le bloc précédent, qu'il doit pouvoir surcharger. */
-[collid="architectes"] #main #article .tf-cadre td p {
-  margin: 0;
-  text-align: left;
-  text-indent: 0;
-}
-[collid="architectes"] #main #article .tf-cadre td p + p { margin-top: .4em; }
 
 @media (max-width: 760px), (pointer: coarse) {
   [collid="architectes"] #main #article .tf-cadre tr.tf-filtres input,
@@ -468,8 +430,8 @@
     display: flex;
     gap: .25rem;
     padding: .5rem 0;
-    border-top: 2px solid var(--fill-color, #8f0e21);
-    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    border-top: 2px solid var(--fill-color, #5f004d);
+    border-bottom: 2px solid var(--fill-color, #5f004d);
     background: none;
   }
   [collid="architectes"] #main #article .tf-cadre thead tr:first-child th {
@@ -553,7 +515,7 @@
   [collid="architectes"] #main #article .tf-cadre tbody tr:nth-child(even) > td,
   [collid="architectes"] #main #article .tf-cadre tbody tr:hover > td { background: none; }
   [collid="architectes"] #main #article .tf-cadre tbody tr.dots-target,
-  [collid="architectes"] #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  [collid="architectes"] #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); padding-left: .7rem; }
   [collid="architectes"] #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
   /* Première colonne (l'entrée) en tête du bloc */
   [collid="architectes"] #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
@@ -574,7 +536,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }

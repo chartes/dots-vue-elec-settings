@@ -928,13 +928,6 @@ span.note-inline {
   margin-right:auto;
 }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-part-title {
-  margin-top:2rem;
-  padding:.45rem .65rem;
-  background:var(--sd-legacy-gray);
-  border-left:4px solid var(--sd-legacy-red);
-  color:var(--sd-legacy-dark);
-}
 
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-subpart-title {
   margin-top:1.5rem;
@@ -995,17 +988,10 @@ span.note-inline {
 
 /* 2026-10-05 — Mises en forme du TEI sans règle jusqu'ici (audit du 05/10), reprises de la
    feuille de l'ancien site (Pleade, theme/css/module-eadeac.css) :
-   - hi[@rend="cite"] → span.cite : <cite> sur l'ancien site, sans règle, donc italique ;
    - p[@rend="smaller"] → p.smaller : « .smaller { font-size: 90% } » ;
-   - list[@rend="encadré"] → ul.encadré : bloc encadré (90 %, filet noir, marges 2em) ;
    - emph[@rend="sup"] → em.sup : <sup> droit sur l'ancien site (« sup { vertical-align: top;
      font-size: 80% } ») ; hteiml le sortait en exposant italique. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) span.cite { font-style: italic; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) p.smaller { font-size: 90%; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) ul.encadré {
-  font-size: 90%; border: 1px solid black; margin-left: 2em; margin-right: 2em;
-  padding: .5em; list-style-position: inside; line-height: 130%;
-}
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) em.sup { font-style: normal; font-size: .75em; line-height: 0; vertical-align: super; }  /* exposant ordinaire, comme le <sup> de hteiml */
 
 /* Recherche dots-cli-es */
@@ -1076,23 +1062,6 @@ span.note-inline {
   border-bottom: 1px dotted #9aa8ae;
 }
 /* ==== fin visionneuses de série ==== */
-
-/* ==== D21 (2026-09-12) : Inventaire général des chartes ==== */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-section { margin: 1.4rem 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-section-info { margin: .2rem 0; color: #555; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-libelle { font-weight: 700; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-notice { margin: 1.1rem 0; padding: .8rem 1rem; border-left: 3px solid #d8d2c8; background: #fcfbfa; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-champs { display: grid; grid-template-columns: minmax(9rem, auto) 1fr; gap: .15rem .9rem; margin: .4rem 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-champs dt { color: #555; font-size: .9rem; }
-/* ==== fin Inventaire ==== */
-/* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
-   l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :
-   <p class="isd-rubrique">. Taille, graisse et couleur de l'ancienne règle des titres h1-h3 de notice (retirée le
-   2026-10-09 : plus aucun titre dans les notices), sans retrait d'alinéa. Sélecteur avec l'id :
-   le socle D12 fixe la taille des titres par `#article h1`, qui l'emporte sur deux classes. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) .isd-notice p.isd-rubrique {
-  margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555; text-indent: 0;
-}
 
 /* ============================================================================
    D43 (2026-09-24) — Index des auteurs d'actes (Cartulaire blanc, Inventaire).

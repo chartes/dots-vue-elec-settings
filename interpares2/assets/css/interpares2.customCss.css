@@ -696,13 +696,6 @@
 }
 /* ==== fin tableau filtrable ==== */
 
-/* ==== BLOC APPARAT CRITIQUE (p.apparatus de hteiml) ====
-   Bloc générique, identique dans chaque corpus qui a un apparat (modèle : chroniques
-   latines, 2026-10-14). Même mise en page que les notes : trait vertical au même endroit,
-   lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
-
-/* ==== fin bloc apparat ==== */
-
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
    latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc

@@ -511,9 +511,6 @@ span.note-inline {
 }
 [collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *):hover .pb-thumbnail-parent { filter: none; }
 
-
-
-
 [collid="cartulaires"] #main #article .footnotes aside.note i,
 [collid="cartulaires"] .aside-noteref-content i {
   font-style: italic;
@@ -919,72 +916,6 @@ span.note-inline {
   --sd-legacy-dark:#4A4A4A;
   --sd-legacy-border:#CECECE;
 }
-/* Pages éditoriales récupérées */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-part,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-subpart,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page {
-  max-width:76rem;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-subpart-title {
-  margin-top:1.5rem;
-  color:var(--sd-legacy-red);
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page {
-  margin-top:1rem;
-  margin-bottom:2.25rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-page-title {
-  color:var(--sd-legacy-dark);
-  font-size:1.65rem;
-  border-bottom:1px solid var(--sd-legacy-border);
-  padding-bottom:.35rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-legacy-h2 {
-  color:var(--sd-legacy-dark);
-  font:700 1.25rem/1.3 Arial,Helvetica,sans-serif;
-  margin:1.6rem 0 .7rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-legacy-h3 {
-  color:var(--sd-legacy-red);
-  font:700 1.05rem/1.3 Arial,Helvetica,sans-serif;
-  margin:1.3rem 0 .6rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page a {
-  color:var(--sd-legacy-link);
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page table {
-  display:block;
-  overflow-x:auto;
-  width:100%;
-  border-collapse:collapse;
-  font-size:.92rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page td,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page th {
-  border:1px solid #d6d6d6;
-  padding:.4rem .5rem;
-  vertical-align:top;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page tr:nth-child(even) {
-  background:#fafafa;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page .date {
-  font-size:.9em;
-  color:#666;
-}
 
 /* 2026-10-05 — Mises en forme du TEI sans règle jusqu'ici (audit du 05/10), reprises de la
    feuille de l'ancien site (Pleade, theme/css/module-eadeac.css) :
@@ -995,32 +926,9 @@ span.note-inline {
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) em.sup { font-style: normal; font-size: .75em; line-height: 0; vertical-align: super; }  /* exposant ordinaire, comme le <sup> de hteiml */
 
 /* Recherche dots-cli-es */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search {
-  margin:1.4rem 0 2rem;
-  padding:1rem 1.1rem 1.2rem;
-  border:1px solid var(--sd-legacy-border);
-  border-top:5px solid var(--sd-legacy-red);
-  background:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-}
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search h2 {
-  margin:.1rem 0 1rem;
-  padding:0;
-  border:0;
-  background:none;
-  color:var(--sd-legacy-red);
-  font-size:1.35rem;
-  font-weight:700;
-}
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search-help {
-  margin:.75rem 0 0;
-  font-size:.9rem;
-  color:#666;
-}
 /* autopilote 2026-09-11 : images servies depuis /images/saint-denis/ */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .sd-graphic { max-width: 100%; height: auto; display: block; margin: .5em 0; }
 
 /* ==== Images rapatriées le 2026-09-12 (folios du Cartulaire blanc, illustrations de chapitre) ====
    Les 831 liens vers la visionneuse de l'ancien site sont devenus des <details> qui déplient
@@ -1056,11 +964,6 @@ span.note-inline {
    désignaient aucune image : ils ne sont plus des liens. On ne les déguise pas en liens morts
    (pas de bleu, pas de soulignement plein) mais on signale qu'il y a quelque chose à savoir,
    l'explication étant dans l'intitulé de survol posé par la feuille XSL. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-visionneuse-absente {
-  color: inherit;
-  cursor: help;
-  border-bottom: 1px dotted #9aa8ae;
-}
 /* ==== fin visionneuses de série ==== */
 
 /* ============================================================================
@@ -1159,10 +1062,6 @@ span.note-inline {
 #cartulaire-blanc[collid] #main #article a.sd-index-renvoi:hover { text-decoration-color: currentColor; }
 
 
-/* Le lien Pleade historique, devenu ancre vers la rubrique de la même page. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-ancre {
-  text-decoration-style: dotted;
-}  /* et non le bleu des liens Pleade */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area details.sd-folio { margin-bottom: 1rem; }  /* blanc entre le folio (libellé ou image) et le texte qui suit */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article section.front { background: none; border: none; padding: 0; margin: 0; }  /* introduction du chapitre (<front>) : hteiml la mettait sur fond gris */
 /* ==== fin Cartulaire blanc de Saint-Denis ==== */

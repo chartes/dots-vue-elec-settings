@@ -4,7 +4,7 @@
    3. Blocs hteiml génériques : notes de bas de page, apparat critique, bibliographie
       (identiques d'un corpus à l'autre, modèle : chroniques latines)
    4. Propre au projet : en-tête des édits, index en tableau, pages de partie
-   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), socle D12, page de titre,
+   5. Mécanismes communs dots-vue : sommaire (D11), socle D12, page de titre,
       tableau filtrable */
 
 /*=============================================================
@@ -422,24 +422,6 @@ table.app.table td.rdg {
    le navigateur a résolu le fragment) ; DoTS-vue pose donc cette classe sur l'élément
    visé, dans DocumentPage.vue. Les deux sélecteurs coexistent : `:target` continue de
    servir pour un clic interne et pour l'impression. */
-
-/* --------------------------------------------------------------------------
-   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
-   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
-   `#mirador-view { position: relative }` l'emporte sur
-   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
-   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
-   marginTop « sticky » faisait défiler la page de travers.
-   -------------------------------------------------------------------------- */
-
-.text-mode #mirador-view {
-  position: absolute;
-  left: 0;
-  top: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 
 /* 2026-10-15 : socle générique D12 retiré (polices, titres, marges, couleurs : rendu de hteiml).
    Restent ses deux règles de mise en page de dots-vue. */

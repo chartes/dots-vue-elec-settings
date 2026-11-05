@@ -20,20 +20,9 @@
  2. HISTORIQUE ÉLEC (diple_html.css, enc.css)
  =============================================================*/
 
-/* 2026-10-19 : police historique retirée (police de hteiml dans dots-vue) : #main #article { font-family: "CartaNovaTexte", Georgia, serif; font-size: 16px; line-height: 133% } */
-/* En-tête de l'acte : filet pointillé arrondi (header) */
-#main #article header.front { padding: 1ex; border: dotted #CCC 1px; border-radius: 1ex; background: none; }
-#main #article header.front ul { margin-top: 0; margin-bottom: 0; }
-#main #article .argument p { text-indent: 0; }
-#main #article section.tradition { margin-top: 1em; }
-/* Témoins : puces carrées, un cran plus petits ; sigle en italique */
-#main #article li.witness { font-size: 90%; list-style: square; }
-#main #article .witness small.n, #main #article .witness label { font-style: italic; color: #000; }
-#main #article p.trailer { font-style: italic; }
-#main #article .byline { text-align: right; margin-left: 45%; text-indent: 0; font-variant: small-caps; }
-#main #article .docAuthor { text-align: right; text-indent: 0; }
-/* Page de l'édition imprimée, en rouge */
-#main #article span.pb, #main #article a.pb { color: var(--fill-color, #5f004d); }
+/* 2026-11-05 : règles historiques (diple_html.css, enc.css) retirées, sans effet mesuré sur 8 pages
+   (actes, introductions, présentation) : toutes reprises par le cartouche du 04/11 (section 4), le bloc liens
+   ou hteiml ; trailer, byline, docAuthor et label absents du TEI. */
 
 /*=============================================================
  3. BLOCS HTEIML GÉNÉRIQUES

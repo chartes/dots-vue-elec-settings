@@ -355,3 +355,22 @@ if (!window.biblCopie) {
     })
   })
 }
+
+// 4. Attribut collid sur <html> : les feuilles de corpus écrivent leurs règles sous la forme
+//    [collid="cjc"] #main #article …, mais rien dans dots-vue ne pose cet attribut. On le déduit
+//    de la feuille injectée (<style id="customCss">), sans toucher au composant Vue : c'est la
+//    valeur la plus fréquente dans ses sélecteurs, ou celle du premier segment de l'URL si la
+//    feuille en cite plusieurs (testaments-poilus reprend des règles de edits).
+function poserCollid () {
+  const el = document.getElementById('customCss')
+  const html = document.documentElement
+  if (!el) { html.removeAttribute('collid'); return }
+  const n = {}
+  for (const m of el.textContent.matchAll(/\[collid="([^"]+)"\]/g)) n[m[1]] = (n[m[1]] || 0) + 1
+  const ids = Object.keys(n).sort((a, b) => n[b] - n[a])
+  const seg = location.pathname.split('/').filter(Boolean).find(s => ids.includes(s))
+  const id = seg || ids[0]
+  if (id && html.getAttribute('collid') !== id) html.setAttribute('collid', id)
+}
+poserCollid()
+new MutationObserver(poserCollid).observe(document.head, { childList: true, subtree: true, characterData: true })

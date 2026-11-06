@@ -99,23 +99,52 @@ h1.head {
 /* fin couleur titres */
 
 /* design front d'un édit
-   Encadré pointillé autour du front d'un édit ; titre et date du document centrés. */
+   Cartouche de l'acte sur le modèle des cartulaires : cadre pointillé prune à angles droits ; n° de l'acte (h1.head)
+   gris foncé puis date centrés ; analyse sans retrait (hteiml : 100 px à gauche) ; témoins en plus petit, sigle droit
+   et gras ; même blanc (1,5 rem) entre les blocs. */
 #main #article .front {
+  --acte-blanc: 1.5rem;
+  position: relative;
   background-color: #fff;
-  border: 1.75px dotted var(--fill-color);
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
   border-radius: 0;
-}
+  padding: 0.5em 0.75em;
+  margin: 0 0 1.5em;
 
-#main #article .front :is(.head, .docDate) {
-  text-align: center;
-  display: block;
+  > h1.head {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2em;
+    line-height: 1.2;
+    margin: 0 0 .2em;
+    padding-top: 0;
+    color: #333 !important;   /* le bloc titres met les h1 dans la couleur d'accent */
+    a.bookmark { position: absolute; }   /* le « § » caché ne décale pas le centrage */
+  }
+  > .docDate { display: block; text-align: center; text-indent: 0; margin: 0 0 var(--acte-blanc); }
+  > .argument { margin: 0 0 var(--acte-blanc); }
+  > .argument > p:last-child { margin-bottom: 0; }
+  > :is(section.tradition, .div.tradition) { padding: 0; margin: 0 0 var(--acte-blanc); border: 0; }
+  .listWit { margin: 0; }
+  li.witness { font-size: 0.85em; line-height: 1.5; }
+  li.witness small.n { font-style: normal; font-weight: 600; }
+  li.witness cite.title { font-style: italic; }
+  > .according { margin: 0 0 var(--acte-blanc); }
+  > .according:last-child { margin-bottom: 0; }
 }
 /* fin design front  */
+
+/* apparat critique (note type="a") : lettre séparée de son texte (hteiml les colle) */
+#main #article .apparatus .note > a { margin-right: .25em; }
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
    latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
    « propre au projet ». */
+/* hteiml ferme chaque section du corps par un filet plein et 3 em de blanc (.body > .div) : la
+   dernière, juste avant les notes, n'en a pas besoin (le pied de page a déjà son filet court). */
+#main #article .body > .div:last-child { border-bottom: none; padding-bottom: 0; }
+
 .document-views #article .footnotes::before {
   content: "";
   display: block;

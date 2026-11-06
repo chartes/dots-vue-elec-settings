@@ -134,8 +134,25 @@ h1.head {
 }
 /* fin design front  */
 
-/* apparat critique (note type="a") : lettre séparée de son texte (hteiml les colle) */
-#main #article .apparatus .note > a { margin-right: .25em; }
+/* apparat critique (note type="a") : même mise en page que les notes et que l'apparat des Édits ; fond gris de hteiml */
+.document-views #article .footnotes p.apparatus { margin-bottom: 1.25rem; line-height: 1.55; }
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques

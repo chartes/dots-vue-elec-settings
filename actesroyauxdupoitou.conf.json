@@ -18,6 +18,7 @@
     },
     "listSection": {
       "displayMode": "toc",
+      "displaySort": ["tome1", "tome2", "tome3", "tome4", "tome5", "tome6", "tome7", "tome8", "tome9", "tome10", "tome11", "tome12"],
       "openState": true,
       "browseButtonText": "Consulter les douze tomes",
       "singleResourceButtonText": "Accéder au document"

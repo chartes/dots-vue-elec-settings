@@ -22,6 +22,14 @@
   - its children (unless otherwise specified)
  =============================================================*/
 
+/* Suppression d'une règle de hteiml */
+header {
+  clear: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
 /* Design du cover
    Page de titre de l'édition (.titlestmt) : titre, éditeurs, date. Contenu centré dans
    une colonne de 42rem ; la taille du titre est fluide (clamp) entre 1.4rem et 2.1rem. */

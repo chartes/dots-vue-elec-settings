@@ -41,7 +41,8 @@
 
     "pageHeader": {
       "collectionAltTitle": "Éditions en ligne de l'École des chartes",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "collectionDescription": "",

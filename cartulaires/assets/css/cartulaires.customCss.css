@@ -410,6 +410,19 @@ span.note-inline {
   line-height: 1.45;
 }
 
+/* 2026-11-11 — tête latine de l'acte sans analyse (La Roche, et tout acte sans <argument>) : rendue en h1 dans header.front.
+   Même taille et même style que l'analyse de Chartres (html.css, .argument : 85 %, italique, interligne 140 %) ; pas de retrait
+   au-dessus (padding-top de html.css) ; le § de marque-page n'apparaît plus au survol. Les h1 des autres pages ne changent pas. */
+[collid="cartulaires"] #main #article header.front:not(:has(> .argument)) > h1.head {
+  font-size: 85%;
+  font-style: italic;
+  line-height: 140%;
+  padding-top: 0;
+}
+[collid="cartulaires"] #main #article header.front a.bookmark {
+  display: none;
+}
+
 /* 2026-10-28 — Hôtel-Dieu de Paris (Brièle) : le titre de l'acte est un titre d'éditeur, pas une rubrique :
    noir, gras, centré. Les autres cartulaires gardent la rubrique violette en italique. */
 [collid="cartulaires"] #main #article article[id^="HDPAR-HD_"] header.front > h1.head {
@@ -496,20 +509,20 @@ span.note-inline {
   position: absolute; left: -6.5rem; width: 6rem; margin: 0; float: none;
   display: inline-block; line-height: 1; text-indent: 0; font-style: normal;
 }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb {
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb {
   position: static; display: flex; flex-direction: row-reverse; justify-content: flex-start; align-items: center;
   gap: .35em; width: auto; height: auto; min-height: 0; padding: 0; margin: 0;
 }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-label { display: none; }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-label-text { display: inline; font-size: .75rem; color: #8a837c; white-space: nowrap; }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-thumbnail-parent {
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb-label { display: none; }
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb-label-text { display: inline; font-size: .75rem; color: #8a837c; white-space: nowrap; }
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb-thumbnail-parent {
   position: relative; display: inline-block; flex: none; width: 16px; height: 20px; margin: 0;
   background-position: center; background-size: contain; filter: brightness(.45);
 }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) .pb-thumbnail-parent img {
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb-thumbnail-parent img {
   position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
 }
-[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *):hover .pb-thumbnail-parent { filter: none; }
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *):hover .pb-thumbnail-parent { filter: none; }
 
 [collid="cartulaires"] #main #article .footnotes aside.note i,
 [collid="cartulaires"] .aside-noteref-content i {
@@ -582,6 +595,9 @@ span.note-inline {
   top: 0;
   right: 100%;
   margin: 0 1.6em 0 0;
+  /* 2026-11-11 : même repère que dans les actes (« {p. N} » + pictogramme 16 × 20, règles intérieures plus haut) :
+     la vignette de 60 × 77 px de dots-vue débordait sur l'entrée (index de NDCH-EG, remarque d'Olivier Canteaut). */
+  width: 6rem; line-height: 1; text-indent: 0; font-style: normal;
 }
 
 /* 2026-10-06 : index, entrée d'arrivée d'un renvoi (« Voir Boignevilla », lien

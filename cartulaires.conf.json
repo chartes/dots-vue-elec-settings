@@ -74,10 +74,6 @@
   },
   "aboutPageSettings": [
     {
-      "tabName": "Cartulaires d’Île-de-France",
-      "compName": "about1"
-    },
-    {
       "tabName": "Un corpus géographiquement homogène",
       "compName": "about2"
     },

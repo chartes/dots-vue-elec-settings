@@ -107,8 +107,7 @@
     }
   ],
   "searchConfig": {
-    "target": "fragment",
-    "include": { "levels": [0] },
+    "target": "resource",
     "facets": [
       {
         "key": "collections",

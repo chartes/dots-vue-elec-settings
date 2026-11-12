@@ -135,6 +135,8 @@
     }
   ],
   "searchConfig": {
+    "target": "fragment",
+    "include": { "citeTypes": ["partie", "acte"] },
     "facets": [
       {
         "key": "dublinCore.creator",

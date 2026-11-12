@@ -90,6 +90,8 @@
     }
   ],
   "searchConfig": {
+    "target": "fragment",
+    "include": { "citeTypes": ["article"] },
     "facets": [
       {
         "key": "dublinCore.contributor",

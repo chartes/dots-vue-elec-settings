@@ -14,10 +14,11 @@
       "customCollectionDescription": ""
     },
     "listSection": {
-      "displayMode": "toc",
+      "displayMode": "mixed",
       "cardCollectionPerPage": 30,
       "logo": "logo_cartulaires.png",
       "browseButtonText": "Découvrir la collection",
+      "displaySort": ["diocese-beauvais", "diocese-bourges", "diocese-chartres", "diocese-orleans", "diocese-paris", "diocese-rouen", "diocese-senlis", "diocese-soissons", "saint-denis-cartulaire-blanc", "cartulaires_index", "NDCH-EG", "NDMA-AB", "STEP-AB", "SMMI-AB", "SCOR-EG", "HDPAR-HD", "NDMT-AB", "NDRC-AB", "NDPA-EG", "NDPR-AB", "SAPC-AB", "SGDP-AB", "SGLY-PR", "SMPA-AB", "SMCP-PR", "SMPA-EG", "SSCO-AB", "SGPA-AB", "NDVC-AB", "HDPO-HD", "MAUB-AB", "SMPO-AB", "VNDP-AB", "SCHA-PR", "SCCO-AB", "cartulaire-blanc", "cartulaire-blanc-edition", "cartulaire-blanc-images", "cartulaire-blanc-index", "cartulaire-blanc-actes", "beaurain", "dugny", "pierrefitte", "rueil", "saint-martin", "tremblay", "ully"],
       "openState": true,
       "columns": [
         {

@@ -396,6 +396,11 @@ span.note-inline {
    (La Roche) : même rang typographique, suivie du même blanc */
 [collid="cartulaires"] #main #article header.front > .argument {
   margin: 0 0 var(--acte-blanc);
+  /* 2026-11-12 (Maxime, retours d'Olivier) : l'analyse alignée sur la tête de l'acte : même taille que le texte et
+     que « D'après a » (html.css la mettait à 85 %), italique. */
+  font-size: 1em;
+  font-style: italic;
+  line-height: 1.45;
 }
 [collid="cartulaires"] #main #article header.front > .argument > p:last-child {
   margin-bottom: 0;
@@ -404,19 +409,16 @@ span.note-inline {
 [collid="cartulaires"] #main #article header.front > h2.head,
 [collid="cartulaires"] #main #article header.front > h3.head {
   margin: 0 0 var(--acte-blanc);
-  font-size: 1.05em;
+  font-size: 1em;
   font-weight: 400;
   font-style: italic;
   line-height: 1.45;
 }
 
-/* 2026-11-11 — tête latine de l'acte sans analyse (La Roche, et tout acte sans <argument>) : rendue en h1 dans header.front.
-   Même taille et même style que l'analyse de Chartres (html.css, .argument : 85 %, italique, interligne 140 %) ; pas de retrait
-   au-dessus (padding-top de html.css) ; le § de marque-page n'apparaît plus au survol. Les h1 des autres pages ne changent pas. */
+/* 2026-11-11 — tête latine de l'acte sans analyse (La Roche, et tout acte sans <argument>) : rendue en h1 dans header.front ;
+   pas de retrait au-dessus (padding-top de html.css) ; le § de marque-page n'apparaît plus au survol. 2026-11-12 : taille
+   ramenée à celle de la règle commune (1 em, comme l'analyse), plus de 85 %. */
 [collid="cartulaires"] #main #article header.front:not(:has(> .argument)) > h1.head {
-  font-size: 85%;
-  font-style: italic;
-  line-height: 140%;
   padding-top: 0;
 }
 [collid="cartulaires"] #main #article header.front a.bookmark {
@@ -953,21 +955,21 @@ span.note-inline {
      et contenu, SINON le menu s'affiche vide ;
    — le `display` du contenu doit être porté par `[open]`, sinon la règle écrase aussi le
      masquage natif de l'état fermé et l'image reste visible en permanence. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio > summary,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio > summary,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration > summary { display: list-item; cursor: pointer; color: #3d0033; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio[open] > :not(summary),
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio[open] > :not(summary),
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] > :not(summary) { display: block; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio:not([open]) > :not(summary),
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio:not([open]) > :not(summary),
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration:not([open]) > :not(summary) { display: none; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio > summary { display: inline list-item; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio-libelle,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio > summary { display: inline list-item; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio-libelle,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-libelle { text-decoration: underline; text-underline-offset: 2px; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio[open],
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio[open],
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] { display: block; margin: .6rem 0 1rem; }
 /* L'image est un folio complet (~500 ko, 2 000 px de haut) : on la borne à la colonne de texte
    et on la laisse défiler dans son cadre plutôt que d'étirer la page. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio-img,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio-img,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-img {
   display: block; max-width: min(100%, 46rem); max-height: 80vh; width: auto; height: auto;
   margin: .5rem 0; border: 1px solid #d8d2c8; background: #fff; object-fit: contain;
@@ -997,20 +999,21 @@ span.note-inline {
 
 /* 2026-11-05 (Maxime : « j'aime bien la présentation » de l'index par pays étrangers des MH) : même mise en
    page — vedette en petites capitales, « ▸ N occurrences » dépliable dessous, un renvoi par ligne, filet
-   entre les entrées. La rubrique vit sur la page « Parcourir » de #cartulaire-blanc depuis le 19/10. */
-#cartulaire-blanc[collid] #main #article .sd-index-auteurs {
+   entre les entrées. La rubrique vit sur la page « Parcourir » de #cartulaire-blanc depuis le 19/10, dans #cartulaire-blanc-index
+   (« Index et recherche ») depuis le 12/11. */
+#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs {
   max-width: 62rem;
   margin-top: 2.5rem;
   padding-top: 1.4rem;
   border-top: 2px solid #5f004d;
   scroll-margin-top: 5rem;
 }
-#cartulaire-blanc[collid] #main #article .sd-index-auteurs-titre { margin: 0 0 .3rem; font-size: 1.15rem; }
-#cartulaire-blanc[collid] #main #article .sd-index-auteurs-chapeau { margin: 0 0 1rem; color: #4a4540; font-size: .9rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs-titre { margin: 0 0 .3rem; font-size: 1.15rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs-chapeau { margin: 0 0 1rem; color: #4a4540; font-size: .9rem; }
 
 /* Barre des initiales. */
-#cartulaire-blanc[collid] #main #article .sd-index-lettres { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.2rem; }
-#cartulaire-blanc[collid] #main #article .sd-index-lettre-lien {
+#cartulaire-blanc-index[collid] #main #article .sd-index-lettres { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.2rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien {
   min-width: 1.9rem;
   padding: .2rem .45rem;
   border: 1px solid #d8d0c8;
@@ -1020,11 +1023,11 @@ span.note-inline {
   text-align: center;
   text-decoration: none;
 }
-#cartulaire-blanc[collid] #main #article .sd-index-lettre-lien:hover,
-#cartulaire-blanc[collid] #main #article .sd-index-lettre-lien:focus { background: var(--fill-color); border-color: var(--fill-color); color: #fff; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien:hover,
+#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien:focus { background: var(--fill-color); border-color: var(--fill-color); color: #fff; }
 
-#cartulaire-blanc[collid] #main #article .sd-index-groupe { scroll-margin-top: 5rem; margin-bottom: 1.6rem; }
-#cartulaire-blanc[collid] #main #article .sd-index-initiale {
+#cartulaire-blanc-index[collid] #main #article .sd-index-groupe { scroll-margin-top: 5rem; margin-bottom: 1.6rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-initiale {
   margin: 1.6rem 0 .6rem;
   color: #5c3a1e;
   font-size: 1.7rem;
@@ -1032,15 +1035,15 @@ span.note-inline {
 }
 
 /* Entrées : modèle .mh-index-entree. */
-#cartulaire-blanc[collid] #main #article ul.sd-index-termes { margin: 0; padding: 0; list-style: none; }
-#cartulaire-blanc[collid] #main #article li.sd-index-terme {
+#cartulaire-blanc-index[collid] #main #article ul.sd-index-termes { margin: 0; padding: 0; list-style: none; }
+#cartulaire-blanc-index[collid] #main #article li.sd-index-terme {
   margin: 0;
   padding: .55rem .4rem .55rem 0;
   border-bottom: 1px solid #f0ebe5;
 }
-#cartulaire-blanc[collid] #main #article li.sd-index-terme:last-child { border-bottom: none; }
-#cartulaire-blanc[collid] #main #article li.sd-index-terme:hover { background: #faf8f6; }
-#cartulaire-blanc[collid] #main #article .sd-index-libelle {
+#cartulaire-blanc-index[collid] #main #article li.sd-index-terme:last-child { border-bottom: none; }
+#cartulaire-blanc-index[collid] #main #article li.sd-index-terme:hover { background: #faf8f6; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-libelle {
   display: block;
   color: #2b2b2b;
   font-weight: 600;
@@ -1049,8 +1052,8 @@ span.note-inline {
 }
 
 /* « N occurrences » : modèle .mh-index-renvois / .mh-index-occurrences. */
-#cartulaire-blanc[collid] #main #article .sd-index-details { margin: .15rem 0 0 1.2rem; }
-#cartulaire-blanc[collid] #main #article .sd-index-sommaire {
+#cartulaire-blanc-index[collid] #main #article .sd-index-details { margin: .15rem 0 0 1.2rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire {
   display: list-item;
   list-style: disclosure-closed;
   margin-left: .9rem;
@@ -1059,23 +1062,23 @@ span.note-inline {
   font-weight: 600;
   cursor: pointer;
 }
-#cartulaire-blanc[collid] #main #article .sd-index-details[open] > .sd-index-sommaire { list-style: disclosure-open; margin-bottom: .2rem; }
-#cartulaire-blanc[collid] #main #article .sd-index-sommaire:hover { color: #5f004d; }
-#cartulaire-blanc[collid] #main #article .sd-index-sommaire:focus-visible { outline: 2px solid #5f004d; outline-offset: 2px; }
-#cartulaire-blanc[collid] #main #article ul.sd-index-renvois {
+#cartulaire-blanc-index[collid] #main #article .sd-index-details[open] > .sd-index-sommaire { list-style: disclosure-open; margin-bottom: .2rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire:hover { color: #5f004d; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire:focus-visible { outline: 2px solid #5f004d; outline-offset: 2px; }
+#cartulaire-blanc-index[collid] #main #article ul.sd-index-renvois {
   margin: 0 0 .3rem 1.9rem;
   padding: 0;
   list-style: none;
   font-size: .9em;
 }
-#cartulaire-blanc[collid] #main #article ul.sd-index-renvois > li { margin: 0 0 .1rem; }
-#cartulaire-blanc[collid] #main #article a.sd-index-renvoi {
+#cartulaire-blanc-index[collid] #main #article ul.sd-index-renvois > li { margin: 0 0 .1rem; }
+#cartulaire-blanc-index[collid] #main #article a.sd-index-renvoi {
   color: #315ba7;
   font-weight: 500;
   text-decoration: underline dotted #9fb3d6;
   text-underline-offset: .18em;
 }
-#cartulaire-blanc[collid] #main #article a.sd-index-renvoi:hover { text-decoration-color: currentColor; }
+#cartulaire-blanc-index[collid] #main #article a.sd-index-renvoi:hover { text-decoration-color: currentColor; }
 
 
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area details.sd-folio { margin-bottom: 1rem; }  /* blanc entre le folio (libellé ou image) et le texte qui suit */
@@ -1321,8 +1324,10 @@ span.note-inline {
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding: 0;
-  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
+  /* 2026-11-12 (Maxime) : apparat dans un cadre grisé, séparé des notes, comme les Actes royaux du Poitou et les
+     Édits (fond de html.css de hteiml, posé ici : il ne vaut que pour section.footnotes). Remplace le fond retiré le 05/11. */
+  padding: 1em;
+  background-color: #f3f4f6;
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -1493,7 +1498,7 @@ span.note-inline {
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.notebottom):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
@@ -1540,7 +1545,7 @@ span.note-inline {
 
 /* 2026-10-28 : table des actes du Cartulaire blanc en tableau filtrable (cartulaires-saint-denis.xsl) : en-têtes longs
    (« Édition de la notice dans l'inventaire ») sur plusieurs lignes, sinon le tableau déborde de l'article. */
-#cartulaire-blanc[collid] #main #article table.tf-tableau button.tf-tri { white-space: normal; }
+#cartulaire-blanc-actes[collid] #main #article table.tf-tableau button.tf-tri { white-space: normal; }
 
 /* Relecture du 30/10 (page de comparaison avant/après) : leçon fautive conservée : romain + « (sic) » (proposition B) */
 [collid="cartulaires"] #article em.sic { font-style: normal; }
@@ -1551,3 +1556,8 @@ span.note-inline {
 @media (max-width: 760px) {
   [collid="cartulaires"] #main #article table.table { display: block; max-width: 100%; overflow-x: auto; }
 }
+
+/* 2026-11-12 (Maxime) : numéros des notes, au pied de l'acte comme dans le panneau « Afficher les notes » (t¹) : violet du
+   site, pas le bleu des liens. */
+[collid="cartulaires"] #main a.notebottom,
+[collid="cartulaires"] #main .aside-noteref-content a.notebottom { color: var(--fill-color); }

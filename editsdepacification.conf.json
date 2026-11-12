@@ -1,8 +1,8 @@
 {
-  "collectionId": "edits",
+  "collectionId": "editsdepacification",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Édits"
+      "collectionShortTitle": "Édits de pacification"
     },
     "pageHeader": {
       "collectionAltTitle": "Édits de pacification",
@@ -43,34 +43,45 @@
     "displayLeftToc": true
   },
   "aboutPageSettings": [],
-  "collectionCustomCss": "edits",
+  "collectionCustomCss": "editsdepacification",
   "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",
     "schema:editor",
-    "dct:created",
-    "dct:source",
-    "dct:language",
-    "dct:publisher",
+    "schema:contributor",
+    "schema:isBasedOn",
+    "schema:publisher",
     "dct:issued",
     "dct:bibliographicCitation",
+    "dct:language",
+    "dct:coverage",
     "dct:license",
-    "dct:rights"
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:encoding",
+    "dcat:accessURL"
   ],
   "metadataRename": {
     "dct:title": "Titre",
     "schema:editor": "Édition scientifique",
-    "dct:created": "Date du document",
-    "dct:source": "Source",
-    "dct:language": "Langue",
-    "dct:publisher": "Publié par",
+    "schema:contributor": "Contributeurs",
+    "schema:isBasedOn": "Source",
+    "schema:publisher": "Éditeur",
     "dct:issued": "Date de publication",
-    "dct:bibliographicCitation": "Comment citer ce document",
+    "dct:bibliographicCitation": "Citer",
+    "dct:language": "Langues",
+    "dct:coverage": "Période",
     "dct:license": "Licence",
-    "dct:rights": "Mentions de droits"
+    "dct:rights": "Mentions de droits",
+    "schema:funder": "Financement",
+    "dct:identifier": "Identifiant",
+    "schema:encoding": "Exports",
+    "dcat:accessURL": "URL"
   },
   "excludeMetadata": {
-    "onlyDeclared": true
+    "onlyDeclared": true,
+    "fields": []
   },
   "customRoutes": [
     {

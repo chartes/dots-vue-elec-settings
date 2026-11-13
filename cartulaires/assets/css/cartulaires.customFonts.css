@@ -3,12 +3,12 @@
    Sert ici aux images que les TEI appellent dans le public/ de dots-vue, absent du dev : chaque <img>
    est remplacée par sa copie dans les settings (content: url(), vérifié Chrome et Firefox). */
 
-/* Cartes de situation des notices : figure produite par cartulaires.xsl (image + légende = source ; Cassini : lien
-   Géoportail sur l'image et la légende). Image fluide : jamais plus large que la colonne, ni que sa taille réelle. */
-figure.cartu-carte { margin: 1em 0; max-width: 660px; }
-.document-views figure.cartu-carte img { display: block; width: auto; max-width: 100%; height: auto; }   /* dots-vue : .document-views figure img { width: 100% } agrandissait les Cassini (640 px) */
-figure.cartu-carte a:hover img { outline: 2px solid currentColor; outline-offset: 2px; }
-figure.cartu-carte figcaption { margin-top: .35em; font-size: .9em; font-style: italic; }
+/* Cartes de situation des notices : figure produite par cartulaires.xsl (image, puis la légende = source ; Cassini : lien
+   Géoportail sur la légende). Sans le cadre centré de hteiml (html.css : figure { border; padding; text-align: center }).
+   Image fluide : jamais plus large que la colonne, ni que sa taille réelle. */
+figure.cartu-carte { margin: 1em 0; padding: 0; border: 0; background: none; text-align: left; max-width: 660px; }
+.document-views figure.cartu-carte img { display: block; width: auto; max-width: 100%; height: auto; padding: 0; }   /* dots-vue : .document-views figure img { width: 100% } agrandissait les Cassini (640 px) */
+figure.cartu-carte figcaption { margin-top: .3em; padding: 0; text-align: left; }
 
 /* Plans de situation des notices (Paris) */
 img[src$="/images/cartulaires/Montmartre.png"] { content: url("../images/Montmartre.png"); }

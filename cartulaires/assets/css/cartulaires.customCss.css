@@ -2,9 +2,9 @@
    1. Couleurs du corpus : celles de la conf (aucune règle ici)
    2. Historique ÉLEC : aucun
    3. Blocs hteiml génériques : notes de bas de page, bibliographie (identiques d'un corpus à l'autre)
-   4. Propre au projet : notes en ligne et apparat, présentation des actes
+   4. Propre au projet : vignettes de page, notes en ligne et apparat, présentation des actes
       (demandes d'Olivier Canteaut), index, tableaux et pages Édition, Cartulaire blanc de Saint-Denis
-   5. Mécanismes communs dots-vue : sommaire (D11), page de titre, tableau filtrable,
+   5. Mécanismes communs dots-vue : volet Mirador, sommaire (D11), page de titre, tableau filtrable,
       arrivée sur une ancre
    Retirés le 19/10 : tri de la liste des actes par boutons radio (W1) et page de groupe (W2), morts
    depuis la page Édition au module tableau filtrable ; ancienne page de garde (garde.xsl) ; ancienne
@@ -23,21 +23,11 @@
 /* 2026-10-22 : l'apparat des cartulaires est du texte libre (notes à lettre regroupées par la XSL) : pas
    l'espace que le bloc commun ajoute après chaque élément (« B , Bituricensis C . »). */
 [collid="cartulaires"] #main #article .footnotes .apparatus span.note *:not(a)::after { content: none; }    /* même pas que les notes */
-/* 2026-10-28 (Maxime, SMCP-PR_0003 : « les barres qui entourent le champ de l'apparat font bizarre ») :
-   pas de filet vertical devant les lettres de l'apparat. */
-[collid="cartulaires"] #main #article .footnotes .apparatus span.note { border-left: 0; }
 /* 2026-10-28 : note sans appel rendue à sa place (« (Collacio fit) », « (Signa) », cartulaires.xsl, p.note-place) :
    petite, en italique, sans retrait, comme une mention de la copie. */
 #main #article p.note-place { font-size: .9em; font-style: italic; text-indent: 0; margin: .4em 0; color: #555; }
-/* Filet court entre l'apparat et les notes, comme celui qui ouvre le pied de page. */
-[collid="cartulaires"] #main #article .footnotes p.apparatus:not(:last-child)::after {
-  content: "";
-  display: block;
-  width: 33.333%;
-  height: 1px;
-  margin: 1.25rem 0 1rem;
-  background: #e4e4e4;
-}
+/* 2026-11-05 (Maxime : apparat « sur le modèle des chroniques latines », « supprimer la barre du bas ») :
+   filet sous l'apparat et suppression du trait vertical (28/10) retirés ; le bloc commun s'applique. */
 /* Notes plus près du texte (modèle : Du Bourg) : sans la section.back vide de hteiml (36 px) ni le
    grand retrait du pied de page. */
 [collid="cartulaires"] #main #article section.back:empty { display: none; }
@@ -161,7 +151,7 @@
 #main #article .tf-tableau thead th {
   padding: 0;
   border: 0;
-  border-bottom: 2px solid var(--fill-color, #8f0e21);
+  border-bottom: 2px solid var(--fill-color, #5f004d);
   background: #f4f1ee;
   vertical-align: bottom;
 }
@@ -189,11 +179,11 @@
   font-size: .95em;
   letter-spacing: 0;
 }
-#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: var(--fill-color, #8f0e21); font-size: .75em; }
-#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: var(--fill-color, #8f0e21); font-size: .75em; }
+#main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri::after { content: "\25B2"; color: var(--fill-color, #5f004d); font-size: .75em; }
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri::after { content: "\25BC"; color: var(--fill-color, #5f004d); font-size: .75em; }
 #main #article .tf-tableau button.tf-tri:hover,
 #main #article .tf-tableau th[aria-sort="ascending"] button.tf-tri,
-#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: var(--fill-color, #8f0e21); }
+#main #article .tf-tableau th[aria-sort="descending"] button.tf-tri { color: var(--fill-color, #5f004d); }
 #main #article .tf-tableau button.tf-tri:hover { background: #ece7e2; }
 #main #article .tf-tableau button.tf-tri:focus-visible { outline: 2px solid #315ba7; outline-offset: -2px; }
 #main #article .tf-tableau td {
@@ -207,7 +197,7 @@
 #main #article .tf-tableau tbody tr:hover > td { background: #f3efe9; }
 #main #article .tf-tableau tbody tr:target > td:first-child,
 #main #article .tf-tableau tbody tr.dots-target > td:first-child,
-#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); }
+#main #article .tf-tableau tbody tr.tf-vise > td:first-child { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); }
 #main #article .tf-tableau tbody tr.tf-vise > td { background: #fbf3d5; }
 #main #article .tf-tableau .tf-vide { color: #c4bdb6; }
 #main #article .tf-tableau tr[hidden] { display: none !important; }
@@ -260,6 +250,32 @@
   #main #article .tf-tableau thead { position: static; }
 }
 
+
+/* Cartulaires : les liens <pb facs> et les témoins @facs sont convertis en
+   composants PageBreak. Comme Du Cange, on garde le marqueur générique de
+   PageBreak.vue — une ICÔNE média cliquable (image en opacity:0 + icône en
+   fond) — et PAS la preview de l'image. Le clic ouvre le folio/manuscrit dans
+   Mirador. (On ne redéfinit donc plus .pb-thumbnail-parent/.pb-thumbnail :
+   les valeurs par défaut du composant suffisent.) */
+
+/* PageBreak est prévu à l'origine comme une petite icône marginale, donc son
+   article est positionné en absolu. Avec une véritable vignette, ce placement
+   peut la mettre sous le lien du folio suivant : le clic part alors vers #pb…
+   au lieu de Mirador. Les Cartulaires la conservent dans le flux du texte. */
+.pb-component {
+  display: inline-block;
+  float: none;
+  margin: 0.5rem 0.75rem 0.5rem 0;
+  vertical-align: middle;
+}
+
+.pb-component .pb {
+  position: static;
+}
+
+.pb-component .pb-label {
+  display: none;
+}
 
 /* Vraies notes éditoriales inline (note sans @n ni @xml:id) : rendues en
    place dans le texte, police plus petite, sans appel de note ni note de bas
@@ -380,6 +396,11 @@ span.note-inline {
    (La Roche) : même rang typographique, suivie du même blanc */
 [collid="cartulaires"] #main #article header.front > .argument {
   margin: 0 0 var(--acte-blanc);
+  /* 2026-11-12 (Maxime, retours d'Olivier) : l'analyse alignée sur la tête de l'acte : même taille que le texte et
+     que « D'après a » (html.css la mettait à 85 %), italique. */
+  font-size: 1em;
+  font-style: italic;
+  line-height: 1.45;
 }
 [collid="cartulaires"] #main #article header.front > .argument > p:last-child {
   margin-bottom: 0;
@@ -388,10 +409,23 @@ span.note-inline {
 [collid="cartulaires"] #main #article header.front > h2.head,
 [collid="cartulaires"] #main #article header.front > h3.head {
   margin: 0 0 var(--acte-blanc);
-  font-size: 1.05em;
+  font-size: 1em;
   font-weight: 400;
   font-style: italic;
   line-height: 1.45;
+}
+
+/* 2026-11-11 — tête latine de l'acte sans analyse (La Roche, et tout acte sans <argument>) : rendue en h1 dans header.front ;
+   pas de retrait au-dessus (padding-top de html.css) ; le § de marque-page n'apparaît plus au survol. 2026-11-12 : taille
+   ramenée à celle de la règle commune (1 em, comme l'analyse), plus de 85 %. */
+[collid="cartulaires"] #main #article header.front:not(:has(> .argument)) > h1.head {
+  padding-top: 0;
+  /* 2026-11-13 (Maxime) : même présentation que l'analyse (Chartres) : couleur du texte, justifiée */
+  color: #333 !important; /* dots-vue impose le violet aux h1 en !important */
+  text-align: justify;
+}
+[collid="cartulaires"] #main #article header.front a.bookmark {
+  display: none;
 }
 
 /* 2026-10-28 — Hôtel-Dieu de Paris (Brièle) : le titre de l'acte est un titre d'éditeur, pas une rubrique :
@@ -450,11 +484,50 @@ span.note-inline {
   font-weight: 600;
 }
 
-/* Repère de positionnement : #article, qui commence au bord du texte. */
+/* 2026-10-22 : pictogramme du témoin (choix de Maxime, après l'œil puis la miniature). L'image de la page
+   de l'édition est portée par le témoin édité (witness[@ana='edited']/@facs, plus d'image sur les pb du
+   texte). dots-vue la rend en aside.pb-component : on garde son pictogramme « image » (icone-media.svg,
+   24 px, image transparente posée dessus pour le clic), mais au bout de la ligne du témoin, dans le flux,
+   au lieu de la boîte flottante de 60 × 30 px. Le clic ouvre la page dans Mirador. */
+[collid="cartulaires"] #main #article li.witness > aside.pb-component {
+  display: inline-block; float: none; position: static;
+  margin: 0 0 0 .4em; vertical-align: middle; line-height: 0;
+}
+[collid="cartulaires"] #main #article li.witness > aside.pb-component .pb { position: static; display: inline-block; width: auto; padding: 0; margin: 0; }
+[collid="cartulaires"] #main #article li.witness > aside.pb-component .pb-label, [collid="cartulaires"] #main #article li.witness > aside.pb-component .pb-label-text { display: none; }
+[collid="cartulaires"] #main #article li.witness > aside.pb-component .pb-thumbnail-parent {
+  /* 2026-10-22 : le SVG fait 24 × 30 px ; dans une boîte de 24 × 24 il était rogné en haut et en bas.
+     Boîte aux proportions du pictogramme, un peu plus petite, et gris foncé pour qu'on la voie. */
+  position: relative; display: inline-block; width: 16px; height: 20px; margin: 0;
+  background-position: center; background-size: contain; filter: brightness(.45);
+}
+[collid="cartulaires"] #main #article li.witness > aside.pb-component .pb-thumbnail-parent img {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
+}
+[collid="cartulaires"] #main #article li.witness > aside.pb-component:hover .pb-thumbnail-parent { filter: none; }
+/* 2026-10-28 (Maxime, SMPA-EG_0007, STEP-AB_0001, HDPO-HD_0010 : « l'icône des images se promène », « des blancs
+   dans le texte », « la page à gauche, et la vignette à gauche aussi ») : saut de page du texte sorti du flux, dans
+   la marge de gauche : « {p. N} » puis le pictogramme des témoins (16 × 20 px, gris foncé). Dans la ligne, la
+   boîte de 60 × 77 px doublait la hauteur de la ligne qui la portait. Repère : #article, qui commence au bord du texte. */
 [collid="cartulaires"] #main #article { position: relative; }
-
-
-
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, li[id] > *, tr.cartu-tm-pb *) {
+  position: absolute; left: -6.5rem; width: 6rem; margin: 0; float: none;
+  display: inline-block; line-height: 1; text-indent: 0; font-style: normal;
+}
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb {
+  position: static; display: flex; flex-direction: row-reverse; justify-content: flex-start; align-items: center;
+  gap: .35em; width: auto; height: auto; min-height: 0; padding: 0; margin: 0;
+}
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb-label { display: none; }
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb-label-text { display: inline; font-size: .75rem; color: #8a837c; white-space: nowrap; }
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb-thumbnail-parent {
+  position: relative; display: inline-block; flex: none; width: 16px; height: 20px; margin: 0;
+  background-position: center; background-size: contain; filter: brightness(.45);
+}
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *) .pb-thumbnail-parent img {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; opacity: 0; cursor: pointer;
+}
+[collid="cartulaires"] #main #article aside.pb-component:not(li.witness > *, tr.cartu-tm-pb *):hover .pb-thumbnail-parent { filter: none; }
 
 [collid="cartulaires"] #main #article .footnotes aside.note i,
 [collid="cartulaires"] .aside-noteref-content i {
@@ -515,6 +588,22 @@ span.note-inline {
 [collid="cartulaires"] #main #article ul.index > li > ul > li { margin-bottom: .35rem; }
 /* Lettre de l'index (p.list de hteiml, sans style) : en intertitre, comme un h2 des notices. */
 [collid="cartulaires"] #main #article div.index > p.list:first-child { font-size: 140%; font-weight: 900; line-height: 1.3; margin: 0 0 1rem; text-indent: 0; }
+
+/* 2026-10-06 : index, vignette de page (pb → aside.pb-component), remontée en tête
+   de l'entrée par la XSL : posée dans la marge de gauche, devant la puce. Sur une
+   ligne à elle, elle prenait la puce (qui s'aligne sur la première ligne). */
+[collid="cartulaires"] #main #article li[id]:has(> aside.pb-component) {
+  position: relative;
+}
+[collid="cartulaires"] #main #article li[id] > aside.pb-component {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin: 0 1.6em 0 0;
+  /* 2026-11-11 : même repère que dans les actes (« {p. N} » + pictogramme 16 × 20, règles intérieures plus haut) :
+     la vignette de 60 × 77 px de dots-vue débordait sur l'entrée (index de NDCH-EG, remarque d'Olivier Canteaut). */
+  width: 6rem; line-height: 1; text-indent: 0; font-style: normal;
+}
 
 /* 2026-10-06 : index, entrée d'arrivée d'un renvoi (« Voir Boignevilla », lien
    depuis un acte) : fond jaune pâle passager, comme Montferrand (comptes, § 7) :
@@ -814,7 +903,6 @@ span.note-inline {
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article header.front > .tei-tradition:last-child { margin-bottom: 0; }  /* cadre de hteiml (header), comme les autres cartulaires */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-title { text-align: center; font-size: 1.2rem; font-weight: 700; line-height: 1.2; margin: 0 0 .24rem; }  /* comme le n° d'acte des cartulaires (.docNum) */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-docDate { text-align: center; font-size: 1rem; line-height: 1.4; margin: 0 0 1.5rem; text-indent: 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary-refurl { font-size: .85rem; line-height: 1.4; text-align: left; margin: 0 0 1rem; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary { font-size: .85rem; line-height: 1.4; text-align: justify; font-style: italic; margin: 0 0 1.5rem; }  /* comme l'analyse (.argument) */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-summary p { text-indent: 0; margin: 0; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-doc-body hr { display: none; }  /* les cartulaires séparent les blocs par des blancs, sans filet */
@@ -822,8 +910,7 @@ span.note-inline {
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition p { text-indent: 0; margin: .3em 0; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-tradition .listWit-head { margin-bottom: 0; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-label { font-style: italic; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-notes { font-size: .85rem; line-height: 1.4; margin: 0 0 1.5rem; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments { font-size: .85rem; line-height: 1.4; margin: 0 0 1.5rem; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments { margin-top: 1.5rem; }  /* blanc sous le cadre de l'en-tête */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-comments p { text-align: justify; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .tei-transcription { font-size: 1rem; line-height: 1.4; text-align: justify; margin-top: 0; }  /* comme le texte des actes (p.p) */
@@ -844,128 +931,25 @@ span.note-inline {
    ================================================================== */
 
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] {
-  --sd-legacy-red:#A73136;
+  --sd-legacy-red:#5f004d;
   --sd-legacy-gray:#E8E8E8;
   --sd-legacy-link:#139EDF;
   --sd-legacy-dark:#4A4A4A;
   --sd-legacy-border:#CECECE;
 }
-/* Pages éditoriales récupérées */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-part,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-subpart,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page {
-  max-width:76rem;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-part-title {
-  margin-top:2rem;
-  padding:.45rem .65rem;
-  background:var(--sd-legacy-gray);
-  border-left:4px solid var(--sd-legacy-red);
-  color:var(--sd-legacy-dark);
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-subpart-title {
-  margin-top:1.5rem;
-  color:var(--sd-legacy-red);
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page {
-  margin-top:1rem;
-  margin-bottom:2.25rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-page-title {
-  color:var(--sd-legacy-dark);
-  font-size:1.65rem;
-  border-bottom:1px solid var(--sd-legacy-border);
-  padding-bottom:.35rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-legacy-h2 {
-  color:var(--sd-legacy-dark);
-  font:700 1.25rem/1.3 Arial,Helvetica,sans-serif;
-  margin:1.6rem 0 .7rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-legacy-h3 {
-  color:var(--sd-legacy-red);
-  font:700 1.05rem/1.3 Arial,Helvetica,sans-serif;
-  margin:1.3rem 0 .6rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page a {
-  color:var(--sd-legacy-link);
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page table {
-  display:block;
-  overflow-x:auto;
-  width:100%;
-  border-collapse:collapse;
-  font-size:.92rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page td,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page th {
-  border:1px solid #d6d6d6;
-  padding:.4rem .5rem;
-  vertical-align:top;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page tr:nth-child(even) {
-  background:#fafafa;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-static-page .date {
-  font-size:.9em;
-  color:#666;
-}
 
 /* 2026-10-05 — Mises en forme du TEI sans règle jusqu'ici (audit du 05/10), reprises de la
    feuille de l'ancien site (Pleade, theme/css/module-eadeac.css) :
-   - hi[@rend="cite"] → span.cite : <cite> sur l'ancien site, sans règle, donc italique ;
    - p[@rend="smaller"] → p.smaller : « .smaller { font-size: 90% } » ;
-   - list[@rend="encadré"] → ul.encadré : bloc encadré (90 %, filet noir, marges 2em) ;
    - emph[@rend="sup"] → em.sup : <sup> droit sur l'ancien site (« sup { vertical-align: top;
      font-size: 80% } ») ; hteiml le sortait en exposant italique. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) span.cite { font-style: italic; }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) p.smaller { font-size: 90%; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) ul.encadré {
-  font-size: 90%; border: 1px solid black; margin-left: 2em; margin-right: 2em;
-  padding: .5em; list-style-position: inside; line-height: 130%;
-}
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) em.sup { font-style: normal; font-size: .75em; line-height: 0; vertical-align: super; }  /* exposant ordinaire, comme le <sup> de hteiml */
 
 /* Recherche dots-cli-es */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search {
-  margin:1.4rem 0 2rem;
-  padding:1rem 1.1rem 1.2rem;
-  border:1px solid var(--sd-legacy-border);
-  border-top:5px solid var(--sd-legacy-red);
-  background:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-}
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search h2 {
-  margin:.1rem 0 1rem;
-  padding:0;
-  border:0;
-  background:none;
-  color:var(--sd-legacy-red);
-  font-size:1.35rem;
-  font-weight:700;
-}
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-search-help {
-  margin:.75rem 0 0;
-  font-size:.9rem;
-  color:#666;
-}
 /* autopilote 2026-09-11 : images servies depuis /images/saint-denis/ */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .sd-graphic { max-width: 100%; height: auto; display: block; margin: .5em 0; }
 
 /* ==== Images rapatriées le 2026-09-12 (folios du Cartulaire blanc, illustrations de chapitre) ====
    Les 831 liens vers la visionneuse de l'ancien site sont devenus des <details> qui déplient
@@ -974,26 +958,53 @@ span.note-inline {
      et contenu, SINON le menu s'affiche vide ;
    — le `display` du contenu doit être porté par `[open]`, sinon la règle écrase aussi le
      masquage natif de l'état fermé et l'image reste visible en permanence. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio > summary,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration > summary { display: list-item; cursor: pointer; color: #7a1f1a; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio[open] > :not(summary),
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio > summary,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration > summary { display: list-item; cursor: pointer; color: #3d0033; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio[open] > :not(summary),
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] > :not(summary) { display: block; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio:not([open]) > :not(summary),
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio:not([open]) > :not(summary),
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration:not([open]) > :not(summary) { display: none; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio > summary { display: inline list-item; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio-libelle,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio > summary { display: inline list-item; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio-libelle,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-libelle { text-decoration: underline; text-underline-offset: 2px; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio[open],
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio[open],
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] { display: block; margin: .6rem 0 1rem; }
 /* L'image est un folio complet (~500 ko, 2 000 px de haut) : on la borne à la colonne de texte
    et on la laisse défiler dans son cadre plutôt que d'étirer la page. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-folio-img,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio-img,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-img {
   display: block; max-width: min(100%, 46rem); max-height: 80vh; width: auto; height: auto;
   margin: .5rem 0; border: 1px solid #d8d2c8; background: #fff; object-fit: contain;
 }
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-pdf::after { content: ""; }
+/* 2026-11-13 (Maxime) : folio dont le libellé est une vignette (img.sd-graphic, Présentation du Cartulaire blanc) : en bloc,
+   sinon le texte qui suit repart à droite de la vignette au lieu d'en dessous. Les libellés texte restent en ligne. */
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio:has(> summary img.sd-graphic) { display: block; }
+/* 2026-11-13 (Maxime) : Table des chapitres du Cartulaire blanc : pages (« ▸ 227-237 ») sur une ligne dans la colonne étroite. */
+#cartulaire-blanc[collid] .document-area table .sd-folio > summary { white-space: nowrap; }
+/* 2026-11-13 (Maxime) : « Images du Cartulaire blanc » (un tome = 700 à 1 000 folios) : grille d'étiquettes au lieu d'un
+   bloc de libellés collés ; l'image dépliée et les titres de chapitre prennent toute la largeur. */
+#cartulaire-blanc-images[collid] .document-area article.sd-static-page,
+#cartulaire-blanc-images[collid] .document-area section.sd-subpart {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: .4rem; align-items: start;
+}
+#cartulaire-blanc-images[collid] .document-area :is(article.sd-static-page, section.sd-subpart) > :is(h1, h2, h3, section.sd-subpart, details[open]) {
+  grid-column: 1 / -1;
+}
+#cartulaire-blanc-images[collid] .document-area section.sd-subpart { margin-top: 1.2rem; }
+#cartulaire-blanc-images[collid] .document-area .sd-subpart-title { margin: 0 0 .2rem; }
+#cartulaire-blanc-images[collid] .document-area details.sd-pb { display: block; margin: 0; }
+#cartulaire-blanc-images[collid] .document-area details.sd-pb > summary {
+  display: block; list-style: none; padding: .3rem .4rem; border: 1px solid #d8d2c8; border-radius: 4px;
+  background: #faf8f5; text-align: center; font-size: .9em; font-variant-numeric: tabular-nums; line-height: 1.3;
+}
+#cartulaire-blanc-images[collid] .document-area details.sd-pb > summary::-webkit-details-marker { display: none; }
+#cartulaire-blanc-images[collid] .document-area details.sd-pb > summary .sd-folio-libelle { text-decoration: none; }
+#cartulaire-blanc-images[collid] .document-area details.sd-pb > summary:hover { border-color: var(--fill-color, #5f004d); background: #f3edf2; }
+#cartulaire-blanc-images[collid] .document-area details.sd-pb[open] > summary {
+  display: inline-block; background: var(--fill-color, #5f004d); border-color: var(--fill-color, #5f004d); color: #fff;
+}
 /* ==== fin images rapatriées ==== */
 
 /* ==== 2026-09-14 (agentsd) : visionneuses de série sans équivalent local ====
@@ -1001,29 +1012,7 @@ span.note-inline {
    désignaient aucune image : ils ne sont plus des liens. On ne les déguise pas en liens morts
    (pas de bleu, pas de soulignement plein) mais on signale qu'il y a quelque chose à savoir,
    l'explication étant dans l'intitulé de survol posé par la feuille XSL. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-visionneuse-absente {
-  color: inherit;
-  cursor: help;
-  border-bottom: 1px dotted #9aa8ae;
-}
 /* ==== fin visionneuses de série ==== */
-
-/* ==== D21 (2026-09-12) : Inventaire général des chartes ==== */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-section { margin: 1.4rem 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-section-info { margin: .2rem 0; color: #555; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-libelle { font-weight: 700; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-notice { margin: 1.1rem 0; padding: .8rem 1rem; border-left: 3px solid #d8d2c8; background: #fcfbfa; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-champs { display: grid; grid-template-columns: minmax(9rem, auto) 1fr; gap: .15rem .9rem; margin: .4rem 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .isd-champs dt { color: #555; font-size: .9rem; }
-/* ==== fin Inventaire ==== */
-/* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
-   l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :
-   <p class="isd-rubrique">. Taille, graisse et couleur de l'ancienne règle des titres h1-h3 de notice (retirée le
-   2026-10-09 : plus aucun titre dans les notices), sans retrait d'alinéa. Sélecteur avec l'id :
-   le socle D12 fixe la taille des titres par `#article h1`, qui l'emporte sur deux classes. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area #article:not(.bottom-toc) .isd-notice p.isd-rubrique {
-  margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555; text-indent: 0;
-}
 
 /* ============================================================================
    D43 (2026-09-24) — Index des auteurs d'actes (Cartulaire blanc, Inventaire).
@@ -1038,167 +1027,89 @@ span.note-inline {
    autres corpus de l'application.
    ============================================================================ */
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs {
-  margin-top: 2.5rem;
-  padding-top: 1.4rem;
-  border-top: 2px solid var(--sd-legacy-red);
-  /* Le lien historique de la page mène ici : ne pas se caler sous l'en-tête fixe. */
-  scroll-margin-top: 5rem;
+/* 2026-11-05 (Maxime : « j'aime bien la présentation » de l'index par pays étrangers des MH) : même mise en
+   page — vedette en petites capitales, « ▸ N occurrences » dépliable dessous, un renvoi par ligne, filet
+   entre les entrées. La rubrique vit sur la page « Parcourir » de #cartulaire-blanc depuis le 19/10, dans #cartulaire-blanc-index
+   (« Index et recherche ») depuis le 12/11. */
+#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs {
+  max-width: 62rem;
+  scroll-margin-top: 5rem;  /* 2026-11-13 : plus de filet violet au-dessus (l'index a sa propre page depuis le 12/11) */
 }
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs-titre {
-  margin: 0 0 .3rem;
-  font-size: 1.15rem;
+#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs-titre {
+  margin: 0 0 1rem; font-size: 160%; line-height: 115%; color: var(--fill-color, #5f004d) !important;  /* 2026-11-13 : titre de page, violet */
 }
+#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs-chapeau { margin: 0 0 1rem; color: #4a4540; font-size: .9rem; }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-auteurs-chapeau {
-  margin: 0 0 1rem;
-  color: var(--sd-legacy-dark);
-  font-size: .9rem;
-}
-
-/* Barre des initiales. Même vocabulaire de pastilles que la navigation de
-   description, pour que la page reste d'une seule pièce. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettres {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .35rem;
-  margin-bottom: 1.2rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien {
+/* Barre des initiales. */
+#cartulaire-blanc-index[collid] #main #article .sd-index-lettres { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.2rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien {
   min-width: 1.9rem;
   padding: .2rem .45rem;
-  border: 1px solid var(--sd-legacy-border);
+  border: 1px solid #d8d0c8;
   border-radius: 3px;
   color: var(--fill-color);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .85rem;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
 }
+#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien:hover,
+#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien:focus { background: var(--fill-color); border-color: var(--fill-color); color: #fff; }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien:hover,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-lettre-lien:focus {
-  background: var(--fill-color);
-  border-color: var(--fill-color);
-  color: #fff;
+#cartulaire-blanc-index[collid] #main #article .sd-index-groupe { scroll-margin-top: 5rem; margin-bottom: 1.6rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-initiale {
+  margin: 1.6rem 0 .6rem;
+  color: #5c3a1e;
+  font-size: 1.7rem;
+  letter-spacing: .05em;
 }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-groupe {
-  /* L'ancre d'une initiale ne doit pas se caler sous l'en-tête fixe. */
-  scroll-margin-top: 5rem;
-  margin-bottom: 1.4rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-initiale {
-  margin: 0 0 .35rem;
-  padding-bottom: .15rem;
-  border-bottom: 1px solid var(--sd-legacy-border);
-  color: var(--sd-legacy-red);
-  font-size: 1rem;
-  letter-spacing: .06em;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article ul.sd-index-termes {
+/* Entrées : modèle .mh-index-entree. */
+#cartulaire-blanc-index[collid] #main #article ul.sd-index-termes { margin: 0; padding: 0; list-style: none; }
+#cartulaire-blanc-index[collid] #main #article li.sd-index-terme {
   margin: 0;
+  padding: .55rem .4rem .55rem 0;
+  border-bottom: 1px solid #f0ebe5;
+}
+#cartulaire-blanc-index[collid] #main #article li.sd-index-terme:last-child { border-bottom: none; }
+#cartulaire-blanc-index[collid] #main #article li.sd-index-terme:hover { background: #faf8f6; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-libelle {
+  display: block;
+  color: #2b2b2b;
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: .02em;
+}
+
+/* « N occurrences » : modèle .mh-index-renvois / .mh-index-occurrences. */
+#cartulaire-blanc-index[collid] #main #article .sd-index-details { margin: .15rem 0 0 1.2rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire {
+  display: list-item;
+  list-style: disclosure-closed;
+  margin-left: .9rem;
+  color: #585858;
+  font-size: .85em;
+  font-weight: 600;
+  cursor: pointer;
+}
+#cartulaire-blanc-index[collid] #main #article .sd-index-details[open] > .sd-index-sommaire { list-style: disclosure-open; margin-bottom: .2rem; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire:hover { color: #5f004d; }
+#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire:focus-visible { outline: 2px solid #5f004d; outline-offset: 2px; }
+#cartulaire-blanc-index[collid] #main #article ul.sd-index-renvois {
+  margin: 0 0 .3rem 1.9rem;
   padding: 0;
   list-style: none;
+  font-size: .9em;
 }
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article li.sd-index-terme {
-  margin: 0;
-  padding: 0;
-  border-bottom: 1px dotted #ddd;
+#cartulaire-blanc-index[collid] #main #article ul.sd-index-renvois > li { margin: 0 0 .1rem; }
+#cartulaire-blanc-index[collid] #main #article a.sd-index-renvoi {
+  color: #315ba7;
+  font-weight: 500;
+  text-decoration: underline dotted #9fb3d6;
+  text-underline-offset: .18em;
 }
+#cartulaire-blanc-index[collid] #main #article a.sd-index-renvoi:hover { text-decoration-color: currentColor; }
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire {
-  display: flex;
-  align-items: baseline;
-  gap: .5rem;
-  padding: .25rem .2rem;
-  cursor: pointer;
-  list-style-position: outside;
-}
 
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire:hover {
-  background: #f3f8f8;
-}
-
-/* `display:flex` sur un summary supprime le triangle de pliage du navigateur :
-   on le redessine, sans quoi rien n'indique que le terme s'ouvre. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::-webkit-details-marker { display: none; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::marker { content: ""; }
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-sommaire::before {
-  content: "\25B8";
-  flex: 0 0 .9rem;
-  color: var(--sd-legacy-red);
-  font-size: .8rem;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-details[open] > .sd-index-sommaire::before {
-  content: "\25BE";
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-libelle {
-  flex: 1 1 auto;
-}
-
-/* Le compte d'occurrences, à droite, aligné d'un terme à l'autre. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-nb {
-  flex: 0 0 auto;
-  min-width: 2.6rem;
-  padding: 0 .4rem;
-  border-radius: 999px;
-  background: var(--sd-legacy-gray);
-  color: var(--sd-legacy-dark);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .75rem;
-  text-align: center;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-details[open] > .sd-index-sommaire {
-  font-weight: 700;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article .sd-index-renvois {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .3rem;
-  margin: .1rem 0 .6rem;
-  padding: .5rem .2rem .5rem 1.2rem;
-  border-left: 3px solid var(--sd-legacy-gray);
-  /* « auteurs laïques » aligne 647 renvois : on borne la hauteur du bloc
-     déplié plutôt que de pousser la page sur plusieurs écrans. */
-  max-height: 16rem;
-  overflow-y: auto;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi {
-  padding: .1rem .4rem;
-  border: 1px solid var(--sd-legacy-border);
-  border-radius: 3px;
-  background: #fff;
-  color: var(--fill-color);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .78rem;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi:hover,
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-renvoi:focus {
-  background: var(--fill-color);
-  border-color: var(--fill-color);
-  color: #fff;
-}
-
-/* Le lien Pleade historique, devenu ancre vers la rubrique de la même page. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article a.sd-index-ancre {
-  text-decoration-style: dotted;
-}  /* et non le bleu des liens Pleade */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area details.sd-folio { margin-bottom: 1rem; }  /* blanc entre le folio (libellé ou image) et le texte qui suit */
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] #main #article section.front { background: none; border: none; padding: 0; margin: 0; }  /* introduction du chapitre (<front>) : hteiml la mettait sur fond gris */
 /* ==== fin Cartulaire blanc de Saint-Denis ==== */
@@ -1232,6 +1143,23 @@ span.note-inline {
 .toc-aside-is-opened #main #article tr.cible-arrivee > td,
 .toc-aside-is-opened #main #article details.cible-arrivee > summary { animation: none; outline: none; }
 /* ==== fin arrivée sur une ancre ==== */
+
+/* --------------------------------------------------------------------------
+   Volet Mirador en mode texte (2026-09-11, D7 — même correctif que
+   saintgermaindespres.customCss.css, section 8) : dans DocumentPage.vue,
+   `#mirador-view { position: relative }` l'emporte sur
+   `.text-mode .mirador-view { position: absolute; visibility: hidden }` ;
+   le volet invisible restait dans le flux (page de 2469 px pour 1280) et son
+   marginTop « sticky » faisait défiler la page de travers.
+   -------------------------------------------------------------------------- */
+
+.text-mode #mirador-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
 
 /* Page de titre (transform/teiHeader2html.xsl, servie par /cover quand le document est ouvert sans
@@ -1314,8 +1242,8 @@ span.note-inline {
     display: flex;
     gap: .25rem;
     padding: .5rem 0;
-    border-top: 2px solid var(--fill-color, #8f0e21);
-    border-bottom: 2px solid var(--fill-color, #8f0e21);
+    border-top: 2px solid var(--fill-color, #5f004d);
+    border-bottom: 2px solid var(--fill-color, #5f004d);
     background: none;
   }
   #main #article .tf-cadre thead tr:first-child th {
@@ -1401,7 +1329,7 @@ span.note-inline {
   #main #article .tf-cadre tbody tr:nth-child(even) > td,
   #main #article .tf-cadre tbody tr:hover > td { background: none; }
   #main #article .tf-cadre tbody tr.dots-target,
-  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #8f0e21); padding-left: .7rem; }
+  #main #article .tf-cadre tbody tr.tf-vise { box-shadow: inset 3px 0 0 var(--fill-color, #5f004d); padding-left: .7rem; }
   #main #article .tf-cadre tbody tr > td:first-child { box-shadow: none; }
   /* Première colonne (l'entrée) en tête du bloc */
   #main #article .tf-cadre tbody td:first-child { font-weight: 600; }
@@ -1425,7 +1353,10 @@ span.note-inline {
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding-left: 0;
+  /* 2026-11-12 (Maxime) : apparat dans un cadre grisé, séparé des notes, comme les Actes royaux du Poitou et les
+     Édits (fond de html.css de hteiml, posé ici : il ne vaut que pour section.footnotes). Remplace le fond retiré le 05/11. */
+  padding: 1em;
+  background-color: #f3f4f6;
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -1478,7 +1409,7 @@ span.note-inline {
   background: #f6f3ef;
   border-bottom: 1px solid #d9d2c9;
 }
-[collid] #main #article table.cartu-tableau-simple thead tr:last-child th { border-bottom: 2px solid var(--fill-color, #8f0e21); }
+[collid] #main #article table.cartu-tableau-simple thead tr:last-child th { border-bottom: 2px solid var(--fill-color, #5f004d); }
 [collid] #main #article table.cartu-tableau-simple tbody td {
   padding: .25em .5em;
   vertical-align: top;
@@ -1516,6 +1447,11 @@ span.note-inline {
 [collid] #main #article table.cartu-tableau-simple a.noteref sup { margin: 0 0 0 .2em; }
 /* colonnes des sigles A, B, C : étroites */
 [collid] #main #article table.cartu-tableau-simple thead tr:last-child th:nth-child(-n+3) { width: 3.5em; }
+/* repère de page dans le tableau : l'étiquette seule, sans la vignette (qui crée un grand blanc) */
+[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb :is(.pb-thumbnail-parent, img) { display: none; }
+[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb aside.pb-component { float: none; position: static; display: inline; margin: 0; }
+[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb article.pb { display: inline; position: static; width: auto; height: auto; min-height: 0; padding: 0; margin: 0; }
+[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb .pb-label-text { display: inline; }
 /* ==== fin tableau simple ==== */
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
@@ -1539,13 +1475,24 @@ span.note-inline {
   padding-bottom: 0;
   padding-left: 1.3em;
 }
-/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+/* Numéros des notes et lettres de l'apparat dans une même colonne de 1,6 em, à .76 em du filet,
+   calée à gauche (« a » commence là où commence « 1. »), même police, en violet partout (le bloc
+   liens passait les lettres en bleu). 2026-11-05, repris des Testaments (Maxime : « a b c en violet
+   partout, alignés avec le 1 des notes, les notes en violet »). */
+.document-views #article .footnotes :is(aside, div).note { position: relative; }
 .document-views #article .footnotes :is(aside, div).note a.noteback {
-  margin-left: calc(-7ex - .68em);
-  font-size: 0.9em;
-  color: var(--fill-color);
+  position: absolute;
+  right: calc(100% + .76em);
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
   font-weight: 700;
   line-height: 1.25;
+}
+.document-views #article .footnotes :is(.apparatus span.note > a, :is(aside, div).note a.noteback) {
+  width: 1.6em;
+  text-align: left;
+  color: #5f004d !important;
 }
 /* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
 .document-views #article .footnotes :is(aside, div).note a.noteback:hover {
@@ -1580,9 +1527,7 @@ span.note-inline {
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.bookmark):not(.persName):not(.placeName):not(.rs) {
-  color: #5f004d !important;
-}
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.notebottom):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
@@ -1629,8 +1574,30 @@ span.note-inline {
 
 /* 2026-10-28 : table des actes du Cartulaire blanc en tableau filtrable (cartulaires-saint-denis.xsl) : en-têtes longs
    (« Édition de la notice dans l'inventaire ») sur plusieurs lignes, sinon le tableau déborde de l'article. */
-#cartulaire-blanc[collid] #main #article table.tf-tableau button.tf-tri { white-space: normal; }
+#cartulaire-blanc-actes[collid] #main #article table.tf-tableau button.tf-tri { white-space: normal; }
 
 /* Relecture du 30/10 (page de comparaison avant/après) : leçon fautive conservée : romain + « (sic) » (proposition B) */
 [collid="cartulaires"] #article em.sic { font-style: normal; }
 [collid="cartulaires"] #article em.sic::after { content: "\00a0(sic)"; font-size: .75em; font-style: italic; color: #777; }
+
+/* 2026-11-04 (responsive) : sur téléphone, les tableaux ordinaires (table.table) défilent dans leur cadre
+   au lieu d'élargir la page (NDPA-EG-04, groupe 4 : +129px). */
+@media (max-width: 760px) {
+  [collid="cartulaires"] #main #article table.table { display: block; max-width: 100%; overflow-x: auto; }
+}
+
+/* 2026-11-12 (Maxime) : numéros des notes, au pied de l'acte comme dans le panneau « Afficher les notes » (t¹) : violet du
+   site, pas le bleu des liens. */
+[collid="cartulaires"] #main a.notebottom,
+[collid="cartulaires"] #main .aside-noteref-content a.notebottom { color: var(--fill-color); }
+
+/* 2026-11-13 (Maxime) : Maubuisson, Cartulaire de 1668 (MAUB-AB-02_cartulaire) : les « Titres » (h2) au rang du titre
+   de page (h1 : violet, 160 %), les lieux (h3) au rang d'un h2 ; auparavant tous deux gris et presque de même taille. */
+[collid="cartulaires"] #main #article section[id^="MAUB-AB-02_cartulaire_titre"] > h2.head {
+  font-size: 160%; line-height: 115%; color: var(--fill-color, #5f004d) !important; margin: 1.5em 0 .5em;
+}
+[collid="cartulaires"] #main #article section[id^="MAUB-AB-02_cartulaire_titre"] h3.head { font-size: 125%; margin: 1.2em 0 .4em; }
+/* … et l'intitulé en petites capitales qui suit « Titre N » (même <head>, après <lb/>) au rang d'un h2. */
+[collid="cartulaires"] #main #article section[id^="MAUB-AB-02_cartulaire_titre"] > h2.head > span.sc {
+  font-size: 87.5%; color: #585858;
+}

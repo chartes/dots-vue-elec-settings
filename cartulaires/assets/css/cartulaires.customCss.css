@@ -1357,6 +1357,9 @@ span.note-inline {
      Édits (fond de html.css de hteiml, posé ici : il ne vaut que pour section.footnotes). Remplace le fond retiré le 05/11. */
   padding: 1em;
   background-color: #f3f4f6;
+  /* 2026-11-13 (Maxime : notes et apparat alignés, partout) : le cadre déborde à gauche de son retrait au lieu de
+     pousser son contenu ; lettres, trait et texte retombent sur la colonne des notes. */
+  margin-left: -1em;
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -1372,6 +1375,7 @@ span.note-inline {
 .document-views #article .footnotes .apparatus span.note > a {
   position: absolute;
   right: calc(100% + .76em);
+  font-size: 1em;   /* 2026-11-13 : même corps que les numéros des notes (hteiml : a.noteback 85 %), sinon la colonne glisse */
   color: var(--fill-color);
   font-weight: 700;
   text-decoration: none;

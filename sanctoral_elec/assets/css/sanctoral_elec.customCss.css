@@ -21,12 +21,11 @@
 
 /* --------------------------------------------------------------------------
    Rubriques. Les « Conventions typographiques » de l'introduction opposent
-   l'encre noire du texte à l'encre rouge des rubriques ; rendues ici en violet
-   (#5f004d), comme les autres couleurs d'accent de l'ÉLEC (02/11/2026, avant : #971716). 540 paragraphes du corps sont concernés.
+   l'encre noire du texte à l'encre rouge des rubriques (540 paragraphes du corps) ; rendues en rouge
+   (#971716), puis en violet le 02/11/2026, enfin sans couleur.
    -------------------------------------------------------------------------- */
-.document-area #article .rubric { color:#5f004d; }
-/* 2026-11-03 : le « Nota » d'ouverture (lectio .N) est un commentaire, pas une rubrique : texte noir. */
-.document-area #article section[id$=".N"] .rubric { color:inherit; }
+/* 2026-11-13 (Maxime : « c'est le fait que ça soit en couleur qui gêne ») : rubriques dans la couleur du texte ;
+   règle « .rubric { color:#5f004d } » retirée, et avec elle l'exception du « Nota » (lectio .N) du 03/11. */
 
 /* Les numéros de lectio et de dies sont en petites capitales chez Diple. */
 .document-area #article .num { font-variant:small-caps; line-height:100%; }
@@ -203,6 +202,9 @@
      Édits (fond de html.css de hteiml, posé ici : il ne vaut que pour section.footnotes). Remplace le fond retiré le 05/11. */
   padding: 1em;
   background-color: #f3f4f6;
+  /* 2026-11-13 (Maxime : notes et apparat alignés, partout) : le cadre déborde à gauche de son retrait au lieu de
+     pousser son contenu ; lettres, trait et texte retombent sur la colonne des notes. */
+  margin-left: -1em;
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -218,6 +220,7 @@
 .document-views #article .footnotes .apparatus span.note > a {
   position: absolute;
   right: calc(100% + .76em);
+  font-size: 1em;   /* 2026-11-13 : même corps que les numéros des notes (hteiml : a.noteback 85 %), sinon la colonne glisse */
   color: var(--fill-color);
   font-weight: 700;
   text-decoration: none;
@@ -331,3 +334,12 @@
 [collid="sanctoral_elec"] #main a.notebottom,
 [collid="sanctoral_elec"] #main .aside-noteref-content a.notebottom,
 [collid="sanctoral_elec"] #main #article a.notebottom { color: var(--fill-color); }   /* #article : passe devant « #main #article a » */
+
+/* 2026-11-13 (Maxime, a009 : « l'espacement entre les différents textes c'est trop grand ») : ~85 px entre la fin d'une
+   lectio et le titre de la suivante (marge du p 14 px + padding de section 20 + 16 de hteiml + marge du h2 25) ;
+   sans le padding des sections de lectio : ~40 px. */
+[collid="sanctoral_elec"] #main #article section.div.lectio { padding-top: 0; padding-bottom: 0; }
+/* … et entre la dernière lectio et les notes (« pareil entre le dernier texte et les notes ») : ~105 px avant le filet
+   (p 14 + padding du dies 20 + marge des notes 43 + padding 16) ; ramené à ~40 px. */
+[collid="sanctoral_elec"] #main #article section.div.dies { padding-bottom: 0; }
+[collid="sanctoral_elec"] #main #article section.footnotes { margin-top: 1.5rem; padding-top: 0; }

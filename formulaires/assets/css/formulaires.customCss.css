@@ -70,6 +70,7 @@
 .document-views #article .footnotes .apparatus span.note > a {
   position: absolute;
   right: calc(100% + .76em);
+  font-size: 1em;   /* 2026-11-13 : même corps que les numéros des notes (hteiml : a.noteback 85 %), sinon la colonne glisse */
   color: var(--fill-color);
   font-weight: 700;
   text-decoration: none;

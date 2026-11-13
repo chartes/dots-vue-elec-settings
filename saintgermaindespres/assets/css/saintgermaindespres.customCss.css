@@ -122,7 +122,9 @@
    des witness ») ; la bascule Transcription / Tradition du 02/11 est retirée, la tradition est toujours visible.
    Seulement l'en-tête d'une pièce (section.front qui contient la tradition), pas la page de présentation :
    cadre pointillé prune, titre puis « Extrait de… », témoins en plus petit, même blanc (1,5 rem) entre les blocs. */
-[collid="saintgermaindespres"] #main #article section.front:has(> section.tradition) {
+/* 2026-11-13 (Maxime, l29 : « pas les mêmes règles que pour les cartulaires ») : hteiml sort désormais header.front,
+   le bloc ne visait plus que section.front et ne s'appliquait plus ; header.front ajouté. */
+[collid="saintgermaindespres"] #main #article :is(section.front:has(> section.tradition), header.front) {
   --acte-blanc: 1.5rem;
   position: relative;
   background-color: #fff;
@@ -132,7 +134,7 @@
   margin: 0 0 1.5em;
 
   /* titre centré, comme le n° du Poitou et des cartulaires ; le « § » caché sort du flux pour ne pas décaler le centrage */
-  > h1.head { font-size: 1.25em; line-height: 1.3; margin: 0 0 .3em; padding-top: 0; text-align: center;
+  > h1.head { font-size: 1.25em; line-height: 1.3; margin: 0 0 .3em; padding-top: 0; text-align: center; color: #333 !important;   /* comme le n° des cartulaires, pas le violet des titres */
     a.bookmark { position: absolute; } }
   /* date de la pièce (« Extrait de la délibération du… ») : centrée, en caractères ordinaires, comme la date des cartulaires */
   > .docDate { display: block; text-align: center; font-variant: normal; margin: 0 0 var(--acte-blanc); }
@@ -141,6 +143,13 @@
   /* témoins comme dans les cartulaires, même sans sigle : puce carrée, retrait de 40 px */
   .listWit { padding-left: 40px; }
   li.witness { display: list-item; list-style: square; padding-left: 0; font-size: 0.85em; line-height: 1.5; }
+  /* 2026-11-13 : mêmes blancs que les cartulaires (mesurés sur NDRC-AB_0002) : .5ex autour de chaque témoin (li de hteiml),
+     .3rem sous la liste, 1,5 rem sous la tradition */
+  li.witness { margin: .5ex 0; }
+  ul.listWit { margin: 0 0 .3rem; }
+  > section.tradition { margin: 0 0 var(--acte-blanc); }
+  /* analyse à la taille du texte, comme celle des cartulaires (#main #article .argument : .95em) */
+  > .argument { font-size: 1em; }
 }
 
 /* 2026-10-19 : texte sans filet ni grand blanc au-dessus. */

@@ -137,80 +137,58 @@
   "searchConfig": {
     "target": "fragment",
     "include": { "citeTypes": ["partie", "acte"] },
+    "countLabel": { "singular": "résultat", "plural": "résultats" },
+    "columns": [
+      {
+        "key": "resource",
+        "label": "Document",
+        "width": "3fr"
+      },
+      {
+        "key": "dublinCore.title",
+        "label": "Titre",
+        "width": "1fr"
+      },
+      {
+        "key": "dublinCore.date",
+        "label": "Date",
+        "type": "date"
+      }
+    ],
     "facets": [
       {
-        "key": "dublinCore.creator",
-        "label": "Auteurs",
-        "enabled": true,
-        "order": 1
+        "key": "resources",
+        "label": "Documents"
       },
       {
-        "key": "dublinCore.contributor",
-        "label": "Contributeurs",
-        "enabled": true,
-        "order": 2
-      },
-      {
-        "key": "dublinCore.publisher",
+        "key": "dublinCore.type",
         "enabled": false
       },
       {
         "key": "dublinCore.language",
-        "label": "Langue des actes",
-        "enabled": true,
-        "order": 6
+        "label": "Langue",
+        "enabled": true
       },
       {
-        "key": "extensions.author",
-        "enabled": false
-      },
-      {
-        "key": "extensions.editor",
-        "enabled": false
-      },
-      {
-        "key": "extensions.publisher",
-        "enabled": false
+        "key": "citeType",
+        "label": "Type de passage (citeType)",
+        "enabled": true
       },
       {
         "key": "extensions.inLanguage",
-        "enabled": false
-      },
-      {
-        "key": "extensions.funder",
         "enabled": false
       }
     ],
     "temporalFacets": [
       {
-        "key": "dublinCore.coverage",
-        "label": "Période d'étude",
-        "enabled": true,
-        "order": 4
-      },
-      {
-        "key": "dublinCore.created",
-        "label": "Date des sources",
-        "enabled": true,
-        "order": 3
-      },
-      {
-        "key": "dublinCore.issued",
-        "label": "Date des éditions",
-        "enabled": true,
-        "order": 5
-      },
-      {
         "key": "extensions.dateCreated",
         "enabled": false
       },
       {
-        "key": "extensions.datePublished",
-        "enabled": false
-      },
-      {
-        "key": "extensions.temporalCoverage",
-        "enabled": false
+        "key": "dublinCore.date",
+        "label": "Date",
+        "enabled": true,
+        "order": 1
       }
     ]
   }

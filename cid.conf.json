@@ -91,89 +91,31 @@
   ],
   "searchConfig": {
     "target": "fragment",
-    "include": { "citeTypes": ["article"] },
-    "facets": [
+    "include": {
+      "citeTypes": [
+        "article"
+      ]
+    },
+    "countLabel": {
+      "singular": "résultat",
+      "plural": "résultats"
+    },
+    "columns": [
       {
-        "key": "dublinCore.contributor",
-        "label": "Auteur",
-        "enabled": true,
-        "order": 6
+        "key": "dublinCore.title",
+        "label": "Titre",
+        "width": "2fr"
       },
       {
         "key": "dublinCore.creator",
-        "label": "Institution",
-        "enabled": true,
-        "order": 4
-      },
-      {
-        "key": "dublinCore.language",
-        "label": "Langage",
-        "enabled": true,
-        "order": 6
-      },
-      {
-        "key": "collections",
-        "enabled": false
-      },
-      {
-        "key": "dublinCore.publisher",
-        "enabled": false
-      },
-      {
-        "key": "extensions.publisher",
-        "enabled": false
-      },
-      {
-        "key": "extensions.author",
-        "enabled": false
-      },
-      {
-        "key": "extensions.editor",
-        "enabled": false
-      },
-      {
-        "key": "extensions.inLanguage",
-        "enabled": false
-      },
-      {
-        "key": "extensions.funder",
-        "enabled": false
-      },
-      {
-        "key": "resources",
-        "enabled": false
+        "label": "Auteur",
+        "width": "1fr"
       }
     ],
-    "temporalFacets": [
+    "facets": [
       {
-        "key": "dublinCore.created",
-        "label": "Date de création",
-        "enabled": true,
-        "order": 1
-      },
-      {
-        "key": "dublinCore.issued",
-        "label": "Date de publication",
-        "enabled": true,
-        "order": 2
-      },
-      {
-        "key": "dublinCore.coverage",
-        "label": "Période d'étude",
-        "enabled": true,
-        "order": 3
-      },
-      {
-        "key": "extensions.dateCreated",
-        "enabled": false
-      },
-      {
-        "key": "extensions.datePublished",
-        "enabled": false
-      },
-      {
-        "key": "extensions.temporalCoverage",
-        "enabled": false
+        "key": "dublinCore.creator",
+        "label": "Auteur"
       }
     ]
   }

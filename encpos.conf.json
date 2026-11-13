@@ -108,6 +108,7 @@
   ],
   "searchConfig": {
     "target": "resource",
+    "columns": "listSection",
     "facets": [
       {
         "key": "collections",

@@ -33,9 +33,5 @@
     { "tabName": "Les thèses", "compName": "about1" },
     { "tabName": "Les positions", "compName": "about2" },
     { "tabName": "Consultation", "compName": "about3" }
-  ],
-  "searchConfig": {
-    "target": "fragment",
-    "include": { "levels": [1] }
-  }
+  ]
 }

@@ -1,0 +1,41 @@
+/* Feuille construite par Vite (collectionCustomFonts), contrairement à cartulaires.customCss.css
+   chargée brute : ses url() relatives sont résolues et les fichiers embarqués dans le build.
+   Sert ici aux images que les TEI appellent dans le public/ de dots-vue, absent du dev : chaque <img>
+   est remplacée par sa copie dans les settings (content: url(), vérifié Chrome et Firefox). */
+
+/* Cartes de situation des notices : figure produite par cartulaires.xsl (image, puis la légende = source ; Cassini : lien
+   Géoportail sur la légende). Sans le cadre centré de hteiml (html.css : figure { border; padding; text-align: center }).
+   Image fluide : jamais plus large que la colonne, ni que sa taille réelle. */
+figure.cartu-carte { margin: 1em 0; padding: 0; border: 0; background: none; text-align: left; max-width: 660px; }
+.document-views figure.cartu-carte img { display: block; width: auto; max-width: 100%; height: auto; padding: 0; }   /* dots-vue : .document-views figure img { width: 100% } agrandissait les Cassini (640 px) */
+figure.cartu-carte figcaption { margin-top: .3em; padding: 0; text-align: left; }
+
+/* Plans de situation des notices (Paris) */
+img[src$="/images/cartulaires/Montmartre.png"] { content: url("../images/Montmartre.png"); }
+img[src$="/images/cartulaires/Paris-S-Martin-des-Champs.png"] { content: url("../images/Paris-S-Martin-des-Champs.png"); }
+img[src$="/images/cartulaires/Paris-S-Merri.png"] { content: url("../images/Paris-S-Merri.png"); }
+
+/* Cartes de Cassini des notices */
+img[src$="/images/cartulaires/HDPO-HD-cassini.png"] { content: url("../images/HDPO-HD-cassini.png"); }
+img[src$="/images/cartulaires/NDMA-AB-cassini.png"] { content: url("../images/NDMA-AB-cassini.png"); }
+img[src$="/images/cartulaires/NDMT-AB-cassini.png"] { content: url("../images/NDMT-AB-cassini.png"); }
+img[src$="/images/cartulaires/NDMV-AB-cassini.png"] { content: url("../images/NDMV-AB-cassini.png"); }
+img[src$="/images/cartulaires/NDPR-AB-cassini.png"] { content: url("../images/NDPR-AB-cassini.png"); }
+img[src$="/images/cartulaires/NDRC-AB-cassini.png"] { content: url("../images/NDRC-AB-cassini.png"); }
+img[src$="/images/cartulaires/NDVC-AB-cassini.png"] { content: url("../images/NDVC-AB-cassini.png"); }
+img[src$="/images/cartulaires/SCHA-PR-cassini.png"] { content: url("../images/SCHA-PR-cassini.png"); }
+img[src$="/images/cartulaires/SGGO-PR-cassini.png"] { content: url("../images/SGGO-PR-cassini.png"); }
+img[src$="/images/cartulaires/SGLY-PR-cassini.png"] { content: url("../images/SGLY-PR-cassini.png"); }
+img[src$="/images/cartulaires/SLES-PR-cassini.png"] { content: url("../images/SLES-PR-cassini.png"); }
+img[src$="/images/cartulaires/SMCP-PR-cassini.png"] { content: url("../images/SMCP-PR-cassini.png"); }
+img[src$="/images/cartulaires/SMPA-EG-cassini.png"] { content: url("../images/SMPA-EG-cassini.png"); }
+img[src$="/images/cartulaires/SMPO-AB-cassini.png"] { content: url("../images/SMPO-AB-cassini.png"); }
+img[src$="/images/cartulaires/SSCO-AB-cassini.png"] { content: url("../images/SSCO-AB-cassini.png"); }
+img[src$="/images/cartulaires/STEP-AB-cassini.png"] { content: url("../images/STEP-AB-cassini.png"); }
+
+/* Extraits du Cartulaire blanc dans son introduction (Saint-Denis) */
+img.sd-graphic { max-width: 100%; height: auto; }   /* comme saint-denis.customCss.css : l'extrait p. 510 fait 1 300 px */
+img.sd-graphic[src$="/LL1157_page473_extrait.jpg"] { content: url("../images/LL1157_page473_extrait.jpg"); }
+img.sd-graphic[src$="/LL1157_page475_extrait.jpg"] { content: url("../images/LL1157_page475_extrait.jpg"); }
+img.sd-graphic[src$="/LL1157_page510_extrait.jpg"] { content: url("../images/LL1157_page510_extrait.jpg"); }
+img.sd-graphic[src$="/LL1157_pagedouze_extrait.jpg"] { content: url("../images/LL1157_pagedouze_extrait.jpg"); }

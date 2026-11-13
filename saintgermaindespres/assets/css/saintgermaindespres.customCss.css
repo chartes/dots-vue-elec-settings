@@ -455,7 +455,18 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.notebottom):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* ==== fin bloc liens ==== */
 
+
+/* 2026-11-13 (Maxime) : numéros des notes dans le panneau « Afficher les notes » en violet du site, comme au pied
+   de l'acte et dans les cartulaires (le bloc liens les passait en bleu). */
+[collid="saintgermaindespres"] #main a.notebottom,
+[collid="saintgermaindespres"] #main .aside-noteref-content a.notebottom,
+[collid="saintgermaindespres"] #main #article a.notebottom { color: var(--fill-color); }   /* #article : passe devant « #main #article a » */
+
+/* 2026-11-13 (Maxime) : témoins de l'en-tête à la taille des cartulaires (13,6 px) : la réduction de .tradition et
+   .listWit (.9em, 2026-10-19) s'appliquait au témoin, à .85em dans les cartulaires. */
+[collid="saintgermaindespres"] #main #article header.front :is(section.tradition, ul.listWit) { font-size: 1em; }
+[collid="saintgermaindespres"] #main #article header.front li.witness { font-size: .85em; }

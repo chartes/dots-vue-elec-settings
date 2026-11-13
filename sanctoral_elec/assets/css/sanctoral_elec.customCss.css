@@ -242,7 +242,7 @@
    Liens en bleu (#315ba7), numéros de note en violet (modèle : Du Bourg) ; restent à part : repères de page (a.pb),
    appels de note (pastille de dots-vue, a.noteref), marque-pages (a.bookmark) et noms liés à l'index
    (a.persName, a.placeName, a.rs), qui gardent la couleur que leur donne le corpus. ==== */
-.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
+.document-views #article:not(.bottom-toc) a:not(.pb):not(.noteref):not(.noteback):not(.notebottom):not(.apparatus span.note > a):not(.bookmark):not(.persName):not(.placeName):not(.rs) { color: #315ba7 !important; }
 .document-views #article .footnotes a.noteback { color: #5f004d !important; }
 /* repères de page de l'imprimé (a.pb : « {p. 01} ») : gris discret, dans chaque corpus */
 .document-views #article a.pb { color: #8a8a8a !important; }
@@ -325,3 +325,9 @@
 /* 2026-11-03 : pas d'apparat vide (même correctif que les autres corpus). */
 .document-views #article .footnotes:empty,
 .document-views #article p.apparatus:empty { display: none; }
+
+/* 2026-11-13 (Maxime) : numéros des notes dans le panneau « Afficher les notes » en violet du site, comme au pied
+   de l'acte et dans les cartulaires (le bloc liens les passait en bleu). */
+[collid="sanctoral_elec"] #main a.notebottom,
+[collid="sanctoral_elec"] #main .aside-noteref-content a.notebottom,
+[collid="sanctoral_elec"] #main #article a.notebottom { color: var(--fill-color); }   /* #article : passe devant « #main #article a » */

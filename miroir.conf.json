@@ -26,9 +26,7 @@
       "Édition de Frédéric Duval"
     ],
     "footerDescription": "",
-     "footerLogos": {
-      "biblissima": ""
-    }
+    "footerLogos": {}
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 5,

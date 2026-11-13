@@ -5,5 +5,10 @@
     "pageHeader": { "collectionAltTitle": "Le Graduel de Bellelay", "aboutButtonText": "À propos" },
     "descriptionSection": { "collectionDescription": "Édition électronique du Graduel de Bellelay." }
   },
+  "footerSettings": {
+    "footerTitle": "",
+    "footerSubtitles": [],
+    "footerDescription": ""
+  },
   "collectionCustomCss": "bellelay"
 }

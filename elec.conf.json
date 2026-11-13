@@ -51,6 +51,17 @@
       "displayMode": "card",
       "cardCollectionPerPage": 9,
       "logo": ""
+    },
+    "filters": {
+      "Actes diplomatiques": ["christofle", "cartulaires", "formulaires", "editsdepacification"],
+      "Textes juridiques": ["cjc"],
+      "Documents d’archives": ["montferrand", "obituaires", "dubourg"],
+      "Textes historiographiques et liturgiques": ["sanctoral_elec", "chroniqueslatines"],
+      "Actes de colloques": ["cid"]
+    },
+    "filtersCard": {
+      "title": "Filtres",
+      "allLabel": "Tous"
     }
   },
 

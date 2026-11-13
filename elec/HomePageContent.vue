@@ -2,63 +2,27 @@
   <article class="home">
     <div class="home-content app-width-padding">
       <p>
-        Parallèlement à ses différentes
-        <a
-          href="https://www.chartes.psl.eu/les-editions"
+        ELEC est la plateforme d’édition scientifique ouverte de l’École nationale
+        des chartes – PSL. Elle rassemble des corpus documentaires et textuels
+        publiés selon les principes FAIR et accessibles pour les usages de la
+        recherche via l’<a
+          href="https://data.chartes.psl.eu/api/dts/"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          collections de publications imprimées
-        </a>,
-        l’École des chartes propose sur ce site une collection de publications
-        électroniques. Celle-ci permet d’offrir à des travaux scientifiques des
-        fonctionnalités propres au numérique. Elle réunit essentiellement des
-        répertoires et des bases de données, ainsi que des éditions de textes, qui
-        peuvent ainsi être explorées plus finement que par la consultation d’une
-        version imprimée.
+        >API DTS</a>.
       </p>
 
-      <p>
-        Cette collection est complétée par&nbsp;:
+      <p class="themes-intro">
+        Explorez les collections&nbsp;:
       </p>
 
-      <ul>
-        <li>
-          des
-          <a
-            href="http://corpus.enc.sorbonne.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            corpus
-          </a>
-          textuels mis en ligne à des fins de recherche, sans intervention éditoriale de
-          l’École des chartes,
-        </li>
-
-        <li>
-          des réalisations à finalité pédagogique, disponible sur le site
-          <a
-            href="http://theleme.enc.sorbonne.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            THELEME
-          </a>,
-        </li>
-
-        <li>
-          un
-          <a
-            href="http://developpements.enc.sorbonne.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            espace de présentation
-          </a>
-          des différents outils et méthodes informatiques développés par l’École
-          des chartes.
-        </li>
+      <!-- Each data-filter is a key of homePageSettings.filters (elec.conf.json): a click filters the cards below -->
+      <ul class="themes">
+        <li data-filter="Actes diplomatiques">Actes diplomatiques</li>
+        <li data-filter="Textes juridiques">Textes juridiques</li>
+        <li data-filter="Documents d’archives">Documents d’archives</li>
+        <li data-filter="Textes historiographiques et liturgiques">Textes historiographiques et liturgiques</li>
+        <li data-filter="Actes de colloques">Actes de colloques</li>
       </ul>
     </div>
   </article>
@@ -138,6 +102,23 @@ export default {
 .home p {
   text-align: left;
   text-indent: 0;
+}
+/* A blank line between the presentation and the themes */
+.home p.themes-intro {
+  margin-top: 1em;
+}
+/* Themes: dashes instead of the default bullets, no extra indent */
+.home ul.themes {
+  list-style: none;
+  padding-left: 0;
+}
+/* Inline-block dash: the active filter underline and colour (set by dots-vue) leave it out */
+.home ul.themes li::before {
+  content: '–';
+  display: inline-block;
+  width: 1em;
+  color: #333333;
+  font-weight: 400;
 }
 
 .home p.byline {

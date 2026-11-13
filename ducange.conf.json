@@ -97,5 +97,19 @@
     "onlyDeclared": true,
     "fields": [
     ]
+  },
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "searchConfig": {
+    "target": "fragment",
+    "include": { "citeTypes": ["entry"] },
+    "columns": [
+      { "key": "dublinCore.title", "label": "Title", "sortKey": "corpus_order" }
+    ]
   }
 }

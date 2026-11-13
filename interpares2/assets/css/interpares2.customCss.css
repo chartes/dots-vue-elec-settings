@@ -696,6 +696,23 @@
 }
 /* ==== fin tableau filtrable ==== */
 
+/* ==== Cartouche d'acte (2026-11-13, repris des Obituaires) : mêmes règles que cartulaires.customCss (header.front) ==== */
+.document-area #article header.front {
+  --acte-blanc: 1.5rem;
+  position: relative;
+  background-color: #fff;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  border-radius: 0;
+  padding: 0.5em 0.75em;
+  margin: 0 0 1.5em;
+}
+.document-area #article header.front > .docNum { display: block; text-align: center; font-weight: 700; font-size: 1.2em; line-height: 1.2; margin: 0 0 .2em; }
+.document-area #article header.front > .docDate { display: block; text-align: center; margin: 0 0 var(--acte-blanc); }
+.document-area #article header.front > .argument { margin: 0 0 var(--acte-blanc); }
+.document-area #article header.front > .argument > p:last-child { margin-bottom: 0; }
+.document-area #article header.front > section.tradition { margin: 0; padding: 0; }
+.document-area #article header.front ul.listWit { margin: 0 0 .3rem; }
+
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
    latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc

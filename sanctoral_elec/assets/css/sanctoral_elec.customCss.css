@@ -199,8 +199,10 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding: 0;
-  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
+  /* 2026-11-12 (Maxime) : apparat dans un cadre grisé, séparé des notes, comme les Actes royaux du Poitou et les
+     Édits (fond de html.css de hteiml, posé ici : il ne vaut que pour section.footnotes). Remplace le fond retiré le 05/11. */
+  padding: 1em;
+  background-color: #f3f4f6;
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }

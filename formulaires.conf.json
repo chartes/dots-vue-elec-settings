@@ -1,41 +1,87 @@
 {
   "collectionId": "formulaires",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": ""
     },
     "pageHeader": {
       "collectionAltTitle": "",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": null
+      "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
       "displayMode": "toc",
       "openState": true,
       "logo": "logo_morchesne.png",
       "browseButtonText": "Parcourir la collection"
+,
+      "singleResourceButtonText": "Accéder au document"
     }
   },
   "footerSettings": {
-    "footerTitle": "",
-    "footerSubtitles": null,
-    "footerDescription": "Le projet d'édition du formulaire d'Odart Morchesne a été développé par la Mission projets numériques de l'École nationale des chartes – PSL."
+    "footerTitle": "Le formulaire d'Odart Morchesne",
+    "footerSubtitles": [
+    "Édition d'Olivier Guyotjeannin, Serge Lusignan et Eduard Frunzeanu"
+    ],
+     "footerDescription": ""
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 3,
-    "editByLevel": null,
+    "editByLevel": 1,
     "editByCiteType": [
-       "partie",
+      "partie",
       "formulaire"
     ],
-    "countByCiteType": [
-      "formulaire"
-    ]
+    "displayTopToc": false,
+    "displayLeftToc": true
   },
-  "aboutPageSettings": [
+  "aboutPageSettings": [],
+  "collectionCustomCss": "formulaires",
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
   ],
-  "collectionCustomCss": "elec"
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:editor",
+    "dct:created",
+    "schema:isBasedOn",
+    "dct:coverage",
+    "dct:language",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:identifier",
+    "dct:license",
+    "dct:rights",
+    "schema:encoding"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:editor": "Éditeur scientifique",
+    "dct:created": "Date du document",
+    "schema:isBasedOn": "Source",
+    "dct:coverage": "Période",
+    "dct:language": "Langue",
+    "schema:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:identifier": "Identifiant",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:exampleOfWork": "Notice",
+    "schema:encoding": "Exports"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

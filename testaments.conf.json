@@ -1,0 +1,101 @@
+{
+  "collectionId": "testaments",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Testaments du Parlement"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Testaments enregistrés au Parlement de Paris sous le règne de Charles VI",
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "logo": "AN_galerie_Parlement.png",
+      "browseButtonText": "Consulter l’édition",
+      "singleResourceButtonText": "Accéder au document"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Testaments enregistrés au Parlement de Paris sous le règne de Charles VI",
+    "footerSubtitles": [
+      "Édité par Marion Chaigne"
+    ],
+    "footerDescription": "",
+    "footerLogos": {
+      "enc": {
+        "imgName": "logo_enc_white.svg",
+        "href": "https://www.chartes.psl.eu/",
+        "alt": "École nationale des chartes"
+      }
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 3,
+    "editByLevel": null,
+    "editByCiteType": [
+      "rubrique",
+      "testament"
+    ],
+    "countByCiteType": [],
+    "displayTopToc": false,
+    "displayLeftToc": true
+  },
+  "documentPageSettings": {
+    "metadataTabLabel": "Notice"
+  },
+  "aboutPageSettings": [],
+  "collectionCustomCss": "testaments",
+  "collectionCustomJs": "elec",
+  "topBreadcrumbButtonLabel": [
+    "extensions.dots:shortTitle"
+  ],
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:editor",
+    "schema:contributor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:language",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:encoding",
+    "dcat:accessURL"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:editor": "Édition scientifique",
+    "schema:contributor": "Contributeurs",
+    "schema:isBasedOn": "Source",
+    "schema:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:language": "Langues",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:funder": "Financement",
+    "dct:identifier": "Identifiant",
+    "schema:encoding": "Exports",
+    "dcat:accessURL": "URL"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
+}

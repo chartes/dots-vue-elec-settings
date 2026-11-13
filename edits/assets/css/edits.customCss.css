@@ -1,42 +1,111 @@
 /*=============================================================
  PART 1
  Updating the css color schema for:
-  - the collection theater
+  - the collection edits
   - its children (unless otherwise specified)
  =============================================================*/
 
 /* Using css variables */
 :root {
-  --fill-color: #8f0e21;
+  /* Couleur d'accent de la collection : titre h1.head, titre et date du cover,
+     numéros et cibles de notes, liens de l'apparat, bouton déplié. */
+  --fill-color: #5f004d;
+
+  /* Variables propres à cette feuille. */
+  --fill-color-soft: rgba(95, 0, 77, 0.3); /* --fill-color atténuée (bordure du front) ;
+                                              à garder synchronisée avec --fill-color */
+  --heading-color: #585858;      /* titres h2 à h6 */
+  --link-color: #315ba7;         /* liens des notes de renvoi et lien « § » */
+  --wit-color: rgb(51, 51, 102); /* sigles des témoins (a.wit) */
+  --highlight-color: #fbeeb8;    /* surlignage de la cible d'un lien interne */
+
+  /* Les gris neutres (texte du cover, filets, crochet de lemme) restent en dur dans
+     les règles : ils ne font pas partie du schéma de couleurs de la collection. */
 }
 
 /*=============================================================
  PART 2
  Updating the css of specific elements (HTML) for:
-  - the collection theater
+  - the collection edits
   - its children (unless otherwise specified)
  =============================================================*/
+
+/* Mise en page générale */
+
+/* Interligne du texte de l'article et des cellules de leçons du tableau d'apparat (td.rdg) */
+#main #article,
+td.rdg {
+  line-height: 28px;
+}
+
+/* Titre h1 des pages .about : en italique */
 .about > h1 {
   font-style: italic !important;
 }
-button {
-  &.expanded {
-    fill: var(--fill-color)
-  }
+
+/* Bouton à l'état déplié : couleur de remplissage (fill) de son icône */
+button.expanded {
+  fill: var(--fill-color);
 }
 
-/*=============================================================
- PART 3
- Updating the css of the DTS API tei response for:
-  - the collection theater
-  - its children (unless otherwise specified)
- =============================================================*/
+/* Divisions de premier niveau du corps (.body > .div) : pas de filet, 3em d'espace en dessous.
+   Écran seulement. */
 @media screen {
   .body > .div {
-    border-bottom: none; !important;
+    border-bottom: none;
     padding-bottom: 3em;
   }
 }
+/* fin mise en page générale */
+
+/* Design du cover
+   Page de titre de l'édition (.titlestmt) : titre, éditeurs, date. Contenu centré dans
+   une colonne de 42rem ; la taille du titre est fluide (clamp) entre 1.4rem et 2.1rem. */
+
+/* Conteneur : colonne centrée */
+#main #article .titlestmt {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+/* Titre */
+#main #article .titlestmt h1 {
+  margin: 0 0 1rem !important;
+  color: var(--fill-color) !important;
+  font-size: clamp(1.4rem, 4vw, 2.1rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+/* Éditeurs : libellé en italique gris, noms en petites capitales */
+#main #article .titlestmt .editors {
+  text-align: center;
+  text-indent: 0;
+}
+#main #article .titlestmt .editors-label {
+  font-style: italic;
+  color: #666;
+  font-variant: normal;
+}
+#main #article .titlestmt .editor {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #333;
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+}
+/* Date : texte et filet supérieur dans la couleur d'accent */
+#main #article .titlestmt .date {
+  display: inline-block;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  color: var(--fill-color);
+  border-top: 1px solid var(--fill-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+/* Version mobile (écran de 480px au plus) : marges du cover, date sur sa propre ligne */
 @media (max-width: 480px) {
   .fileDesc {
     padding: 1.25rem 1rem;
@@ -49,134 +118,147 @@ button {
   }
 }
 
-fieldset {
-  margin: 2em 0em 1em 0;
-  padding: 0 1ex 1ex 1ex;
-  box-sizing: border-box;
-  max-width: 100%;
-  border: 1px dotted #363;
-  white-space: normal;
+/* fin du cover */
+
+/* Couleur des titres
+   h2 à h6 en gris ; h1.head (titre d'un édit) dans la couleur d'accent. */
+h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
 }
 
-.front, .div, .footnotes {
-  font-family: Libre Baskerville,serif !important;
-  font-size: 16px;
-  text-align: left;
-  font-weight: 400;
-  line-height: 28px;
-  color: #5f5f5f;
+h1.head {
+  color: var(--fill-color);
+}
+/* fin couleur titres */
+
+/* design front d'un édit
+   Encadré pointillé autour du front d'un édit ; titre et date du document centrés. */
+.front {
+  background-color: #fff;
+  border: 1.75px dotted var(--fill-color-soft);
+  border-radius: 0;
 }
 
-h1, h2, h3 {
-  color: var(--fill-color) !important;
-}
-
-.witness {
-  font-family: Libre Baskerville,serif !important;
-  -webkit-border-radius: 1ex;
-  margin-left: 1em;
-}
-
-a {
-  color: #315ba7;
-  text-decoration: none;
-}
-
-.apparatus {
-  margin-bottom: 30px !important;
-}
-
-/* Neutralise le width="50%" figé dans le HTML et laisse la table respirer */
-table.app.table {
-  width: 100% !important;
-  max-width: 100%;
-  table-layout: auto;
-  border-collapse: collapse;
-  margin: 0.75em 0;
-}
-
-table.app.table th,
-table.app.table td {
-  width: auto !important;   /* écrase l'attribut width="50%" */
-  box-sizing: border-box;
-  padding: 0.5em 0.75em;
-  vertical-align: top;
-  text-align: left;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-table.app.table th {
-  background: #f5f5f5;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-table.app.table a.wit {
-  display: inline-block;
-  word-break: break-word;
-}
-
-table.app.table td.rdg {
-  line-height: 1.5;
-}
-
-/* Sur petit écran, si une ligne reste trop dense, on autorise un défilement horizontal plutôt qu'un écrasement */
-@media (max-width: 600px) {
-  table.app.table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  table.app.table th,
-  table.app.table td {
-    font-size: 0.9em;
-  }
-}
-
-ul.index li {
-  margin: 2.5ex 0;
-}
-
-.fileDesc {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 2rem 1.25rem;
-  font-family: "Georgia", "Iowan Old Style", serif;
+.front :is(.head, .docDate) {
   text-align: center;
+  display: block;
+}
+/* fin design front  */
+
+/* design apparat critique
+   Apparat en notes de bas de page (.footnotes .apparatus) : une note par ligne, avec filet
+   vertical à gauche, sigle dans la marge, lemme fermé par un crochet et sigles de témoins. */
+.document-views #article .footnotes p.apparatus {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+  line-height: 1.55;
+}
+/* Espace après chaque élément de l'apparat.
+   NB : avec l'espace dans « * ::after », le sélecteur ne vise que les éléments situés
+   au moins deux niveaux sous .apparatus. */
+.document-views #article .footnotes .apparatus * ::after { content: " "; }
+/* Note : bloc avec filet vertical gris à gauche */
+.document-views #article .footnotes .apparatus span.note {
+  display: block;
+  position: relative;
+  margin-bottom: .3em;
+  line-height: 1.25;
+  margin-left: 2.5em;
+  padding-left: 1.3em;
+  border-left: 1px solid #ccc;
+}
+/* Lien de la note : placé dans la marge, à gauche du filet */
+.document-views #article .footnotes .apparatus span.note > a {
+  position: absolute;
+  right: calc(100% + .76em);
+  color: var(--fill-color);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: none;
+}
+/* Lemme fermé par un crochet */
+.document-views #article .footnotes .apparatus .lem::after {
+  content: "]\00a0";
+  color: #8a837c;
+}
+/* Sigles des témoins (liens a.wit) : dans l'apparat en note et dans les en-têtes du
+   tableau d'apparat. Police héritée dans l'apparat ; couleur propre. */
+.document-views #article .footnotes .apparatus .wit { font-family: inherit; }
+a.wit {
+  color: var(--wit-color);
 }
 
-.fileDesc h1 {
-  margin: 0 0 1rem;
-  color: #8f0e21;
-  font-size: clamp(1.4rem, 4vw, 2.1rem);
-  line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-align: center !important;
+.aside-noteref-content .rdg > .wit + i::before {
+  content: " ";
 }
 
-.fileDesc .principal {
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
-  color: #333;
-  margin-bottom: 0.75rem;
-  font-variant: small-caps;
-  letter-spacing: 0.03em; /* les petites capitales rendent souvent mieux légèrement espacées */
+/* ==== fin bloc apparat ==== */
+
+/* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
+   Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
+   latines, 2026-10-14). Ne pas le modifier dans un corpus : régler l'écart dans le bloc
+   « propre au projet ». */
+.document-views #article .footnotes::before {
+  content: "";
+  display: block;
+  width: 33.333%;
+  height: 2px;
+  margin-bottom: 1em;
+  background: #e4e4e4;
 }
 
-.fileDesc .principal .label {
-  font-style: italic;
-  color: #666;
-  font-variant: normal; /* on annule les petites capitales pour "sous la direction de" */
+.document-views #article .footnotes {
+  margin-top: 0em;
 }
 
-.fileDesc .date {
-  display: inline-block;
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-  color: #8f0e21;
-  border-top: 1px solid #e2c5cb;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
+.note:target, .note:target a {
+  color: var(--fill-color);
 }
+
+/* Trait vertical à la hauteur du texte : html.css met .5ex de retrait en haut et en bas
+   de chaque note, que le trait recouvre ; l'écart passe dans la marge. Texte des notes
+   aligné, avec ou sans signe de citation avant lui. */
+.document-views #article .footnotes :is(aside, div).note {
+  margin-bottom: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 1.3em;
+}
+/* Numéro calé pour finir là où finissent les lettres de l'apparat. */
+.document-views #article .footnotes :is(aside, div).note a.noteback {
+  margin-left: calc(-7ex - .68em);
+  font-size: 0.9em;
+  color: var(--fill-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+/* Survol du numéro : souligner le chiffre seul (html.css soulignait toute la boîte). */
+.document-views #article .footnotes :is(aside, div).note a.noteback:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+/* ==== fin bloc notes ==== */
+
+/* ==== BLOC LIENS DE RENVOI ET CIBLE D'ARRIVÉE (propre au projet) ====
+   Placé APRÈS le bloc notes : c'est ici que se règlent les écarts avec lui. */
+
+/* Notes en span.note (par exemple les notes de renvoi « voir aussi ») et lien « § » :
+   couleur des liens. Pas dans l'apparat (.apparatus), qui a sa propre couleur plus haut.
+   L'ordre compte : à égalité de spécificité avec « .note:target a » du bloc notes, la
+   dernière règle l'emporte ; ce bloc doit donc rester après lui. */
+:not(.apparatus) > span.note > *,
+.up {
+  color: var(--link-color);
+}
+
+/* Cible d'arrivée d'un lien interne : fond clair qui s'estompe en 3 s. Pas appliqué aux
+   éléments qui contiennent directement un titre (.head) ou un numéro de ligne (small.lg-n). */
+@keyframes disparition-fond {
+  from { background-color: var(--highlight-color); }
+  to   { background-color: transparent; }
+}
+
+.cible-arrivee:not(:has(> .head, > small.lg-n)) {
+  animation: disparition-fond 3s ease-out 1;
+}
+/* ==== fin bloc liens ==== */

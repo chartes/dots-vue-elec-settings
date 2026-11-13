@@ -41,7 +41,8 @@
 
     "pageHeader": {
       "collectionAltTitle": "Éditions en ligne de l'École des chartes",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "collectionDescription": "",
@@ -49,13 +50,20 @@
     },
     "listSection": {
       "displayMode": "card",
-      "cardCollectionPerPage": 5,
+      "cardCollectionPerPage": 9,
       "logo": ""
     }
   },
 
   "footerSettings": {
-    "footerTitle": "Élec"
+    "footerTitle": "ELEC",
+    "footerSubtitles": [
+      "Édition en ligne de l'école des chartes"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
 
   "aboutPageSettings": [

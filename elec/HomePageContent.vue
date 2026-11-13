@@ -1,66 +1,8 @@
 <template>
   <article class="home">
     <div class="home-content app-width-padding">
-      <p>
-        Parallèlement à ses différentes
-        <a
-          href="https://www.chartes.psl.eu/les-editions"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          collections de publications imprimées
-        </a>,
-        l’École des chartes propose sur ce site une collection de publications
-        électroniques. Celle-ci permet d’offrir à des travaux scientifiques des
-        fonctionnalités propres au numérique. Elle réunit essentiellement des
-        répertoires et des bases de données, ainsi que des éditions de textes, qui
-        peuvent ainsi être explorées plus finement que par la consultation d’une
-        version imprimée.
-      </p>
-
-      <p>
-        Cette collection est complétée par&nbsp;:
-      </p>
-
-      <ul>
-        <li>
-          des
-          <a
-            href="http://corpus.enc.sorbonne.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            corpus
-          </a>
-          textuels mis en ligne à des fins de recherche, sans intervention éditoriale de
-          l’École des chartes,
-        </li>
-
-        <li>
-          des réalisations à finalité pédagogique, disponible sur le site
-          <a
-            href="http://theleme.enc.sorbonne.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            THELEME
-          </a>,
-        </li>
-
-        <li>
-          un
-          <a
-            href="http://developpements.enc.sorbonne.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            espace de présentation
-          </a>
-          des différents outils et méthodes informatiques développés par l’École
-          des chartes.
-        </li>
-      </ul>
     </div>
+    <p>ELEC est la plateforme d’édition scientifique ouverte de l’École nationale des chartes – PSL. Elle rassemble des corpus documentaires et textuels publiés selon les principes FAIR et accessibles pour les usages de la recherche via l’<a href="https://data.chartes.psl.eu/api/dts/" target="_blank">API DTS</a>.</p>
   </article>
 </template>
 

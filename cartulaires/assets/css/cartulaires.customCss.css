@@ -420,6 +420,9 @@ span.note-inline {
    ramenée à celle de la règle commune (1 em, comme l'analyse), plus de 85 %. */
 [collid="cartulaires"] #main #article header.front:not(:has(> .argument)) > h1.head {
   padding-top: 0;
+  /* 2026-11-13 (Maxime) : même présentation que l'analyse (Chartres) : couleur du texte, justifiée */
+  color: #333 !important; /* dots-vue impose le violet aux h1 en !important */
+  text-align: justify;
 }
 [collid="cartulaires"] #main #article header.front a.bookmark {
   display: none;

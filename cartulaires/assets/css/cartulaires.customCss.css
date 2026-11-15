@@ -1605,3 +1605,9 @@ span.note-inline {
 [collid="cartulaires"] #main #article section[id^="MAUB-AB-02_cartulaire_titre"] > h2.head > span.sc {
   font-size: 87.5%; color: #585858;
 }
+
+/* 2026-11-14 (Olivier Canteaut, 13/11) : censiers en texte continu, deux niveaux de titres (cartulaires.xsl,
+   h3.censier-niveau-1 en petites capitales, h4.censier-niveau-2 en italique), centrés comme dans l'imprimé. */
+[collid="cartulaires"] #main #article :is(h3, h4).censier-titre { text-align: center; font-weight: normal; margin: 1.4em 2em .6em; line-height: 1.35; }
+[collid="cartulaires"] #main #article h3.censier-niveau-1 { font-variant: small-caps; font-size: 1.12em; letter-spacing: .02em; margin-top: 2em; }
+[collid="cartulaires"] #main #article h4.censier-niveau-2 { font-style: italic; font-size: 1em; }

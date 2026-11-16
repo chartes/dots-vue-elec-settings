@@ -108,8 +108,9 @@
   "searchConfig": {
     "target": "fragment",
     "include": { "citeTypes": ["entry"] },
+    "countLabel": { "singular": "entrée", "plural": "entrées" },
     "columns": [
-      { "key": "dublinCore.title", "label": "Title", "sortKey": "corpus_order" }
+      { "key": "dublinCore.title", "label": "Entrée", "sortKey": "corpus_order" }
     ]
   }
 }

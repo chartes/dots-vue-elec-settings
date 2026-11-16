@@ -136,7 +136,7 @@
   "searchConfig": {
     "target": "fragment",
     "include": { "citeTypes": ["partie", "acte"] },
-    "countLabel": { "singular": "résultat", "plural": "résultats" },
+    "countLabel": { "singular": "passage", "plural": "passages" },
     "columns": [
       {
         "key": "resource",
@@ -170,7 +170,7 @@
       },
       {
         "key": "citeType",
-        "label": "Type de passage (citeType)",
+        "label": "Type de passage",
         "enabled": true
       },
       {

@@ -179,6 +179,11 @@
 .document-area .isd-notice { margin: 1.1rem 0; padding: .8rem 1rem; border-left: 3px solid #d8d2c8; background: #fcfbfa; }
 .document-area .isd-champs { display: grid; grid-template-columns: minmax(9rem, auto) 1fr; gap: .15rem .9rem; margin: .4rem 0; }
 .document-area .isd-champs dt { color: #555; font-size: .9rem; }
+/* 2026-11-16 : TEI de l'Inventaire refait depuis l'EAD. Mots latins écrits en gros caractères (hi[@rend='large'],
+   emph de l'EAD) : en italique, comme sur l'ancien site (Pleade : .pl-ead-emph { font-style: italic }). Les termes
+   d'index (dfn.term : auteurs d'actes, types de documents) restent droits, comme avant. */
+.document-area .isd-notice .large { font-style: italic; }
+.document-area .isd-notice dfn.term { font-style: normal; }
 /* ==== fin Inventaire ==== */
 /* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
    l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :

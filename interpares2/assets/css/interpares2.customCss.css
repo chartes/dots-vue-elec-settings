@@ -98,8 +98,8 @@
   font-size: 24px;
   font-weight: normal;
   border-bottom: none;
-  margin: 1em 0;
-  padding: 1em 0 0;
+  margin: 1.1em 0 .35em;  /* 2026-11-16 (Maxime) : « trop d'espace entre les titres » : marges de l'Obituaire, */
+  padding: 0;              /* plus de padding-top en plus de la marge */
 }
 
 #main #article h3 {
@@ -107,16 +107,16 @@
   font-size: 22px;
   font-weight: normal;
   border-bottom: none;
-  margin: 1em 0;
-  padding: 10px 0 0 1em;
+  margin: .9em 0 .3em;
+  padding: 0 0 0 1em;  /* 2026-11-16 : idem */
 }
 
 #main #article h4 {
   color: #585858;
   font-size: 20px;
   font-weight: normal;
-  margin: 1em 0;
-  padding: 10px 0 0 3em;
+  margin: .8em 0 .3em;
+  padding: 0 0 0 3em;  /* 2026-11-16 : idem */
 }
 
 
@@ -424,7 +424,7 @@
    au-dessus du h1 ni celui des sections imbriquées (1 rem / 1,25 rem qui s'additionnent), h2-h4 en
    interligne normal (h2 : deux fois la taille du texte). Les blancs ne sont resserrés que hors des actes
    (pas de header.front). */
-[collid="interpares2"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .75em; padding-top: 0; }
+[collid="interpares2"] #main #article h1.head { font-size: 160%; font-weight: 900; line-height: 115%; margin: 0 0 .35em; padding-top: 0; }  /* 2026-11-16 : .75em → .35em (titres trop espacés), comme l'Obituaire */
 [collid="interpares2"] #main #article h2.head { font-size: 140%; }
 [collid="interpares2"] #main #article h3.head { font-size: 130%; }
 [collid="interpares2"] #main #article h4.head { font-size: 120%; }

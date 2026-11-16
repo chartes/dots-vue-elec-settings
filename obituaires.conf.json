@@ -55,6 +55,20 @@
     "dct:identifier"
   ],
   "metadataRename": {
+    "dct:title": "Titre",
+    "dct:creator": "Auteur",
+    "dct:created": "Date du document",
+    "dct:language": "Langue",
+    "schema:contributor": "Collaborateurs",
+    "schema:isBasedOn": "Source",
+    "dct:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "dct:identifier": "Identifiant",
     "@id": "dts:id",
     "@type": "dts:type"
   },

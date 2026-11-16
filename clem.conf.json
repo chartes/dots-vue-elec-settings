@@ -58,6 +58,23 @@
       "dots:resourceIIIFManifest"
     ],
     "metadataRename": {
+    "dct:title": "Titre",
+    "dct:creator": "Auteur",
+    "dct:created": "Date du document",
+    "dct:isVersionOf": "Version de",
+    "dct:language": "Langue",
+    "schema:contributor": "Collaborateurs",
+    "dct:source": "Source",
+    "dct:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicalCitation": "Citer",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "dct:identifier": "Identifiant",
+    "dct:relation": "Voir aussi",
+    "dots:resourceIIIFManifest": "Manifeste IIIF",
       "@id": "dts:id",
       "@type": "dts:type"
     },

@@ -214,17 +214,33 @@
    10 % (87 px, soit moins que le padding de 109 px) portent l'image a 1050 px sans
    creer de debordement horizontal de la page. Gain mesure : 1,24x pour la plus
    grande image, jusqu'a 1,75x pour les plus petites. */
+/* 2026-11-16 : la regle generique « img { max-width: 670px; max-height: 40vh } » ecrasait la
+   vignette (157 px de large), et l'image ouverte, etiree a 120 %, devenait floue (fichiers ELEC de
+   650 a 1275 px, pas de meilleure source). Fermee : page entiere a la hauteur de l'ecran.
+   Ouverte : taille reelle du fichier, jamais agrandie, centree, bornee a la colonne elargie. */
+#main #article .sgdp-figure-vignette {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 80vh;
+  border: 1px solid #ddd;
+}
 #main #article .sgdp-figure[open] > .sgdp-figure-image {
   display: block;
-  width: 120%;
+  width: auto;
+  height: auto;
   max-width: 120%;
-  margin: .4rem -10%;
+  max-height: none;
+  margin: .4rem auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 @media (max-width: 900px) {
   #main #article .sgdp-figure[open] > .sgdp-figure-image {
-    width: 100%;
     max-width: 100%;
-    margin: .4rem 0;
+    left: auto;
+    transform: none;
   }
 }
 

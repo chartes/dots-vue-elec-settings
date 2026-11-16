@@ -374,3 +374,40 @@ function poserCollid () {
 }
 poserCollid()
 new MutationObserver(poserCollid).observe(document.head, { childList: true, subtree: true, characterData: true })
+
+// 5. Export PDF d'une unité (2026-11-16, d'abord pour l'Inventaire de Saint-Denis, à la manière de l'ancien site :
+//    « obtenir cette unité de description en format PDF »). La XSL pose un <button class="elec-pdf"> dans l'unité
+//    (article, section…) ; un clic ouvre une fenêtre qui ne contient que cette unité, avec les feuilles de style de la
+//    page, son titre, son adresse et la date, puis lance l'impression : le navigateur y propose « Enregistrer en PDF ».
+//    Les vignettes d'images restent repliées (on garde le libellé de la page, pas l'image).
+function exporterPdf (bouton) {
+  const unite = bouton.closest('[data-pdf]') || bouton.closest('article, section')
+  if (!unite) return
+  const copie = unite.cloneNode(true)
+  copie.querySelectorAll('button.elec-pdf').forEach(b => b.remove())
+  copie.querySelectorAll('details[open]').forEach(d => d.removeAttribute('open'))
+  const titre = (unite.getAttribute('data-pdf-titre') || (unite.querySelector('h1, h2, h3') || {}).textContent || document.title).trim()
+  const styles = Array.from(document.querySelectorAll('link[rel="stylesheet"], style')).map(n => n.outerHTML).join('\n')
+  const echap = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+  const w = window.open('', '_blank')
+  if (!w) return
+  w.document.write('<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><base href="' + echap(document.baseURI) + '">' +
+    '<title>' + echap(titre) + '</title>' + styles +
+    '<style>body{background:#fff;margin:1.5cm;} .elec-pdf-pied{margin-top:2rem;font-size:.85em;color:#555;border-top:1px solid #ccc;padding-top:.5rem}' +
+    ' details > summary{list-style:none} details > summary::-webkit-details-marker{display:none}' +
+    ' @page{margin:1.5cm} @media print{body{margin:0}}</style></head>' +
+    '<body><div class="document-area"><div id="article">' + copie.outerHTML + '</div></div>' +
+    '<p class="elec-pdf-pied">' + echap(location.href) + ' — consulté le ' + new Date().toLocaleDateString('fr-FR') + '</p></body></html>')
+  w.document.close()
+  const imprimer = () => { w.focus(); w.print() }
+  if (w.document.readyState === 'complete') setTimeout(imprimer, 300)
+  else w.addEventListener('load', () => setTimeout(imprimer, 300))
+}
+
+if (!window.elecPdf) {
+  window.elecPdf = true
+  document.addEventListener('click', event => {
+    const b = event.target.closest('button.elec-pdf')
+    if (b) { event.preventDefault(); exporterPdf(b) }
+  })
+}

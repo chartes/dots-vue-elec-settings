@@ -184,6 +184,14 @@
    d'index (dfn.term : auteurs d'actes, types de documents) restent droits, comme avant. */
 .document-area .isd-notice .large { font-style: italic; }
 .document-area .isd-notice dfn.term { font-style: normal; }
+/* 2026-11-16 : bouton « PDF » de chaque notice (export de la notice seule, bloc 5 de elec.customJs.js), en haut à droite. */
+.document-area .isd-notice { position: relative; }
+.document-area .isd-notice > button.elec-pdf {
+  position: absolute; top: .6rem; right: .8rem; padding: .1rem .5rem; font-size: .8rem; line-height: 1.4;
+  color: #5f004d; background: #fff; border: 1px solid #c9bfc6; border-radius: 3px; cursor: pointer;
+}
+.document-area .isd-notice > button.elec-pdf:hover { background: #f3edf2; border-color: #5f004d; }
+@media print { .document-area .isd-notice > button.elec-pdf { display: none; } }
 /* ==== fin Inventaire ==== */
 /* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
    l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :

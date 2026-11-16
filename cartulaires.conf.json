@@ -85,6 +85,7 @@
   ],
   "collectionCustomCss": "cartulaires",
   "collectionCustomJs": "elec",
+  "collectionCustomFonts": "cartulaires",
   "topBreadcrumbButtonLabel": [
     "extensions.dots:shortTitle"
   ],

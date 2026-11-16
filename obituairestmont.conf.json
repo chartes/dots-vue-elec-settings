@@ -1,0 +1,80 @@
+{
+  "collectionId": "obituairestmont",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Obituaires"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "L'Obituaire du Saint-Mont",
+      "aboutButtonText": "À propos",
+      "aboutButtonState": true
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": ""
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "",
+    "footerSubtitles": [],
+    "footerDescription": ""
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 5,
+    "editByLevel": 1,
+    "editByCiteType": [
+      "partie",
+      "mensis",
+      "Annexes"
+    ]
+  },
+ "aboutPageSettings": [
+  ],
+    "collectionCustomCss": "obituairestmont",
+  "collectionCustomJs": "elec",
+  "topBreadcrumbButtonLabel": [
+    "extensions.dots:shortTitle"
+  ],
+  "metadataDisplayOrder": [
+    "dct:title",
+
+    "dct:creator",
+
+    "dct:created",
+
+    "dct:language",
+
+    "schema:contributor",
+
+    "schema:isBasedOn",
+
+    "dct:publisher",
+
+    "dct:issued",
+
+    "dct:bibliographicalCitation",
+
+    "dct:coverage",
+
+    "dct:description",
+
+    "dct:license",
+
+    "dct:rights",
+
+    "dct:identifier"
+  ],
+  "metadataRename": {
+    "@id": "dts:id",
+    "@type": "dts:type"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": [
+    ]
+  }
+}

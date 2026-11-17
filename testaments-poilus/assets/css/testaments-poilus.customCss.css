@@ -1031,3 +1031,8 @@
    vide la page du testament dessous), dots-vue y ajoute donc la TOC du reste du corpus. Elle est
    masquée dès que la page porte un testament. */
 [collid="testaments-poilus"] .document.wrapper:has(article.testament) > .bottom-toc { display: none; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

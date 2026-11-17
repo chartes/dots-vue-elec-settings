@@ -1096,3 +1096,8 @@
 /* 2026-11-04 (responsive) : la référence (élément flex) peut rétrécir et ses URL se couper
    (sources et bibliographie : +57px sur téléphone). */
 [collid="delescluze"] #main #article li.bibl > .bibl-texte { min-width: 0; overflow-wrap: anywhere; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

@@ -278,3 +278,8 @@
 /* ==== Apparat vide (2026-11-03) : rien à afficher s'il n'y a pas d'entrée ==== */
 .document-views #article .footnotes:empty,
 .document-views #article p.apparatus:empty { display: none; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

@@ -766,12 +766,12 @@
 
 /* 2026-10-28 (Maxime, presentation : « des blancs pour rien ») : une URL affichée en toutes lettres est un seul mot ;
    dans une note ou un paragraphe justifié, elle passait entière à la ligne et la ligne d'avant s'étirait. Coupure
-   permise n'importe où, et pas de justification là où le texte cite une URL. */
+   permise n'importe où (l'URL remplit la ligne au lieu de la laisser s'étirer). 2026-11-17 : plus d'alignement à gauche
+   des paragraphes à lien, qui désjustifiait aussi ceux à lien court (Présentation, « InterPARES ») ; la coupure suffit. */
 [collid="interpares2"] #main #article a[href^="http"] { overflow-wrap: anywhere; }
 /* 2026-11-17 : filet de sécurité mobile. Une adresse ou un mot trop long laissé en texte (sans lien) peut être coupé
    s'il ne tient pas sur la ligne ; sans effet sur le reste du texte. */
 [collid="interpares2"] #main #article { overflow-wrap: break-word; }
-[collid="interpares2"] #main #article :is(p, li, .note):has(> a[href^="http"]) { text-align: left; }
 
 /* 2026-10-28 (Maxime, interpares1 : « tableau, comportement dots-vue générique ? ») : tableaux ordinaires (table.table
    de hteiml) au style simple des autres corpus (modèle : tableaux d'introduction des cartulaires) au lieu du thème de
@@ -803,3 +803,8 @@
 [collid="interpares2"] #main a.notebottom,
 [collid="interpares2"] #main .aside-noteref-content a.notebottom,
 [collid="interpares2"] #main #article a.notebottom { color: var(--fill-color); }   /* #article : passe devant « #main #article a » */
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

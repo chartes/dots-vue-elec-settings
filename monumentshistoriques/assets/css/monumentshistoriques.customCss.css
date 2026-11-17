@@ -2227,3 +2227,8 @@ article.mh-edition:has(> .mh-groupe) { padding-bottom: 0; }
 /* Index Mérimée/Palissy (02/11, « une redite ») : la bulle du nom du monument ne redisait que le numéro, déjà affiché à côté
    et porteur de la protection. Elle disparaît ; le nom reste un lien. */
 .mh-edition .mh-index-entree a.mh-monument > .mh-bulle { display: none !important; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

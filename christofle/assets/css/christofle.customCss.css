@@ -1036,3 +1036,8 @@
 
 /* Relecture du 30/10 (page de comparaison avant/après) : ajout marginal en bloc, filet à gauche (proposition B) */
 [collid="christofle"] #article .add { display: block; font-size: .875em; color: #666; border-left: 2px solid #ccc; padding-left: .6em; margin: .3em 0; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

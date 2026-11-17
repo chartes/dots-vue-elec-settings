@@ -495,3 +495,8 @@
    .listWit (.9em, 2026-10-19) s'appliquait au témoin, à .85em dans les cartulaires. */
 [collid="saintgermaindespres"] #main #article header.front :is(section.tradition, ul.listWit) { font-size: 1em; }
 [collid="saintgermaindespres"] #main #article header.front li.witness { font-size: .85em; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

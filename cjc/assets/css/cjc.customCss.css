@@ -460,3 +460,8 @@
 
 /* Relecture du 30/10 : réclame en bas de page (fw catchword) : « [réclame : …] » en gris, plus petit */
 [collid="cjc"] #article .reclame { color: #8a8a8a; font-size: .85em; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

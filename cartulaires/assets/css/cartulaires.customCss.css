@@ -1611,3 +1611,8 @@ span.note-inline {
 [collid="cartulaires"] #main #article :is(h3, h4).censier-titre { text-align: center; font-weight: normal; margin: 1.4em 2em .6em; line-height: 1.35; }
 [collid="cartulaires"] #main #article h3.censier-niveau-1 { font-variant: small-caps; font-size: 1.12em; letter-spacing: .02em; margin-top: 2em; }
 [collid="cartulaires"] #main #article h4.censier-niveau-2 { font-style: italic; font-size: 1em; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

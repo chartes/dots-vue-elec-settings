@@ -433,3 +433,8 @@ ins {
 
 /* Relecture du 30/10 (page de comparaison avant/après) : leçon corrigée par l'éditeur : « ] corr. » dans l'apparat (proposition A) */
 [collid="chroniqueslatines"] #article .footnotes .apparatus .lem.corraut::after { content: "]\00a0 corr."; color: #8a837c; }
+
+/* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
+#main #article {
+  line-height: 28px;
+}

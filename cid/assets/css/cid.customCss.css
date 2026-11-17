@@ -417,7 +417,7 @@
 [collid="cid"] #main #article section.footnotes aside.glose { order: -1; }
 
 /* 2026-10-29 : séparateur entre deux parties d'un article (<metamark rend="*"/>, cid.xsl) : astérisque centrée. */
-[collid="cid"] #main #article p.metamark-separateur { text-align: center; text-indent: 0; margin: 1.2em 0; letter-spacing: .3em; color: #6f6a65; }
+[collid="cid"] #main #article .metamark-separateur { display: block; text-align: center; text-indent: 0; margin: 1.2em 0; letter-spacing: .3em; color: #6f6a65; }
 
 /* Relecture du 30/10 : lettres espacées de l'imprimé (phr rend="ls", 7) */
 [collid="cid"] #article .phr.ls { letter-spacing: .18em; }
@@ -425,3 +425,16 @@
 /* 2026-11-17 : filet de sécurité mobile. Une adresse ou un mot trop long laissé en texte (sans lien) peut être coupé
    s'il ne tient pas sur la ligne ; sans effet sur le reste du texte. */
 [collid="cid"] #main #article { overflow-wrap: break-word; }
+
+/* 2026-11-17 : paragraphe suivant d'une note d'apparat, en <span> (cid.xsl) pour rester dans le bloc d'apparat. */
+[collid="cid"] #main #article .apparatus span.p { display: block; margin-top: .4em; }
+/* 2026-11-17 : astérisque de séparation dans une entrée d'apparat, dessiné ici (cid.xsl sort un span vide). */
+[collid="cid"] #main #article span.metamark-separateur:empty::before { content: "*"; }
+/* 2026-11-17 (Maxime : « comme l'Énéide ») : apparat du CID dans l'encadré gris de hteiml et en 13 px, comme le Miroir ;
+   le bloc générique APPARAT ci-dessus retire ce fond pour tous les corpus (05/11), on le remet ici pour le CID seul. */
+[collid="cid"] #main #article .footnotes p.apparatus { background-color: rgb(243, 244, 246); padding: 1em; font-size: 13px; }
+/* Saut de page dans une entrée d'apparat (1986 art_31_appendici, z) : enfant direct de l'entrée, il prenait la place de la lettre. */
+[collid="cid"] #main #article .footnotes .apparatus span.note > a.pb { position: static; display: inline; float: none; margin: 0 .25em; font-weight: normal; font-size: .85em; color: rgb(138, 131, 124) !important; }
+/* 2026-11-17 : appel de note chiffrée dans une entrée d'apparat (1986 art_31_appendici, comme sur ÉLEC) : même raison, il
+   se posait sur la lettre de l'entrée ; ici à sa place dans le texte. */
+[collid="cid"] #main #article .footnotes .apparatus span.note > a.noteref { position: static; display: inline; width: auto; margin: 0; font-weight: normal; }

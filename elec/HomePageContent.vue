@@ -6,7 +6,7 @@
         des chartes – PSL. Elle rassemble des corpus documentaires et textuels
         publiés selon les principes FAIR et accessibles pour les usages de la
         recherche via l’<a
-          href="https://data.chartes.psl.eu/api/dts/"
+          href="https://dots-suite.github.io/dots_documentation/dts-requests-overview/"
           target="_blank"
           rel="noopener noreferrer"
         >API DTS</a>.

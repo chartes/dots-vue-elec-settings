@@ -11,19 +11,6 @@
           rel="noopener noreferrer"
         >API DTS</a>.
       </p>
-
-      <p class="themes-intro">
-        Explorez les collections&nbsp;:
-      </p>
-
-      <!-- Each data-filter is a key of homePageSettings.filters (elec.conf.json): a click filters the cards below -->
-      <ul class="themes">
-        <li data-filter="Actes diplomatiques">Actes diplomatiques</li>
-        <li data-filter="Textes juridiques">Textes juridiques</li>
-        <li data-filter="Documents d’archives">Documents d’archives</li>
-        <li data-filter="Textes historiographiques et liturgiques">Textes historiographiques et liturgiques</li>
-        <li data-filter="Actes de colloques">Actes de colloques</li>
-      </ul>
     </div>
   </article>
 </template>
@@ -102,23 +89,6 @@ export default {
 .home p {
   text-align: left;
   text-indent: 0;
-}
-/* A blank line between the presentation and the themes */
-.home p.themes-intro {
-  margin-top: 1em;
-}
-/* Themes: dashes instead of the default bullets, no extra indent */
-.home ul.themes {
-  list-style: none;
-  padding-left: 0;
-}
-/* Inline-block dash: the active filter underline and colour (set by dots-vue) leave it out */
-.home ul.themes li::before {
-  content: '–';
-  display: inline-block;
-  width: 1em;
-  color: #333333;
-  font-weight: 400;
 }
 
 .home p.byline {

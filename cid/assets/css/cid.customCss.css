@@ -421,3 +421,7 @@
 
 /* Relecture du 30/10 : lettres espacées de l'imprimé (phr rend="ls", 7) */
 [collid="cid"] #article .phr.ls { letter-spacing: .18em; }
+
+/* 2026-11-17 : filet de sécurité mobile. Une adresse ou un mot trop long laissé en texte (sans lien) peut être coupé
+   s'il ne tient pas sur la ligne ; sans effet sur le reste du texte. */
+[collid="cid"] #main #article { overflow-wrap: break-word; }

@@ -51,10 +51,9 @@
    1. Colonne de texte — enc.css / html.css
    -------------------------------------------------------------------------- */
 
-#main #article {
-  color: #000;
-  max-width: 74rem;
-  margin: 0 auto; }
+/* 2026-11-17 (Vincent : « les box, laisser hteiml gérer ») : largeur et marges de la colonne retirées,
+   hteiml et dots-vue les règlent selon l'écran. */
+#main #article { color: #000; }
 
 #main #article p,
 #main #article li { text-align: justify; }
@@ -136,14 +135,12 @@
 #main #article cite { font-style: normal; }
 
 /* Signatures et mentions d'auteur en fin de contribution. */
+/* 2026-11-17 : sans le retrait de 45 % (en mobile, la colonne des auteurs tombait à la moitié de l'écran). */
 #main #article .byline {
   text-align: right;
-  margin-left: 45%;
   text-indent: 0;
   font-variant: small-caps;
 }
-/* theme/interpares2.css */
-#main #article .docDate { margin-left: 94%; text-indent: 0; }
 #main #article .avert {
   font-size: 20px;
   font-weight: normal;
@@ -152,13 +149,8 @@
   color: #585858;
 }
 
-#main #article blockquote {
-  margin: 0 2em 1.5ex 1.5em;
-  padding: .3ex 1ex .3ex .5em;
-  border-left: 2px dotted #ccc;
-  text-align: justify;
-  line-height: 1.15;
-}
+/* 2026-11-17 : boîte de la citation (marges, retrait, filet) laissée à hteiml. */
+#main #article blockquote { line-height: 1.15; }
 #main #article blockquote p { text-indent: 0; margin: .7ex 0; }
 
 
@@ -181,8 +173,6 @@
    qui, injectés globalement, repeignaient aussi les tableaux de l'interface.
    -------------------------------------------------------------------------- */
 
-#main #article img { max-width: 600px; height: auto; }
-
 #main #article table { border-collapse: collapse; width: 100%; }
 #main #article th {
   text-align: center;
@@ -196,9 +186,6 @@
   padding: 1px 3px;
   vertical-align: top;
 }
-#main #article table.sansbord { width: 30%; }
-#main #article table.sansbord td { border: none; }
-#main #article td.icone { width: 250px; }
 
 
 #main #article a.bookmark { color: #ccc; border-bottom: none; }
@@ -781,6 +768,9 @@
    dans une note ou un paragraphe justifié, elle passait entière à la ligne et la ligne d'avant s'étirait. Coupure
    permise n'importe où, et pas de justification là où le texte cite une URL. */
 [collid="interpares2"] #main #article a[href^="http"] { overflow-wrap: anywhere; }
+/* 2026-11-17 : filet de sécurité mobile. Une adresse ou un mot trop long laissé en texte (sans lien) peut être coupé
+   s'il ne tient pas sur la ligne ; sans effet sur le reste du texte. */
+[collid="interpares2"] #main #article { overflow-wrap: break-word; }
 [collid="interpares2"] #main #article :is(p, li, .note):has(> a[href^="http"]) { text-align: left; }
 
 /* 2026-10-28 (Maxime, interpares1 : « tableau, comportement dots-vue générique ? ») : tableaux ordinaires (table.table

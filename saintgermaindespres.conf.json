@@ -11,7 +11,7 @@
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": ""
+      "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
       "displayMode": "toc",
@@ -52,7 +52,6 @@
     "schema:exampleOfWork",
     "dct:language",
     "schema:editor",
-    "schema:isBasedOn",
     "schema:publisher",
     "dct:issued",
     "dct:bibliographicCitation",
@@ -76,7 +75,6 @@
     "schema:exampleOfWork": "Notice",
     "dct:language": "Langue",
     "schema:editor": "Éditeur scientifique",
-    "schema:isBasedOn": "Source",
     "schema:publisher": "Éditeur",
     "dct:issued": "Date de publication",
     "dct:bibliographicCitation": "Citer",

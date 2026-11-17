@@ -27,9 +27,10 @@
     "tableOfContentDepth": 5,
     "editByLevel": 0,
     "editByCiteType": [
-      "partie",
-      "part"
-    ]
+   "partie",
+   "part",
+   "section"
+  ]
   },
   "aboutPageSettings": [
     null

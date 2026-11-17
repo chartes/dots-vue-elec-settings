@@ -8,6 +8,7 @@
 //      et surlignée d'un jaune qui fond (bloc CSS « Arrivée sur une ancre » de chaque corpus).
 //   3. Bibliographie (module commun transform/commun/bibliographie.xsl, li.bibl) : un clic sur une
 //      référence la copie dans le presse-papiers, en texte brut ; « Copié » s'affiche un instant.
+//   5. Visionneuse IIIF : une image marquée img.iiif-visionneuse s'ouvre au clic dans TIFY (bloc en fin de fichier).
 // Un corpus qui a un comportement propre (Bellelay : présélection par fête ; Saint-Denis : export PDF et
 // porte-documents de l'Inventaire) garde son <corpus>.customJs.js, qui importe celui-ci puis ajoute le sien.
 
@@ -375,3 +376,129 @@ function poserCollid () {
 }
 poserCollid()
 new MutationObserver(poserCollid).observe(document.head, { childList: true, subtree: true, characterData: true })
+
+// 5. Visionneuse IIIF (TIFY, 2026-11-17) : une image marquée par la XSL (img.iiif-visionneuse, servie par
+//    un serveur d'images IIIF : …/iiif/<doi>/<sha1>/full/max/0/default.jpg, Saint-Germain-des-Prés et CID
+//    sur Nakala) s'ouvre au clic dans TIFY, par-dessus la page, sur cette image ; on y feuillette toutes les
+//    images marquées du texte affiché. Nakala ne fournit que le service d'image, pas de manifeste : on en
+//    construit un (IIIF Presentation 3) à la volée, libellé de chaque vue = alt de l'image. TIFY (module ES,
+//    AGPL) est chargé du CDN au premier clic ; son panneau est stylé ici (rien à ajouter aux CSS de corpus).
+if (!window.elecTify) {
+  window.elecTify = true
+  const TIFY = 'https://cdn.jsdelivr.net/npm/tify@0.36.2/dist/'
+  const IIIF = /^(https:\/\/.+\/iiif\/.+)\/full\/[^/]+\/0\/default\.(?:jpg|png)$/
+  let tify = null
+
+  const style = document.createElement('style')
+  style.id = 'elec-tify-style'
+  style.textContent = `
+    img.iiif-visionneuse { cursor: zoom-in; }
+    .elec-tify { position: fixed; inset: 0; z-index: 10000; display: flex; flex-direction: column;
+      background: rgba(20, 20, 20, .85); padding: 2.5rem 1rem 1rem; }
+    .elec-tify-fermer { position: absolute; top: .4rem; right: 1rem; font: inherit; font-size: 1rem;
+      color: #fff; background: none; border: 1px solid #fff; border-radius: 3px; padding: .2rem .6rem; cursor: pointer; }
+    .elec-tify-cadre { flex: 1; min-height: 0; background: #fff; }`
+  document.head.append(style)
+
+  aLAffichage('img.iiif-visionneuse', el => {
+    if (!el.title) el.title = 'Ouvrir dans la visionneuse'
+  })
+
+  // Dimensions d'une image : celles du fichier déjà chargé dans la page, sinon son info.json
+  const dimensions = async (img, service) => {
+    if (img.complete && img.naturalWidth) return [img.naturalWidth, img.naturalHeight]
+    try {
+      const info = await (await fetch(service + '/info.json')).json()
+      return [info.width, info.height]
+    } catch (e) { return [1000, 1000] }
+  }
+
+  // Données Nakala des images (…/iiif/<doi>/<sha1>) : description de chaque fichier (libellé de la vue),
+  // licence ; une requête par donnée, l'API publique de Nakala autorise les appels d'autres origines
+  const NAKALA = /^https:\/\/api\.nakala\.fr\/iiif\/(10\.\d+\/[^/]+)\/([0-9a-f]{40})$/
+  const donneesNakala = async services => {
+    const dois = [...new Set(services.map(s => (s.match(NAKALA) || [])[1]).filter(Boolean))]
+    const res = { fichiers: {}, licences: new Set(), dois }
+    await Promise.all(dois.map(async doi => {
+      try {
+        const d = await (await fetch('https://api.nakala.fr/datas/' + doi)).json()
+        for (const f of d.files || []) res.fichiers[f.sha1] = f.description
+        for (const m of d.metas || []) if (m.propertyUri.endsWith('#license')) res.licences.add(m.value)
+      } catch (e) { /* libellés de repli */ }
+    }))
+    return res
+  }
+
+  const manifeste = async (imgs, titre) => {
+    const base = location.origin + '/elec-tify/' + Date.now()
+    const services = imgs.map(img => img.getAttribute('src').match(IIIF)[1])
+    const nk = await donneesNakala(services)
+    const items = await Promise.all(imgs.map(async (img, i) => {
+      const src = img.getAttribute('src')
+      const service = services[i]
+      const [w, h] = await dimensions(img, service)
+      const c = `${base}/canvas/${i + 1}`
+      const sha1 = (service.match(NAKALA) || [])[2]
+      return {
+        id: c, type: 'Canvas', width: w, height: h,
+        label: { none: [nk.fichiers[sha1] || img.getAttribute('alt') || 'Image ' + (i + 1)] },
+        items: [{ id: c + '/page', type: 'AnnotationPage', items: [{
+          id: c + '/image', type: 'Annotation', motivation: 'painting', target: c,
+          body: { id: src, type: 'Image', format: 'image/jpeg', width: w, height: h,
+            service: [{ id: service, type: 'ImageService3', profile: 'level2' }] } }] }]
+      }
+    }))
+    const m = { '@context': 'http://iiif.io/api/presentation/3/context.json', id: base + '/manifest',
+      type: 'Manifest', label: { none: [titre] }, items }
+    if (nk.dois.length) {
+      const liens = nk.dois.map(d => `<a href="https://doi.org/${d}" target="_blank" rel="noopener">${d}</a>`).join(', ')
+      m.metadata = [{ label: { fr: ['Images'] }, value: { none: ['Nakala : ' + liens] } }]
+      if (nk.licences.size === 1) {
+        const l = [...nk.licences][0]
+        m.requiredStatement = { label: { fr: ['Licence'] }, value: { none: [l] } }
+        const cc = l.match(/^CC-(BY(?:-[A-Z]{2})*)-(\d\.\d)$/)
+        if (cc) m.rights = `http://creativecommons.org/licenses/${cc[1].toLowerCase()}/${cc[2]}/`
+      }
+    }
+    return URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/ld+json' }))
+  }
+
+  const fermer = () => {
+    if (tify) { tify.destroy(); tify = null }
+    document.querySelector('.elec-tify')?.remove()
+    document.removeEventListener('keydown', echap)
+  }
+  const echap = event => { if (event.key === 'Escape') fermer() }
+
+  const ouvrir = async img => {
+    const zone = img.closest('#article, article, main') || document.body
+    const imgs = [...zone.querySelectorAll('img.iiif-visionneuse')].filter(x => IIIF.test(x.getAttribute('src') || ''))
+    const n = imgs.indexOf(img) + 1
+    if (!n) return
+    const titre = (document.querySelector('#article h1, #article h2, h1') || {}).innerText || document.title
+    fermer()
+    const panneau = document.createElement('div')
+    panneau.className = 'elec-tify'
+    panneau.innerHTML = '<button type="button" class="elec-tify-fermer">Fermer ✕</button><div class="elec-tify-cadre"></div>'
+    document.body.append(panneau)
+    panneau.querySelector('.elec-tify-fermer').addEventListener('click', fermer)
+    document.addEventListener('keydown', echap)
+    if (!document.getElementById('elec-tify-css')) {
+      const css = document.createElement('link')
+      css.id = 'elec-tify-css'; css.rel = 'stylesheet'; css.href = TIFY + 'tify.css'
+      document.head.append(css)
+    }
+    const [{ default: Tify }, url] = await Promise.all([import(/* @vite-ignore */ TIFY + 'tify.js'), manifeste(imgs, titre.trim())])
+    if (!panneau.isConnected) return
+    tify = new Tify({ container: panneau.querySelector('.elec-tify-cadre'), manifestUrl: url, pages: [n],
+      language: 'fr', translationsDirUrl: TIFY + 'translations', views: ['thumbnails', 'info'] })
+  }
+
+  document.addEventListener('click', event => {
+    const img = event.target instanceof Element && event.target.closest('img.iiif-visionneuse')
+    if (!img) return
+    event.preventDefault()
+    event.stopPropagation()
+    ouvrir(img)
+  }, true)
+}

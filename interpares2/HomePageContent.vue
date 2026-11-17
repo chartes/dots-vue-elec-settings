@@ -1,7 +1,7 @@
 <template>
   <article class="home">
     <div class="home-content app-width-padding">
-      <p>L’École des chartes et les Archives de France se sont associées pour fournir la traduction en français des principaux travaux du groupe de recherche InterPares (International Research on Permanent Authentic Records in Electronic Systems : <a href="http://www.interpares.org/" target="_blank">http://www.interpares.org/</a>) sur la conservation pérenne de documents authentiques dans les systèmes électroniques. Cette traduction a pour objectif de diffuser dans la communauté archivistique francophone les concepts et la réflexion théorique élaborés par InterPares, contribuant ainsi à l’élaboration d’une archivistique et d’une diplomatique numériques.</p>
+      <p>L’École des chartes et les Archives de France se sont associées pour fournir la traduction en français des principaux travaux du groupe de recherche <a href="http://www.interpares.org/" target="_blank">InterPares</a> (International Research on Permanent Authentic Records in Electronic Systems) sur la conservation pérenne de documents authentiques dans les systèmes électroniques. Cette traduction a pour objectif de diffuser dans la communauté archivistique francophone les concepts et la réflexion théorique élaborés par InterPares, contribuant ainsi à l’élaboration d’une archivistique et d’une diplomatique numériques.</p>
       <p>Outre la traduction des principaux livrables, dont un glossaire de près de 600 termes, le lecteur trouvera ici une introduction présentant les principaux apports d’InterPares tant dans le domaine de la définition des documents numériques que dans celui des critères d’authenticité qui en gouvernent la production et la conservation.</p>
     </div>
   </article>

@@ -261,6 +261,27 @@ function arriverSur (cible, jaune = true) {
     cible.classList.add('cible-arrivee')
   }
   placerSous(cible)
+  // 2026-11-13 : galerie d'images de Saint-Denis : arriver sur un chapitre affiche son image (vignette de dots-vue,
+  // qui ouvre la visionneuse au bon folio), sinon l'image resterait masquée derrière la vignette.
+  if (cible.matches('section.sd-subpart')) {
+    // la vignette n'existe qu'une fois le manifeste chargé, et la visionneuse peut n'être pas encore prête à la
+    // recevoir : on clique, puis on revérifie toutes les 1,5 s (18 s au plus)
+    let n = 0
+    // la vignette est un interrupteur (un 2e clic referme la visionneuse) : on ne clique que si la visionneuse
+    // n'affiche pas déjà l'image du chapitre (repérée par le n° de vue du fichier : « 0231R »)
+    const ouvrir = () => {
+      if (++n > 12) return
+      const sec = document.getElementById(cible.id)
+      const v = sec && sec.querySelector('button.pb-thumbnail')
+      const lien = sec && sec.querySelector('aside.pb-component a[href]')
+      const vue = lien && (lien.getAttribute('href').match(/_(\d+[RV])_L\.jpg$/) || [])[1]
+      const vu = (document.querySelector('.mirador-viewer') || {}).innerText || ''
+      if (v && vue && vu.includes(vue)) return
+      if (v) v.click()
+      setTimeout(ouvrir, 1500)
+    }
+    setTimeout(ouvrir, 300)
+  }
   // le front peut encore faire défiler la page ou décaler la mise en page (images) : on recale
   setTimeout(() => placerSous(cible), 300)
   setTimeout(() => placerSous(cible), 1000)

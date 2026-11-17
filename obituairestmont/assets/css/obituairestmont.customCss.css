@@ -43,7 +43,7 @@
   text-align: center !important;
 }
 /* Éditeurs : libellé en italique gris, noms en petites capitales */
-#main #article .titlestmt .editors {
+#main #article .titlestmt .editors, .source {
   text-align: center;
   text-indent: 0;
 }
@@ -51,6 +51,7 @@
   font-style: italic;
   color: #666;
   font-variant: normal;
+  text-align: center !important;
 }
 #main #article .titlestmt .editor {
   font-size: clamp(1rem, 2.5vw, 1.15rem);
@@ -139,10 +140,132 @@ h1.head {
 }
 /* ==== fin bloc notes ==== */
 
-section.front {
-    background-color: transparent;
+#obituairestmont-edition_intro h1.head {
+  color: var(--fill-color) !important;
+  font-size: 160% !important;
+  text-align: left !important;
+  font-weight: 900 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
 }
 
-section {
-  padding: 0;
+section.front[id="obituairestmont-edition_intro"] {
+  border: 0 !important;
+}
+
+/* design front d'un édit
+   Cartouche de l'acte sur le modèle des cartulaires : cadre pointillé prune à angles droits ; n° de l'acte (h1.head)
+   gris foncé puis date centrés ; analyse sans retrait (hteiml : 100 px à gauche) ; témoins en plus petit, sigle droit
+   et gras ; même blanc (1,5 rem) entre les blocs. */
+#main #article .front {
+  --acte-blanc: 1.5rem;
+  position: relative;
+  background-color: #fff;
+  border: 1.75px dotted rgba(95, 0, 77, 0.3);
+  border-radius: 0;
+  padding: 0.5em 0.75em;
+  margin: 0 0 1.5em;
+
+  > h1.head {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2em;
+    line-height: 1.2;
+    margin: 0 0 .2em;
+    padding-top: 0;
+    color: #333;   /* le bloc titres met les h1 dans la couleur d'accent */
+    a.bookmark { position: absolute; }   /* le « § » caché ne décale pas le centrage */
+  }
+  > .docDate { display: block; text-align: center; text-indent: 0; margin: 0 0 var(--acte-blanc); }
+  > .argument { margin: 0 0 var(--acte-blanc); }
+  > .argument > p:last-child { margin-bottom: 0; }
+  > :is(section.tradition, .div.tradition) { padding: 0; margin: 0 0 var(--acte-blanc); border: 0; }
+  .listWit { margin: 0; }
+  li.witness { font-size: 0.85em; line-height: 1.5; }
+  li.witness small.n { font-style: normal; font-weight: 600; }
+  li.witness cite.title { font-style: italic; }
+  > .according { margin: 0 0 var(--acte-blanc); }
+  > .according:last-child { margin-bottom: 0; }
+}
+/* fin design front  */
+
+/* ==== BLOC BIBLIOGRAPHIE (module commun bibliographie.xsl, 2026-11-03) ==== */
+
+.document-views #article .biblio { margin: 0 0 1.2rem; }
+.document-views #article details.biblio > summary { display: block; list-style: none; cursor: pointer; }
+.document-views #article details.biblio > summary::-webkit-details-marker { display: none; }
+.document-views #article .biblio-compte {
+  margin-left: .3em;
+  color: #8a837c;
+  font-size: .85em;
+  font-weight: normal;
+  font-variant: normal;
+  letter-spacing: 0;
+}
+.document-views #article ul.biblio-liste { margin: 0; padding: 0; list-style: none; }
+.document-views #article ul.biblio-liste > li.bibl {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: .5em .4rem .5em 0;
+  border-bottom: 1px solid #f1ece6;
+  font-size: 1rem;
+  text-indent: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+.document-views #article ul.biblio-liste > li.bibl::marker { content: none; }
+.document-views #article ul.biblio-liste > li.bibl:hover { background: #f7f4f1; }
+.document-views #article li.bibl > .bibl-texte { flex: 1 1 auto; padding-left: 1.6em; text-indent: -1.6em; }
+.document-views #article li.bibl > .bibl-annee {
+  flex: 0 0 auto;
+  color: #8a837c;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.document-views #article li.bibl .author,
+.document-views #article li.bibl .sigle { font-variant: small-caps; font-weight: normal; letter-spacing: .02em; }
+.document-views #article li.bibl cite.title { font-style: italic; }
+.document-views #article li.bibl a { color: inherit; text-decoration: underline dotted #b9afa5; text-underline-offset: .18em; }
+.document-views #article .biblio details.biblio { margin-left: 1.2rem; }
+@media (max-width: 700px) {
+  .document-views #article ul.biblio-liste > li.bibl { flex-direction: column; gap: .1rem; }
+}
+/* fin biblio */
+
+div.list p.list {
+  white-space: normal;
+  font-size: 105%;
+  color: var(--fill-color) ;
+  font-weight: normal;
+  padding: 0 1ex;
+  margin: 1ex 0;
+  text-decoration: none;
+}
+
+div.list ul {
+  list-style: none;
+  padding-left: 0;
+}
+div.list ul li {
+  position: relative;
+  padding-left: 1.2em;
+}
+
+div.list ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4em;                /* à ajuster pour centrer sur la première ligne */
+  width: 0.6em;
+  height: 0.6em;
+  background: #5f004d;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+#home-article {
+  text-align: justify;
+  margin-bottom: 1em !important;
 }

@@ -39,7 +39,7 @@
       "piece",
       "section"
     ],
-    "displayTopToc": true,
+    "displayTopToc": false,
     "displayLeftToc": true
   },
   "aboutPageSettings": [],

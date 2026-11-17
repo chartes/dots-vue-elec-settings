@@ -74,7 +74,8 @@ function filtrer (cadre) {
     if (ok) nb++
   })
   // Suggestions : n'offrir que les valeurs encore présentes avec les autres filtres ; une
-  // option retenue au prix des accents prend sa forme aplatie pour libellé (sinon Chrome la masque)
+  // option retenue au prix des accents prend sa forme sans accents pour valeur (sinon Chrome la masque ;
+  // en libellé, Chrome l'afficherait en 2e ligne sous la forme accentuée), la forme d'origine est gardée dans data-v
   cadre.querySelectorAll('.tf-filtres input[list]').forEach(e => {
     const d = document.getElementById(e.getAttribute('list'))
     if (!d) return
@@ -89,15 +90,15 @@ function filtrer (cadre) {
     const q = plat(e.value)
     const qb = e.value.toLowerCase().replace(/\s+/g, '')
     Array.from(d.options).forEach(o => {
-      const v = o.getAttribute('data-n') || plat(o.value)
+      if (!o.hasAttribute('data-v')) o.setAttribute('data-v', o.value)
+      const orig = o.getAttribute('data-v')
+      const v = o.getAttribute('data-n') || plat(orig)
       let ok = v.indexOf(q) !== -1
       if (ok && aut.length) ok = txt.indexOf(v) !== -1
       o.disabled = !ok
-      if (ok && o.value.toLowerCase().replace(/\s+/g, '').indexOf(qb) === -1) {
-        o.label = v
-        return
-      }
-      o.removeAttribute('label')
+      o.value = ok && orig.toLowerCase().replace(/\s+/g, '').indexOf(qb) === -1
+        ? orig.normalize('NFD').replace(/[̀-ͯ]/g, '')
+        : orig
     })
   })
   const cp = cadre.querySelector('.tf-compteur')

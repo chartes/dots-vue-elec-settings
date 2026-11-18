@@ -1,8 +1,17 @@
 <template>
   <article class="home">
     <div class="home-content app-width-padding">
+      <p>
+        ELEC est la plateforme d’édition scientifique ouverte de l’École nationale
+        des chartes – PSL. Elle rassemble des corpus documentaires et textuels
+        publiés selon les principes FAIR et accessibles pour les usages de la
+        recherche via l’<a
+          href="https://dots-suite.github.io/dots_documentation/dts-requests-overview/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >API DTS</a>.
+      </p>
     </div>
-    <p>ELEC est la plateforme d’édition scientifique ouverte de l’École nationale des chartes – PSL. Elle rassemble des corpus documentaires et textuels publiés selon les principes FAIR et accessibles pour les usages de la recherche via l’<a href="https://dots-suite.github.io/dots_documentation/dts-requests-overview/" target="_blank">API DTS</a>.</p>
   </article>
 </template>
 

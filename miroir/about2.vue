@@ -23,7 +23,7 @@ origine troyenne ; l’Antiquité comme réservoir de comportements modèles ;
                            <em>La transmission des savoirs au Moyen Âge et à la Renaissance</em>. Actes du colloque
                         international organisé par l’équipe « Poétique des genres et spiritualité » de l'université de
                         Franche-Comté et le Centre d'études supérieures de la Renaissance de l'université François Rabelais de
-                        Tours, à Besançon et à Tours, du 24 au 29 mars 2003, 2 vol., Besançon, 2005, tome I. <em>Du XIIe au XVe
+                        Tours, à Besançon et à Tours, du 24 au 29 mars 2003, 2 vol., Besançon, 2005, tome I. <em>Du XII<sup>e</sup> au XV<sup>e</sup>
                            siècle</em>, sous la direction de Pierre Nobel, p. 77-98.</li>
         </ul>
         <p class="texte">Frédéric Duval a de son côté fait le point
@@ -75,7 +75,7 @@ ratione humana manifeste probantur esse vera »<sup><a id="appelnote2.3" class="
         <p class="texte">L'existence d'un corpus classique cohérent et bien établi dès le haut Moyen Âge est confirmé par le grand
                      nombre des florilèges classiques :</p>
         <ul>
-            <li>Birger Munk Olsen, « Les classiques latins dans les florilèges médiévaux antérieurs au XIIIe siècle », dans <em>Revue d'histoire des textes</em>, t. 9, 1979, p. 47-121 et t. 10,
+            <li>Birger Munk Olsen, « Les classiques latins dans les florilèges médiévaux antérieurs au XIII<sup>e</sup> siècle », dans <em>Revue d'histoire des textes</em>, t. 9, 1979, p. 47-121 et t. 10,
                         1980, p. 115-164. </li>
         </ul>
         <p class="texte">Ainsi que par la présence des auteurs classiques dans le canon des textes étudiés dans le cadre du
@@ -156,45 +156,46 @@ in allegoricam contulit eglogam, quam morte preventus non
                         Franche-Comté et le Centre d'études supérieures
 de la Renaissance de l'université François Rabelais de
                         Tours, à Besançon et à Tours, du 24 au 29mars
-2003, 2 vol., Besançon, 2005, tome I. <em>Du XIIe au XVe
+                        2003, 2 vol., Besançon, 2005, tome I. <em>Du XII<sup>e</sup> au XV<sup>e</sup>
                            siècle</em>, sous la direction de Pierre Nobel, p. 231-257. </li>
         </ul>
     </div>
     <hr class="notes">
-    <p class="notes"><a class="footnote" id="footnote2.1" href="#appelnote2.1">1</a> Saint Jérôme. <em>Lettres</em>, t. I, éd. et trad. J. Labourt, Paris, 1949, <em>Epistula ad
-                           Eustochium XXII</em>, 29 p. 144 (<em>Collection des universités de France</em>).</p>
-   <p class="notes"><a class="footnote" id="footnote2.2" href="#appelnote2.2">2</a> Everard de Kirkham est, vers le milieu du XIIIe siècle, l'un des premiers traducteurs des Disticha
+    <section class="footnotes">
+      <aside class="notes"><a class="footnote" id="footnote2.1" href="#appelnote2.1">1</a> Saint Jérôme. <em>Lettres</em>, t. I, éd. et trad. J. Labourt, Paris, 1949, <em>Epistula ad
+        Eustochium XXII</em>, 29 p. 144 (<em>Collection des universités de France</em>).</aside>
+      <aside class="notes"><a class="footnote" id="footnote2.2" href="#appelnote2.2">2</a> Everard de Kirkham est, vers le milieu du XIII<sup>e</sup> siècle, l'un des premiers traducteurs des Disticha
                         Catonis: <em>Maître Elie's Überarbeitung der ältesten französischen Übertragung von Ovid's Ars
                            Amatoria</em>, herausgegeben von H. Kühne und E. Stengel nebst <em>Elie's de Wincestre, eines
                            Anonymus und Everarts Übertragungen der Disticha Catonis</em> herausgegeben von E. Stengel, Marburg,
-                        1886, p. 111-119.</p>
-    <p class="notes"><a class="footnote" id="footnote2.3" href="#appelnote2.3">3</a> Serge Lusignan, <em>Préface au Speculum maius de Vincent de Beauvais: réfraction et
+     1886, p. 111-119.</aside>
+    <aside class="notes"><a class="footnote" id="footnote2.3" href="#appelnote2.3">3</a> Serge Lusignan, <em>Préface au Speculum maius de Vincent de Beauvais: réfraction et
                         diffraction</em>, Montréal, Paris, 1979 (<em>Cahiers d'études médiévales</em>, 5), p.
-                     126-127.</p>
-    <p class="notes"><a class="footnote" id="footnote2.4" href="#appelnote2.4">4</a> Sur
+      126-127.</aside>
+    <aside class="notes"><a class="footnote" id="footnote2.4" href="#appelnote2.4">4</a> Sur
                         Boèce, voir un point récent dans <em>Boèce ou la chaine des savoirs</em>.
  Actes du colloque
                         international de la fondation Singer-Polignac
 (Paris, 8-12 juin 1999) édités pr Alain Galonnier, Louvain,
                         2003, particuliérement Umberto Todini,  « Boezio
  più pagano di Lucrezio ? », p.
-                     23-31.</p>
-    <p class="notes"><a class="footnote" id="footnote2.5" href="#appelnote2.5">5</a> Jean-Yves Tilliette « Imitation des classiques », dans
+ 23-31.</aside>
+    <aside class="notes"><a class="footnote" id="footnote2.5" href="#appelnote2.5">5</a> Jean-Yves Tilliette « Imitation des classiques », dans
                               <em>Dictionnaire du Moyen Âge</em> sous la direction de Claude Gauvard, Alain de Libera et
-                           Michel Zink, Paris, 2002, p. 298-300.</p>
-    <p class="notes"><a class="footnote" id="footnote2.6" href="#appelnote2.6">6</a>
+      Michel Zink, Paris, 2002, p. 298-300.</aside>
+    <aside class="notes"><a class="footnote" id="footnote2.6" href="#appelnote2.6">6</a>
  L'Egloga Theoduli a été traduite en français par Jean Le Fèvre. Voir
                            Geneviève Hasenohr,  « Tradition du texte et
 tradition de l’image. À propos d’un programme d’illustration du
 Theodelet », dans <em>Miscellanea codicologica F. Masai dicat
                               1979</em>, ediderunt Pierre Cockshaw, Monique-Cécile Garand et Pierre Jodogne, 1979, p.
-                        451-467.</p>
-    <p class="notes"><a class="footnote" id="footnote2.7" href="#appelnote2.7">7</a><em>Accessus ad Auctores. Bernard d'Utrecht. Conrad d'Hirsau. Dialogus super auctores</em>,
+      451-467.</aside>
+    <aside class="notes"><a class="footnote" id="footnote2.7" href="#appelnote2.7">7</a><em>Accessus ad Auctores. Bernard d'Utrecht. Conrad d'Hirsau. Dialogus super auctores</em>,
                         édition entièrement revue et augmentée par R. B.
  G. Huygens, Leiden, 1970, p. 59-60. Voir sur la
                         composition du texte, R. P. H. Green, « The
 Genesis of a Medieval Textbook : the Models and Sources of the Egloga
-Theoduli », dans <em>Viator</em>, t. 13, 1982, p. 49-106.</p>
+Theoduli », dans <em>Viator</em>, t. 13, 1982, p. 49-106.</aside></section>
       </div>
       <div id="defintioncorpustraduction">
         <h2>Définition du corpus. Place de la traduction dans la diffusion des classiques au Moyen Âge.</h2>
@@ -219,18 +220,18 @@ Theoduli », dans <em>Viator</em>, t. 13, 1982, p. 49-106.</p>
 la magistrale synthèse de Birger Monk Olsen et par ses travaux
 successifs qui la mettent à jour :</p>
         <ul>
-            <li>Birger Munk Olsen, <em>L'étude des classiques latins aux XIe et au XIIe siècles</em>, 4 vol., Paris,
+          <li>Birger Munk Olsen, <em>L'étude des classiques latins aux XI<sup>e</sup> et au XII<sup>e</sup> siècles</em>, 4 vol., Paris,
                      1982-2014 (<em>Documents, études et répertoires publiés par l'IRHT</em>, 23).</li>
-            <li>Birger Munk Olsen, « Chronique des manuscrits latins (IXe-XIIe siècles) », dans
+          <li>Birger Munk Olsen, « Chronique des manuscrits latins (IX<sup>e</sup>-XII<sup>e</sup> siècles) », dans
                      <em>Revue d'histoire des
-                     textes</em>, t. 21, 1991, p. 37-76; « Chronique des manuscrits latins (IXe-XIIe
+                       textes</em>, t. 21, 1991, p. 37-76; « Chronique des manuscrits latins (IX<sup>e</sup>-XII<sup>e</sup>
                         siècles). II », dans
                         <em>Revue d'histoire des textes</em>, t. 24, 1994, p. 199-249 ; « Chronique des manuscrits latins
-                        (IXe-XIIe siècles). III », dans <em>Revue d'histoire des textes</em>, t. 27, 1997, p. 29-85 ;
+            (IX<sup>e</sup>-XII<sup>e</sup> siècles). III », dans <em>Revue d'histoire des textes</em>, t. 27, 1997, p. 29-85 ;
                      « Chronique
-                     des manuscrits latins (IXe-XIIe siècles). IV », dans <em>Revue d'histoire des textes</em>, t. 30, 2000,
-                     p. 123-188; « Chronique des manuscrits latins (IXe-XIIe siècles). V », dans <em>Revue d'histoire des
-                        textes</em>, t. 32, 2002, p. 73-106; « Chronique des manuscrits latins (IXe-XIIe siècles). VI », dans <em>Revue d'histoire des
+                     des manuscrits latins (IX<sup>e</sup>-XII<sup>e</sup> siècles). IV », dans <em>Revue d'histoire des textes</em>, t. 30, 2000,
+            p. 123-188; « Chronique des manuscrits latins (IX<sup>e</sup>-XII<sup>e</sup> siècles). V », dans <em>Revue d'histoire des
+              textes</em>, t. 32, 2002, p. 73-106; « Chronique des manuscrits latins (IX<sup>e</sup>-XII<sup>e</sup> siècles). VI », dans <em>Revue d'histoire des
                         textes</em>, n.s, t. 2, 2007, p. 49-106.</li>
         </ul>
         <p class="texte">Voir aussi les colloques internationaux qui ont été consacrés à la transmission médiévale des classiques :</p>
@@ -242,7 +243,7 @@ Reception of Classical Texts (Firenze Certosa del Galluzo, 26-27
                      june 1992) edited by Claudio Leonardi and Birger
 Munk Olsen, 1995 (<em>Biblioteca del Medioevo
                      latino</em>, 15) [Pierre Petitmengin, Birger Munk Olsen, « Bibliographie de la réception de la littérature
-                     classique du IXe au XVe siècle », p. 199-274].</li>
+              classique du IX<sup>e</sup> au XV<sup>e</sup> siècle », p. 199-274].</li>
             <li><em>Medieval and Renaissance Scholarship</em>. Proceedings of the Second European Science Foundation
                      Workshop on the Classical Tradition in the Middle Ages and the Renaissance (London, The Warburg Institute,
                      27-28 november 1992) edited by Nicholas Mann and Birger Munk Olsen, Leiden, 1997 (<em>Mittelateinische
@@ -407,7 +408,7 @@ répertoire ne portant pas encore de titre définitif, nous le citons
                      traductions qui ont disparu et d'autre part les manuscrits de traductions existantes qui ont disparu. Nous
                      nous appuierons sur</p>
         <ul>
-            <li><em>Bibliothèques de manuscrits médiévaux en France : relevé des inventaires du VIIIe au XVIIIe
+          <li><em>Bibliothèques de manuscrits médiévaux en France : relevé des inventaires du VIII<sup>e</sup> au XVIII<sup>e</sup>
                            siècle</em>, établi par A. M. Genevois, J. F. Genest, A. Chalandon, avec la collaboration de M. J. Beaud et A.
                            Guillaumont pour l'informatique, Paris, 1987.</li>
         </ul>
@@ -426,15 +427,15 @@ les œuvres  postérieures.  »<a id="appelnote2.9" class="appel_note" href="#fo
                      des textes sources (dans leur état médiéval) que des textes traduits. </p>
     </div>
     <hr class="notes">
-    <p class="notes"><a class="footnote" id="footnote2.8" href="#appelnote2.8">8</a> Jacques Monfrin, « Les translations vernaculaires de Virgile au Moyen Âge », dans
+    <section class="footnotes"><aside class="notes"><a class="footnote" id="footnote2.8" href="#appelnote2.8">8</a> Jacques Monfrin, « Les translations vernaculaires de Virgile au Moyen Âge », dans
                         <em>Lectures
                            médiévales de Virgile</em>. Actes du colloque organisé par l'École française de Rome (Rome, 25-28
                         octobre 1982), Rome, 1985 (<em>Collection de l'École française de Rome</em>, 80), p. 189-249. Réimpr.
-                        dans <em>Études de philologie romane</em>, p. 859-917, p. 859.</p>
-    <p class="notes"><a class="footnote" id="footnote2.9" href="#appelnote2.9">9</a> Jacques Monfrin, , « Les traducteures et leur public au Moyen Âge », dans <em>Journal des
+                        dans <em>Études de philologie romane</em>, p. 859-917, p. 859.</aside>
+    <aside class="notes"><a class="footnote" id="footnote2.9" href="#appelnote2.9">9</a> Jacques Monfrin, , « Les traducteures et leur public au Moyen Âge », dans <em>Journal des
                         savants</em>, 1964, p. 5-20 publié aussi dans <em>L'humanisme médiéval dans les littérature romanes du
-                           XIIe au XIVe siècle</em>. Colloque…Strasbourg…1962, Paris, 1964 (Actes et colloques, 4), p. 247-264.
-                        Réimpr. dans <em>Études de philologie romane</em>, p. 787-801.</p>
+                          XII<sup>e</sup> au XIV<sup>e</sup> siècle</em>. Colloque…Strasbourg…1962, Paris, 1964 (Actes et colloques, 4), p. 247-264.
+      Réimpr. dans <em>Études de philologie romane</em>, p. 787-801.</aside></section>
       </div>
     </div>
   </article>

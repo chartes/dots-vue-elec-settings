@@ -47,13 +47,6 @@
     }
   ],
   "collectionCustomCss": "morchesne",
-  "customRoutes": [
-    {
-      "name": "Search",
-      "path": "search",
-      "compName": "SearchPage"
-    }
-  ],
   "metadataDisplayOrder": [
     "dct:title",
     "schema:editor",

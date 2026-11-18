@@ -21,13 +21,17 @@
     }
   },
   "footerSettings": {
-    "footerTitle": "",
+    "footerTitle": "Miroir des classiques",
     "footerSubtitles": [
       "Édition de Frédéric Duval"
     ],
     "footerDescription": "",
-     "footerLogos": {
-      "biblissima": ""
+    "footerLogos": {
+      "biblissima": {
+        "imgName": "logo_biblissima_footer_white.png",
+        "href": "https://projet.biblissima.fr/",
+        "alt": "Biblissima+"
+      }
     }
   },
   "tableOfContentsSettings": {

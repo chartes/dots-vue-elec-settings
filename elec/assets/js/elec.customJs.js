@@ -405,8 +405,10 @@ new MutationObserver(poserCollid).observe(document.head, { childList: true, subt
 //    l'écran, une par image ; si TIFY ne se charge pas, l'image reste. Exception : les images d'un tableau
 //    (seings des notaires, CID 1986 : 286 vignettes de 60 px) gardent l'ouverture au clic (Fermer ou Échap
 //    la rend ; on y feuillette les images du tableau).
-//    Nakala ne fournit que le service d'image, pas de manifeste : on en construit un (IIIF Presentation 3) à
-//    la volée, libellé de chaque vue = description du fichier Nakala, sinon alt de l'image. TIFY (module ES,
+//    Manifeste : celui que la XSL pose sur l'image (data-manifest = graphic/@corresp du TEI, manifestes publiés
+//    sur GitLab, chartes-iiif/manifests ; 2026-11-18, CID et SGP), ouvert sur la vue de cette image (sha1 Nakala) ;
+//    sans data-manifest, on en construit un (IIIF Presentation 3) à la volée, Nakala ne fournissant que le
+//    service d'image : libellé de chaque vue = description du fichier Nakala, sinon alt de l'image. TIFY (module ES,
 //    AGPL) est chargé du CDN à la première visionneuse ; son cadre est stylé ici (rien à ajouter aux CSS de corpus).
 if (!window.elecTify) {
   window.elecTify = true
@@ -515,7 +517,17 @@ if (!window.elecTify) {
     return URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/ld+json' }))
   }
 
-  // Visionneuse d'emblée : une image, un manifeste ; hauteur à la proportion de l'image (barre de TIFY comprise),
+  // Manifeste publié (data-manifest) : lu une fois par page ; vue = celle dont l'image a le même sha1 que l'image du texte
+  const publies = new Map()
+  const vueDe = async (url, img) => {
+    if (!publies.has(url)) publies.set(url, fetch(url).then(r => r.json()))
+    const sha1 = ((img.getAttribute('src') || '').match(/\/([0-9a-f]{40})\//) || [])[1]
+    const items = (await publies.get(url)).items || []
+    const n = items.findIndex(c => JSON.stringify(c.items).includes(sha1))
+    return sha1 && n >= 0 ? n + 1 : 1
+  }
+
+  // Visionneuse d'emblée : une image, un manifeste (le publié s'il existe, ouvert sur sa vue) ; hauteur à la proportion de l'image (barre de TIFY comprise),
   // entre 320 px et min(75vh, 720px)
   const monter = async img => {
     if (!img.isConnected) return
@@ -530,11 +542,13 @@ if (!window.elecTify) {
       const [w, h] = await dimensions(img, service)
       const largeur = panneau.clientWidth || 600
       panneau.style.height = `clamp(320px, ${Math.round(largeur * h / w) + 56}px, min(75vh, 720px))`
-      const [{ default: Tify }, url] = await Promise.all([chargerTify(), manifeste([img], titre)])
+      const publie = img.dataset.manifest
+      const [{ default: Tify }, url, page] = await Promise.all([chargerTify(),
+        publie || manifeste([img], titre), publie ? vueDe(publie, img) : 1])
       if (!panneau.isConnected) return
       cible.style.display = 'none'
       const cadre = panneau.querySelector('.elec-tify-cadre')
-      montees.set(cadre, new Tify({ container: cadre, manifestUrl: url, pages: [1],
+      montees.set(cadre, new Tify({ container: cadre, manifestUrl: url, pages: [page],
         language: 'fr', translationsDirUrl: TIFY + 'translations', views: ['info'] }))
     } catch (e) {
       console.warn('elec.customJs : visionneuse non montée, image laissée', e)
@@ -569,9 +583,11 @@ if (!window.elecTify) {
     panneau.scrollIntoView({ block: 'nearest' })
     panneau.querySelector('.elec-tify-fermer').addEventListener('click', fermer)
     document.addEventListener('keydown', echap)
-    const [{ default: Tify }, url] = await Promise.all([chargerTify(), manifeste(imgs, titre.trim())])
+    const publie = img.dataset.manifest
+    const [{ default: Tify }, url, page] = await Promise.all([chargerTify(),
+      publie || manifeste(imgs, titre.trim()), publie ? vueDe(publie, img) : n])
     if (!panneau.isConnected) return
-    tify = new Tify({ container: panneau.querySelector('.elec-tify-cadre'), manifestUrl: url, pages: [n],
+    tify = new Tify({ container: panneau.querySelector('.elec-tify-cadre'), manifestUrl: url, pages: [page],
       language: 'fr', translationsDirUrl: TIFY + 'translations', views: ['thumbnails', 'info'] })
   }
 

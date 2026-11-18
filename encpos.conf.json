@@ -107,6 +107,7 @@
     }
   ],
   "searchConfig": {
+    "defaultSort": "corpus_order",
     "facets": [
       {
         "key": "collections",

@@ -54,11 +54,12 @@
       "logo": ""
     },
     "filters": {
-      "Actes diplomatiques": ["christofle", "cartulaires", "formulaires", "editsdepacification"],
+      "Actes diplomatiques": ["christofle", "cartulaires", "morchesne", "editsdepacification"],
       "Textes juridiques": ["cjc"],
-      "Documents d’archives": ["montferrand", "obituaires", "dubourg"],
+      "Documents d’archives": ["montferrand", "obituairestmont", "dubourg", "saintgermaindespres"],
       "Textes historiographiques et liturgiques": ["sanctoral_elec", "chroniqueslatines"],
-      "Actes de colloques": ["cid"]
+      "Actes de colloques": ["cid"],
+      "Outils et méthodes": ["interpares2"]
     },
     "filtersCard": {
       "title": "Filtres",

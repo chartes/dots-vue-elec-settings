@@ -11,7 +11,7 @@
     },
     "descriptionSection": {
       "collectionDescription": "",
-      "customCollectionDescription": ""
+      "customCollectionDescription": { "compName": "HomePageContent" }
     },
     "listSection": {
       "displayMode": "toc",
@@ -24,8 +24,7 @@
   "footerSettings": {
     "footerTitle": "Travaux de restauration de l'église Saint-Germain-des-Prés",
     "footerSubtitles": [
-      "Édition de Philippe Plagnieux et Élisabeth Parinet",
-      "Édition électronique de Mathilde Henriquet"
+      "Édition de Philippe Plagnieux et Élisabeth Parinet"
     ],
     "footerDescription": null,
     "footerLogos": {
@@ -39,7 +38,7 @@
       "piece",
       "section"
     ],
-    "displayTopToc": true,
+    "displayTopToc": false,
     "displayLeftToc": true
   },
   "aboutPageSettings": [],
@@ -52,7 +51,6 @@
     "schema:exampleOfWork",
     "dct:language",
     "schema:editor",
-    "schema:isBasedOn",
     "schema:publisher",
     "dct:issued",
     "dct:bibliographicCitation",
@@ -76,7 +74,6 @@
     "schema:exampleOfWork": "Notice",
     "dct:language": "Langue",
     "schema:editor": "Éditeur scientifique",
-    "schema:isBasedOn": "Source",
     "schema:publisher": "Éditeur",
     "dct:issued": "Date de publication",
     "dct:bibliographicCitation": "Citer",

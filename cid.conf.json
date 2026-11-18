@@ -81,7 +81,8 @@
     },
     null
   ],
-  "collectionCustomCss": false,
+  "collectionCustomCss": "cid",
+  "collectionCustomJs": "elec",
   "customRoutes": [
     {
       "name": "Search",

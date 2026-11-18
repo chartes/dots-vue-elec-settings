@@ -400,21 +400,25 @@ new MutationObserver(poserCollid).observe(document.head, { childList: true, subt
 
 // 5. Visionneuse IIIF (TIFY, 2026-11-17) : une image marquée par la XSL (img.iiif-visionneuse, servie par
 //    un serveur d'images IIIF : …/iiif/<doi>/<sha1>/full/max/0/default.jpg, Saint-Germain-des-Prés et CID
-//    sur Nakala) s'ouvre au clic dans TIFY, dans le corps du texte, à la place de l'image (Fermer ou Échap
-//    la rend ; plein écran par le bouton de TIFY) ; on y feuillette toutes les
-//    images marquées du texte affiché. Nakala ne fournit que le service d'image, pas de manifeste : on en
-//    construit un (IIIF Presentation 3) à la volée, libellé de chaque vue = alt de l'image. TIFY (module ES,
-//    AGPL) est chargé du CDN au premier clic ; son panneau est stylé ici (rien à ajouter aux CSS de corpus).
+//    sur Nakala) est remplacée par TIFY, dans le corps du texte, à sa place.
+//    2026-11-18 (Maxime) : visionneuse affichée d'emblée, sans clic ; montée quand l'image approche de
+//    l'écran, une par image ; si TIFY ne se charge pas, l'image reste. Exception : les images d'un tableau
+//    (seings des notaires, CID 1986 : 286 vignettes de 60 px) gardent l'ouverture au clic (Fermer ou Échap
+//    la rend ; on y feuillette les images du tableau).
+//    Nakala ne fournit que le service d'image, pas de manifeste : on en construit un (IIIF Presentation 3) à
+//    la volée, libellé de chaque vue = description du fichier Nakala, sinon alt de l'image. TIFY (module ES,
+//    AGPL) est chargé du CDN à la première visionneuse ; son cadre est stylé ici (rien à ajouter aux CSS de corpus).
 if (!window.elecTify) {
   window.elecTify = true
   const TIFY = 'https://cdn.jsdelivr.net/npm/tify@0.36.2/dist/'
   const IIIF = /^(https:\/\/.+\/iiif\/.+)\/full\/[^/]+\/0\/default\.(?:jpg|png)$/
   let tify = null
+  const montees = new Map()   // cadre → instance TIFY montée d'emblée
 
   const style = document.createElement('style')
   style.id = 'elec-tify-style'
   style.textContent = `
-    img.iiif-visionneuse { cursor: zoom-in; }
+    table img.iiif-visionneuse { cursor: zoom-in; }
     .elec-tify { display: flex; flex-direction: column; width: 100%; height: min(75vh, 720px);
       margin: .5rem 0 1rem; border: 1px solid #ccc; text-indent: 0; text-align: left; }
     .elec-tify-fermer { align-self: flex-end; font: inherit; font-size: .9rem; color: #333; background: #f3f3f3;
@@ -422,9 +426,35 @@ if (!window.elecTify) {
     .elec-tify-cadre { flex: 1; min-height: 0; background: #fff; }`
   document.head.append(style)
 
+  const auClic = img => !!img.closest('table')
+  const aMonter = new IntersectionObserver(entrees => entrees.forEach(e => {
+    if (!e.isIntersecting) return
+    aMonter.unobserve(e.target)
+    monter(e.target)
+  }), { rootMargin: '600px 0px' })
+
   aLAffichage('img.iiif-visionneuse', el => {
-    if (!el.title) el.title = 'Ouvrir dans la visionneuse'
+    if (!IIIF.test(el.getAttribute('src') || '')) return
+    if (auClic(el)) { if (!el.title) el.title = 'Ouvrir dans la visionneuse'; return }
+    aMonter.observe(el)
   })
+  // Texte remplacé par dots-vue (navigation) : libérer les visionneuses sorties de la page
+  new MutationObserver(() => montees.forEach((t, cadre) => {
+    if (cadre.isConnected) return
+    try { t.destroy() } catch (e) { /* déjà détruite */ }
+    montees.delete(cadre)
+  })).observe(document.documentElement, { childList: true, subtree: true })
+
+  const chargerTify = () => {
+    if (!document.getElementById('elec-tify-css')) {
+      const css = document.createElement('link')
+      css.id = 'elec-tify-css'; css.rel = 'stylesheet'; css.href = TIFY + 'tify.css'
+      document.head.append(css)
+    }
+    return import(/* @vite-ignore */ TIFY + 'tify.js')
+  }
+  // L'image, ou le lien qui ne contient qu'elle (CID : <a href="#id"><img/></a>)
+  const aMasquer = img => img.parentElement?.tagName === 'A' && img.parentElement.children.length === 1 ? img.parentElement : img
 
   // Dimensions d'une image : celles du fichier déjà chargé dans la page, sinon son info.json
   const dimensions = async (img, service) => {
@@ -485,11 +515,39 @@ if (!window.elecTify) {
     return URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/ld+json' }))
   }
 
-  // L'image (ou le lien qui l'entoure) est masquée le temps de la visionneuse, puis rendue
+  // Visionneuse d'emblée : une image, un manifeste ; hauteur à la proportion de l'image (barre de TIFY comprise),
+  // entre 320 px et min(75vh, 720px)
+  const monter = async img => {
+    if (!img.isConnected) return
+    const titre = (img.getAttribute('alt') || (document.querySelector('#article h1, #article h2, h1') || {}).innerText || document.title).trim()
+    const cible = aMasquer(img)
+    const panneau = document.createElement('div')
+    panneau.className = 'elec-tify elec-tify-direct'
+    panneau.innerHTML = '<div class="elec-tify-cadre"></div>'
+    cible.after(panneau)
+    try {
+      const service = img.getAttribute('src').match(IIIF)[1]
+      const [w, h] = await dimensions(img, service)
+      const largeur = panneau.clientWidth || 600
+      panneau.style.height = `clamp(320px, ${Math.round(largeur * h / w) + 56}px, min(75vh, 720px))`
+      const [{ default: Tify }, url] = await Promise.all([chargerTify(), manifeste([img], titre)])
+      if (!panneau.isConnected) return
+      cible.style.display = 'none'
+      const cadre = panneau.querySelector('.elec-tify-cadre')
+      montees.set(cadre, new Tify({ container: cadre, manifestUrl: url, pages: [1],
+        language: 'fr', translationsDirUrl: TIFY + 'translations', views: ['info'] }))
+    } catch (e) {
+      console.warn('elec.customJs : visionneuse non montée, image laissée', e)
+      panneau.remove()
+      cible.style.display = ''
+    }
+  }
+
+  // Ouverture au clic (images des tableaux) : l'image (ou le lien qui l'entoure) est masquée, puis rendue
   let masquee = null
   const fermer = () => {
     if (tify) { tify.destroy(); tify = null }
-    document.querySelector('.elec-tify')?.remove()
+    document.querySelector('.elec-tify:not(.elec-tify-direct)')?.remove()
     if (masquee) { masquee.style.display = ''; masquee = null }
     document.removeEventListener('keydown', echap)
   }
@@ -497,7 +555,7 @@ if (!window.elecTify) {
 
   const ouvrir = async img => {
     const zone = img.closest('#article, article, main') || document.body
-    const imgs = [...zone.querySelectorAll('img.iiif-visionneuse')].filter(x => IIIF.test(x.getAttribute('src') || ''))
+    const imgs = [...zone.querySelectorAll('img.iiif-visionneuse')].filter(x => auClic(x) && IIIF.test(x.getAttribute('src') || ''))
     const n = imgs.indexOf(img) + 1
     if (!n) return
     const titre = (document.querySelector('#article h1, #article h2, h1') || {}).innerText || document.title
@@ -505,18 +563,13 @@ if (!window.elecTify) {
     const panneau = document.createElement('div')
     panneau.className = 'elec-tify'
     panneau.innerHTML = '<button type="button" class="elec-tify-fermer">Fermer ✕</button><div class="elec-tify-cadre"></div>'
-    masquee = img.parentElement?.tagName === 'A' && img.parentElement.children.length === 1 ? img.parentElement : img
+    masquee = aMasquer(img)
     masquee.after(panneau)
     masquee.style.display = 'none'
     panneau.scrollIntoView({ block: 'nearest' })
     panneau.querySelector('.elec-tify-fermer').addEventListener('click', fermer)
     document.addEventListener('keydown', echap)
-    if (!document.getElementById('elec-tify-css')) {
-      const css = document.createElement('link')
-      css.id = 'elec-tify-css'; css.rel = 'stylesheet'; css.href = TIFY + 'tify.css'
-      document.head.append(css)
-    }
-    const [{ default: Tify }, url] = await Promise.all([import(/* @vite-ignore */ TIFY + 'tify.js'), manifeste(imgs, titre.trim())])
+    const [{ default: Tify }, url] = await Promise.all([chargerTify(), manifeste(imgs, titre.trim())])
     if (!panneau.isConnected) return
     tify = new Tify({ container: panneau.querySelector('.elec-tify-cadre'), manifestUrl: url, pages: [n],
       language: 'fr', translationsDirUrl: TIFY + 'translations', views: ['thumbnails', 'info'] })
@@ -524,7 +577,7 @@ if (!window.elecTify) {
 
   document.addEventListener('click', event => {
     const img = event.target instanceof Element && event.target.closest('img.iiif-visionneuse')
-    if (!img) return
+    if (!img || !auClic(img)) return
     event.preventDefault()
     event.stopPropagation()
     ouvrir(img)

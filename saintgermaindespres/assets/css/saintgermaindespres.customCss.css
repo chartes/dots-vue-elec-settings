@@ -170,79 +170,12 @@
 
 #main #article a.bookmark:hover { color: #5f004d; }
 
-/* ==== D14e-6 (2026-09-12) : agrandissement des 64 images dans la page ====
-   Ancien site : les figures etaient de simples <img> en ligne, a leur taille
-   naturelle (600 a 850 px de large) ; jquery.colorbox etait charge par deux
-   pages seulement (l'accueil et inha.php) et lie a la classe « .colorbox »,
-   absente de toutes les pages conservees : aucune visionneuse en surimpression
-   n'a donc jamais fonctionne sur le site historique.
-   Les fragments DoTS-vue sont compiles comme gabarits Vue (aucun <script>) :
-   l'agrandissement se fait sans script par <details>/<summary>, comme pour les
-   fac-similes de christofle.
-   Etat FERME = rendu ELEC a l'identique (image en ligne, taille naturelle).
-   Etat OUVERT = image portee a toute la largeur de la colonne de texte
-   (~1093 px mesures), soit environ 1,3 a 1,8 fois la taille naturelle. */
-
+/* ==== D14e-6 : les 64 images ====
+   2026-11-18 (Maxime) : plus d'agrandissement/réduction dans la page (<details> retiré de saintgermain.xsl) ;
+   chaque image sur Nakala est remplacée à l'affichage par la visionneuse TIFY (elec.customJs.js, bloc 5).
+   Sans script : l'image seule, à sa taille, bornée à la colonne (contre « img { max-height: 40vh } » de hteiml). */
 #main #article .sgdp-figure { display: block; margin: 1rem 0; }
-#main #article .sgdp-figure > summary {
-  display: block;
-  cursor: zoom-in;
-  list-style: none;
-}
-#main #article .sgdp-figure[open] > summary { cursor: zoom-out; }
-
-
-#main #article .sgdp-figure-ouvrir,
-#main #article .sgdp-figure-fermer {
-  display: inline-block;
-  margin-top: .3rem;
-  color: #5f004d;
-  font-size: .9em;
-}
-#main #article .sgdp-figure-fermer,
-#main #article .sgdp-figure[open] .sgdp-figure-ouvrir,
-#main #article .sgdp-figure[open] .sgdp-figure-vignette { display: none; }
-#main #article .sgdp-figure[open] .sgdp-figure-fermer { display: inline-block; }
-/* 2026-11-04 : ouvert, « Réduire l'image » sous l'image (le summary précède l'image dans le HTML) : le
-   summary est posé en bas du details, dans un blanc réservé de la hauteur du bouton. */
-#main #article .sgdp-figure[open] { position: relative; padding-bottom: 1.9rem; }
-#main #article .sgdp-figure[open] > summary { position: absolute; left: 0; bottom: 0; }
-
-/* Ouvert, l'image deborde dans la marge interne de #article (padding 20px 10% 120px
-   de DoTS-vue) : la colonne de texte ne fait que 875 px pour des images de 600 a
-   850 px de large, un « width: 100% » ne gagnait que 3 %. Les marges negatives de
-   10 % (87 px, soit moins que le padding de 109 px) portent l'image a 1050 px sans
-   creer de debordement horizontal de la page. Gain mesure : 1,24x pour la plus
-   grande image, jusqu'a 1,75x pour les plus petites. */
-/* 2026-11-16 : la regle generique « img { max-width: 670px; max-height: 40vh } » ecrasait la
-   vignette (157 px de large), et l'image ouverte, etiree a 120 %, devenait floue (fichiers ELEC de
-   650 a 1275 px, pas de meilleure source). Fermee : page entiere a la hauteur de l'ecran.
-   Ouverte : taille reelle du fichier, jamais agrandie, centree, bornee a la colonne elargie. */
-#main #article .sgdp-figure-vignette {
-  display: block;
-  width: auto;
-  max-width: 100%;
-  max-height: 80vh;
-  border: 1px solid #ddd;
-}
-#main #article .sgdp-figure[open] > .sgdp-figure-image {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 120%;
-  max-height: none;
-  margin: .4rem auto;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-@media (max-width: 900px) {
-  #main #article .sgdp-figure[open] > .sgdp-figure-image {
-    max-width: 100%;
-    left: auto;
-    transform: none;
-  }
-}
+#main #article .sgdp-figure-image { display: block; width: auto; height: auto; max-width: 100%; max-height: 80vh; }
 
 /* Les 48 renvois aux PDF d'attachements restent sur l'ancien site ELEC. */
 #main #article a.sgdp-pdf::after { content: " [PDF]"; font-size: .85em; }

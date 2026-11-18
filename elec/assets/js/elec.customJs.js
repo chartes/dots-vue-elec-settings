@@ -8,7 +8,7 @@
 //      et surlignée d'un jaune qui fond (bloc CSS « Arrivée sur une ancre » de chaque corpus).
 //   3. Bibliographie (module commun transform/commun/bibliographie.xsl, li.bibl) : un clic sur une
 //      référence la copie dans le presse-papiers, en texte brut ; « Copié » s'affiche un instant.
-//   5. Visionneuse IIIF : une image marquée img.iiif-visionneuse s'ouvre au clic dans TIFY (bloc en fin de fichier).
+//   5. Visionneuse IIIF : une image marquée img.iiif-visionneuse s'ouvre au clic dans TIFY, à sa place (bloc en fin de fichier).
 // Un corpus qui a un comportement propre (Bellelay : présélection par fête ; Saint-Denis : export PDF et
 // porte-documents de l'Inventaire) garde son <corpus>.customJs.js, qui importe celui-ci puis ajoute le sien.
 
@@ -400,7 +400,8 @@ new MutationObserver(poserCollid).observe(document.head, { childList: true, subt
 
 // 5. Visionneuse IIIF (TIFY, 2026-11-17) : une image marquée par la XSL (img.iiif-visionneuse, servie par
 //    un serveur d'images IIIF : …/iiif/<doi>/<sha1>/full/max/0/default.jpg, Saint-Germain-des-Prés et CID
-//    sur Nakala) s'ouvre au clic dans TIFY, par-dessus la page, sur cette image ; on y feuillette toutes les
+//    sur Nakala) s'ouvre au clic dans TIFY, dans le corps du texte, à la place de l'image (Fermer ou Échap
+//    la rend ; plein écran par le bouton de TIFY) ; on y feuillette toutes les
 //    images marquées du texte affiché. Nakala ne fournit que le service d'image, pas de manifeste : on en
 //    construit un (IIIF Presentation 3) à la volée, libellé de chaque vue = alt de l'image. TIFY (module ES,
 //    AGPL) est chargé du CDN au premier clic ; son panneau est stylé ici (rien à ajouter aux CSS de corpus).
@@ -414,10 +415,10 @@ if (!window.elecTify) {
   style.id = 'elec-tify-style'
   style.textContent = `
     img.iiif-visionneuse { cursor: zoom-in; }
-    .elec-tify { position: fixed; inset: 0; z-index: 10000; display: flex; flex-direction: column;
-      background: rgba(20, 20, 20, .85); padding: 2.5rem 1rem 1rem; }
-    .elec-tify-fermer { position: absolute; top: .4rem; right: 1rem; font: inherit; font-size: 1rem;
-      color: #fff; background: none; border: 1px solid #fff; border-radius: 3px; padding: .2rem .6rem; cursor: pointer; }
+    .elec-tify { display: flex; flex-direction: column; width: 100%; height: min(75vh, 720px);
+      margin: .5rem 0 1rem; border: 1px solid #ccc; text-indent: 0; text-align: left; }
+    .elec-tify-fermer { align-self: flex-end; font: inherit; font-size: .9rem; color: #333; background: #f3f3f3;
+      border: none; border-bottom: 1px solid #ccc; border-left: 1px solid #ccc; padding: .15rem .6rem; cursor: pointer; }
     .elec-tify-cadre { flex: 1; min-height: 0; background: #fff; }`
   document.head.append(style)
 
@@ -484,9 +485,12 @@ if (!window.elecTify) {
     return URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/ld+json' }))
   }
 
+  // L'image (ou le lien qui l'entoure) est masquée le temps de la visionneuse, puis rendue
+  let masquee = null
   const fermer = () => {
     if (tify) { tify.destroy(); tify = null }
     document.querySelector('.elec-tify')?.remove()
+    if (masquee) { masquee.style.display = ''; masquee = null }
     document.removeEventListener('keydown', echap)
   }
   const echap = event => { if (event.key === 'Escape') fermer() }
@@ -501,7 +505,10 @@ if (!window.elecTify) {
     const panneau = document.createElement('div')
     panneau.className = 'elec-tify'
     panneau.innerHTML = '<button type="button" class="elec-tify-fermer">Fermer ✕</button><div class="elec-tify-cadre"></div>'
-    document.body.append(panneau)
+    masquee = img.parentElement?.tagName === 'A' && img.parentElement.children.length === 1 ? img.parentElement : img
+    masquee.after(panneau)
+    masquee.style.display = 'none'
+    panneau.scrollIntoView({ block: 'nearest' })
     panneau.querySelector('.elec-tify-fermer').addEventListener('click', fermer)
     document.addEventListener('keydown', echap)
     if (!document.getElementById('elec-tify-css')) {

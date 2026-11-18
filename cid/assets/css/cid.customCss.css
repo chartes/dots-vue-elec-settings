@@ -17,8 +17,10 @@
  2. HISTORIQUE ÉLEC (cid/theme/cid.css)
  =============================================================*/
 
-/* Images : 600 px au plus sur l'ÉLEC ; ici bornées aussi à la colonne. */
-[collid="cid"] #main #article img { max-width: min(600px, 100%); height: auto; }
+/* Images : 600 px au plus sur l'ÉLEC ; ici bornées aussi à la colonne. width:auto contre le
+   « figure img { width:100% } » de dots-vue, max-height:none contre le 40vh de hteiml : les deux
+   ensemble aplatissaient l'image (600 × 244 px quel que soit son format). */
+[collid="cid"] #main #article img { width: auto; max-width: min(600px, 100%); height: auto; max-height: none; }
 /* Tableaux sans filets (« sansbord ») : répertoires, listes en colonnes. Les autres tableaux : bloc 4. */
 [collid="cid"] #main #article table.sansbord { border: none; border-collapse: collapse; width: 100%; font-size: .95rem; line-height: 1.4; }
 [collid="cid"] #main #article table.sansbord td { border: none; text-align: left; padding: 1px 3px; }

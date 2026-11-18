@@ -102,8 +102,13 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding: 0;
-  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
+  /* 2026-11-12 (Maxime) : apparat dans un cadre grisé, séparé des notes, comme les Actes royaux du Poitou et les
+     Édits (fond de html.css de hteiml, posé ici : il ne vaut que pour section.footnotes). Remplace le fond retiré le 05/11. */
+  padding: 1em;
+  background-color: #f3f4f6;
+  /* 2026-11-13 (Maxime : notes et apparat alignés, partout) : le cadre déborde à gauche de son retrait au lieu de
+     pousser son contenu ; lettres, trait et texte retombent sur la colonne des notes. */
+  margin-left: -1em;
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }
@@ -432,9 +437,9 @@
 [collid="cid"] #main #article .apparatus span.p { display: block; margin-top: .4em; }
 /* 2026-11-17 : astérisque de séparation dans une entrée d'apparat, dessiné ici (cid.xsl sort un span vide). */
 [collid="cid"] #main #article span.metamark-separateur:empty::before { content: "*"; }
-/* 2026-11-17 (Maxime : « comme l'Énéide ») : apparat du CID dans l'encadré gris de hteiml et en 13 px, comme le Miroir ;
-   le bloc générique APPARAT ci-dessus retire ce fond pour tous les corpus (05/11), on le remet ici pour le CID seul. */
-[collid="cid"] #main #article .footnotes p.apparatus { background-color: rgb(243, 244, 246); padding: 1em; font-size: 13px; }
+/* 2026-11-17 (Maxime : « comme l'Énéide ») : apparat du CID en 13 px, comme le Miroir (l'encadré gris est dans le
+   bloc générique APPARAT depuis le 18/11). */
+[collid="cid"] #main #article .footnotes p.apparatus { font-size: 13px; }
 /* Saut de page dans une entrée d'apparat (1986 art_31_appendici, z) : enfant direct de l'entrée, il prenait la place de la lettre. */
 [collid="cid"] #main #article .footnotes .apparatus span.note > a.pb { position: static; display: inline; float: none; margin: 0 .25em; font-weight: normal; font-size: .85em; color: rgb(138, 131, 124) !important; }
 /* 2026-11-17 : appel de note chiffrée dans une entrée d'apparat (1986 art_31_appendici, comme sur ÉLEC) : même raison, il

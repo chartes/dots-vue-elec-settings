@@ -736,6 +736,12 @@ span.note-inline {
   pointer-events: none;
   cursor: default;
 }
+/* 2026-11-18 : téléphone. La marge de gauche ne fait que 32 px : les repères posés dans la marge (« {p. 260} » du texte,
+   « {p. 259} » et « Voir le cartulaire » de l'en-tête, l. 361) sortaient de l'écran. Remis dans la ligne, à leur place. */
+@media (max-width: 760px) {
+  [collid="cartulaires"] #main #article header.front a.pb { position: static; }
+  [collid="cartulaires"] #main #article a.pb { float: none; margin: 0 .35em 0 0; }
+}
 
 /* 2026-10-07 : NDVC-AB, index : page du livre après le numéro d'acte « 293 (p. 274) » */
 [collid="cartulaires"] #main #article .cartu-page {

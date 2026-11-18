@@ -107,6 +107,7 @@
   ],
   "searchConfig": {
     "target": "fragment",
+    "defaultSort": "corpus_order",
     "include": { "citeTypes": ["entry"] },
     "countLabel": { "singular": "entrée", "plural": "entrées" },
     "columns": [

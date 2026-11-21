@@ -168,14 +168,15 @@ h1.head {
   border-left: 1px solid #ccc;
 }
 /* Lien de la note : placé dans la marge, à gauche du filet */
-.document-views #article .footnotes .apparatus span.note > a {
-  position: absolute;
-  right: calc(100% + .76em);
-  color: var(--fill-color);
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: none;
-}
+ .document-views #article .footnotes .apparatus span.note > a {
+    position: absolute;
+    left: -2.5em;
+    color: var(--fill-color);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: medium;
+    padding-left: 0.75em;
+ }
 /* Lemme fermé par un crochet */
 .document-views #article .footnotes .apparatus .lem::after {
   content: "]\00a0";

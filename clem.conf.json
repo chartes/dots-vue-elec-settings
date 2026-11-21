@@ -1,5 +1,5 @@
 {
-  "collectionId": "CLEM",
+  "collectionId": "clem",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "CLEM"
@@ -37,7 +37,7 @@
     { "tabName": "Conventions éditoriales", "compName": "about2" },
     null
   ],
-  "collectionCustomCss": "CLEM",
+  "collectionCustomCss": "clem",
   "metadataDisplayOrder": [
       "dct:title",
       "dct:creator",
@@ -58,8 +58,22 @@
       "dots:resourceIIIFManifest"
     ],
     "metadataRename": {
-      "@id": "dts:id",
-      "@type": "dts:type"
+      "dct:title": "Titre",
+      "dct:creator": "Auteur",
+      "dct:created": "Date du document",
+      "dct:isVersionOf": "Source",
+      "dct:language": "Langue",
+      "schema:contributor": "Collaborateurs",
+      "dct:source": "Source",
+      "dct:publisher": "Éditeur",
+      "dct:issued": "Date de publication",
+      "dct:bibliographicalCitation": "Citer",
+      "dct:coverage": "Couverture temporelle",
+      "dct:description": "Description",
+      "dct:license": "Licence",
+      "dct:rights": "Mentions de droits",
+      "dct:identifier": "Identifiant",
+      "dct:relation": "Voir aussi"
     },
     "excludeMetadata": {
       "onlyDeclared": false,

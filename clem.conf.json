@@ -24,8 +24,15 @@
   },
   "footerSettings": {
     "footerTitle": "CLEM",
-    "footerSubtitles": [],
-    "footerDescription": ""
+    "footerSubtitles": ["Édition par François Ploton-Nicollet"],
+    "footerDescription": "Le projet d'édition des Carmina latina epigraphica moderna a été développé par la Mission projets numériques de l'École nationale des chartes – PSL avec le soutien de Biblissima+. Biblissima+ bénéficie d’une aide de l'Etat gérée par l'ANR au titre du Programme d’investissements d’avenir intégré à France 2030, portant la référence ANR-21-ESRE-0005.",
+    "footerLogos": {
+      "biblissima": {
+        "imgName": "logo_biblissima_footer_white.png",
+        "href": "https://projet.biblissima.fr/",
+        "alt": "Biblissima+"
+      }
+    }
   },
   "tableOfContentsSettings": {
     "tableOfContentDepth": 1,
@@ -38,6 +45,9 @@
     null
   ],
   "collectionCustomCss": "clem",
+  "topBreadcrumbButtonLabel": [
+    "extensions.dots:shortTitle"
+  ],
   "metadataDisplayOrder": [
       "dct:title",
       "dct:creator",

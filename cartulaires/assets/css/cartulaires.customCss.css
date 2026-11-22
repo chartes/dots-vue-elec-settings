@@ -1599,6 +1599,19 @@ span.note-inline {
 [collid="cartulaires"] #main #article :is(h3, h4).censier-titre { text-align: center; font-weight: normal; margin: 1.4em 2em .6em; line-height: 1.35; }
 [collid="cartulaires"] #main #article h3.censier-niveau-1 { font-variant: small-caps; font-size: 1.12em; letter-spacing: .02em; margin-top: 2em; }
 [collid="cartulaires"] #main #article h4.censier-niveau-2 { font-style: italic; font-size: 1em; }
+/* 2026-11-22 (Olivier Canteaut) : le 1er paragraphe après un titre de censier a son alinéa, comme les autres. */
+[collid="cartulaires"] #main #article :is(h3, h4).censier-titre ~ p.noindent { text-indent: var(--indent); }
+/* 2026-11-22 : plan dépliable du censier (cartulaires.xsl, details.censier-plan). */
+[collid="cartulaires"] #main #article details.censier-plan { margin: 1em 0 1.5em; padding: .4em .8em; border: 1px solid #e4e4e4; border-radius: 4px; background: #fafafa; }
+[collid="cartulaires"] #main #article details.censier-plan > summary { cursor: pointer; font-weight: 600; }
+[collid="cartulaires"] #main #article details.censier-plan ul { list-style: none; margin: .5em 0 0; padding: 0; }
+[collid="cartulaires"] #main #article details.censier-plan li { text-indent: 0; margin: .15em 0; line-height: 1.35; }
+[collid="cartulaires"] #main #article details.censier-plan li.censier-plan-niveau-1 { font-variant: small-caps; margin-top: .6em; }
+[collid="cartulaires"] #main #article details.censier-plan li.censier-plan-niveau-2 { font-style: italic; padding-left: 1.5em; font-size: .95em; }
+
+/* 2026-11-22 : texte réservé aux lecteurs d'écran (« Voir le cartulaire », lien image d'un témoin quand Gallica
+   refuse le manifeste) : aucune CSS chargée par dots-vue ne définissait .sr-only, le texte s'affichait en marge. */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 /* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
 #main #article {

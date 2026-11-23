@@ -65,14 +65,14 @@
                           Boèce », dans <em> Histoire littéraire de la France</em>, t. 37, 1938, p. 419-470 (complété
                       par Mario Roques, sur la traduction de Renaud de Louhans, <em>ibid.</em> p. 470-488). </li>
               <li><em>La somme du Code, texte dauphinois de la région de Grenoble</em>, publié d'après un manuscrit du
-                      XIIIe siècle appartenant à la Bibliothèque du château d'Uriage par Louis Royer et Antoine Thomas, Paris,
+                      XIII<sup>e</sup> siècle appartenant à la Bibliothèque du château d'Uriage par Louis Royer et Antoine Thomas, Paris,
                       1929. </li>
               <li>Robert Bossuat, « Anciennes traductions françaises du <em>De officiis</em> de
                       Cicéron », dans <em>Bibliothèque de l'Ecole des chartes</em>, t. 96, 1935, p. 246-284.</li>
               <li>Robert Bossuat, « Jean Miélot, traducteur de Cicéron », dans <em>Bibliothèque de
                           l'Ecole des chartes</em>, t. 99, 1938, p. 82-124.</li>
               <li>Robert Bossuat, « Traductions françaises des <em>Commentaires</em> de César à la fin
-                          du XVe siècle », dans <em>Bibliothèque d'Humanisme et Renaissance</em>, t. 3, 1943, p.
+                          du XV<sup>e</sup> siècle », dans <em>Bibliothèque d'Humanisme et Renaissance</em>, t. 3, 1943, p.
                       253-411.</li>
               <li>Robert Bossuat, « Vasque de Lucène, traducteur de Quinte-Curce (1468) », dans
                           <em>Bibliothèque d'Humanisme et Renaissance</em>, t. 8, 1946, p. 197-246.</li>
@@ -83,13 +83,12 @@
                       France</em>, t. 40, 1974, p. 113-186.</li>
           </ul>
           <p class="texte">Thèses pour l'obtention du diplôme d'archiviste paléographe soutenues avant 1955 et concernant des traductions
-                    d'auteurs classiques ou portant sur des compilations historiques ayant largement utilisé des auteurs classiques
-                    :</p>
+                    d'auteurs classiques ou portant sur des compilations historiques ayant largement utilisé des auteurs classiques :</p>
           <ul>
               <li> Omer Vaudoir-Lainé, « Virgile, ses transformations et sa légende au Moyen Âge »,
                       résumé dans <em>Ecole nationale des chartes. Positions des thèses…1868-1869</em>, p. 33-38. </li>
               <li> Léopold Pannier, « Pierre Bersuire et sa traduction de Tite-Live considérée comme monument
-                          de la formation savante de la langue française au XIVe siècle » résumé dans <em>Ecole nationale
+                          de la formation savante de la langue française au XIV<sup>e</sup> siècle » résumé dans <em>Ecole nationale
                           des chartes. Positions des thèses…1869</em>, p. 57-63 ; en partie publié : « Notice
                           bibliographique sur le bénédictin Pierre Bersuire, premier traducteur français de Tite-Live », dans
                           <em>Bibliothèque de l'Ecole des chartes</em>, t. 33, 1872, p. 325-364.</li>
@@ -101,7 +100,7 @@
               <li>Félix Olivier-Martin, « Les <em>Institutes</em> de Justinien en français. Texte
                           critique publié avec une introduction », résumé dans <em>Ecole nationale des chartes. Positions
                           des thèses</em>…1927, p. ; publié : <em>Les Institutes de Justinien en français, traduction anonyme
-                          du XIIIe siècle</em>. Texte critique publié avec une introduction, Paris, 1935 (<em>Société
+                          du XIII<sup>e</sup> siècle</em>. Texte critique publié avec une introduction, Paris, 1935 (<em>Société
                           d'Histoire du droit</em>).</li>
               <li>Jeannine Bordas, « <em>L'Art d'amour</em>, traduction en prose de l'<em>Ars</em> <em>amatoria</em> d'Ovide », résumé dans <em>Ecole nationale des chartes. Positions des
                           thèses</em>…1954, p. 15-17.</li>
@@ -111,28 +110,30 @@
                           Bourgogne (1470). Le traité de Xénophon mis en français d'après la version latine du Pogge. Edition des
                           livres I et V</em>, Genève, 1973 (<em>Travaux d'Humanisme et Renaissance</em>, 140).</li>
           </ul>
-          <hr class="notes">
-          <p class="notes">
-            <a class="footnote" id="footnote1" href="#appelnote1">1</a> On trouvera un historique des études sur les traductions médiévales remontant au XVIII<sup>e</sup> siècle sous la plume
-                        de François Bérier, dans <em>La littérature française aux XIVe et XVe siècles</em>, t. 8, vol. I
+          <hr class="notes"/>
+          <section class="footnotes">
+            <aside id="footnote1" class="notes">
+            <a class="noteback" href="#appelnote1">1</a> On trouvera un historique des études sur les traductions médiévales remontant au XVIII<sup>e</sup> siècle sous la plume
+                        de François Bérier, dans <em>La littérature française aux XIVe et XV<sup>e</sup> siècles</em>, t. 8, vol. I
                         (partie historique) du <em>Grundriss der romanischen Literaturen des Mittelalters</em>, Heidelberg,
                         1988, p. 219-265 « La traduction en français », part. <em>Historique des
                         études</em>, p. 219-220.
-          </p>
-          <p class="notes">
-            <a class="footnote" id="footnote2" href="#appelnote2">2</a> Frédéric Hennebert, <em>Histoire des traductions françaises d'auteurs grecs et latins pendant le XVIe
-                                    et le XVIIe siècles</em>, Bruxelles, 1861, p. 12.
-          </p>
-          <p class="notes">
-            <a class="footnote" id="footnote3" href="#appelnote3">3</a> La
+          </aside>
+          <aside id="footnote2" class="notes">
+            <a class="noteback" href="#appelnote2">2</a> Frédéric Hennebert, <em>Histoire des traductions françaises d'auteurs grecs et latins pendant le XVIe
+                                    et le XVII<sup>e</sup> siècles</em>, Bruxelles, 1861, p. 12.
+          </aside>
+          <aside id="footnote3" class="notes">
+            <a class="noteback" href="#appelnote3">3</a> La
                                 documentation réunie par Delisle a été exploitée par Serge Lusignan dans le chapitre IV « Le
-                                    mouvement des traductions au XIVe siècle et la définition du français comme langue savante », de son
-                                livre <em>Parler vulgairement. Les intellectuels et la langue française aux XIIIe et XIVe siècles</em>,
+                                    mouvement des traductions au XIV<sup>e</sup> siècle et la définition du français comme langue savante », de son
+                                livre <em>Parler vulgairement. Les intellectuels et la langue française aux XIIIe et XIV<sup>e</sup> siècles</em>,
                                 Paris, 1986 et dans « La topique de la <em>translatio studii</em> et les traductions
-                                    françaises de textes savants au XIVe siècle », dans <em>Traductions et traducteurs au Moyen
+                                    françaises de textes savants au XIV<sup>e</sup> siècle », dans <em>Traductions et traducteurs au Moyen
                                 Âge</em>. Actes du colloque international du CNRS organisé à Paris, Institut de recherche et d'histoire
                                 des textes, les 26-28 mai 1986. Textes réunis par Geneviève Contamine, Paris, 1989, p. 303-315.
-          </p>
+          </aside>
+          </section>
       </div>
       <div id="jacquesmonfrin">
         <h2>Jacques Monfrin [promotion 1947] et l'Inventaire critique des traductions d'auteurs anciens du
@@ -150,7 +151,7 @@
               </ul>
               <p class="texte">Jacques Monfrin<sup><a id="appelnote4" href="#footnote4" class="appel_note">4</a></sup> présenta en 1955 à
                         l'Académie des inscriptions et belles-lettres un <em>Inventaire critique des traductions d'auteurs anciens du
-                          XIIIe au XVe siècle</em>, qui a obtenu le Prix du
+                          XIII<sup>e</sup> au XV<sup>e</sup> siècle</em>, qui a obtenu le Prix du
       budget. Le séjour de Jacques Monfrin à l'École française
                         de Rome ainsi que son passage au département des
       manuscrits de la Bibliothèque nationale lui avaient permis de
@@ -165,7 +166,7 @@
               <blockquote style="font-style:italic;">
                   <p class="texte">« Le principal objet de ce travail est de
       dresser la liste des œuvres anciennes qui ont été traduites en
-                              langue française du XIIIe au XVe siècle. Nous
+                              langue française du XIII<sup>e</sup> au XV<sup>e</sup> siècle. Nous
       avons pris le mot ancien dans son sens le plus étroit, en
                               nous limitant aux œuvres de l'Antiquité
       classique ; nous n'avons retenu les auteurs de basse époque que
@@ -177,7 +178,7 @@
       pouvait donner lieu à quelque hésitation ; mais les traductions
                               de la <em>Consolatio Philosophiæ</em> sont bien connues ; la récente notice de <em>l'Histoire
                                 littéraire</em><sup><a id="appelnote5" href="#footnote5" class="appel_note">5</a></sup>
-      analyse celles qui sont antérieures au milieu du XIVe siècle ; de
+      analyse celles qui sont antérieures au milieu du XIV<sup>e</sup> siècle ; de
       celles qui
                               viennent après cette date, nous avons rencontré
       une foule de manuscrits dont nous remettons l'étude à plus
@@ -205,9 +206,9 @@
       traduction et de la langue des traducteurs : les œuvres
                               grecques originales sont, du point de vue du
       style, tout à fait défigurées. En les traduisant en latin,
-                              les savants du XIIe et du XIIIe siècle leur ont
-      déjà donné une physionomie médiévale si bien qu'au XIVe et
-                              au XVe siècle, les traducteurs français
+                              les savants du XII<sup>e</sup> et du XIII<sup>e</sup> siècle leur ont
+      déjà donné une physionomie médiévale si bien qu'au XIV<sup>e</sup> et
+                              au XV<sup>e</sup> siècle, les traducteurs français
       trouveront leur besogne d'adaptation à moitié faite. Si l'on veut
                               étudier comment la prose française a été
       façonnée par les traducteurs, on devrait, comme on l'a déjà fait
@@ -595,8 +596,8 @@
                           le texte des confidences de Didon à Anna (Aen., IV 1-38) dans l'<em>Histoire ancienne jusqu'à
                           César</em> (Paris, BNF, fr. 20125), dans le <em>Livre des Eneydes</em> (Paris, BNF, Rés. G Yc 312)
                           et dans la traduction d'Octovien de Saint-Gelays (Paris, BNF, fr. 861)].</li>
-                  <li>Jacques Monfrin, « L'Histoire de Didon et Énée au XVe siècle », dans <em>Études
-                              littéraires sur le XVe siècle. Actes du Ve Colloque international sur le moyen français. Milan 6-8 mai
+                  <li>Jacques Monfrin, « L'Histoire de Didon et Énée au XV<sup>e</sup> siècle », dans <em>Études
+                              littéraires sur le XV<sup>e</sup> siècle. Actes du Ve Colloque international sur le moyen français. Milan 6-8 mai
                               1985</em>. Vol. III. Contributi del Centro studi sulla letteratura medio-francese, vol. quinto. Milan,
                           1986, p. 161-197.</li>
               </ul>
@@ -620,9 +621,9 @@
                           l'introduction à l'<em>Inventaire</em>]. </li>
                   <li> Jacques Monfrin, « Les traducteurs et leur public au Moyen Âge », dans <em>Journal des
                           Savants</em>, 1964, p. 5-20 publié aussi dans <em>L'humanisme médiéval dans les littératures romanes du
-                              Xlle au XIVe siècle</em>. Colloque... Strasbourg... 1962, Paris, 1964 (<em>Actes et
+                              Xlle au XIV<sup>e</sup> siècle</em>. Colloque... Strasbourg... 1962, Paris, 1964 (<em>Actes et
                           Colloques</em>, 3), p. 217-246 et p. 247-264. Réimpr. dans <em>Études de philologie romane</em>, p.
-                          787-801 [envisage la réception des traductions dans les bibliothèques princières et privées aux XIVe et XVe
+                          787-801 [envisage la réception des traductions dans les bibliothèques princières et privées aux XIV<sup>e</sup> et XV<sup>e</sup>
                           siècles et définit la méthode]. </li>
               </ul>
               <blockquote style="font-style:italic;">
@@ -636,11 +637,11 @@
               </blockquote>
               <ul>
                   <li> Jacques Monfrin, « La connaissance de l'Antiquité et le problème de l'Humanisme en langue
-                              vulgaire dans la France du XVe siècle », dans <em>The Late Middle ages and the Dawn of Humanism
+                              vulgaire dans la France du XV<sup>e</sup> siècle », dans <em>The Late Middle ages and the Dawn of Humanism
                               outside Italy</em>, Louvain, 1972, (<em>Mediaevalia Lovaniensia</em>, Series I/ Studia I), p.
                           131-170. Réimpr. dans <em>Études de philologie romane</em>, p. 803-837 [resserre le point de vue sur la
                           fin du Moyen Âge et intéresse essentiellement la traduction des historiens anciens et son intégration dans
-                          les tentatives d'histoire générale qui ont été réalisées en France au XVe siècle. L'article fournit en
+                          les tentatives d'histoire générale qui ont été réalisées en France au XV<sup>e</sup> siècle. L'article fournit en
                           appendice un choix de prologues: Prologue de Jean de Courcy pour la <em>Bouquechardière</em> (Paris,
                           BNF, fr. 329), Prologue de Jean Lebègue pour la traduction du <em>De bello punico primo</em> de
                           Leonardo Bruni [(Paris, BNF, fr. 23085), Prologue de Jean de Hangest pour l'abrégé de Valère-Maxime (Paris,
@@ -663,9 +664,9 @@
                               « Un remaniement du Tite-Live de Pierre Bersuire par Laurent de Premierfait (Manuscrit
                               Paris, B. N., Fr. 264-265-266) », dans <em>Romania</em>, t. 107, 1986, p. 231-181 ; « A propos de la traduction de Tite-Live par Pierre Bersuire. Le manuscrit Oxford, Bibliothèque
                               bodléienne, Rawlinson C 447 », dans <em>Romania</em>, t. 118, 2000, p. 449-498 ;
-                              <em>L'histoire romaine de Tite-Live: un miroir de sagesse antique pour le roi de France au XVe
+                              <em>L'histoire romaine de Tite-Live: un miroir de sagesse antique pour le roi de France au XV<sup>e</sup>
                           siècle</em>, Paris, 2000; « Une traduction des Décades de Tite-Live pour Jean le
-                          Bon », dans <em>Revue de la Bibliothèque nationale de France</em>, n° 23, 2006, p. 81-85; « Art militaire et “discipline de chevalerie” au milieu du XIVe siècle. Pétrarque et
+                          Bon », dans <em>Revue de la Bibliothèque nationale de France</em>, n° 23, 2006, p. 81-85; « Art militaire et “discipline de chevalerie” au milieu du XIV<sup>e</sup> siècle. Pétrarque et
                           Bersuire », à paraître.</li>
                   <li>Béatrice de Chancel, « Étude des manuscrits et de la traduction du texte de la
                                 <em>Bouquechardière</em> de Jean de Courcy », résumé dans <em>École nationale des
@@ -673,7 +674,7 @@
                               de la <em>Bouquechardière</em> de Jean de Courcy », dans <em>Revue d'Histoire des
                           textes</em>, t. 17, 1987, p. 219-290 et « Les manuscrits de la
                               <em>Bouquechardière</em> de Jean de Courcy et leur décor », dans <em>Manuscrits et
-                              enluminures dans le monde normand (Xe-XVe siècles). Colloque de Cerisy-la-Salle (octobre 1995).</em>
+                              enluminures dans le monde normand (Xe-XV<sup>e</sup> siècles). Colloque de Cerisy-la-Salle (octobre 1995).</em>
                           Actes publiés sous la direction de Pierre Bouet et Monique Dosdat, Caen, 1999, p. 181-196. </li>
                   <li> Christophe Pavlidès, « L'<em>Histoire ancienne jusqu'à César</em> (première
                               rédaction). Étude de la tradition manuscrite. Étude et édition partielle de la section d'histoire
@@ -708,7 +709,8 @@
               </ul>
           </div>
 
-          <hr class="notes"><p class="notes"><a class="footnote" id="footnote4" href="#appelnote4">4</a> Voir sur les travaux et la carrière de Jacques Monfrin, professeur de Philologie
+          <hr class="notes"/>
+            <section class="footnotes"><aside id="footnote4" class="notes"><a class="footnote" href="#appelnote4">4</a> Voir sur les travaux et la carrière de Jacques Monfrin, professeur de Philologie
                           romane à l'École de 1958 à 1989, Françoise Vielliard et Emmanuel Poulle, « Jacques Monfrin
                               (1924-1998) », dans <em>Bibliothèque de l'École des chartes</em>,
       t. 157, 1999, p. 317-325. On
@@ -716,10 +718,10 @@
       de ses travaux, aux p. 981-997 du volume de réimpression
                           d'un certain nombre de ses articles, Jacques
       Monfrin, <em>Études de philologie romane</em>,
-                              Genève, 2001 (<em>Publications romanes et françaises</em>, 220).</p>
-          <p class="notes"><a class="footnote" id="footnote5" href="#appelnote5">5</a> Antoine Thomas, « Traductions… », <em>op.
-                                cit</em>.</p>
-          <p class="notes"><a class="footnote" id="footnote6" href="#appelnote6">6</a> On rappellera que le <em>Secret des secrets</em> que le
+                              Genève, 2001 (<em>Publications romanes et françaises</em>, 220).</aside>
+              <aside id="footnote5" class="notes"><a class="footnote" href="#appelnote5">5</a> Antoine Thomas, « Traductions… », <em>op.
+                                cit</em>.</aside>
+                <aside id="footnote6" class="notes"><a class="footnote" href="#appelnote6">6</a> On rappellera que le <em>Secret des secrets</em> que le
                                 Moyen Âge attribue à Aristote avait fait l'objet de la thèse d'École des chartes de Jacques Monfrin:
                                     « Le <em>Secret des Secrets</em>. Recherches sur les traductions françaises
                                     suivies du texte de Jofroi de Waterford et Servais Copale », résumé dans <em>École
@@ -732,16 +734,16 @@
                                     Ryan et Charles B. Schmitt, Londres, 1982 (<em>Warburg Institute Surveys</em>, 9), p.
                                 73-113. Il n'a pas eu le temps de publier l'édition de la traduction faite par Jofroi de
                                 Waterford et Servais Copale « à peu près en état d'être publiée » (« La place… »,
-                                    <em>op. cit</em>. p. 74).</p>
-          <p class="notes"><a class="footnote" id="footnote7" href="#appelnote7">7</a> Robert Bossuat,
+                  <em>op. cit</em>. p. 74).</aside>
+                  <aside id="footnote7" class="notes"><a class="footnote" href="#appelnote7">7</a> Robert Bossuat,
                                     <em>Manuel bibliographique de la littérature du Moyen Âge</em>, Paris, 1951 à compléter
                                     <em>Manuel bibliographique de la littérature du Moyen Âge (Supplément 1949-1953)</em> avec le
                                 concours de Jacques Monfrin, Paris, 1955; <em>Manuel bibliographique de la littérature du Moyen
                                     Âge. Second supplément (1954-1960)</em>, Paris, 1960; Françoise Vielliard, Jacques Monfrin,
                                     <em>Manuel bibliographique de la littérature du Moyen Âge de Robert Bossuat. Troisième supplément
                                     (1960-1980). II. L'ancien français (Chapitres IV à IX). Le moyen français</em>, Paris,
-                              1991.</p>
-          <p class="notes"><a class="footnote" id="footnote8" href="#appelnote8">8</a> Cette notice a été en
+                    1991.</aside>
+                    <aside id="footnote8" class="notes"><a class="footnote" href="#appelnote8">8</a> Cette notice a été en
                                 partie utilisée dans <em>Humanisme et traduction…</em>, voir <em>Études de philologie
                                 romane</em> p. 774 note 45 et extraits du prologue du <em>De amicitia</em>
       p. 774-775. Les
@@ -757,50 +759,50 @@
       d'histoire des textes, les 26-28 mai 1986. Textes réunis par
                                 Geneviève Contamine, Paris, 1989), une
       communication sur les traductions de Cicéron par Laurent de
-                                Premierfait mais il ne l'a pas publiée.</p>
-          <p class="notes"><a class="footnote" id="footnote9" href="#appelnote9">9</a> Cette notice a été publiée: Jacques Monfrin, « Notice sur une
+      Premierfait mais il ne l'a pas publiée.</aside>
+                      <aside id="footnote9" class="notes"><a class="footnote" href="#appelnote9">9</a> Cette notice a été publiée: Jacques Monfrin, « Notice sur une
                                     traduction de la <em>Vie de César</em> de Suétone contenue dans le manuscrit français 20312 de
                                     la Bibliothèque nationale de Paris », dans <em>Fin du Moyen Âge et Renaissance. Mélanges de
                                     philologie française offerts à Robert Guiette</em>, Anvers, 1961, p. 203-224 et « Un grand seigneur humaniste, Georges d'Halluin », dans <em>Bulletin de la Société
-                                    nationale des antiquaires de France</em>, 1963, p. 94-96.</p>
-          <p class="notes"><a class="footnote" id="footnote10" href="#appelnote10">10</a> Cette notice inédite a été rendue en partie obsolète par la publication
+                                      nationale des antiquaires de France</em>, 1963, p. 94-96.</aside>
+                        <aside id="footnote10" class="notes"><a class="footnote" href="#appelnote10">10</a> Cette notice inédite a été rendue en partie obsolète par la publication
                                 d'Henry Bardon, « La première traduction de Térence en français », dans
-                                    <em>Rivista di cultura classica e medioevale</em>, t. 27, 1975, p. 233-247.</p>
-          <p class="notes"><a class="footnote" id="footnote11" href="#appelnote11">11</a> Cette notice inédite a été rendue en partie obsolète par
-                                les travaux de Leena Löfstedt sur les traductions de Végèce.</p>
-          <p class="notes"><a class="footnote" id="footnote12" href="#appelnote12">12</a> Cette notice a été publiée: Jacques Monfrin en collaboration avec Charles
+                          <em>Rivista di cultura classica e medioevale</em>, t. 27, 1975, p. 233-247.</aside>
+                          <aside id="footnote11" class="notes"><a class="footnote" href="#appelnote11">11</a> Cette notice inédite a été rendue en partie obsolète par
+                            les travaux de Leena Löfstedt sur les traductions de Végèce.</aside>
+                            <aside id="footnote12" class="notes"><a class="footnote" href="#appelnote12">12</a> Cette notice a été publiée: Jacques Monfrin en collaboration avec Charles
                                 Samaran, « Pierre Bersuire Prieur de Saint-Éloi de Paris (1290-1362) », dans
                                     <em>Histoire littéraire de la France</em>,
       t. 39, Paris, 1962, p. 301-314[en particulier
                                     « La traduction française de Tite-Live »,
-      p. 348-414 et « Appendice. Manuscrits et éditions », p. 434-450].</p>
-          <p class="notes"><a class="footnote" id="footnote13" href="#appelnote13">13</a> Cette étude a été rendue obsolète par les travaux de Giuseppe di Stefano sur Simon de Hesdin et
-                                Nicolas de Gonesse.</p>
-          <p class="notes"><a class="footnote" id="footnote14" href="#appelnote14">14</a> Giuseppe Billanovitch, « Petrarch and the
+                                    p. 348-414 et « Appendice. Manuscrits et éditions », p. 434-450].</aside>
+                              <aside id="footnote13" class="notes"><a class="footnote" href="#appelnote13">13</a> Cette étude a été rendue obsolète par les travaux de Giuseppe di Stefano sur Simon de Hesdin et
+                                Nicolas de Gonesse.</aside>
+                                <aside id="footnote14" class="notes"><a class="footnote" href="#appelnote14">14</a> Giuseppe Billanovitch, « Petrarch and the
                                     textual tradition of Livy », dans <em>Journal of the Warburg and Courtauld
-                                Institutes</em>, t. 14, 1951, p. 137-208.</p>
-          <p class="notes"><a class="footnote" id="footnote15" href="#appelnote15">15</a> Jacques Monfrin, « Jean de Brienne, comte d'Eu, et la traduction des
+                                      Institutes</em>, t. 14, 1951, p. 137-208.</aside>
+                                  <aside id="footnote15" class="notes"><a class="footnote" href="#appelnote15">15</a> Jacques Monfrin, « Jean de Brienne, comte d'Eu, et la traduction des
                                       Météorologiques d'Aristote par Mahieu le Vilain (vers 1290) », dans <em>Académie des
                                       inscriptions et belles-lettres. Comptes rendus des séances de l'année 1996</em>, p. 27-36.
-                                    Réimpr. dans <em>Études de philologie romane</em>, p. 919-928.</p>
-          <p class="notes"><a class="footnote" id="footnote16" href="#appelnote16">16</a> Jacques Monfrin a exploité ces remarques dans une conférence
+                                    Réimpr. dans <em>Études de philologie romane</em>, p. 919-928.</aside>
+                                    <aside id="footnote16" class="notes"><a class="footnote" id="footnote16" href="#appelnote16">16</a> Jacques Monfrin a exploité ces remarques dans une conférence
                                 prononcée devant la Société des antiquaires de France en 1967; voir un résumé « Le goût
                                     des lettres antiques à la cour des ducs de Bourgogne  », dans <em>Bulletin de la Société
-                                    nationale des antiquaires de France</em>, 1967, p. 285-287.</p>
-          <p class="notes"><a class="footnote" id="footnote17" href="#appelnote17">17</a> Voir le « Rapport de conférence de philologie romane 1980-1981 [I. Étude
-                              des traductions en français d'auteurs latins classiques du XIIe à la fin du XVe siècle] », dans
+                                      nationale des antiquaires de France</em>, 1967, p. 285-287.</aside>
+                                      <aside id="footnote17" class="notes"><a class="footnote" href="#appelnote17">17</a> Voir le « Rapport de conférence de philologie romane 1980-1981 [I. Étude
+                              des traductions en français d'auteurs latins classiques du XIIe à la fin du XV<sup>e</sup> siècle] », dans
                               <em>École pratique des Hautes Études. IVe section. Sciences historiques et philologiques. Livret
                           I</em>, 1982, p.139 et le « Rapport de conférence de philologie romane 1981-1982 [I. La
-                              mise en romanz. Recherches sur les traductions de textes latins (XIIe-XVe siècle)] et 1982-1983 [I.
+                              mise en romanz. Recherches sur les traductions de textes latins (XIIe-XV<sup>e</sup> siècle)] et 1982-1983 [I.
                               Traductions en ancien français d'auteurs latins classiques.] », dans <em>École pratique des
                               Hautes Études. IVe section. Sciences historiques et philologiques. Livret II</em>, 1985, p.
-                        139-140.</p>
-          <p class="notes"><a class="footnote" id="footnote18" href="#appelnote18">18</a> « Séance publique du 27 mars 1982. Réception de M. Jacques Monfrin. Discours de M.
+                                        139-140.</aside>
+                                        <aside id="footnote18" class="notes"><a class="footnote" href="#appelnote18">18</a> « Séance publique du 27 mars 1982. Réception de M. Jacques Monfrin. Discours de M.
                                 Pierre Ruelle et de M. Jacques Monfrin », dans <em>Bulletin de l'Académie royale de langue et
                                 de littérature françaises</em>, t. 60, n° 1, Bruxelles, 1982, p. 9-37, à la p. 14 [discours de
-                              Pierre Ruelle]. </p>
-          <p class="notes"><a class="footnote" id="footnote19" href="#appelnote19">19</a><em>Études de philologie romane</em>, p. 788.</p>
-      </div>
+                                          Pierre Ruelle]. </aside>
+                <aside id="footnote19" class="notes"><a class="footnote" href="#appelnote19">19</a><em> Études de philologie romane</em>, p. 788.</aside>
+      </section></div>
       <div id="miroirclassiques2007">
         <h2>Le Miroir des classiques 1 [2007]</h2>
           <div class="intro">
@@ -812,7 +814,7 @@
                           Étude de la tradition manuscrite et édition partielle du livre III », résumé dans <em>École
                           nationale des chartes. Positions des thèses</em>…1991, p. 25-31.</li>
               <li>Anne-Caroline Beaugendre, « Le <em>Livre des merveilles du monde</em> ou
-                            <em>Secret de l'histoire naturelle</em> (premier tiers du XVe siècle). Édition critique »,
+                            <em>Secret de l'histoire naturelle</em> (premier tiers du XV<sup>e</sup> siècle). Édition critique »,
                       résumé dans <em>École nationale des chartes. Positions des thèses</em>…1992, p. 13-19 ; en partie
                       publié : <em>Les Merveilles du monde ou les Secrets de l'histoire naturelle</em>, Paris, 1996.</li>
               <li>Frédéric Duval, « Édition critique du <em>Romuleon</em> de Benvenuto da Imola dans la
@@ -824,8 +826,8 @@
                           la <em>Chronique universelle</em> et de l'<em>Histoire romaine</em> », résumé dans
                           <em>École nationale des chartes. Positions des thèses</em>…2001, p. 127-133.</li>
               <li>Étienne Rouziès, « Lectures médiévales de Salluste », résumé dans <em>École
-                          nationale des chartes. Positions des thèses</em>…2004, p. 177-181. Voir du même auteur, « Salluste dans les bibliothèques du XVe siècle », dans <em>D'une Antiquité l'autre. La
-                          littérature antique classique dans les bibliothèques du XVe au XIXe siècle</em>, sous la direction de
+                          nationale des chartes. Positions des thèses</em>…2004, p. 177-181. Voir du même auteur, « Salluste dans les bibliothèques du XV<sup>e</sup> siècle », dans <em>D'une Antiquité l'autre. La
+                          littérature antique classique dans les bibliothèques du XVe au XIX<sup>e</sup> siècle</em>, sous la direction de
                       Catherine Volpilhac-Auger, Lyon, 2006, p. 29-48 (<em>Métamorphoses du livre</em>).</li>
               <li>Séverine Montigny, « Édition partielle de l'œuvre de Jean du Quesne, traducteur de César et
                           chroniqueur à la cour de Charles le Téméraire. Première partie : édition de la traduction de la
@@ -888,11 +890,11 @@
               <li><em>La transmission des savoirs au Moyen Âge et à la Renaissance</em>. Actes du colloque
                           international organisé par l'équipe « Poétique des Genres et Spiritualité » de l'Université de
                           Franche-Comté et le Centre d'études supérieures de la Renaissance de l'Université François Rabelais de
-                          Tours, à Besançon et à Tours, du 24 au 29 mars 2003, tome I. <em>Du XIIe au XVe siècle</em>, sous la
-                          direction de Pierre Nobel, tome II. <em>Au XVIe siècle</em>, sous la direction d'Alfredo Perifano,
+                          Tours, à Besançon et à Tours, du 24 au 29 mars 2003, tome I. <em>Du XIIe au XV<sup>e</sup> siècle</em>, sous la
+                          direction de Pierre Nobel, tome II. <em>Au XVI<sup>e</sup> siècle</em>, sous la direction d'Alfredo Perifano,
                           Besançon, 2005. Voir en particulier dans le tome I, Frédéric Duval et Françoise
                           Vielliard « La transmission des auteurs classiques dans les traductions en français et en
-                            occitan du XIIIe au XVe siècle », p. 363-384. Présentation du projet en quatre volets : I.
+                            occitan du XIIIe au XV<sup>e</sup> siècle », p. 363-384. Présentation du projet en quatre volets : I.
                           <em>Genèse du projet et bilan bibliographique</em>: cette première partie est reprise et
                       complétée ici. II. <em>Objectifs</em>, partie sur laquelle il n'y a pas à revenir. III.
                           Définition du corpus : cette troisième partie a été reprise lors d'une conférence donnée à la
@@ -912,7 +914,7 @@
           <p class="texte">Enfin il faut signaler une entreprise plus large dans ses ambitions que le <em>Miroir des classiques</em>
                     puisqu'elle concerne toutes les traductions dans
   toutes les langues de l'Europe médiévale, et dont les principes
-                    viennent d'être définis : <em>Translater au Moyen Âge. Cinq siècles de traductions en français (XIe-XVe
+                    viennent d'être définis : <em>Translater au Moyen Âge. Cinq siècles de traductions en français (XI<sup>e</sup>-XV<sup>e</sup>
                       siècles). Étude et Répertoire</em>. Une publication en deux volumes, sous la direction de Claudio
                     Galderisi, est prévue chez Brépols pour 2010. [<em>Translations médiévales. Six siècles de traductions en français (X<sup>e</sup>-XV<sup>e</sup> siècles), Etude et répertoire</em>, dir. Claudio Galderisi, Turnhout, 2011.]</p>
           <p class="texte">Le <em>Miroir des classiques</em> est le fruit
@@ -975,27 +977,22 @@ effectué par Hélène Gautier et Lucie Viénot. Au plan technique, le
 projet est également redevable à Mathilde Henriquet et à Pascal
 Campeotto (Ecole des chartes) ainsi qu’au pool Biblissima.</p>
     </div>
-    <hr class="notes">
-    <p class="notes">
+    <hr class="notes"/>
+        <section class="footnotes"><aside class="notes" id="miroir2_note1">
       <a
         class="footnote"
-        id="miroir2_note1"
-        href="#miroir2_appel1"
-      >
-        1
-      </a>
+        href="#miroir2_appel1">1</a>
           Ce travail a bénéficié́ d'une aide de l’État gérée par l'Agence Nationale de la Recherche au titre du programme d’Investissements d’avenir portant la référence ANR-21-ESRE-0005 (Biblissima+).
-    </p>
-    <p>
+    </aside>
+        <aside id="miroir2_note2">
       <a
         class="footnote"
-        id="miroir2_note2"
         href="#miroir2_appel2"
       >
         2
       </a>
       <em>Translations médiévales. Six siècles de traductions en français (X<sup>e</sup>-XV<sup>e</sup> siècles), Etude et répertoire</em>, dir. Claudio Galderisi, Turnhout, 2011, t. II, p. 634-640.
-    </p>
+    </aside></section>
       </div>
     </div>
   </article>

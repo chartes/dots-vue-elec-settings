@@ -1,0 +1,97 @@
+{
+  "collectionId": "saintgermaindespres",
+  "mediaTypeEndpoint": "html",
+  "homePageSettings": {
+    "appNavBar": {
+      "collectionShortTitle": "Saint-Germain-des-Prés"
+    },
+    "pageHeader": {
+      "collectionAltTitle": "Saint-Germain-des-Prés : une église médiévale au filtre du XIXe siècle",
+      "aboutButtonText": "À propos"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": { "compName": "HomePageContent" }
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "logo": "stgermain3.jpg",
+      "openState": true,
+      "browseButtonText": "Parcourir les dossiers",
+      "singleResourceButtonText": "Accéder au document"
+    }
+  },
+  "footerSettings": {
+    "footerTitle": "Travaux de restauration de l'église Saint-Germain-des-Prés",
+    "footerSubtitles": [
+      "Édition de Philippe Plagnieux et Élisabeth Parinet"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 4,
+    "editByLevel": 1,
+    "editByCiteType": [
+      "piece",
+      "section"
+    ],
+    "displayTopToc": false,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [],
+  "collectionCustomCss": "saintgermaindespres",
+  "collectionCustomJs": "elec",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:author": "Auteur",
+    "dct:created": "Date du document",
+    "schema:exampleOfWork": "Notice",
+    "dct:language": "Langue",
+    "schema:editor": "Éditeur scientifique",
+    "schema:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:funder": "Financement",
+    "dct:identifier": "Identifiant",
+    "schema:identifier": "Identifiant",
+    "schema:encoding": "Exports",
+    "schema:associatedMedia": "Images",
+    "schema:subjectOf": "Voir aussi",
+    "schema:about": "Sujet",
+    "dcat:accessURL": "URL"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
+}

@@ -1,5 +1,6 @@
 {
   "collectionId": "editsdepacification",
+  "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
       "collectionShortTitle": "Édits de pacification"
@@ -82,13 +83,5 @@
   "excludeMetadata": {
     "onlyDeclared": true,
     "fields": []
-  },
-  "customRoutes": [
-    {
-      "name": "Search",
-      "path": "search",
-      "compName": "SearchPage"
-    }
-  ],
-  "mediaTypeEndpoint": "html"
+  }
 }

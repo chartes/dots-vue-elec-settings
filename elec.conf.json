@@ -87,7 +87,7 @@
   "collectionCustomCss": "elec",
   "collectionCustomFonts": "elec",
   "collectionCustomJs": "elec",
-  "excludeCollectionIds": ["corpus", "bfm", "theater"],
+  "excludeCollectionIds": ["corpus", "bfm", "theater", "ENCPOS"],
   "searchConfig": {
     "facets": [
       {

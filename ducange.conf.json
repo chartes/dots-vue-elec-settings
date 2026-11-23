@@ -97,5 +97,28 @@
     "onlyDeclared": true,
     "fields": [
     ]
+  },
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "searchConfig": {
+    "target": "fragment",
+    "defaultSort": "corpus_order",
+    "include": { "citeTypes": ["entry"] },
+    "countLabel": { "singular": "entrée", "plural": "entrées" },
+    "columns": [
+      { "key": "dublinCore.title", "label": "Entrée", "sortKey": "corpus_order" }
+    ],
+    "searchType": {
+      "default": "notice",
+      "options": {
+        "notice": { "labels": { "long": "articles", "short": "articles" }, "prefix": true, "minTermLength": 1 },
+        "fulltext": { "labels": { "long": "plein texte", "short": "texte" }, "prefix": false, "minTermLength": 3 }
+      }
+    }
   }
 }

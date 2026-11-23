@@ -87,7 +87,7 @@
   "collectionCustomCss": "elec",
   "collectionCustomFonts": "elec",
   "collectionCustomJs": "elec",
-  "excludeCollectionIds": ["corpus", "bfm", "ENCPOS", "theater"],
+  "excludeCollectionIds": ["corpus", "bfm", "theater"],
   "searchConfig": {
     "facets": [
       {
@@ -108,6 +108,13 @@
         "enabled": true,
         "order": 2
       }
-    ]
+    ],
+    "searchType": {
+      "default": "fulltext",
+      "options": {
+        "notice": { "labels": { "long": "notices", "short": "notices" }, "prefix": false, "minTermLength": 3 },
+        "fulltext": { "labels": { "long": "plein texte", "short": "texte" }, "prefix": false, "minTermLength": 3 }
+      }
+    }
   }
 }

@@ -901,6 +901,28 @@ span.note-inline {
    propres à cette édition (pages du site, images, Inventaire, index des auteurs, sommaire).
    Les écarts à Pleade sont marqués [dots]. */
 
+/* Pages de présentation : le premier titre est celui de la page ; les sections
+   imbriquées suivent la hiérarchie h2–h6. Leur gris les distingue clairement du
+   titre principal violet, et les marges restent proches du texte et du pied. */
+:is(#cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] #main #article .sd-static-page {
+  margin: 0 0 1rem;
+}
+:is(#cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] #main #article .sd-page-title {
+  padding: 0;
+  line-height: 1.25;
+  margin: 0 0 .45rem;
+}
+:is(#cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] #main #article :is(h2, h3, h4, h5, h6).sd-page-title,
+:is(#cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] #main #article :is(.sd-legacy-h2, .sd-legacy-h3) {
+  color: #555 !important;
+}
+:is(#cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] #main #article .sd-static-page > :last-child {
+  margin-bottom: 0;
+}
+:is(#cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] #main #article > .sd-static-page:last-child {
+  margin-bottom: 0;
+}
+
 /* ---------- Texte : police et interligne des autres cartulaires (Roboto, hteiml par défaut) depuis le
    2026-10-19 ; les règles Pleade (Verdana 13 px, liens bleus) sont retirées. ---------- */
 
@@ -964,21 +986,21 @@ span.note-inline {
      et contenu, SINON le menu s'affiche vide ;
    — le `display` du contenu doit être porté par `[open]`, sinon la règle écrase aussi le
      masquage natif de l'état fermé et l'image reste visible en permanence. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio > summary,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio > summary,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration > summary { display: list-item; cursor: pointer; color: #3d0033; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio[open] > :not(summary),
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio[open] > :not(summary),
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] > :not(summary) { display: block; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio:not([open]) > :not(summary),
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio:not([open]) > :not(summary),
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration:not([open]) > :not(summary) { display: none; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio > summary { display: inline list-item; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio-libelle,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio > summary { display: inline list-item; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio-libelle,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-libelle { text-decoration: underline; text-underline-offset: 2px; }
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio[open],
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio[open],
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration[open] { display: block; margin: .6rem 0 1rem; }
 /* L'image est un folio complet (~500 ko, 2 000 px de haut) : on la borne à la colonne de texte
    et on la laisse défiler dans son cadre plutôt que d'étirer la page. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio-img,
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio-img,
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-img {
   display: block; max-width: min(100%, 46rem); max-height: 80vh; width: auto; height: auto;
   margin: .5rem 0; border: 1px solid #d8d2c8; background: #fff; object-fit: contain;
@@ -986,7 +1008,7 @@ span.note-inline {
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area .sd-illustration-pdf::after { content: ""; }
 /* 2026-11-13 (Maxime) : folio dont le libellé est une vignette (img.sd-graphic, Présentation du Cartulaire blanc) : en bloc,
    sinon le texte qui suit repart à droite de la vignette au lieu d'en dessous. Les libellés texte restent en ligne. */
-:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images)[collid] .document-area .sd-folio:has(> summary img.sd-graphic) { display: block; }
+:is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully, #cartulaire-blanc, #cartulaire-blanc-images, #inventaire-introduction, #inventaire-images, #saint-denis-site)[collid] .document-area .sd-folio:has(> summary img.sd-graphic) { display: block; }
 /* 2026-11-13 (Maxime) : Table des chapitres du Cartulaire blanc : pages (« ▸ 227-237 ») sur une ligne dans la colonne étroite. */
 #cartulaire-blanc[collid] .document-area table .sd-folio > summary { white-space: nowrap; }
 /* 2026-11-13 (Maxime) : « Images du Cartulaire blanc » : comme le site d'origine, une vignette par tome et par chapitre
@@ -1019,18 +1041,18 @@ span.note-inline {
    page — vedette en petites capitales, « ▸ N occurrences » dépliable dessous, un renvoi par ligne, filet
    entre les entrées. La rubrique vit sur la page « Parcourir » de #cartulaire-blanc depuis le 19/10, dans #cartulaire-blanc-index
    (« Index et recherche ») depuis le 12/11. */
-#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-auteurs {
   max-width: 62rem;
   scroll-margin-top: 5rem;  /* 2026-11-13 : plus de filet violet au-dessus (l'index a sa propre page depuis le 12/11) */
 }
-#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs-titre {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-auteurs-titre {
   margin: 0 0 1rem; font-size: 160%; line-height: 115%; color: var(--fill-color, #5f004d) !important;  /* 2026-11-13 : titre de page, violet */
 }
-#cartulaire-blanc-index[collid] #main #article .sd-index-auteurs-chapeau { margin: 0 0 1rem; color: #4a4540; font-size: .9rem; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-auteurs-chapeau { margin: 0 0 1rem; color: #4a4540; font-size: .9rem; }
 
 /* Barre des initiales. */
-#cartulaire-blanc-index[collid] #main #article .sd-index-lettres { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.2rem; }
-#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-lettres { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1.2rem; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-lettre-lien {
   min-width: 1.9rem;
   padding: .2rem .45rem;
   border: 1px solid #d8d0c8;
@@ -1040,11 +1062,11 @@ span.note-inline {
   text-align: center;
   text-decoration: none;
 }
-#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien:hover,
-#cartulaire-blanc-index[collid] #main #article .sd-index-lettre-lien:focus { background: var(--fill-color); border-color: var(--fill-color); color: #fff; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-lettre-lien:hover,
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-lettre-lien:focus { background: var(--fill-color); border-color: var(--fill-color); color: #fff; }
 
-#cartulaire-blanc-index[collid] #main #article .sd-index-groupe { scroll-margin-top: 5rem; margin-bottom: 1.6rem; }
-#cartulaire-blanc-index[collid] #main #article .sd-index-initiale {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-groupe { scroll-margin-top: 5rem; margin-bottom: 1.6rem; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-initiale {
   margin: 1.6rem 0 .6rem;
   color: #5c3a1e;
   font-size: 1.7rem;
@@ -1052,15 +1074,15 @@ span.note-inline {
 }
 
 /* Entrées : modèle .mh-index-entree. */
-#cartulaire-blanc-index[collid] #main #article ul.sd-index-termes { margin: 0; padding: 0; list-style: none; }
-#cartulaire-blanc-index[collid] #main #article li.sd-index-terme {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article ul.sd-index-termes { margin: 0; padding: 0; list-style: none; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article li.sd-index-terme {
   margin: 0;
   padding: .55rem .4rem .55rem 0;
   border-bottom: 1px solid #f0ebe5;
 }
-#cartulaire-blanc-index[collid] #main #article li.sd-index-terme:last-child { border-bottom: none; }
-#cartulaire-blanc-index[collid] #main #article li.sd-index-terme:hover { background: #faf8f6; }
-#cartulaire-blanc-index[collid] #main #article .sd-index-libelle {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article li.sd-index-terme:last-child { border-bottom: none; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article li.sd-index-terme:hover { background: #faf8f6; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-libelle {
   display: block;
   color: #2b2b2b;
   font-weight: 600;
@@ -1069,8 +1091,8 @@ span.note-inline {
 }
 
 /* « N occurrences » : modèle .mh-index-renvois / .mh-index-occurrences. */
-#cartulaire-blanc-index[collid] #main #article .sd-index-details { margin: .15rem 0 0 1.2rem; }
-#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-details { margin: .15rem 0 0 1.2rem; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-sommaire {
   display: list-item;
   list-style: disclosure-closed;
   margin-left: .9rem;
@@ -1079,23 +1101,23 @@ span.note-inline {
   font-weight: 600;
   cursor: pointer;
 }
-#cartulaire-blanc-index[collid] #main #article .sd-index-details[open] > .sd-index-sommaire { list-style: disclosure-open; margin-bottom: .2rem; }
-#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire:hover { color: #5f004d; }
-#cartulaire-blanc-index[collid] #main #article .sd-index-sommaire:focus-visible { outline: 2px solid #5f004d; outline-offset: 2px; }
-#cartulaire-blanc-index[collid] #main #article ul.sd-index-renvois {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-details[open] > .sd-index-sommaire { list-style: disclosure-open; margin-bottom: .2rem; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-sommaire:hover { color: #5f004d; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article .sd-index-sommaire:focus-visible { outline: 2px solid #5f004d; outline-offset: 2px; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article ul.sd-index-renvois {
   margin: 0 0 .3rem 1.9rem;
   padding: 0;
   list-style: none;
   font-size: .9em;
 }
-#cartulaire-blanc-index[collid] #main #article ul.sd-index-renvois > li { margin: 0 0 .1rem; }
-#cartulaire-blanc-index[collid] #main #article a.sd-index-renvoi {
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article ul.sd-index-renvois > li { margin: 0 0 .1rem; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article a.sd-index-renvoi {
   color: #315ba7;
   font-weight: 500;
   text-decoration: underline dotted #9fb3d6;
   text-underline-offset: .18em;
 }
-#cartulaire-blanc-index[collid] #main #article a.sd-index-renvoi:hover { text-decoration-color: currentColor; }
+:is(#cartulaire-blanc-index, #inventaire-index)[collid] #main #article a.sd-index-renvoi:hover { text-decoration-color: currentColor; }
 
 
 :is(#beaurain, #dugny, #pierrefitte, #rueil, #saint-martin, #tremblay, #ully)[collid] .document-area details.sd-folio { margin-bottom: 1rem; }  /* blanc entre le folio (libellé ou image) et le texte qui suit */
@@ -1617,3 +1639,68 @@ span.note-inline {
 #main #article {
   line-height: 28px;
 }
+
+/* ==== BLOC INVENTAIRE GÉNÉRAL DE SAINT-DENIS (2026-11-24) ====
+   L'Inventaire général (ISD-vol1-3) rejoint le Cartulaire blanc dans la collection « Chartes médiévales de l'abbaye de
+   Saint-Denis ». Règles reprises de la feuille du projet saint-denis (folios, notices, rubriques, outils PDF et
+   porte-documents), limitées aux trois tomes. */
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-folio > summary { display: list-item; cursor: pointer; color: var(--fill-color, #5f004d); }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-folio[open] > :not(summary) { display: block; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-folio:not([open]) > :not(summary) { display: none; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-folio { display: inline-block; margin: .15rem 0; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-folio > summary { display: inline list-item; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-folio-libelle { text-decoration: underline; text-underline-offset: 2px; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-folio[open] { display: block; margin: .6rem 0 1rem; }
+/* L'image est un folio complet (~500 ko, 2 000 px de haut) : on la borne à la colonne de texte
+   et on la laisse défiler dans son cadre plutôt que d'étirer la page. */
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-folio-img {
+  display: block; max-width: min(100%, 46rem); max-height: 80vh; width: auto; height: auto;
+  margin: .5rem 0; border: 1px solid #d8d2c8; background: #fff; object-fit: contain;
+}
+/* ==== fin images rapatriées ==== */
+
+/* ==== 2026-09-14 (agentsd) : visionneuses de série sans équivalent local ====
+   Les cinq renvois « Tome N (Archives nationales LL ...) » de « Feuilleter les images » ne
+   désignaient aucune image : ils ne sont plus des liens. On ne les déguise pas en liens morts
+   (pas de bleu, pas de soulignement plein) mais on signale qu'il y a quelque chose à savoir,
+   l'explication étant dans l'intitulé de survol posé par la feuille XSL. */
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .sd-visionneuse-absente {
+  color: inherit;
+  cursor: help;
+  border-bottom: 1px dotted #9aa8ae;
+}
+/* ==== fin visionneuses de série ==== */
+
+/* ==== D21 (2026-09-12) : Inventaire général des chartes ==== */
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-section { margin: 1.4rem 0; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-section-info { margin: .2rem 0; color: #555; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-libelle { font-weight: 700; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice { margin: 1.1rem 0; padding: .8rem 1rem; border-left: 3px solid #d8d2c8; background: #fcfbfa; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-champs { display: grid; grid-template-columns: minmax(9rem, auto) 1fr; gap: .15rem .9rem; margin: .4rem 0; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-champs dt { color: #555; font-size: .9rem; }
+/* 2026-11-16 : TEI de l'Inventaire refait depuis l'EAD. Mots latins écrits en gros caractères (hi[@rend='large'],
+   emph de l'EAD) : en italique, comme sur l'ancien site (Pleade : .pl-ead-emph { font-style: italic }). Les termes
+   d'index (dfn.term : auteurs d'actes, types de documents) restent droits, comme avant. */
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice .large { font-style: italic; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice dfn.term { font-style: normal; }
+/* 2026-11-16 : outils de chaque notice (porte-documents, PDF de la notice, PDF de la période ; blocs 5 et 6 de
+   elec.customJs.js), en haut à droite, comme la barre d'outils de l'ancien site. */
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice { position: relative; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils { float: right; display: flex; gap: .3rem; margin: 0 0 .3rem .8rem; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils button {
+  padding: .1rem .5rem; font-size: .8rem; line-height: 1.4; color: #5f004d; background: #fff;
+  border: 1px solid #c9bfc6; border-radius: 3px; cursor: pointer;
+}
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils button:hover { background: #f3edf2; border-color: #5f004d; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils button.elec-panier[aria-pressed="true"] { background: #f3edf2; border-color: #5f004d; }
+@media print { :is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils { display: none; } }
+/* ==== fin Inventaire ==== */
+/* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
+   l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :
+   <p class="isd-rubrique">. Taille, graisse et couleur de l'ancienne règle des titres h1-h3 de notice (retirée le
+   2026-10-09 : plus aucun titre dans les notices), sans retrait d'alinéa. Sélecteur avec l'id :
+   le socle D12 fixe la taille des titres par `#article h1`, qui l'emporte sur deux classes. */
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area #article:not(.bottom-toc) .isd-notice p.isd-rubrique {
+  margin: .8rem 0 .3rem; font-size: .95rem; font-weight: 700; color: #555; text-indent: 0;
+}
+/* ==== fin bloc Inventaire général ==== */

@@ -18,7 +18,7 @@
       "cardCollectionPerPage": 30,
       "logo": "logo_cartulaires.png",
       "browseButtonText": "Découvrir la collection",
-      "displaySort": ["saint-denis-cartulaire-blanc", "diocese-beauvais", "diocese-bourges", "diocese-chartres", "diocese-orleans", "diocese-paris", "diocese-rouen", "diocese-senlis", "diocese-soissons", "cartulaires_index", "NDCH-EG", "NDMA-AB", "STEP-AB", "SMMI-AB", "SCOR-EG", "HDPAR-HD", "NDMT-AB", "NDRC-AB", "NDPA-EG", "NDPR-AB", "SAPC-AB", "SGDP-AB", "SGLY-PR", "SMPA-AB", "SMCP-PR", "SMPA-EG", "SSCO-AB", "SGPA-AB", "NDVC-AB", "HDPO-HD", "MAUB-AB", "SMPO-AB", "VNDP-AB", "SCHA-PR", "SCCO-AB", "cartulaire-blanc", "cartulaire-blanc-edition", "cartulaire-blanc-images", "cartulaire-blanc-index", "cartulaire-blanc-actes", "beaurain", "dugny", "pierrefitte", "rueil", "saint-martin", "tremblay", "ully"],
+      "displaySort": ["saint-denis-cartulaire-blanc", "diocese-beauvais", "diocese-bourges", "diocese-chartres", "diocese-orleans", "diocese-paris", "diocese-rouen", "diocese-senlis", "diocese-soissons", "cartulaires_index", "NDCH-EG", "NDMA-AB", "STEP-AB", "SMMI-AB", "SCOR-EG", "HDPAR-HD", "NDMT-AB", "NDRC-AB", "NDPA-EG", "NDPR-AB", "SAPC-AB", "SGDP-AB", "SGLY-PR", "SMPA-AB", "SMCP-PR", "SMPA-EG", "SSCO-AB", "SGPA-AB", "NDVC-AB", "HDPO-HD", "MAUB-AB", "SMPO-AB", "VNDP-AB", "SCHA-PR", "SCCO-AB", "saint-denis-site", "cartulaire-blanc", "cartulaire-blanc-edition", "cartulaire-blanc-images", "cartulaire-blanc-index", "cartulaire-blanc-actes", "beaurain", "dugny", "pierrefitte", "rueil", "saint-martin", "tremblay", "ully", "inventaire-general", "inventaire-introduction", "ISD-vol1", "ISD-vol2", "ISD-vol3", "inventaire-images", "inventaire-index"],
       "openState": true,
       "columns": [
         {
@@ -66,7 +66,8 @@
     "editByLevel": null,
     "editByCiteType": [
       "partie",
-      "acte"
+      "acte",
+      "notice"
     ],
     "countByCiteType": []
   },
@@ -84,7 +85,7 @@
     }
   ],
   "collectionCustomCss": "cartulaires",
-  "collectionCustomJs": "elec",
+  "collectionCustomJs": "cartulaires",
   "collectionCustomFonts": "cartulaires",
   "topBreadcrumbButtonLabel": [
     "extensions.dots:shortTitle"

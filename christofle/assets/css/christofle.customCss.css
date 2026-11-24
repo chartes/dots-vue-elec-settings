@@ -48,19 +48,7 @@
 /* Barre des lettres de l'index */
 /* ---------- Note (minute) ----------
    2026-11-23 : colonnes de l'ÉLEC retirées (fac-similé flottant à 28 %, texte réduit à 65 % du reste) :
-   le texte prend la largeur de dots-vue ; les folios sont en vignettes au-dessus du texte. */
-/* Vignettes des folios : en rangée ; ouverte, l'image prend toute la largeur (sans script, <details>). */
-#article .christofle-facsimiles { display: flex; flex-wrap: wrap; gap: 1em; margin: 0 0 1.5em; }
-#article .christofle-facsimiles figure { flex: 0 0 auto; width: 160px; margin: 0; padding: 0; border: none; background: none; }
-#article .christofle-facsimiles figure:has(details[open]) { flex-basis: 100%; width: 100%; }
-#article .christofle-facsimiles figcaption { font-size: 80%; }
-#article .christofle-facsimiles .pageUrl { display: block; font-size: 80%; font-weight: bold; color: #5f004d; }
-#article .christofle-facsimiles summary { list-style: none; cursor: zoom-in; }
-#article .christofle-facsimiles summary::-webkit-details-marker { display: none; }
-#article .christofle-facsimiles img.vignette { width: 100%; height: auto; }
-#article .christofle-facsimiles details[open] img.vignette { display: none; }
-#article .christofle-facsimiles details[open] summary { cursor: zoom-out; }
-#article .christofle-facsimiles img.grande { width: 100%; max-height: none; height: auto; box-sizing: border-box; }  /* hteiml donne 6 px de marge intérieure aux images */
+   le texte prend la largeur de dots-vue ; les folios sont les vignettes de dots-vue, en marge (manifeste IIIF). */
 
 #article .christofle-texte p { text-align: justify; text-indent: 0; margin: 0 0 0.8em; }  /* 2026-10-27 : paragraphes de la minute aérés */
 

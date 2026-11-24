@@ -1,0 +1,11 @@
+/* Christofle : images de l'introduction (« Son registre », 6 images) servies avec l'application.
+ 2026-11-24 : elles ne sont pas sur Nakala (seuls les 191 folios du registre y sont déposés) et public/images/ de dots-vue
+ n'existe pas sur le dev. La feuille XSL les appelle en ../../images/christofle/image-N.jpg ; cette feuille (customFonts,
+ importée en ?url : Vite construit ses url()) remplace chaque image par sa copie dans assets/images. Même recette que les
+ cartes des cartulaires (13/11). */
+img[src$="/images/christofle/image-1.jpg"] { content: url("../images/image-1.jpg"); }
+img[src$="/images/christofle/image-2.jpg"] { content: url("../images/image-2.jpg"); }
+img[src$="/images/christofle/image-3.jpg"] { content: url("../images/image-3.jpg"); }
+img[src$="/images/christofle/image-4.jpg"] { content: url("../images/image-4.jpg"); }
+img[src$="/images/christofle/image-5.jpg"] { content: url("../images/image-5.jpg"); }
+img[src$="/images/christofle/image-6.jpg"] { content: url("../images/image-6.jpg"); }

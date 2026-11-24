@@ -58,6 +58,7 @@
     }
   ],
   "collectionCustomCss": "christofle",
+  "collectionCustomFonts": "christofle",
   "collectionCustomJs": "elec",
   "metadataDisplayOrder": [
     "dct:title",

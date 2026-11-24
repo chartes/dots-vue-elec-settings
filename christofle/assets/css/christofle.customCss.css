@@ -54,9 +54,6 @@
 
 #article .recordType { font-weight: bold; }
 
-#article .pb { font-style: italic; font-size: inherit; line-height: inherit; float: none; margin: 0; color: inherit; } /* [dots] hteiml (html.css) rejette le folio en marge droite */
-#article .pb:before { content: "["; font-style: normal; }
-#article .pb:after { content: "] "; font-style: normal; }
 
 #article .christofle-minute :lang(frm), #article .christofle-minute :lang(lat) { font-style: italic; }
 
@@ -80,16 +77,17 @@
   padding: 10px 0;
   text-align: justify;
 }
-/* 2026-10-27 : texte de l'introduction sans encadré (validé pour Christofle) */
-#article .paratext > section {
+/* 2026-10-27 : texte de l'introduction sans encadré (validé pour Christofle).
+   2026-11-24 : les trois parties sont rendues par hteiml (section.div#r515, #r527, #r658). */
+#article :is(#r515, #r527, #r658) {
   clear: none;  /* [dots] hteiml */
   padding: 0;
   text-align: justify;
 }
-#article .paratext :lang(frm):before { content: "« "; }
-#article .paratext :lang(frm):after { content: " »"; }
-#article .paratext figure { display: inline-block; vertical-align: top; margin-left: 0; padding: 0; border: 0; background: transparent; }
-#article .paratext figure img {
+#article :is(#r515, #r527, #r658) :lang(frm):before { content: "« "; }
+#article :is(#r515, #r527, #r658) :lang(frm):after { content: " »"; }
+#article :is(#r515, #r527, #r658) figure { display: inline-block; vertical-align: top; margin-left: 0; padding: 0; border: 0; background: transparent; }
+#article :is(#r515, #r527, #r658) figure img {
   margin: 8px;
   border: none;  /* 2026-10-27 : cadre retiré (validé pour Christofle) */
   border-radius: 0;
@@ -104,26 +102,9 @@
   color: #5f004d;
   text-decoration: underline;
 }
-#article #content a.externalLink:link { color: #4A4A4A; text-decoration: none; }
-#article #content a.externalLink:visited, #article #content a.externalLink:hover { color: #4A4A4A; text-decoration: underline; }
 
 #article #content article { margin: 0; padding: 0; } /* [dots] hteiml espace les article */
-#article .paratext p, #article .titlePage p { margin: 0.8em 0; text-indent: 0; } /* [dots] hteiml colle les paragraphes et les met en retrait */
-
-/* ---------- Accueil ---------- */
-#article .titlePage #image { float: left; width: 28%; margin: 5% 0 0 0; } /* [dots] colonne plus étroite que l'ÉLEC : pas de marge de 10 % */
-#article .titlePage #image figure { padding: 0; margin: 0 0 0 20px; border: none; }
-#article .titlePage #image figcaption { font-size: 80%; }
-#article .titlePage img {
-  width: 250px;
-  max-width: 100%;
-  height: auto;
-  border: solid 0.2px #4A4A4A;
-  border-radius: 5px;
-}
-#article #titlePage { margin: 5% 10% 0 32%; text-align: justify; clear: none; }
-#article .titlePage #image { clear: none; }
-#article #titlePage p { text-align: justify; }
+#article :is(#r515, #r527, #r658) p { margin: 0.8em 0; text-indent: 0; } /* [dots] hteiml colle les paragraphes et les met en retrait */
 
 /* ---------- Index ---------- */
 #article .index section article, #article .actTypes section article {
@@ -152,12 +133,6 @@
 
 /* [dots] exposants de hteiml (<hi rend="super">) */
 #article .super { vertical-align: super; font-size: 75%; line-height: 0; }
-
-/* ---------- Petits écrans : une colonne ---------- */
-@media screen and (max-width: 900px) {
-  #article .titlePage #image { float: none; width: auto; margin-left: 0; }
-  #article #titlePage { margin-left: 0; margin-right: 0; border-left: none; }
-}
 
 /*=============================================================
  3. BLOCS HTEIML GÉNÉRIQUES

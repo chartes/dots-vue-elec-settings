@@ -10,7 +10,7 @@
       "aboutButtonText": "À propos"
     },
     "descriptionSection": {
-      "collectionDescription":  { "compName": "HomePageContent" },
+      "collectionDescription": "",
       "customCollectionDescription":  { "compName": "HomePageContent" }
     },
     "listSection": {

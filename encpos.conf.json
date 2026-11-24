@@ -108,6 +108,8 @@
   ],
   "searchConfig": {
     "defaultSort": "corpus_order",
+    "target": "resource",
+    "columns": "listSection",
     "facets": [
       {
         "key": "collections",

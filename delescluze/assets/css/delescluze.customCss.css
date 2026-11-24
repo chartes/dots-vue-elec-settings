@@ -239,11 +239,6 @@
   color: #4A4A4A; font-style: italic; font-size: 80%;
 }
 
-/* Notes d'apparat de la transcription : appels et notes de hteiml (2026-11-23, au lieu de la bulle
-   de l'ÉLEC), visibles dans l'état « Transcription » seulement, comme avant. */
-#main #article a.noteref[href*="-app-"] { display: none; }
-#main #article .dl-mode-tr:checked ~ * a.noteref[href*="-app-"] { display: inline; }
-
 /* Page sans image numérique (lettre14-page01) : mention de l'ÉLEC. */
 #main #article .facsimile-absent { font-style: italic; }
 
@@ -993,8 +988,10 @@
    lettre calée à droite juste avant, comme les numéros 1, 2, 3. */
 .document-views #article .footnotes p.apparatus {
   margin-bottom: 1.25rem;
-  padding: 0;
-  background: none;   /* 2026-11-05 : sans le fond gris de html.css (hteiml), comme les notes */
+  /* 2026-11-24 (Maxime) : apparat dans le cadre grisé de hteiml, comme les autres corpus (copie du bloc des cartulaires). */
+  padding: 1em;
+  background-color: #f3f4f6;
+  margin-left: -1em;
   line-height: 1.55;
 }
 .document-views #article .footnotes .apparatus * ::after { content: " "; }

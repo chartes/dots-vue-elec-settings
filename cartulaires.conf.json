@@ -18,7 +18,7 @@
       "cardCollectionPerPage": 30,
       "logo": "logo_cartulaires.png",
       "browseButtonText": "Découvrir la collection",
-      "displaySort": ["diocese-beauvais", "diocese-bourges", "diocese-chartres", "diocese-orleans", "diocese-paris", "diocese-rouen", "diocese-senlis", "diocese-soissons", "saint-denis-cartulaire-blanc", "cartulaires_index", "NDCH-EG", "NDMA-AB", "STEP-AB", "SMMI-AB", "SCOR-EG", "HDPAR-HD", "NDMT-AB", "NDRC-AB", "NDPA-EG", "NDPR-AB", "SAPC-AB", "SGDP-AB", "SGLY-PR", "SMPA-AB", "SMCP-PR", "SMPA-EG", "SSCO-AB", "SGPA-AB", "NDVC-AB", "HDPO-HD", "MAUB-AB", "SMPO-AB", "VNDP-AB", "SCHA-PR", "SCCO-AB", "cartulaire-blanc", "cartulaire-blanc-edition", "cartulaire-blanc-images", "cartulaire-blanc-index", "cartulaire-blanc-actes", "beaurain", "dugny", "pierrefitte", "rueil", "saint-martin", "tremblay", "ully"],
+      "displaySort": ["saint-denis-cartulaire-blanc", "diocese-beauvais", "diocese-bourges", "diocese-chartres", "diocese-orleans", "diocese-paris", "diocese-rouen", "diocese-senlis", "diocese-soissons", "cartulaires_index", "NDCH-EG", "NDMA-AB", "STEP-AB", "SMMI-AB", "SCOR-EG", "HDPAR-HD", "NDMT-AB", "NDRC-AB", "NDPA-EG", "NDPR-AB", "SAPC-AB", "SGDP-AB", "SGLY-PR", "SMPA-AB", "SMCP-PR", "SMPA-EG", "SSCO-AB", "SGPA-AB", "NDVC-AB", "HDPO-HD", "MAUB-AB", "SMPO-AB", "VNDP-AB", "SCHA-PR", "SCCO-AB", "saint-denis-site", "cartulaire-blanc", "cartulaire-blanc-edition", "cartulaire-blanc-images", "cartulaire-blanc-index", "cartulaire-blanc-actes", "beaurain", "dugny", "pierrefitte", "rueil", "saint-martin", "tremblay", "ully", "inventaire-general", "inventaire-introduction", "ISD-vol1", "ISD-vol2", "ISD-vol3", "inventaire-images", "inventaire-index"],
       "openState": true,
       "columns": [
         {
@@ -47,9 +47,10 @@
     }
   },
   "footerSettings": {
-    "footerTitle": "Cartulaires d’Île-de-France",
+    "footerTitle": "Cartulaires numérisés d’Île-de-France",
     "footerSubtitles": [
-      "Édition par Olivier Canteaut"
+      "Direction scientifique : Olivier Guyotjeannin et Olivier Canteaut",
+      "École nationale des chartes – PSL"
     ],
     "footerDescription": "Le projet d'édition des CARTULAIRES a été développé par la Mission projets numériques de l'École nationale des chartes – PSL avec le soutien de Biblissima+. Biblissima+ bénéficie d’une aide de l'Etat gérée par l'ANR au titre du Programme d’investissements d’avenir intégré à France 2030, portant la référence ANR-21-ESRE-0005.",
     "footerLogos": {
@@ -65,7 +66,8 @@
     "editByLevel": null,
     "editByCiteType": [
       "partie",
-      "acte"
+      "acte",
+      "notice"
     ],
     "countByCiteType": []
   },
@@ -83,7 +85,7 @@
     }
   ],
   "collectionCustomCss": "cartulaires",
-  "collectionCustomJs": "elec",
+  "collectionCustomJs": "cartulaires",
   "collectionCustomFonts": "cartulaires",
   "topBreadcrumbButtonLabel": [
     "extensions.dots:shortTitle"
@@ -108,7 +110,7 @@
   "metadataRename": {
     "dct:title": "Titre",
     "schema:author": "Auteur",
-    "schema:editor": "Éditeur scientifique",
+    "schema:editor": "Direction scientifique",
     "schema:contributor": "Collaborateurs",
     "dct:created": "Date du document",
     "schema:isBasedOn": "Source",
@@ -156,38 +158,78 @@
     ],
     "facets": [
       {
-        "key": "resources",
-        "label": "Documents"
+        "key": "dublinCore.creator",
+        "label": "Auteurs",
+        "enabled": true,
+        "order": 1
       },
       {
-        "key": "dublinCore.type",
+        "key": "dublinCore.contributor",
+        "label": "Contributeurs",
+        "enabled": true,
+        "order": 2
+      },
+      {
+        "key": "dublinCore.publisher",
         "enabled": false
       },
       {
         "key": "dublinCore.language",
-        "label": "Langue",
-        "enabled": true
+        "label": "Langue des actes",
+        "enabled": true,
+        "order": 6
       },
       {
-        "key": "citeType",
-        "label": "Type de passage",
-        "enabled": true
+        "key": "extensions.author",
+        "enabled": false
+      },
+      {
+        "key": "extensions.editor",
+        "enabled": false
+      },
+      {
+        "key": "extensions.publisher",
+        "enabled": false
       },
       {
         "key": "extensions.inLanguage",
+        "enabled": false
+      },
+      {
+        "key": "extensions.funder",
         "enabled": false
       }
     ],
     "temporalFacets": [
       {
+        "key": "dublinCore.coverage",
+        "label": "Période d'étude",
+        "enabled": true,
+        "order": 4
+      },
+      {
+        "key": "dublinCore.created",
+        "label": "Date des sources",
+        "enabled": true,
+        "order": 3
+      },
+      {
+        "key": "dublinCore.issued",
+        "label": "Date des éditions",
+        "enabled": true,
+        "order": 5
+      },
+      {
         "key": "extensions.dateCreated",
         "enabled": false
       },
       {
-        "key": "dublinCore.date",
-        "label": "Date",
-        "enabled": true,
-        "order": 1
+        "key": "extensions.datePublished",
+        "enabled": false
+      },
+      {
+        "key": "extensions.temporalCoverage",
+        "enabled": false
       }
     ]
   }

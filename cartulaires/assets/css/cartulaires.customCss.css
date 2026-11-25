@@ -8,7 +8,10 @@
       arrivée sur une ancre
    Retirés le 19/10 : tri de la liste des actes par boutons radio (W1) et page de groupe (W2), morts
    depuis la page Édition au module tableau filtrable ; ancienne page de garde (garde.xsl) ; ancienne
-   bibliographie (biblio-page), remplacée par le bloc commun. */
+   bibliographie (biblio-page), remplacée par le bloc commun.
+   Retirés le 25/11 : « Liste des actes » des pages de groupe (le sommaire de dots-vue la donne), lettres
+   repliables de l'index (cartu-lettre), anciens tableaux (cartu-table-matieres, cartu-appendice-table…) :
+   classes que plus aucune feuille ne produit. */
 
 /*=============================================================
  1. COULEURS DU CORPUS
@@ -123,9 +126,9 @@
  =============================================================*/
 
 /* ---------- Tableaux triables et filtrables (2026-10-19) ----------
-   Liste des actes de la page Édition, tables de l'introduction, table chronologique, appendice,
-   annexes, concordance : marqueurs tf-* de tableau-filtrable.xsl (constructeur cartu-tf du module
-   tableaux), comportement dans le JS générique de l'ÉLEC. Mêmes règles que les tableaux des Édits,
+   Table des actes du Cartulaire blanc de Saint-Denis (cartulaires-saint-denis.xsl) : marqueurs tf-* de
+   tableau-filtrable.xsl, comportement dans le JS générique de l'ÉLEC. (Les tableaux des introductions
+   sont des tableaux simples depuis le 20/10.) Mêmes règles que les tableaux des Édits,
    de Montferrand et de Du Bourg. */
 #main #article .tf-cadre { margin: 1.2rem 0 2rem; }
 #main #article table.tf-tableau {
@@ -743,59 +746,6 @@ span.note-inline {
   [collid="cartulaires"] #main #article a.pb { float: none; margin: 0 .35em 0 0; }
 }
 
-/* 2026-10-07 : NDVC-AB, index : page du livre après le numéro d'acte « 293 (p. 274) » */
-[collid="cartulaires"] #main #article .cartu-page {
-  color: #6f6f6f;
-  font-size: .9em;
-  white-space: nowrap;
-}
-
-/* 2026-10-07 : SCOR-EG, table des matières (concordance date → acte) : même tableau triable que la
-   liste des actes, mais c'est le contenu de la page : pas de hauteur maximale ni d'ascenseur interne */
-[collid="cartulaires"] #main #article .cartu-concordance .cartu-actes-table tbody {
-  max-height: none;
-  overflow: visible;
-}
-
-/* 2026-10-07 : SSCO-AB, « Table du cartulaire » en tableau */
-[collid="cartulaires"] #main #article table.cartu-table-matieres {
-  display: table;
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-  font-size: .95em;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres :is(th, td) {
-  display: table-cell;
-  padding: .3em .6em;
-  border-bottom: 1px solid #e3e0da;
-  text-align: left;
-  vertical-align: top;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres thead th {
-  border-bottom: 2px solid #b9b2a6;
-  font-weight: 600;
-  white-space: nowrap;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres tr.cartu-tm-partie th {
-  padding-top: 1.2em;
-  border-bottom: 1px solid #b9b2a6;
-  font-variant: small-caps;
-  letter-spacing: .04em;
-  color: #5a5248;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres :is(.cartu-tm-n, .cartu-tm-p) {
-  text-align: right;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres :is(.cartu-tm-date, .cartu-tm-fol) {
-  white-space: nowrap;
-  color: #555;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres .cartu-tm-deest { font-style: italic; color: #8a8a8a; }
-[collid="cartulaires"] #main #article table.cartu-table-matieres tbody tr:not(.cartu-tm-partie):hover { background: #f6f3ee; }
-
 /* 2026-10-07 : la colonne du texte est un élément flex de .wrapper ; sans contenu large
    (un index aux lignes courtes) elle se rétractait à ~330 px et tout passait à la ligne trop
    tôt. Même règle que les autres corpus (cjc, delescluze, bellelay, christofle…). */
@@ -804,87 +754,22 @@ span.note-inline {
   min-width: 0;
 }
 
-/* 2026-10-08 : index sur une seule page, lettres repliables (modèle Delescluze, index-personnes) :
-   details.cartu-lettre « A (130) », entrées dedans. Une entrée visée par un lien (dots-target)
-   ouvre sa lettre. */
-[collid="cartulaires"] #main #article details.cartu-lettre { scroll-margin-top: 90px; }
-[collid="cartulaires"] #main #article details.cartu-lettre > summary { display: block; list-style: none; cursor: pointer; }
-[collid="cartulaires"] #main #article details.cartu-lettre > summary::-webkit-details-marker { display: none; }
-[collid="cartulaires"] #main #article .cartu-lettre-titre {
-  margin: 1.1rem 0 .3rem;
-  padding-bottom: .25rem;
-  border-bottom: 1px solid #e6dfe3;
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: .04em;
-}
-[collid="cartulaires"] #main #article .cartu-lettre-titre::before {
-  content: "";
-  display: inline-block;
-  margin: 0 .55rem .1em .1rem;
-  border-left: 6px solid #8a7f86;
-  border-top: 4.5px solid transparent;
-  border-bottom: 4.5px solid transparent;
-  transition: transform .15s;
-}
-[collid="cartulaires"] #main #article details.cartu-lettre[open] > summary .cartu-lettre-titre::before,
-[collid="cartulaires"] #main #article details.cartu-lettre:has(.dots-target) > summary .cartu-lettre-titre::before,
-[collid="cartulaires"] #main #article details.cartu-lettre.dots-target > summary .cartu-lettre-titre::before { transform: rotate(90deg); }
-[collid="cartulaires"] #main #article details.cartu-lettre > summary:hover .cartu-lettre-titre { color: #000; }
-[collid="cartulaires"] #main #article .cartu-lettre-nb { color: #8a7f86; font-weight: normal; font-size: .82em; letter-spacing: 0; }
-[collid="cartulaires"] #main #article details.cartu-lettre:has(.dots-target)::details-content,
-[collid="cartulaires"] #main #article details.cartu-lettre.dots-target::details-content { content-visibility: visible; display: block; }
-[collid="cartulaires"] #main #article ul.cartu-lettre-entrees { margin: .2rem 0 .6rem; }
-
 /* === SECTION ORDINAUX DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
 /* === SECTION ORDINAUX FIN === */
 
 /* === SECTION EDITION DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
-/* Page Édition (cartulaires-edition.xsl) : liste des actes au module tableau filtrable (bloc 5).
+/* Page d'un groupe (« Édition », parties) : titre du groupe ; la liste des actes est le sommaire de dots-vue.
    Le titre de groupe est sous .dots-ui, dont la remise à zéro rapetisse h1 : même taille que Bellelay. */
 [collid="cartulaires"] #main #article div.group > h1.head { font-size: 160%; font-weight: 900; padding-top: 1em; line-height: 115%; }
-[collid="cartulaires"] #main #article table.cartu-edition .cartu-tm-partie-col { min-width: 12em; font-size: .9em; color: #5a5257; }
-[collid="cartulaires"] #main #article table.cartu-edition th.cartu-tm-n { width: 5em; }
 /* === SECTION EDITION FIN === */
 
 /* === SECTION TITRES DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
 /* === SECTION TITRES FIN === */
 
 /* === SECTION TABLEAUX DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
-/* 2026-10-08 : tableaux analytiques des introductions (ex. HDPAR-HD_front) : table.cartu-table-matieres
-   (règles plus haut) ; ici seulement le titre du tableau, la ligne de folio et la taille. */
-[collid="cartulaires"] #main #article table.cartu-table-analytique {
-  font-size: .88em;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres > caption {
-  caption-side: top;
-  text-align: left;
-  font-weight: 600;
-  padding: .4em 0;
-  color: #5a5248;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres tr.cartu-tm-pb td {
-  padding: .1em .6em 0;
-  border-bottom: none;
-  font-size: .85em;
-  color: #8a7f74;
-}
-[collid="cartulaires"] #main #article table.cartu-table-matieres tr.cartu-tm-pb:hover { background: none; }
-@media (max-width: 640px) {
-  [collid="cartulaires"] #main #article table.cartu-table-analytique { font-size: .75em; }
-}
-/* Appendices en inventaire (VNDP-AB_back) : filtre au-dessus du tableau, colonnes étroites sauf Article */
-.document-area #article table.cartu-appendice-table td.cartu-app-rubrique,
-.document-area #article table.cartu-appendice-table td.cartu-app-lieu { white-space: nowrap; color: #5a5257; }
-.document-area #article table.cartu-appendice-table tr[hidden] { display: none; }
-.document-area #article table.cartu-appendice-table td.cartu-app-article { white-space: normal; width: 70%; }
-.document-area #article table.cartu-appendice-table td.cartu-app-lieu { white-space: normal; max-width: 12rem; }
-.document-area #article table.cartu-appendice-table .cartu-app-note { margin-left: .5em; color: #8a7f86; font-size: .82em; font-style: italic; }
-.document-area #article .cartu-app-note::before { content: "["; } .document-area #article .cartu-app-note::after { content: "]"; }
-/* 2026-10-08 (tableaux2) : annexes de SAPC-AB (liste des abbesses, corpus des sceaux) : colonnes du tableau des sceaux */
-.document-area #article table.cartu-appendice-table td.cartu-app-nom { white-space: normal; width: 18%; }
-.document-area #article table.cartu-sceaux-table td.cartu-app-article p { margin: 0 0 .35em; }
-.document-area #article table.cartu-sceaux-table tr.cartu-tm-partie strong { color: #5a5248; }
+/* 2026-11-25 : règles des anciens tableaux (cartu-table-matieres, cartu-table-analytique, cartu-appendice-table,
+   cartu-sceaux-table) retirées : plus produites par les feuilles ; les tableaux des introductions sont des
+   table.cartu-tableau-simple (bloc TABLEAU SIMPLE plus bas). */
 /* === SECTION TABLEAUX FIN === */
 
 

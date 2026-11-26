@@ -153,10 +153,6 @@
 #main #article figure img { width: auto; max-width: 100%; height: auto; max-height: none; }
 #main #article > section.div > figure { padding: 0; border: 0; background: transparent; }
 #main #article figure .bl-zones img { max-width: none; }  /* zones : coordonnées en pixels de l image */
-/* Images associées d'une pièce : vignettes côte à côte, chacune mène à sa page. */
-#main #article .bl-mosaique { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1em 0; }
-#main #article .bl-mosaique .imagefeuillet { margin: 0; }
-#main #article .bl-mosaique img { width: 220px; max-width: 100%; height: auto; }
 /* Image à zones (introduction) : les coordonnées des zones supposent la taille réelle. */
 #main #article .bl-zones { display: block; overflow-x: auto; }
 #main #article .bl-zones img { max-width: none; }
@@ -616,18 +612,119 @@
 [collid="bellelay"] #article .remarques::before { content: "("; }
 [collid="bellelay"] #article .remarques::after { content: ")"; }
 
-/* ==== Onglets d'une pièce (02/11, Maxime : « copier le comportement du vieux site ÉLEC ») ====
-   Sommaire de la pièce / Description / Images associées : trois onglets en rangée sous le titre, l'onglet de la
-   page affichée en plein (couleur du corpus), les autres en cadre. Émis par bellelay.xsl (nav.bl-onglets). */
-#main #article .bl-onglets { display: flex; flex-wrap: wrap; gap: .4rem; margin: .2rem 0 1.2rem; padding-bottom: .5rem; border-bottom: 1px solid #cfc9c3; }
-#main #article .bl-onglets .bl-onglet {
-  display: inline-block; padding: .2rem .7rem; border: 1px solid #b8b2ac; background: #fff; color: #5f004d;
-  font: 500 .95rem/1.4 var(--font-primary, "Roboto"), Arial, sans-serif; text-decoration: none; border-bottom: 1px solid #b8b2ac;
+/* ==== Pièce de l'Analyse modernisée (2026-11-26, Maxime : « reprendre l'analyse, un truc modernisé ») ====
+   Remplace les onglets ÉLEC du 02/11. Page d'une pièce : les vues des feuillets à droite (vignettes légendées, chacune
+   mène à son feuillet), la fiche à gauche, une ligne par rubrique (libellé en petites capitales, valeurs regroupées).
+   Pages de feuillet et de description : une ligne de liens vers les autres pages de la pièce (p.bl-retour). */
+/* 2026-11-26 : la mosaïque (vignettes qui ne sont pas déjà en grand dans la page) vient sous la fiche, en ligne. */
+#main #article .bl-mosaique { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0 0 1.5rem; }
+#main #article .bl-mosaique .bl-vue { flex: 1 1 10rem; max-width: 14rem; margin: 0; padding: 0; border: 0; background: none; }
+#main #article .bl-mosaique .bl-vue img {
+  display: block; width: 100%; height: auto; max-height: none; border-radius: 3px;
+  box-shadow: 0 .15rem .6rem rgba(45, 37, 36, .18); transition: transform .15s, box-shadow .15s;
 }
-#main #article .bl-onglets .bl-onglet:hover { background: #f8eeee; }
-#main #article .bl-onglets .bl-onglet.actif { background: #5f004d; border-color: #5f004d; color: #fff; font-weight: 700; cursor: default; }
-.document-views #article:not(.bottom-toc) .bl-onglets a.bl-onglet.actif.actif.actif.actif.actif.actif { color: #fff !important; }  /* passe devant la règle commune des liens (bleu !important) */
-/* ==== fin onglets ==== */
+#main #article .bl-mosaique .bl-vue a:hover img { transform: translateY(-2px); box-shadow: 0 .3rem 1rem rgba(45, 37, 36, .25); }
+#main #article .bl-mosaique .bl-vue figcaption { margin-top: .4rem; text-align: center; font-size: .85rem; color: #6b6b6b; }
+#main #article dl.bl-fiche {
+  display: grid; grid-template-columns: max-content 1fr; margin: 0 0 1.5rem; padding: 0;
+  border-top: 2px solid #5f004d; line-height: 1.5;
+}
+#main #article dl.bl-fiche .bl-fiche-ligne { display: contents; }
+#main #article dl.bl-fiche dt,
+#main #article dl.bl-fiche dd { margin: 0; padding: .6rem .8rem; border-bottom: 1px solid #ebe6e0; }
+#main #article dl.bl-fiche dt {
+  padding-left: 0; color: #6b625f; font-weight: 600; font-size: .8rem; font-variant: small-caps;
+  letter-spacing: .04em; text-transform: lowercase; white-space: nowrap;
+}
+#main #article dl.bl-fiche dt::first-letter { text-transform: uppercase; }
+#main #article dl.bl-fiche dd { color: #202020; }
+#main #article .bl-sep { color: #b3aaa1; }
+#main #article p.bl-retour { margin: 0 0 1.2rem; padding: .4rem 0; border-bottom: 1px solid #ebe6e0; font-size: .9rem; }
+#main #article p.bl-retour a::before { content: "← "; color: #b3aaa1; }
+#main #article section.page::after { content: ""; display: block; clear: both; }
+/* Feuillets et commentaires de la pièce, sur la même page (annexes, 26/11) : une section chacun, sous un filet. */
+#main #article section.bl-annexe { clear: both; margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid #ebe6e0; }
+#main #article section.bl-annexe > h2.head { margin-top: 0; }
+/* Feuillets d'une pièce côte à côte (26/11, Maxime) : grille de colonnes d'au moins 20 rem ; image bornée à 65 % de
+   la hauteur de l'écran, centrée dans sa colonne (les zones cliquables sont recalées par le bloc 7 du JS commun). */
+#main #article .bl-feuillets {
+  clear: both; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 0 2.5rem; margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid #ebe6e0; align-items: start;
+}
+/* chaque feuillet = 4 blocs (titre, image, annotations, pièces du feuillet) posés sur les mêmes rangées que ceux de la
+   colonne voisine (subgrid) : « Les pièces de ce feuillet » commencent à la même hauteur des deux côtés */
+#main #article .bl-feuillets > section.bl-annexe {
+  display: grid; grid-template-rows: subgrid; grid-row: span 4; row-gap: 0;
+  margin: 0; padding: 0; border: 0; min-width: 0;
+}
+/* blanc sous un bloc seulement s'il a un contenu : un bloc vide (pas d'annotations, pas de liste) ne laisse aucun trou */
+#main #article .bl-feuillets > section.bl-annexe > * { margin-top: 0; margin-bottom: .8rem; }
+#main #article .bl-feuillets > section.bl-annexe > :is(:empty, :last-child) { margin-bottom: 0; }
+/* bloc vide : hauteur nulle (hteiml lui laissait 12 à 24 px de marges internes) ; gardé dans la grille pour l'alignement */
+#main #article .bl-feuillets > section.bl-annexe > :empty { height: 0; min-height: 0; padding: 0; border: 0; }
+/* rangées sans intervalle (les 4 blocs de chaque feuillet en portent un s'ils ont du contenu) ; feuillets empilés sur écran
+   étroit : un blanc entre deux feuillets */
+@media (max-width: 900px) { #main #article .bl-feuillets { row-gap: 1.5rem; } }
+#main #article .bl-feuillets .bl-pieces-feuillet > section { margin: 0; padding: 0; }
+/* image calée à gauche, sous son titre (centrée, elle laissait un blanc de chaque côté) */
+#main #article .bl-feuillets .imagefeuillet { margin: 0; text-align: left; }
+#main #article .bl-feuillets .imagefeuillet img,
+#main #article .bl-feuillets .bl-zones img {
+  display: block; width: auto; max-width: 100%; height: auto; max-height: 65vh; margin: 0;
+}
+#main #article .bl-feuillets .imagefeuillet .credit { text-align: left; }
+#main #article .bl-feuillets .bl-annotations { margin: 0; font-size: .92rem; }
+#main #article .bl-feuillets .bl-annotations-titre { margin: 0 0 .3rem; font-weight: 600; }
+#main #article .bl-feuillets .bl-annotations ol { margin: 0; padding-left: 1.4em; }
+#main #article .bl-feuillets .bl-annotations li { margin: 0 0 .4rem; line-height: 1.45; text-align: left; }
+
+/* ==== Lecture plus fluide d'une pièce (26/11, Maxime : « beaucoup d'espacement ») ==== */
+/* Un seul feuillet : l'image à gauche, titre, annotations et pièces du feuillet à droite (au lieu d'une colonne vide). */
+@media (min-width: 761px) {
+  #main #article .bl-feuillets:has(> section.bl-annexe:only-child) { display: block; }
+  #main #article .bl-feuillets > section.bl-annexe:only-child {
+    grid-template-columns: fit-content(24rem) minmax(0, 1fr); grid-template-rows: auto auto 1fr;
+    column-gap: 2.5rem; row-gap: 0;
+  }
+  #main #article .bl-feuillets > section.bl-annexe:only-child > h2.head { grid-column: 2; grid-row: 1; }
+  #main #article .bl-feuillets > section.bl-annexe:only-child > .imagefeuillet { grid-column: 1; grid-row: 1 / span 3; }
+  #main #article .bl-feuillets > section.bl-annexe:only-child > .bl-annotations { grid-column: 2; grid-row: 2; }
+  #main #article .bl-feuillets > section.bl-annexe:only-child > :last-child { grid-column: 2; grid-row: 3; }
+}
+/* Sections de la page moins espacées (filet, puis titre). */
+#main #article .bl-feuillets,
+#main #article section.bl-annexe { margin-top: 1.8rem; padding-top: 1rem; }
+#main #article .bl-feuillets :is(h3, h4, h5).head { margin: 0 0 .4rem; font-size: 1rem; }
+#main #article .bl-feuillets ul { margin: 0; }
+#main #article .bl-feuillets li { margin: 0 0 .15rem; }
+/* Commentaires : intertitres resserrés ; exemples musicaux sans cadre, côte à côte, légende discrète sous l'exemple. */
+#main #article section.bl-annexe-commentaires h3.head { margin: 1.2rem 0 .5rem; font-size: 1.1rem; }
+#main #article section.bl-annexe-commentaires h2.head + span + h3.head { margin-top: 0; }
+#main #article section.bl-annexe-commentaires figure {
+  display: inline-block; vertical-align: top; width: auto; max-width: 100%;
+  margin: .3rem 2rem .8rem 0; padding: 0; border: 0; background: none; text-align: left;
+}
+#main #article section.bl-annexe-commentaires figure img { display: block; padding: 0; max-height: 9rem; }
+#main #article section.bl-annexe-commentaires figure figcaption { margin-top: .3rem; padding: 0; font-size: .8rem; color: #6b6b6b; text-align: left; }
+/* Fin de page (26/11, Maxime : « trop d'espacement entre le dernier mot et le footer », 176 px) : la zone de texte de
+   dots-vue garde 120 px de fond (2 rem, comme les Testaments de poilus) ; sections et dernier paragraphe sans marge finale. */
+[collid="bellelay"] .document-views .text-view { padding-bottom: 2rem; }
+#main #article section.page:has(> section.bl-annexe),
+#main #article section.page > section.bl-annexe:last-child { padding-bottom: 0; }
+#main #article section.page > section.bl-annexe:last-child > :last-child { margin-bottom: 0; }
+/* Haut de page (26/11, Maxime : « une marge en haut avant le titre ») : hteiml met 1 rem en haut de la section de la
+   page et 1,6 em au-dessus du h1 ; retirés, comme Delescluze et les cartulaires. */
+#main #article > section.div.page { padding-top: 0; }
+#main #article > section.div.page > h1.head { padding-top: 0; margin-top: 0; }
+/* ==== fin lecture fluide ==== */
+#main #article .bl-feuillets .bl-zones { overflow: visible; }
+#main #article .bl-feuillets ul { padding-left: 1.2em; }
+#main #article .bl-feuillets li { font-size: .92rem; }
+@media (max-width: 760px) {
+  #main #article dl.bl-fiche { grid-template-columns: 1fr; }
+  #main #article dl.bl-fiche dt { padding-bottom: 0; border-bottom: 0; }
+}
+/* ==== fin pièce de l'Analyse ==== */
 
 /* 2026-11-17 (Maxime : « ça aide à la lecture ») : interligne du texte, comme Actes royaux du Poitou. */
 #main #article {

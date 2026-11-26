@@ -1,8 +1,8 @@
 // Cartulaires : comportements des pages. Chargé par dots-vue via "collectionCustomJs": "cartulaires". Les comportements
 // communs (tableaux triables et filtrables, arrivée sur une ancre, bibliographie…) sont ceux du JS générique de l'ÉLEC,
 // importé ci-dessous ; ce fichier n'ajoute que ce qui est propre à l'Inventaire général des chartes de Saint-Denis :
-// l'export PDF d'une notice ou d'une période et le porte-documents (boutons posés par cartulaires-inventaire.xsl dans
-// div.elec-outils). Repris le 2026-11-24 du JS du projet saint-denis, supprimé quand l'Inventaire et les pages du site
+// l'export PDF d'une notice ou d'une période et l'export EAD d'une notice (boutons posés par cartulaires-inventaire.xsl
+// dans les métadonnées de la notice ; porte-documents retiré le 2026-11-26). Repris le 2026-11-24 du JS du projet saint-denis, supprimé quand l'Inventaire et les pages du site
 // sont passés dans la collection « Chartes médiévales de l'abbaye de Saint-Denis » des cartulaires. Sans bouton
 // .elec-pdf dans la page, ces blocs ne font rien : les autres cartulaires gardent le seul comportement commun.
 
@@ -64,7 +64,7 @@ function prefixerIds (racine) {
   })
 }
 function nettoyerPourImpression (racine) {
-  racine.querySelectorAll('button.elec-pdf, button.elec-panier').forEach(b => b.remove())
+  racine.querySelectorAll('button.elec-pdf, button.elec-panier, button.elec-ead').forEach(b => b.remove())
   racine.querySelectorAll('details[open]').forEach(d => d.removeAttribute('open'))
 }
 function fenetreImpression (titre) {
@@ -158,127 +158,68 @@ if (!window.elecPdf) {
   })
 }
 
-// 2. Porte-documents (2026-11-16, comme sur l'ancien site : « ajouter au porte-documents »). La XSL pose dans une unité un
-//    <button class="elec-panier" data-panier-id="ID" data-panier-titre="…">. Le porte-documents est gardé dans ce
-//    navigateur (localStorage : rien n'est envoyé ni partagé) et montré par un bouton fixe en bas à droite de l'écran :
-//    liste des unités retenues (lien vers chacune, retrait), « Tout en PDF » (chaque unité est demandée à l'API DoTS,
-//    comme au bloc 1) et « Vider ». Chaque entrée garde son adresse et sa ressource.
-const PANIER = 'elec-porte-documents'
-function lirePanier () {
-  try { return JSON.parse(localStorage.getItem(PANIER)) || [] } catch (e) { return [] }
-}
-function ecrirePanier (l) {
-  try { localStorage.setItem(PANIER, JSON.stringify(l)) } catch (e) {}
-  majPanier()
-}
-const memeEntree = (x, id, ressource) => x.id === id && x.ressource === ressource
-function majBoutonPanier (b) {
-  const dedans = lirePanier().some(x => memeEntree(x, b.getAttribute('data-panier-id'), ressourceCourante()))
-  b.setAttribute('aria-pressed', dedans ? 'true' : 'false')
-  b.textContent = dedans ? 'Retirer du porte-documents' : 'Ajouter au porte-documents'
-}
-function basculerPanier (b) {
-  const id = b.getAttribute('data-panier-id')
-  const ressource = ressourceCourante()
-  let l = lirePanier()
-  if (l.some(x => memeEntree(x, id, ressource))) l = l.filter(x => !memeEntree(x, id, ressource))
-  else {
-    l.push({
-      id,
-      ressource,
-      titre: (b.getAttribute('data-panier-titre') || id).trim(),
-      adresse: location.origin + location.pathname + '?refId=' + encodeURIComponent(id),
-      api: apiDts()
-    })
+// 2. Export EAD d'une notice (2026-11-26, Maxime : « Export EAD / Export PDF dans les métadonnées » ; le porte-documents
+//    est retiré). La XSL pose dans les métadonnées <button class="elec-ead" data-ead-id="ISD-vol1_notice1"
+//    data-ead-src="…/ISD-vol1.xml">. L'EAD est la reconstitution du 16/11 (chartes/saint-denis, ead/, servie par
+//    raw.githubusercontent.com, CORS ouvert) : on y prend le composant <c id="ID">, placé dans un <ead> minimal (en-tête
+//    et identification du tome repris de l'EAD) ; le fichier ID.xml est proposé au téléchargement. Un tome n'est lu
+//    qu'une fois par page.
+const EAD_NS = 'urn:isbn:1-931666-22-9'
+const eadCache = new Map()
+function lireEad (src) {
+  if (!eadCache.has(src)) {
+    eadCache.set(src, fetch(src).then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status)
+      return r.text()
+    }).then(t => new DOMParser().parseFromString(t, 'application/xml')))
   }
-  ecrirePanier(l)
+  return eadCache.get(src)
 }
-function panneauPanier () {
-  let p = document.getElementById('elec-panier')
-  if (p) return p
-  const st = document.createElement('style')
-  st.id = 'elec-panier-style'
-  st.textContent = '#elec-panier{position:fixed;right:1rem;bottom:1rem;z-index:1000;font-size:.9rem}' +
-    '#elec-panier>button.elec-panier-ouvrir{padding:.4rem .8rem;border:1px solid #5f004d;border-radius:4px;background:#5f004d;color:#fff;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}' +
-    '#elec-panier .elec-panier-liste{position:absolute;right:0;bottom:2.6rem;width:min(26rem,90vw);max-height:60vh;overflow:auto;background:#fff;border:1px solid #c9bfc6;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.2);padding:.6rem .8rem}' +
-    '#elec-panier ol{margin:.3rem 0 .6rem 1.2rem;padding:0} #elec-panier li{margin:.25rem 0}' +
-    '#elec-panier li button{margin-left:.4rem;border:0;background:none;color:#8a1c1c;cursor:pointer}' +
-    '#elec-panier .elec-panier-actions button{margin-right:.5rem;padding:.15rem .5rem;border:1px solid #c9bfc6;border-radius:3px;background:#fff;color:#5f004d;cursor:pointer}' +
-    '@media print{#elec-panier{display:none}}'
-  document.head.append(st)
-  p = document.createElement('div')
-  p.id = 'elec-panier'
-  p.style.fontFamily = getComputedStyle(document.querySelector('#app') || document.body).fontFamily // hors de #app : sinon police par défaut
-  p.innerHTML = '<button type="button" class="elec-panier-ouvrir" aria-expanded="false"></button>' +
-    '<div class="elec-panier-liste" hidden><strong>Porte-documents</strong><ol></ol>' +
-    '<div class="elec-panier-actions"><button type="button" class="elec-panier-pdf">Tout en PDF</button>' +
-    '<button type="button" class="elec-panier-vider">Vider</button></div></div>'
-  document.body.append(p)
-  return p
-}
-function majPanier () {
-  const l = lirePanier()
-  document.querySelectorAll('button.elec-panier').forEach(majBoutonPanier)
-  const p = document.getElementById('elec-panier') || (l.length ? panneauPanier() : null)
-  if (!p) return
-  p.hidden = l.length === 0
-  p.querySelector('.elec-panier-ouvrir').textContent = 'Porte-documents (' + l.length + ')'
-  const ol = p.querySelector('ol')
-  ol.innerHTML = ''
-  l.forEach((x, i) => {
-    const li = document.createElement('li')
+async function exporterEad (b) {
+  const id = b.getAttribute('data-ead-id')
+  const libelle = b.textContent
+  b.disabled = true
+  b.textContent = 'EAD…'
+  try {
+    const doc = await lireEad(b.getAttribute('data-ead-src'))
+    const c = Array.from(doc.getElementsByTagNameNS(EAD_NS, 'c')).find(x => x.getAttribute('id') === id)
+    if (!c) throw new Error("notice absente de l'EAD")
+    const sortie = document.implementation.createDocument(EAD_NS, 'ead', null)
+    const ead = sortie.documentElement
+    for (const a of Array.from(doc.documentElement.attributes)) ead.setAttribute(a.name, a.value)
+    const entete = doc.getElementsByTagNameNS(EAD_NS, 'eadheader')[0]
+    if (entete) ead.append(sortie.importNode(entete, true))
+    const archdesc = doc.getElementsByTagNameNS(EAD_NS, 'archdesc')[0]
+    const ad = sortie.createElementNS(EAD_NS, 'archdesc')
+    if (archdesc) for (const a of Array.from(archdesc.attributes)) ad.setAttribute(a.name, a.value)
+    const did = archdesc && Array.from(archdesc.children).find(x => x.localName === 'did')
+    if (did) ad.append(sortie.importNode(did, true))
+    const dsc = sortie.createElementNS(EAD_NS, 'dsc')
+    dsc.append(sortie.importNode(c, true))
+    ad.append(dsc)
+    ead.append(ad)
+    const xml = '<?xml version="1.0" encoding="UTF-8"?>' + String.fromCharCode(10) + new XMLSerializer().serializeToString(sortie)
     const a = document.createElement('a')
-    a.href = x.adresse
-    a.textContent = x.titre
-    const r = document.createElement('button')
-    r.type = 'button'
-    r.title = 'Retirer du porte-documents'
-    r.textContent = '✕'
-    r.setAttribute('data-i', i)
-    li.append(a, r)
-    ol.append(li)
-  })
-}
-async function panierEnPdf () {
-  const l = lirePanier()
-  if (!l.length) return
-  const w = fenetreImpression('Porte-documents')
-  if (!w) return
-  const noeuds = []
-  for (const x of l) {
-    try {
-      const art = await uniteDepuisApi(apiDts() || x.api, x.ressource, x.id)
-      nettoyerPourImpression(art)
-      prefixerIds(art)
-      noeuds.push(...Array.from(art.childNodes))
-    } catch (e) {
-      const err = document.createElement('p')
-      err.textContent = x.titre + ' : export impossible (' + e.message + ')'
-      noeuds.push(err)
-    }
+    a.href = URL.createObjectURL(new Blob([xml], { type: 'application/xml' }))
+    a.download = id + '.xml'
+    document.body.append(a)
+    a.click()
+    a.remove()
+    setTimeout(() => URL.revokeObjectURL(a.href), 10000)
+    b.textContent = libelle
+  } catch (e) {
+    b.textContent = libelle
+    b.title = 'Export EAD impossible : ' + e.message
+    console.warn('[cartulaires] export EAD', id, e)
+  } finally {
+    b.disabled = false
   }
-  remplirEtImprimer(w, 'Porte-documents', noeuds, l.length + ' unité(s) — ' + location.origin)
 }
 
-if (!window.elecPanier) {
-  window.elecPanier = true
-  aLAffichage('button.elec-panier', majBoutonPanier)
+if (!window.elecEad) {
+  window.elecEad = true
   document.addEventListener('click', event => {
-    const b = event.target.closest('button.elec-panier, #elec-panier button')
-    if (!b) return
-    if (b.matches('.elec-panier')) basculerPanier(b)
-    else if (b.matches('.elec-panier-ouvrir')) {
-      const liste = b.nextElementSibling
-      liste.hidden = !liste.hidden
-      b.setAttribute('aria-expanded', String(!liste.hidden))
-    } else if (b.matches('.elec-panier-pdf')) panierEnPdf()
-    else if (b.matches('.elec-panier-vider')) ecrirePanier([])
-    else if (b.hasAttribute('data-i')) {
-      const l = lirePanier()
-      l.splice(Number(b.getAttribute('data-i')), 1)
-      ecrirePanier(l)
-    }
+    const b = event.target.closest('button.elec-ead')
+    if (b) { event.preventDefault(); exporterEad(b) }
   })
-  window.addEventListener('storage', e => { if (e.key === PANIER) majPanier() })
-  majPanier()
 }

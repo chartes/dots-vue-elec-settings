@@ -768,8 +768,8 @@ span.note-inline {
 
 /* === SECTION TABLEAUX DEBUT (chantier du 2026-10-08 ; ne modifier qu entre ces deux marqueurs) === */
 /* 2026-11-25 : règles des anciens tableaux (cartu-table-matieres, cartu-table-analytique, cartu-appendice-table,
-   cartu-sceaux-table) retirées : plus produites par les feuilles ; les tableaux des introductions sont des
-   table.cartu-tableau-simple (bloc TABLEAU SIMPLE plus bas). */
+   cartu-sceaux-table) retirées : plus produites par les feuilles ; les tableaux des introductions sont rendus par
+   hteiml en table.table (règles plus bas, limitées aux pages sans header.front). */
 /* === SECTION TABLEAUX FIN === */
 
 
@@ -1284,74 +1284,33 @@ span.note-inline {
 .document-views #article .footnotes .apparatus .wit { font-family: inherit; }
 /* ==== fin bloc apparat ==== */
 
-/* ==== TABLEAU SIMPLE (2026-10-27) : tableaux des introductions (table.cartu-tableau-simple, ex. HDPAR-HD_front),
-   sans tri ni filtre. Filets entre les lignes, en-tête marqué, intertitres (Rois., Évêques.) et lignes de folio
-   (Cah. 3, fol. 7-9) distingués des données ; colonnes de numéros sans retour à la ligne. ==== */
-[collid] #main #article table.cartu-tableau-simple {
-  width: 100%;
-  margin: 1.5rem 0 2rem;
-  border-collapse: collapse;
-  font-size: .9em;
-  line-height: 1.35;
+/* ==== TABLEAUX DES INTRODUCTIONS : rendu hteiml (table.table), hors des actes.
+   Les pages d’actes gardent leur CSS hteiml : header.front permet de limiter les règles à l’introduction. ==== */
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table {
+  width: 100%; margin: 1.5rem 0 2rem; border-collapse: collapse; border: none; font-size: .9em; line-height: 1.35;
 }
-[collid] #main #article table.cartu-tableau-simple caption {
-  caption-side: top;
-  text-align: left;
-  font-weight: 600;
-  padding: 0 0 .5em;
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table caption { caption-side: top; text-align: left; font-weight: 600; padding: 0 0 .5em; }
+/* Première ligne de titre = ancien thead ; un titre portant un total reste un intertitre. */
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr:has(> th):not(.cartu-tm-partie):not(:has(> td)):not(tr:not(.cartu-tm-pb):has(> td) ~ tr) > th {
+  padding: .35em .5em; text-align: left; vertical-align: bottom; font-weight: 600; background: #f6f3ef; border-bottom: 1px solid #d9d2c9;
 }
-[collid] #main #article table.cartu-tableau-simple thead th {
-  padding: .35em .5em;
-  text-align: left;
-  vertical-align: bottom;
-  font-weight: 600;
-  background: #f6f3ef;
-  border-bottom: 1px solid #d9d2c9;
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr:has(> th):not(.cartu-tm-partie):not(:has(> td)):not(tr:not(.cartu-tm-pb):has(> td) ~ tr):has(+ tr > td) > th { border-bottom: 2px solid var(--fill-color, #5f004d); }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr:has(> th):not(.cartu-tm-partie):not(:has(> td)):not(tr:not(.cartu-tm-pb):has(> td) ~ tr):has(+ tr > td) > th:nth-child(-n+3) { width: 3.5em; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table td { padding: .25em .5em; vertical-align: top; border-bottom: 1px solid #ece7e2; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table td.cartu-court { white-space: nowrap; font-variant-numeric: tabular-nums; }
+/* Intertitres, y compris les lignes de titre avec un total. */
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr.cartu-tm-partie > th,
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr:not(.cartu-tm-pb):has(> td) ~ tr:has(> th):not(:has(> td)) > th {
+  padding: .7em .5em .3em; text-align: left; font-weight: 600; background: #efe9e1; border-bottom: 1px solid #d9d2c9;
 }
-[collid] #main #article table.cartu-tableau-simple thead tr:last-child th { border-bottom: 2px solid var(--fill-color, #5f004d); }
-[collid] #main #article table.cartu-tableau-simple tbody td {
-  padding: .25em .5em;
-  vertical-align: top;
-  border-bottom: 1px solid #ece7e2;
-}
-/* cellules courtes (sigles A, B, C, numéros, cotes ; td.cartu-court posé par la XSL le 2026-10-28) : chiffres
-   alignés, pas de coupure. Avant : les trois premières colonnes et la dernière, ce qui bloquait l'analyse de SMPA-AB-02. */
-[collid] #main #article table.cartu-tableau-simple tbody td.cartu-court {
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-/* intertitres : Rois., Évêques. — Évêques de Paris., Abbés et prieurs. */
-[collid] #main #article table.cartu-tableau-simple tbody tr.cartu-tm-partie > th {
-  padding: .7em .5em .3em;
-  text-align: left;
-  font-weight: 600;
-  background: #efe9e1;
-  border-bottom: 1px solid #d9d2c9;
-}
-/* lignes de folio : Cah. 3, fol. 7-9. — Copie b. */
-[collid] #main #article table.cartu-tableau-simple tbody tr:not(.cartu-tm-pb):has(> td[colspan]) > td {
-  padding-top: .6em;
-  font-style: italic;
-  color: #6b6260;
-}
-/* repères de page de l'imprimé : discrets */
-[collid] #main #article table.cartu-tableau-simple tbody tr.cartu-tm-pb > td {
-  padding: .15em .5em;
-  text-align: right;
-  font-size: .8em;
-  color: #9a9088;
-  border-bottom: none;
-}
-/* appel de note dans une cellule : pastille de dots-vue, un peu moins espacée */
-[collid] #main #article table.cartu-tableau-simple a.noteref sup { margin: 0 0 0 .2em; }
-/* colonnes des sigles A, B, C : étroites */
-[collid] #main #article table.cartu-tableau-simple thead tr:last-child th:nth-child(-n+3) { width: 3.5em; }
-/* repère de page dans le tableau : l'étiquette seule, sans la vignette (qui crée un grand blanc) */
-[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb :is(.pb-thumbnail-parent, img) { display: none; }
-[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb aside.pb-component { float: none; position: static; display: inline; margin: 0; }
-[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb article.pb { display: inline; position: static; width: auto; height: auto; min-height: 0; padding: 0; margin: 0; }
-[collid] #main #article table.cartu-tableau-simple tr.cartu-tm-pb .pb-label-text { display: inline; }
-/* ==== fin tableau simple ==== */
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr:not(.cartu-tm-pb):has(> td[colspan]) > td { padding-top: .6em; font-style: italic; color: #6b6260; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr.cartu-tm-pb > td { padding: .15em .5em; text-align: right; font-size: .8em; color: #9a9088; border-bottom: none; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table a.noteref sup { margin: 0 0 0 .2em; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr.cartu-tm-pb :is(.pb-thumbnail-parent, img) { display: none; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr.cartu-tm-pb aside.pb-component { float: none; position: static; display: inline; margin: 0; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr.cartu-tm-pb article.pb { display: inline; position: static; width: auto; height: auto; min-height: 0; padding: 0; margin: 0; }
+[collid="cartulaires"] #main #article:not(:has(header.front)) table.table tr.cartu-tm-pb .pb-label-text { display: inline; }
+/* ==== fin tableaux des introductions ==== */
 
 /* ==== BLOC NOTES DE BAS DE PAGE (aside.note et div.note de hteiml) ====
    Bloc générique, identique dans chaque corpus qui a des notes (modèle : chroniques
@@ -1568,17 +1527,21 @@ span.note-inline {
    d'index (dfn.term : auteurs d'actes, types de documents) restent droits, comme avant. */
 :is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice .large { font-style: italic; }
 :is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice dfn.term { font-style: normal; }
-/* 2026-11-16 : outils de chaque notice (porte-documents, PDF de la notice, PDF de la période ; blocs 5 et 6 de
-   elec.customJs.js), en haut à droite, comme la barre d'outils de l'ancien site. */
+/* 2026-11-26 (Maxime) : en tête de notice, « Image de l'acte » et « Édition de l'acte » (copie et édition au Cartulaire
+   blanc), en haut à droite à la place des anciens outils ; porte-documents et PDF retirés. Exports EAD et PDF : boutons
+   dans les métadonnées (dd.isd-exports). */
 :is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice { position: relative; }
-:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils { float: right; display: flex; gap: .3rem; margin: 0 0 .3rem .8rem; }
-:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils button {
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > p.isd-acte-liens { float: right; display: flex; flex-wrap: wrap; gap: .3rem; margin: 0 0 .3rem .8rem; text-indent: 0; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > p.isd-acte-liens a,
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-champs dd.isd-exports button {
   padding: .1rem .5rem; font-size: .8rem; line-height: 1.4; color: #5f004d; background: #fff;
-  border: 1px solid #c9bfc6; border-radius: 3px; cursor: pointer;
+  border: 1px solid #c9bfc6; border-radius: 3px; cursor: pointer; text-decoration: none;
 }
-:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils button:hover { background: #f3edf2; border-color: #5f004d; }
-:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils button.elec-panier[aria-pressed="true"] { background: #f3edf2; border-color: #5f004d; }
-@media print { :is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > .elec-outils { display: none; } }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-champs dd.isd-exports button + button { margin-left: .3rem; }
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > p.isd-acte-liens a:hover,
+:is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-champs dd.isd-exports button:hover { background: #f3edf2; border-color: #5f004d; }
+@media print { :is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-notice > p.isd-acte-liens,
+  :is(#ISD-vol1, #ISD-vol2, #ISD-vol3)[collid] .document-area .isd-champs dd.isd-exports { display: none; } }
 /* ==== fin Inventaire ==== */
 /* 2026-10-02 : les rubriques de notice (« Édition du regeste », « Références données par
    l'Inventaire général »…) ne sont plus des titres mais des étiquettes, comme sur l'ancien site :

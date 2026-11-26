@@ -19,7 +19,14 @@
       "cardCollectionPerPage": 30,
       "logo": "C._du_Cange.jpg",
       "browseButtonText": "Parcourir le glossaire",
-      "openState": true
+      "openState": true,
+      "displaySort": [
+        "ducange_presentation",
+        "lettres",
+        "glossaire",
+        "ducange_rerum",
+        "ducange_auctorum"
+      ]
     }
   },
   "footerSettings": {
@@ -37,7 +44,8 @@
     "tableOfContentDepth": 2,
     "editByLevel": 1,
     "editByCiteType": [
-      "entry"
+      "entry",
+      "index"
     ],
     "countByCiteType": [
       "entry"
@@ -101,5 +109,13 @@
     "onlyDeclared": true,
     "fields": []
   },
-  "collectionCustomJs": "elec"
+  "collectionCustomJs": "ducange",
+  "customRoutes": [
+    {
+      "name": "Search",
+      "path": "search",
+      "compName": "SearchPage"
+    }
+  ],
+  "collectionCustomFonts": "ducange"
 }

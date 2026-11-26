@@ -37,6 +37,8 @@
     "editByLevel": 2,
     "editByCiteType": [
       "page",
+      "carnet",
+      "lettre",
       "groupe"
     ],
     "displayTopToc": true,

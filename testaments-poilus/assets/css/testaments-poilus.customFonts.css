@@ -1,0 +1,14 @@
+/* ==== Images de l'accueil et de l'introduction (2026-11-26) ====
+   Le TEI appelle encore les chemins de l'ancien site (/testaments-de-poilus/introduction/…, /theme/img/…), absents de
+   dots-vue. Recette des cartulaires (13/11) : les fichiers sont dans assets/images ; cette feuille est importée par Vite
+   (customFonts → url() résolues et hachées), contrairement à customCss (?raw) ; content:url() remplace l'image. TEI inchangé. */
+img[src$="/enveloppe-testamentNicolon-v2.jpg"] { content: url("../images/enveloppe-testamentNicolon-v2.jpg"); }
+img[src$="/introduction-image-1-ter.jpg"] { content: url("../images/introduction-image-1-ter.jpg"); }
+img[src$="/introduction-image-2-bis.jpg"] { content: url("../images/introduction-image-2-bis.jpg"); }
+img[src$="/procedure-image-1.jpg"] { content: url("../images/procedure-image-1.jpg"); }
+img[src$="/procedure-image-2.jpg"] { content: url("../images/procedure-image-2.jpg"); }
+img[src$="/procedure-image-3.jpg"] { content: url("../images/procedure-image-3.jpg"); }
+img[src$="/introduction/FRAN_0045_00365_ptt.jpg"] { content: url("../images/FRAN_0045_00365_ptt.jpg"); }
+/* Taille réelle (≤ 672 × 487) dans la limite de la colonne : hteiml borne toute image à 40vh, ce qui réduisait les deux
+   graphiques de l'introduction (même correctif que Delescluze et la CID). */
+img[src*="/testaments-de-poilus/"] { max-height: none; max-width: 100%; width: auto; height: auto; }

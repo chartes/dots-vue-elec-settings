@@ -226,6 +226,11 @@
 #main #article span.lg,
 #main #article span.l { display: block; }
 
+/* 2026-11-26 (Maxime : « le rendu des autres projets, il y a un cadre grisé ») : hteiml met les textes insérés
+   (div.floatingText) dans un cadre gris en retrait, à interligne serré, et les choice sur fond gris : texte courant. */
+#main #article div.floatingText { background: none; padding: 0; margin: 0; line-height: inherit; }
+#main #article div.floatingText p { line-height: inherit; }
+#main #article span.choice { background: none; }
 /* Textes insérés dans les carnets (div.floatingText) : titre en gras, en retrait. */
 #main #article .floatingTextTitle { margin-left: 15%; font-weight: bold; }
 
@@ -249,6 +254,10 @@
    est au-dessus du texte de la page, dans la largeur qu'il avait. */
 #main #article section.page > .facsimile img { width: 24rem; max-width: 100%; max-height: none; height: auto; }  /* hteiml borne les img à 40vh : l'image était écrasée */
 #main #article section.page > .facsimile .facsimile-desc { font-size: 80%; font-style: normal; }
+/* 2026-11-26 : plus d'image dans la page (vignette de dots-vue, qui ouvre la visionneuse à côté du texte) :
+   vignette, cote et lien vers la salle des inventaires sur une ligne. */
+#main #article section.page > .facsimile:not(:has(img)) { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem 1rem; margin: 0 0 .6rem; }
+#main #article section.page > .facsimile:not(:has(img)) > p { margin: 0; font-size: 85%; line-height: 1.4; }
 
 /* Onglets Édition / Transcription : petites capitales, l'état actif en rouge gras (#text-menu) */
 #main #article .dl-mode + label {
@@ -327,7 +336,16 @@
 
 /* Jour : la date en titre centré et gras (time.head) ; [dots] hteiml espace beaucoup les sections */
 #main #article section.page section.div { margin: 0 0 1em; padding: 0; }
-#main #article section.page .head { text-align: center; font-weight: bold; }
+/* 2026-11-26 (Maxime : « pourquoi les titres sont centrés ? ») : la règle visait section.page .head, donc aussi
+   les titres de l'introduction (div type="page") ; seules les dates des jours restent centrées. */
+#main #article section.day > .head { text-align: center; font-weight: bold; }
+/* 2026-11-26 (Maxime : « les dates stylisées comme les dates des cartulaires ») : date du jour comme la date d'un
+   acte (.docDate des cartulaires) : centrée, taille et graisse du texte, gris foncé, sans intertitre gras. */
+[collid="delescluze"] #main #article section.day > h2.head.day {
+  font-size: 1em; font-weight: 400; line-height: 1.5; text-align: center;
+  margin: 1.5rem 0 .75rem; padding: 0;
+}
+.document-views #main #article section.day > h2.head.day { color: #333 !important; }
 
 
 /*=============================================================
@@ -548,21 +566,8 @@
    « table des matières des lettres » ci-dessous. La version d'avant est dans
    `delescluze.customCss.css.bak_lettresnues_20260912`. ==== */
 
-/* ==== Repère de l'élément courant dans les menus (2026-09-12) ====
-   Trois tentatives ont échoué avant la bonne : `aria-current` sur l'ancre, une classe sur le
-   <li>, puis un second jeton de classe sur l'ancre — DoTS-vue réécrit les ancres internes, perd
-   `aria-current`, retire les classes des <li> et ne garde que le PREMIER jeton de classe des
-   <a>. Les règles qui visaient `a.dl-lettre-courante` / `a.dl-mois-courant` ont donc été
-   retirées le 2026-09-12 à 19:30 : plus aucune ancre ne porte ces classes, l'élément courant est
-   un <strong>, stylé juste en dessous. ==== */
-
-/* La lettre (ou le mois) courante est un <strong>, pas un lien : DoTS-vue normalise la classe
-   des ancres internes, donc aucun attribut ni classe ne survit sur un <a> ; un élément distinct,
-   lui, traverse la réécriture (mesuré le 2026-09-12). */
-#main #article ul.dl-mois-liste strong.dl-mois-courant {
-  color: #5f004d;
-  font-weight: bold;
-}
+/* 2026-11-26 : plus de mois courant (un carnet = une page de dots-vue, tous les mois sont des liens) ; règle
+   strong.dl-mois-courant retirée. */
 
 /* ==== 2026-09-12, 20:30 : les 60 lignes de la table des matières des lettres ont été RETIRÉES.
    « en vrai enlève les lettre a b c d e c'est déjà dans la toc » — vérifié avant de retirer : le

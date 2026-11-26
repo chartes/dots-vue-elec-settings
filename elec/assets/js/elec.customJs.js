@@ -599,3 +599,33 @@ if (!window.elecTify) {
     ouvrir(img)
   }, true)
 }
+
+// 6. Règles hors de portée des CSS de corpus (2026-11-26). Depuis le 04/11 (dots-vue fa2f363), la CSS d'un corpus est
+//    confinée sous « @scope (:root) to (.dots-ui, .mirador-view) » : elle n'atteint plus l'interface de dots-vue, dont
+//    le sommaire du bas (div.dots-ui.bottom-toc). Une page dont le texte porte la classe sans-sommaire-bas (posée
+//    par la XSL : testament des Poilus, déjà affiché dans la page de son jour) n'a pas de sommaire du bas.
+if (!document.getElementById('elec-hors-scope')) {
+  const style = document.createElement('style')
+  style.id = 'elec-hors-scope'
+  style.textContent = '.document.wrapper:has(.sans-sommaire-bas) > .bottom-toc { display: none; }'
+  document.head.append(style)
+}
+
+// 7. Zones d'une image (<map>/<area>, Bellelay) (2026-11-26) : leurs coordonnées sont en pixels de l'image d'origine ; quand la
+//    CSS affiche l'image plus petite (feuillets côte à côte), les zones ne tombaient plus sur leur détail. On les recale sur la
+//    largeur affichée, au chargement et à chaque changement de taille (coordonnées d'origine gardées dans data-coords).
+aLAffichage('img[usemap]', img => {
+  const nom = (img.getAttribute('usemap') || '').replace(/^#/, '')
+  const carte = (img.parentElement && img.parentElement.querySelector(`map[name="${nom}"]`)) || document.querySelector(`map[name="${nom}"]`)
+  if (!carte) return
+  const caler = () => {
+    if (!img.naturalWidth || !img.clientWidth) return
+    const r = img.clientWidth / img.naturalWidth
+    carte.querySelectorAll('area[coords]').forEach(a => {
+      if (!a.dataset.coords) a.dataset.coords = a.getAttribute('coords')
+      a.setAttribute('coords', a.dataset.coords.split(',').map(n => Math.round(parseFloat(n) * r)).join(','))
+    })
+  }
+  if (img.complete) caler(); else img.addEventListener('load', caler)
+  new ResizeObserver(caler).observe(img)
+})

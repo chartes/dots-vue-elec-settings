@@ -8,11 +8,14 @@
     "pageHeader": {
       "collectionBannerImg": "banner_bellelay.jpg",
       "collectionAltTitle": "Le Graduel de Bellelay",
-      "aboutButtonText": "À propos"
+      "aboutButtonText": "À propos",
+      "aboutOpenState": true
     },
     "descriptionSection": {
       "collectionDescription": "Le graduel de Bellelay est l'un des premiers livres liturgiques notés de l'ordre des Prémontrés. Cette édition donne accès à la présentation, à l'introduction, à l'étude générale, au manuscrit feuilletable, à la liste des interventions, à l'index et aux analyses.",
-      "customCollectionDescription": ""
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "toc",
@@ -28,9 +31,29 @@
     "footerSubtitles": [
       "Édition d'Olivier Cullin"
     ],
-    "footerDescription": null,
+    "footerDescription": "Toute reproduction des textes et des images à des fins autres que strictement personnelles et notamment toute reproduction destinée à une publication électronique, papier, ou audio, destinée à des tiers, est strictement prohibée et constitutive du délit de contrefaçon. Images : atelier d'Axiane (Porrentruy), Bibliothèque cantonale jurassienne.",
     "footerLogos": {
-      "biblissima": null
+      "biblissima": null,
+      "cnrs": {
+        "imgName": "logo_cnrs.svg",
+        "href": "https://www.cnrs.fr/",
+        "alt": "Logo du CNRS"
+      },
+      "cescm": {
+        "imgName": "logo_cescm.jpg",
+        "href": "https://cescm.labo.univ-poitiers.fr/",
+        "alt": "Logo du CESCM"
+      },
+      "jura": {
+        "imgName": "logo_jura.svg",
+        "href": "https://www.jura.ch/",
+        "alt": "Logo de la République et canton du Jura"
+      },
+      "axiane": {
+        "imgName": "logo_axiane.png",
+        "href": "https://www.axiane.ch/",
+        "alt": "Logo de la Fondation Axiane"
+      }
     }
   },
   "tableOfContentsSettings": {
@@ -43,6 +66,7 @@
     "leftTocFragmentIsDocument": false
   },
   "collectionCustomCss": "bellelay",
+  "collectionCustomFonts": "bellelay",
   "collectionCustomJs": "bellelay",
   "customRoutes": [
     {
@@ -102,5 +126,11 @@
   "excludeMetadata": {
     "onlyDeclared": true,
     "fields": []
-  }
+  },
+  "aboutPageSettings": [
+    {
+      "tabName": "Présentation",
+      "compName": "about1"
+    }
+  ]
 }

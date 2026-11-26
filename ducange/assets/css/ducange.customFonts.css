@@ -1,0 +1,24 @@
+/* Feuille construite par Vite (collectionCustomFonts), contrairement à ducange.customCss.css chargée brute : ses url()
+   relatives sont résolues et les fichiers embarqués dans le build (recette des cartulaires).
+   Images des pages de présentation (data/presentation.xml, reprises de l'ancien site le 2026-11-18) : ducange.xsl produit
+   <img src="/images/ducange/X">, remplacée ici par la copie de X dans les réglages (content: url()). */
+
+/* Figure : image fluide, jamais plus large que la colonne ; sans le cadre centré de hteiml (html.css : figure { border; padding }) */
+figure.dc-figure { margin: 1em 0; padding: 0; border: 0; background: none; text-align: left; }
+.document-views figure.dc-figure img { display: block; width: auto; max-width: 100%; height: auto; padding: 0; }
+/* Portrait de Du Cange à droite du texte, comme dans l'ancien site */
+.document-views figure.dc-figure:has(img[src$="/images/ducange/C_du_Cange.jpg"]) { float: right; max-width: 40%; margin: 0 0 1em 1.5em; }
+@media (max-width: 768px) { .document-views figure.dc-figure:has(img[src$="/images/ducange/C_du_Cange.jpg"]) { float: none; max-width: 100%; margin: 1em 0; } }
+
+img[src$="/images/ducange/C_du_Cange.jpg"] { content: url("../images/C._du_Cange.jpg"); }
+img[src$="/images/ducange/glossarium_favre_10vol.jpg"] { content: url("../images/glossarium_favre_10vol.jpg"); }
+img[src$="/images/ducange/315.jpg"] { content: url("../images/presentation/315.jpg"); }
+img[src$="/images/ducange/Carpentier-SENSUALITE.png"] { content: url("../images/presentation/Carpentier-SENSUALITE.png"); }
+img[src$="/images/ducange/Godefroy-SENSUALITE.png"] { content: url("../images/presentation/Godefroy-SENSUALITE.png"); }
+img[src$="/images/ducange/Lacurne-SENSUALITE.png"] { content: url("../images/presentation/Lacurne-SENSUALITE.png"); }
+img[src$="/images/ducange/Littre-SENSUALITE.png"] { content: url("../images/presentation/Littre-SENSUALITE.png"); }
+img[src$="/images/ducange/ducange-auteurs.png"] { content: url("../images/presentation/ducange-auteurs.png"); }
+img[src$="/images/ducange/ducange-cnrtl.png"] { content: url("../images/presentation/ducange-cnrtl.png"); }
+img[src$="/images/ducange/ducange-siglae.png"] { content: url("../images/presentation/ducange-siglae.png"); }
+img[src$="/images/ducange/glossarium-citations.png"] { content: url("../images/presentation/glossarium-citations.png"); }
+img[src$="/images/ducange/glossarium-tailles.png"] { content: url("../images/presentation/glossarium-tailles.png"); }

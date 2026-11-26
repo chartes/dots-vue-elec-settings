@@ -1,0 +1,9 @@
+/* ==== Pied de page : logos des partenaires (2026-11-26) ====
+   Logos officiels (cnrs.fr, cescm.labo.univ-poitiers.fr, jura.ch, axiane.ch) en couleur, illisibles sur le gris foncé
+   du pied : posés sur une pastille blanche. Feuille customFonts (globale) : le pied est hors de la portée de customCss. */
+.footer img.footer-logo.cnrs-logo,
+.footer img.footer-logo.cescm-logo,
+.footer img.footer-logo.jura-logo,
+.footer img.footer-logo.axiane-logo {
+  background: #fff; padding: 5px; border-radius: 4px; height: 56px; width: auto; max-width: none; object-fit: contain; box-sizing: border-box;
+}

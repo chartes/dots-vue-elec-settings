@@ -6,7 +6,7 @@
       "collectionShortTitle": "Du Cange"
     },
     "pageHeader": {
-      "collectionAltTitle": "Du Cange",
+      "collectionAltTitle": "Glossarium mediae et infimae latinitatis",
       "aboutButtonText": "À propos",
       "collectionBannerImg": "glossarium_favre_10vol.jpg"
     },
@@ -18,87 +18,88 @@
       "displayMode": "toc",
       "cardCollectionPerPage": 30,
       "logo": "C._du_Cange.jpg",
-      "browseButtonText": "Découvrir la collection",
+      "browseButtonText": "Parcourir le glossaire",
       "openState": true
     }
   },
   "footerSettings": {
-    "footerTitle": "Cartulaires d’Île-de-France",
-    "footerSubtitles": [
-      "Corpus numérique de cartulaires médiévaux",
-      "École nationale des chartes – PSL"
-    ],
-    "footerDescription": "Le projet d'édition des CARTULAIRES a été développé par la Mission projets numériques de l'École nationale des chartes – PSL avec le soutien de Biblissima+. Biblissima+ bénéficie d’une aide de l'Etat gérée par l'ANR au titre du Programme d’investissements d’avenir intégré à France 2030, portant la référence ANR-21-ESRE-0005."
+    "footerTitle": "Glossarium mediae et infimae latinitatis",
+    "footerSubtitles": null,
+    "footerDescription": "",
+    "footerLogos": {
+      "biblissima": null
+    }
   },
-
   "tableOfContentsSettings": {
-    "tableOfContentDepth": 5,
-    "editByLevel": null,
+    "tableOfContentDepth": 2,
+    "editByLevel": 1,
     "editByCiteType": [
       "entry"
     ],
     "countByCiteType": [
       "entry"
-    ]
+    ],
+    "displayTopToc": true,
+    "displayLeftToc": true
   },
-
-  "aboutPageSettings": [
-
-  ],
+  "aboutPageSettings": [],
   "collectionCustomCss": "ducange",
   "metadataDisplayOrder": [
     "dct:title",
-
     "schema:author",
-
     "dct:created",
-
     "schema:exampleOfWork",
-
     "dct:language",
-
     "schema:editor",
-
     "schema:isBasedOn",
-
     "schema:publisher",
-
     "dct:issued",
-
     "dct:bibliographicCitation",
-
     "dct:coverage",
-
     "dct:description",
-
     "dct:license",
-
     "dct:rights",
-
     "schema:funder",
-
     "dct:identifier",
     "schema:identifier",
-
     "schema:encoding",
-
     "schema:associatedMedia",
-
     "schema:subjectOf",
     "schema:about",
-
     "dcat:accessURL"
   ],
   "metadataRename": {
+    "dct:title": "Titre",
+    "schema:author": "Auteur",
+    "dct:created": "Date du document",
+    "schema:exampleOfWork": "Notice",
+    "dct:language": "Langue",
+    "schema:editor": "Éditeur scientifique",
+    "schema:isBasedOn": "Source",
+    "schema:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:funder": "Financement",
+    "dct:identifier": "Identifiant",
+    "schema:identifier": "Identifiant",
+    "schema:encoding": "Exports",
+    "schema:associatedMedia": "Images",
+    "schema:subjectOf": "Voir aussi",
+    "schema:about": "Sujet",
+    "dcat:accessURL": "URL",
     "@id": "dts:id",
     "@type": "dts:type"
   },
   "excludeMetadata": {
     "onlyDeclared": true,
-    "fields": [
-    ]
+    "fields": []
   },
-  "customRoutes": [
+  "collectionCustomJs": "elec",
+"customRoutes": [
     {
       "name": "Search",
       "path": "search",

@@ -2,7 +2,7 @@
   "collectionId": "cid",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Cid"
+      "collectionShortTitle": "CID"
     },
     "pageHeader": {
       "collectionAltTitle": "Actes des congrès de la Commission internationale de diplomatique",
@@ -43,11 +43,11 @@
         },
         {
           "key": "dublinCore.contributor",
-          "label": "Auteur",
+          "label": "Éditeur",
           "width": "1fr"
         },
         {
-          "key": "extensions.temporalCoverage",
+          "key": "dublinCore.created",
           "label": "Date",
           "type": "date",
           "width": "250px"
@@ -84,6 +84,9 @@
   ],
   "collectionCustomCss": "cid",
   "collectionCustomJs": "elec",
+  "topBreadcrumbButtonLabel": [
+    "dublinCore.title"
+  ],
   "metadataDisplayOrder": [
     "dct:title",
     "schema:author",
@@ -116,8 +119,8 @@
     "dct:language": "Langue",
     "schema:editor": "Éditeur scientifique",
     "schema:isBasedOn": "Source",
-    "schema:publisher": "Éditeur",
-    "dct:issued": "Date de publication",
+    "schema:publisher": "Éditeur de l'édition électronique",
+    "dct:issued": "Date de l'édition électronique",
     "dct:bibliographicCitation": "Citer",
     "dct:coverage": "Période",
     "dct:description": "Présentation",

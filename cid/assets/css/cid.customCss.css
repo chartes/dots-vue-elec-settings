@@ -45,7 +45,7 @@
   text-align: center;
   text-indent: 0;
 }
-#main #article .titlestmt .editors-label {
+#main #article .titlestmt .editors-label, .extent {
   font-style: italic;
   color: #666;
   font-variant: normal;

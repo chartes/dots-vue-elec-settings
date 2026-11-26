@@ -3,37 +3,105 @@
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Pierre Christofle"
+      "collectionShortTitle": "Christofle"
     },
     "pageHeader": {
+      "collectionBannerImg": "banner_christofle.jpg",
       "collectionAltTitle": "L’année 1437 dans la pratique de Pierre Christofle, notaire du Châtelet d’Orléans",
       "aboutButtonText": "Présentation"
     },
     "descriptionSection": {
-      "collectionDescription": "",
-      "customCollectionDescription": { "compName": "HomePageContent" }
+      "collectionDescription": "Pierre Christofle fut notaire royal à Orléans de 1423 à 1450, attaché à la prévôté pour qui il rédigeait des contrats portant le sceau de l’institution. Comme ses confrères, Pierre Christofle inscrivait dans un registre et en une forme abrégée les conventions qu’il attestait. Ces notes, au nombre de 387, rédigées entre le 1er janvier et le 29 décembre 1437, sont ici éditées dans leur ensemble. L’édition, indexée et prochainement téléchargeable, permet l’enquête sur le lexique des actes. Elle accompagne et complète une version imprimée, publiée dans la collection « Mémoires et documents de l’École des chartes », qui propose un essai interprétatif de cette documentation.",
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
     },
     "listSection": {
       "displayMode": "toc",
+      "logo": "banner_christofle.jpg",
       "openState": true,
-      "browseButtonText": "Consulter l’édition"
+      "browseButtonText": "Consulter l’édition",
+      "singleResourceButtonText": "Ouvrir le document"
     }
   },
   "footerSettings": {
-    "footerTitle": "L’année 1437 dans la pratique de Pierre Christofle",
+    "footerTitle": "L’année 1437 dans la pratique de Pierre Christofle, notaire du Châtelet d’Orléans",
     "footerSubtitles": [
-      "Édition de Kouky Fianu, Anne Fortier et Florence Clavaud",
-      "École nationale des chartes – PSL"
+      "Édition de Kouky Fianu et Anne Fortier",
+      "Édition électronique de Florence Clavaud"
     ],
-    "footerDescription": "Édition électronique du registre de Pierre Christofle, notaire du Châtelet d’Orléans."
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
   },
   "tableOfContentsSettings": {
-    "tableOfContentDepth": 2,
+    "tableOfContentDepth": 4,
     "editByLevel": 1,
-    "editByCiteType": ["Section", "Note", "Index des lieux et personnes", "Index des types d'actes"],
+    "editByCiteType": [
+      "Section",
+      "Note",
+      "lettre",
+      "indexLieuxPersonnes",
+      "indexTypesActes"
+    ],
     "displayTopToc": true,
     "displayLeftToc": true
   },
-  "aboutPageSettings": [],
-  "collectionCustomCss": "christofle"
+  "aboutPageSettings": null,
+  "collectionCustomCss": "christofle",
+  "collectionCustomFonts": "christofle",
+  "collectionCustomJs": "elec",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:author": "Auteur",
+    "dct:created": "Date du document",
+    "schema:exampleOfWork": "Notice",
+    "dct:language": "Langue",
+    "schema:editor": "Éditeur scientifique",
+    "schema:isBasedOn": "Source",
+    "schema:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:funder": "Financement",
+    "dct:identifier": "Identifiant",
+    "schema:identifier": "Identifiant",
+    "schema:encoding": "Exports",
+    "schema:associatedMedia": "Images",
+    "schema:subjectOf": "Voir aussi",
+    "schema:about": "Sujet",
+    "dcat:accessURL": "URL"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

@@ -2,7 +2,7 @@
   "collectionId": "cid",
   "homePageSettings": {
     "appNavBar": {
-      "collectionShortTitle": "Cid"
+      "collectionShortTitle": "CID"
     },
     "pageHeader": {
       "collectionAltTitle": "Actes des congrès de la Commission internationale de diplomatique",
@@ -43,11 +43,11 @@
         },
         {
           "key": "dublinCore.contributor",
-          "label": "Auteur",
+          "label": "Éditeur",
           "width": "1fr"
         },
         {
-          "key": "extensions.temporalCoverage",
+          "key": "dublinCore.created",
           "label": "Date",
           "type": "date",
           "width": "250px"
@@ -68,7 +68,8 @@
     "editByCiteType": [
       "article"
     ],
-    "leftTocFragmentIsDocument": true
+    "leftTocFragmentIsDocument": true,
+     "displayTopToc": true
   },
   "aboutPageSettings": [
     {
@@ -83,6 +84,61 @@
   ],
   "collectionCustomCss": "cid",
   "collectionCustomJs": "elec",
+  "topBreadcrumbButtonLabel": [
+    "dublinCore.title"
+  ],
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:author": "Auteur",
+    "dct:created": "Date du document",
+    "schema:exampleOfWork": "Notice",
+    "dct:language": "Langue",
+    "schema:editor": "Éditeur scientifique",
+    "schema:isBasedOn": "Source",
+    "schema:publisher": "Éditeur de l'édition électronique",
+    "dct:issued": "Date de l'édition électronique",
+    "dct:bibliographicCitation": "Citer",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:funder": "Financement",
+    "dct:identifier": "Identifiant",
+    "schema:identifier": "Identifiant",
+    "schema:encoding": "Exports",
+    "schema:associatedMedia": "Images",
+    "schema:subjectOf": "Voir aussi",
+    "schema:about": "Sujet",
+    "dcat:accessURL": "URL"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  },
   "customRoutes": [
     {
       "name": "Search",

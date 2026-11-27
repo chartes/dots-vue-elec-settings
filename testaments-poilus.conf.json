@@ -2,13 +2,118 @@
   "collectionId": "testaments-poilus",
   "mediaTypeEndpoint": "html",
   "homePageSettings": {
-    "appNavBar": { "collectionShortTitle": "Testaments de poilus" },
-    "pageHeader": { "collectionAltTitle": "Testaments de guerre de Poilus parisiens (1914-1918)", "aboutButtonText": "Le projet" },
-    "descriptionSection": { "collectionDescription": "", "customCollectionDescription": { "compName": "HomePageContent" } },
-    "listSection": { "displayMode": "toc", "openState": true, "browseButtonText": "Consulter les testaments" }
+    "appNavBar": {
+      "collectionShortTitle": "Testaments de poilus"
+    },
+    "pageHeader": {
+      "collectionBannerImg": "banner_testaments-poilus.jpg",
+      "collectionAltTitle": "Testaments de guerre de Poilus parisiens (1914-1918)",
+      "aboutButtonText": "Le projet"
+    },
+    "descriptionSection": {
+      "collectionDescription": "",
+      "customCollectionDescription": {
+        "compName": "HomePageContent"
+      }
+    },
+    "listSection": {
+      "displayMode": "toc",
+      "openState": true,
+      "browseButtonText": "Consulter les testaments",
+      "singleResourceButtonText": "Ouvrir le document"
+    }
   },
-  "footerSettings": { "footerTitle": "Testaments de guerre de Poilus parisiens (1914-1918)", "footerSubtitles": ["Édition critique", "École nationale des chartes – PSL"], "footerDescription": "Édition électronique des testaments de guerre de Poilus parisiens." },
-  "tableOfContentsSettings": { "tableOfContentDepth": 3, "editByLevel": 2, "editByCiteType": ["testament", "lettre", "partie", "sous-partie", "section", "Accueil", "Nous contacter", "Crédits", "Mentions légales"], "displayTopToc": true, "displayLeftToc": true },
-  "aboutPageSettings": [{ "tabName": "Le projet", "compName": "about1" }, { "tabName": "Introduction", "compName": "about3" }, { "tabName": "Édition et droits", "compName": "about2" }],
-  "collectionCustomCss": "testaments-poilus"
+  "footerSettings": {
+    "footerTitle": "Testaments de guerre de Poilus parisiens (1914-1918)",
+    "footerSubtitles": [
+      "Édition de Christine Nougaret",
+      "Édition électronique de Florence Clavaud"
+    ],
+    "footerDescription": null,
+    "footerLogos": {
+      "biblissima": null
+    }
+  },
+  "tableOfContentsSettings": {
+    "tableOfContentDepth": 5,
+    "editByLevel": 2,
+    "editByCiteType": [
+      "testament",
+      "lettre",
+      "testateur",
+      "lieu",
+      "partie",
+      "sous-partie",
+      "section",
+      "Accueil",
+      "Crédits"
+    ],
+    "displayTopToc": true,
+    "displayLeftToc": true
+  },
+  "aboutPageSettings": [
+    {
+      "tabName": "Crédits",
+      "compName": "about1"
+    },
+    {
+      "tabName": "Mentions légales",
+      "compName": "about2"
+    }
+  ],
+  "collectionCustomCss": "testaments-poilus",
+  "collectionCustomFonts": "testaments-poilus",
+  "collectionCustomJs": "elec",
+  "metadataDisplayOrder": [
+    "dct:title",
+    "schema:author",
+    "dct:created",
+    "schema:exampleOfWork",
+    "dct:language",
+    "schema:editor",
+    "schema:isBasedOn",
+    "schema:publisher",
+    "dct:issued",
+    "dct:bibliographicCitation",
+    "dct:coverage",
+    "dct:description",
+    "dct:license",
+    "dct:rights",
+    "schema:funder",
+    "dct:identifier",
+    "schema:identifier",
+    "schema:encoding",
+    "schema:associatedMedia",
+    "schema:subjectOf",
+    "schema:about",
+    "dcat:accessURL"
+  ],
+  "metadataRename": {
+    "dct:title": "Titre",
+    "schema:author": "Auteur",
+    "dct:created": "Date du document",
+    "schema:exampleOfWork": "Notice",
+    "dct:language": "Langue",
+    "schema:editor": "Éditeur scientifique",
+    "schema:isBasedOn": "Source",
+    "schema:publisher": "Éditeur",
+    "dct:issued": "Date de publication",
+    "dct:bibliographicCitation": "Citer",
+    "dct:coverage": "Période",
+    "dct:description": "Présentation",
+    "dct:license": "Licence",
+    "dct:rights": "Mentions de droits",
+    "schema:funder": "Financement",
+    "dct:identifier": "Identifiant",
+    "schema:identifier": "Identifiant",
+    "schema:encoding": "Exports",
+    "schema:associatedMedia": "Images",
+    "schema:subjectOf": "Voir aussi",
+    "schema:about": "Sujet",
+    "dcat:accessURL": "URL"
+  },
+  "excludeMetadata": {
+    "onlyDeclared": true,
+    "fields": []
+  }
 }

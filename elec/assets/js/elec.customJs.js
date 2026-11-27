@@ -629,3 +629,184 @@ aLAffichage('img[usemap]', img => {
   if (img.complete) caler(); else img.addEventListener('load', caler)
   new ResizeObserver(caler).observe(img)
 })
+
+// 8. Bande d'images (2026-11-27, Maxime : « vignette => bande, prev next zoom navigation, clique on met en plein écran ») :
+//    la XSL d'un corpus pose en tête d'une unité une <figure class="elec-bande" data-cote="droite|gauche"> qui contient les
+//    images de l'unité (<img data-cible="ID de la page" alt="libellé">, en taille moyenne pour le plein écran). Ce bloc la fixe
+//    sur le côté de l'écran, ajoute la barre précédent / suivant / zoom − + / plein écran, suit la page lue (l'image de la
+//    page à l'écran est mise en avant) et mène le texte à la page d'une image. Le plein écran est la visionneuse de dots-vue
+//    (ImageLightbox de Victor, branche feat/search-granularity-v2 : un clic sur une image d'une <figure> l'ouvre, avec les
+//    autres images de la figure). Bande à gauche : bouton « Sommaire » qui la replie et ouvre le sommaire de dots-vue.
+if (!document.getElementById('elec-bande-style')) {
+  const st = document.createElement('style')
+  st.id = 'elec-bande-style'
+  st.textContent = [
+    'figure.elec-bande{--l:260px;position:fixed;z-index:20;top:150px;bottom:1rem;min-height:0;width:var(--l);margin:0;',
+    ' display:flex;flex-direction:column;background:#fff;border:1px solid #d9d2d6;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.12);text-align:center}',
+    'figure.elec-bande[data-cote="droite"]{right:1rem} figure.elec-bande[data-cote="gauche"]{left:1rem}',
+    'figure.elec-bande .elec-bande-barre{display:flex;gap:.25rem;justify-content:center;flex-wrap:wrap;padding:.35rem;border-bottom:1px solid #eee;font:13px/1.2 var(--font-primary,Roboto),Arial,sans-serif}',
+    'figure.elec-bande .elec-bande-barre button{min-width:1.9rem;padding:.15rem .4rem;border:1px solid #c9bfc6;border-radius:3px;background:#fff;color:#5f004d;cursor:pointer}',
+    'figure.elec-bande .elec-bande-barre button:hover{background:#f3edf2;border-color:#5f004d}',
+    'figure.elec-bande .elec-bande-barre .elec-bande-pos{align-self:center;color:#666;min-width:3.2rem}',
+    'figure.elec-bande[aria-busy="true"]{cursor:progress} figure.elec-bande[aria-busy="true"] .elec-bande-pos::after{content:" …"}',
+    'figure.elec-bande .elec-bande-vues{flex:1;overflow-y:auto;padding:.4rem;display:flex;flex-direction:column;gap:.5rem}',
+    '.document-views figure.elec-bande img{width:100%;max-width:100%;max-height:none;height:auto;border:2px solid transparent;border-radius:2px;opacity:.75;cursor:zoom-in}',
+    '.document-views figure.elec-bande img.elec-bande-courante{border-color:#5f004d;opacity:1}',
+    'figure.elec-bande figcaption.elec-bande-libelle{padding:.3rem .4rem;font:12px/1.3 var(--font-primary,Roboto),Arial,sans-serif;color:#555;border-top:1px solid #eee}',
+    'figure.elec-bande.elec-bande-repliee{width:auto;bottom:auto} figure.elec-bande.elec-bande-repliee .elec-bande-vues,figure.elec-bande.elec-bande-repliee figcaption{display:none}',
+    'body.elec-bande-droite .document-views #article{margin-right:calc(var(--elec-bande-l,260px) + 1.5rem)}',
+    'body.elec-bande-gauche .document-views #article{margin-left:calc(var(--elec-bande-l,260px) + 1.5rem)}',
+    '@media (max-width:760px){figure.elec-bande{position:static;width:auto;max-height:60vh;margin:0 0 1rem}',
+    ' body.elec-bande-droite .document-views #article,body.elec-bande-gauche .document-views #article{margin-left:0;margin-right:0}}',
+    '@media print{figure.elec-bande{display:none}}'
+  ].join('\n')
+  document.head.append(st)
+}
+const LARGEURS_BANDE = [200, 260, 360, 480, 640]
+// Bas de la barre de navigation collante de dots-vue (fil d'Ariane, flèches) : la bande et la page visée se placent dessous
+const basNavigation = () => Math.round(document.querySelector('nav.navigation-row')?.getBoundingClientRect().bottom || 80)
+// Mener le texte à la page d'une image (2026-11-27, Maxime : « quand on clique sur la page 2 ça va trop bas ») : la page
+// juste sous la barre de navigation, sans descendre plus bas que la fin du texte (une lettre courte ne peut pas amener sa
+// page 2 en haut de l'écran : scrollIntoView allait alors jusqu'au pied de page) ; rien si elle est déjà bien en vue.
+function allerALaPage (cible) {
+  const haut = basNavigation()
+  const r = cible.getBoundingClientRect()
+  if (r.top >= haut && r.top <= haut + window.innerHeight * 0.25) return
+  const texte = document.querySelector('.document-views #article') || document.querySelector('#article')
+  const fin = texte ? texte.getBoundingClientRect().bottom + window.scrollY : Infinity
+  let y = r.top + window.scrollY - haut - 12
+  y = Math.min(y, fin - window.innerHeight + 24)
+  window.scrollTo({ top: Math.max(0, Math.min(y, r.top + window.scrollY)), behavior: 'smooth' })
+}
+function monterBande (fig) {
+  const imgs = Array.from(fig.querySelectorAll('img'))
+  if (!imgs.length) return
+  const cote = fig.dataset.cote === 'gauche' ? 'gauche' : 'droite'
+  fig.dataset.cote = cote
+  // les images dans un conteneur à défilement, la barre au-dessus, le libellé de l'image courante en dessous
+  const vues = document.createElement('div')
+  vues.className = 'elec-bande-vues'
+  imgs.forEach(i => { i.loading = 'lazy'; vues.append(i) })
+  const barre = document.createElement('div')
+  barre.className = 'elec-bande-barre'
+  const bouton = (txt, titre, fn) => {
+    const b = document.createElement('button')
+    b.type = 'button'; b.textContent = txt; b.title = titre; b.setAttribute('aria-label', titre)
+    b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); fn() })
+    barre.append(b); return b
+  }
+  const libelle = document.createElement('figcaption')
+  libelle.className = 'elec-bande-libelle'
+  fig.textContent = ''
+  fig.append(barre, vues, libelle)
+  let courante = 0
+  // largeur de départ : data-largeur (rang dans LARGEURS_BANDE, 1 = 260 px par défaut ; Du Cange : 2 = 360 px)
+  let niveau = Math.max(0, Math.min(LARGEURS_BANDE.length - 1, parseInt(fig.dataset.largeur || '1', 10) || 1))
+  const pos = document.createElement('span')
+  pos.className = 'elec-bande-pos'
+  const largeur = () => {
+    const l = LARGEURS_BANDE[niveau]
+    fig.style.setProperty('--l', l + 'px')
+    document.body.style.setProperty('--elec-bande-l', l + 'px')
+  }
+  const montrer = (k, suivreTexte) => {
+    courante = Math.max(0, Math.min(imgs.length - 1, k))
+    imgs.forEach((i, n) => i.classList.toggle('elec-bande-courante', n === courante))
+    const img = imgs[courante]
+    pos.textContent = (courante + 1) + ' / ' + imgs.length
+    libelle.textContent = img.alt || ''
+    const haut = img.offsetTop - vues.offsetTop - 8
+    if (haut < vues.scrollTop || haut > vues.scrollTop + vues.clientHeight - 40) vues.scrollTo({ top: haut })   // instantané : Chrome n'anime qu'un défilement à la fois, celui du texte passerait à la trappe
+    if (suivreTexte) {
+      const cible = img.dataset.cible && document.getElementById(img.dataset.cible)
+      if (cible) allerALaPage(cible)
+    }
+  }
+  if (cote === 'gauche') {
+    // ☰ : la bande se replie et le sommaire de dots-vue s'ouvre ; un second clic referme le sommaire et rouvre la bande
+    // (comme le panneau de l'ancien Du Cange, qui passait de la liste des articles à l'image de la colonne)
+    bouton('☰', 'Sommaire / images', () => {
+      const repliee = fig.classList.toggle('elec-bande-repliee')
+      document.body.classList.toggle('elec-bande-gauche', !repliee)
+      const t = document.querySelector('button.toc-menu-toggle')
+      const ouvert = !!(t && t.classList.contains('is-opened'))
+      if (t && repliee !== ouvert) t.click()
+    })
+    // au chargement, la bande prend la place du sommaire : le refermer s'il est ouvert
+    setTimeout(() => {
+      const t = document.querySelector('button.toc-menu-toggle')
+      if (t && t.classList.contains('is-opened') && !fig.classList.contains('elec-bande-repliee')) t.click()
+    }, 300)
+  }
+  // au bord de la bande, l'événement elec-bande-bord (detail : -1 ou 1) laisse un corpus aller plus loin
+  // (Du Cange : colonne voisine du volume, ducange.customJs.js) ; sans écouteur, rien ne se passe
+  // choix du lecteur (◀ ▶) : gardé tant qu'il ne fait pas défiler le texte lui-même (un article court ne peut pas
+  // amener la page de l'image en haut de l'écran, le suivi de lecture reviendrait sinon à la première image)
+  let choisie = false
+  const libre = () => { choisie = false }
+  ;['wheel', 'touchmove', 'keydown'].forEach(t => window.addEventListener(t, libre, { passive: true }))
+  const pas = d => {
+    const k = courante + d
+    if (k >= 0 && k < imgs.length) { choisie = true; montrer(k, true) }
+    else fig.dispatchEvent(new CustomEvent('elec-bande-bord', { detail: d, bubbles: true }))
+  }
+  bouton('◀', 'Image précédente', () => pas(-1))
+  barre.append(pos)
+  bouton('▶', 'Image suivante', () => pas(1))
+  bouton('−', 'Réduire la bande', () => { niveau = Math.max(0, niveau - 1); largeur() })
+  bouton('+', 'Agrandir la bande', () => { niveau = Math.min(LARGEURS_BANDE.length - 1, niveau + 1); largeur() })
+  bouton('⛶', 'Plein écran', () => imgs[courante].click())   // ouvre la visionneuse de dots-vue (clic sur une image de figure)
+  imgs.forEach((img, n) => img.addEventListener('click', () => montrer(n, false)))
+  // place : sous la barre de navigation (ou sous l'en-tête du document en haut de page), et au-dessus du pied de page
+  // quand il entre dans l'écran (2026-11-27, Maxime : « que la visionneuse n'aille pas dans le footer »)
+  const entete = document.querySelector('.document-views') || document.querySelector('#article')
+  const grandEcran = window.matchMedia('(min-width: 761px)')
+  let prevu = false
+  const placer = () => {
+    prevu = false
+    if (!fig.isConnected || !grandEcran.matches) return
+    const haut = Math.max(basNavigation(), entete ? Math.round(entete.getBoundingClientRect().top) : 0) + 8
+    const pied = document.querySelector('footer.layout-footer, footer')
+    const basPied = pied ? Math.round(window.innerHeight - pied.getBoundingClientRect().top) : 0
+    fig.style.top = haut + 'px'
+    fig.style.bottom = Math.max(16, basPied + 16) + 'px'
+  }
+  const replacer = () => { if (!prevu) { prevu = true; requestAnimationFrame(placer) } }
+  window.addEventListener('scroll', replacer, { passive: true })
+  window.addEventListener('resize', replacer)
+  placer()
+  setTimeout(placer, 500)
+  document.body.classList.add('elec-bande-' + cote)
+  largeur()
+  montrer(0, false)
+  // image de départ demandée par un corpus avant d'ouvrir la page (window.elecBandeDepart : un morceau de l'adresse de
+  // l'image ; Du Cange : colonne visée par ◀ ▶ quand elle est au milieu d'un article)
+  // (effacée seulement quand une image y répond : pendant le changement de page, l'ancienne bande peut être remontée)
+  const depart = window.elecBandeDepart
+  const kDepart = depart ? imgs.findIndex(i => i.src.includes(depart)) : -1
+  if (kDepart !== -1) window.elecBandeDepart = null
+  if (kDepart > 0) { choisie = true; setTimeout(() => montrer(kDepart, true), 300) }
+  // suivre la lecture : l'image de la page la plus haute visible
+  const cibles = imgs.map(i => i.dataset.cible && document.getElementById(i.dataset.cible))
+  if (cibles.some(Boolean) && 'IntersectionObserver' in window) {
+    const visibles = new Set()
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => e.isIntersecting ? visibles.add(e.target) : visibles.delete(e.target))
+      if (choisie) return
+      const k = cibles.findIndex(c => c && visibles.has(c))
+      if (k !== -1 && k !== courante) montrer(k, false)
+    }, { rootMargin: '-10% 0px -60% 0px' })
+    cibles.forEach(c => c && io.observe(c))
+  }
+  // quand dots-vue remplace le document, la bande part avec lui : retirer les marges
+  new MutationObserver((m, obs) => {
+    if (!fig.isConnected) {
+      ;['wheel', 'touchmove', 'keydown'].forEach(t => window.removeEventListener(t, libre))
+      window.removeEventListener('scroll', replacer)
+      window.removeEventListener('resize', replacer)
+      document.body.classList.remove('elec-bande-droite', 'elec-bande-gauche')
+      obs.disconnect()
+    }
+  }).observe(document.body, { childList: true, subtree: true })
+}
+aLAffichage('figure.elec-bande', monterBande)

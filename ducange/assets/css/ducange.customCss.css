@@ -39,15 +39,21 @@
   [collid="ducange"] #main #article a.dc-colonne, [collid="ducange"] #main #article span.dc-colonne { position: absolute; right: calc(100% + .8rem); }
 }
 /* 2026-11-26 : « Pour citer » retiré (Maxime) ; ses règles aussi. */
-/* ---- CSS HISTORIQUE (2026-11-26, Maxime : « remettre la css historique ») ----
-   Repris de la feuille d'avant le 30/10 (celle de l'ancien site, remodelée pour hteiml : bloc « DoTS-vue compatibility »)
-   et porté sur les classes de la XSL actuelle : a.headword/a.form → span.form.b (vedette principale), .sc → span.form.sc
-   (vedette secondaire), div.dictScrap_bibl → p.dc-redacteur. SANS le cadre de l'article (« vire le cadre »). */
-[collid="ducange"] #main #article article.entry { color: #2f2a25; font-size: 1rem; line-height: 1.65; overflow-wrap: anywhere; border: 0; }
-[collid="ducange"] #main #article .dictScrap { margin: 0 0 1.25rem; }
-[collid="ducange"] #main #article .form.b { color: #8f2f20; font-family: Georgia, "Times New Roman", serif; font-size: 1.05em; font-weight: 700; }
-[collid="ducange"] #main #article .form.sc { color: #8f2f20; font-variant: small-caps; font-weight: 400; letter-spacing: .02em; }
-[collid="ducange"] #main #article .form .num { color: inherit; font-weight: 400; font-variant: small-caps; }
+/* ---- CSS HISTORIQUE (2026-11-26/27, Maxime : « remettre la css historique », comparée à l'ancien site dans la Wayback
+   Machine, AASANTIA du 09/11/2025, valeurs relevées sur la page : ducange.css + enc.css) ----
+   Texte à empattements (CartaNovaTexte sur l'ancien site, police retirée des corpus le 19/10 et absente du web : Georgia) ;
+   vedette principale et secondaire en Trebuchet MS, rouge #A73136 (gras / petites capitales) ; citations en bloc,
+   en romain, noir, filet gauche rose #FFCCCC (blockquote de l'ancien site). SANS le cadre de l'article ni la ligne
+   « Pour citer » / « © École des chartes » (« vire le cadre »). Classes de la XSL actuelle : span.form.b, span.form.sc,
+   span.quote, p.dc-redacteur. */
+[collid="ducange"] #main #article article.entry { color: #333; font-family: Georgia, "Times New Roman", serif; line-height: 1.65; overflow-wrap: anywhere; border: 0; }
+[collid="ducange"] #main #article .dictScrap { margin: 0 0 1em; }
+[collid="ducange"] #main #article .form.b { color: #a73136; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 1.07em; font-weight: 700; }
+[collid="ducange"] #main #article .form.sc { color: #a73136; font-family: "Trebuchet MS", Arial, sans-serif; font-size: 1.07em; font-variant: small-caps; font-weight: 400; letter-spacing: 0; }
+[collid="ducange"] #main #article .form .num { color: inherit; font-weight: 400; }
+[collid="ducange"] #main #article .quote { display: block; margin: 1px 0 1px 7px; padding: .5ex 2em .5ex 1ex; border-left: 2px solid #ffcccc;
+  color: #000; font-style: normal; line-height: 1.5; text-indent: 0; }
+[collid="ducange"] #main #article .quote .mentioned, [collid="ducange"] #main #article .quote i { font-style: italic; }
 [collid="ducange"] #main #article .dc-redacteur { display: table; margin: .35em 0 .4em auto; padding: .1rem .45rem; border-radius: 2px;
   background: #f3f0e9; color: #5c5348; font-size: .8em; font-variant: normal; letter-spacing: 0; }
 [collid="ducange"] #main #article .unclear { text-decoration: underline wavy #c9bfb3; }

@@ -730,3 +730,16 @@
 #main #article {
   line-height: 28px;
 }
+
+/* ==== Feuillets du manuscrit : vue e-codices et bouton « Annotations » (2026-11-27) ====
+   Vignette dots-vue (a.pb.bl-ec-vue → visionneuse) ; annotations des images en texte, derrière un petit bouton. */
+#main #article .imagefeuillet.bl-ec { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .9rem; margin: .4rem 0 1rem; text-align: left; }
+#main #article .imagefeuillet.bl-ec .credit { margin: 0; font-size: .8rem; color: #6b6b6b; text-align: left; flex: 1 1 16rem; }
+#main #article details.bl-annotations-feuillet { flex-basis: 100%; margin: 0; }
+#main #article details.bl-annotations-feuillet > summary { display: inline-block; padding: .15rem .65rem; border: 1px solid #c9bfc6;
+  border-radius: 3px; background: #fff; color: #5f004d; font-size: .85rem; font-weight: 500; cursor: pointer; list-style: none; }
+#main #article details.bl-annotations-feuillet > summary::-webkit-details-marker { display: none; }
+#main #article details.bl-annotations-feuillet > summary:hover, #main #article details.bl-annotations-feuillet[open] > summary { background: #f3edf2; border-color: #5f004d; }
+#main #article details.bl-annotations-feuillet ol { margin: .6rem 0 0 1.2rem; padding: 0; }
+#main #article details.bl-annotations-feuillet li { margin: .3rem 0; }
+/* ==== fin feuillets e-codices ==== */

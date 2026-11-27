@@ -31,7 +31,7 @@
     "footerSubtitles": [
       "Édition d'Olivier Cullin"
     ],
-    "footerDescription": "Toute reproduction des textes et des images à des fins autres que strictement personnelles et notamment toute reproduction destinée à une publication électronique, papier, ou audio, destinée à des tiers, est strictement prohibée et constitutive du délit de contrefaçon. Images : atelier d'Axiane (Porrentruy), Bibliothèque cantonale jurassienne.",
+    "footerDescription": "Toute reproduction des textes et des images à des fins autres que strictement personnelles et notamment toute reproduction destinée à une publication électronique, papier, ou audio, destinée à des tiers, est strictement prohibée et constitutive du délit de contrefaçon. Images du manuscrit : e-codices – Bibliothèque virtuelle des manuscrits en Suisse (Porrentruy, Bibliothèque cantonale jurassienne, Ms. 18), CC BY-NC 4.0.",
     "footerLogos": {
       "biblissima": null,
       "cnrs": {
@@ -132,5 +132,37 @@
       "tabName": "Présentation",
       "compName": "about1"
     }
-  ]
+  ],
+  "renderer": {
+    "css": [
+      "/renderer/html.css"
+    ],
+    "documentContainer": "#center",
+    "pageSelectors": [
+      "html",
+      "body",
+      ":root"
+    ],
+    "facsimiles": [
+      {
+        "selector": "a.pb.bl-ec-vue",
+        "image": {
+          "attribute": "href"
+        }
+      },
+      {
+        "selector": "a.pb[href*='iiif']",
+        "image": {
+          "attribute": "href"
+        }
+      },
+      {
+        "selector": ".lg figure",
+        "image": {
+          "selector": "a img",
+          "attribute": "src"
+        }
+      }
+    ]
+  }
 }

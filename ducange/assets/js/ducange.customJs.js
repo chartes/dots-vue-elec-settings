@@ -381,3 +381,110 @@ if (!window.ducangeConsulter) {
 }
 
 // 2026-11-26 (Maxime) : bouton « Citer » retiré avec « Pour citer cette entrée ».
+
+// --- Bande des colonnes : colonne par colonne (2026-11-27, Maxime : « quand on change de page ça change l'image » ;
+// choix : colonne par colonne). Dans la bande (bloc 8 du JS commun), ◀ ▶ parcourent les colonnes de l'article ; au bord,
+// on passe à la colonne voisine du volume (ordre des vues du manifeste de la lettre, figure[data-manifeste]) et la page
+// affiche le premier article qui commence dans cette colonne ; si aucun n'y commence (article long), l'article qui la
+// traverse, sa bande ouverte sur cette colonne. Les articles voisins sont lus par l'API DTS : ordre = navigation de la
+// lettre, colonnes = entry/@facs et cb/@facs, par lots de 30 articles (document?start=…&end=…). ---
+if (!window.ducangeColonnes) {
+  window.ducangeColonnes = true
+  const API = String(import.meta.env.VITE_APP_DTS_ENDPOINT_URL || '').replace(/\/$/, '')
+  const TEI = 'http://www.tei-c.org/ns/1.0'
+  const XML = 'http://www.w3.org/XML/1998/namespace'
+  const LOT = 30
+  const empreinte = u => (String(u || '').match(/\/([0-9a-f]{40})(?:[/?]|$)/) || [])[1]
+  const manifestes = {}
+  const rangs = url => (manifestes[url] ??= fetch(url).then(r => r.json()).then(m => {
+    const vues = m.sequences ? m.sequences[0].canvases : (m.items || [])
+    // seules les vues de colonne comptent (« p. 254, col. c ») : le manifeste intercale la page entière (« p. 255 »)
+    const idx = new Map()
+    let rang = 0
+    vues.forEach(c => {
+      const libelle = typeof c.label === 'string' ? c.label : JSON.stringify(c.label || '')
+      if (!/col\./.test(libelle)) return
+      const im = c.images ? c.images[0].resource : c.items?.[0]?.items?.[0]?.body
+      const srv = im && (Array.isArray(im.service) ? im.service[0] : im.service)
+      const e = empreinte((srv && (srv['@id'] || srv.id)) || (im && (im['@id'] || im.id)))
+      if (e) idx.set(e, rang++)
+    })
+    return idx
+  }))
+  const ordres = {}
+  const ordre = rid => (ordres[rid] ??= fetch(`${API}/navigation?resource=${encodeURIComponent(rid)}&down=1`)
+    .then(r => r.json()).then(j => j.member.map(m => m.identifier)))
+  const lot = async (rid, a, b) => {
+    const t = await fetch(`${API}/document?resource=${encodeURIComponent(rid)}&start=${encodeURIComponent(a)}&end=${encodeURIComponent(b)}`).then(r => r.text())
+    const doc = new DOMParser().parseFromString(t, 'application/xml')
+    return Array.from(doc.getElementsByTagNameNS(TEI, 'entry')).filter(e => e.parentNode?.localName !== 'entry').map(e => ({
+      id: e.getAttributeNS(XML, 'id'),
+      debut: empreinte(e.getAttribute('facs')),
+      cb: Array.from(e.getElementsByTagNameNS(TEI, 'cb')).map(c => ({ n: c.getAttribute('n'), e: empreinte(c.getAttribute('facs')) }))
+    }))
+  }
+  // la page de l'article, par le routeur de dots-vue (sans recharger) ; la bande de la nouvelle page s'ouvre sur la
+  // colonne visée (window.elecBandeDepart, bloc 8 du JS commun)
+  let colonneVisee = null
+  const aller = id => {
+    window.elecBandeDepart = colonneVisee
+    const routeur = document.querySelector('#app')?.__vue_app__?.config.globalProperties.$router
+    if (routeur) routeur.push({ path: location.pathname, query: { refId: id } })
+    else location.href = location.pathname + '?refId=' + encodeURIComponent(id)
+  }
+  const ressource = () => location.pathname.split('/').filter(Boolean).pop()
+  // préchargement dès qu'une bande apparaît : ordre des articles de la lettre et vues du manifeste
+  new MutationObserver(() => {
+    const f = document.querySelector('figure.elec-bande[data-manifeste]:not([data-precharge])')
+    if (!f) return
+    f.dataset.precharge = '1'
+    rangs(f.dataset.manifeste)
+    ordre(ressource())
+  }).observe(document.documentElement, { childList: true, subtree: true })
+  let enCours = false
+  document.addEventListener('elec-bande-bord', async ev => {
+    const fig = ev.target
+    if (enCours || !fig.matches?.('figure.elec-bande[data-manifeste]')) return
+    enCours = true
+    fig.setAttribute('aria-busy', 'true')
+    try {
+      const sens = ev.detail
+      const rid = ressource()
+      const ici = new URLSearchParams(location.search).get('refId')
+      const idx = await rangs(fig.dataset.manifeste)
+      const bande = Array.from(fig.querySelectorAll('img')).map(i => idx.get(empreinte(i.src))).filter(n => n !== undefined)
+      if (!bande.length || !ici) return
+      const cible = sens > 0 ? Math.max(...bande) + 1 : Math.min(...bande) - 1
+      colonneVisee = ([...idx].find(([, i]) => i === cible) || [])[0] || null
+      const ids = await ordre(rid)
+      let k = ids.indexOf(ici)
+      if (k === -1) return
+            let avant = null                         // ▶ : dernier article commencé avant la colonne visée
+      let trouve = null                        // ◀ : premier article (en remontant, le plus ancien) qui y commence
+      for (let tour = 0; tour < 20; tour++) {
+        const a = sens > 0 ? k + 1 : Math.max(0, k - LOT)
+        const b = sens > 0 ? Math.min(ids.length - 1, k + LOT) : k - 1
+        if (a > b) break
+        let entrees = await lot(rid, ids[a], ids[b])
+        if (sens < 0) entrees = entrees.reverse()
+        for (const e of entrees) {
+          const c = idx.get(e.debut)
+          if (c === undefined) continue
+          if (sens > 0) {
+            if (c === cible) return aller(e.id)
+            if (c > cible) return aller(avant ? avant.id : e.id)
+            avant = e
+          } else {
+            if (c === cible) { trouve = e; continue }
+            if (c < cible) return aller(trouve ? trouve.id : e.id)
+          }
+        }
+        k = sens > 0 ? b : a
+      }
+      if (trouve) aller(trouve.id)
+    } finally {
+      enCours = false
+      fig.removeAttribute('aria-busy')
+    }
+  })
+}
